@@ -1,0 +1,97 @@
+﻿using UnityEngine;
+
+public class AlarmClockScript : MonoBehaviour
+{
+    #region Initialization
+    private void Start() => ClockRender = GetComponentInChildren<SpriteRenderer>();
+    #endregion
+
+    #region Per-Frame Logic
+    private void Update()
+    {
+        if (timeLeft.CountdownWithDeltaTime() != 0)
+        {
+            UpdateDisplay();
+        }
+        else if (!rang)
+        {
+            TriggerAlarm();
+        }
+
+        if (lifeSpan.CountdownWithDeltaTime() == 0)
+        {
+            Destroy(gameObject);
+        }
+
+        if (Time.timeScale != 0 && trigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange) && !rang && (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)))
+        {
+            CyclePreset();
+        }
+    }
+    #endregion
+
+    #region Alarm Control
+    private void CyclePreset()
+    {
+        currentPreset = (currentPreset + 1) % timePresets.Length;
+        timeLeft = timePresets[currentPreset];
+        lifeSpan = timePresets[currentPreset] + 5;
+        windAud.Play();
+    }
+
+    private void TriggerAlarm()
+    {
+        rang = true;
+        gameObject.tag = "Untagged";
+        if (gc.baldiScrpt.isActiveAndEnabled)
+        {
+            gc.baldiScrpt.Hear(transform.position, 8);
+        }
+        if (gc.famishScrpt.isActiveAndEnabled)
+        {
+            gc.famishScrpt.Hear(transform.position, 8f);
+        }
+        if (gc.zerulscrpt.isActiveAndEnabled)
+        {
+            gc.zerulscrpt.Hear(transform.position, 8f);
+        }
+        if (gc.muchoing.isActiveAndEnabled)
+        {
+            gc.muchoing.Hear(transform.position, 8f);
+        }
+        audioDevice.PlayClip(ring, false, 1f);
+    }
+
+    private void UpdateDisplay()
+    {
+        var index = Mathf.Clamp((int)(timeLeft / 15), 0, 3);
+        currentPreset = index;
+        ClockRender.sprite = sprites[index];
+    }
+    #endregion
+
+    #region Serialized Configuration
+    [Header("References")]
+    public GameControllerScript gc;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip ring;
+    [SerializeField] private AudioSource audioDevice;
+    [SerializeField] private AudioSource windAud;
+
+    [Header("Settings")]
+    [SerializeField] private int[] timePresets = { 15, 30, 45, 60 };
+    [SerializeField] private float timeLeft;
+    [SerializeField] private float lifeSpan;
+
+    [Header("Visuals")]
+    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private SphereCollider trigger;
+    #endregion
+
+    #region Internal State
+    private SpriteRenderer ClockRender;
+    [HideInInspector] public bool rang;
+    [HideInInspector] public int currentPreset;
+    #endregion
+}

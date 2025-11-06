@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236c482ebd8096a48bb93a133aff9474, type: 3}
+  m_Name: static
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 3e9596596d21dbf46af57e2f706a756a, type: 3}
+  subtitleType: 0
+  subtitleOption:
+    enabled: 1
+    headText: '*Panic! In static! Out manic!.....wait why am i typing lyrics in a
+      captio*'
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    duration: 0
+    utStyle: 1
+    TextAppearSpeed: 0.05
+    shakey: 1
+    shakeyspeed: 500
+    shakeyradius: 0.3
+    fonts: 0

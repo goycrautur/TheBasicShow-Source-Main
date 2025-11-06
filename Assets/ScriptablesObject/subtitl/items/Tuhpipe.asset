@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236c482ebd8096a48bb93a133aff9474, type: 3}
+  m_Name: Tuhpipe
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: d20ab9f43ff0a554f8b5d2bf558ecc90, type: 3}
+  subtitleType: 1
+  subtitleOption:
+    enabled: 1
+    headText: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*'
+    textColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
+    duration: 3
+    utStyle: 1
+    TextAppearSpeed: 0.025
+    shakey: 1
+    shakeyspeed: 1000
+    shakeyradius: 3
+    fonts: 0

@@ -1,0 +1,51 @@
+﻿using UnityEngine;
+using System.Collections;
+public class SausageJerry : NPC
+{
+	public override void OnStart()
+	{
+		base.OnStart();
+	}
+
+	public override void OnUpdate()
+	{
+		if (fartCooldown > 0f)
+		{
+			fartCooldown -= Time.deltaTime;
+			
+		}
+		if (fartCooldown <= 0f)
+		{
+			fart();
+		}
+	}
+	public void fart()
+	{
+		SausageJerAudio.PlayOneShot(farth);
+		GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, farth.length - 1.5f, SausageJerAudio);
+		Instantiate(Itemspawn, new Vector3(transform.position.x, 4f, transform.position.z), transform.rotation);
+		Instantiate(FartParticle, transform.position, transform.rotation);
+		fartCooldown = DefaultfartCooldown;
+	}
+
+	public override void OnFixedUpdate()
+	{
+		base.OnFixedUpdate();
+		base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+		agent.speed = base.agentSpeed;
+	}
+
+	//protected override void CheckForPlayer() => base.CheckForPlayer();
+
+	protected override void HandleMovement() => base.HandleMovement();
+
+	protected override void Wander(string locationType = "default") => base.Wander(locationType);
+
+	//protected override void TargetPlayer() => base.TargetPlayer();
+	public float DefaultfartCooldown;
+	public float fartCooldown;
+	public GameObject Itemspawn, FartParticle;
+	public AudioSource SausageJerAudio;
+	public AudioClip farth;
+	[SerializeField] private subsScriptableObject subsScriptable;
+}

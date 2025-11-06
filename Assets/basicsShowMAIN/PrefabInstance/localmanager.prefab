@@ -1,0 +1,222 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7127100925093899789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9215136827119889394}
+  - component: {fileID: 768994507842043771}
+  m_Layer: 0
+  m_Name: localmanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9215136827119889394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127100925093899789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &768994507842043771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127100925093899789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285e271ce4a0fb545b2327d44f1cb84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultLanguages:
+  - language: EN
+    pairs:
+    - key: warnMenu_Warning
+      value: hey uhhhhh
+    - key: warnMenu_Disclaimer
+      value: cool text disclaimer am i right
+    - key: warnMenu_dontleak
+      value: so basicly, this is a dev build, dont leak it ok bye
+    - key: warnMenu_playmf
+      value: <color=red>PROCEED
+    - key: Menu_play
+      value: <#E5B67E>press on this text or press enter
+    - key: Menu_VersionText
+      value: <#808080>idkwhateverbuildok
+    - key: Menu_Back
+      value: Back
+    - key: Menu_PlayReal
+      value: Play
+    - key: Menu_Options
+      value: Options
+    - key: Options_sensitiv
+      value: Sensitivity Bar
+    - key: Options_controlsconfigu
+      value: Controls
+    - key: Options_volum
+      value: Volume
+    - key: Options_reso
+      value: Resolution
+    - key: Options_anaismovemen
+      value: Analog Movements
+    - key: Options_rumb
+      value: Rumblr
+    - key: Options_vsync
+      value: V-Sync
+    - key: Options_fulscren
+      value: Full Screen
+    - key: Options_runinbg
+      value: Run In Background
+    - key: Options_itminfo
+      value: Item Info Text
+    - key: Options_subs
+      value: Subtitles
+    - key: Options_Back
+      value: Back
+    - key: CMapper_Back
+      value: done configu
+    - key: CMapper_Restore
+      value: Back
+    - key: CMapper_Pause
+      value: Pause
+    - key: CMapper_Confirm
+      value: Confirm
+    - key: CMapper_Interact
+      value: Interact
+    - key: CMapper_UseItem
+      value: Use Item
+    - key: CMapper_Jump
+      value: Jump
+    - key: CMapper_itemSlots_1
+      value: Item Slot 1
+    - key: CMapper_itemSlots_2
+      value: Item Slot 2
+    - key: CMapper_itemSlots_3
+      value: Item Slot 3
+    - key: CMapper_itemSlots_4
+      value: Item Slot 4
+    - key: CMapper_itemSlots_5
+      value: Item Slot 5
+    - key: CMapper_itemSlots_6
+      value: Item Slot 6
+    - key: CMapper_itemSlots_7
+      value: Item Slot 7
+    - key: CMapper_itemSlots_8
+      value: Item Slot 8
+    - key: CMapper_itemSlots_9
+      value: Item Slot 9
+    - key: CMapper_Movements_Fowards
+      value: Move Forward
+    - key: CMapper_Movements_Backwards
+      value: Move Backward
+    - key: CMapper_Movements_Left
+      value: Strafe Left
+    - key: CMapper_Movements_Right
+      value: Strafe Right
+    - key: CMapper_Movements_Run
+      value: Run
+    - key: CMapper_Movements_behindyou
+      value: Look Back
+    - key: CMapper_Confirm_walltext
+      value: 'Are You Sure You Want
+
+        To Rebind This Key?'
+    - key: CMapper_Confirm_Yes
+      value: Yez
+    - key: CMapper_Confirm_No
+      value: Na
+    - key: HoverInfoText_none
+      value: 
+    - key: HoverInfoText_Menu_Play
+      value: the main shit lol
+    - key: HoverInfoText_Menu_Options
+      value: this is where u configure stuff lol
+    - key: HoverInfoText_Menu_goback
+      value: go back to the title screen realism
+    - key: HoverInfoText_Options_sensitiv
+      value: i dont need to explain to you what this does,aintcha?
+    - key: HoverInfoText_Options_controlsconfigu
+      value: GO [CONFIGURE] YOURSELF
+    - key: HoverInfoText_Options_volum
+      value: probally will not fully work im not sure,just use the windows volume
+        shit lol
+    - key: HoverInfoText_Options_reso
+      value: having a decompile allowing ppl to change resolution is so peak oml
+    - key: HoverInfoText_Options_anaismovemen
+      value: makes ur movement analog,dont really kno what it does but ok
+    - key: HoverInfoText_Options_rumb
+      value: makes screen rumble,pretty cool righ
+    - key: HoverInfoText_Options_vsync
+      value: locks ur fps to ur monitor refresh rate, quite stable
+    - key: HoverInfoText_Options_fulscren
+      value: 'it does what it said :shrugs:'
+    - key: HoverInfoText_Options_runinbg
+      value: makes the game run in background, really useful if you want to stream
+        the mod ig
+    - key: HoverInfoText_Options_itminfo
+      value: enables the item info text,it shows item info thats all
+    - key: HoverInfoText_Options_subs
+      value: enables bbcr ahh captions yea
+    - key: HoverInfoText_Options_goback
+      value: goin back already?.,.,,.,.,.,.,
+    - key: HoverInfoText_Modifiers_muchomous
+      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
+    - key: HoverInfoText_Modifiers_EvapPad
+      value: enables or disable the evap pad at any time you want!
+    - key: HoverInfoText_Modifiers_Meeptimer
+      value: oh god its war from pizza tower
+    - key: ModeSelectMen_Back
+      value: Back
+    - key: ModeSelectMen_stor
+      value: Story Mode
+    - key: ModeSelectMen_bruhmished
+      value: famished
+    - key: ModeSelectMen_erull
+      value: hell
+    - key: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
+      value: Lappin
+    - key: ModeSelectMen_PlayMenStuff_notfound
+      value: mode not found, defaulting to story mode
+    - key: ModeSelectMen_PlayMenStuff_storyMode
+      value: Story Mode
+    - key: ModeSelectMen_PlayMenStuff_famished
+      value: famished
+    - key: ModeSelectMen_PlayMenStuff_zerull
+      value: z33rull M3D3
+    - key: ModeSelectMen_PlayMenStuff_lappingOfAsylum
+      value: story mode (hard,trust)
+    - key: Playmenu_back
+      value: Back
+    - key: Playmenu_newga
+      value: Start New Game
+    - key: Playmenu_Modifier_muchomous
+      value: mucho
+    - key: Playmenu_Modifier_EvapPad
+      value: EvapPad
+    - key: Playmenu_Modifier_Meeptimer
+      value: MEEP Timer
+    - key: Playmenu_Modifier_muchomous_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_EvapPad_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_Meeptimer_Locked
+      value: LOCKED
+    - key: loadaText
+      value: Loading
+  currentLang: EN

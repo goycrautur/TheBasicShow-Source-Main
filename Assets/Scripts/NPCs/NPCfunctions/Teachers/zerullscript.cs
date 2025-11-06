@@ -1,0 +1,206 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class zerullscript : NPC
+{
+    public bool offmesh;
+    #region Unity Lifecycle
+    public override void OnStart()
+    {
+        base.OnStart();
+        zeraudio = GetComponent<AudioSource>();
+        GetAngry(0f);
+        Move();
+
+        if (endless)
+        {
+            Endless();
+        }
+
+        Wander();
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        if (TempAnger > 0f)
+        {
+            TempAnger -= 0.02f * Time.deltaTime;
+        }
+        else
+        {
+            TempAnger = 0f;
+        }
+        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+        {
+            w.enableOffMeshScript = offmesh;
+            if (!w.broken)
+            {
+                if (Vector3.Distance(transform.position, w.transform.position) <= 10)
+                {
+                    w.Window(true, false, 0f);
+                }
+            }
+        }
+    }
+
+    public override void OnFixedUpdate()
+    {
+        if (player == null) return;
+
+        if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
+        {
+            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
+            {
+                TargetPlayer();
+            }
+        }
+    }
+    #endregion
+
+    #region Movement
+    protected override void Wander(string locationType = "default")
+    {
+        base.Wander(locationType);
+        currentPriority = 0f;
+        offmesh = false;
+    }
+
+    protected override void TargetPlayer()
+    {
+        base.TargetPlayer();
+        currentPriority = 0f;
+        offmesh = true;
+        Hear(player.position, 9999, false);
+    }
+
+    public void Move()
+    {
+        if (this.isActiveAndEnabled)
+        {
+            if (Wait < 30f)
+            {
+                agent.speed = base.agentSpeed;
+            }
+            if (Wait > 30f)
+            {
+                agent.speed = base.agentSpeed * (Wait/30);
+            }
+
+            if (!stopMoving)
+            {
+                Invoke(nameof(OnMoveDone), timeToMove);
+            }
+            Wait = (-3 - TempAnger) * Anger / (Anger+3 / SpeedScale) + 3;
+        }
+    }
+
+    private void OnMoveDone()
+    {
+        agent.speed = 0;
+
+        if (agent.remainingDistance <= 0.1f)
+        {
+            Wander();
+        }
+
+        if (!stopMoving)
+        {
+            Invoke(nameof(Move), Wait);
+        }
+    }
+    #endregion
+
+    #region Anger System
+    public void GetAngry(float value)
+    {
+        Anger += value;
+
+        if (Anger < 0.5f)
+        {
+            Anger = 0.5f;
+        }
+    }
+
+    public void GetTempAngry(float value) => TempAnger += value;
+
+    public void Endless()
+    {
+        Invoke(nameof(Endless), timeToAnger);
+        timeToAnger = angerFrequency;
+        GetAngry(angerRate);
+        angerRate += angerRateRate;
+    }
+    #endregion
+
+    #region Hearing Detection
+    public void Hear(Vector3 soundLocation, float priority, bool indicator = true)
+    {
+        if (!isActiveAndEnabled) return;
+
+        bool canHear = !antiHearing && priority >= currentPriority;
+        bool inNoSqueeArea = false;
+
+        foreach (Collider collider in Physics.OverlapSphere(soundLocation, 0.1f))
+        {
+            if (collider.gameObject.CompareTag("NoSquee Area"))
+            {
+                canHear = false;
+                inNoSqueeArea = true;
+                break;
+            }
+        }
+
+        if (canHear)
+        {
+            agent.SetDestination(soundLocation);
+            currentPriority = priority;
+
+            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            {
+                baldicator.Rebind();
+                baldicator.Play("Indicator_Heared", -1, 0f);
+            }
+        }
+        else
+        {
+            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            {
+                baldicator.Rebind();
+                baldicator.Play("Indicator_Confused", -1, 0f);
+            }
+        }
+    }
+    public void ActivateAntiHearing(float SetTime) => StartCoroutine(SetHearingTimer(SetTime));
+
+    private IEnumerator SetHearingTimer(float Timer)
+    {
+        Wander();
+        antiHearing = true;
+        yield return new WaitForSeconds(Timer);
+        antiHearing = false;
+    }
+    #endregion
+
+    #region Serialized Field States
+    [Header("Baldi's Stats")]
+    [SerializeField] private float Anger;
+    [SerializeField] private float TempAnger, Wait, SpeedScale;
+
+    [Header("Movement and Behavior")]
+    [SerializeField] private float timeToMove;
+    public bool stopMoving, antiHearing;
+
+    [Header("Anger Management")]
+    [SerializeField] private float angerRate;
+    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger;
+    public bool endless;
+
+    [Header("Audio and Animation")]
+    [SerializeField] private Animator baldicator;
+
+    private float currentPriority;
+    private AudioSource zeraudio;
+    #endregion
+}
