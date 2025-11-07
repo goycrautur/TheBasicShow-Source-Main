@@ -12,7 +12,8 @@ public class MathMachineScript : MonoBehaviour
     public bool won, hasLost;
     public Transform player;
     public TextMeshPro text1,textsign,text3,text4;
-    public GameObject prize,disabled;
+    public GameObject prize, disabled;
+    public SpriteRenderer machineMapIcon;
     public GameObject[] balls;
     public float cooldown,Say;
     public void Pickup(int num, GameObject gameObject)
@@ -31,6 +32,7 @@ public class MathMachineScript : MonoBehaviour
 
     public void GetNewProblem()
     {
+        machineMapIcon.enabled = true;
         num1 = Mathf.RoundToInt(UnityEngine.Random.Range(0f, 9f));//Pick a random number between 0 and 9
         num3 = Mathf.RoundToInt(UnityEngine.Random.Range(0f, 9f));//Pick a random number between 0 and 9
         sign = Mathf.RoundToInt(UnityEngine.Random.Range(0f, 1f));// Picks a random sign (addition) or (subtraction)
@@ -55,7 +57,7 @@ public class MathMachineScript : MonoBehaviour
         {
             GetNewProblem();
         }
-
+        machineMapIcon.enabled = true;
     }
 
     private void Update()
@@ -126,6 +128,7 @@ public class MathMachineScript : MonoBehaviour
     {
         if (!won & !hasLost & cooldown <= 0)
         {
+            machineMapIcon.enabled = false;
             audioSource.PlayOneShot(gen);
             GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[8].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[8], 0f, audioSource);
             GameControllerScript.Instance.isHoldingBall = false;
@@ -169,6 +172,7 @@ public class MathMachineScript : MonoBehaviour
     {
         if (!won & cooldown <= 0)
         {
+            machineMapIcon.enabled = false;
             if (!GameControllerScript.Instance.spoopMode)
             {
                 GameControllerScript.Instance.ActivateSpoopMode();
