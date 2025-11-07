@@ -37,6 +37,10 @@ public class LappingOfAsylumController : MonoBehaviour
             LapSound.clip = RandomizedPrelapMusic[audLapVal];
             LapSound.Play();
             LapSound.loop = true;
+            if (gc.warrealest)
+            {
+                gc.LapManag.MeepTimer.SetActive(true);
+            }
         }
         if (stuff == "exitstuff")
         {
@@ -58,7 +62,7 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         if (Meeptimar.isActiveAndEnabled && Lap5CheeseCount != 7)
         {
-            meepTimerScript.Instance.AddTime(12.5f, Color.green);
+            meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 25f : 12.5f, Color.green);
         }
         if (LapFamishShit)
         {
@@ -123,41 +127,37 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public IEnumerator zawadro()
     {
-        if (!h)
+        gc.audioDevice2.PlayOneShot(zawarudo);
+        LapSound.Stop();
+        gc.player.movementLocked = true;
+        gc.player.titlecard = true;
+        gc.playerCollider.enabled = false;
+        gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
+        AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
+        yield return new WaitForSeconds(zawarudo.length);
+        gc.player.maxHealth += 50;
+        gc.player.totemshit(false);
+        gc.maxNotebooks += realCurrentMaxNoteboo;
+        CurrentMaxNotebooks += realCurrentMaxNoteboo;
+        for (int i = 0; i < noteboos.Length; ++i)
         {
-            h = true;
-            gc.audioDevice2.PlayOneShot(zawarudo);
-            LapSound.Stop();
-            gc.player.movementLocked = true;
-            gc.player.titlecard = true;
-            gc.playerCollider.enabled = false;
-            gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
-            AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
-            yield return new WaitForSeconds(zawarudo.length);
-            gc.player.maxHealth += 50;
-            gc.player.totemshit(false);
-            gc.maxNotebooks += realCurrentMaxNoteboo;
-            CurrentMaxNotebooks += realCurrentMaxNoteboo;
-            for (int i = 0; i < noteboos.Length; ++i)
-            {
-                noteboos[i].Respawn();
-            }
-            gc.UpdateNotebookCount();
-            yield return new WaitForSeconds(zawarudo.length / 2);
-            LapSound.clip = lappingHi[CurrentLap].LapMusik;
-            LapSound.Play();
-            LapSound.loop = true;
-            gc.audioDevice2.PlayOneShot(BellSoundLapping);
-            CurrentLap++;
-            gc.player.walkSpeedMultipler += 0.45f;
-            gc.player.runSpeedMultipler += 0.4f;
-            gc.player.movementLocked = false;
-            gc.player.titlecard = false;
-            gc.playerCollider.enabled = true;
-            gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
-            AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
-            yield return null;
+            noteboos[i].Respawn();
         }
+        gc.UpdateNotebookCount();
+        yield return new WaitForSeconds(zawarudo.length / 2);
+        LapSound.clip = lappingHi[CurrentLap].LapMusik;
+        LapSound.Play();
+        LapSound.loop = true;
+        gc.audioDevice2.PlayOneShot(BellSoundLapping);
+        CurrentLap++;
+        gc.player.walkSpeedMultipler += 0.45f;
+        gc.player.runSpeedMultipler += 0.4f;
+        gc.player.movementLocked = false;
+        gc.player.titlecard = false;
+        gc.playerCollider.enabled = true;
+        gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
+        AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
+        yield return null;
         yield break;
     }
     public IEnumerator flagmove()

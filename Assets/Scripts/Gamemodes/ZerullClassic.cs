@@ -419,7 +419,15 @@ public class ZerullClassic : MonoBehaviour
         {
             Singleton<MusicManager>.Instance.StopMidi(true, null, null);
         }
-        EndingManager.Instance.LoadNormalResults();
+        gc.Gatesrea.ForEach(g => g.Down(false));
+        gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+        if (gc.LapManag.Meeptimar.isActiveAndEnabled)
+        {
+            gc.LapManag.Meeptimar.AddTime(60f, Color.green);
+            gc.LapManag.Meeptimar.inEnding = true;
+            gc.LapManag.Meeptimar.canTime = false;
+            gc.warmusic.Stop();
+        }
     }
     public void AfterHit()
     {
@@ -538,6 +546,10 @@ public class ZerullClassic : MonoBehaviour
             gc.WindowLayermask = "Ignore Raycast";
             gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
             ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
+            if (gc.warrealest)
+            {
+                gc.LapManag.MeepTimer.SetActive(true);
+            }
         }
     }
     public void jusUpdatebr()

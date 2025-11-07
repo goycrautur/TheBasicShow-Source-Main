@@ -40,6 +40,10 @@ public class FamishedModeController : MonoBehaviour
             butch.SetActive(true);
             gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
             ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
+            if (gc.warrealest)
+            {
+                gc.LapManag.MeepTimer.SetActive(true);
+            }
         }
         if (gc.notebooks == 3)
         {
