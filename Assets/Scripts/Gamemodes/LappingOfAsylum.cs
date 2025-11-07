@@ -142,13 +142,13 @@ public class LappingOfAsylumController : MonoBehaviour
             {
                 noteboos[i].Respawn();
             }
-            CurrentLap++;
             gc.UpdateNotebookCount();
             yield return new WaitForSeconds(zawarudo.length / 2);
             LapSound.clip = lappingHi[CurrentLap].LapMusik;
             LapSound.Play();
             LapSound.loop = true;
             gc.audioDevice2.PlayOneShot(BellSoundLapping);
+            CurrentLap++;
             gc.player.walkSpeedMultipler += 0.45f;
             gc.player.runSpeedMultipler += 0.4f;
             gc.player.movementLocked = false;
