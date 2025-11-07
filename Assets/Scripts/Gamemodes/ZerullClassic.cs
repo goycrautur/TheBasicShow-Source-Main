@@ -192,7 +192,7 @@ public class ZerullClassic : MonoBehaviour
         }
         zs.sprite.gameObject.SetActive(true);
         debug = true; // Makes that null doesn't able to kill player
-        zs.Agent.speed = 300f; // Make null very fast for time
+        zs.Agent.speed = 100f; // Make null very fast for time
     }
     public void Prepare()
     {
@@ -419,6 +419,7 @@ public class ZerullClassic : MonoBehaviour
         {
             Singleton<MusicManager>.Instance.StopMidi(true, null, null);
         }
+        gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
         gc.Gatesrea.ForEach(g => g.Down(false));
         gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
         if (gc.LapManag.Meeptimar.isActiveAndEnabled)
@@ -428,6 +429,11 @@ public class ZerullClassic : MonoBehaviour
             gc.LapManag.Meeptimar.canTime = false;
             gc.warmusic.Stop();
         }
+        PlayerPrefsExtension.SetBool("BeatedUpZerull", true);
+        GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
+        GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed - GameControllerScript.Instance.player.DefaultRunSpeed;
+        float ratioy = (float)Screen.width / 360f;
+        tweenitemsAlt[0].transform.DOMoveY(ratioy*425, 3f);
     }
     public void AfterHit()
     {

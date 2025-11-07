@@ -7,8 +7,8 @@ public class ZerullBossScript : MonoBehaviour
     [Header("Audio"), SerializeField]
     private AudioQueueScript audioDevice;
 
-    [SerializeField] public AudioClip hit, bossIntro, bossIntro_Loop, bossStart;
-    [SerializeField] private subsScriptableObject bossHit_Captions,bossyapStart_captions, bossyapIntro_captions,bossyapIntroloop_captions;
+    [SerializeField] public AudioClip hit, bossIntro, bossIntro_Loop, bossStart,ChairHit,ChairStart;
+    [SerializeField] private subsScriptableObject bossHit_Captions, chairHit_Captions,bossyapStart_captions, bossyapIntro_captions,bossyapIntroloop_captions;
 
     [Header("References"), SerializeField]
     private NavMeshAgent agent;
@@ -16,11 +16,19 @@ public class ZerullBossScript : MonoBehaviour
 
     [SerializeField] private SpriteRenderer normalSprite;
     [SerializeField] private PlayerScript pscript;
+    [SerializeField] private Sprite ChairSprite;
 
     private MaterialPropertyBlock spriteProperties;
 
     private void Start()
     {
+        bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+        if (chair)
+        {
+            normalSprite.sprite = ChairSprite;
+            hit = ChairHit;
+            bossStart = ChairStart;
+        }
         spriteProperties = new MaterialPropertyBlock();
         normalSprite.GetPropertyBlock(spriteProperties);
         spriteProperties.SetFloat("_Seed", 0f);
@@ -104,7 +112,16 @@ public class ZerullBossScript : MonoBehaviour
     {
         hitted = true;
         audioDevice.ClearQueue();
-        audioDevice.QueueAudio(hit,bossHit_Captions);
+        
+        bool chairh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+        if (!chairh)
+        {
+            audioDevice.QueueAudio(hit, bossHit_Captions);
+        }
+        if (chairh)
+        {
+            audioDevice.QueueAudio(ChairHit, chairHit_Captions);
+        }
         if (!ZerullClassic.Instance.RealBossStarted)
         {
             audioDevice.QueueAudio(bossStart, bossyapStart_captions);

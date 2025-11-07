@@ -28,6 +28,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         Subtitles = captio;
         ItemInfostuffahah.SetActive(ItemInfoShit);
         subtitlesCanvas.SetActive(Subtitles);
+        bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         if (GameControllerScript.Instance.mode == "endless")
         {
             modesText.text = "Endless Mode";
@@ -45,7 +46,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (GameControllerScript.Instance.mode == "zerullclassic")
         {
             NoYCTP = false;
-            modesText.text = "?eru?? M0D3";
+            modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3";
         }
         if (GameControllerScript.Instance.mode == "LappingOfAsylum")
         {

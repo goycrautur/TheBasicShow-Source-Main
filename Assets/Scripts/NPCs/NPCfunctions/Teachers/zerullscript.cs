@@ -7,6 +7,11 @@ public class zerullscript : NPC
     #region Unity Lifecycle
     public override void OnStart()
     {
+        bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+        if (chair)
+        {
+            normalSprite.sprite = ChairSprite;
+        }
         base.OnStart();
         zeraudio = GetComponent<AudioSource>();
         GetAngry(0f);
@@ -202,5 +207,7 @@ public class zerullscript : NPC
 
     private float currentPriority;
     private AudioSource zeraudio;
+    [SerializeField] private SpriteRenderer normalSprite;
+    [SerializeField] private Sprite ChairSprite;
     #endregion
 }

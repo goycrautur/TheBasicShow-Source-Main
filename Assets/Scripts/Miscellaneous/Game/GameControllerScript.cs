@@ -125,9 +125,10 @@ public class GameControllerScript : MonoBehaviour
         }
         if (mode == "zerullclassic")
         {
-            modeDetails = "???????";
+            bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+            modeDetails = chair ? "c  h  a  i  r" : "???????";
             largeImagething = "van";
-            largeImageText = "*CLASSIFIED INFO*";
+            largeImageText = chair ? "c  h  a  i  r" : "*CLASSIFIED INFO*";
         }
         if (mode == "LappingOfAsylum")
         {

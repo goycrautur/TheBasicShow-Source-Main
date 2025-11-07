@@ -47,6 +47,7 @@ public class MathGameScript : MonoBehaviour
         Baldtalk.SetActive(false);
         StaticBG.SetActive(false);
         ZerullFeed.SetActive(false);
+        ChairFeed.SetActive(false);
 
         if (gc.notebooks == 1 && gc.mode != "zerullclassic")
         {
@@ -63,6 +64,7 @@ public class MathGameScript : MonoBehaviour
         }
         if (gc.mode == "zerullclassic")
         {
+            bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
             ProvideHintOrFeedback();
             Baldtalk.SetActive(false);
             BlackCoverUp.SetActive(false);
@@ -72,7 +74,14 @@ public class MathGameScript : MonoBehaviour
 			baldiFeedTransform.gameObject.SetActive(false);
 			baldiFeed.enabled = false;
 			StaticBG.SetActive(true);
-			ZerullFeed.SetActive(true);
+            if (!chair)
+            {
+                ZerullFeed.SetActive(true);
+            }
+            if (chair)
+            {
+                ChairFeed.SetActive(true);
+            }
 		}
 
         if (gc.mode != "zerullclassic")
@@ -380,8 +389,16 @@ public class MathGameScript : MonoBehaviour
         }
         if (gc.mode == "zerullclassic" && problemsWrong <= 0)
         {
-			int index = UnityEngine.Random.Range(0, zerullQuotes.Length);
-            questionText.text = zerullQuotes[index];
+            bool chairr = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+            if (!chairr)
+            {
+                int index = UnityEngine.Random.Range(0, zerullQuotes.Length);
+                questionText.text = zerullQuotes[index];
+            }
+            if (chairr)
+            {
+                questionText.text = "chair";
+            }
             questionText2.text = questionText3.text = string.Empty;
             problem = 1;
             results[problem - 1].sprite = correct;
@@ -389,6 +406,7 @@ public class MathGameScript : MonoBehaviour
             results[problem - 1].sprite = correct;
             problem = 3;
             results[problem - 1].sprite = correct;
+
 			return;
 		}
             questionText.text = hintText[UnityEngine.Random.Range(0, hintText.Length)];
@@ -556,7 +574,7 @@ public class MathGameScript : MonoBehaviour
     [SerializeField] private Image baldiFeedI;
     [SerializeField] private GameObject Baldtalk;
     [Header("Zerull UI Elements")]
-    [SerializeField] private GameObject ZerullFeed;
+    [SerializeField] private GameObject ZerullFeed,ChairFeed;
     [SerializeField] private GameObject StaticBG;
     public string[] zerullQuotes;
 
