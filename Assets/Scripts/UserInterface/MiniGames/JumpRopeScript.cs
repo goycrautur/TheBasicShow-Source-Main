@@ -9,7 +9,7 @@ public class JumpRopeScript : MonoBehaviour
 		KeyCode jumpKey = Singleton<InputManager>.Instance.KeyboardMapping[InputAction.Jump];
 		Instructions.text = $"Time to jump rope!\nUse {jumpKey} to jump!";
 
-		jumpDelay = 1f;
+		jumpDelay = 0.5f;
 		ropeHit = true;
 		jumpStarted = false;
 		jumps = 0;

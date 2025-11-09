@@ -160,6 +160,12 @@ public class FirstPrizeScript : NPC
 
     private void HandleHuggingPlayer()
     {
+        if (gc.player.jumpRope)
+        {
+            gc.player.jumpRope = false;
+            gc.player.DeactivateJumpRope();
+            gc.player.playtime.Disappoint();
+        }
         Vector3[] directions = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left };
         Vector3 furthestPoint = Vector3.zero;
         float maxDistance = 0f;
@@ -247,8 +253,8 @@ public class FirstPrizeScript : NPC
                 }
             }
             audioDevice.PlayOneShot(audBang);
-            if (hugAnnounced)
-            {
+            //if (hugAnnounced)
+            //{
                 if (GameControllerScript.Instance.baldiScrpt.isActiveAndEnabled)
                 {
                     GameControllerScript.Instance.baldiScrpt.Hear(transform.position, 8f);
@@ -265,7 +271,7 @@ public class FirstPrizeScript : NPC
                 {
                     GameControllerScript.Instance.muchoing.Hear(transform.position, 8f);
                 }
-            }
+            //}
         }
         prevSpeed = agent.velocity.magnitude;
     }

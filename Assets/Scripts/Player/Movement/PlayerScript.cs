@@ -53,9 +53,15 @@ public class PlayerScript : MonoBehaviour
 		{
 			HudManager.Instance.colorVarSetter(false);
 			if (ZerullClassic.Instance.RealBossStarted)
-            {
-                SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
-            }
+			{
+				SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
+			}
+			if (jumpRope)
+        	{
+            	jumpRope = false;
+            	DeactivateJumpRope();
+            	playtime.Disappoint();
+        	}
 		}
 		else
 		{
