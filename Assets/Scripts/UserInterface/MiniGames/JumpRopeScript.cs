@@ -7,9 +7,11 @@ public class JumpRopeScript : MonoBehaviour
 	private void OnEnable()
 	{
 		KeyCode jumpKey = Singleton<InputManager>.Instance.KeyboardMapping[InputAction.Jump];
-		Instructions.text = $"Time to jump rope!\nUse {jumpKey} to jump!";
+		string jumpkeyFR = $"{jumpKey}";
+		string jumpkeyFRthe2nd = jumpkeyFR == "Mouse0" ? "Left Click" : jumpkeyFR == "Mouse1" ? "Right Click" : jumpkeyFR;
+		Instructions.text = $"Time to jump rope!\nUse {jumpkeyFRthe2nd} to jump!";
 
-		jumpDelay = 0.5f;
+		jumpDelay = 1f;
 		ropeHit = true;
 		jumpStarted = false;
 		jumps = 0;
@@ -79,7 +81,7 @@ public class JumpRopeScript : MonoBehaviour
 
 		jumps++;
 		jumpCount.text = $"{jumps}/{maxJumps}";
-		jumpDelay = 0.5f;
+		jumpDelay = 0.25f;
 	}
 
 	private void Fail()
