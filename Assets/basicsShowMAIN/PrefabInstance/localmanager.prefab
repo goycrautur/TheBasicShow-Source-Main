@@ -175,12 +175,16 @@ MonoBehaviour:
       value: enables bbcr ahh captions yea
     - key: HoverInfoText_Options_goback
       value: goin back already?.,.,,.,.,.,.,
+    - key: HoverInfoText_Modifiers_syfm
+      value: nuh uh, cant use that yet buddy,go beat story mode first
     - key: HoverInfoText_Modifiers_muchomous
       value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
     - key: HoverInfoText_Modifiers_EvapPad
       value: enables or disable the evap pad at any time you want!
     - key: HoverInfoText_Modifiers_Meeptimer
       value: oh god its war from pizza tower
+    - key: HoverInfoText_Modifiers_ChaosMode
+      value: its DEFINITIVELY not that chaos mode, trust me, trustme, T!!#US M!@!e
     - key: ModeSelectMen_Back
       value: Back
     - key: ModeSelectMen_stor
@@ -217,6 +221,9 @@ MonoBehaviour:
       value: LOCKED
     - key: Playmenu_Modifier_Meeptimer_Locked
       value: LOCKED
+    - key: Playmenu_Modifier_ChaosMode_Locked
+      value: LOCKED
     - key: loadaText
       value: Loading
   currentLang: EN
+  currentJsonVersion: 1

@@ -382,6 +382,19 @@ public class GameControllerScript : MonoBehaviour
             }
         }
         UpdateNotebookCount();
+        bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
+        if (ChaosMode)
+        {
+            foreach (GameObject obj in ObjectsToEnable)
+            {
+                if (obj != null)
+                {
+                    GameObject clone = Instantiate(obj, obj.transform.position, obj.transform.rotation);
+                    clone.name = obj.name;
+                    clone.SetActive(true);
+                }
+            }
+        }
     }
     #endregion
 

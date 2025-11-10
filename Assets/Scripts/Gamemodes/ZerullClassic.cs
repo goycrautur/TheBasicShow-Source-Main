@@ -382,15 +382,13 @@ public class ZerullClassic : MonoBehaviour
             meepTimerScript.Instance.AddTime(5f * hp,Color.green);
         }
         debug = true; // Enable debug bool, to make null not able to kill player
-        for (int i = 2; i < maxHealth; ++i)
+        health -= hp; // Decreases null health
+            
+        if (health <= 0) // If health is zero or less, game will load results
         {
-            health -= hp; // Decreases null health
-            if (health <= 0) // If health is zero or less, game will load results
-            {
-                BossEnd();
-            }
-            return;
+            BossEnd();
         }
+        return;
     }
     private void BossEnd() // I've never tested is this void works or not, but if it's not works, please tell me in the comments
     {
@@ -403,14 +401,6 @@ public class ZerullClassic : MonoBehaviour
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         Shader.SetGlobalFloat("_VertexGlitchIntensity", 0f);
         Shader.SetGlobalFloat("_VertexGlitchSeed", 0f);
-        if (ShowHealthSlider)
-        {
-            if (healthSlider != null)
-                healthSlider.gameObject.SetActive(false);
-        }
-
-        GameControllerScript.Instance.player.walkSpeed = GameControllerScript.Instance.player.DefaultWalkSpeed;
-        GameControllerScript.Instance.player.runSpeed = GameControllerScript.Instance.player.DefaultRunSpeed;
 
         if (spawnBlockagesDuringTheBossfight)
             blockages.SetActive(false);

@@ -7,6 +7,7 @@ public class MuchoScript : NPC
     public override void OnStart()
     {
         base.OnStart();
+        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         baldiAudio = GetComponent<AudioSource>();
         GetAngry(0f);
         Move();

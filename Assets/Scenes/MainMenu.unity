@@ -3838,6 +3838,203 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: Options_reso
+--- !u!1 &45423855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 45423856}
+  - component: {fileID: 45423860}
+  - component: {fileID: 45423859}
+  - component: {fileID: 45423858}
+  - component: {fileID: 45423857}
+  m_Layer: 5
+  m_Name: buton
+  m_TagString: Button
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &45423856
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45423855}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 545706860}
+  - {fileID: 1982088178}
+  - {fileID: 1035596754}
+  m_Father: {fileID: 1885356052}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: 25}
+  m_SizeDelta: {x: 160, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &45423857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45423855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1008ccda87407f04fb63e765cf48434f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thingtodisable: {fileID: 45423855}
+  dotheOpposite: 0
+  playerprefsname: storyBeaten
+--- !u!114 &45423858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45423855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027b2b7757cea8042ae0e7955b397010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ModifierName: Chaos
+--- !u!114 &45423859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45423855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ff61b9834b36a48b4e69e95e7dd4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 545706862}
+        m_TargetAssemblyTypeName: TextUnderliner, Assembly-CSharp
+        m_MethodName: Underline
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HoverInfoText_Modifiers_ChaosMode
+          m_BoolArgument: 1
+        m_CallState: 2
+  mouseLeave:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 545706862}
+        m_TargetAssemblyTypeName: TextUnderliner, Assembly-CSharp
+        m_MethodName: Underline
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HoverInfoText_none
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &45423860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45423855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 816}
+    m_SelectOnDown: {fileID: 878}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.7843137, g: 0.7843137, b: 0.7843137, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.7843137, g: 0.7843137, b: 0.7843137, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: 46489c032ebd79f4aa215294f7b5d8e2,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: cd47441dd97b05b49869acac017ffa88, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 46489c032ebd79f4aa215294f7b5d8e2, type: 3}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  toggleTransition: 0
+  graphic: {fileID: 1035596755}
+  m_Group: {fileID: 0}
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 962613037}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 1
 --- !u!1 &53415156
 GameObject:
   m_ObjectHideFlags: 0
@@ -4319,31 +4516,31 @@ MonoBehaviour:
   mouseOver:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022579518}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: nuh uh, cant use that yet buddy,go beat story mode first
+          m_StringArgument: HoverInfoText_Modifiers_syfm
           m_BoolArgument: 0
         m_CallState: 2
   mouseLeave:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022579518}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: HoverInfoText_none
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &76116710
@@ -5096,31 +5293,31 @@ MonoBehaviour:
   mouseOver:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022579518}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: nuh uh, cant use that yet buddy,go beat story mode first
+          m_StringArgument: HoverInfoText_Modifiers_syfm
           m_BoolArgument: 0
         m_CallState: 2
   mouseLeave:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022579518}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: HoverInfoText_none
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &175617464
@@ -8492,6 +8689,169 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531956660}
+  m_CullTransparentMesh: 1
+--- !u!1 &545706859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 545706860}
+  - component: {fileID: 545706864}
+  - component: {fileID: 545706863}
+  - component: {fileID: 545706862}
+  - component: {fileID: 545706861}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &545706860
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545706859}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 45423856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -33, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &545706861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545706859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe14e4a12c2ae944857170344f15f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Playmenu_Modifier_ChaosMode
+--- !u!114 &545706862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545706859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5ad28a4f1e6f24c8c7a4db21e62640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 545706863}
+--- !u!114 &545706863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545706859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Chaos.. Mode!
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
+  m_sharedMaterial: {fileID: 824898514370142616, guid: 1f104ab5c06b6f34ab0816f086069b5b,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &545706864
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545706859}
   m_CullTransparentMesh: 1
 --- !u!1 &561862898
 GameObject:
@@ -14605,7 +14965,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START NEW GAME
+  m_text: Start New Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc15ff1ca1bb1154eab4bd2dc589d1a8, type: 2}
   m_sharedMaterial: {fileID: 1532673802376166379, guid: bc15ff1ca1bb1154eab4bd2dc589d1a8,
@@ -14935,6 +15295,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: HoverInfoText_none
+--- !u!1 &1035596753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1035596754}
+  - component: {fileID: 1035596756}
+  - component: {fileID: 1035596755}
+  m_Layer: 5
+  m_Name: Checkmark
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1035596754
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035596753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 45423856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 68, y: 4}
+  m_SizeDelta: {x: 32, y: 32}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1035596755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035596753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 2247793541055268140, guid: 0ea353a601c7ade4cb27d80ac2694365,
+    type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1035596756
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035596753}
+  m_CullTransparentMesh: 0
 --- !u!1 &1042367734
 GameObject:
   m_ObjectHideFlags: 0
@@ -15592,6 +16028,163 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1061399118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061399119}
+  - component: {fileID: 1061399122}
+  - component: {fileID: 1061399121}
+  - component: {fileID: 1061399120}
+  m_Layer: 5
+  m_Name: butonLocked
+  m_TagString: Button
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1061399119
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061399118}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1487002277}
+  m_Father: {fileID: 1885356052}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -16.2, y: 25}
+  m_SizeDelta: {x: 160, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1061399120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061399118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ff61b9834b36a48b4e69e95e7dd4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HoverInfoText_Modifiers_syfm
+          m_BoolArgument: 0
+        m_CallState: 2
+  mouseLeave:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HoverInfoText_none
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1061399121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061399118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1008ccda87407f04fb63e765cf48434f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thingtodisable: {fileID: 1061399118}
+  dotheOpposite: 1
+  playerprefsname: storyBeaten
+--- !u!114 &1061399122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061399118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 816}
+    m_SelectOnDown: {fileID: 878}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.7843137, g: 0.7843137, b: 0.7843137, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.7843137, g: 0.7843137, b: 0.7843137, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: 46489c032ebd79f4aa215294f7b5d8e2,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: cd47441dd97b05b49869acac017ffa88, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 46489c032ebd79f4aa215294f7b5d8e2, type: 3}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  toggleTransition: 0
+  graphic: {fileID: 0}
+  m_Group: {fileID: 0}
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1118224343}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 1
 --- !u!1 &1062134795
 GameObject:
   m_ObjectHideFlags: 0
@@ -20975,31 +21568,31 @@ MonoBehaviour:
   mouseOver:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022579518}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: nuh uh, cant use that yet buddy,go beat story mode first
+          m_StringArgument: HoverInfoText_Modifiers_syfm
           m_BoolArgument: 0
         m_CallState: 2
   mouseLeave:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022579518}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1022579522}
+        m_TargetAssemblyTypeName: YuriArchive.GlobalLocalization.LocalizedText, Assembly-CSharp
+        m_MethodName: setkey
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: HoverInfoText_none
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1456739794
@@ -21626,6 +22219,169 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482563609}
+  m_CullTransparentMesh: 1
+--- !u!1 &1487002276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487002277}
+  - component: {fileID: 1487002281}
+  - component: {fileID: 1487002280}
+  - component: {fileID: 1487002279}
+  - component: {fileID: 1487002278}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1487002277
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487002276}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1061399119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 30, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1487002278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487002276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe14e4a12c2ae944857170344f15f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Playmenu_Modifier_ChaosMode_Locked
+--- !u!114 &1487002279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487002276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5ad28a4f1e6f24c8c7a4db21e62640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1487002280}
+--- !u!114 &1487002280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487002276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: LOCKED
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
+  m_sharedMaterial: {fileID: 824898514370142616, guid: 1f104ab5c06b6f34ab0816f086069b5b,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1487002281
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487002276}
   m_CullTransparentMesh: 1
 --- !u!1 &1501945091
 GameObject:
@@ -27427,6 +28183,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881225276}
   m_CullTransparentMesh: 1
+--- !u!1 &1885356051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885356052}
+  m_Layer: 5
+  m_Name: kyswhychaosishere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1885356052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885356051}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 45423856}
+  - {fileID: 1061399119}
+  m_Father: {fileID: 2128374036}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -90}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1891702516
 GameObject:
   m_ObjectHideFlags: 0
@@ -29061,6 +29854,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981606885}
+  m_CullTransparentMesh: 1
+--- !u!1 &1982088177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1982088178}
+  - component: {fileID: 1982088180}
+  - component: {fileID: 1982088179}
+  m_Layer: 5
+  m_Name: CheckBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1982088178
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982088177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 45423856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 66, y: 0}
+  m_SizeDelta: {x: 32, y: 32}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1982088179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982088177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 90870ffec1a46d645845021c50074ca7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1982088180
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982088177}
   m_CullTransparentMesh: 1
 --- !u!1 &1984936602
 GameObject:
@@ -30866,7 +31734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BACK
+  m_text: Back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
   m_sharedMaterial: {fileID: 824898514370142616, guid: 1f104ab5c06b6f34ab0816f086069b5b,
@@ -33086,6 +33954,7 @@ RectTransform:
   - {fileID: 1849966087}
   - {fileID: 401861894}
   - {fileID: 1619009094}
+  - {fileID: 1885356052}
   m_Father: {fileID: 487857635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -33299,195 +34168,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &768994507468711027
-MonoBehaviour:
+--- !u!4 &906694691483262425
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7127100925509170437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285e271ce4a0fb545b2327d44f1cb84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultLanguages:
-  - language: EN
-    pairs:
-    - key: warnMenu_Warning
-      value: hey uhhhhh
-    - key: warnMenu_Disclaimer
-      value: cool text disclaimer am i right
-    - key: warnMenu_dontleak
-      value: so basicly, this is a dev build, dont leak it ok bye
-    - key: warnMenu_playmf
-      value: <color=red>PROCEED
-    - key: Menu_play
-      value: <#E5B67E>press on this text or press enter
-    - key: Menu_VersionText
-      value: <#808080>idkwhateverbuildok
-    - key: Menu_Back
-      value: Back
-    - key: Menu_PlayReal
-      value: Play
-    - key: Menu_Options
-      value: Options
-    - key: Options_sensitiv
-      value: Sensitivity Bar
-    - key: Options_controlsconfigu
-      value: Controls
-    - key: Options_volum
-      value: Volume
-    - key: Options_reso
-      value: Resolution
-    - key: Options_anaismovemen
-      value: Analog Movements
-    - key: Options_rumb
-      value: Rumblr
-    - key: Options_vsync
-      value: V-Sync
-    - key: Options_fulscren
-      value: Full Screen
-    - key: Options_runinbg
-      value: Run In Background
-    - key: Options_itminfo
-      value: Item Info Text
-    - key: Options_subs
-      value: Subtitles
-    - key: Options_Back
-      value: Back
-    - key: CMapper_Back
-      value: done configu
-    - key: CMapper_Restore
-      value: Back
-    - key: CMapper_Pause
-      value: Pause
-    - key: CMapper_Confirm
-      value: Confirm
-    - key: CMapper_Interact
-      value: Interact
-    - key: CMapper_UseItem
-      value: Use Item
-    - key: CMapper_Jump
-      value: Jump
-    - key: CMapper_itemSlots_1
-      value: Item Slot 1
-    - key: CMapper_itemSlots_2
-      value: Item Slot 2
-    - key: CMapper_itemSlots_3
-      value: Item Slot 3
-    - key: CMapper_itemSlots_4
-      value: Item Slot 4
-    - key: CMapper_itemSlots_5
-      value: Item Slot 5
-    - key: CMapper_itemSlots_6
-      value: Item Slot 6
-    - key: CMapper_itemSlots_7
-      value: Item Slot 7
-    - key: CMapper_itemSlots_8
-      value: Item Slot 8
-    - key: CMapper_itemSlots_9
-      value: Item Slot 9
-    - key: CMapper_Movements_Fowards
-      value: Move Forward
-    - key: CMapper_Movements_Backwards
-      value: Move Backward
-    - key: CMapper_Movements_Left
-      value: Strafe Left
-    - key: CMapper_Movements_Right
-      value: Strafe Right
-    - key: CMapper_Movements_Run
-      value: Run
-    - key: CMapper_Movements_behindyou
-      value: Look Back
-    - key: CMapper_Confirm_walltext
-      value: 'Are You Sure You Want
-
-        To Rebind This Key?'
-    - key: CMapper_Confirm_Yes
-      value: Yez
-    - key: CMapper_Confirm_No
-      value: Na
-    - key: HoverInfoText_none
-      value: 
-    - key: HoverInfoText_Menu_Play
-      value: the main shit lol
-    - key: HoverInfoText_Menu_Options
-      value: this is where u configure stuff lol
-    - key: HoverInfoText_Menu_goback
-      value: go back to the title screen realism
-    - key: HoverInfoText_Options_sensitiv
-      value: i dont need to explain to you what this does,aintcha?
-    - key: HoverInfoText_Options_controlsconfigu
-      value: GO [CONFIGURE] YOURSELF
-    - key: HoverInfoText_Options_volum
-      value: probally will not fully work im not sure,just use the windows volume
-        shit lol
-    - key: HoverInfoText_Options_reso
-      value: having a decompile allowing ppl to change resolution is so peak oml
-    - key: HoverInfoText_Options_anaismovemen
-      value: makes ur movement analog,dont really kno what it does but ok
-    - key: HoverInfoText_Options_rumb
-      value: makes screen rumble,pretty cool righ
-    - key: HoverInfoText_Options_vsync
-      value: locks ur fps to ur monitor refresh rate, quite stable
-    - key: HoverInfoText_Options_fulscren
-      value: 'it does what it said :shrugs:'
-    - key: HoverInfoText_Options_runinbg
-      value: makes the game run in background, really useful if you want to stream
-        the mod ig
-    - key: HoverInfoText_Options_itminfo
-      value: enables the item info text,it shows item info thats all
-    - key: HoverInfoText_Options_subs
-      value: enables bbcr ahh captions yea
-    - key: HoverInfoText_Options_goback
-      value: goin back already?.,.,,.,.,.,.,
-    - key: HoverInfoText_Modifiers_muchomous
-      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
-    - key: HoverInfoText_Modifiers_EvapPad
-      value: enables or disable the evap pad at any time you want!
-    - key: HoverInfoText_Modifiers_Meeptimer
-      value: oh god its war from pizza tower
-    - key: ModeSelectMen_Back
-      value: Back
-    - key: ModeSelectMen_stor
-      value: Story Mode
-    - key: ModeSelectMen_bruhmished
-      value: famished
-    - key: ModeSelectMen_erull
-      value: hell
-    - key: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
-      value: Lappin
-    - key: ModeSelectMen_PlayMenStuff_notfound
-      value: mode not found, defaulting to story mode
-    - key: ModeSelectMen_PlayMenStuff_storyMode
-      value: Story Mode
-    - key: ModeSelectMen_PlayMenStuff_famished
-      value: famished
-    - key: ModeSelectMen_PlayMenStuff_zerull
-      value: z33rull M3D3
-    - key: ModeSelectMen_PlayMenStuff_lappingOfAsylum
-      value: story mode (hard,trust)
-    - key: Playmenu_back
-      value: Back
-    - key: Playmenu_newga
-      value: Start New Game
-    - key: Playmenu_Modifier_muchomous
-      value: mucho
-    - key: Playmenu_Modifier_EvapPad
-      value: EvapPad
-    - key: Playmenu_Modifier_Meeptimer
-      value: MEEP Timer
-    - key: Playmenu_Modifier_muchomous_Locked
-      value: LOCKED
-    - key: Playmenu_Modifier_EvapPad_Locked
-      value: LOCKED
-    - key: Playmenu_Modifier_Meeptimer_Locked
-      value: LOCKED
-    - key: loadaText
-      value: Loading
-  currentLang: EN
-  currentJsonVersion: 2
+  m_GameObject: {fileID: 1269743092661622822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1269743092661622822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 906694691483262425}
+  - component: {fileID: 8780753136184248656}
+  m_Layer: 0
+  m_Name: localmanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!224 &1475726150047454965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33636,38 +34348,201 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3838384939725117311}
   m_CullTransparentMesh: 1
---- !u!1 &7127100925509170437
-GameObject:
+--- !u!114 &8780753136184248656
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9215136826981445882}
-  - component: {fileID: 768994507468711027}
-  m_Layer: 0
-  m_Name: localmanager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9215136826981445882
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7127100925509170437}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1269743092661622822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285e271ce4a0fb545b2327d44f1cb84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultLanguages:
+  - language: EN
+    pairs:
+    - key: warnMenu_Warning
+      value: hey uhhhhh
+    - key: warnMenu_Disclaimer
+      value: cool text disclaimer am i right
+    - key: warnMenu_dontleak
+      value: so basicly, this is a dev build, dont leak it ok bye
+    - key: warnMenu_playmf
+      value: <color=red>PROCEED
+    - key: Menu_play
+      value: <#E5B67E>press on this text or press enter
+    - key: Menu_VersionText
+      value: <#808080>idkwhateverbuildok
+    - key: Menu_Back
+      value: Back
+    - key: Menu_PlayReal
+      value: Play
+    - key: Menu_Options
+      value: Options
+    - key: Options_sensitiv
+      value: Sensitivity Bar
+    - key: Options_controlsconfigu
+      value: Controls
+    - key: Options_volum
+      value: Volume
+    - key: Options_reso
+      value: Resolution
+    - key: Options_anaismovemen
+      value: Analog Movements
+    - key: Options_rumb
+      value: Rumblr
+    - key: Options_vsync
+      value: V-Sync
+    - key: Options_fulscren
+      value: Full Screen
+    - key: Options_runinbg
+      value: Run In Background
+    - key: Options_itminfo
+      value: Item Info Text
+    - key: Options_subs
+      value: Subtitles
+    - key: Options_Back
+      value: Back
+    - key: CMapper_Back
+      value: done configu
+    - key: CMapper_Restore
+      value: Back
+    - key: CMapper_Pause
+      value: Pause
+    - key: CMapper_Confirm
+      value: Confirm
+    - key: CMapper_Interact
+      value: Interact
+    - key: CMapper_UseItem
+      value: Use Item
+    - key: CMapper_Jump
+      value: Jump
+    - key: CMapper_itemSlots_1
+      value: Item Slot 1
+    - key: CMapper_itemSlots_2
+      value: Item Slot 2
+    - key: CMapper_itemSlots_3
+      value: Item Slot 3
+    - key: CMapper_itemSlots_4
+      value: Item Slot 4
+    - key: CMapper_itemSlots_5
+      value: Item Slot 5
+    - key: CMapper_itemSlots_6
+      value: Item Slot 6
+    - key: CMapper_itemSlots_7
+      value: Item Slot 7
+    - key: CMapper_itemSlots_8
+      value: Item Slot 8
+    - key: CMapper_itemSlots_9
+      value: Item Slot 9
+    - key: CMapper_Movements_Fowards
+      value: Move Forward
+    - key: CMapper_Movements_Backwards
+      value: Move Backward
+    - key: CMapper_Movements_Left
+      value: Strafe Left
+    - key: CMapper_Movements_Right
+      value: Strafe Right
+    - key: CMapper_Movements_Run
+      value: Run
+    - key: CMapper_Movements_behindyou
+      value: Look Back
+    - key: CMapper_Confirm_walltext
+      value: 'Are You Sure You Want
+
+        To Rebind This Key?'
+    - key: CMapper_Confirm_Yes
+      value: Yez
+    - key: CMapper_Confirm_No
+      value: Na
+    - key: HoverInfoText_none
+      value: 
+    - key: HoverInfoText_Menu_Play
+      value: the main shit lol
+    - key: HoverInfoText_Menu_Options
+      value: this is where u configure stuff lol
+    - key: HoverInfoText_Menu_goback
+      value: go back to the title screen realism
+    - key: HoverInfoText_Options_sensitiv
+      value: i dont need to explain to you what this does,aintcha?
+    - key: HoverInfoText_Options_controlsconfigu
+      value: GO [CONFIGURE] YOURSELF
+    - key: HoverInfoText_Options_volum
+      value: probally will not fully work im not sure,just use the windows volume
+        shit lol
+    - key: HoverInfoText_Options_reso
+      value: having a decompile allowing ppl to change resolution is so peak oml
+    - key: HoverInfoText_Options_anaismovemen
+      value: makes ur movement analog,dont really kno what it does but ok
+    - key: HoverInfoText_Options_rumb
+      value: makes screen rumble,pretty cool righ
+    - key: HoverInfoText_Options_vsync
+      value: locks ur fps to ur monitor refresh rate, quite stable
+    - key: HoverInfoText_Options_fulscren
+      value: 'it does what it said :shrugs:'
+    - key: HoverInfoText_Options_runinbg
+      value: makes the game run in background, really useful if you want to stream
+        the mod ig
+    - key: HoverInfoText_Options_itminfo
+      value: enables the item info text,it shows item info thats all
+    - key: HoverInfoText_Options_subs
+      value: enables bbcr ahh captions yea
+    - key: HoverInfoText_Options_goback
+      value: goin back already?.,.,,.,.,.,.,
+    - key: HoverInfoText_Modifiers_syfm
+      value: nuh uh, cant use that yet buddy,go beat story mode first
+    - key: HoverInfoText_Modifiers_muchomous
+      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
+    - key: HoverInfoText_Modifiers_EvapPad
+      value: enables or disable the evap pad at any time you want!
+    - key: HoverInfoText_Modifiers_Meeptimer
+      value: oh god its war from pizza tower
+    - key: HoverInfoText_Modifiers_ChaosMode
+      value: its DEFINITIVELY not that chaos mode, trust me, trustme, T!!#US M!@!e
+    - key: ModeSelectMen_Back
+      value: Back
+    - key: ModeSelectMen_stor
+      value: Story Mode
+    - key: ModeSelectMen_bruhmished
+      value: famished
+    - key: ModeSelectMen_erull
+      value: hell
+    - key: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
+      value: Lappin
+    - key: ModeSelectMen_PlayMenStuff_notfound
+      value: mode not found, defaulting to story mode
+    - key: ModeSelectMen_PlayMenStuff_storyMode
+      value: Story Mode
+    - key: ModeSelectMen_PlayMenStuff_famished
+      value: famished
+    - key: ModeSelectMen_PlayMenStuff_zerull
+      value: z33rull M3D3
+    - key: ModeSelectMen_PlayMenStuff_lappingOfAsylum
+      value: story mode (hard,trust)
+    - key: Playmenu_back
+      value: Back
+    - key: Playmenu_newga
+      value: Start New Game
+    - key: Playmenu_Modifier_muchomous
+      value: mucho
+    - key: Playmenu_Modifier_EvapPad
+      value: EvapPad
+    - key: Playmenu_Modifier_Meeptimer
+      value: MEEP Timer
+    - key: Playmenu_Modifier_muchomous_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_EvapPad_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_Meeptimer_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_ChaosMode_Locked
+      value: LOCKED
+    - key: loadaText
+      value: Loading
+  currentLang: EN
+  currentJsonVersion: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -33677,4 +34552,4 @@ SceneRoots:
   - {fileID: 511}
   - {fileID: 1222106239}
   - {fileID: 897653112}
-  - {fileID: 9215136826981445882}
+  - {fileID: 906694691483262425}
