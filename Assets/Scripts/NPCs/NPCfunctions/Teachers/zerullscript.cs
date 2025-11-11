@@ -24,6 +24,16 @@ public class zerullscript : NPC
 
         Wander();
     }
+    public void OnEnable()
+    {
+
+        gc.zerscr.Add(this);
+        Move();
+    }
+    public void OnDisable()
+    {
+        gc.zerscr.Remove(this);
+    }
 
     public override void OnUpdate()
     {
@@ -190,8 +200,8 @@ public class zerullscript : NPC
 
     #region Serialized Field States
     [Header("Baldi's Stats")]
-    [SerializeField] private float Anger;
-    [SerializeField] private float TempAnger, Wait, SpeedScale;
+    public float Anger;
+    public float TempAnger, Wait, SpeedScale;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;

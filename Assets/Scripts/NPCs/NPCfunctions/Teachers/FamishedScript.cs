@@ -16,6 +16,14 @@ public class FamishedScript : NPC
 
         Wander();
     }
+    public void OnEnable()
+    {
+        gc.famishscr.Add(this);
+    }
+    public void OnDisable()
+    {
+        gc.famishscr.Remove(this);
+    }
 
     public override void OnUpdate()
     {
@@ -153,8 +161,8 @@ public class FamishedScript : NPC
 
     #region Serialized Field States
     [Header("Baldi's Stats")]
-    [SerializeField] private float famishedSpd;
-    [SerializeField] private float famishedtempSpd;
+    public float famishedSpd;
+    public float famishedtempSpd;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;

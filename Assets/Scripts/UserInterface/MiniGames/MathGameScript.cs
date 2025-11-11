@@ -324,20 +324,14 @@ public class MathGameScript : MonoBehaviour
 
     private void HandleBaldiAnger()
     {
-            if (problem == 3)
-            {
-                gc.baldiScrpt?.GetAngry(0.25f);
-                gc.muchoing?.GetAngry(0.25f);
-                gc.zerulscrpt?.GetAngry(0.25f);
-                gc.famishScrpt?.GetAngry(0.25f);
-            }
-            else
-            {
-                gc.baldiScrpt?.GetTempAngry(0.35f);
-                gc.muchoing?.GetTempAngry(0.4f);
-                gc.zerulscrpt?.GetTempAngry(0.35f);
-                gc.famishScrpt?.GetTempAngry(0.35f);
-            }
+        if (problem == 3)
+        {
+            gc.AngerShit(0.25f, 0f,false, "all");
+        }
+        else
+        {
+            gc.AngerShit(0f, 0.25f,true, "all");
+        }
     }
 
     private void ResetInputState()
@@ -369,22 +363,7 @@ public class MathGameScript : MonoBehaviour
         }
         if (problemsWrong >= 3)
         {
-            if (gc.baldiScrpt.isActiveAndEnabled)
-            {
-                gc.baldiScrpt.Hear(playerPosition, 7f);
-            }
-            if (gc.muchoing.isActiveAndEnabled)
-            {
-                gc.muchoing.Hear(playerPosition, 7f);
-            }
-            if (gc.famishScrpt.isActiveAndEnabled)
-            {
-                gc.famishScrpt.Hear(playerPosition, 7f);
-            }
-            if (gc.zerulscrpt.isActiveAndEnabled)
-            {
-                gc.zerulscrpt.Hear(playerPosition, 7f);
-            }
+            GameControllerScript.Instance.HearingShit(7f, null, playerPosition, "all", true);
             gc.audioDevice.PlayClip(gc.deathbell, false, 1f);
         }
         if (gc.mode == "zerullclassic" && problemsWrong <= 0)

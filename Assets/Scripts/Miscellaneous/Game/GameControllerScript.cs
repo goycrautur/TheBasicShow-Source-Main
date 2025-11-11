@@ -6,6 +6,7 @@ using FluidMidi;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Diagnostics;
+using System;
 
 public class GameControllerScript : MonoBehaviour
 {
@@ -61,6 +62,183 @@ public class GameControllerScript : MonoBehaviour
             }
         }
     }
+    #region TeachersChaosModeStuff
+    public void HearingShit(float soundval, Transform wherItCameFrom, Vector3 wherItCameFromAlt, string teacher = null, bool UseVector3 = false)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            if (zerulscrpt.isActiveAndEnabled)
+            {
+                zerulscrpt.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+            }
+            foreach (zerullscript zes in zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    zes.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            if (famishScrpt.isActiveAndEnabled)
+            {
+                famishScrpt.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+            }
+            foreach (FamishedScript fam in famishscr)
+            {
+                if (fam.isActiveAndEnabled)
+                {
+                    fam.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            if (muchoing.isActiveAndEnabled)
+            {
+                muchoing.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+            }
+            foreach (MuchoScript muc in muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    muc.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            if (baldiScrpt.isActiveAndEnabled)
+            {
+                baldiScrpt.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+            }
+            foreach (BaldiScript bal in balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    bal.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+    }
+    public void AngerShit(float angerAmmount, float tempAngerAmmount = 0f, bool tempAnger = false, string teacher = null)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            if (zerulscrpt.isActiveAndEnabled)
+            {
+                if (!tempAnger)
+                {
+                    zerulscrpt.GetAngry(angerAmmount/2);
+                }
+                else
+                {
+                    zerulscrpt.GetTempAngry(tempAngerAmmount/2);
+                }
+            }
+            foreach (zerullscript zes in zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        zes.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        zes.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            if (famishScrpt.isActiveAndEnabled)
+            {
+                if (!tempAnger)
+                {
+                    famishScrpt.GetAngry(angerAmmount/2);
+                }
+                else
+                {
+                    famishScrpt.GetTempAngry(tempAngerAmmount/2);
+                }
+            }
+            foreach (FamishedScript fam in famishscr)
+            {
+                if (fam.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        fam.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        fam.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            if (muchoing.isActiveAndEnabled)
+            {
+                if (!tempAnger)
+                {
+                    muchoing.GetAngry(angerAmmount/2);
+                }
+                else
+                {
+                    muchoing.GetTempAngry(tempAngerAmmount/2);
+                }
+            }
+            foreach (MuchoScript muc in muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        muc.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        muc.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            if (baldiScrpt.isActiveAndEnabled)
+            {
+                if (!tempAnger)
+                {
+                    baldiScrpt.GetAngry(angerAmmount/2);
+                }
+                else
+                {
+                    baldiScrpt.GetTempAngry(tempAngerAmmount/2);
+                }
+            }
+            foreach (BaldiScript bal in balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        bal.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        bal.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+    }
+    #endregion
+
 
     #region Initialization
     private void InitializeGameSettings()
@@ -385,12 +563,35 @@ public class GameControllerScript : MonoBehaviour
         bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
         if (ChaosMode)
         {
-            foreach (GameObject obj in ObjectsToEnable)
+            if (mode == "story" || mode == "LappingOfAsylum")
             {
-                if (obj != null)
+                foreach (GameObject obj in ObjectsToEnable)
                 {
-                    GameObject clone = Instantiate(obj, obj.transform.position, obj.transform.rotation);
-                    clone.name = obj.name;
+                    if (obj != null)
+                    {
+                        GameObject clone = Instantiate(obj, obj.transform.position, obj.transform.rotation);
+                        clone.name = obj.name;
+                        clone.SetActive(true);
+                    }
+                }
+            }
+            if (mode == "famished")
+            {
+                if (fmc.butch != null)
+                {
+                    GameObject clone = Instantiate(fmc.butch, fmc.butch.transform.position, fmc.butch.transform.rotation);
+                    clone.name = fmc.butch.name;
+                    clone.GetComponent<FamishedScript>().famishedSpd = 0.5f;
+                    clone.SetActive(true);
+                }
+            }
+            if (mode == "zerullclassic")
+            {
+                if (zerull.zer != null)
+                {
+                    GameObject clone = Instantiate(zerull.zer, zerull.zer.transform.position, zerull.zer.transform.rotation);
+                    clone.name = zerull.zer.name;
+                    clone.GetComponent<zerullscript>().Anger = 0.5f;
                     clone.SetActive(true);
                 }
             }
@@ -475,7 +676,7 @@ public class GameControllerScript : MonoBehaviour
 
         if (!gamaOvarDevice.isPlaying)
         {
-            audOverVal = (int)Random.Range(0f, LoseSounds.Length);
+            audOverVal = (int)UnityEngine.Random.Range(0f, LoseSounds.Length);
             gamaOvarDevice.PlayOneShot(LoseSounds[audOverVal]);
         }
 
@@ -853,8 +1054,19 @@ public class GameControllerScript : MonoBehaviour
         {
             isHiding = false;
         }
+        if (player.hugging)
+        {
+            player.hugging = false;
+            player.sweepingFailsave = 0f;
+        }
+        if (player.jumpRope)
+        {
+            player.jumpRope = false;
+            player.DeactivateJumpRope();
+            player.playtime.Disappoint();
+        }
 
-        int teleports = Random.Range(43, 49);
+        int teleports = UnityEngine.Random.Range(43, 49);
         float delay = 0.05f;
         const float increaseFactor = 1.04f;
 
@@ -886,6 +1098,14 @@ public class GameControllerScript : MonoBehaviour
     }
     #endregion
 
+    [Serializable]
+    public class modifiersName
+    {
+        [SerializeField]
+        public bool enabled;
+        [SerializeField]
+        public string name;
+    }
     #region SerializedFields
     [Header("subtitles object stuff")]
     public subsScriptableObject[] subtitlesScriptableObject;
@@ -925,7 +1145,7 @@ public class GameControllerScript : MonoBehaviour
 
     [Header("Serialized References")]
     public TMP_Text notebookCount;
-    [SerializeField] public GameObject highScoreText, baldi, tutorobj,playerGameobject;
+    [SerializeField] public GameObject highScoreText, baldi, tutorobj;
     public List<GameObject> ObjectsToEnable = new List<GameObject>();
     public List<GateScript> Gatesrea = new List<GateScript>();
     public List<ElvDoorScript> ElevdorRea = new List<ElvDoorScript>();
@@ -934,7 +1154,7 @@ public class GameControllerScript : MonoBehaviour
     public Animator Icon,CirclAnimator;
     public Material SpriteRenderer;
     public Sprite Present;
-    public bool[] Modifiers;
+    public modifiersName[] Modifiers;
 
     [Header("Audio References")]
     [SerializeField] private AudioClip[] LoseSounds;
@@ -977,5 +1197,10 @@ public class GameControllerScript : MonoBehaviour
     public GameObject PickBall;
     [Header("discord stuff")]
     public string modeDetails;
-    public string modeState,largeImagething,largeImageText;
+    public string modeState, largeImagething, largeImageText;
+    [Header("teachers management")]
+    public List<BaldiScript> balscr = new List<BaldiScript>();
+    public List<zerullscript> zerscr = new List<zerullscript>();
+    public List<MuchoScript> muchscr = new List<MuchoScript>();
+    public List<FamishedScript> famishscr = new List<FamishedScript>();
 }

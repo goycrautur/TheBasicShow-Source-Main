@@ -7,7 +7,6 @@ public class MuchoScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         baldiAudio = GetComponent<AudioSource>();
         GetAngry(0f);
         Move();
@@ -21,7 +20,13 @@ public class MuchoScript : NPC
     }
     public void OnEnable()
     {
+
+        gc.muchscr.Add(this);
         Move();
+    }
+    public void OnDisable()
+    {
+        gc.muchscr.Remove(this);
     }
 
     public override void OnUpdate()
@@ -74,6 +79,7 @@ public class MuchoScript : NPC
     {
         if (this.isActiveAndEnabled)
         {
+            base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
             gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,0f,GetComponent<AudioSource>());
             if (baldiAnger < 40f)
             {
@@ -200,7 +206,6 @@ public class MuchoScript : NPC
     [Header("Audio and Animation")]
     [SerializeField] private AudioClip slap;
     [SerializeField] private Animator baldicator, baldiAnimator;
-    [SerializeField] private GameObject sprite;
 
     private float currentPriority;
     private AudioSource baldiAudio;

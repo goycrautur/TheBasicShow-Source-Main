@@ -21,6 +21,11 @@ public class BaldiScript : NPC
     public void OnEnable()
     {
         Move();
+        gc.balscr.Add(this);
+    }
+    public void OnDisable()
+    {
+        gc.balscr.Remove(this);
     }
 
     public override void OnUpdate()

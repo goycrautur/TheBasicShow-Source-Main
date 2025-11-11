@@ -67,22 +67,9 @@ public class LearningGameManager : MonoBehaviour
         }
         if (gc.spoopMode)
         {
-            if (gc.baldiScrpt.isActiveAndEnabled)
-            {
-                gc.baldiScrpt.GetAngry(1.1f / 2);
-            }
-            if (gc.muchoing.isActiveAndEnabled)
-            {
-                gc.muchoing.GetAngry(1.1f / 2);
-            }
-            if (gc.famishScrpt.isActiveAndEnabled)
-            {
-                gc.famishScrpt.GetAngry(1.2f / 2);
-            }
-            if (gc.zerulscrpt.isActiveAndEnabled)
-            {
-                gc.zerulscrpt.GetAngry(1.5f / 2);
-            }
+            gc.AngerShit(1.1f / 2, 0f,false, "all");
+            gc.AngerShit(0.1f / 2, 0f,false, "famished");
+            gc.AngerShit(0.4f / 2, 0f,false, "zerull");
         }
 
         if (!gc.spoopMode && gc.mode == "story")

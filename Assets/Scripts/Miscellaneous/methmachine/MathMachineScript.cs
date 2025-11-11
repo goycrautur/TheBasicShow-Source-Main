@@ -190,22 +190,7 @@ public class MathMachineScript : MonoBehaviour
                         LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
                     }
                 }
-                if (GameControllerScript.Instance.baldiScrpt.isActiveAndEnabled)
-                {
-                    GameControllerScript.Instance.baldiScrpt.Hear(transform.position, 9f);
-                }
-                if (GameControllerScript.Instance.muchoing.isActiveAndEnabled)
-                {
-                    GameControllerScript.Instance.muchoing.Hear(transform.position, 9f);
-                }
-                if (GameControllerScript.Instance.famishScrpt.isActiveAndEnabled)
-                {
-                    GameControllerScript.Instance.famishScrpt.Hear(transform.position, 9f);
-                }
-                if (GameControllerScript.Instance.zerulscrpt.isActiveAndEnabled)
-                {
-                    GameControllerScript.Instance.zerulscrpt.Hear(transform.position, 9f);
-                }
+                GameControllerScript.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
             audioSource.PlayOneShot(err);
             GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], 0f, audioSource);

@@ -75,18 +75,12 @@ public class booksInteract : Interactable
             if (gc.mode == "famished")
             {
                 gc.fmc.manualUpdate();
-                if (gc.famishScrpt.isActiveAndEnabled)
-                {
-                    gc.famishScrpt.Hear(player.position, 7f);
-                }
+                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "famished",false);
             }
             if (gc.mode == "zerullclassic")
             {
                 gc.zerull.jusUpdatebr();
-                if (gc.zerulscrpt.isActiveAndEnabled)
-                {
-                    gc.zerulscrpt.Hear(player.position, 7f);
-                }
+                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "zerull",false);
             }
         }
         else
@@ -95,18 +89,13 @@ public class booksInteract : Interactable
             if (gc.mode == "famished")
             {
                 gc.fmc.manualUpdate();
-                if (gc.famishScrpt.isActiveAndEnabled)
-                {
-                    gc.famishScrpt.Hear(player.position, 7f);
-                }
+                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "famished",false);
             }
             if (gc.mode == "zerullclassic")
             {
                 gc.zerull.jusUpdatebr();
-                if (gc.zerulscrpt.isActiveAndEnabled)
-                {
-                    gc.zerulscrpt.Hear(player.position, 7f);
-                }
+                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "zerull",false);
+                
             }
             return;
         }
@@ -147,22 +136,9 @@ public class booksInteract : Interactable
         }
         if (gc.spoopMode)
         {
-            if (gc.baldiScrpt.isActiveAndEnabled)
-            {
-                gc.baldiScrpt.GetAngry(1.1f);
-            }
-            if (gc.muchoing.isActiveAndEnabled)
-            {
-                gc.muchoing.GetAngry(1.1f);
-            }
-            if (gc.famishScrpt.isActiveAndEnabled)
-            {
-                gc.famishScrpt.GetAngry(1.2f);
-            }
-            if (gc.zerulscrpt.isActiveAndEnabled)
-            {
-                gc.zerulscrpt.GetAngry(1.5f);
-            }
+            gc.AngerShit(1.1f / 2, 0f,false, "all");
+            gc.AngerShit(0.1f / 2, 0f,false, "famished");
+            gc.AngerShit(0.4f / 2, 0f,false, "zerull");
         }
     }
     #region Learning Game Launch

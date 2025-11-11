@@ -89,10 +89,7 @@ public class SwingingDoorScript : MonoBehaviour
         if ((gc.notebooks <= gc.maxNotebooks || gc.mode == "endless") && !heardDoor && !bDoorLocked)
         {
             PlayDoorSound();
-            gc.baldiScrpt?.Hear(transform.position, 1);
-            gc.famishScrpt?.Hear(transform.position, 1);
-            gc.muchoing?.Hear(transform.position, 1);
-            gc.zerulscrpt?.Hear(transform.position, 1);
+            gc.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
         }
     }
 

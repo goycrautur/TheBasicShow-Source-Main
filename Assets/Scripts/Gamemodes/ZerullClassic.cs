@@ -534,14 +534,19 @@ public class ZerullClassic : MonoBehaviour
     }
     public void dosomeupdatebitch()
     {
+        bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
         if (gc.mode == "zerullclassic")
         {
             GlitchShaders(false);
             zer.SetActive(true);
-            StartCoroutine(easingeee(new Color(0.5f, 0.5f, 0.5f, 1f), 0, 2, 2));
             gc.WindowLayermask = "Ignore Raycast";
-            gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
-            ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
+            if (!ChaosMode)
+            {
+                StartCoroutine(easingeee(new Color(0.5f, 0.5f, 0.5f, 1f), 0, 2, 2));
+
+                gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
+                ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
+            }
             if (gc.warrealest)
             {
                 gc.LapManag.MeepTimer.SetActive(true);

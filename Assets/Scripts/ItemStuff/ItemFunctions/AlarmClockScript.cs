@@ -43,22 +43,7 @@ public class AlarmClockScript : MonoBehaviour
     {
         rang = true;
         gameObject.tag = "Untagged";
-        if (gc.baldiScrpt.isActiveAndEnabled)
-        {
-            gc.baldiScrpt.Hear(transform.position, 8);
-        }
-        if (gc.famishScrpt.isActiveAndEnabled)
-        {
-            gc.famishScrpt.Hear(transform.position, 8f);
-        }
-        if (gc.zerulscrpt.isActiveAndEnabled)
-        {
-            gc.zerulscrpt.Hear(transform.position, 8f);
-        }
-        if (gc.muchoing.isActiveAndEnabled)
-        {
-            gc.muchoing.Hear(transform.position, 8f);
-        }
+        gc.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
         audioDevice.PlayClip(ring, false, 1f);
     }
 

@@ -23,22 +23,7 @@ public class WindowScript : MonoBehaviour
         {
             if (sound)
             {
-                if (gc.baldiScrpt.isActiveAndEnabled)
-                {
-                    gc.baldiScrpt.Hear(transform.position, soundval);
-                }
-                if (gc.muchoing.isActiveAndEnabled)
-                {
-                    gc.muchoing.Hear(transform.position, soundval);
-                }
-                if (gc.famishScrpt.isActiveAndEnabled)
-                {
-                    gc.famishScrpt.Hear(transform.position, soundval);
-                }
-                if (gc.zerulscrpt.isActiveAndEnabled)
-                {
-                    gc.zerulscrpt.Hear(transform.position, soundval);
-                }
+                gc.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
             audioDevice.clip = brokesound;
             audioDevice.Play();

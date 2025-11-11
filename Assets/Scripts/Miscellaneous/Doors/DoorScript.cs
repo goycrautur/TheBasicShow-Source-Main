@@ -46,10 +46,7 @@ public class DoorScript : MonoBehaviour
             {
                 if (!bDoorOpen)
                 {
-                    GameC.baldiScrpt?.Hear(transform.position, 1);
-                    GameC.famishScrpt?.Hear(transform.position, 1);
-                    GameC.muchoing?.Hear(transform.position, 1);
-                    GameC.zerulscrpt?.Hear(transform.position, 1);
+                    GameC.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
                 }
                 OpenDoor(3);
             }
