@@ -76,7 +76,7 @@ public class PlaytimeScript : NPC
         {
             bool playerInRange = (transform.position - player.position).magnitude <= 30f;
 
-            if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !gc.player.invisi && !gc.player.invisichalk)
+            if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !gc.player.invisi && !gc.player.invisichalk && !gc.player.jumpRope)
             {
                 playerSeen = true;
                 TargetPlayer();

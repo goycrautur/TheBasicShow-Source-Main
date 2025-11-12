@@ -7,7 +7,6 @@ public class ITM_MetalPipe : BaseItem
     [SerializeField] private Sprite pipeSprite,UnuseablepipeSprite;
     [SerializeField] private AudioClip audiopip, fail;
     [SerializeField] private bool piped, CantUse;
-    [SerializeField] private NPC[] FreezingNPClist;
     [SerializeField] private subsScriptableObject Subtitlesthing;
     public override bool OnUse()
     {
@@ -47,13 +46,7 @@ public class ITM_MetalPipe : BaseItem
     }
     private IEnumerator Waitin()
     {
-        for (int i = 0; i < FreezingNPClist.Length; ++i)
-        {
-            if (FreezingNPClist[i].isActiveAndEnabled)
-            {
-                FreezingNPClist[i].agentSpeedScale -= 1f;
-            }
-        }
+        GameControllerScript.Instance.metalpipeStun = true;
         GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultAdd;
         GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultAdd;
         GameControllerScript.Instance.player.staminaDropMultiple += staminaDropmultAdd;
@@ -77,13 +70,7 @@ public class ITM_MetalPipe : BaseItem
         GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultAdd;
         GameControllerScript.Instance.player.staminaDropMultiple -= staminaDropmultAdd;
         GameControllerScript.Instance.player.staminaRiseMultiple -= staminaRisemultAdd;
-        for (int i = 0; i < FreezingNPClist.Length; ++i)
-        {
-            if (FreezingNPClist[i].isActiveAndEnabled)
-            {
-                FreezingNPClist[i].agentSpeedScale += 1f;
-            }
-        }
+        GameControllerScript.Instance.metalpipeStun = false;
         yield break;
     }
 }

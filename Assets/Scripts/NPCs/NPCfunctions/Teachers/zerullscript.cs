@@ -126,6 +126,17 @@ public class zerullscript : NPC
         }
     }
     #endregion
+    private void OnTriggerStay(Collider play)
+    {
+        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        {
+            if (!base.squished)
+			{
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 2f, false, true, false);
+				gc.player.killedbybaldi = true;
+			}
+        }
+    }
 
     #region Anger System
     public void GetAngry(float value)

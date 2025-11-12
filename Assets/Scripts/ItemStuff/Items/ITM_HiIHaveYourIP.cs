@@ -14,10 +14,7 @@ public class ITM_HiIHaveYourIP : BaseItem
     }
     private IEnumerator amwaitin(float time)
     {
-        for (int i = 0; i < npcIconGameObject.Length; ++i)
-        {
-            npcIconGameObject[i].SetActive(true);
-        }
+        GameControllerScript.Instance.ipleak = true;
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Sprite, duration);
         time = duration;
         yield return null;
@@ -32,15 +29,11 @@ public class ITM_HiIHaveYourIP : BaseItem
         }
         newGauge.Hide();
         used = false;
-        for (int i = 0; i < npcIconGameObject.Length; ++i)
-        {
-            npcIconGameObject[i].SetActive(false);
-        }
+        GameControllerScript.Instance.ipleak = false;
         yield break;
     }
     [SerializeField] private float duration = 60f;
     [SerializeField] private AudioClip Used;
     [SerializeField] private Sprite Sprite;
     [SerializeField] private bool used;
-    [SerializeField] private GameObject[] npcIconGameObject;
 }

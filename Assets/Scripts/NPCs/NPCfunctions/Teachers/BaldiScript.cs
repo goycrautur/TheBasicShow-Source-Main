@@ -75,7 +75,7 @@ public class BaldiScript : NPC
         if (this.isActiveAndEnabled)
         {
             agent.speed = base.agentSpeed;
-            gc.SubsManager.summonLeSubtitle(slapSound.subtitleOption,slapSound,0f,GetComponent<AudioSource>());
+            gc.SubsManager.summonLeSubtitle(slapSound.subtitleOption, slapSound, 0f, GetComponent<AudioSource>());
             baldiAudio.PlayOneShot(slap);
             baldiAnimator.SetTrigger("slap");
 
@@ -86,6 +86,7 @@ public class BaldiScript : NPC
             baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger + 2f / baldiSpeedScale) + 3f;
         }
     }
+
 
     private void OnMoveDone()
     {
@@ -102,6 +103,17 @@ public class BaldiScript : NPC
         }
     }
     #endregion
+    private void OnTriggerStay(Collider play)
+    {
+        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        {
+            if (!base.squished)
+			{
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 30 / gc.player.PlayerDmgResistance, 2f, false, true, false);
+				gc.player.killedbybaldi = true;
+			}
+        }
+    }
 
     #region Anger System
     public void GetAngry(float value)

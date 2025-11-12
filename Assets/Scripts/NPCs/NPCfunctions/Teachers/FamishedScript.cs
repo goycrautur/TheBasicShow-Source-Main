@@ -86,6 +86,17 @@ public class FamishedScript : NPC
         Hear(player.position, 9999, false);
     }
     #endregion
+    private void OnTriggerStay(Collider play)
+    {
+        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        {
+            if (!base.squished)
+			{
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 1.5f, false, true, false);
+				gc.player.killedbyfamished = true;
+			}
+        }
+    }
 
     #region Anger System
     public void GetAngry(float value)

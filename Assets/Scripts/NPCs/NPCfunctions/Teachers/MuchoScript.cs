@@ -115,6 +115,17 @@ public class MuchoScript : NPC
         }
     }
     #endregion
+    private void OnTriggerStay(Collider play)
+    {
+        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        {
+            if (!base.squished)
+			{
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2 / gc.player.PlayerDmgResistance, 0.025f, false, true, false);
+				gc.player.killedbybaldi = true;
+			}
+        }
+    }
 
     #region Anger System
     public void GetAngry(float value)

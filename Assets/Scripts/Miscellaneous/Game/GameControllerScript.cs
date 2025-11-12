@@ -50,6 +50,14 @@ public class GameControllerScript : MonoBehaviour
         }
         GameOverFunction();
         muchofinaleStuff();
+        foreach (NPC enpeecee in NPCThatGetAffectedByMetalPipe)
+        {
+            enpeecee.agentSpeedScale = metalpipeStun ? 0f : 1f;
+        }
+        foreach (GameObject npcmapicon in NpcMinimapIcon)
+        {
+            npcmapicon.SetActive(ipleak ? true : false);
+        }
     }
     #endregion
     public void muchofinaleStuff()
@@ -126,17 +134,6 @@ public class GameControllerScript : MonoBehaviour
     {
         if (teacher == "all" || teacher == "All" || teacher == "zerull")
         {
-            if (zerulscrpt.isActiveAndEnabled)
-            {
-                if (!tempAnger)
-                {
-                    zerulscrpt.GetAngry(angerAmmount/2);
-                }
-                else
-                {
-                    zerulscrpt.GetTempAngry(tempAngerAmmount/2);
-                }
-            }
             foreach (zerullscript zes in zerscr)
             {
                 if (zes.isActiveAndEnabled)
@@ -154,17 +151,6 @@ public class GameControllerScript : MonoBehaviour
         }
         if (teacher == "all" || teacher == "All" || teacher == "famished")
         {
-            if (famishScrpt.isActiveAndEnabled)
-            {
-                if (!tempAnger)
-                {
-                    famishScrpt.GetAngry(angerAmmount/2);
-                }
-                else
-                {
-                    famishScrpt.GetTempAngry(tempAngerAmmount/2);
-                }
-            }
             foreach (FamishedScript fam in famishscr)
             {
                 if (fam.isActiveAndEnabled)
@@ -182,17 +168,6 @@ public class GameControllerScript : MonoBehaviour
         }
         if (teacher == "all" || teacher == "All" || teacher == "mucho")
         {
-            if (muchoing.isActiveAndEnabled)
-            {
-                if (!tempAnger)
-                {
-                    muchoing.GetAngry(angerAmmount/2);
-                }
-                else
-                {
-                    muchoing.GetTempAngry(tempAngerAmmount/2);
-                }
-            }
             foreach (MuchoScript muc in muchscr)
             {
                 if (muc.isActiveAndEnabled)
@@ -210,17 +185,6 @@ public class GameControllerScript : MonoBehaviour
         }
         if (teacher == "all" || teacher == "All" || teacher == "baldi")
         {
-            if (baldiScrpt.isActiveAndEnabled)
-            {
-                if (!tempAnger)
-                {
-                    baldiScrpt.GetAngry(angerAmmount/2);
-                }
-                else
-                {
-                    baldiScrpt.GetTempAngry(tempAngerAmmount/2);
-                }
-            }
             foreach (BaldiScript bal in balscr)
             {
                 if (bal.isActiveAndEnabled)
@@ -1140,7 +1104,7 @@ public class GameControllerScript : MonoBehaviour
     [Header("Game Mode & Settings")]
     public string mode;
     public int notebooks, maxNotebooks, maxExits, UnlockAmount, SlotsAmmount, CharacterIntVal;
-    [SerializeField] public bool debugMode, isHiding, MusicGO,youCantPause;
+    [SerializeField] public bool debugMode, isHiding, MusicGO,youCantPause,metalpipeStun,ipleak;
     [SerializeField] private string gameoverScene;
 
     [Header("Serialized References")]
@@ -1149,8 +1113,9 @@ public class GameControllerScript : MonoBehaviour
     public List<GameObject> ObjectsToEnable = new List<GameObject>();
     public List<GateScript> Gatesrea = new List<GateScript>();
     public List<ElvDoorScript> ElevdorRea = new List<ElvDoorScript>();
-    public List<GameObject> ObjectsToDisable, ItemsToRespawn = new List<GameObject>();
+    public List<GameObject> ObjectsToDisable, ItemsToRespawn,NpcMinimapIcon = new List<GameObject>();
     [SerializeField] private List<VendingMachineScript> MachinesToRestock = new List<VendingMachineScript>();
+    public List<NPC> NPCThatGetAffectedByMetalPipe = new List<NPC>();
     public Animator Icon,CirclAnimator;
     public Material SpriteRenderer;
     public Sprite Present;

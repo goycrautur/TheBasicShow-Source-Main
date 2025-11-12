@@ -14,7 +14,12 @@ public class NPC : MonoBehaviour
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        gc.NPCThatGetAffectedByMetalPipe.Add(this);
         OnStart();
+    }
+     protected virtual void OnDestroy()
+    {
+        gc.NPCThatGetAffectedByMetalPipe.Remove(this);
     }
 
     protected virtual void Update() => OnUpdate();

@@ -459,18 +459,22 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.transform.name == "Playtime" & !jumpRope & playtime.playCool <= 0f)
+		if (!jumpRope)
 		{
-			if (!invisi && !invisichalk|| !invisichalk && !invisi)
+
+			if (other.transform.name == "Playtime" & !jumpRope & playtime.playCool <= 0f)
 			{
-				ActivateJumpRope();
+				if (!invisi && !invisichalk || !invisichalk && !invisi)
+				{
+					ActivateJumpRope();
+				}
 			}
-		}
-		else if (other.transform.name == "MemeMouse" & !jumpRope & playtime.playCool <= 0f)
-		{
-			if (!invisi && !invisichalk|| !invisichalk && !invisi)
+			else if (other.transform.name == "MemeMouse" & !jumpRope & playtime.playCool <= 0f)
 			{
-				ActivateJumpRope();
+				if (!invisi && !invisichalk || !invisichalk && !invisi)
+				{
+					ActivateJumpRope();
+				}
 			}
 		}
 
@@ -490,41 +494,9 @@ public class PlayerScript : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.transform.name == "Jerry" & !gc.debugMode & !titlecard)
-		{
-			if (!GameControllerScript.Instance.baldiScrpt.squished)
-			{
-				SetHP(HealthChangeMode.Remove, 30 / PlayerDmgResistance, 1f, false, true, false);
-				killedbybaldi = true;
-			}
-		}
 		if (other.transform.name == "Wanderer" & !gc.debugMode & !titlecard)
 		{
 			SetHP(HealthChangeMode.Remove, 40 / PlayerDmgResistance, 1f, false, true, false);
-		}
-		if (other.transform.name == "Mucho" & !gc.debugMode & !titlecard)
-		{
-			if (!GameControllerScript.Instance.baldiScrpt.squished)
-			{
-				SetHP(HealthChangeMode.Remove, 2 / PlayerDmgResistance, 0.025f, false, true, false);
-				killedbybaldi = true;
-			}
-		}
-		if (other.transform.name == "Zerull" & !gc.debugMode & !titlecard)
-		{
-			if (!GameControllerScript.Instance.zerulscrpt.squished)
-			{
-				SetHP(HealthChangeMode.Remove, 50 / PlayerDmgResistance, 2f, false, true, false);
-				killedbybaldi = true;
-			}
-		}
-		if (other.transform.name == "FamishedButch" & !gc.debugMode & !titlecard)
-		{
-			if (!GameControllerScript.Instance.famishScrpt.squished)
-			{
-				SetHP(HealthChangeMode.Remove, 50 / PlayerDmgResistance, 1.5f, false, true, false);
-				killedbyfamished = true;
-			}
 		}
 		if (other.transform.name == "Gotta Sweep")
 		{
