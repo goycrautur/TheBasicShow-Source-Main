@@ -540,13 +540,13 @@ public class ZerullClassic : MonoBehaviour
             GlitchShaders(false);
             zer.SetActive(true);
             gc.WindowLayermask = "Ignore Raycast";
-            if (!ChaosMode)
-            {
+            //if (!ChaosMode)
+            //{
                 StartCoroutine(easingeee(new Color(0.5f, 0.5f, 0.5f, 1f), 0, 2, 2));
 
                 gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
                 ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
-            }
+            //}
             if (gc.warrealest)
             {
                 gc.LapManag.MeepTimer.SetActive(true);

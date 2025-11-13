@@ -239,6 +239,8 @@ public class GameControllerScript : MonoBehaviour
     }
     public void discordupdate(string StateUpdateType = "chees")
     {
+        bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
+        string chaosString = !ChaosMode ? "" : " - your local suffering enabled (Chaos Mode)";
         if (StateUpdateType == "chees")
         {
         modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks";
@@ -249,32 +251,32 @@ public class GameControllerScript : MonoBehaviour
         }
         if (mode == "endless")
         {
-            modeDetails = "Endless Mode";
+            modeDetails = "Endless Mode" + chaosString;
             largeImagething = "teacherjerproto";
             largeImageText = "hi i am teachr jery and im gonna smac you";
         }
         if (mode == "story")
         {
-            modeDetails = "Story Mode";
+            modeDetails = "Story Mode" + chaosString;
             largeImagething = "teacherjerproto";
             largeImageText = "hi i am teachr jery and im gonna smac you";
         }
         if (mode == "famished")
         {
-            modeDetails = "???????";
+            modeDetails = "???????" + chaosString;
             largeImagething = "creepydarkmf";
             largeImageText = "*hungry ass noise intenstify*";
         }
         if (mode == "zerullclassic")
         {
             bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-            modeDetails = chair ? "c  h  a  i  r" : "???????";
+            modeDetails = chair ? "c  h  a  i  r" + chaosString: "???????" + chaosString;
             largeImagething = "van";
             largeImageText = chair ? "c  h  a  i  r" : "*CLASSIFIED INFO*";
         }
         if (mode == "LappingOfAsylum")
         {
-            modeDetails = "lapping mode - lap " + LapManag.CurrentLap;
+            modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " |"+ chaosString;
             largeImagething = "teacherjerproto";
             largeImageText = "the lapping grindset begin";
         }
