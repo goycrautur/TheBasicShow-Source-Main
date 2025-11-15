@@ -21,7 +21,7 @@ public class ITM_Quarter : BaseItem
                     audioDevice.PlayOneShot(aud_Drop);
                     vendingMachine.DispenseItem();
                 }
-                return false;
+                return true;
             }
             if (Ray.collider.CompareTag("Phone"))
             {
