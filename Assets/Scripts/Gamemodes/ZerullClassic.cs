@@ -389,7 +389,7 @@ public class ZerullClassic : MonoBehaviour
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= hp; // Decreases null health
             
-        if (health <= 0) // If health is zero or less, game will load results
+        if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
             if (!zs.totemready)
             {

@@ -118,7 +118,7 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void Hit(bool firstHit, float time, float hp = 1f)
     {
-        if (iframes > 0f) return;
+        if (iframes < 0f) return;
         hitted = true;
         audioDevice.ClearQueue();
         
@@ -209,6 +209,6 @@ public class ZerullBossScript : MonoBehaviour
     [Header("Chase Music")]
     [SerializeField] private AudioSource audioChase;
     private bool midiDrums,iframedown;
-    private float iframes = 10f;
+    private float iframes = 0f;
     [HideInInspector] public bool hitted,totemready;
 }
