@@ -7,8 +7,8 @@ public class ZerullBossScript : MonoBehaviour
     [Header("Audio"), SerializeField]
     private AudioQueueScript audioDevice;
 
-    [SerializeField] public AudioClip hit, bossIntro, bossIntro_Loop, bossStart,ChairHit,ChairStart;
-    [SerializeField] private subsScriptableObject bossHit_Captions, chairHit_Captions,bossyapStart_captions, bossyapIntro_captions,bossyapIntroloop_captions;
+    [SerializeField] public AudioClip hit, bossIntro, bossIntro_Loop,totemSound, bossStart,ChairHit,ChairStart;
+    [SerializeField] private subsScriptableObject bossHit_Captions, chairHit_Captions,bossyapStart_captions, bossyapIntro_captions,bossyapIntroloop_captions,totem_Captions;
 
     [Header("References"), SerializeField]
     private NavMeshAgent agent;
@@ -37,6 +37,14 @@ public class ZerullBossScript : MonoBehaviour
 
     private void Update()
     {
+        if (iframedown)
+        {
+            iframes -= Time.deltaTime;
+        }
+        if (iframes < 0f)
+        {
+            iframedown = false;
+        }
         foreach (WindowScript w in FindObjectsOfType<WindowScript>())
         {
             w.enableOffMeshScript = true;
@@ -110,6 +118,7 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void Hit(bool firstHit, float time, float hp = 1f)
     {
+        if (iframes > 0f) return;
         hitted = true;
         audioDevice.ClearQueue();
         
@@ -128,6 +137,13 @@ public class ZerullBossScript : MonoBehaviour
         }
         ToggleState(false, firstHit, true);
         StartCoroutine(Stun(hp, time, firstHit));
+    }
+    public void totem()
+    {
+        audioDevice.ClearQueue();
+        audioDevice.QueueAudio(totemSound, totem_Captions);
+        iframes = 10f;
+        iframedown = true;
     }
     private IEnumerator Stun(float hp, float time, bool firstHit)
     {
@@ -192,6 +208,7 @@ public class ZerullBossScript : MonoBehaviour
 
     [Header("Chase Music")]
     [SerializeField] private AudioSource audioChase;
-    private bool midiDrums;
-    [HideInInspector] public bool hitted;
+    private bool midiDrums,iframedown;
+    private float iframes = 10f;
+    [HideInInspector] public bool hitted,totemready;
 }

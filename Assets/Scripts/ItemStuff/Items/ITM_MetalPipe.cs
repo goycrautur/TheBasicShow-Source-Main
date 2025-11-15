@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ITM_MetalPipe : BaseItem
 {
-    [SerializeField] private float duration = 60f, cantuseduration, energy, walkspeedmultAdd,runspeedmultAdd,staminaDropmultAdd,staminaRisemultAdd;
-    [SerializeField] private Sprite pipeSprite,UnuseablepipeSprite;
+    [SerializeField] private float duration = 60f,invinciDuration, cantuseduration, energy, walkspeedmultAdd,runspeedmultAdd,staminaDropmultAdd,staminaRisemultAdd;
+    [SerializeField] private Sprite pipeSprite,UnuseablepipeSprite,invicible;
     [SerializeField] private AudioClip audiopip, fail;
     [SerializeField] private bool piped, CantUse;
     [SerializeField] private subsScriptableObject Subtitlesthing;
@@ -44,14 +44,34 @@ public class ITM_MetalPipe : BaseItem
         CantUse = false;
         yield break;
     }
+    public IEnumerator titlecar(float duration)
+    {
+        float time = duration;
+        Gauge newGauge3 = GaugeManager.Instance.CreateGaugeInstance(invicible, duration);
+        GameControllerScript.Instance.player.titlecard = true;
+        while (time > 0f)
+        {
+            time -= Time.deltaTime;
+            if (newGauge3 != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
+            {
+                newGauge3.Set(duration, time);
+            }
+            yield return null;
+        }
+        newGauge3.Hide();
+        GameControllerScript.Instance.player.titlecard = false;
+        yield break;
+    }
     private IEnumerator Waitin()
     {
         GameControllerScript.Instance.metalpipeStun = true;
+        
         GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultAdd;
         GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultAdd;
         GameControllerScript.Instance.player.staminaDropMultiple += staminaDropmultAdd;
         GameControllerScript.Instance.player.staminaRiseMultiple += staminaRisemultAdd;
         StartCoroutine(cantuse(cantuseduration));
+        StartCoroutine(titlecar(invinciDuration));
         float time = duration;
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(pipeSprite, duration);
         piped = true;

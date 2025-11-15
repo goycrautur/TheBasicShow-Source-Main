@@ -3,7 +3,7 @@ using UnityEngine;
 public class AddToLightingWhitelist : MonoBehaviour
 {
     //boo this guy cant code a blacklist so he resulted to using whitelist instead booo booo
-    private SpriteRenderer sprRen;
+    [SerializeField] private SpriteRenderer sprRen;
 
     private void Start()
     {

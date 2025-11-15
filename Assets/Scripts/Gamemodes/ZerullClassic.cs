@@ -11,7 +11,7 @@ public class ZerullClassic : MonoBehaviour
 {
     private bool replaceALLSAKES;
     [SerializeField] private GameControllerScript gc;
-    public GameObject zer;
+    public GameObject zer,Payphone;
     #region SingletonSetup
     private void Awake() => Instance = this;
     public static ZerullClassic Instance;
@@ -47,6 +47,7 @@ public class ZerullClassic : MonoBehaviour
     [Header("Blockages")]
     public bool spawnBlockagesDuringTheBossfight;
     public GameObject blockages;
+    public GameObject[] RandomBlockages;
     [Tooltip("Boss variant of null"), SerializeField] public ZerullBossScript zs;
     [SerializeField, Tooltip("If it's set to null, game will use optimized version")] private Slider healthSlider;
 
@@ -114,6 +115,10 @@ public class ZerullClassic : MonoBehaviour
     }
     private void Start()
     {
+        if (gc.mode == "zerullclassic")
+        {
+            Destroy(Payphone);
+        }
         health = maxHealth;
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         if (Midi)
@@ -386,6 +391,13 @@ public class ZerullClassic : MonoBehaviour
             
         if (health <= 0) // If health is zero or less, game will load results
         {
+            if (!zs.totemready)
+            {
+                zs.totem();
+                health = 1;
+                zs.totemready = true;
+            }
+            else
             BossEnd();
         }
         return;

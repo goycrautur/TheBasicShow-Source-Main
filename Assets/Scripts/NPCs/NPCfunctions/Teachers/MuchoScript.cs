@@ -80,7 +80,7 @@ public class MuchoScript : NPC
         if (this.isActiveAndEnabled)
         {
             base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-            gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,0f,GetComponent<AudioSource>());
+            gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,0f,baldiAudio);
             if (baldiAnger < 40f)
             {
                 agent.speed = base.agentSpeed;

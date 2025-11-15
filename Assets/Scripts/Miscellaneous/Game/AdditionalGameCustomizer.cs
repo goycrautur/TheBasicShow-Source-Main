@@ -326,7 +326,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public Color donthaveanamelmfao, darkencanva, canvascolormain, zaColor;
     public bool NoYCTP, DetentionAfterScissorUse, AnOldRule, ItemDropping, SkipCraftersAttack, ReworkedCurrency, RandomizeItems, ItemInfoShit,Subtitles;
     public Image spee;
-    public Sprite run1, run2, totemsprite, dorMapLockedSprite, dorMapSprite;
+    public Sprite run1, run2, invincibl, dorMapLockedSprite, dorMapSprite;
     public Texture2D itemMapSprite,SpecialItemMapSprite;
 
     [Header("Visual Addons")]

@@ -85,7 +85,7 @@ public class PlayerScript : MonoBehaviour
 	private IEnumerator summonGaug()
 	{
 		float time = 10f;
-		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.totemsprite, 10f);
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.invincibl, 10f);
 		titlecardtotem = false;
 		while (time > 0f)
 		{

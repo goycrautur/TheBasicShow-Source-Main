@@ -75,10 +75,6 @@ public class GameControllerScript : MonoBehaviour
     {
         if (teacher == "all" || teacher == "All" || teacher == "zerull")
         {
-            if (zerulscrpt.isActiveAndEnabled)
-            {
-                zerulscrpt.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-            }
             foreach (zerullscript zes in zerscr)
             {
                 if (zes.isActiveAndEnabled)
@@ -89,10 +85,6 @@ public class GameControllerScript : MonoBehaviour
         }
         if (teacher == "all" || teacher == "All" || teacher == "famished")
         {
-            if (famishScrpt.isActiveAndEnabled)
-            {
-                famishScrpt.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-            }
             foreach (FamishedScript fam in famishscr)
             {
                 if (fam.isActiveAndEnabled)
@@ -103,10 +95,6 @@ public class GameControllerScript : MonoBehaviour
         }
         if (teacher == "all" || teacher == "All" || teacher == "mucho")
         {
-            if (muchoing.isActiveAndEnabled)
-            {
-                muchoing.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-            }
             foreach (MuchoScript muc in muchscr)
             {
                 if (muc.isActiveAndEnabled)
@@ -117,15 +105,54 @@ public class GameControllerScript : MonoBehaviour
         }
         if (teacher == "all" || teacher == "All" || teacher == "baldi")
         {
-            if (baldiScrpt.isActiveAndEnabled)
-            {
-                baldiScrpt.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-            }
             foreach (BaldiScript bal in balscr)
             {
                 if (bal.isActiveAndEnabled)
                 {
                     bal.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+    }
+    public void deafshit(float AntiHearingDuration,string teacher = null)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            foreach (zerullscript zes in zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    zes.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            foreach (FamishedScript fam in famishscr)
+            {
+                if (fam.isActiveAndEnabled)
+                {
+                    fam.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            foreach (MuchoScript muc in muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    muc.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            foreach (BaldiScript bal in balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    bal.ActivateAntiHearing(AntiHearingDuration);
                 }
             }
         }

@@ -24,14 +24,15 @@ public class zerullscript : NPC
 
         Wander();
     }
-    public void OnEnable()
+    public override void OnEnable()
     {
-
+        base.OnEnable();
         gc.zerscr.Add(this);
         Move();
     }
-    public void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
         gc.zerscr.Remove(this);
     }
 

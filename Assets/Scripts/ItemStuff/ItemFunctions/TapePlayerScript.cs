@@ -26,22 +26,7 @@ public class TapePlayerScript : MonoBehaviour
     {
         sprite.sprite = closedSprite;
         audioDevice.Play();
-        if (GameControllerScript.Instance.baldiScrpt.isActiveAndEnabled)
-        {
-            GameControllerScript.Instance.baldiScrpt.ActivateAntiHearing(AntiHearingDuration);
-        }
-        if (GameControllerScript.Instance.famishScrpt.isActiveAndEnabled)
-        {
-            GameControllerScript.Instance.famishScrpt.ActivateAntiHearing(AntiHearingDuration);
-        }
-        if (GameControllerScript.Instance.zerulscrpt.isActiveAndEnabled)
-        {
-            GameControllerScript.Instance.zerulscrpt.ActivateAntiHearing(AntiHearingDuration);
-        }
-        if (GameControllerScript.Instance.muchoing.isActiveAndEnabled)
-        {
-            GameControllerScript.Instance.muchoing.ActivateAntiHearing(AntiHearingDuration);
-        }
+        GameControllerScript.Instance.deafshit(AntiHearingDuration,"All");
         if (ZerullClassic.Instance.zs != null && ZerullClassic.Instance.RealBossStarted)
         {
             StartCoroutine(StunBoss());
