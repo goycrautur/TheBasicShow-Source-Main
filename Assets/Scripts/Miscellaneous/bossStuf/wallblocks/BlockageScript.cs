@@ -1,6 +1,4 @@
 using UnityEngine;
-using Unity.Burst;
-using Unity.Mathematics;
 using System;
 
 public class BlockageScript : MonoBehaviour
@@ -14,11 +12,6 @@ public class BlockageScript : MonoBehaviour
 	private float coolDown;
 	
 	private int index;
-	private void Start()
-    {
-        Debug.Log(obstacles.Length);
-    }
-
 	private void Update()
 	{
         if (active && Vector3.Distance(GameControllerScript.Instance.player.transform.position, base.transform.position) >= 120 && coolDown <= 0f)
@@ -38,7 +31,7 @@ public class BlockageScript : MonoBehaviour
 	
     private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player") && coolDown <= 0 && !active && UnityEngine.Random.Range(0, 3) > ZerullClassic.Instance.health - (obstacles.Length+1))
+		if (other.CompareTag("Player") && coolDown <= 0 && !active && UnityEngine.Random.Range(0, ZerullClassic.Instance.health) > ZerullClassic.Instance.health - (obstacles.Length+1))
 		{
 			active = true;
 			index = UnityEngine.Random.Range(0, obstacles.Length);
