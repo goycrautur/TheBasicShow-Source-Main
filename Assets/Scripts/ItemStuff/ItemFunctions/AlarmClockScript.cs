@@ -43,7 +43,7 @@ public class AlarmClockScript : MonoBehaviour
     {
         rang = true;
         gameObject.tag = "Untagged";
-        gc.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
+        gc.HearingShit(12f, this.transform, new Vector3(0f,0f,0f), "all",false);
         audioDevice.PlayClip(ring, false, 1f);
     }
 

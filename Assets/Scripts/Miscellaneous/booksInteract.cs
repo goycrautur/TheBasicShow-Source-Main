@@ -75,12 +75,12 @@ public class booksInteract : Interactable
             if (gc.mode == "famished")
             {
                 gc.fmc.manualUpdate();
-                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "famished",false);
+                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
             }
             if (gc.mode == "zerullclassic")
             {
                 gc.zerull.jusUpdatebr();
-                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "zerull",false);
+                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
             }
         }
         else
@@ -89,12 +89,12 @@ public class booksInteract : Interactable
             if (gc.mode == "famished")
             {
                 gc.fmc.manualUpdate();
-                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "famished",false);
+                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
             }
             if (gc.mode == "zerullclassic")
             {
                 gc.zerull.jusUpdatebr();
-                gc.HearingShit(1f, player, new Vector3(0f,0f,0f), "zerull",false);
+                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
                 
             }
             return;

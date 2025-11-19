@@ -24,3 +24,15 @@ MonoBehaviour:
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
+    timedSub: 1
+    subtitleTimings:
+    - enabled: 0
+      headText: 
+      textColor: {r: 0, g: 0, b: 0, a: 0}
+      duration: 0
+      utStyle: 0
+      TextAppearSpeed: 0
+      shakey: 0
+      shakeyspeed: 0
+      shakeyradius: 0
+      fonts: 0

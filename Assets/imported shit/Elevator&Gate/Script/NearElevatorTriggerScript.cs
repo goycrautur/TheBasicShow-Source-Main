@@ -16,7 +16,7 @@ public class NearElevatorTriggerScript : MonoBehaviour
 			if (GameControllerScript.Instance.finaleMode || GameControllerScript.Instance.mode == "LappingOfAsylum" && GameControllerScript.Instance.LapManag.allowClosElev)
 			{
 				closeExitStuff();
-				GameControllerScript.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
+				GameControllerScript.Instance.HearingShit(10f, this.transform, new Vector3(0f,0f,0f), "all",false);
 			}
 		}
 	}

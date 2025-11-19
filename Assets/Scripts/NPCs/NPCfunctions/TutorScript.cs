@@ -61,7 +61,7 @@ public class TutorScript : MonoBehaviour
         tutorAnimation.Rebind();
         tutorSource.Stop();
         tutorAnimation.Play("BaldiWave", -1, 0f);
-        tutorSource.PlayOneShot(aud_Hi);
+        //tutorSource.PlayOneShot(aud_Hi);
         //UIPopupTextManagerWithMovement.Show("baldhi", Color.green, base.transform, 5.221f, 1.319f);
     }
 
