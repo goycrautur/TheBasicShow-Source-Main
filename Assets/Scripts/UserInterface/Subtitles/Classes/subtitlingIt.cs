@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class subtitlingItftTimings
 {
-    // hi yuri if u reading this hi
+    // hi yuri if u reading this hi x2
 	public bool enabled = true;
 	public string headText = "Placeholder";
 	public Color textColor = new Color(1f, 1f, 1f, 1f);
