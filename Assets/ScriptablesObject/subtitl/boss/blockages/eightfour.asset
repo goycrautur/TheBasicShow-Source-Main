@@ -17,7 +17,7 @@ MonoBehaviour:
     enabled: 1
     headText: eight four!
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    duration: 3
+    duration: 0
     utStyle: 1
     TextAppearSpeed: 0.025
     shakey: 0
