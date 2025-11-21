@@ -45,7 +45,7 @@ public class ProjectileScript : MonoBehaviour
         }
         if (thrown)
         {
-            transform.position += transform.forward * ProjectileSpeed*ZerullClassic.Instance.midiTempo * Time.deltaTime;
+            transform.position += transform.forward * ProjectileSpeed * Time.deltaTime;
             lifeSpan -= Time.deltaTime;
             if (lifeSpan <= 0f)
             {
