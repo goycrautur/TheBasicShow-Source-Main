@@ -36,7 +36,7 @@ public class ZerullClassic : MonoBehaviour
 
     [HideInInspector] public GameObject currentProjectile;
 
-    private bool projectilesDoNotExist;
+    private bool projectilesDoNotExist,ok;
 
     public int maxObjects = 5;
 
@@ -77,6 +77,7 @@ public class ZerullClassic : MonoBehaviour
     [Tooltip("Boss Start MIDI version")] public StreamingAsset midiStart;
 
     [Tooltip("Boss Loop MIDI version")] public StreamingAsset midiLoop;
+    [Tooltip("Boss Loop MIDI the bloxyver")] public StreamingAsset bloxyLoop1,bloxyLoop2;
 
     [Tooltip("Length of Start MIDI")] public float midiStartLength = 7f;
     public GameObject[] tweenOutitems,tweenitemsAlt;
@@ -86,7 +87,8 @@ public class ZerullClassic : MonoBehaviour
     [SerializeField] private Material CellingMat;
     [SerializeField] private Material NoLightCeilingMat,WallMat, FloorMat, FenceMat, CarpetMat, NoLightCeilingMatGlitch, CellingMatGlitch, WallMatGlitch, FloorMatGlitch, FenceMatGlitch, CarpetMatGlitch;
     private SongPlayer normalMidiPlayer, drumsMidiPlayer, normalMidiPlayerLoop;
-    public bool bossStarted, realBossStarted;
+    public bool bossStarted, realBossStarted,switchToBloxyb;
+    public Animator yourflashbang;
 
     public bool BossStarted
     {
@@ -140,6 +142,18 @@ public class ZerullClassic : MonoBehaviour
 
     private void Update()
     {
+        if (ok)
+        {
+            GameObject cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+            if (cameraObject != null)
+            {
+                Camera cameraComponent = cameraObject.GetComponent<Camera>();
+                if (cameraComponent != null)
+                {
+                    cameraComponent.fieldOfView = 120;
+                }
+            }
+        }
         if (replaceALLSAKES)
         {
             for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -345,9 +359,8 @@ public class ZerullClassic : MonoBehaviour
             {
                 Singleton<MusicManager>.Instance.StopMidi(false, normalMidiPlayer, null);
             }
-
-            normalMidiPlayerLoop = Singleton<MusicManager>.Instance.PlayMidi(midiLoop, true);
-            drumsMidiPlayer = Singleton<MusicManager>.Instance.PlayDrumsMidi(midiLoop, true, normalMidiPlayerLoop);
+            normalMidiPlayerLoop = Singleton<MusicManager>.Instance.PlayMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true);
+            drumsMidiPlayer = Singleton<MusicManager>.Instance.PlayDrumsMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true, normalMidiPlayerLoop);
             Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
             Singleton<MusicManager>.Instance.GainDrums(zs.transform, drumsMidiPlayer);
             Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
@@ -373,28 +386,45 @@ public class ZerullClassic : MonoBehaviour
     }
     public void OnHit(float tiem, float hp = 1f) // When player hit null by a projectile
     {
-        if (alreadyHit && !realBossStarted)
+        if (alreadyHit && !realBossStarted || (zs.iframes > 0f))
             return;
 
-        zs.Hit(!realBossStarted, tiem, hp);
+        zs.Hit(!realBossStarted, tiem, zs.totemready ? 1 : hp);
+        if (health <= maxHealth / 2 && !ok && switchToBloxyb)
+        {
+            Singleton<MusicManager>.Instance.StopMidi(true, null, null);
+            normalMidiPlayerLoop = Singleton<MusicManager>.Instance.PlayMidi(bloxyLoop2, true);
+            drumsMidiPlayer = Singleton<MusicManager>.Instance.PlayDrumsMidi(bloxyLoop2, true, normalMidiPlayerLoop);
+            Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
+            Singleton<MusicManager>.Instance.GainDrums(zs.transform, drumsMidiPlayer);
+            Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
+            gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
+            
+            StartCoroutine(easingeee(new Color(1f, 0.92f, 0.016f, 1f), 0, 2, 2));
+            ok = true;
+            RemoveProjectiles();
+            yourflashbang.Rebind();
+		    yourflashbang.Play("flashAnim", -1, 0f);
+        }
         if (realBossStarted && Midi)
         {
-            midiTempo += 0.025f * hp;
+            midiTempo += 0.025f * (zs.totemready ? 1 : hp);
             Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
         }
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
-            meepTimerScript.Instance.AddTime(5f * hp,Color.green);
+            meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
         }
         debug = true; // Enable debug bool, to make null not able to kill player
-        health -= hp; // Decreases null health
+        health -= zs.totemready ? 1 : hp; // Decreases null health
+        gc.AngerShit(2f * (zs.totemready ? 1 : hp), 0f,false, "mucho");
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
             if (!zs.totemready)
             {
                 zs.totem();
-                health = 1;
+                health = 10;
                 zs.totemready = true;
             }
             else
@@ -402,9 +432,10 @@ public class ZerullClassic : MonoBehaviour
         }
         return;
     }
-    private void BossEnd() // I've never tested is this void works or not, but if it's not works, please tell me in the comments
+    private void BossEnd()
     {
         zs.gameObject.SetActive(false);
+        gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
 
         musicAudio.Stop();
         musicLoop.Stop();
@@ -446,9 +477,10 @@ public class ZerullClassic : MonoBehaviour
         }
         else
         {
+            debug = false;
             if (Midi)
             {
-                if (health != 1)
+                if (health > 1)
                 {
                     Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
                     Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
@@ -464,12 +496,10 @@ public class ZerullClassic : MonoBehaviour
             if (health == 1)
             {
                 spawnCooldown = 5f;
-                maxObjects = 2;
+                maxObjects = 5;
                 RemoveProjectiles();
                 RemoveItems();
             }
-
-            debug = false; // Disable debug to make null able to kill player
         }
     }
     private void PlayMusic(AudioSource source, AudioClip clip, bool loop = false)

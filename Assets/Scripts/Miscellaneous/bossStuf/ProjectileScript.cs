@@ -36,6 +36,10 @@ public class ProjectileScript : MonoBehaviour
             transform.localEulerAngles = cameraTransform.localEulerAngles + rotateOffset * Vector3.up;
             if (Input.GetMouseButton(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact))
             {
+                if (ZerullClassic.Instance.playSoundWhenProjectileThrown && audioDevice != null)
+                {
+                    audioDevice.PlayOneShot(throwSound);
+                }
                 Throw();
             }
         }
@@ -107,10 +111,6 @@ public class ProjectileScript : MonoBehaviour
 
     private void Throw()
     {
-        if (ZerullClassic.Instance.playSoundWhenProjectileThrown && audioDevice != null)
-        {
-            audioDevice.PlayOneShot(throwSound);
-        }
         thrown = true;
         transform.position = cameraTransform.position;
         transform.rotation = cameraTransform.rotation;

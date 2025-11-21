@@ -29,6 +29,18 @@ public class FamishedModeController : MonoBehaviour
             Shader.SetGlobalFloat("_VertexGlitchIntensity", shadvalh);
         }
     }*/
+
+    public void onebounc(Transform ok)
+    {
+        foreach (FamishedScript fam in gc.famishscr)
+        {
+            if (fam.isActiveAndEnabled)
+            {
+                fam.agent.Warp(new Vector3(ok.position.x,fam.transform.position.y,ok.position.z));
+            }
+        }
+        StartCoroutine(easing(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 0));
+    }
     public void manualUpdate()
     {
         if (gc.notebooks == 2)
@@ -154,7 +166,7 @@ public class FamishedModeController : MonoBehaviour
         gc.voxLight.ambientLight = kolor;
     }
     [SerializeField] private GameControllerScript gc;
-    public bool corspesspawn;
+    public bool corspesspawn, isAbleToMove;
     public float angerMultipler;
     public GameObject butch;
     public AudioSource funnyaudiotuff;

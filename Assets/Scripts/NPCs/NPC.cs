@@ -154,7 +154,7 @@ public class NPC : MonoBehaviour
     #region Internal State
     protected float coolDown;
     public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed;
-    protected NavMeshAgent agent;
+    public NavMeshAgent agent;
     #endregion
     public int hp, maxhp;
     private bool fuckingdead;

@@ -20,7 +20,7 @@ public class BossfightTriggerScript : MonoBehaviour
     private void Start()
     {
         string himode = PlayerPrefs.GetString("CurrentMode");
-        if (himode != "zerullclassic")
+        if (himode != "zerullclassic" && himode != "famished"||himode != "famished" && himode != "zerullclassic")
         {
             Destroy(base.gameObject);
         }
@@ -53,8 +53,16 @@ public class BossfightTriggerScript : MonoBehaviour
     {
         enter = true;
         nes.closeExitStuff();
+        string himode = PlayerPrefs.GetString("CurrentMode");
+        if (himode == "zerullclassic")
+        {
         ZerullClassic.Instance.GetBoss().Target = bossSpawn;
         ZerullClassic.Instance.BossIntro();
+        }
+        if (himode == "famished")
+        {
+        FamishedModeController.Instance.onebounc(bossSpawn);
+        }
         foreach (BossfightTriggerScript bossTriggers in FindObjectsOfType<BossfightTriggerScript>())
         {
             if (bossTriggers != this)

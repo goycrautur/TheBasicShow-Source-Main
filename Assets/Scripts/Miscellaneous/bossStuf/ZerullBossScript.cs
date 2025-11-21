@@ -76,6 +76,7 @@ public class ZerullBossScript : MonoBehaviour
     {
         if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.BossStarted && other.CompareTag("Player"))
         {
+            if (!GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 2f, false, true, false);
             return;
         }
@@ -118,7 +119,6 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void Hit(bool firstHit, float time, float hp = 1f)
     {
-        if (iframes < 0f) return;
         hitted = true;
         audioDevice.ClearQueue();
         
@@ -209,6 +209,6 @@ public class ZerullBossScript : MonoBehaviour
     [Header("Chase Music")]
     [SerializeField] private AudioSource audioChase;
     private bool midiDrums,iframedown;
-    private float iframes = 0f;
+    public float iframes = 0f;
     [HideInInspector] public bool hitted,totemready;
 }

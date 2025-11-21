@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Tuhpipe
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d20ab9f43ff0a554f8b5d2bf558ecc90, type: 3}
-  subtitleType: 1
   subtitleOption:
     enabled: 1
-    headText: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*'
+    headText: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*</b>'
     textColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     duration: 3
     utStyle: 1
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []
