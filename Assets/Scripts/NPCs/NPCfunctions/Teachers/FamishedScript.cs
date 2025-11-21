@@ -28,7 +28,7 @@ public class FamishedScript : NPC
     public override void OnUpdate()
     {
         base.OnUpdate();
-        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        base.agentSpeed = !gc.fmc.isAbleToMove ? 0 : base.DefaultAgentSpeed * base.agentSpeedScale;
         if (famishedtempSpd > 0f)
         {
             famishedtempSpd -= 0.02f * Time.deltaTime;
@@ -60,6 +60,10 @@ public class FamishedScript : NPC
     public override void OnFixedUpdate()
     {
         if (player == null) return;
+        if (player != null && agent.enabled && gameObject.activeSelf && gc.fmc.alwaysKnowIp)
+        {
+            agent.SetDestination(player.position);
+        }
 
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {

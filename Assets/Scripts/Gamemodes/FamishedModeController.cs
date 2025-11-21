@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class FamishedModeController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class FamishedModeController : MonoBehaviour
     #endregion
     private void Start()
     {
+        TimethatUhhh = Onebouncemain.length;
         if (gc.mode == "famished")
         {
             gc.UpdateNotebookCount();
@@ -29,9 +31,63 @@ public class FamishedModeController : MonoBehaviour
             Shader.SetGlobalFloat("_VertexGlitchIntensity", shadvalh);
         }
     }*/
+    public void Update()
+    {
+        if (TimethatUhhh > 0f)
+		{
+            if (!dontupdatebr)
+            {
+            Endonebounc();
+            }
+		}
+        if (AllowCountdown)
+		{
+			TimethatUhhh -= Time.deltaTime;
+		}
+        if (pitchdown)
+		{
+			pitchval -= Time.deltaTime;
+            funnyaudiotuff.pitch = pitchval;
+		}
+        int num = Mathf.FloorToInt(TimethatUhhh / 60f);
+        int num2 = Mathf.FloorToInt(TimethatUhhh % 60f);
+        TimerText.text = string.Format("{0:00}:{1:00}", num, num2);
+        if (turnOnLightAutoChange)
+        {
+            gc.voxLight.ambientLight = colortext == "red" ? new Color(1f, 0f, 0f, 1f) : colortext == "white" ? new Color(0.65f, 0.65f, 0.65f, 1f) : new Color(0.65f, 0.65f, 0.65f, 1f);
+        }
+    }
+
+    public void Endonebounc()
+    {
+        alwaysKnowIp = false;
+        angerMultipler = 0.1f;
+        colortext = "white";
+        pitchdown = true;
+        funnyaudiotuff.clip = OneBounceEnd;
+        funnyaudiotuff.loop = false;
+        funnyaudiotuff.Play();
+        dontupdatebr = true;
+        gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
+        gc.Gatesrea.ForEach(g => g.Down(false));
+        gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+        return;
+    }
 
     public void onebounc(Transform ok)
     {
+        for (int a = 0; a < tweenOutitems.Length; ++a)
+        {
+            tweenOutitems[a].transform.DOMoveX(-700, 3f);
+        }
+        colortext = "red";
+        gc.player.DefaultWalkSpeed += 40;
+        gc.player.DefaultRunSpeed += 40;
+        angerMultipler = 1.35f;
+        ZerullClassic.Instance.yourflashbang.Rebind();
+		ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
+        AdditionalGameCustomizer.Instance.FovAmmount = 90;
+        isAbleToMove = false;
         foreach (FamishedScript fam in gc.famishscr)
         {
             if (fam.isActiveAndEnabled)
@@ -39,7 +95,22 @@ public class FamishedModeController : MonoBehaviour
                 fam.agent.Warp(new Vector3(ok.position.x,fam.transform.position.y,ok.position.z));
             }
         }
-        StartCoroutine(easing(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 0));
+        GameControllerScript.Instance.audioDevice.PlayOneShot(windCras);
+        funnyaudiotuff.Stop();
+        turnOnLightAutoChange = true;
+        StartCoroutine(peak());
+    }
+    public IEnumerator peak()
+    {
+        yield return new WaitForSeconds(windCras.length);
+        funnyaudiotuff.clip = Onebouncemain;
+        funnyaudiotuff.loop = false;
+        funnyaudiotuff.Play();
+        isAbleToMove = true;
+        alwaysKnowIp = true;
+        AllowCountdown = true;
+        OneBounceFamis = true;
+        obTimer.SetActive(true);
     }
     public void manualUpdate()
     {
@@ -89,7 +160,7 @@ public class FamishedModeController : MonoBehaviour
         if (gc.notebooks == 14 && gc.exitsReached == 0)
         {
             gc.voxLight.ambientLight = new Color(1f, 0f, 0f, 1f);
-            StartCoroutine(easing(new Color(0.25f, 0.25f, 0.25f, 1f), 0, 3, 3));
+            StartCoroutine(easing(new Color(0.25f, 0.25f, 0.25f, 1f), 0, 1, 1));
             angerMultipler = 1.35f;
             corspesspawn = true;
             funnyaudiotuff.clip = despairloopfinale1;
@@ -101,19 +172,19 @@ public class FamishedModeController : MonoBehaviour
             funnyaudiotuff.clip = despairloopfinale2;
             funnyaudiotuff.loop = true;
             funnyaudiotuff.Play();
-            StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 3, 3));
+            StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 1));
         }
         if (gc.exitsReached == 3)
         {
             StartCoroutine(finale());
-            StartCoroutine(easing(new Color(0.15f, 0.15f, 0.15f, 1f), 0, 3, 3));
+            StartCoroutine(easing(new Color(0.15f, 0.15f, 0.15f, 1f), 0, 1, 1));
         }
         if (gc.exitsReached == 5)
         {
             angerMultipler = 0.3f;
             StopCoroutine(finale());
             StartCoroutine(finaleaga());
-            StartCoroutine(easing(new Color(0.65f, 0.65f, 0.65f, 1f), 0, 3, 3));
+            StartCoroutine(easing(new Color(0.65f, 0.65f, 0.65f, 1f), 0, 1, 1));
         }
     }
     public IEnumerator ohgodwhat()
@@ -166,9 +237,12 @@ public class FamishedModeController : MonoBehaviour
         gc.voxLight.ambientLight = kolor;
     }
     [SerializeField] private GameControllerScript gc;
-    public bool corspesspawn, isAbleToMove;
-    public float angerMultipler;
-    public GameObject butch;
+    public GameObject[] tweenOutitems;
+    public bool corspesspawn, isAbleToMove, alwaysKnowIp,AllowCountdown, pitchdown,dontupdatebr,OneBounceFamis,turnOnLightAutoChange;
+    public float angerMultipler,TimethatUhhh,pitchval = 1f;
+	public TMP_Text TimerText;
+    private string colortext;
+    public GameObject butch,obTimer;
     public AudioSource funnyaudiotuff;
-    public AudioClip despairIntro, despairloop1, despairIntro2, despairloop2, despairloopfinale1, despairloopfinale2, despairSuddenstop, despairloopfinale3, despairSuddenstop2,despairloopfinale4;
+    public AudioClip despairIntro, despairloop1, despairIntro2, despairloop2, despairloopfinale1, despairloopfinale2, despairSuddenstop, despairloopfinale3, despairSuddenstop2,despairloopfinale4,windCras,Onebouncemain,OneBounceEnd;
 }

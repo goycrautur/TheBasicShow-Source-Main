@@ -142,18 +142,6 @@ public class ZerullClassic : MonoBehaviour
 
     private void Update()
     {
-        if (ok)
-        {
-            GameObject cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
-            if (cameraObject != null)
-            {
-                Camera cameraComponent = cameraObject.GetComponent<Camera>();
-                if (cameraComponent != null)
-                {
-                    cameraComponent.fieldOfView = 120;
-                }
-            }
-        }
         if (replaceALLSAKES)
         {
             for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -392,6 +380,7 @@ public class ZerullClassic : MonoBehaviour
         zs.Hit(!realBossStarted, tiem, zs.totemready ? 1 : hp);
         if (health <= maxHealth / 2 && !ok && switchToBloxyb)
         {
+            AdditionalGameCustomizer.Instance.FovAmmount = 80;
             Singleton<MusicManager>.Instance.StopMidi(true, null, null);
             normalMidiPlayerLoop = Singleton<MusicManager>.Instance.PlayMidi(bloxyLoop2, true);
             drumsMidiPlayer = Singleton<MusicManager>.Instance.PlayDrumsMidi(bloxyLoop2, true, normalMidiPlayerLoop);
@@ -417,7 +406,7 @@ public class ZerullClassic : MonoBehaviour
         }
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= zs.totemready ? 1 : hp; // Decreases null health
-        gc.AngerShit(2f * (zs.totemready ? 1 : hp), 0f,false, "mucho");
+        gc.AngerShit(1.5f * (zs.totemready ? 1 : hp), 0f,false, "mucho");
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {

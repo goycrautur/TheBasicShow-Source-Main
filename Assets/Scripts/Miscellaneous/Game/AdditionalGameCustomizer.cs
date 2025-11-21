@@ -142,7 +142,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
             Camera cameraComponent = cameraObject.GetComponent<Camera>();
             if (cameraComponent != null)
             {
-                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : 60;
+                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : FovAmmount;
             }
         }
     }
@@ -337,7 +337,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     [Header("Serialized References")]
     public Image[] ExitImages;
     public Image rainboCanv;
-    public float rainboSpee, huehuehue, saturati, brignes, transparenci;
+    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount;
     public Sprite[] BookColors;
     public Material NormalSky, NormalRedSky, NightSky, RedNightSky, TwilightSky, RedTwilightSky, DefaultSky;
     [SerializeField] private GameObject warning, Clock, TMP, OldStamina, PreOldStamina, NewStamina, VerticalStamina, CircleStamina, GaugeManager, Counter, staminapercent, healthpercent;

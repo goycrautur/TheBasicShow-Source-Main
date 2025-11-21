@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour
 		if (invisi || invisichalk)
 		{
 			HudManager.Instance.colorVarSetter(false);
-			if (ZerullClassic.Instance.RealBossStarted)
+			if (ZerullClassic.Instance.RealBossStarted || FamishedModeController.Instance.OneBounceFamis)
 			{
 				SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
 			}

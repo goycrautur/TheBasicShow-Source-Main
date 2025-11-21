@@ -136,9 +136,9 @@ public class booksInteract : Interactable
         }
         if (gc.spoopMode)
         {
-            gc.AngerShit(1.1f / 2, 0f,false, "all");
-            gc.AngerShit(0.1f / 2, 0f,false, "famished");
-            gc.AngerShit(0.4f / 2, 0f,false, "zerull");
+            gc.AngerShit(1.1f, 0f,false, "all");
+            gc.AngerShit(0.1f, 0f,false, "famished");
+            gc.AngerShit(0.4f, 0f,false, "zerull");
         }
     }
     #region Learning Game Launch
