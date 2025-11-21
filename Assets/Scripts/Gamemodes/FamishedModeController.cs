@@ -33,12 +33,13 @@ public class FamishedModeController : MonoBehaviour
     }*/
     public void Update()
     {
-        if (TimethatUhhh > 0f)
+        if (TimethatUhhh < 0f)
 		{
             if (!dontupdatebr)
             {
             Endonebounc();
             }
+            AllowCountdown = false;
 		}
         if (AllowCountdown)
 		{
