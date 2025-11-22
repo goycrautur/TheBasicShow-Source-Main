@@ -35,14 +35,15 @@ public class FamishedModeController : MonoBehaviour
     {
         if (TimethatUhhh < 0f)
 		{
+            AllowCountdown = false;
             if (!dontupdatebr)
             {
             Endonebounc();
-            }
-            AllowCountdown = false;
+            } 
 		}
         if (AllowCountdown)
 		{
+            gc.modeState = "ONEBOUNCE | " + (int)TimethatUhhh+" Seconds Left";
 			TimethatUhhh -= Time.deltaTime;
 		}
         if (pitchdown)
@@ -61,6 +62,8 @@ public class FamishedModeController : MonoBehaviour
 
     public void Endonebounc()
     {
+        AdditionalGameCustomizer.Instance.FovAmmount = 60;
+        gc.modeState = "its over (fr this time)";
         alwaysKnowIp = false;
         angerMultipler = 0.1f;
         colortext = "white";
@@ -72,21 +75,35 @@ public class FamishedModeController : MonoBehaviour
         gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
         gc.Gatesrea.ForEach(g => g.Down(false));
         gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+        gc.player.DefaultWalkSpeed -= 40;
+        gc.player.DefaultRunSpeed -= 50;
         return;
     }
 
     public void onebounc(Transform ok)
     {
+        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+		{
+			if (!w.broken)
+			{
+				w.Window(true, false, 0f);
+			}
+		}
         for (int a = 0; a < tweenOutitems.Length; ++a)
         {
             tweenOutitems[a].transform.DOMoveX(-700, 3f);
         }
         colortext = "red";
         gc.player.DefaultWalkSpeed += 40;
-        gc.player.DefaultRunSpeed += 40;
+        gc.player.DefaultRunSpeed += 50;
         angerMultipler = 1.35f;
         ZerullClassic.Instance.yourflashbang.Rebind();
 		ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
+        ZerullClassic.Instance.health = 10;
+        if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight)
+        {
+            ZerullClassic.Instance.blockages.SetActive(true);
+        }
         AdditionalGameCustomizer.Instance.FovAmmount = 90;
         isAbleToMove = false;
         foreach (FamishedScript fam in gc.famishscr)
@@ -186,6 +203,7 @@ public class FamishedModeController : MonoBehaviour
             StopCoroutine(finale());
             StartCoroutine(finaleaga());
             StartCoroutine(easing(new Color(0.65f, 0.65f, 0.65f, 1f), 0, 1, 1));
+            gc.modeState = gc.exitsReached + "/" + gc.maxExits + " Exits" + " | its over..?";
         }
     }
     public IEnumerator ohgodwhat()

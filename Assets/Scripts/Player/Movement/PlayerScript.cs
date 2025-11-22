@@ -73,7 +73,7 @@ public class PlayerScript : MonoBehaviour
 				{
 					if (!w.broken)
 					{
-						if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= 4)
+						if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= windowbreakDistance)
 						{
 							w.Window(true, true, 6f);
 						}
@@ -643,7 +643,7 @@ public class PlayerScript : MonoBehaviour
 	public bool breakwindow, train, titlecardtotem;
 	public int principalBugFixer;
 	public string guiltType;
-	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance;
+	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;
 	public bool gameOver, jumpRope, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, outdoorsfr, IgnoreHpLimit, titlecard;
 
 	[Header("Private Variables")]

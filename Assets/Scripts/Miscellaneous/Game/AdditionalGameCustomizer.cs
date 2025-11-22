@@ -142,7 +142,8 @@ public class AdditionalGameCustomizer : MonoBehaviour
             Camera cameraComponent = cameraObject.GetComponent<Camera>();
             if (cameraComponent != null)
             {
-                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : FovAmmount;
+                
+                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : Mathf.Lerp(cameraComponent.fieldOfView, FovAmmount, 5f * Time.deltaTime);;
             }
         }
     }

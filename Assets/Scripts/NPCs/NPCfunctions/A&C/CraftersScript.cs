@@ -19,21 +19,14 @@ public class CraftersScript : NPC
             forceShowTime -= Time.deltaTime;
         }
 
-        if (angerCooldown > 0f)
-        {
-            angerCooldown -= Time.deltaTime;
-        }
 
-        if (gettingAngry)
+        if (AngryMeter == 5 & !angry)
         {
-            anger += Time.deltaTime;
-            if (anger >= 1f & !angry)
-            {
-                angry = true;
-                audioDevice.PlayOneShot(aud_Intro);
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
-                spriteImage.sprite = angrySprite;
-            }
+            angry = true;
+            audioDevice.PlayOneShot(aud_Intro);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
+            spriteImage.sprite = angrySprite;
+            AngryMeter = 0;
         }
         else if (anger > 0f)
         {
@@ -83,10 +76,7 @@ public class CraftersScript : NPC
     #region Visibility & Aggression Check
     public override void OnFixedUpdate()
     {
-        if (gc.notebooks >= gc.maxNotebooks)//(gc.notebooks >= AngerLimit)
-        {
-            CheckForPlayerAndVisibility();
-        }
+        CheckForPlayerAndVisibility();
     }
 
     private void CheckForPlayerAndVisibility()
@@ -95,11 +85,15 @@ public class CraftersScript : NPC
         {
             if (raycastHit.transform.CompareTag("Player") && craftersRenderer.isVisible && spriteImage.sprite == normalSprite)
             {
-                gettingAngry = true;
+                if (!stopUpdate)
+                {
+                    stopUpdate = true;
+                    AngryMeter += 1;
+                }
             }
             else
             {
-                gettingAngry = false;
+                stopUpdate = false;
             }
         }
     }
@@ -152,13 +146,12 @@ public class CraftersScript : NPC
 
         if (!endless)
         {
+            angry = false;
             gameObject.SetActive(false);
         }
         else
         {
-            angerCooldown = 3f;
             anger = 0f;
-            gettingAngry = false;
             angry = false;
             agent.speed = base.agentSpeed;
             spriteImage.sprite = normalSprite;
@@ -170,7 +163,7 @@ public class CraftersScript : NPC
     #region Serialized Inspector Variables
     [Header("States & Conditions")]
     [SerializeField] private float anger;
-    [SerializeField] private bool angry, gettingAngry;
+    [SerializeField] private bool angry, stopUpdate;
 
     [Header("References & Components")]
     [SerializeField] private CharacterController cc;
@@ -185,10 +178,10 @@ public class CraftersScript : NPC
 
     [Header("Movement & Speed")]
     [SerializeField] private GameObject attackingCrafters;
-    [SerializeField] private float baseSpeed, speedAlt1,speedAlt2, defspeedAlt1,defspeedAlt2, angerCooldown;
+    [SerializeField] private float baseSpeed, speedAlt1,speedAlt2, defspeedAlt1,defspeedAlt2;
 
     [Header("Gameplay Flow")]
-    [SerializeField] private int AngerLimit;
+    [SerializeField] private int AngryMeter;
     public bool endless;
     #endregion
 

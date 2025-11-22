@@ -122,6 +122,15 @@ public class ZerullClassic : MonoBehaviour
             Destroy(Payphone);
         }
         health = maxHealth;
+        bool shakeswitchFR = PlayerPrefsExtension.GetBool("WallShakeSwitch");
+        bool shake = PlayerPrefsExtension.GetBool("WallShake");
+        bool blox = PlayerPrefsExtension.GetBool("bloxy");
+        if(!shakeswitchFR )
+        {
+        PlayerPrefsExtension.SetBool("WallShake", true);
+        }
+        VertexShake = !shakeswitchFR ? true : shake;
+        switchToBloxyb = blox;
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         if (Midi)
         {
@@ -207,6 +216,15 @@ public class ZerullClassic : MonoBehaviour
     }
     public void Encounter()
     {
+        gc.modeState = "oh no he got last exit what do i do";
+        PlayerPrefsExtension.SetBool("WallShakeSwitch", true);
+        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+		{
+			if (!w.broken)
+			{
+				w.Window(true, false, 0f);
+			}
+		}
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
             meepTimerScript.Instance.AddTime(25f, Color.green);
@@ -260,6 +278,7 @@ public class ZerullClassic : MonoBehaviour
     public bool alreadyHit,isbroyapping; // why not
     private void StartHit()
     {
+        gc.modeState = "!!?!?!@?!?@!?@?!??!@!?@!?@!?@? HE GOT HURT";
         if (debugMode)
             Debug.Log("Boss Pissed");
 
@@ -290,12 +309,14 @@ public class ZerullClassic : MonoBehaviour
 
     private IEnumerator BeforeBossBegin()
     {
+        gc.modeState = "he pissed";
         yield return new WaitForSeconds(StartSongsIsMidi ? (midiStartLength/midiTempo) : Boss_Music[1].length); // Wait until the music will end
         BossBegin(); // Start boss
     }
 
     private void BossBegin()
     {
+        gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
             meepTimerScript.Instance.AddTime(25f, Color.green);
@@ -374,6 +395,8 @@ public class ZerullClassic : MonoBehaviour
     }
     public void OnHit(float tiem, float hp = 1f) // When player hit null by a projectile
     {
+
+        gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         if (alreadyHit && !realBossStarted || (zs.iframes > 0f))
             return;
 
@@ -412,6 +435,7 @@ public class ZerullClassic : MonoBehaviour
         {
             if (!zs.totemready)
             {
+                gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp |" + " oh no he casted totoem of undying";
                 zs.totem();
                 health = 10;
                 zs.totemready = true;
@@ -423,6 +447,7 @@ public class ZerullClassic : MonoBehaviour
     }
     private void BossEnd()
     {
+        gc.modeState = "you did it";
         zs.gameObject.SetActive(false);
         gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
 

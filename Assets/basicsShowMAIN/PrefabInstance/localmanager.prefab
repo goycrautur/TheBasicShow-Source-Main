@@ -173,6 +173,9 @@ MonoBehaviour:
       value: enables the item info text,it shows item info thats all
     - key: HoverInfoText_Options_subs
       value: enables bbcr ahh captions yea
+    - key: HoverInfoText_Options_zershake
+      value: Enables/Disables wall shake in zerull/chair bossfight (for those who
+        had low focus)
     - key: HoverInfoText_Options_goback
       value: goin back already?.,.,,.,.,.,.,
     - key: HoverInfoText_Modifiers_syfm
@@ -215,6 +218,8 @@ MonoBehaviour:
       value: EvapPad
     - key: Playmenu_Modifier_Meeptimer
       value: MEEP Timer
+    - key: Playmenu_Modifier_ChaosMode
+      value: Chaos.. Mode!
     - key: Playmenu_Modifier_muchomous_Locked
       value: LOCKED
     - key: Playmenu_Modifier_EvapPad_Locked

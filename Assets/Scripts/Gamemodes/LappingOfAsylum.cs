@@ -60,6 +60,27 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void UpdateManually()
     {
+        ChaosCheeseCount++;
+        if (ChaosCheeseCount == 7)
+        {
+            bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
+            if (ChaosMode)
+            {
+                if (gc.mode == "LappingOfAsylum")
+                {
+                    foreach (GameObject obj in gc.ObjectsToEnable)
+                    {
+                        if (obj != null)
+                        {
+                            GameObject clone = Instantiate(obj, obj.transform.position, obj.transform.rotation);
+                            clone.name = obj.name;
+                            clone.SetActive(true);
+                        }
+                    }
+                }
+            }
+            ChaosCheeseCount = 0;
+        }
         if (Meeptimar.isActiveAndEnabled && Lap5CheeseCount != 7)
         {
             meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 25f : 12.5f, Color.green);
@@ -102,12 +123,39 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (FamishCheeseCount == 7)
         {
-            gc.voxLight.ambientLight = new Color(0.05f, 0.05f, 0.05f, 0f);
-            StartCoroutine(gc.fmc.easing(new Color(0.35f, 0.35f, 0.35f, 1f), 0, 1, 1));
             gc.fmc.angerMultipler = 0.65f;
             gc.famishScrpt.activatewindowbreak = true;
             LapFamishShit = false;
             FamishCheeseCount = 0;
+        }
+        if (CurrentLap >= 3)
+        {
+            Chaos3CheeseCount++;
+            if (Chaos3CheeseCount == 7)
+            {
+                bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
+                if (ChaosMode)
+                {
+                    if (gc.mode == "LappingOfAsylum")
+                    {
+                        if (gc.fmc.butch != null)
+                        {
+                            GameObject clone = Instantiate(gc.fmc.butch, gc.fmc.butch.transform.position, gc.fmc.butch.transform.rotation);
+                            clone.name = gc.fmc.butch.name;
+                            clone.GetComponent<FamishedScript>().famishedSpd = 0.5f;
+                            clone.SetActive(true);
+                        }
+                        if (gc.zerull.zer != null)
+                        {
+                            GameObject clone = Instantiate(gc.zerull.zer, gc.zerull.zer.transform.position, gc.zerull.zer.transform.rotation);
+                            clone.name = gc.zerull.zer.name;
+                            clone.GetComponent<zerullscript>().Anger = 0.5f;
+                            clone.SetActive(true);
+                        }
+                    }
+                }
+                Chaos3CheeseCount = 0;
+            }
         }
         if (gc.notebooks == 1)
         {
@@ -132,7 +180,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.movementLocked = true;
         gc.player.titlecard = true;
         gc.playerCollider.enabled = false;
-        gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
+        gc.npcCloneList.ForEach(o => o.SetActive(false));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
         yield return new WaitForSeconds(zawarudo.length);
         gc.player.maxHealth += 50;
@@ -155,7 +203,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
-        gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
+        gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         yield return null;
         yield break;
@@ -201,7 +249,7 @@ public class LappingOfAsylumController : MonoBehaviour
                 gc.player.titlecard = true;
                 gc.playerCollider.enabled = false;
                 gc.audioDevice2.PlayOneShot(PortalEnteringSound);
-                gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
+                gc.npcCloneList.ForEach(o => o.SetActive(false));
                 gc.CirclAnimator.SetTrigger("nooo");
                 yield return new WaitForSeconds(PortalEnteringSound.length + 1);
                 gc.player.titlecard = false;
@@ -209,7 +257,7 @@ public class LappingOfAsylumController : MonoBehaviour
                 gc.playerCollider.enabled = true;
                 gc.audioDevice2.PlayOneShot(PortalExitingSound);
                 gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
-                gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
+                gc.npcCloneList.ForEach(o => o.SetActive(true));
                 gc.CirclAnimator.SetTrigger("yooo");
                 yield return new WaitForSeconds(PortalExitingSound.length);
                 LapSpecificsStuff();
@@ -248,6 +296,11 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (CurrentLap == 4)
         {
+            ZerullClassic.Instance.health = 20;
+            if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight)
+            {
+                ZerullClassic.Instance.blockages.SetActive(true);
+            }
             gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
             mucho.SetActive(true);
             Lap5TimingStuff = true;
@@ -270,7 +323,7 @@ public class LappingOfAsylumController : MonoBehaviour
     public booksInteract[] noteboos;
     public AudioSource LapSound;
     public AudioClip BellSoundLapping,PortalEnteringSound,PortalExitingSound,zawarudo, lap5Aud1;
-    public int CurrentLap, MaxLap, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount;
+    public int CurrentLap, MaxLap, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount,ChaosCheeseCount,Chaos3CheeseCount;
     public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff;
     public lapVariablesStuff[] lappingHi;
     [Serializable]

@@ -79,6 +79,10 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 79e74b022c3575849a186e94275220fc, type: 3}
     subtitleObjectStuff: {fileID: 11400000, guid: 6a77f0abf7c2425498b45c300504c10c,
       type: 2}
+  - mat: {fileID: 2100000, guid: 436510f6681605a48b49c33933d941a5, type: 2}
+    audio: {fileID: 8300000, guid: cd14568e3ed7fad46b8ed3242a1d1480, type: 3}
+    subtitleObjectStuff: {fileID: 11400000, guid: c3930e7cec7573e4e83a2def71b082c9,
+      type: 2}
 --- !u!82 &550599744099410290
 AudioSource:
   m_ObjectHideFlags: 0

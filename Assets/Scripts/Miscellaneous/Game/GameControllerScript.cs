@@ -556,7 +556,7 @@ public class GameControllerScript : MonoBehaviour
         bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
         if (ChaosMode)
         {
-            if (mode == "story" || mode == "LappingOfAsylum")
+            if (mode == "story")
             {
                 foreach (GameObject obj in ObjectsToEnable)
                 {
@@ -1139,7 +1139,7 @@ public class GameControllerScript : MonoBehaviour
     [Header("Serialized References")]
     public TMP_Text notebookCount;
     [SerializeField] public GameObject highScoreText, baldi, tutorobj;
-    public List<GameObject> ObjectsToEnable = new List<GameObject>();
+    public List<GameObject> ObjectsToEnable,npcCloneList = new List<GameObject>();
     public List<GateScript> Gatesrea = new List<GateScript>();
     public List<ElvDoorScript> ElevdorRea = new List<ElvDoorScript>();
     public List<GameObject> ObjectsToDisable, ItemsToRespawn,NpcMinimapIcon = new List<GameObject>();

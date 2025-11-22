@@ -23,6 +23,7 @@ public class mathMachineZonetrigger : MonoBehaviour
             if (!this.IsInsideBoxCollider(numBallScript.transform) && numBallScript.RoomID == RoomID)
             {
                 numBallScript.DownBall();
+				GameControllerScript.Instance.PickBall.SetActive(false);
                 numBallScript.die();
 			}
 		}

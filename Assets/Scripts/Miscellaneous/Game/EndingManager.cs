@@ -71,7 +71,7 @@ public class EndingManager : MonoBehaviour
 
         Game.player.transform.position = SecretWarpPoint.transform.position + Vector3.up * Game.player.height;
 
-        Game.ObjectsToEnable.ForEach(o => o.SetActive(false));
+        Game.npcCloneList.ForEach(o => o.SetActive(false));
         Environment.ForEach(s => s.SetActive(false));
 
         Game.player.forceLookSpeed = 750f;

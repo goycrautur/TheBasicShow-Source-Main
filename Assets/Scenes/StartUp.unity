@@ -1708,6 +1708,810 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1488244644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.size
+      value: 93
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[20].key
+      value: Options_walshak
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[21].key
+      value: Options_Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[22].key
+      value: CMapper_Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[23].key
+      value: CMapper_Restore
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[24].key
+      value: CMapper_Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[25].key
+      value: CMapper_Confirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[26].key
+      value: CMapper_Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[27].key
+      value: CMapper_UseItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[28].key
+      value: CMapper_Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[29].key
+      value: CMapper_itemSlots_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[30].key
+      value: CMapper_itemSlots_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[31].key
+      value: CMapper_itemSlots_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[32].key
+      value: CMapper_itemSlots_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[33].key
+      value: CMapper_itemSlots_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[34].key
+      value: CMapper_itemSlots_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[35].key
+      value: CMapper_itemSlots_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[36].key
+      value: CMapper_itemSlots_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[37].key
+      value: CMapper_itemSlots_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[38].key
+      value: CMapper_Movements_Fowards
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[39].key
+      value: CMapper_Movements_Backwards
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[40].key
+      value: CMapper_Movements_Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[41].key
+      value: CMapper_Movements_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[42].key
+      value: CMapper_Movements_Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[43].key
+      value: CMapper_Movements_behindyou
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[44].key
+      value: CMapper_Confirm_walltext
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[45].key
+      value: CMapper_Confirm_Yes
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[46].key
+      value: CMapper_Confirm_No
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[47].key
+      value: HoverInfoText_none
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[48].key
+      value: HoverInfoText_Menu_Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[49].key
+      value: HoverInfoText_Menu_Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[50].key
+      value: HoverInfoText_Menu_goback
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[51].key
+      value: HoverInfoText_Options_sensitiv
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[52].key
+      value: HoverInfoText_Options_controlsconfigu
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[53].key
+      value: HoverInfoText_Options_volum
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[54].key
+      value: HoverInfoText_Options_reso
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[55].key
+      value: HoverInfoText_Options_anaismovemen
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[56].key
+      value: HoverInfoText_Options_rumb
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[57].key
+      value: HoverInfoText_Options_vsync
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[58].key
+      value: HoverInfoText_Options_fulscren
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[59].key
+      value: HoverInfoText_Options_runinbg
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[60].key
+      value: HoverInfoText_Options_itminfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[61].key
+      value: HoverInfoText_Options_subs
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[62].key
+      value: HoverInfoText_Options_zershake
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[63].key
+      value: HoverInfoText_Options_goback
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[64].key
+      value: HoverInfoText_Modifiers_syfm
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[65].key
+      value: HoverInfoText_Modifiers_muchomous
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[66].key
+      value: HoverInfoText_Modifiers_EvapPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[67].key
+      value: HoverInfoText_Modifiers_Meeptimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[68].key
+      value: HoverInfoText_Modifiers_ChaosMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[69].key
+      value: HoverInfoText_Modifiers_bloxyzerull
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[70].key
+      value: ModeSelectMen_Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].key
+      value: ModeSelectMen_stor
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[72].key
+      value: ModeSelectMen_bruhmished
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].key
+      value: ModeSelectMen_erull
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].key
+      value: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].key
+      value: ModeSelectMen_PlayMenStuff_notfound
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].key
+      value: ModeSelectMen_PlayMenStuff_storyMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].key
+      value: ModeSelectMen_PlayMenStuff_famished
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].key
+      value: ModeSelectMen_PlayMenStuff_zerull
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].key
+      value: ModeSelectMen_PlayMenStuff_lappingOfAsylum
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].key
+      value: Playmenu_back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].key
+      value: Playmenu_newga
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].key
+      value: Playmenu_Modifier_muchomous
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[83].key
+      value: Playmenu_Modifier_EvapPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[84].key
+      value: Playmenu_Modifier_Meeptimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].key
+      value: Playmenu_Modifier_ChaosMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[86].key
+      value: Playmenu_Modifier_bloxyzerull
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[87].key
+      value: Playmenu_Modifier_muchomous_Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[88].key
+      value: Playmenu_Modifier_EvapPad_Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[89].key
+      value: Playmenu_Modifier_Meeptimer_Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[90].key
+      value: Playmenu_Modifier_ChaosMode_Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[91].key
+      value: Playmenu_Modifier_bloxyzerull_Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[92].key
+      value: loadaText
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[20].value
+      value: Wall Shakes
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[21].value
+      value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[22].value
+      value: done configu
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[23].value
+      value: Restore defaul
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[24].value
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[25].value
+      value: Confirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[26].value
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[27].value
+      value: Use Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[28].value
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[29].value
+      value: Item Slot 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[30].value
+      value: Item Slot 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[31].value
+      value: Item Slot 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[32].value
+      value: Item Slot 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[33].value
+      value: Item Slot 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[34].value
+      value: Item Slot 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[35].value
+      value: Item Slot 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[36].value
+      value: Item Slot 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[37].value
+      value: Item Slot 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[38].value
+      value: Move Forward
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[39].value
+      value: Move Backward
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[40].value
+      value: Strafe Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[41].value
+      value: Strafe Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[42].value
+      value: Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[43].value
+      value: Look Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[44].value
+      value: 'Are You Sure You Want
+
+        To Rebind This Key?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[45].value
+      value: Yez
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[46].value
+      value: Na
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[47].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[48].value
+      value: the main shit lol
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[49].value
+      value: this is where u configure stuff lol
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[50].value
+      value: go back to the title screen realism
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[51].value
+      value: i dont need to explain to you what this does,aintcha?
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[52].value
+      value: GO [CONFIGURE] YOURSELF
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[53].value
+      value: probally will not fully work im not sure,just use the windows volume
+        shit lol
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[54].value
+      value: having a decompile allowing ppl to change resolution is so peak oml
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[55].value
+      value: makes ur movement analog,dont really kno what it does but ok
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[56].value
+      value: makes screen rumble,pretty cool righ
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[57].value
+      value: locks ur fps to ur monitor refresh rate, quite stable
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[58].value
+      value: 'it does what it said :shrugs:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[59].value
+      value: makes the game run in background, really useful if you want to stream
+        the mod ig
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[60].value
+      value: enables the item info text,it shows item info thats all
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[61].value
+      value: enables bbcr ahh captions yea
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[62].value
+      value: Enables/Disables wall shake in zerull/chair bossfight (for those who
+        had low focus)
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[63].value
+      value: goin back already?.,.,,.,.,.,.,
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[64].value
+      value: nuh uh, cant use that yet buddy,go beat story mode first
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[65].value
+      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[66].value
+      value: enables or disable the evap pad at any time you want!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[67].value
+      value: oh god its war from pizza tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[68].value
+      value: its DEFINITIVELY not that chaos mode, trust me, trustme, T!!#US M!@!e
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[69].value
+      value: just switch out the music for your lapping problem trust- (Zerull/chair
+        mode ONLY)
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[70].value
+      value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].value
+      value: Story Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[72].value
+      value: famished
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].value
+      value: hell
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].value
+      value: Lappin
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].value
+      value: mode not found, defaulting to story mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].value
+      value: Story Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].value
+      value: famished
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].value
+      value: z33rull M3D3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].value
+      value: story mode (hard,trust)
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].value
+      value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].value
+      value: Start New Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].value
+      value: mucho
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[83].value
+      value: EvapPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[84].value
+      value: MEEP Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].value
+      value: Chaos.. Mode!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[86].value
+      value: Bloxifyed
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[88].value
+      value: LOCKED
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[89].value
+      value: LOCKED
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[90].value
+      value: LOCKED
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[91].value
+      value: LOCKED
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[92].value
+      value: Loading
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127100925093899789, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_Name
+      value: localmanager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215136827119889394, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec18831a37f4c604b91674cbda8b1d14, type: 3}
 --- !u!1 &1692269479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,23 +3315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!1 &843077463506971546
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1637345322964741733}
-  - component: {fileID: 7203435678423235308}
-  m_Layer: 0
-  m_Name: localmanager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1377212676752564407
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,21 +3357,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &1637345322964741733
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843077463506971546}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2256337458843312301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,201 +3462,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3672458031535280840}
   m_CullTransparentMesh: 1
---- !u!114 &7203435678423235308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843077463506971546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285e271ce4a0fb545b2327d44f1cb84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultLanguages:
-  - language: EN
-    pairs:
-    - key: warnMenu_Warning
-      value: hey uhhhhh
-    - key: warnMenu_Disclaimer
-      value: cool text disclaimer am i right
-    - key: warnMenu_dontleak
-      value: so basicly, this is a dev build, dont leak it ok bye
-    - key: warnMenu_playmf
-      value: <color=red>PROCEED
-    - key: Menu_play
-      value: <#E5B67E>press on this text or press enter
-    - key: Menu_VersionText
-      value: <#808080>idkwhateverbuildok
-    - key: Menu_Back
-      value: Back
-    - key: Menu_PlayReal
-      value: Play
-    - key: Menu_Options
-      value: Options
-    - key: Options_sensitiv
-      value: Sensitivity Bar
-    - key: Options_controlsconfigu
-      value: Controls
-    - key: Options_volum
-      value: Volume
-    - key: Options_reso
-      value: Resolution
-    - key: Options_anaismovemen
-      value: Analog Movements
-    - key: Options_rumb
-      value: Rumblr
-    - key: Options_vsync
-      value: V-Sync
-    - key: Options_fulscren
-      value: Full Screen
-    - key: Options_runinbg
-      value: Run In Background
-    - key: Options_itminfo
-      value: Item Info Text
-    - key: Options_subs
-      value: Subtitles
-    - key: Options_Back
-      value: Back
-    - key: CMapper_Back
-      value: done configu
-    - key: CMapper_Restore
-      value: Back
-    - key: CMapper_Pause
-      value: Pause
-    - key: CMapper_Confirm
-      value: Confirm
-    - key: CMapper_Interact
-      value: Interact
-    - key: CMapper_UseItem
-      value: Use Item
-    - key: CMapper_Jump
-      value: Jump
-    - key: CMapper_itemSlots_1
-      value: Item Slot 1
-    - key: CMapper_itemSlots_2
-      value: Item Slot 2
-    - key: CMapper_itemSlots_3
-      value: Item Slot 3
-    - key: CMapper_itemSlots_4
-      value: Item Slot 4
-    - key: CMapper_itemSlots_5
-      value: Item Slot 5
-    - key: CMapper_itemSlots_6
-      value: Item Slot 6
-    - key: CMapper_itemSlots_7
-      value: Item Slot 7
-    - key: CMapper_itemSlots_8
-      value: Item Slot 8
-    - key: CMapper_itemSlots_9
-      value: Item Slot 9
-    - key: CMapper_Movements_Fowards
-      value: Move Forward
-    - key: CMapper_Movements_Backwards
-      value: Move Backward
-    - key: CMapper_Movements_Left
-      value: Strafe Left
-    - key: CMapper_Movements_Right
-      value: Strafe Right
-    - key: CMapper_Movements_Run
-      value: Run
-    - key: CMapper_Movements_behindyou
-      value: Look Back
-    - key: CMapper_Confirm_walltext
-      value: 'Are You Sure You Want
-
-        To Rebind This Key?'
-    - key: CMapper_Confirm_Yes
-      value: Yez
-    - key: CMapper_Confirm_No
-      value: Na
-    - key: HoverInfoText_none
-      value: 
-    - key: HoverInfoText_Menu_Play
-      value: the main shit lol
-    - key: HoverInfoText_Menu_Options
-      value: this is where u configure stuff lol
-    - key: HoverInfoText_Menu_goback
-      value: go back to the title screen realism
-    - key: HoverInfoText_Options_sensitiv
-      value: i dont need to explain to you what this does,aintcha?
-    - key: HoverInfoText_Options_controlsconfigu
-      value: GO [CONFIGURE] YOURSELF
-    - key: HoverInfoText_Options_volum
-      value: probally will not fully work im not sure,just use the windows volume
-        shit lol
-    - key: HoverInfoText_Options_reso
-      value: having a decompile allowing ppl to change resolution is so peak oml
-    - key: HoverInfoText_Options_anaismovemen
-      value: makes ur movement analog,dont really kno what it does but ok
-    - key: HoverInfoText_Options_rumb
-      value: makes screen rumble,pretty cool righ
-    - key: HoverInfoText_Options_vsync
-      value: locks ur fps to ur monitor refresh rate, quite stable
-    - key: HoverInfoText_Options_fulscren
-      value: 'it does what it said :shrugs:'
-    - key: HoverInfoText_Options_runinbg
-      value: makes the game run in background, really useful if you want to stream
-        the mod ig
-    - key: HoverInfoText_Options_itminfo
-      value: enables the item info text,it shows item info thats all
-    - key: HoverInfoText_Options_subs
-      value: enables bbcr ahh captions yea
-    - key: HoverInfoText_Options_goback
-      value: goin back already?.,.,,.,.,.,.,
-    - key: HoverInfoText_Modifiers_syfm
-      value: nuh uh, cant use that yet buddy,go beat story mode first
-    - key: HoverInfoText_Modifiers_muchomous
-      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
-    - key: HoverInfoText_Modifiers_EvapPad
-      value: enables or disable the evap pad at any time you want!
-    - key: HoverInfoText_Modifiers_Meeptimer
-      value: oh god its war from pizza tower
-    - key: HoverInfoText_Modifiers_ChaosMode
-      value: its DEFINITIVELY not that chaos mode, trust me, trustme, T!!#US M!@!e
-    - key: ModeSelectMen_Back
-      value: Back
-    - key: ModeSelectMen_stor
-      value: Story Mode
-    - key: ModeSelectMen_bruhmished
-      value: famished
-    - key: ModeSelectMen_erull
-      value: hell
-    - key: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
-      value: Lappin
-    - key: ModeSelectMen_PlayMenStuff_notfound
-      value: mode not found, defaulting to story mode
-    - key: ModeSelectMen_PlayMenStuff_storyMode
-      value: Story Mode
-    - key: ModeSelectMen_PlayMenStuff_famished
-      value: famished
-    - key: ModeSelectMen_PlayMenStuff_zerull
-      value: z33rull M3D3
-    - key: ModeSelectMen_PlayMenStuff_lappingOfAsylum
-      value: story mode (hard,trust)
-    - key: Playmenu_back
-      value: Back
-    - key: Playmenu_newga
-      value: Start New Game
-    - key: Playmenu_Modifier_muchomous
-      value: mucho
-    - key: Playmenu_Modifier_EvapPad
-      value: EvapPad
-    - key: Playmenu_Modifier_Meeptimer
-      value: MEEP Timer
-    - key: Playmenu_Modifier_muchomous_Locked
-      value: LOCKED
-    - key: Playmenu_Modifier_EvapPad_Locked
-      value: LOCKED
-    - key: Playmenu_Modifier_Meeptimer_Locked
-      value: LOCKED
-    - key: Playmenu_Modifier_ChaosMode_Locked
-      value: LOCKED
-    - key: loadaText
-      value: Loading
-  currentLang: EN
-  currentJsonVersion: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2893,4 +3470,4 @@ SceneRoots:
   - {fileID: 14}
   - {fileID: 655103949}
   - {fileID: 446619058}
-  - {fileID: 1637345322964741733}
+  - {fileID: 1488244644}
