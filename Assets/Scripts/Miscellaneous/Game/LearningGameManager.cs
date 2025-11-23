@@ -67,9 +67,9 @@ public class LearningGameManager : MonoBehaviour
         }
         if (gc.spoopMode)
         {
-            gc.AngerShit(1.1f, 0f,false, "all");
-            gc.AngerShit(0.1f, 0f,false, "famished");
-            gc.AngerShit(0.4f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f, 0f,false, "zerull");
         }
 
         if (!gc.spoopMode && gc.mode == "story")

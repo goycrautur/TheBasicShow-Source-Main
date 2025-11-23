@@ -23368,6 +23368,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
+      propertyPath: currentJsonVersion
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.size
       value: 93
       objectReference: {fileID: 0}

@@ -46,7 +46,7 @@ public class DoorScript : MonoBehaviour
             {
                 if (!bDoorOpen)
                 {
-                    GameC.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
+                    Singleton<OtherMainStuffManager>.Instance.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
                 }
                 OpenDoor(3);
             }

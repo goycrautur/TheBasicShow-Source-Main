@@ -89,6 +89,8 @@ public class CraftersScript : NPC
                 {
                     stopUpdate = true;
                     AngryMeter += 1;
+                    audioDevice.PlayOneShot(angrySound);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptableang.subtitleOption, subsScriptableang, 0f, audioDevice);
                 }
             }
             else
@@ -147,6 +149,9 @@ public class CraftersScript : NPC
         if (!endless)
         {
             angry = false;
+            agent.speed = base.agentSpeed;
+            spriteImage.sprite = normalSprite;
+            audioDevice.Stop();
             gameObject.SetActive(false);
         }
         else
@@ -169,11 +174,11 @@ public class CraftersScript : NPC
     [SerializeField] private CharacterController cc;
     [SerializeField] private Renderer craftersRenderer;
     [SerializeField] private SpriteRenderer spriteImage;
-    [SerializeField] private subsScriptableObject subsScriptable;
+    [SerializeField] private subsScriptableObject subsScriptable,subsScriptableang;
 
     [Header("Audio & Visuals")]
     [SerializeField] private AudioClip aud_Intro;
-    [SerializeField] private AudioClip aud_Loop;
+    [SerializeField] private AudioClip aud_Loop,angrySound;
     [SerializeField] private Sprite angrySprite, normalSprite, invisibleSprite;
 
     [Header("Movement & Speed")]

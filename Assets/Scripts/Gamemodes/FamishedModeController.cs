@@ -82,6 +82,7 @@ public class FamishedModeController : MonoBehaviour
 
     public void onebounc(Transform ok)
     {
+        gc.modeState = "OH GOD NO WHAT";
         foreach (WindowScript w in FindObjectsOfType<WindowScript>())
 		{
 			if (!w.broken)

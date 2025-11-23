@@ -280,7 +280,7 @@ public class PrincipalScript : NPC
         {
             gauge = GaugeManager.Instance.CreateGaugeInstance(gaugeDetentionSprite, maxGaugeLockTime);
         }
-        GameControllerScript.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
+        Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
 
         if (officeDoor.lockTime <= 99f)
         {

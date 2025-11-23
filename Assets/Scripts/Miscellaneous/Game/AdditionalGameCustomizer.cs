@@ -143,7 +143,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
             if (cameraComponent != null)
             {
                 
-                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : Mathf.Lerp(cameraComponent.fieldOfView, FovAmmount, 5f * Time.deltaTime);;
+                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : Mathf.Lerp(cameraComponent.fieldOfView, FovAmmount, 5f * Time.deltaTime);
             }
         }
     }
@@ -212,6 +212,10 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Singleton<VertexGlitchManager>.Instance.Glitch();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            scoreSystemManager.Instance.AddScore(5);
         }
 
         if (FlashLight && Input.GetKeyDown(KeyCode.F))

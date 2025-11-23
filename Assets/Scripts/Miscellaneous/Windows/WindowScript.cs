@@ -23,7 +23,7 @@ public class WindowScript : MonoBehaviour
         {
             if (sound)
             {
-                gc.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
+                Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
             audioDevice.clip = brokesound;
             audioDevice.Play();

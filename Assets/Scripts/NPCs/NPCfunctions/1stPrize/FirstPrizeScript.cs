@@ -240,7 +240,7 @@ public class FirstPrizeScript : NPC
 
     private void DetectSuddenStop()
     {
-        if (prevSpeed - agent.velocity.magnitude > 15f)
+        if (prevSpeed - agent.velocity.magnitude > 25f)
         {
             foreach (WindowScript w in FindObjectsOfType<WindowScript>())
             {
@@ -255,7 +255,7 @@ public class FirstPrizeScript : NPC
             audioDevice.PlayOneShot(audBang);
             //if (hugAnnounced)
             //{
-                GameControllerScript.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
+                Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
             //}
         }
         prevSpeed = agent.velocity.magnitude;

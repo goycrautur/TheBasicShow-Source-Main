@@ -75,12 +75,12 @@ public class booksInteract : Interactable
             if (gc.mode == "famished")
             {
                 gc.fmc.manualUpdate();
-                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
+                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
             }
             if (gc.mode == "zerullclassic")
             {
                 gc.zerull.jusUpdatebr();
-                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
+                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
             }
         }
         else
@@ -89,12 +89,12 @@ public class booksInteract : Interactable
             if (gc.mode == "famished")
             {
                 gc.fmc.manualUpdate();
-                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
+                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
             }
             if (gc.mode == "zerullclassic")
             {
                 gc.zerull.jusUpdatebr();
-                gc.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
+                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
                 
             }
             return;
@@ -136,9 +136,9 @@ public class booksInteract : Interactable
         }
         if (gc.spoopMode)
         {
-            gc.AngerShit(1.1f, 0f,false, "all");
-            gc.AngerShit(0.1f, 0f,false, "famished");
-            gc.AngerShit(0.4f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f, 0f,false, "zerull");
         }
     }
     #region Learning Game Launch

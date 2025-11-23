@@ -429,7 +429,7 @@ public class ZerullClassic : MonoBehaviour
         }
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= zs.totemready ? 1 : hp; // Decreases null health
-        gc.AngerShit(1.5f * (zs.totemready ? 1 : hp), 0f,false, "mucho");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready ? 1 : hp), 0f,false, "mucho");
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {

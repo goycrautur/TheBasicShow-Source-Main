@@ -1,0 +1,370 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
+{
+    #region TeachersChaosModeStuff
+    public void HearingShit(float soundval, Transform wherItCameFrom, Vector3 wherItCameFromAlt, string teacher = null, bool UseVector3 = false)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    zes.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            foreach (FamishedScript fam in  GameControllerScript.Instance.famishscr)
+            {
+                if (fam.isActiveAndEnabled)
+                {
+                    fam.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    muc.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    bal.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+                }
+            }
+        }
+    }
+    public void deafshit(float AntiHearingDuration,string teacher = null)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    zes.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            foreach (FamishedScript fam in GameControllerScript.Instance.famishscr)
+            {
+                if (fam.isActiveAndEnabled)
+                {
+                    fam.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    muc.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    bal.ActivateAntiHearing(AntiHearingDuration);
+                }
+            }
+        }
+    }
+    public void AngerShit(float angerAmmount, float tempAngerAmmount = 0f, bool tempAnger = false, string teacher = null)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        zes.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        zes.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            foreach (FamishedScript fam in GameControllerScript.Instance.famishscr)
+            {
+                if (fam.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        fam.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        fam.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        muc.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        muc.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    if (!tempAnger)
+                    {
+                        bal.GetAngry(angerAmmount);
+                    }
+                    else
+                    {
+                        bal.GetTempAngry(tempAngerAmmount);
+                    }
+                }
+            }
+        }
+    }
+    public void HighSchoolDropOut()
+    {
+        for (int i = 0; i < GameControllerScript.Instance.SlotsAmmount; ++i)
+        {
+            if (ItemManager.Instance.Inventory[i].ItemInstance != null)
+            {
+                ItemManager.Instance.DropItem(i);
+            }
+        }
+    }
+    public void slot()
+    {
+        if (ItemManager.Instance.ItemSelection >= GameControllerScript.Instance.SlotsAmmount)
+        {
+            ItemManager.Instance.ItemSelection = GameControllerScript.Instance.SlotsAmmount - 1;
+        }
+        if (GameControllerScript.Instance.SlotsAmmount >= 9)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory9slot;
+            for (int i = 0; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[8].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 8; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 8)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory8slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages8slot, AdditionalGameCustomizer.Instance.ItemImageBGs8slot);
+            AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[8].SetActive(false);
+            AdditionalGameCustomizer.Instance.ItemSlotsGameObj[8].SetActive(false);
+            AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[8].SetActive(false);
+            for (int i = 0; i < 8; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[7].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 7; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 7)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory7slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages7slot, AdditionalGameCustomizer.Instance.ItemImageBGs7slot);
+            for (int i = 6; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            for (int i = 0; i < 7; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[6].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 6; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 6)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory6slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages6slot, AdditionalGameCustomizer.Instance.ItemImageBGs6slot);
+            for (int i = 5; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            for (int i = 0; i < 6; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[5].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 5; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 5)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory5slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages5slot, AdditionalGameCustomizer.Instance.ItemImageBGs5slot);
+            for (int i = 4; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            for (int i = 0; i < 5; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[4].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 4; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 4)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory4slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages4slot, AdditionalGameCustomizer.Instance.ItemImageBGs4slot);
+            for (int i = 3; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            for (int i = 0; i < 4; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[3].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 3; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 3)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory3slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages3slot, AdditionalGameCustomizer.Instance.ItemImageBGs3slot);
+            for (int i = 2; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            for (int i = 0; i < 3; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[2].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            for (int i = 1; i < 2; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 2)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory2slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages2slot, AdditionalGameCustomizer.Instance.ItemImageBGs2slot);
+            for (int i = 1; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            for (int i = 0; i < 2; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
+            }
+            AdditionalGameCustomizer.Instance.ItemImageSlots[1].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        if (GameControllerScript.Instance.SlotsAmmount == 1)
+        {
+            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory1slot;
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages1slot, AdditionalGameCustomizer.Instance.ItemImageBGs1slot);
+            for (int i = 0; i < 9; ++i)
+            {
+                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
+                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
+            }
+            AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[0].SetActive(true);
+            AdditionalGameCustomizer.Instance.ItemSlotsGameObj[0].SetActive(true);
+            AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[0].SetActive(true);
+            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
+        }
+        ItemManager.Instance.UpdateItemUI();
+    }
+    #endregion
+
+}

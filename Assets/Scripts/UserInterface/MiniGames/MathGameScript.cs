@@ -326,11 +326,11 @@ public class MathGameScript : MonoBehaviour
     {
         if (problem == 3)
         {
-            gc.AngerShit(0.25f, 0f,false, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.25f, 0f,false, "all");
         }
         else
         {
-            gc.AngerShit(0f, 0.25f,true, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.25f,true, "all");
         }
     }
 
@@ -363,7 +363,7 @@ public class MathGameScript : MonoBehaviour
         }
         if (problemsWrong >= 3)
         {
-            GameControllerScript.Instance.HearingShit(7f, null, playerPosition, "all", true);
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, null, playerPosition, "all", true);
             gc.audioDevice.PlayClip(gc.deathbell, false, 1f);
         }
         if (gc.mode == "zerullclassic" && problemsWrong <= 0)
@@ -402,9 +402,9 @@ public class MathGameScript : MonoBehaviour
             {
                 questionText.text = "fuck you, 2 of your slots will be gone";
                 questionText2.text = questionText3.text = string.Empty;
-                gc.HighSchoolDropOut();
+                Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
                 gc.SlotsAmmount = gc.SlotsAmmount - 2;
-                gc.slot();
+                Singleton<OtherMainStuffManager>.Instance.slot();
             }
             if (gc.failedNotebooks == gc.maxNotebooks)
             {

@@ -15,7 +15,7 @@ public class ITM_shucks : BaseItem
         if (used) return false;
         GameControllerScript.Instance.audioDevice.PlayOneShot(shucy);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Set, (int)GameControllerScript.Instance.player.maxHealth/2f, 6f, true, false);
-        GameControllerScript.Instance.player.maxHealth *= 1.5f;
+        GameControllerScript.Instance.player.maxHealth += 50f;
         used = true;
         StartCoroutine(Wait());
         return true;

@@ -26,7 +26,7 @@ public class TapePlayerScript : MonoBehaviour
     {
         sprite.sprite = closedSprite;
         audioDevice.Play();
-        GameControllerScript.Instance.deafshit(AntiHearingDuration,"All");
+        Singleton<OtherMainStuffManager>.Instance.deafshit(AntiHearingDuration,"All");
         if (ZerullClassic.Instance.zs != null && ZerullClassic.Instance.RealBossStarted)
         {
             StartCoroutine(StunBoss());
