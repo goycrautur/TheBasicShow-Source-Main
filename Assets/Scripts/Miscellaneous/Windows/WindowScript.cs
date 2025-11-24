@@ -33,7 +33,6 @@ public class WindowScript : MonoBehaviour
             window_Out.material = WindowMats[3];
             meshCollider_In.enabled = false;
             meshCollider_Out.enabled = false;
-
             broken = true;
             gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[2].subtitleOption,gc.subtitlesScriptableObject[2],0f,audioDevice);
             Instantiate(shattersPrefab, transform.position, Quaternion.identity);

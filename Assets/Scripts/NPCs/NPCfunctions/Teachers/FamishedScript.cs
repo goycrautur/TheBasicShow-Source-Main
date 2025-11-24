@@ -27,6 +27,7 @@ public class FamishedScript : NPC
 
     public override void OnUpdate()
     {
+        MOOOVEYOUBITCH();
         base.OnUpdate();
         base.agentSpeed = !gc.fmc.isAbleToMove ? 0 : base.DefaultAgentSpeed * base.agentSpeedScale;
         if (famishedtempSpd > 0f)
@@ -56,8 +57,7 @@ public class FamishedScript : NPC
             agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
         }
     }
-
-    public override void OnFixedUpdate()
+    public void MOOOVEYOUBITCH()
     {
         if (player == null) return;
         if (player != null && agent.enabled && gameObject.activeSelf && gc.fmc.alwaysKnowIp)
@@ -73,7 +73,6 @@ public class FamishedScript : NPC
             }
         }
     }
-
     #endregion
 
     #region Movement

@@ -38,6 +38,7 @@ public class zerullscript : NPC
 
     public override void OnUpdate()
     {
+        targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (TempAnger > 0f)
@@ -60,8 +61,7 @@ public class zerullscript : NPC
             }
         }
     }
-
-    public override void OnFixedUpdate()
+    public void targe()
     {
         if (player == null) return;
 

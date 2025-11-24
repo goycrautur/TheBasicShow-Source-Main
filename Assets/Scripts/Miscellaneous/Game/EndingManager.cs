@@ -13,10 +13,13 @@ public class EndingManager : MonoBehaviour
     #endregion
 
     #region PublicMethods
-    public void LoadNormalResults()
+    public void LoadNormalResults(bool secret = false)
     {
         PlayerPrefsExtension.SetBool("storyBeaten", true);
-        GetResults = true;
+        if (!secret)
+        {
+            GetResults = true;
+        }
 
         DestroyIfExists("JumpRope(Clone)");
         DestroyIfExists("CraftersAttacker(Clone)");
@@ -40,13 +43,16 @@ public class EndingManager : MonoBehaviour
             Game.warmusic.Stop();
         }
 
-        Game.ObjectsToEnable.ForEach(o => o.SetActive(false));
+        Game.npcCloneList.ForEach(o => o.SetActive(false));
+        if (secret)
+        {
+            GetSecret = true;
+        }
     }
 
     public void LoadSecretEnding()
     {
-        PlayerPrefsExtension.SetBool("storyBeaten", true);
-        GetSecret = true;
+        
         StartCoroutine(BlackFlash());
 
         if (Game.exitEasingCoroutine != null)
@@ -54,24 +60,17 @@ public class EndingManager : MonoBehaviour
             StopCoroutine(Game.exitEasingCoroutine);
             Game.exitEasingCoroutine = null;
         }
+        results.SetActive(false);
 
         portal.SetActive(true);
+        AudioListener.pause = false;
         //NULL.SetActive(true);
-
-        DestroyIfExists("JumpRope(Clone)");
-        DestroyIfExists("CraftersAttacker(Clone)");
-        Game.baldiScrpt.stopMoving = true;
-
-        Game.audioDevice.loop = false;
-        Game.audioDevice.Stop();
-        Game.escapeMusic.Stop();
 
         Game.voxLight.ambientLight = new Color(0.45f, 0.45f, 0.45f, 1f);
         ApplySkybox();
 
         Game.player.transform.position = SecretWarpPoint.transform.position + Vector3.up * Game.player.height;
 
-        Game.npcCloneList.ForEach(o => o.SetActive(false));
         Environment.ForEach(s => s.SetActive(false));
 
         Game.player.forceLookSpeed = 750f;

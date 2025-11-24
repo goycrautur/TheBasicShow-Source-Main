@@ -427,6 +427,7 @@ public class ZerullClassic : MonoBehaviour
         {
             meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
         }
+        scoreSystemManager.Instance.AddScore(zs.totemready ? 325 : 325*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= zs.totemready ? 1 : hp; // Decreases null health
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready ? 1 : hp), 0f,false, "mucho");

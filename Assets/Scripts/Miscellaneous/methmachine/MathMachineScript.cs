@@ -126,6 +126,7 @@ public class MathMachineScript : MonoBehaviour
     // Update is called once per frame
     public IEnumerator Win()
     {
+        scoreSystemManager.Instance.AddScore(1000);
         if (!won & !hasLost & cooldown <= 0)
         {
             machineMapIcon.enabled = false;
@@ -190,8 +191,12 @@ public class MathMachineScript : MonoBehaviour
                         LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
                     }
                 }
+                scoreSystemManager.Instance.AddScore(6500,false);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
-                Singleton<OtherMainStuffManager>.Instance.AngerShit(3f, 0, false, "all");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(10f, 0, false, "all");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 2f, true, "all");
+                ZerullClassic.Instance.maxHealth += 35;
+                ZerullClassic.Instance.health = ZerullClassic.Instance.maxHealth;
             }
             audioSource.PlayOneShot(err);
             GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], 0f, audioSource);

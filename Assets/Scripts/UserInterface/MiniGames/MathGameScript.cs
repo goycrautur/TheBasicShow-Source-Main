@@ -330,7 +330,9 @@ public class MathGameScript : MonoBehaviour
         }
         else
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.25f,true, "all");
+            scoreSystemManager.Instance.AddScore(500);
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.4f,true, "all");
+            scoreSystemManager.Instance.PointsMultiplier += 0.025f;
         }
     }
 

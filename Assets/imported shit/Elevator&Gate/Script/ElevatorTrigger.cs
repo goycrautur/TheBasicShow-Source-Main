@@ -19,7 +19,7 @@ public class ElevatorTrigger : MonoBehaviour
                 eDoor.Close();
                 if (gc.failedNotebooks >= gc.maxNotebooks)
                 {
-                    em.LoadSecretEnding();
+                    em.LoadNormalResults(true);
                 }
                 else
                 {

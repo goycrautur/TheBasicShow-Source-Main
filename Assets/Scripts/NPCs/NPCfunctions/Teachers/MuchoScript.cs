@@ -31,6 +31,7 @@ public class MuchoScript : NPC
 
     public override void OnUpdate()
     {
+        targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (baldiTempAnger > 0f)
@@ -42,8 +43,7 @@ public class MuchoScript : NPC
             baldiTempAnger = 0f;
         }
     }
-
-    public override void OnFixedUpdate()
+    public void targe()
     {
         if (player == null) return;
 
@@ -60,6 +60,7 @@ public class MuchoScript : NPC
         }
     }
     #endregion
+
 
     #region Movement
     protected override void Wander(string locationType = "default")

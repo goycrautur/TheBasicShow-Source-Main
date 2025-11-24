@@ -8,6 +8,7 @@ public class ITM_MetalPipe : BaseItem
     [SerializeField] private AudioClip audiopip, fail;
     [SerializeField] private bool piped, CantUse;
     [SerializeField] private subsScriptableObject Subtitlesthing;
+    [SerializeField] private AudioSource PipeDevice;
     public override bool OnUse()
     {
         if (CantUse)
@@ -17,8 +18,8 @@ public class ITM_MetalPipe : BaseItem
         }
         if (!CantUse)
         {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,0f,new Vector3(0f,-170.5f,0f),GameControllerScript.Instance.audioDevice);
-            GameControllerScript.Instance.audioDevice.PlayOneShot(audiopip);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,0f,new Vector3(0f,-170.5f,0f),PipeDevice);
+            PipeDevice.PlayOneShot(audiopip);
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
             StopCoroutine(Waitin());
             StartCoroutine(Waitin());

@@ -153,9 +153,10 @@ public class NPC : MonoBehaviour
 
     #region Internal State
     protected float coolDown;
-    public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed;
+    public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;
     public NavMeshAgent agent;
+    public GameObject confusionEffect;
     #endregion
     public int hp, maxhp;
-    private bool fuckingdead;
+    private bool fuckingdead,stun;
 }

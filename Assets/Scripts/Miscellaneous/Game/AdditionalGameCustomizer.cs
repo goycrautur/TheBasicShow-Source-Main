@@ -213,10 +213,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             Singleton<VertexGlitchManager>.Instance.Glitch();
         }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            scoreSystemManager.Instance.AddScore(5);
-        }
 
         if (FlashLight && Input.GetKeyDown(KeyCode.F))
         {

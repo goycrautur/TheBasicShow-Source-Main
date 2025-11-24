@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 4065861123621725688}
   - component: {fileID: 4065861123621736265}
   - component: {fileID: 4065861123621735524}
+  - component: {fileID: 628915688759870803}
   m_Layer: 0
   m_Name: Pickup_HotJerrys
   m_TagString: Item
@@ -183,6 +184,19 @@ MonoBehaviour:
   SpawnAtRandom: 0
   mapIconSprite: {fileID: 5051587764740504221}
   DroppedItem: 0
+--- !u!114 &628915688759870803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4065861123621722581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907c185bc0dfc5c43b04f1693457f544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 10
 --- !u!1 &4065861123621722769
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,3 +327,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprRen: {fileID: 0}

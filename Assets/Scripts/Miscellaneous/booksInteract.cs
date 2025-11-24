@@ -102,6 +102,7 @@ public class booksInteract : Interactable
     }
     private void NoYCTPMode()
     {
+        scoreSystemManager.Instance.AddScore(500);
         gc.Icon.Rebind();
         gc.Icon.Play("IconSpinMain", -1, 0f);
         gc.audioDevice2.PlayOneShot(gc.aud_Collected);

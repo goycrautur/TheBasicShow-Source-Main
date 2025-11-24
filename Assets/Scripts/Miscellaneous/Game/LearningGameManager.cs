@@ -41,6 +41,7 @@ public class LearningGameManager : MonoBehaviour
 
     public void DeactivateLearningGame(GameObject subject)
     {
+        scoreSystemManager.Instance.AddScore(500);
         gc.schoolMusic.ignoreListenerPause = false;
         AudioListener.pause = false;
         Time.timeScale = 1f;

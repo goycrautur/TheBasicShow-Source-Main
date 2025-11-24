@@ -18,8 +18,10 @@ public class CraftersScript : NPC
         {
             forceShowTime -= Time.deltaTime;
         }
-
-
+        if (chillBro > 0f)
+        {
+            chillBro -= Time.deltaTime;
+        }
         if (AngryMeter == 5 & !angry)
         {
             angry = true;
@@ -27,10 +29,6 @@ public class CraftersScript : NPC
             GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
             spriteImage.sprite = angrySprite;
             AngryMeter = 0;
-        }
-        else if (anger > 0f)
-        {
-            anger -= Time.deltaTime;
         }
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         speedAlt1 = defspeedAlt1 * base.agentSpeedScale;
@@ -83,14 +81,17 @@ public class CraftersScript : NPC
     {
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
-            if (raycastHit.transform.CompareTag("Player") && craftersRenderer.isVisible && spriteImage.sprite == normalSprite)
+            if (raycastHit.transform.CompareTag("Player") && craftersRenderer.isVisible && spriteImage.sprite == normalSprite && chillBro < 0f)
             {
                 if (!stopUpdate)
                 {
                     stopUpdate = true;
                     AngryMeter += 1;
+                    if (AngryMeter < 5)
+                    {
                     audioDevice.PlayOneShot(angrySound);
                     GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptableang.subtitleOption, subsScriptableang, 0f, audioDevice);
+                    }
                 }
             }
             else
@@ -145,18 +146,8 @@ public class CraftersScript : NPC
     {
         cc.enabled = true;
         gc.CraftersTeleport();
-
-        if (!endless)
         {
-            angry = false;
-            agent.speed = base.agentSpeed;
-            spriteImage.sprite = normalSprite;
-            audioDevice.Stop();
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            anger = 0f;
+            chillBro = 20f;
             angry = false;
             agent.speed = base.agentSpeed;
             spriteImage.sprite = normalSprite;
@@ -167,7 +158,7 @@ public class CraftersScript : NPC
 
     #region Serialized Inspector Variables
     [Header("States & Conditions")]
-    [SerializeField] private float anger;
+    [SerializeField] private float chillBro;
     [SerializeField] private bool angry, stopUpdate;
 
     [Header("References & Components")]
@@ -191,7 +182,7 @@ public class CraftersScript : NPC
     #endregion
 
     #region Internal State
-    private float forceShowTime;
+    public float forceShowTime;
     private AudioSource audioDevice;
     #endregion
 }
