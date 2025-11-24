@@ -4,6 +4,10 @@ public class NearElevatorTriggerScript : MonoBehaviour
 {
 	public void closeExitStuff()
 	{
+		if (GameControllerScript.Instance.FinaleSecret)
+        {
+            scoreSystemManager.Instance.PointsMultiplier += 0.2f;
+        }
 		scoreSystemManager.Instance.AddScore(1000);
 		GameControllerScript.Instance.ExitReached(EntranceID);
 		elvDoor.Close();
