@@ -47,9 +47,12 @@ public class subtitlesScriptReal : MonoBehaviour
         {
             tmpTxt.text = subtitlys.headText;
         }
-        for (int i = 0; i < subtitlys.subtitleTimings.Length; ++i)
+        if (subtitlys.timedSub)
         {
-            StartCoroutine(TimingIthink(subtitlys.subtitleTimings[i].duration,i));
+            for (int i = 0; i < subtitlys.subtitleTimings.Length; ++i)
+            {
+                StartCoroutine(TimingIthink(subtitlys.subtitleTimings[i].duration,i));
+            }
         }
 
         if (is3d)

@@ -48,7 +48,7 @@ public class FinalModeTV : MonoBehaviour
         if (clip == null) yield break;
 
         BaldiDevice.PlayOneShot(clip);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(baldSub.subtitleOption,baldSub,0f,new Vector3(0f,170.5f,0f),BaldiDevice);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(baldSub.subtitleOption,baldSub,0f,new Vector3(0f,40.5f,0f),BaldiDevice);
         float timer = 0f;
 
         while (timer < clip.length)
