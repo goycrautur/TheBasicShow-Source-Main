@@ -106,50 +106,59 @@ public class GameControllerScript : MonoBehaviour
     }
     public void discordupdate(string StateUpdateType = "chees")
     {
-        bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
-        string chaosString = !ChaosMode ? "" : " - your local suffering enabled (Chaos Mode)";
-        if (StateUpdateType == "chees")
+        if (StateUpdateType != "youwo")
         {
-        modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks";
-        }
-        if (StateUpdateType == "exit")
-        {
-        modeState = exitsReached + "/" + maxExits + " Exits";
-        }
-        if (mode == "endless")
-        {
-            modeDetails = "Endless Mode" + chaosString;
-            largeImagething = "teacherjerproto";
-            largeImageText = "hi i am teachr jery and im gonna smac you";
-        }
-        if (mode == "story")
-        {
-            modeDetails = "Story Mode" + chaosString;
-            largeImagething = "teacherjerproto";
-            largeImageText = "hi i am teachr jery and im gonna smac you";
-        }
-        if (mode == "famished")
-        {
-            modeDetails = "???????" + chaosString;
-            largeImagething = "creepydarkmf";
-            largeImageText = "*hungry ass noise intenstify*";
-            if (exitsReached == 5)
+            bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
+            string chaosString = !ChaosMode ? "" : " - your local suffering enabled (Chaos Mode)";
+            if (StateUpdateType == "chees")
             {
-                modeState = exitsReached + "/" + maxExits + " Exits" + " | its over..?";
+            modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
+            }
+            if (StateUpdateType == "exit")
+            {
+            modeState = exitsReached + "/" + maxExits + " Exits | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
+            }
+            if (mode == "endless")
+            {
+                modeDetails = "Endless Mode" + chaosString;
+                largeImagething = "teacherjerproto";
+                largeImageText = "hi i am teachr jery and im gonna smac you";
+            }
+            if (mode == "story")
+            {
+                modeDetails = "Story Mode" + chaosString;
+                largeImagething = "teacherjerproto";
+                largeImageText = "hi i am teachr jery and im gonna smac you";
+            }
+            if (mode == "famished")
+            {
+                modeDetails = "???????" + chaosString;
+                largeImagething = "creepydarkmf";
+                largeImageText = "*hungry ass noise intenstify*";
+                if (exitsReached == 5)
+                {
+                    modeState = exitsReached + "/" + maxExits + " Exits" + " | its over..? | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
+                }
+            }
+            if (mode == "zerullclassic")
+            {
+                bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+                modeDetails = chair ? "c  h  a  i  r" + chaosString: "???????" + chaosString;
+                largeImagething = "van";
+                largeImageText = chair ? "c  h  a  i  r" : "*CLASSIFIED INFO*";
+            }
+            if (mode == "LappingOfAsylum")
+            {
+                modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " |"+ chaosString;
+                largeImagething = "teacherjerproto";
+                largeImageText = "the lapping grindset begin";
             }
         }
-        if (mode == "zerullclassic")
+        else
         {
-            bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-            modeDetails = chair ? "c  h  a  i  r" + chaosString: "???????" + chaosString;
-            largeImagething = "van";
-            largeImageText = chair ? "c  h  a  i  r" : "*CLASSIFIED INFO*";
-        }
-        if (mode == "LappingOfAsylum")
-        {
-            modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " |"+ chaosString;
-            largeImagething = "teacherjerproto";
-            largeImageText = "the lapping grindset begin";
+            modeDetails = "Win Screen";
+            largeImagething = "levictory";
+            largeImageText = "YOU WON LES GOOOO";
         }
     }
     public void musi()
@@ -343,9 +352,26 @@ public class GameControllerScript : MonoBehaviour
         {
             StartCoroutine(tweeniconSolo(Color.black, 0, 1, 1f, i));
         }
-        ElevdorRea.ForEach(ed => ed.Opendor = true);
-
-        finaleMode = true;
+        
+        if (AdditionalGameCustomizer.Instance != null)
+        {
+            switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+            {
+                case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                    ElevdorRea.ForEach(ed => ed.Opendor = true);
+                    finaleMode = true;
+                    break;
+                case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                    ElevdorRea.ForEach(ed => ed.Opendor = true);
+                    finaleMode = true;
+                    break;
+            }
+        }
+        if (mode != "story")
+        {
+            ElevdorRea.ForEach(ed => ed.Opendor = true);
+            finaleMode = true;
+        }
     }
 
     public IEnumerator ambatudaldi()
@@ -361,45 +387,6 @@ public class GameControllerScript : MonoBehaviour
             escapeMusic.loop = true;
             escapeMusic.Play();
             Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = escapeMusic;
-        }
-    }
-    public IEnumerator truerfinale(int type)
-    {
-        if (mode == "story")
-        {
-            if (type <= 2)
-            {
-                escapeMusic.clip = EvapV2FinaleTypeShit[type];
-                escapeMusic.Play();
-                yield return new WaitForSeconds(EvapV2FinaleTypeShit[type].length);
-                escapeMusic.clip = EvapV2FinaleTypeShit[5 + type];
-                escapeMusic.loop = true;
-                escapeMusic.Play();
-            }
-            if (type == 3)
-            {
-                escapeMusic.clip = EvapV2FinaleTypeShit[8];
-                escapeMusic.loop = true;
-                escapeMusic.Play();
-            }
-            if (type == 4)
-            {
-                escapeMusic.clip = EvapV2FinaleTypeShit[3];
-                escapeMusic.Play();
-                yield return new WaitForSeconds(EvapV2FinaleTypeShit[3].length);
-                escapeMusic.clip = EvapV2FinaleTypeShit[9];
-                escapeMusic.loop = true;
-                escapeMusic.Play();
-            }
-            if (type == 5)
-            {
-                escapeMusic.clip = EvapV2FinaleTypeShit[4];
-                escapeMusic.Play();
-                yield return new WaitForSeconds(EvapV2FinaleTypeShit[4].length);
-                escapeMusic.clip = EvapV2FinaleTypeShit[10];
-                escapeMusic.loop = true;
-                escapeMusic.Play();
-            }
         }
     }
 
@@ -418,6 +405,9 @@ public class GameControllerScript : MonoBehaviour
                         case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                             PlayAudioClip(aud_ChaosStartLoop, true);
                             break;
+                        case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                            PlayAudioClip(aud_ChaosStartLoop, true);
+                            break;
                     }
                 }
             }
@@ -429,6 +419,9 @@ public class GameControllerScript : MonoBehaviour
                     {
                         case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                             PlayAudioClip(aud_ChaosFinal, true);
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                            PlayAudioClip(aud_ChaosStartLoop, true);
                             break;
                     }
                 }
@@ -461,17 +454,23 @@ public class GameControllerScript : MonoBehaviour
 
         if (mode == "story")
         {
-            if (exitEasingCoroutine != null)
+            if (!FinaleSecret)
             {
-                StopCoroutine(exitEasingCoroutine);
-            }
-            if (AdditionalGameCustomizer.Instance != null)
-            {
-                switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                if (exitEasingCoroutine != null)
                 {
-                    case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                        exitEasingCoroutine = StartCoroutine(easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
-                        break;
+                    StopCoroutine(exitEasingCoroutine);
+                }
+                if (AdditionalGameCustomizer.Instance != null)
+                {
+                    switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                    {
+                        case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                            exitEasingCoroutine = StartCoroutine(easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                            exitEasingCoroutine = StartCoroutine(easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                            break;
+                    }
                 }
             }
         }
@@ -510,8 +509,10 @@ public class GameControllerScript : MonoBehaviour
                 }
                 if (FinaleSecret)
                 {
-                    StopCoroutine(truerfinale(0));
-                    StartCoroutine(truerfinale(1));
+                    Singleton<MusicShitass>.Instance.KillCorou();
+                    EvapV2FinaleSounSource[0].enabled = false;
+                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(1));
+                    
                 }
             }
         }
@@ -531,13 +532,20 @@ public class GameControllerScript : MonoBehaviour
                                 audioDevice.loop = true;
                                 audioDevice.Play();
                                 break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(2));
+                                audioDevice.clip = aud_ChaosStart;
+                                audioDevice.loop = true;
+                                audioDevice.Play();
+                                break;
                         }
                     }
                 }
                 if (FinaleSecret)
                 {
-                    StopCoroutine(truerfinale(1));
-                    StartCoroutine(truerfinale(2));
+                    Singleton<MusicShitass>.Instance.KillCorou();
+                    EvapV2FinaleSounSource[1].enabled = false;
+                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(2));
                 }
             }
         }
@@ -559,13 +567,21 @@ public class GameControllerScript : MonoBehaviour
                                 escapeMusic.pitch = 0.6f;
                                 StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
                                 break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(3));
+                                audioDevice.clip = aud_ChaosStartLoop;
+                                audioDevice.loop = true;
+                                audioDevice.Play();
+                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                break;
                         }
                     }
                 }
                 if (FinaleSecret)
                 {
-                    StopCoroutine(truerfinale(2));
-                    StartCoroutine(truerfinale(3));
+                    Singleton<MusicShitass>.Instance.KillCorou();
+                    EvapV2FinaleSounSource[2].enabled = false;
+                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(3));
                     AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.darkencanva;
                 }
             }
@@ -587,13 +603,21 @@ public class GameControllerScript : MonoBehaviour
                                 audioDevice.loop = true;
                                 audioDevice.Play();
                                 break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(4));
+                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                audioDevice.clip = aud_ChaosBuildUp;
+                                audioDevice.loop = true;
+                                audioDevice.Play();
+                                break;
                         }
                     }
                 }
                 if (FinaleSecret)
                 {
-                    StopCoroutine(truerfinale(3));
-                    StartCoroutine(truerfinale(4));
+                    Singleton<MusicShitass>.Instance.KillCorou();
+                    EvapV2FinaleSounSource[3].enabled = false;
+                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(4));
                     AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
                 }
             }
@@ -612,13 +636,18 @@ public class GameControllerScript : MonoBehaviour
                                 escapeMusic.pitch = 0.3f;
                                 StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
                                 break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(5));
+                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                break;
                         }
                     }
                 }
                 if (FinaleSecret)
                 {
-                    StopCoroutine(truerfinale(4));
-                    StartCoroutine(truerfinale(5));
+                    Singleton<MusicShitass>.Instance.KillCorou();
+                    EvapV2FinaleSounSource[4].enabled = false;
+                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(5));
                 }
             }
         }
@@ -732,7 +761,6 @@ public class GameControllerScript : MonoBehaviour
         audioDevice.PlayOneShot(aud_Teleport);
     }
     #endregion
-
     [Serializable]
     public class modifiersName
     {
@@ -793,9 +821,10 @@ public class GameControllerScript : MonoBehaviour
     public modifiersName[] Modifiers;
 
     [Header("Audio References")]
-    [SerializeField] private AudioClip[] LoseSounds;
-    [SerializeField] public AudioClip[] HurtSounds;
-    [SerializeField] public AudioClip[] EvapV2FinaleTypeShit;
+    private AudioClip[] LoseSounds;
+    public AudioClip[] HurtSounds;
+    public AudioClip[] EvapV2FinaleTypeShit, NormalTbsFinale;
+    public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
     public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic;
     public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, deathbell, punchsoun, totem,loboto, gastervanish;

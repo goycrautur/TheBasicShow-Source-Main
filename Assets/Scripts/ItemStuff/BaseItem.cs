@@ -45,7 +45,7 @@ public class BaseItem : MonoBehaviour
 
     public Texture SmallSprite;
     
-    [Header("Settings"), Tooltip("How many uses the item has")] public int Uses = 1;
+    [Header("Settings"), Tooltip("How many uses the item has")] public int Uses = 1,MaxUsesCap = 1;
     [Tooltip("ID of the item.")] public int ItemID;
     public bool SpecialItemIcon;
     #endregion

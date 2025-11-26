@@ -16,6 +16,10 @@ public class ProjectileScript : MonoBehaviour
 
     [SerializeField]
     private AudioClip throwSound;
+    [SerializeField]
+    private SpriteRenderer theSpriteREND;
+    [SerializeField]
+    private subsScriptableObject subtitlesScriptableObjectREAL;
 
     [SerializeField]
     private float rotateOffset, projectileDamage = 1f, ProjectileSpeed = 30f;
@@ -39,6 +43,10 @@ public class ProjectileScript : MonoBehaviour
                 if (ZerullClassic.Instance.playSoundWhenProjectileThrown && audioDevice != null)
                 {
                     audioDevice.PlayOneShot(throwSound);
+                    if (subtitlesScriptableObjectREAL != null)
+                    {
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, 0, audioDevice);
+                    }
                 }
                 Throw();
             }
@@ -97,6 +105,10 @@ public class ProjectileScript : MonoBehaviour
                     Destroy(GetComponent<Billboard>());
                 }
                 ZerullClassic.Instance.currentProjectile = base.gameObject;
+                if (theSpriteREND != null)
+                {
+                    theSpriteREND.color = new Color(1f, 1f, 1f, 0.5f);
+                }
                 pickedUp = true;
             }
     }
@@ -111,6 +123,11 @@ public class ProjectileScript : MonoBehaviour
 
     private void Throw()
     {
+        audioDevice.mute = false;
+        if (theSpriteREND != null)
+        {
+            theSpriteREND.color = new Color(1f, 1f, 1f, 1f);
+        }
         thrown = true;
         transform.position = cameraTransform.position;
         transform.rotation = cameraTransform.rotation;
@@ -120,6 +137,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void Respawn()
     {
+        audioDevice.mute = true;
         audioDevice.Stop();
         thrown = false;
         pickedUp = false;

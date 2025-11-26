@@ -52,7 +52,7 @@ public class EndingManager : MonoBehaviour
 
     public void LoadSecretEnding()
     {
-        
+        Game.modeState = "???????????????????";
         StartCoroutine(BlackFlash());
 
         if (Game.exitEasingCoroutine != null)

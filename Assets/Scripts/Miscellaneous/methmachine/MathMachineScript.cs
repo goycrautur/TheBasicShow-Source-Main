@@ -191,12 +191,18 @@ public class MathMachineScript : MonoBehaviour
                         LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
                     }
                 }
+                if (GameControllerScript.Instance.mode == "story")
+                {
+                    LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
+                    scoreSystemManager.Instance.PointsMultiplier += 1f;
+                }
                 scoreSystemManager.Instance.AddScore(6500,false);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
                 Singleton<OtherMainStuffManager>.Instance.AngerShit(10f, 0, false, "all");
                 Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 2f, true, "all");
                 ZerullClassic.Instance.maxHealth += 35;
-                ZerullClassic.Instance.health = ZerullClassic.Instance.maxHealth;
+                ZerullClassic.Instance.health += 35;
+                ZerullClassic.Instance.healthSlider.maxValue = ZerullClassic.Instance.maxHealth - 1f;
             }
             audioSource.PlayOneShot(err);
             GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], 0f, audioSource);

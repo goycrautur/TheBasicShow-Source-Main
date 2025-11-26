@@ -22,7 +22,7 @@ public class scoreSystemManager : MonoBehaviour
     {
         for (int i = 0; i < Ranks.Length; ++i)
         {
-            if (Ranks[i].rankScore <= scorevalue)
+            if (Ranks[i].rankScore <= Mathf.Round(curScore))
             {
                 colorTexreal = ColorUtility.ToHtmlStringRGB(Ranks[i].rankColor);
                 CurRank = Ranks[i].ranks;
@@ -30,8 +30,6 @@ public class scoreSystemManager : MonoBehaviour
                 {
                     RankAudioSource.PlayOneShot(Ranks[i].rankSound);
                     Ranks[i].diditplay = true;
-                    Ranks[i-1].diditplay = true;
-                    Ranks[i+1].diditplay = true;
                 }
             }
         }

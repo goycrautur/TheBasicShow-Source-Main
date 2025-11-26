@@ -90,7 +90,10 @@ public class LearningGameManager : MonoBehaviour
         }
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum")
         {
-            gc.Gatesrea.ForEach(g => g.Down(false));
+            if (gc.mode != "story")
+            {
+                gc.Gatesrea.ForEach(g => g.Down(false));
+            }
             if (gc.mode == "story")
             {
                 if (AdditionalGameCustomizer.Instance != null &&
@@ -115,16 +118,21 @@ public class LearningGameManager : MonoBehaviour
                                     gc.escapeMusic.clip = gc.SchoolhouseEscape;
                                     gc.escapeMusic.loop = true;
                                     gc.escapeMusic.Play();
+                                    gc.Gatesrea.ForEach(g => g.Down(false));
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.Daldi:
                                     StartCoroutine(gc.ambatudaldi());
+                                    gc.Gatesrea.ForEach(g => g.Down(false));
+                                    break;
+                                case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                    StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(0));
                                     break;
                             }
                         }
                     }
                     if (gc.FinaleSecret)
                     {
-                        StartCoroutine(gc.truerfinale(0));
+                        StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(0));
                     }
                 }
             }

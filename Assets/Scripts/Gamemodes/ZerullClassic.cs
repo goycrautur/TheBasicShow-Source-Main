@@ -32,7 +32,7 @@ public class ZerullClassic : MonoBehaviour
     [Header("Projectile"), SerializeField]
     private Transform[] projectilespawns;
 
-    [SerializeField] private GameObject[] projectileprefabs;
+    public GameObject[] projectileprefabs;
 
     [HideInInspector] public GameObject currentProjectile;
 
@@ -49,7 +49,7 @@ public class ZerullClassic : MonoBehaviour
     public GameObject blockages;
     public GameObject[] RandomBlockages;
     [Tooltip("Boss variant of null"), SerializeField] public ZerullBossScript zs;
-    [SerializeField, Tooltip("If it's set to null, game will use optimized version")] private Slider healthSlider;
+    [Tooltip("If it's set to null, game will use optimized version")] public Slider healthSlider;
 
     [Header("Audio"), SerializeField, Tooltip("Boss Music (Boss Clips located at NullScript object)")]
     private AudioClip[] Boss_Music;
@@ -396,7 +396,6 @@ public class ZerullClassic : MonoBehaviour
     public void OnHit(float tiem, float hp = 1f) // When player hit null by a projectile
     {
 
-        gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         if (alreadyHit && !realBossStarted || (zs.iframes > 0f))
             return;
 
@@ -420,26 +419,27 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted && Midi)
         {
-            midiTempo += 0.025f * (zs.totemready ? 1 : hp);
+            midiTempo += 0.02f * (zs.totemready ? 1 : hp);
             Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
         }
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
             meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
         }
-        scoreSystemManager.Instance.AddScore(zs.totemready ? 325 : 325*(int)hp);
+        scoreSystemManager.Instance.AddScore(zs.totemready ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= zs.totemready ? 1 : hp; // Decreases null health
+        gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready ? 1 : hp), 0f,false, "mucho");
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
             if (!zs.totemready)
             {
-                gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp |" + " oh no he casted totoem of undying";
                 zs.totem();
                 health = 10;
                 zs.totemready = true;
+                gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
             }
             else
             BossEnd();

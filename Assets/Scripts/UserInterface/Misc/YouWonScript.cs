@@ -10,6 +10,8 @@ public class YouWonScript : MonoBehaviour
     {
         AudioSourcereal.ignoreListenerPause = true;
         Subtitles.SetActive(false);
+        GameControllerScript.Instance.discordupdate("youwo");
+        GameControllerScript.Instance.modeState = "";
     }
 
     private void Update()
@@ -30,12 +32,13 @@ public class YouWonScript : MonoBehaviour
             }
             if (ScoreDelay <= 0f)
             {
-                scorePreRoundup = Mathf.Lerp(scorePreRoundup,scoreSystemManager.Instance.scorevalue, 3f * Time.deltaTime);
+                scorePreRoundup = Mathf.Lerp(scorePreRoundup,scoreSystemManager.Instance.scorevalue, 5f * Time.deltaTime);
                 scoretext.SetActive(true);
                 score = Mathf.Round(scorePreRoundup);
-                ScoreTXTrea.text = "Score:" + score;
+                ScoreTXTrea.text = "Score: " + score;
                 if (!diditVineBoo)
                 {
+                    GameControllerScript.Instance.modeState = "Score: " + scoreSystemManager.Instance.scorevalue;
                     AudioSourcereal.clip = vinebo;
                     AudioSourcereal.loop = false;
                     audPitch = 1f;
@@ -46,9 +49,10 @@ public class YouWonScript : MonoBehaviour
             if (RankDelay <= 0f)
             {
                 ranktext.SetActive(true);
-                RanksTXTrea.text = "Ranks:" + scoreSystemManager.Instance.CurRank;
+                RanksTXTrea.text = "Ranks: " + scoreSystemManager.Instance.CurRank;
                 if (!diditVineBoo2)
                 {
+                    GameControllerScript.Instance.modeState = "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
                     AudioSourcereal.clip = vinebo;
                     AudioSourcereal.loop = false;
                     audPitch = 2f;
@@ -76,7 +80,7 @@ public class YouWonScript : MonoBehaviour
                             AudioSourcereal.loop = false;
                             AudioSourcereal.Play();
                             RanksMusicKys[i].diditPlay = true;
-                            if (!EM.GetSecret)
+                            if (EM.GetResults)
                             {
                                 youCanGoNow = true;
                             }
@@ -96,6 +100,7 @@ public class YouWonScript : MonoBehaviour
             }
             if (secreDelay <= 0f)
             {
+                GameControllerScript.Instance.modeState = "You Won?";
                 audPitch -= Time.deltaTime;
                 Sdelay2 -= Time.deltaTime;
             }

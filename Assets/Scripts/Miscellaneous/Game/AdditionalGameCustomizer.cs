@@ -218,6 +218,10 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             isFlashlightOn = !isFlashlightOn;
         }
+        /*if (Input.GetKeyDown(KeyCode.K))
+        {
+            ZerullClassic.Instance.SpawnProjectile(GameControllerScript.Instance.player.transform, true, Random.Range(2, ZerullClassic.Instance.projectileprefabs.Length));
+        }*/
     }
     #endregion
 
@@ -356,7 +360,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
 
     #region Enums
     public enum SkyboxStyle { Default, Day, Sunset, Night }
-    public enum EscapeFunsies { BBCR, Daldi }
+    public enum EscapeFunsies { BBCR, Daldi, TBS}
     public enum StaminaDisplay { Old, PreOld, Normal, Vertical, Circle }
     #endregion
     [Header("doing This Cuz I Cant Be Bothered Spamming Shit")]

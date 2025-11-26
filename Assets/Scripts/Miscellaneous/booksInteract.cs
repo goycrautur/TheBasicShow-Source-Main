@@ -155,7 +155,10 @@ public class booksInteract : Interactable
     #endregion
     private void TriggerFinalSequence()
     {
-        gc.Gatesrea.ForEach(g => g.Down(false));
+        if (gc.mode != "story")
+        {
+            gc.Gatesrea.ForEach(g => g.Down(false));
+        }
         if (AdditionalGameCustomizer.Instance?.FinalModeTV == true)
         {
             if (gc.mode == "story")
@@ -195,16 +198,21 @@ public class booksInteract : Interactable
                                 gc.escapeMusic.clip = gc.SchoolhouseEscape;
                                 gc.escapeMusic.loop = true;
                                 gc.escapeMusic.Play();
+                                gc.Gatesrea.ForEach(g => g.Down(false));
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.Daldi:
                                 StartCoroutine(gc.ambatudaldi());
+                                gc.Gatesrea.ForEach(g => g.Down(false));
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(0));
                                 break;
                         }
                     }
                 }
                 if (gc.FinaleSecret)
                 {
-                    StartCoroutine(gc.truerfinale(0));
+                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(0));
                 }
             }
         }

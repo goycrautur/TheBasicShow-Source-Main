@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioDevice111: {fileID: 550599744099410290}
   subsAudioDevice: {fileID: 5669727722991425385}
-  lifeSpan: 10
+  lifeSpan: 12.5
   gc: {fileID: 0}
   blockTypes:
   - mat: {fileID: 2100000, guid: cc4fa83476ce95d4d84033ab5fe95c42, type: 2}

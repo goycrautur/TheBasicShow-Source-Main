@@ -332,7 +332,6 @@ public class MathGameScript : MonoBehaviour
         {
             scoreSystemManager.Instance.AddScore(500);
             Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.4f,true, "all");
-            scoreSystemManager.Instance.PointsMultiplier += 0.025f;
         }
     }
 

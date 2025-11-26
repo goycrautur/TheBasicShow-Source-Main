@@ -17,6 +17,7 @@ public class FamishedModeController : MonoBehaviour
         TimethatUhhh = Onebouncemain.length;
         if (gc.mode == "famished")
         {
+            scoreSystemManager.Instance.PointsMultiplier += 1f;
             gc.UpdateNotebookCount();
             StartCoroutine(easing(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 0));
             gc.WindowLayermask = "Ignore Raycast";
@@ -45,11 +46,13 @@ public class FamishedModeController : MonoBehaviour
 		{
             gc.modeState = "ONEBOUNCE | " + (int)TimethatUhhh+" Seconds Left";
 			TimethatUhhh -= Time.deltaTime;
+            
 		}
         if (pitchdown)
 		{
 			pitchval -= Time.deltaTime;
             funnyaudiotuff.pitch = pitchval;
+            
 		}
         int num = Mathf.FloorToInt(TimethatUhhh / 60f);
         int num2 = Mathf.FloorToInt(TimethatUhhh % 60f);
@@ -62,6 +65,8 @@ public class FamishedModeController : MonoBehaviour
 
     public void Endonebounc()
     {
+        float valthing = scoreSystemManager.Instance.scorevalue / 2.5f;
+        scoreSystemManager.Instance.AddScore((int)valthing, false);
         AdditionalGameCustomizer.Instance.FovAmmount = 60;
         gc.modeState = "its over (fr this time)";
         alwaysKnowIp = false;

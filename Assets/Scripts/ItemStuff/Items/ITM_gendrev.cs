@@ -7,8 +7,7 @@ public class ITM_gendrev : BaseItem
     public override bool OnUse()
     {
         if (used) return false;
-        prevpov = AdditionalGameCustomizer.Instance.FovAmmount;
-        AdditionalGameCustomizer.Instance.FovAmmount = FovAmmount;
+        AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
         AdditionalGameCustomizer.Instance.rainbowTime = true;
         used = true;
         meowloop.SetActive(true);
@@ -29,7 +28,7 @@ public class ITM_gendrev : BaseItem
         GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,0f,new Vector3(0f,-170.5f,0f),meow);
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMultAlt;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMultAlt;
-        AdditionalGameCustomizer.Instance.FovAmmount = AltFovAmmount;
+        AdditionalGameCustomizer.Instance.FovAmmount -= AltFovAmmount;
         Gauge newGauge3 = GaugeManager.Instance.CreateGaugeInstance(sadbob, downDuration);
         while (time > 0f)
         {
@@ -43,18 +42,17 @@ public class ITM_gendrev : BaseItem
         newGauge3.Hide();
         GameControllerScript.Instance.player.walkSpeedMultipler += speedMultAlt;
         GameControllerScript.Instance.player.runSpeedMultipler += speedMultAlt;
-        AdditionalGameCustomizer.Instance.FovAmmount = prevpov;
+        AdditionalGameCustomizer.Instance.FovAmmount += AltFovAmmount;
         used = false;
         yield break;
     }
     public IEnumerator windBreakBlast()
     {
         GameControllerScript.Instance.player.breakwindow = true;
-        prevWinbreakRadius = GameControllerScript.Instance.player.windowbreakDistance;
-        GameControllerScript.Instance.player.windowbreakDistance = windobreakradius;
+        GameControllerScript.Instance.player.windowbreakDistance += windobreakradius;
         yield return new WaitForSeconds(0.1f);
         GameControllerScript.Instance.player.breakwindow = false;
-        GameControllerScript.Instance.player.windowbreakDistance = prevWinbreakRadius;
+        GameControllerScript.Instance.player.windowbreakDistance -= windobreakradius;
         yield break;
     }
     private IEnumerator amwaitin(float time)
@@ -78,11 +76,11 @@ public class ITM_gendrev : BaseItem
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMult;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMult;
         AdditionalGameCustomizer.Instance.rainbowTime = false;
-        AdditionalGameCustomizer.Instance.FovAmmount = prevpov;
+        AdditionalGameCustomizer.Instance.FovAmmount -= FovAmmount;
         StartCoroutine(boowo(downDuration));
         yield break;
     }
-    [SerializeField] private float duration = 60f,downDuration, speedMult,speedMultAlt,FovAmmount,AltFovAmmount,prevpov,windobreakradius,prevWinbreakRadius;
+    [SerializeField] private float duration = 60f,downDuration, speedMult,speedMultAlt,FovAmmount,AltFovAmmount,windobreakradius;
     [SerializeField] private GameObject meowloop;
     [SerializeField] private AudioSource meow,mwloop;
     [SerializeField] private AudioClip peak,boowoo;

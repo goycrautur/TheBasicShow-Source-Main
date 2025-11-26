@@ -3365,8 +3365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cad6300ac6a2494b8f01ca1f7c7ef81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailsthing: Start New Game Menu
-  detailsthing2: Modes Select Menu
+  detailsthing: Modes Select Menu
+  detailsthing2: Start New Game Menu
   statething: peak
   statething2: its time |  its time
   largimag: van
@@ -22788,8 +22788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cad6300ac6a2494b8f01ca1f7c7ef81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailsthing: Start New Game Menu
-  detailsthing2: Modes Select Menu
+  detailsthing: Modes Select Menu
+  detailsthing2: Start New Game Menu
   statething: peak
   statething2: its time |  its time
   largimag: van
@@ -28059,8 +28059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cad6300ac6a2494b8f01ca1f7c7ef81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailsthing: Start New Game Menu
-  detailsthing2: Modes Select Menu
+  detailsthing: Modes Select Menu
+  detailsthing2: Start New Game Menu
   statething: peak
   statething2: its time |  its time
   largimag: van
@@ -29120,8 +29120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cad6300ac6a2494b8f01ca1f7c7ef81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailsthing: Start New Game Menu
-  detailsthing2: Modes Select Menu
+  detailsthing: Modes Select Menu
+  detailsthing2: Start New Game Menu
   statething: peak
   statething2: its time |  its time
   largimag: van
@@ -32165,8 +32165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cad6300ac6a2494b8f01ca1f7c7ef81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailsthing: Modes Select Menu
-  detailsthing2: Start New Game Menu
+  detailsthing: Start New Game Menu
+  detailsthing2: Modes Select Menu
   statething: its time |  its time
   statething2: peak
   largimag: van

@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932417759486796683}
-  m_LocalRotation: {x: 0.12998664, y: 0.33799303, z: -0.29199645, w: 0.88521314}
+  m_LocalRotation: {x: 0.1328995, y: 0.09706396, z: 0.78449714, w: 0.5978969}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -1.2026417}
+  m_AnchoredPosition: {x: -0, y: -2.6826668}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9106377844088883684
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bd9ddccc360329c42b91b7bb3134d238, type: 2}
+  - {fileID: 2100000, guid: 09b46f1ab00cc5f4e9e419a724e668ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 7581270106364978491}
   - component: {fileID: 5885894844889399425}
   - component: {fileID: -2452637138297308520}
-  - component: {fileID: 411268840847717479}
+  - component: {fileID: 5681811132365182976}
   m_Layer: 0
   m_Name: Projectile_jurki
   m_TagString: Projectile
@@ -276,9 +276,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioDevice: {fileID: 7581270106364978491}
   throwSound: {fileID: 8300000, guid: 5ec4d41b3df494e4a8373ee31fea786b, type: 3}
+  theSpriteREND: {fileID: 7487137391670823497}
+  subtitlesScriptableObjectREAL: {fileID: 11400000, guid: cf1ae4e5dc026d84ba02ff2f37b04e51,
+    type: 2}
   rotateOffset: 90
   projectileDamage: 3
-  ProjectileSpeed: 80
+  ProjectileSpeed: 20
 --- !u!114 &-2452637138297308520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,8 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: 2
---- !u!65 &411268840847717479
-BoxCollider:
+--- !u!135 &5681811132365182976
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -311,5 +314,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 10
+  m_Center: {x: 0, y: 5, z: 0}

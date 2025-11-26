@@ -10,6 +10,19 @@ public class subtitlesScriptReal : MonoBehaviour
     // yea forgive me im too braindead to do scaling lol dont copystrike me yuri
     private void Start()
     {
+        shakespeed = subtitlys.shakeyspeed;
+        shakeyradius = subtitlys.shakeyradius;
+        tmpTxt.text = "";
+        hjea = subtitlys.headText;
+        tmpTxt.color = subtitlys.textColor;
+        aspectRatio = 1f;
+        bg.localScale = new Vector3(1f, 1f, 1f);
+        bg.anchoredPosition = fixesPosition;
+        
+        checkStuff();
+    }
+    private void checkStuff()
+    {
         if (subtitlys.duration != 0f && realduration == 0f)
         {
             duration = subtitlys.duration;
@@ -20,67 +33,41 @@ public class subtitlesScriptReal : MonoBehaviour
         }
         else
         {
-            duration = realduration;
+            if (!subtitlys.timedSub)
+            {
+                duration = realduration;
+                shake = subtitlys.shakey;
+            }
         }
-        tmpTxt.text = "";
-        StartCoroutine(TextAnimator());
-        tmpTxt.color = subtitlys.textColor;
-        aspectRatio = 1f;
-        bg.localScale = new Vector3(1f, 1f, 1f);
+        if (subtitlys.utStyle)
+        {
+            StartCoroutine(TextAnimator(hjea,subtitlys.TextAppearSpeed));
+        }
+        if (!subtitlys.utStyle)
+        {
+            tmpTxt.text = subtitlys.headText;
+        }
+        for (int i = 0; i < subtitlys.subtitleTimings.Length; ++i)
+        {
+            StartCoroutine(TimingIthink(subtitlys.subtitleTimings[i].duration,i));
+        }
+
         if (is3d)
         {
             bg.anchoredPosition = new Vector3(0f, -266.66f / aspectRatio, 0f);
             return;
         }
-        bg.anchoredPosition = fixesPosition;
     }
-
     private void Update()
     {
-        if (subtitlys.shakey)
+        if (shake)
         {
-            Vector3 localPosition = new Vector3(Mathf.Sin(Time.time * subtitlys.shakeyspeed) * subtitlys.shakeyradius, Mathf.Cos(Time.time * subtitlys.shakeyspeed) * subtitlys.shakeyradius, 0f);
+            Vector3 localPosition = new Vector3(Mathf.Sin(Time.time * shakespeed) * shakeyradius, Mathf.Cos(Time.time * shakespeed) * shakeyradius, 0f);
             tmpTxt.transform.localPosition = localPosition;
             return;
         }
-        else if (!subtitlys.utStyle)
-        {
-            if (tmpTxt.text.Length >= 50)
-            {
-                tmpTxt.fontSize = 16;
-            }
-            if (tmpTxt.text.Length >= 98)
-            {
-                tmpTxt.fontSize = 8;
-            }
-        }
         tmpTxt.transform.localPosition = Vector3.zero;
-    }
-    private void LateUpdate()
-    {
-        if (producerAud == null)
-        {
-            Destroy(base.gameObject);
-            return;
-        }
-        if (!producerAud.gameObject.activeInHierarchy)
-        {
-            Destroy(base.gameObject);
-        }
-        if (!infinite)
-        {
-            if (duration <= 0f)
-            {
-                Destroy(base.gameObject);
-                return;
-            }
-            duration -= Time.deltaTime;
-        }
-        if (!is3d)
-        {
-            return;
-        }
-        if (is3d)
+        /*if (is3d)
         {
             if (producerAud != null)
             {
@@ -95,6 +82,33 @@ public class subtitlesScriptReal : MonoBehaviour
                     tmpTxt.enabled = true;
                 }
             }
+        }*/
+    }
+
+    private void LateUpdate()
+    {
+        if (producerAud == null)
+        {
+            Destroy(base.gameObject);
+            return;
+        }
+        if (!producerAud.gameObject.activeInHierarchy)
+        {
+            Destroy(base.gameObject);
+            return;
+        }
+        if (!infinite)
+        {
+            if (duration <= 0f)
+            {
+                Destroy(base.gameObject);
+                return;
+            }
+            duration -= Time.deltaTime;
+        }
+        if (!is3d)
+        {
+            return;
         }
         try
         {
@@ -142,50 +156,41 @@ public class subtitlesScriptReal : MonoBehaviour
             Destroy(base.gameObject);
         }
     }
-    private IEnumerator TextAnimator()
+    private IEnumerator TimingIthink(float time,int i)
     {
-        foreach (char c in subtitlys.headText)
+
+        yield return new WaitForSeconds(time);
+        tmpTxt.text = "";
+        tmpTxt.color = subtitlys.subtitleTimings[i].textColor;
+        shake = subtitlys.subtitleTimings[i].shakey;
+        shakespeed = subtitlys.subtitleTimings[i].shakeyspeed;
+        shakeyradius = subtitlys.subtitleTimings[i].shakeyradius;
+        hjea = subtitlys.subtitleTimings[i].headText;
+        if (subtitlys.subtitleTimings[i].utStyle)
         {
-            TMP_Text tmp_Text = tmpTxt;
-            tmp_Text.text += c.ToString();
-            if (subtitlys.utStyle)
-            {
-                if (tmp_Text.text.Length >= 50)
-                {
-                    tmpTxt.fontSize = 16;
-                }
-                if (tmp_Text.text.Length >= 98)
-                {
-                    tmpTxt.fontSize = 8;
-                }
-                yield return new WaitForSeconds(subtitlys.TextAppearSpeed);
-            }
+            StartCoroutine(TextAnimator(hjea,subtitlys.subtitleTimings[i].TextAppearSpeed));
+        }
+        if (!subtitlys.subtitleTimings[i].utStyle)
+        {
+            tmpTxt.text = hjea;
+        }
+        Debug.Log("timing sub " + i);
+        yield break;
+    }
+    private IEnumerator TextAnimator(string Text,float textAppearSpeed)
+    {
+        foreach (char c in Text)
+        {
+            tmpTxt.text += c.ToString();
+            yield return new WaitForSeconds(textAppearSpeed);
         }
         yield break;
     }
-    public void OnEnable()
-    {
-        if (is3d)
-        {
-            if (producerAud != null)
-            {
-                if (producerAud.mute)
-                {
-                    imagbg.enabled = false;
-                    tmpTxt.enabled = false;
-                }
-                if (!producerAud.mute)
-                {
-                    imagbg.enabled = true;
-                    tmpTxt.enabled = true;
-                }
-            }
-        }
-    }
+    public string hjea;
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
-    public float duration,realduration;
-    public bool is3d, infinite;
+    public float duration,realduration,shakespeed,shakeyradius;
+    public bool is3d, infinite,shake;
     public AudioSource producerAud;
     public TMP_Text tmpTxt;
     public Image imagbg;
