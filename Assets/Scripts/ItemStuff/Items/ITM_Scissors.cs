@@ -7,9 +7,12 @@ public class ITM_Scissors : BaseItem
         if (AdditionalGameCustomizer.Instance.DetentionAfterScissorUse)
         {
             if (!GameControllerScript.Instance.player.outdoorsfr)
-            {
-                GameControllerScript.Instance.player.ResetGuilt("bully", 1f);
-            }
+		    {
+			    if (GameControllerScript.Instance.player.door.lockTime <= 0f)
+			    {
+			    GameControllerScript.Instance.player.ResetGuilt("bully", 1f);
+			    }
+		    }
         }
 
         if (GameControllerScript.Instance.player.jumpRope)

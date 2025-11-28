@@ -13,7 +13,7 @@ public class ITM_MetalPipe : BaseItem
     {
         if (CantUse)
         {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(fail);
+            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.LoudIncorecBugger);
             return false;
         }
         if (!CantUse)

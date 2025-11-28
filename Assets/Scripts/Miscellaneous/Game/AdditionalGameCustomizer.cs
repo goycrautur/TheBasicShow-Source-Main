@@ -218,10 +218,10 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             isFlashlightOn = !isFlashlightOn;
         }
-        /*if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             ZerullClassic.Instance.SpawnProjectile(GameControllerScript.Instance.player.transform, true, Random.Range(2, ZerullClassic.Instance.projectileprefabs.Length));
-        }*/
+        }
     }
     #endregion
 
@@ -270,8 +270,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
                         {
                             if (!ItemManager.Instance.IsInventoryFull())
                             {
-                                Cash = Cash - 0.25;
-                                audioDevice.PlayOneShot(aud_Drop);
                                 vendingMachine.DispenseItem();
                             }
                         }
@@ -347,7 +345,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public Material NormalSky, NormalRedSky, NightSky, RedNightSky, TwilightSky, RedTwilightSky, DefaultSky;
     [SerializeField] private GameObject warning, Clock, TMP, OldStamina, PreOldStamina, NewStamina, VerticalStamina, CircleStamina, GaugeManager, Counter, staminapercent, healthpercent;
     [SerializeField] private TMP_Text currencyCounter, percentageText, healthPercentageText, modesText, ModifierText, speedtextmf,defmultText;
-    [SerializeField] private AudioClip aud_Drop;
+    [SerializeField] public AudioClip aud_Drop;
     [SerializeField] private GameObject quarter,ItemInfostuffahah,subtitlesCanvas;
     #endregion
 

@@ -52,6 +52,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 	}
     public void UpdateStatus(string details = "", string state = "", string largeImage = "", string largeText = "")
 	{
+		//Debug.Log("Details:" + details + " State:" + state + " largeImage:" + largeImage + " largeText:" + largeText);
 		#if UNITY_EDITOR
 		return;
 		#endif

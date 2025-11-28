@@ -19,6 +19,7 @@ public class ITM_Quarter : BaseItem
                 if (vendingMachine != null)
                 {
                     audioDevice.PlayOneShot(aud_Drop);
+                    vendingMachine.insertedMoney++;
                     vendingMachine.DispenseItem();
                 }
                 return true;

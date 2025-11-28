@@ -6,11 +6,13 @@ public class ITM_BSODA : BaseItem
     {
         GameControllerScript Contoller = GameControllerScript.Instance;
         Instantiate(bsodaSpray, Contoller.player.transform.position, Contoller.cameraTransform.rotation);
-
         if (!Contoller.player.outdoorsfr)
-        {
-            Contoller.player.ResetGuilt("drink", 1f);
-        }
+		{
+			if (Contoller.player.door.lockTime <= 0f)
+			{
+			Contoller.player.ResetGuilt("drink", 1f);
+			}
+		}
         GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Soda);
         return true;
     }

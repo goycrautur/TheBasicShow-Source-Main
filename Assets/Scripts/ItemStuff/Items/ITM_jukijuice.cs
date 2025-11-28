@@ -6,11 +6,13 @@ public class ITM_jukijuice : BaseItem
     {
         GameControllerScript.Instance.audioDevice.PlayOneShot(aud);
 
-        if (AdditionalGameCustomizer.Instance.AnOldRule)
-        {
-            GameControllerScript.Instance.player.ResetGuilt("eat", 1f);
-        }
-
+        if (!GameControllerScript.Instance.player.outdoorsfr)
+		{
+			if (GameControllerScript.Instance.player.door.lockTime <= 0f)
+			{
+			GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
+			}
+		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, Stamina);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, helth, 0f, true,false);
         if (replaceitem)

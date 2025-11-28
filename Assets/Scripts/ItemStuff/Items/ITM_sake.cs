@@ -12,9 +12,12 @@ public class ITM_sake : BaseItem
         }
 
         if (!Contoller.player.outdoorsfr)
-        {
-            Contoller.player.ResetGuilt("drink", 1f);
-        }
+		{
+			if (Contoller.player.door.lockTime <= 0f)
+			{
+			Contoller.player.ResetGuilt("drink", 1f);
+			}
+		}
         GameControllerScript.Instance.audioDevice.PlayOneShot(sake);
         return true;
     }

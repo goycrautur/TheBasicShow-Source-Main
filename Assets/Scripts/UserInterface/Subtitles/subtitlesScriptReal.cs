@@ -11,6 +11,7 @@ public class subtitlesScriptReal : MonoBehaviour
     private void Start()
     {
         shakespeed = subtitlys.shakeyspeed;
+        shake = subtitlys.shakey;
         shakeyradius = subtitlys.shakeyradius;
         tmpTxt.text = "";
         hjea = subtitlys.headText;
@@ -36,7 +37,7 @@ public class subtitlesScriptReal : MonoBehaviour
             if (!subtitlys.timedSub)
             {
                 duration = realduration;
-                shake = subtitlys.shakey;
+                
             }
         }
         if (subtitlys.utStyle)
@@ -70,22 +71,6 @@ public class subtitlesScriptReal : MonoBehaviour
             return;
         }
         tmpTxt.transform.localPosition = Vector3.zero;
-        /*if (is3d)
-        {
-            if (producerAud != null)
-            {
-                if (producerAud.mute)
-                {
-                    imagbg.enabled = false;
-                    tmpTxt.enabled = false;
-                }
-                if (!producerAud.mute)
-                {
-                    imagbg.enabled = true;
-                    tmpTxt.enabled = true;
-                }
-            }
-        }*/
     }
 
     private void LateUpdate()
@@ -113,8 +98,6 @@ public class subtitlesScriptReal : MonoBehaviour
         {
             return;
         }
-        try
-        {
             Vector3 position = Camera.main.transform.position;
             Vector3 position2 = producerAud.transform.position;
             float num = Vector3.Distance(position2, position);
@@ -153,10 +136,21 @@ public class subtitlesScriptReal : MonoBehaviour
                 num9 *= 1f;
                 bg.localScale = new Vector3(num9, num9, 1f);
             }
-        }
-        catch
+        if (is3d)
         {
-            Destroy(base.gameObject);
+            if (producerAud != null)
+            {
+                if (producerAud.mute)
+                {
+                    imagbg.enabled = false;
+                    tmpTxt.enabled = false;
+                }
+                if (!producerAud.mute)
+                {
+                    imagbg.enabled = true;
+                    tmpTxt.enabled = true;
+                }
+            }
         }
     }
     private IEnumerator TimingIthink(float time,int i)

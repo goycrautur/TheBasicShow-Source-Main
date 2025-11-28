@@ -6,7 +6,13 @@ public class ITM_slateskin : BaseItem
     public override bool OnUse()
     {
         GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
-        GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
+        if (!GameControllerScript.Instance.player.outdoorsfr)
+		{
+			if (GameControllerScript.Instance.player.door.lockTime <= 0f)
+			{
+			GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
+			}
+		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultiplerminus;
         GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultiplerminus;

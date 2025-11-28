@@ -102,7 +102,7 @@ public class booksInteract : Interactable
     }
     private void NoYCTPMode()
     {
-        scoreSystemManager.Instance.AddScore(500);
+        
         gc.Icon.Rebind();
         gc.Icon.Play("IconSpinMain", -1, 0f);
         gc.audioDevice2.PlayOneShot(gc.aud_Collected);
@@ -116,14 +116,20 @@ public class booksInteract : Interactable
         {
             if (gc.mode == "story")
             {
+                scoreSystemManager.Instance.AddScore(1200);
                 lgm.Tutor.tutorSource.Stop();
                 lgm.quarter.SetActive(true);
                 lgm.Tutor.tutorSource.PlayClip(lgm.aud_Prize, false, 1f);
             }
         }
+        if (gc.notebooks >= 2)
+        {
+        scoreSystemManager.Instance.AddScore(1400);
+        }
 
         if (gc.notebooks == 2)
         {
+            
             gc.ActivateSpoopMode();
             if (gc.mode == "story")
             {
@@ -186,6 +192,11 @@ public class booksInteract : Interactable
 
         if (gc.mode == "story")
         {
+            if (gc.warrealest)
+            {
+                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                gc.Gatesrea.ForEach(g => g.Down(false));
+            }
             if (!gc.warrealest)
             {
                 if (!gc.FinaleSecret)
@@ -213,6 +224,8 @@ public class booksInteract : Interactable
                 if (gc.FinaleSecret)
                 {
                     StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(0));
+                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                        gc.Gatesrea.ForEach(g => g.Down(false));
                 }
             }
         }

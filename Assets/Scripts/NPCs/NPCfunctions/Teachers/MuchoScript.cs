@@ -9,7 +9,6 @@ public class MuchoScript : NPC
         base.OnStart();
         baldiAudio = GetComponent<AudioSource>();
         GetAngry(0f);
-        Move();
 
         if (endless)
         {
@@ -17,6 +16,7 @@ public class MuchoScript : NPC
         }
 
         Wander();
+        Move();
     }
     public void OnEnable()
     {

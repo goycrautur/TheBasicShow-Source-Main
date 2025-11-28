@@ -24,7 +24,7 @@ MonoBehaviour:
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
-    timedSub: 1
+    timedSub: 0
     subtitleTimings:
     - enabled: 0
       headText: 

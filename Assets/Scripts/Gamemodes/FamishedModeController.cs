@@ -65,7 +65,11 @@ public class FamishedModeController : MonoBehaviour
 
     public void Endonebounc()
     {
-        float valthing = scoreSystemManager.Instance.scorevalue / 2.5f;
+        if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight)
+        {
+            ZerullClassic.Instance.blockages.SetActive(false);
+        }
+        float valthing = scoreSystemManager.Instance.scorevalue / 1.5f;
         scoreSystemManager.Instance.AddScore((int)valthing, false);
         AdditionalGameCustomizer.Instance.FovAmmount = 60;
         gc.modeState = "its over (fr this time)";

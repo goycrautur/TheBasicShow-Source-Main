@@ -136,6 +136,9 @@ public class ZerullBossScript : MonoBehaviour
             audioDevice.QueueAudio(bossStart, bossyapStart_captions);
         }
         ToggleState(false, firstHit, true);
+        agent.speed += 0.75f * hp;
+        GameControllerScript.Instance.player.DefaultWalkSpeed += 0.7f * hp;
+        GameControllerScript.Instance.player.DefaultRunSpeed += 0.7f * hp;
         StartCoroutine(Stun(hp, time, firstHit));
     }
     public void totem()
@@ -163,14 +166,7 @@ public class ZerullBossScript : MonoBehaviour
         spriteProperties.SetFloat("_Seed", 0f);
         normalSprite.SetPropertyBlock(spriteProperties);
         ToggleState(true, firsthit, false);
-        AfterHit(hp);
-    }
-
-    private void AfterHit(float hp = 1f)
-    {
-        agent.speed += 1.05f * hp;
-        GameControllerScript.Instance.player.DefaultWalkSpeed += 1 * hp;
-        GameControllerScript.Instance.player.DefaultRunSpeed += 1 * hp;
+        
         ZerullClassic.Instance.AfterHit();
         hitted = false;
     }

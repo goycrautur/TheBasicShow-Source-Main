@@ -245,6 +245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioDevice: {fileID: 7581270106364978491}
   throwSound: {fileID: 8300000, guid: 3b610cea7c5a8344d8e68e697374f66b, type: 3}
+  theSpriteREND: {fileID: 0}
+  subtitlesScriptableObjectREAL: {fileID: 11400000, guid: 7825a46f8d944b1498fe0290dfbb9a5c,
+    type: 2}
   rotateOffset: 90
   projectileDamage: 1
   ProjectileSpeed: 110

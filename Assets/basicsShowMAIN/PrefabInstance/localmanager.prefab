@@ -87,12 +87,14 @@ MonoBehaviour:
       value: Item Info Text
     - key: Options_subs
       value: Subtitles
+    - key: Options_walshak
+      value: Wall Shakes
     - key: Options_Back
       value: Back
     - key: CMapper_Back
       value: done configu
     - key: CMapper_Restore
-      value: Back
+      value: Restore defaul
     - key: CMapper_Pause
       value: Pause
     - key: CMapper_Confirm
@@ -181,15 +183,21 @@ MonoBehaviour:
     - key: HoverInfoText_Modifiers_syfm
       value: nuh uh, cant use that yet buddy,go beat story mode first
     - key: HoverInfoText_Modifiers_muchomous
-      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
+      value: teacher jerry didnt feel like teaching rn, so he tell his subtitute
+        cousin mucho mouse to take his place!
     - key: HoverInfoText_Modifiers_EvapPad
       value: enables or disable the evap pad at any time you want!
     - key: HoverInfoText_Modifiers_Meeptimer
-      value: oh god its war from pizza tower
+      value: pizza tower war timer, litearlly
     - key: HoverInfoText_Modifiers_ChaosMode
-      value: its DEFINITIVELY not that chaos mode, trust me, trustme, T!!#US M!@!e
+      value: ehm, what are you talking about?? it aint bbcr chaos mode trust me-
+    - key: HoverInfoText_Modifiers_bloxyzerull
+      value: just switch out the music for your lapping problem trust- (Only compatible
+        with Zerull Mode)
     - key: ModeSelectMen_Back
       value: Back
+    - key: ModeSelectMen_modifi
+      value: Modifiers
     - key: ModeSelectMen_stor
       value: Story Mode
     - key: ModeSelectMen_bruhmished
@@ -220,6 +228,8 @@ MonoBehaviour:
       value: MEEP Timer
     - key: Playmenu_Modifier_ChaosMode
       value: Chaos.. Mode!
+    - key: Playmenu_Modifier_bloxyzerull
+      value: Bloxifyed
     - key: Playmenu_Modifier_muchomous_Locked
       value: LOCKED
     - key: Playmenu_Modifier_EvapPad_Locked
@@ -227,6 +237,8 @@ MonoBehaviour:
     - key: Playmenu_Modifier_Meeptimer_Locked
       value: LOCKED
     - key: Playmenu_Modifier_ChaosMode_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_bloxyzerull_Locked
       value: LOCKED
     - key: loadaText
       value: Loading

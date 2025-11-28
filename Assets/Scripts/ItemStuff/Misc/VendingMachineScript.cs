@@ -22,11 +22,22 @@ public class VendingMachineScript : MonoBehaviour
     #region Public Actions
     public void DispenseItem()
     {
+        AudioSource audioDevice = GameControllerScript.Instance.audioDevice;
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
             if (!ItemManager.Instance.IsInventoryFull())
             {
-                ItemManager.Instance.CollectItem(itemID);
+                
+                if (AdditionalGameCustomizer.Instance.Cash >= ItemCostRaldMoneyType)
+                {
+                    audioDevice.PlayOneShot(AdditionalGameCustomizer.Instance.aud_Drop);
+                    AdditionalGameCustomizer.Instance.Cash = AdditionalGameCustomizer.Instance.Cash - ItemCostRaldMoneyType;
+                    ItemManager.Instance.CollectItem(itemID);
+                }
+                else
+                {
+                    audioDevice.PlayOneShot(GameControllerScript.Instance.LoudIncorecBugger);
+                }
             }
             else
             {
@@ -35,7 +46,12 @@ public class VendingMachineScript : MonoBehaviour
         }
         else
         {
+            if (insertedMoney == itemCostNormal)
+            {
             ItemManager.Instance.CollectItem(itemID);
+            insertedMoney = 0;
+            }
+
         }
 
         if (isOutOfGoods)
@@ -46,7 +62,7 @@ public class VendingMachineScript : MonoBehaviour
 
         if (crazyMode)
         {
-            itemID = Random.Range(1, 37);
+            itemID = Random.Range(1, 39);
         }
     }
 
@@ -82,5 +98,7 @@ public class VendingMachineScript : MonoBehaviour
 
     [Header("Item Settings")]
     [SerializeField] private int itemID = 1;
+    public int itemCostNormal = 1,insertedMoney;
+    public double ItemCostRaldMoneyType = 0.25;
     #endregion
 }

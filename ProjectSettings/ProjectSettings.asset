@@ -91,7 +91,7 @@ PlayerSettings:
   submitAnalytics: 0
   usePlayerLog: 0
   dedicatedServerOptimizations: 0
-  bakeCollisionMeshes: 0
+  bakeCollisionMeshes: 1
   forceSingleInstance: 0
   useFlipModelSwapchain: 1
   resizableWindow: 0
@@ -142,7 +142,23 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 2800000, guid: f096d546126a2f847b84aab774930214, type: 3}
+  - {fileID: 21300000, guid: d5de3d4fe8f7c7845bf6d2e018de8752, type: 3}
+  - {fileID: 2800000, guid: 401d94b19f8d41e43bdc9dd11f22ad28, type: 3}
+  - {fileID: 2800000, guid: bebd9c3560b983a4a840d52cf4789657, type: 3}
+  - {fileID: 2800000, guid: 83c5d0556a2360b469e533c1f5801423, type: 3}
+  - {fileID: 2800000, guid: 7616dd2b68207114a982ab8a8fa0c757, type: 3}
+  - {fileID: 2800000, guid: dcd600af5004c454393924b2c283e658, type: 3}
+  - {fileID: 2800000, guid: eb7b8d8395f4cd74999c0afdfbaf9385, type: 3}
+  - {fileID: 2800000, guid: 13de7b12e46094348bfb4eab74957dc9, type: 3}
+  - {fileID: 2800000, guid: e6e6d684295988746bbc83eaf8546035, type: 3}
+  - {fileID: 2800000, guid: 4dc8121b11ee9fd49b255055dcc47f1f, type: 3}
+  - {fileID: 2800000, guid: ddd45ab4742d14c44ac0bacf0bddbc79, type: 3}
+  - {fileID: 2800000, guid: 9a793fd861437234d8b2844a315c7dea, type: 3}
+  - {fileID: 2800000, guid: f205c261ce2f26e49953a0701967dcd9, type: 3}
+  - {fileID: 2800000, guid: c881520aeca60364eb6cd6a22e26a36f, type: 3}
+  - {fileID: 2800000, guid: 82bbf66770d78074eba9464638105c14, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -183,7 +199,7 @@ PlayerSettings:
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
-  StripUnusedMeshComponents: 0
+  StripUnusedMeshComponents: 1
   strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988

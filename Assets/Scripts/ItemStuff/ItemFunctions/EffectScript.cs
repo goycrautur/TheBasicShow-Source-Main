@@ -49,9 +49,9 @@ public class EffectScript : MonoBehaviour
         {
             if (!notNpcEntirely)
             {
-                Vector3 pushDirection = (npcreal.GetComponent<Collider>().transform.position - other.transform.position).normalized;
+                /*Vector3 pushDirection = (npcreal.GetComponent<Collider>().transform.position - other.transform.position).normalized;
                 StopCoroutine(npcreal.SmoothPush(npcreal.GetComponent<Transform>(), pushDirection, 4f, 0.1f));
-                StartCoroutine(npcreal.SmoothPush(npcreal.GetComponent<Transform>(), pushDirection, 4f, 0.1f));
+                StartCoroutine(npcreal.SmoothPush(npcreal.GetComponent<Transform>(), pushDirection, 4f, 0.1f));*/
                 GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
                 Destroy(other.gameObject, 0f);
             }

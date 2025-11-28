@@ -9,9 +9,9 @@ public static class Sych
 
     public static bool ScreenRaycastMatchesCollider(this Collider col, out RaycastHit hit, float maxDistance) => ScreenCenterRaycast(out hit) && hit.transform.IsWithinDistance(maxDistance) && hit.collider == col;
 
-    public static bool RaycastFromPosition(this Vector3 origin, Vector3 direction, out RaycastHit hit, QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.Ignore) => Physics.Raycast(origin, direction, out hit, Mathf.Infinity, -5, triggerInteraction);
+    public static bool RaycastFromPosition(this Vector3 origin, Vector3 direction, out RaycastHit hit, QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.Ignore, int Layermask = -5) => Physics.Raycast(origin, direction, out hit, Mathf.Infinity, Layermask, triggerInteraction);
 
-    public static bool RaycastFromPositionWithDistance(this Vector3 origin, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity) => Physics.Raycast(origin, direction, out hit, maxDistance, -5, QueryTriggerInteraction.Ignore);
+    public static bool RaycastFromPositionWithDistance(this Vector3 origin, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, int Layermask = -5) => Physics.Raycast(origin, direction, out hit, maxDistance, Layermask, QueryTriggerInteraction.Ignore);
 
     public static bool ScreenCenterRaycast(out RaycastHit hit) => Physics.Raycast(Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)), out hit);
 

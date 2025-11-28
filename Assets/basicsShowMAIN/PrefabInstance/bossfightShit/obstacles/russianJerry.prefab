@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2517806299971401544}
   - component: {fileID: 887865606723106329}
   - component: {fileID: 2459527844884179387}
+  - component: {fileID: 8730321355129845753}
   m_Layer: 0
   m_Name: russianJerry
   m_TagString: Untagged
@@ -152,6 +153,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8730321355129845753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565268054291569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audisourc: {fileID: 2459527844884179387}
+  sub: {fileID: 11400000, guid: 9e056233cca558f41bfb1082fae28d44, type: 2}
+  type: 3d
 --- !u!1 &3659684099224240735
 GameObject:
   m_ObjectHideFlags: 0

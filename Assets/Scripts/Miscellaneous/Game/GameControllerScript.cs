@@ -821,13 +821,13 @@ public class GameControllerScript : MonoBehaviour
     public modifiersName[] Modifiers;
 
     [Header("Audio References")]
-    private AudioClip[] LoseSounds;
+    public AudioClip[] LoseSounds;
     public AudioClip[] HurtSounds;
     public AudioClip[] EvapV2FinaleTypeShit, NormalTbsFinale;
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
     public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, deathbell, punchsoun, totem,loboto, gastervanish;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, deathbell, punchsoun, totem,loboto, gastervanish,LoudIncorecBugger;
     #endregion
 
     #region PrivateFields

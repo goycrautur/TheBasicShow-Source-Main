@@ -8,7 +8,13 @@ public class ITM_ZestyBar : BaseItem
 
         if (AdditionalGameCustomizer.Instance.AnOldRule)
         {
-            GameControllerScript.Instance.player.ResetGuilt("eat", 1f);
+            if (!GameControllerScript.Instance.player.outdoorsfr)
+		    {
+			    if (GameControllerScript.Instance.player.door.lockTime <= 0f)
+			    {
+			    GameControllerScript.Instance.player.ResetGuilt("eat", 1f);
+			    }
+		    }
         }
 
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, ZestyStamina);

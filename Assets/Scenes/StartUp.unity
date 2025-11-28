@@ -1719,7 +1719,7 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.size
-      value: 93
+      value: 94
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -1979,112 +1979,112 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].key
-      value: ModeSelectMen_stor
+      value: ModeSelectMen_modifi
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[72].key
-      value: ModeSelectMen_bruhmished
+      value: ModeSelectMen_stor
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].key
-      value: ModeSelectMen_erull
+      value: ModeSelectMen_bruhmished
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].key
-      value: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
+      value: ModeSelectMen_erull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].key
-      value: ModeSelectMen_PlayMenStuff_notfound
+      value: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].key
-      value: ModeSelectMen_PlayMenStuff_storyMode
+      value: ModeSelectMen_PlayMenStuff_notfound
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].key
-      value: ModeSelectMen_PlayMenStuff_famished
+      value: ModeSelectMen_PlayMenStuff_storyMode
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].key
-      value: ModeSelectMen_PlayMenStuff_zerull
+      value: ModeSelectMen_PlayMenStuff_famished
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].key
-      value: ModeSelectMen_PlayMenStuff_lappingOfAsylum
+      value: ModeSelectMen_PlayMenStuff_zerull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].key
-      value: Playmenu_back
+      value: ModeSelectMen_PlayMenStuff_lappingOfAsylum
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].key
-      value: Playmenu_newga
+      value: Playmenu_back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].key
-      value: Playmenu_Modifier_muchomous
+      value: Playmenu_newga
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[83].key
-      value: Playmenu_Modifier_EvapPad
+      value: Playmenu_Modifier_muchomous
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[84].key
-      value: Playmenu_Modifier_Meeptimer
+      value: Playmenu_Modifier_EvapPad
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].key
-      value: Playmenu_Modifier_ChaosMode
+      value: Playmenu_Modifier_Meeptimer
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[86].key
-      value: Playmenu_Modifier_bloxyzerull
+      value: Playmenu_Modifier_ChaosMode
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[87].key
-      value: Playmenu_Modifier_muchomous_Locked
+      value: Playmenu_Modifier_bloxyzerull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[88].key
-      value: Playmenu_Modifier_EvapPad_Locked
+      value: Playmenu_Modifier_muchomous_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[89].key
-      value: Playmenu_Modifier_Meeptimer_Locked
+      value: Playmenu_Modifier_EvapPad_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[90].key
-      value: Playmenu_Modifier_ChaosMode_Locked
+      value: Playmenu_Modifier_Meeptimer_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[91].key
-      value: Playmenu_Modifier_bloxyzerull_Locked
+      value: Playmenu_Modifier_ChaosMode_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[92].key
-      value: loadaText
+      value: Playmenu_Modifier_bloxyzerull_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2319,7 +2319,8 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[65].value
-      value: guys, why is mucho mous from mousetale taking over jerry schol???!?!?!?!?!!?!
+      value: teacher jerry didnt feel like teaching rn, so he tell his subtitute
+        cousin mucho mouse to take his place!
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2329,18 +2330,18 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[67].value
-      value: oh god its war from pizza tower
+      value: pizza tower war timer, litearlly
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[68].value
-      value: its DEFINITIVELY not that chaos mode, trust me, trustme, T!!#US M!@!e
+      value: ehm, what are you talking about?? it aint bbcr chaos mode trust me-
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[69].value
-      value: just switch out the music for your lapping problem trust- (Zerull/chair
-        mode ONLY)
+      value: just switch out the music for your lapping problem trust- (Only compatible
+        with Zerull Mode)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2350,82 +2351,82 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].value
-      value: Story Mode
+      value: Modifiers
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[72].value
-      value: famished
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].value
-      value: hell
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].value
-      value: Lappin
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].value
-      value: mode not found, defaulting to story mode
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].value
       value: Story Mode
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].value
       value: famished
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].value
+      value: hell
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].value
+      value: Lappin
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].value
+      value: mode not found, defaulting to story mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].value
+      value: Story Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].value
-      value: z33rull M3D3
+      value: famished
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].value
-      value: story mode (hard,trust)
+      value: z33rull M3D3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].value
-      value: Back
+      value: story mode (hard,trust)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].value
-      value: Start New Game
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].value
-      value: mucho
+      value: Start New Game
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[83].value
-      value: EvapPad
+      value: mucho
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[84].value
-      value: MEEP Timer
+      value: EvapPad
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].value
-      value: Chaos.. Mode!
+      value: MEEP Timer
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[86].value
-      value: Bloxifyed
+      value: Chaos.. Mode!
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2450,7 +2451,7 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[92].value
-      value: Loading
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 7127100925093899789, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}

@@ -22,9 +22,7 @@ public class NPC : MonoBehaviour
         gc.NPCThatGetAffectedByMetalPipe.Remove(this);
     }
 
-    protected virtual void Update() => OnUpdate();
-
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         if (canTargetPlayer)
         {
@@ -36,6 +34,10 @@ public class NPC : MonoBehaviour
             HandleMovement();
         }
 
+        OnUpdate();
+    }
+    protected virtual void FixedUpdate()
+    {
         OnFixedUpdate();
     }
     #endregion
@@ -155,8 +157,8 @@ public class NPC : MonoBehaviour
     protected float coolDown;
     public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;
     public NavMeshAgent agent;
-    public GameObject confusionEffect;
+    public GameObject confusionEffect,StunSprite;
     #endregion
-    public int hp, maxhp;
-    private bool fuckingdead,stun;
+    public int hp, maxhp = 100;
+    public bool fuckingdead,stun,UsesStunSprite;
 }

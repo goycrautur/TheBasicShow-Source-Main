@@ -4,9 +4,15 @@ public class FacultyTriggerScript : MonoBehaviour
 {
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player") && ps.door.lockTime < 0)
+		if (other.gameObject.CompareTag("Player"))
 		{
-			ps.ResetGuilt("faculty", 1f);
+			if (!ps.outdoorsfr)
+			{
+				if (ps.door.lockTime <= 0f)
+				{
+				ps.ResetGuilt("faculty", 1f);
+				}
+			}
 		}
 	}
 

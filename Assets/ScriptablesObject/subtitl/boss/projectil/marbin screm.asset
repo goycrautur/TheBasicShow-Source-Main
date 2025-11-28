@@ -15,14 +15,24 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 00b0ee414036703428ae40d968d4dfb8, type: 3}
   subtitleOption:
     enabled: 1
-    headText: '*Screaming*'
+    headText: WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoooooooooaaaaaaa
     textColor: {r: 1, g: 0, b: 0, a: 1}
     duration: 0
     utStyle: 1
-    TextAppearSpeed: 0.025
+    TextAppearSpeed: 0.09
     shakey: 1
     shakeyspeed: 1000
     shakeyradius: 1
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    timedSub: 1
+    subtitleTimings:
+    - enabled: 1
+      headText: Gee-gaa-daa
+      textColor: {r: 1, g: 0, b: 0, a: 1}
+      duration: 5
+      utStyle: 1
+      TextAppearSpeed: 0.05
+      shakey: 0
+      shakeyspeed: 0
+      shakeyradius: 0
+      fonts: 0

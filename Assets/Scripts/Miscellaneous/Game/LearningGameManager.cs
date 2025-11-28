@@ -41,7 +41,7 @@ public class LearningGameManager : MonoBehaviour
 
     public void DeactivateLearningGame(GameObject subject)
     {
-        scoreSystemManager.Instance.AddScore(500);
+        scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 750);
         gc.schoolMusic.ignoreListenerPause = false;
         AudioListener.pause = false;
         Time.timeScale = 1f;
@@ -70,7 +70,7 @@ public class LearningGameManager : MonoBehaviour
         {
             Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
             Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f, 0f,false, "zerull");
         }
 
         if (!gc.spoopMode && gc.mode == "story")
@@ -106,6 +106,11 @@ public class LearningGameManager : MonoBehaviour
                 {
                     gc.audioDevice.PlayOneShot(aud_AllNotebooks, 0.8f);
                 }
+                if (gc.warrealest)
+                {
+                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                    gc.Gatesrea.ForEach(g => g.Down(false));
+                }
                 if (!gc.warrealest)
                 {
                     if (!gc.FinaleSecret)
@@ -133,6 +138,9 @@ public class LearningGameManager : MonoBehaviour
                     if (gc.FinaleSecret)
                     {
                         StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(0));
+                        gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                        gc.Gatesrea.ForEach(g => g.Down(false));
+                        gc.finaleMode = true;
                     }
                 }
             }

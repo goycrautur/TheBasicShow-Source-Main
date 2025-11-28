@@ -17,7 +17,7 @@ public class MathGameScript : MonoBehaviour
         HandleAudioFeedback();
         HandleInput();
 
-        if (problem > 3)
+        if (problem > 9)
         {
             HandleGameEnd();
         }
@@ -147,7 +147,7 @@ public class MathGameScript : MonoBehaviour
     {
         ResetProblemUI();
 
-        if (problem <= 3)
+        if (problem <= 9)
         {
             GenerateMathProblem();
         }
@@ -174,7 +174,7 @@ public class MathGameScript : MonoBehaviour
 
         QueueAudio(bal_problems[problem - 1]);
 
-        if ((gc.mode == "endless" && gc.notebooks == 2 && problem == 3 && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == 3))
+        if ((gc.mode == "endless" && gc.notebooks == 2 && problem == 9 && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == 9))
         {
             GenerateImpossibleProblem();
             impossibleQuestionShown = true;
@@ -253,7 +253,7 @@ public class MathGameScript : MonoBehaviour
 
         if (gc.mode != "zerullclassic")
 		{
-			if (problem <= 3)
+			if (problem <= 9)
 			{
 				if (IsCorrectAnswer())
 				{
@@ -301,6 +301,7 @@ public class MathGameScript : MonoBehaviour
         QueueAudio(bal_praises[praiseIndex]);
 
         NewProblem();
+        scoreSystemManager.Instance.AddScore(50);
     }
 
     private void HandleIncorrectAnswer()
@@ -315,7 +316,7 @@ public class MathGameScript : MonoBehaviour
             baldiFeed.SetTrigger("angry");
             gc.ActivateSpoopMode();
         }
-
+        scoreSystemManager.Instance.AddScore(250);
         HandleBaldiAnger();
         ClearAudioQueue();
         baldiAudio.Stop();
@@ -324,14 +325,13 @@ public class MathGameScript : MonoBehaviour
 
     private void HandleBaldiAnger()
     {
-        if (problem == 3)
+        if (problem == 9)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.25f, 0f,false, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.2f, 0f,false, "all");
         }
         else
         {
-            scoreSystemManager.Instance.AddScore(500);
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.4f,true, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.15f,true, "all");
         }
     }
 
@@ -362,7 +362,7 @@ public class MathGameScript : MonoBehaviour
         {
             questionText.text = endlessHintText[UnityEngine.Random.Range(0, endlessHintText.Length)];
         }
-        if (problemsWrong >= 3)
+        if (problemsWrong >= 9)
         {
             Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, null, playerPosition, "all", true);
             gc.audioDevice.PlayClip(gc.deathbell, false, 1f);
@@ -386,12 +386,24 @@ public class MathGameScript : MonoBehaviour
             results[problem - 1].sprite = correct;
             problem = 3;
             results[problem - 1].sprite = correct;
+            problem = 4;
+            results[problem - 1].sprite = correct;
+            problem = 5;
+            results[problem - 1].sprite = correct;
+            problem = 6;
+            results[problem - 1].sprite = correct;
+            problem = 7;
+            results[problem - 1].sprite = correct;
+            problem = 8;
+            results[problem - 1].sprite = correct;
+            problem = 9;
+            results[problem - 1].sprite = correct;
 
 			return;
 		}
             questionText.text = hintText[UnityEngine.Random.Range(0, hintText.Length)];
         questionText2.text = questionText3.text = string.Empty;
-        if (gc.mode == "story" && problemsWrong >= 3)
+        if (gc.mode == "story" && problemsWrong >= 9)
         {
             gc.failedNotebooks++;
             if (gc.failedNotebooks < gc.maxNotebooks)
@@ -399,7 +411,7 @@ public class MathGameScript : MonoBehaviour
                 questionText.text = "Keep Doing TS shit my guy, " + gc.failedNotebooks + "/" + gc.maxNotebooks + " left";
                 questionText2.text = questionText3.text = string.Empty;
             }
-            if (gc.failedNotebooks == 1 && gc.notebooks <= gc.UnlockAmount)
+            if (gc.failedNotebooks == 1 && gc.notebooks < gc.UnlockAmount)
             {
                 questionText.text = "fuck you, 2 of your slots will be gone";
                 questionText2.text = questionText3.text = string.Empty;

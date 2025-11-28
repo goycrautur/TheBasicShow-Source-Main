@@ -281,7 +281,7 @@ MonoBehaviour:
     type: 2}
   rotateOffset: 90
   projectileDamage: 1
-  ProjectileSpeed: 50
+  ProjectileSpeed: 25
 --- !u!114 &-2452637138297308520
 MonoBehaviour:
   m_ObjectHideFlags: 0
