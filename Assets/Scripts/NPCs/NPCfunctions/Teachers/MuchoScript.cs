@@ -122,7 +122,7 @@ public class MuchoScript : NPC
         {
             if (!base.squished)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2 / gc.player.PlayerDmgResistance, 0.025f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2 / gc.player.PlayerDmgResistance, 0, false, true, false);
 				gc.player.killedbybaldi = true;
 			}
         }
@@ -177,7 +177,7 @@ public class MuchoScript : NPC
             if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
                 baldicator.Rebind();
-                baldicator.Play("Indicator_Heared", -1, 0f);
+                baldicator.Play("BjIndicator_Heared", -1, 0f);
             }
         }
         else
@@ -185,7 +185,7 @@ public class MuchoScript : NPC
             if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
                 baldicator.Rebind();
-                baldicator.Play("Indicator_Confused", -1, 0f);
+                baldicator.Play("BjIndicator_Confused", -1, 0f);
             }
         }
     }
