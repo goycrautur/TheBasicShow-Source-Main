@@ -91,6 +91,7 @@ public class FamishedModeController : MonoBehaviour
 
     public void onebounc(Transform ok)
     {
+        scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
         gc.modeState = "OH GOD NO WHAT";
         foreach (WindowScript w in FindObjectsOfType<WindowScript>())
 		{

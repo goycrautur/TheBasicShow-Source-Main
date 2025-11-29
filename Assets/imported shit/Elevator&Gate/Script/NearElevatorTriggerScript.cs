@@ -4,7 +4,7 @@ public class NearElevatorTriggerScript : MonoBehaviour
 {
 	public void closeExitStuff()
 	{
-		scoreSystemManager.Instance.AddScore(1750);
+		scoreSystemManager.Instance.AddScore(1750,true,true,"exit");
 		GameControllerScript.Instance.ExitReached(EntranceID);
 		elvDoor.Close();
 		gameObject.SetActive(false);

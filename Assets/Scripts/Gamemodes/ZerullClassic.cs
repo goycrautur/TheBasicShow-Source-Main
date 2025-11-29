@@ -201,6 +201,7 @@ public class ZerullClassic : MonoBehaviour
 
     public void BossIntro()
     {
+        scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
         Prepare();
         if (debugMode)
         {
@@ -208,7 +209,7 @@ public class ZerullClassic : MonoBehaviour
         }
         zs.sprite.gameObject.SetActive(true);
         debug = true; // Makes that null doesn't able to kill player
-        zs.Agent.speed = 100f; // Make null very fast for time
+        zs.Agent.speed = 140f; // Make null very fast for time
     }
     public void Prepare()
     {

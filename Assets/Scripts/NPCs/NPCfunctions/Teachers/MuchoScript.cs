@@ -122,7 +122,7 @@ public class MuchoScript : NPC
         {
             if (!base.squished)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2 / gc.player.PlayerDmgResistance, 0, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2f / gc.player.PlayerDmgResistance, 0.0125f, false, true, false);
 				gc.player.killedbybaldi = true;
 			}
         }

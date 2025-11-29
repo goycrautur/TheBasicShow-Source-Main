@@ -19,68 +19,63 @@ public class DiscordRPC_stuff : MonoBehaviour
 	{
 		if (discord == null)
 		{
-			discord = new Discord.Discord(applicationID, 1UL);
+			discord = new Discord.Discord(applicationID, (ulong)Discord.CreateFlags.NoRequireDiscord);
 		}
+		currentActivity = new Activity
+        {
+            State = StateStatus,
+            Details = StateDetails,
+            Timestamps =
+            {
+                Start = System.DateTimeOffset.Now.ToUnixTimeSeconds() 
+            }
+        };
 	}
+	private void OnDisable()
+    {
+        discord.Dispose();
+    }
 
 	private void Update()
 	{
-		if (!cantConnect)
+		if (!Refresh)
 		{
 			try
 			{
 				discord.RunCallbacks();
+				
 			}
 			catch
 			{
-				cantConnect = true;
+				Refresh = true;
 			}
 		}
-		#if UNITY_EDITOR
-		ActivityManager activityManager = discord.GetActivityManager();
-		Activity activity = default(Activity);
-		activity.Details = "Unity Editor";
-		Activity activity2 = activity;
-		activityManager.UpdateActivity(activity2, delegate (Result res)
-		{
-			if (res != Result.Ok)
-			{
-				Debug.LogWarning("Failed to connect to Discord.");
-			}
-		});
-		#endif
+        changeActivity();
 	}
+	public void changeActivity()
+    {
+		currentActivity.Details = StateDetails;
+		currentActivity.State = StateStatus;
+		currentActivity.Assets.LargeImage = StateIMGLarge;
+		currentActivity.Assets.LargeText = StateIMGSmall;
+        var activityManager = discord.GetActivityManager();
+        activityManager.UpdateActivity(currentActivity, result =>
+        {
+            if (result != Discord.Result.Ok)
+                Debug.LogWarning("Failed to update Discord!");
+        });
+    }
     public void UpdateStatus(string details = "", string state = "", string largeImage = "", string largeText = "")
 	{
-		//Debug.Log("Details:" + details + " State:" + state + " largeImage:" + largeImage + " largeText:" + largeText);
-		#if UNITY_EDITOR
-		return;
-		#endif
-		if (cantConnect)
-		{
-			return;
-		}
-		if (discord == null)
-		{
-			discord = new Discord.Discord(applicationID, 1UL);
-		}
-		ActivityManager activityManager = discord.GetActivityManager();
-		Activity activity = default(Activity);
-		activity.Details = details;
-		activity.State = state;
-		activity.Assets.LargeImage = largeImage;
-		activity.Assets.LargeText = largeText;
-		Activity activity2 = activity;
-		activityManager.UpdateActivity(activity2, delegate (Result res)
-		{
-			if (res != Result.Ok)
-			{
-				Debug.LogWarning("Failed to connect to Discord.");
-			}
-		});
+		StateDetails = details;
+        StateStatus = state;
+		StateIMGLarge = largeImage;
+		StateIMGSmall = largeText;
 	}
 	public static DiscordRPC_stuff current;
 	public Discord.Discord discord;
 	public long applicationID;
-	public bool cantConnect;
+	public bool Refresh;
+	public string StateDetails,StateStatus,StateIMGLarge,StateIMGSmall;
+	private Activity currentActivity; 
 }

@@ -31,6 +31,11 @@ public class LearningGameManager : MonoBehaviour
             learnMusic.Play();
         }
     }
+    public IEnumerator timeounaleshit(AudioClip clipped,subsScriptableObject subtitlObjec)
+	{
+		yield return new WaitForSeconds(Singleton<TimeOutManagerFUCKYEA>.Instance.timeoutTVDurationStuffIncaseReachingFinaleLmfao);
+        StartCoroutine(Television.StartTVSequence(clipped,subtitlObjec));
+    }
     public IEnumerator transiskill(GameObject subject)
 	{
         subject.GetComponent<MathGameScript>().enabled = false;
@@ -41,7 +46,7 @@ public class LearningGameManager : MonoBehaviour
 
     public void DeactivateLearningGame(GameObject subject)
     {
-        scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 750);
+        scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 750, true,true);
         gc.schoolMusic.ignoreListenerPause = false;
         AudioListener.pause = false;
         Time.timeScale = 1f;
@@ -100,13 +105,13 @@ public class LearningGameManager : MonoBehaviour
                     AdditionalGameCustomizer.Instance.FinalModeTV)
                 {
                     Television.baldingit = true;
-                    StartCoroutine(Television.StartTVSequence(aud_AllNotebooks));
+                    StartCoroutine(timeounaleshit(aud_AllNotebooks,balSubs));
                 }
                 else
                 {
                     gc.audioDevice.PlayOneShot(aud_AllNotebooks, 0.8f);
                 }
-                if (gc.warrealest)
+                if (gc.warrealest || gc.timeout)
                 {
                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                     gc.Gatesrea.ForEach(g => g.Down(false));
@@ -151,12 +156,14 @@ public class LearningGameManager : MonoBehaviour
     #region References
     [Header("References")]
     public AudioSource learnMusic;
-    public AudioClip aud_AllNotebooks, aud_Prize;
+    public AudioClip aud_AllNotebooks,aud_Timeout, aud_Prize;
+    public subsScriptableObject famSubs,balSubs,balSubsTIMEOUT;
     public GameObject quarter;
+
 
     [Header("Scripts")]
     [SerializeField] private KeyFunctions KF;
-    public FinalModeTV Television;
+    public BaldTVyea Television;
     public TutorScript Tutor;
     #endregion
 

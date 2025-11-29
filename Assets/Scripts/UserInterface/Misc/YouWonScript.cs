@@ -10,6 +10,11 @@ public class YouWonScript : MonoBehaviour
     {
         AudioSourcereal.ignoreListenerPause = true;
         Subtitles.SetActive(false);
+        GameControllerScript.Instance.timeout = false;
+        Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown = false;
+        Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 9999;
+        scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
+        LappingOfAsylumController.LapInstance.vanishScore = false;
         GameControllerScript.Instance.discordupdate("youwo");
         GameControllerScript.Instance.modeState = "";
     }

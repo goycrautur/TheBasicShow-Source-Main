@@ -392,7 +392,7 @@ public class PlayerScript : MonoBehaviour
 	{
 		if (guilt > 0f)
 		{
-			guilt -= Time.deltaTime;
+			guilt -= Time.deltaTime * 2;
 		}
 	}
 
@@ -422,6 +422,7 @@ public class PlayerScript : MonoBehaviour
 	}
 	public void SetHP(HealthChangeMode mode, float fashionevalue, float invinciframes, bool ignoreIframes = false, bool playrandomizedPresetSound = false, bool dontResetIframes = true)
 	{
+		
 		if (Iframes > 0f && !ignoreIframes)
 		{
 			return;
@@ -442,12 +443,21 @@ public class PlayerScript : MonoBehaviour
 		}
 		switch (mode)
 		{
-			case HealthChangeMode.Add: health += fashionevalue; break;
-			case HealthChangeMode.Remove: health -= fashionevalue; break;
+			case HealthChangeMode.Add: 
+				health += fashionevalue; 
+				break;
+			case HealthChangeMode.Remove: 
+				scoreSystemManager.Instance.AddScore(-10*(int)fashionevalue,true);
+				health -= fashionevalue; 
+				break;
 			case HealthChangeMode.Multiply: health *= fashionevalue;break;
-			case HealthChangeMode.Divide: if (fashionevalue != 0f) health /= fashionevalue; break;
+			case HealthChangeMode.Divide: 
+				scoreSystemManager.Instance.AddScore(-10*(int)fashionevalue,true);
+				if (fashionevalue != 0f) health /= fashionevalue; 
+				break;
 			case HealthChangeMode.Set: health = fashionevalue; break;
 		}
+		
 		if (Mathf.Abs(health - healthPending) >= 10f)
 		{
 			StartCoroutine(HealthSlide());

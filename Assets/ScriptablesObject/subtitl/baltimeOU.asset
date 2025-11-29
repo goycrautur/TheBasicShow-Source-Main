@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236c482ebd8096a48bb93a133aff9474, type: 3}
+  m_Name: baltimeOU
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 6db2f32a14c8ff14cab06e7a98899657, type: 3}
+  subtitleOption:
+    enabled: 1
+    headText: Class Dismisses!
+    textColor: {r: 0, g: 1, b: 0, a: 1}
+    duration: 0
+    utStyle: 1
+    TextAppearSpeed: 0.02
+    shakey: 0
+    shakeyspeed: 10
+    shakeyradius: 5
+    fonts: 0
+    timedSub: 1
+    subtitleTimings:
+    - enabled: 1
+      headText: School is no longer in session.
+      textColor: {r: 0, g: 1, b: 0, a: 1}
+      duration: 2
+      utStyle: 1
+      TextAppearSpeed: 0.02
+      shakey: 0
+      shakeyspeed: 0
+      shakeyradius: 0
+      fonts: 0
+    - enabled: 1
+      headText: Better wrap thing up soon...
+      textColor: {r: 0, g: 1, b: 0, a: 1}
+      duration: 4.78
+      utStyle: 1
+      TextAppearSpeed: 0.02
+      shakey: 0
+      shakeyspeed: 0
+      shakeyradius: 0
+      fonts: 0
+    - enabled: 1
+      headText: or else im gonna...
+      textColor: {r: 0, g: 1, b: 0, a: 1}
+      duration: 6.71
+      utStyle: 1
+      TextAppearSpeed: 0.02
+      shakey: 0
+      shakeyspeed: 0
+      shakeyradius: 0
+      fonts: 0
+    - enabled: 1
+      headText: Fiiiiind yooou!
+      textColor: {r: 0, g: 1, b: 0, a: 1}
+      duration: 7.9
+      utStyle: 1
+      TextAppearSpeed: 0.04
+      shakey: 0
+      shakeyspeed: 0
+      shakeyradius: 0
+      fonts: 0

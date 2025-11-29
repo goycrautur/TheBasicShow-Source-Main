@@ -18,6 +18,7 @@ public class GameControllerScript : MonoBehaviour
     #region UnityCallbacks
     private void Start()
     {
+        
         InitializeGameSettings();
         UpdateNotebookCount();
         Singleton<OtherMainStuffManager>.Instance.slot();
@@ -34,6 +35,21 @@ public class GameControllerScript : MonoBehaviour
 
     private void Update()
     {
+        if (timeout)
+        {
+            escapeMusic.mute = true;
+            if (warrealest)
+            {
+                warmusic.mute = true;
+            }
+            for (int i = 0; i < EvapV2FinaleSounSource.Length; ++i)
+            {
+                if (EvapV2FinaleSounSource[i] != null)
+                {
+                    EvapV2FinaleSounSource[i].mute = true;
+                }
+            }
+        }
         if (maxNotebooks == failedNotebooks && !warrealest)
         {
             FinaleSecret = true;
@@ -278,6 +294,7 @@ public class GameControllerScript : MonoBehaviour
         spoopMode = true;
         if (mode == "story")
         {
+            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(10f);
             ObjectsToDisable.ForEach(o => o.SetActive(false));
             ObjectsToEnable.ForEach(o => o.SetActive(true));
             if (warrealest)
@@ -286,10 +303,10 @@ public class GameControllerScript : MonoBehaviour
                 StartCoroutine(meeptimerwai());
             }
         }
-        if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic")
+        /*if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic")
         {
             Gatesrea.ForEach(g => g.Down());
-        }
+        }*/
 
         //midishit1.Stop();
         schoolMusic.Stop();
@@ -317,6 +334,9 @@ public class GameControllerScript : MonoBehaviour
 
         PlayerCamera.farClipPlane = gameOverDelay * 400f;
         gameOverDelay -= Time.unscaledDeltaTime;
+        timeout = false;
+        Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown = false;
+        Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 9999;
 
         if (!gamaOvarDevice.isPlaying)
         {
@@ -353,18 +373,25 @@ public class GameControllerScript : MonoBehaviour
             StartCoroutine(tweeniconSolo(Color.black, 0, 1, 1f, i));
         }
         
-        if (AdditionalGameCustomizer.Instance != null)
+        if (mode == "story")
         {
-            switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+            if (AdditionalGameCustomizer.Instance != null)
             {
-                case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                    ElevdorRea.ForEach(ed => ed.Opendor = true);
-                    finaleMode = true;
-                    break;
-                case AdditionalGameCustomizer.EscapeFunsies.Daldi:
-                    ElevdorRea.ForEach(ed => ed.Opendor = true);
-                    finaleMode = true;
-                    break;
+                switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                {
+                    case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                        ElevdorRea.ForEach(ed => ed.Opendor = true);
+                        finaleMode = true;
+                        break;
+                    case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                        ElevdorRea.ForEach(ed => ed.Opendor = true);
+                        finaleMode = true;
+                        break;
+                }
+            }
+            if (timeout)
+            {
+                finaleMode = true;
             }
         }
         if (mode != "story")
@@ -388,6 +415,15 @@ public class GameControllerScript : MonoBehaviour
             escapeMusic.Play();
             Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = escapeMusic;
         }
+    }
+    public IEnumerator tiemoutStu()
+    {
+        yield return new WaitForSeconds(LearningGameManager.Instance.Television.Markings ? 3f : 0.75f);
+        StartCoroutine(easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5));
+        Singleton<TimeOutManagerFUCKYEA>.Instance.spamupdatethese =true;
+        TimeoutMusic.clip = timeoutMusicAud;
+        TimeoutMusic.loop = true;
+        TimeoutMusic.Play();
     }
 
     private void FinaleModeAnnoyance()
@@ -826,8 +862,8 @@ public class GameControllerScript : MonoBehaviour
     public AudioClip[] EvapV2FinaleTypeShit, NormalTbsFinale;
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
-    public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, deathbell, punchsoun, totem,loboto, gastervanish,LoudIncorecBugger;
+    public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, deathbell, punchsoun, totem,loboto, gastervanish,LoudIncorecBugger,timeoutMusicAud;
     #endregion
 
     #region PrivateFields
@@ -836,7 +872,7 @@ public class GameControllerScript : MonoBehaviour
     public float[] nuzzlesframeshit;
     [SerializeField] private float gameOverDelay, nuzzlframes;
     public int lastRespawnCount, failedNotebooks, exitsReached, cullingMask;
-    public bool spoopMode, finaleMode, FinaleSecret,war,warrealest;
+    public bool spoopMode, finaleMode, FinaleSecret,war,warrealest,timeout;
     [HideInInspector] public Coroutine exitEasingCoroutine;
     [HideInInspector] public LearningGameManager Math;
     [HideInInspector] public EndingManager progress;
@@ -863,7 +899,8 @@ public class GameControllerScript : MonoBehaviour
     [Header("discord stuff")]
     public string modeDetails;
     public string modeState, largeImagething, largeImageText;
-    [Header("teachers management")]
+    [Header("teachers management and stuff")]
+    public List<PrincipalScript> maxiScr = new List<PrincipalScript>();
     public List<BaldiScript> balscr = new List<BaldiScript>();
     public List<zerullscript> zerscr = new List<zerullscript>();
     public List<MuchoScript> muchscr = new List<MuchoScript>();

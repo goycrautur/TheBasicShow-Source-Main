@@ -15,6 +15,18 @@ public class LappingOfAsylumController : MonoBehaviour
     private void Awake() => LapInstance = this;
     public static LappingOfAsylumController LapInstance;
     #endregion
+    public void Update()
+    {
+        if (vanishScore)
+		{
+			scoreDecreaseTimer -= Time.deltaTime;
+		}
+        if (scoreDecreaseTimer < 0f)
+		{
+            scoreSystemManager.Instance.AddScore(-10*CurrentLap);
+            scoreDecreaseTimer = 1f/CurrentLap;
+        }
+    }
     private void Start()
     {
         realCurrentMaxNoteboo = gc.maxNotebooks;
@@ -44,7 +56,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (stuff == "exitstuff")
         {
-            if (CurrentLap < MaxLap - 1)
+            if (CurrentLap < MaxLap)
             {
                 LapPortals.ForEach(lap => lap.SetActive(true));
             }
@@ -157,10 +169,6 @@ public class LappingOfAsylumController : MonoBehaviour
                 Chaos3CheeseCount = 0;
             }
         }
-        if (gc.notebooks == 1)
-        {
-            gc.Gatesrea.ForEach(g => g.Down());
-        }
         if (gc.notebooks == CurrentMaxNotebooks)
         {
             if (CurrentLap == 0)
@@ -205,6 +213,8 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.playerCollider.enabled = true;
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
+        vanishScore = true;
+        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(360f);
         yield return null;
         yield break;
     }
@@ -229,7 +239,6 @@ public class LappingOfAsylumController : MonoBehaviour
                 }
                 gc.player.maxHealth += 25;
                 gc.player.totemshit(false);
-                gc.Gatesrea.ForEach(g => g.Down());
                 gc.ElevdorRea.ForEach(ed => ed.Close());
                 gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
                 for (int e = 0; e < AdditionalGameCustomizer.Instance.ExitImages.Length; ++e)
@@ -271,6 +280,8 @@ public class LappingOfAsylumController : MonoBehaviour
                     LapPortals.ForEach(lap => lap.SetActive(false));
                 }
                 inportalALREADY = false;
+                gc.Gatesrea.ForEach(g => g.Down(false));
+                LapPortals.ForEach(lap => lap.SetActive(false));
                 yield return null;
             }
         }
@@ -284,6 +295,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (CurrentLap == 2)
         {
+            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
             gc.zerull.zer.SetActive(true);
             LapFamishShit = true;
@@ -324,7 +336,8 @@ public class LappingOfAsylumController : MonoBehaviour
     public AudioSource LapSound;
     public AudioClip BellSoundLapping,PortalEnteringSound,PortalExitingSound,zawarudo, lap5Aud1;
     public int CurrentLap, MaxLap, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount,ChaosCheeseCount,Chaos3CheeseCount;
-    public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff;
+    public float scoreDecreaseTimer;
+    public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff, vanishScore;
     public lapVariablesStuff[] lappingHi;
     [Serializable]
 	public class lapVariablesStuff

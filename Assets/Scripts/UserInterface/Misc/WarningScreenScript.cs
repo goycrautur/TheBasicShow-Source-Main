@@ -22,9 +22,9 @@ public class WarningScreenScript : MonoBehaviour
         }
         Cursor.LockCursor();
         the.GetComponent<Animator>().SetTrigger("yooo");
-        if (!DiscordRPC_stuff.current.cantConnect)
+        if (!DiscordRPC_stuff.current.Refresh)
         {
-            DiscordRPC_stuff.current.UpdateStatus("warning screen", "yum", "van", "the crx");
+        DiscordRPC_stuff.current.UpdateStatus("warning screen", "yum", "van", "the crx");
         }
     }
     private IEnumerator bootass()

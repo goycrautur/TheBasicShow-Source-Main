@@ -10,9 +10,19 @@ public class PrincipalScript : NPC
         AudioDevice = GetComponent<AudioSource>();
         Wander();
     }
+    public void OnEnable()
+    {
+
+        gc.maxiScr.Add(this);
+    }
+    public void OnDisable()
+    {
+        gc.maxiScr.Remove(this);
+    }
 
     public override void OnUpdate()
     {
+        agent.speed = movin ? base.agentSpeed : SPEEDY ? (base.agentSpeed*8) : 0;
         base.OnUpdate();
         if (seesRuleBreak)
         {
@@ -51,7 +61,7 @@ public class PrincipalScript : NPC
     {
         base.OnFixedUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        agent.speed = movin ? base.agentSpeed : 0;
+        
         if (!angry)
         {
             HandlePlayerDetection();
@@ -81,7 +91,7 @@ public class PrincipalScript : NPC
     {
         timeSeenRuleBreak += Time.deltaTime;
 
-        float ruleBreakThreshold = playerScript.guiltType == "escape" ? 0f : playerScript.guiltType == "faculty" ? 0f : 0.75f;
+        float ruleBreakThreshold = playerScript.guiltType == "escape" ? 0f : playerScript.guiltType == "faculty" ? 0f : playerScript.guiltType == "running" ? 0.25f : 0.35f;
         audioQueue.ClearQueue();
         if (timeSeenRuleBreak >= ruleBreakThreshold && !angry)
         {
@@ -163,6 +173,7 @@ public class PrincipalScript : NPC
     #region Movement & Navigation
     protected override void Wander(string locationType = "default")
     {
+        SPEEDY = false;
         playerScript.principalBugFixer = 1;
         base.Wander(locationType);
         if (agent.isStopped)
@@ -190,6 +201,7 @@ public class PrincipalScript : NPC
 
     protected override void TargetPlayer()
     {
+        SPEEDY = false;
         base.TargetPlayer();
         movin = true;
     }
@@ -198,6 +210,7 @@ public class PrincipalScript : NPC
     {
         if (!bullySeen)
         {
+            SPEEDY = false;
             agent.SetDestination(bully.position);
             audioQueue.QueueAudio(audNoBullying,noBullyingCaptions);
             movin = true;
@@ -330,6 +343,7 @@ public class PrincipalScript : NPC
         {
             if (!squished)
             {
+                scoreSystemManager.Instance.AddScore(-500);
                 GiveDetention(other.transform);
             }
             else if (squished)
@@ -351,6 +365,11 @@ public class PrincipalScript : NPC
         }
     }
     #endregion
+    public void callToSMTH(Vector3 tranfo)
+    {
+    SPEEDY = true;
+	agent.SetDestination(tranfo);
+    }
 
     #region Serialized Field States
     [Header("Player and Bully Detection")]
@@ -381,6 +400,6 @@ public class PrincipalScript : NPC
     private Vector3 aim;
     private Gauge gauge;
     [SerializeField] private Transform nonexistance;
-    [SerializeField] private bool movin;
+    [SerializeField] private bool movin,SPEEDY;
     #endregion
 }

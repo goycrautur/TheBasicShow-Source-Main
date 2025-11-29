@@ -21,6 +21,13 @@ public class WindowScript : MonoBehaviour
     {
         if (!broken && broke)
         {
+            foreach (PrincipalScript maxi in  GameControllerScript.Instance.maxiScr)
+            {
+                if (maxi.isActiveAndEnabled)
+                {
+                    maxi.callToSMTH(this.transform.position);
+                }
+            }
             if (sound)
             {
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
