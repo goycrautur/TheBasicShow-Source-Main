@@ -7,7 +7,6 @@ public class MuchoScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        baldiAudio = GetComponent<AudioSource>();
         GetAngry(0f);
 
         if (endless)
@@ -220,7 +219,7 @@ public class MuchoScript : NPC
     [SerializeField] private Animator baldicator, baldiAnimator;
 
     private float currentPriority;
-    private AudioSource baldiAudio;
+    [SerializeField] private AudioSource baldiAudio;
     [SerializeField] private subsScriptableObject slamSound;
     #endregion
 }

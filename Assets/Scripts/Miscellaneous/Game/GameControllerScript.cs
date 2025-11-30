@@ -35,26 +35,6 @@ public class GameControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (timeout)
-        {
-            escapeMusic.mute = true;
-            if (warrealest)
-            {
-                warmusic.mute = true;
-            }
-            for (int i = 0; i < EvapV2FinaleSounSource.Length; ++i)
-            {
-                if (EvapV2FinaleSounSource[i] != null)
-                {
-                    EvapV2FinaleSounSource[i].mute = true;
-                }
-            }
-        }
-        if (maxNotebooks == failedNotebooks && !warrealest)
-        {
-            FinaleSecret = true;
-        }
-        DiscordRPC_stuff.current.UpdateStatus(modeDetails, modeState, largeImagething, largeImageText);
         if (!KF.gamePaused)
         {
             FinaleModeAnnoyance();
@@ -66,6 +46,11 @@ public class GameControllerScript : MonoBehaviour
         }
         GameOverFunction();
         muchofinaleStuff();
+        randomASSstuff();
+    }
+    #endregion
+    public void randomASSstuff()
+    {
         foreach (NPC enpeecee in NPCThatGetAffectedByMetalPipe)
         {
             enpeecee.agentSpeedScale = metalpipeStun ? 0f : 1f;
@@ -74,8 +59,21 @@ public class GameControllerScript : MonoBehaviour
         {
             npcmapicon.SetActive(ipleak ? true : false);
         }
+        escapeMusic.mute = timeout;
+        warmusic.mute = timeout;
+        for (int i = 0; i < EvapV2FinaleSounSource.Length; ++i)
+        {
+            if (EvapV2FinaleSounSource[i] != null)
+            {
+                EvapV2FinaleSounSource[i].mute = timeout;
+            }
+        }
+        if (maxNotebooks == failedNotebooks && !warrealest)
+        {
+            FinaleSecret = true;
+        }
+        DiscordRPC_stuff.current.UpdateStatus(modeDetails, modeState, largeImagething, largeImageText);
     }
-    #endregion
     public void muchofinaleStuff()
     {
         for (int i = 0; i < nuzzlesframeshit.Length; ++i)
@@ -294,7 +292,7 @@ public class GameControllerScript : MonoBehaviour
         spoopMode = true;
         if (mode == "story")
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(180f);
+            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(0f);
             ObjectsToDisable.ForEach(o => o.SetActive(false));
             ObjectsToEnable.ForEach(o => o.SetActive(true));
             if (warrealest)
