@@ -30,6 +30,14 @@ public class MuchoScript : NPC
 
     public override void OnUpdate()
     {
+        if (antiHearing)
+		{
+			AntiHearingDuratio -= Time.deltaTime;
+		}
+        if (AntiHearingDuratio < 0f)
+		{
+            antiHearing = false;
+        }
         targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
@@ -41,6 +49,7 @@ public class MuchoScript : NPC
         {
             baldiTempAnger = 0f;
         }
+
     }
     public void targe()
     {
@@ -96,8 +105,12 @@ public class MuchoScript : NPC
             {
                 Invoke(nameof(OnMoveDone), timeToMove);
             }
-            baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger+2 / baldiSpeedScale) + 3;
+            resetWaitTime();
         }
+    }
+    public void resetWaitTime()
+    {
+        baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger+2 / baldiSpeedScale) + 3;
     }
 
     private void OnMoveDone()
@@ -188,14 +201,11 @@ public class MuchoScript : NPC
             }
         }
     }
-    public void ActivateAntiHearing(float SetTime) => StartCoroutine(SetHearingTimer(SetTime));
-
-    private IEnumerator SetHearingTimer(float Timer)
+    public void ActivateAntiHearing(float SetTime)
     {
         Wander();
         antiHearing = true;
-        yield return new WaitForSeconds(Timer);
-        antiHearing = false;
+        AntiHearingDuratio = SetTime;
     }
     #endregion
     [SerializeField] private GameObject bsodaSpray;
@@ -203,7 +213,7 @@ public class MuchoScript : NPC
     #region Serialized Field States
     [Header("Baldi's Stats")]
     [SerializeField] private float baldiAnger;
-    [SerializeField] private float baldiTempAnger, baldiWait, baldiSpeedScale;
+    public float baldiTempAnger, baldiWait, baldiSpeedScale;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;
@@ -211,7 +221,7 @@ public class MuchoScript : NPC
 
     [Header("Anger Management")]
     [SerializeField] private float angerRate;
-    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger;
+    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
     public bool endless;
 
     [Header("Audio and Animation")]

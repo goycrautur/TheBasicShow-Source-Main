@@ -27,12 +27,12 @@ public class ITM_Quarter : BaseItem
             if (Ray.collider.CompareTag("Phone"))
             {
                 TapePlayerScript tapePlayer = Ray.collider.GetComponent<TapePlayerScript>();
-                if (tapePlayer != null)
+                if (tapePlayer != null && !tapePlayer.TapeCDEnable)
                 {
                     tapePlayer.Play();
                     audioDevice.PlayOneShot(aud_Drop);
+                    return true;
                 }
-                return true;
             }
         }
         return false;

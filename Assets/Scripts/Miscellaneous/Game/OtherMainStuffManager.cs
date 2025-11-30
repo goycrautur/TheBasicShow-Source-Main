@@ -4,6 +4,105 @@ using UnityEngine;
 
 public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
 {
+    //peak ass singleton class for just chaos mode and other tuff stuff ky
+    public void Start()
+    {
+        MuchoStunDura = 1f;
+        FamStunDura = 1f;
+        ZerStunDura = 1f;
+        BalStunDura = 1f;
+    }
+    public void Update()
+    {
+        if (MuchoStunCount)
+		{
+			MuchoStunDura -= Time.deltaTime;
+            foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    muc.stopMoving = true;
+                    muc.agent.speed = 0;
+                }
+            }
+		}
+        if (MuchoStunDura < 0f)
+		{
+            foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+            {
+                if (muc.isActiveAndEnabled)
+                {
+                    muc.stopMoving = false;
+                    muc.resetWaitTime();
+                    muc.Move();
+                }
+            }
+            MuchoStunCount = false;
+            MuchoStunDura = 1f;
+        }
+        if (FamStunCount)
+		{
+			FamStunDura -= Time.deltaTime;
+		}
+        if (FamStunDura < 0f)
+		{
+            FamStunCount = false;
+            FamStunDura = 1f;
+        }
+        if (ZerStunCount)
+		{
+			ZerStunDura -= Time.deltaTime;
+            foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    zes.stopMoving = true;
+                    zes.agent.speed = 0;
+                }
+            }
+		}
+        if (ZerStunDura < 0f)
+		{
+            foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
+            {
+                if (zes.isActiveAndEnabled)
+                {
+                    zes.stopMoving = false;
+                    zes.resetWaitTime();
+                    zes.Move();
+                }
+            }
+            ZerStunCount = false;
+            ZerStunDura = 1f;
+            
+        }
+        if (BalStunCount)
+		{
+			BalStunDura -= Time.deltaTime;
+            foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    bal.stopMoving = true;
+                    bal.agent.speed = 0;
+                }
+            }
+		}
+        if (BalStunDura < 0f)
+		{
+            foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
+            {
+                if (bal.isActiveAndEnabled)
+                {
+                    bal.stopMoving = false;
+                    bal.resetWaitTime();
+                    bal.Move();
+                }
+            }
+            BalStunCount = false;
+            BalStunDura = 1f;
+        }
+    }
     #region TeachersChaosModeStuff
     public void HearingShit(float soundval, Transform wherItCameFrom, Vector3 wherItCameFromAlt, string teacher = null, bool UseVector3 = false)
     {
@@ -89,6 +188,29 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                     bal.ActivateAntiHearing(AntiHearingDuration);
                 }
             }
+        }
+    }
+    public void PeakStun(float Duration,string teacher = null)
+    {
+        if (teacher == "all" || teacher == "All" || teacher == "zerull")
+        {
+            ZerStunDura = Duration;
+            ZerStunCount = true;
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "famished")
+        {
+            FamStunDura = Duration;
+            FamStunCount = true;
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "mucho")
+        {
+            MuchoStunDura = Duration;
+            MuchoStunCount = true;
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "baldi")
+        {
+            BalStunDura = Duration;
+            BalStunCount = true;
         }
     }
     public void AngerShit(float angerAmmount, float tempAngerAmmount = 0f, bool tempAnger = false, string teacher = null)
@@ -366,5 +488,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
         ItemManager.Instance.UpdateItemUI();
     }
     #endregion
-
+    public float MuchoStunDura,FamStunDura,ZerStunDura,BalStunDura;
+    public bool MuchoStunCount,FamStunCount,ZerStunCount,BalStunCount;
 }

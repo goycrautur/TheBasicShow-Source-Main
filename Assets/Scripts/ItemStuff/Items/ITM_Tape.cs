@@ -8,13 +8,24 @@ public class ITM_Tape : BaseItem
         {
             if (Ray.collider.CompareTag("TapePlayer"))
             {
-                Ray.collider.gameObject.GetComponent<TapePlayerScript>().Play();
-                GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Insert);
-                return true;
+                if (!Ray.collider.gameObject.GetComponent<TapePlayerScript>().TapeCDEnable)
+                {
+                    Ray.collider.gameObject.GetComponent<TapePlayerScript>().Play(holyshitTapeTypes == TapeTypes.BaldiLeastFavouriteTape ? "normal" : holyshitTapeTypes == TapeTypes.JerryEarPiercingDvdDisk ? "JEPDVDD" : holyshitTapeTypes == TapeTypes.JerryAbsoloutelyFuckingBangerDvdDisk ? "jerrypeakassDisc" :"");
+                    GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Insert);
+                    return true;
+                }
             }
         }
         return false;
     }
 
+    public TapeTypes holyshitTapeTypes;
+    public enum TapeTypes
+    {
+        BaldiLeastFavouriteTape,
+        JerryEarPiercingDvdDisk,
+        JerryAbsoloutelyFuckingBangerDvdDisk
+        
+    }
     [SerializeField] private AudioClip aud_Insert;
 }

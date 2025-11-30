@@ -38,6 +38,14 @@ public class zerullscript : NPC
 
     public override void OnUpdate()
     {
+        if (antiHearing)
+		{
+			AntiHearingDuratio -= Time.deltaTime;
+		}
+        if (AntiHearingDuratio < 0f)
+		{
+            antiHearing = false;
+        }
         targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
@@ -108,8 +116,12 @@ public class zerullscript : NPC
             {
                 Invoke(nameof(OnMoveDone), timeToMove);
             }
-            Wait = (-3 - TempAnger) * Anger / (Anger+3 / SpeedScale) + 3;
+            resetWaitTime();
         }
+    }
+    public void resetWaitTime()
+    {
+        Wait = (-3 - TempAnger) * Anger / (Anger+3 / SpeedScale) + 3;
     }
 
     private void OnMoveDone()
@@ -199,14 +211,11 @@ public class zerullscript : NPC
             }
         }
     }
-    public void ActivateAntiHearing(float SetTime) => StartCoroutine(SetHearingTimer(SetTime));
-
-    private IEnumerator SetHearingTimer(float Timer)
+    public void ActivateAntiHearing(float SetTime)
     {
         Wander();
         antiHearing = true;
-        yield return new WaitForSeconds(Timer);
-        antiHearing = false;
+        AntiHearingDuratio = SetTime;
     }
     #endregion
 
@@ -221,7 +230,7 @@ public class zerullscript : NPC
 
     [Header("Anger Management")]
     [SerializeField] private float angerRate;
-    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger;
+    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
     public bool endless;
 
     [Header("Audio and Animation")]

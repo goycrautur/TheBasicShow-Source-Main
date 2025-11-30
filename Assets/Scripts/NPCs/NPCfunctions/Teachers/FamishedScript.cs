@@ -27,6 +27,14 @@ public class FamishedScript : NPC
 
     public override void OnUpdate()
     {
+        if (antiHearing)
+		{
+			AntiHearingDuratio -= Time.deltaTime;
+		}
+        if (AntiHearingDuratio < 0f)
+		{
+            antiHearing = false;
+        }
         MOOOVEYOUBITCH();
         base.OnUpdate();
         base.agentSpeed = !gc.fmc.isAbleToMove ? 0 : base.DefaultAgentSpeed * base.agentSpeedScale;
@@ -162,14 +170,11 @@ public class FamishedScript : NPC
         }
     }
 
-    public void ActivateAntiHearing(float SetTime) => StartCoroutine(SetHearingTimer(SetTime));
-
-    private IEnumerator SetHearingTimer(float Timer)
+    public void ActivateAntiHearing(float SetTime)
     {
         Wander();
         antiHearing = true;
-        yield return new WaitForSeconds(Timer);
-        antiHearing = false;
+        AntiHearingDuratio = SetTime;
     }
     #endregion
 
@@ -184,7 +189,7 @@ public class FamishedScript : NPC
 
     [Header("Anger Management")]
     [SerializeField] private float angerRate;
-    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger;
+    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
     public bool endless;
 
     [Header("Audio and Animation")]

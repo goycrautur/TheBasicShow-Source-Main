@@ -30,6 +30,14 @@ public class BaldiScript : NPC
 
     public override void OnUpdate()
     {
+        if (antiHearing)
+		{
+			AntiHearingDuratio -= Time.deltaTime;
+		}
+        if (AntiHearingDuratio < 0f)
+		{
+            antiHearing = false;
+        }
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (baldiTempAnger > 0f)
@@ -83,8 +91,12 @@ public class BaldiScript : NPC
             {
                 Invoke(nameof(OnMoveDone), timeToMove);
             }
-            baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger + 2f / baldiSpeedScale) + 3f;
+            resetWaitTime();
         }
+    }
+    public void resetWaitTime()
+    {
+        baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger + 2f / baldiSpeedScale) + 3f;
     }
 
 
@@ -175,21 +187,18 @@ public class BaldiScript : NPC
             }
         }
     }
-    public void ActivateAntiHearing(float SetTime) => StartCoroutine(SetHearingTimer(SetTime));
-
-    private IEnumerator SetHearingTimer(float Timer)
+    public void ActivateAntiHearing(float SetTime)
     {
         Wander();
         antiHearing = true;
-        yield return new WaitForSeconds(Timer);
-        antiHearing = false;
+        AntiHearingDuratio = SetTime;
     }
     #endregion
 
     #region Serialized Field States
     [Header("Baldi's Stats")]
     [SerializeField] private float baldiAnger;
-    [SerializeField] private float baldiTempAnger, baldiWait, baldiSpeedScale;
+    public float baldiTempAnger, baldiWait, baldiSpeedScale;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;
@@ -197,7 +206,7 @@ public class BaldiScript : NPC
 
     [Header("Anger Management")]
     [SerializeField] private float angerRate;
-    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger;
+    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
     public bool endless;
 
     [Header("Audio and Animation")]
