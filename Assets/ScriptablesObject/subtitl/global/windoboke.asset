@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: windoboke
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 3fc70047cfa07dc4ab4d1db6d7147389, type: 3}
-  subtitleType: 1
   subtitleOption:
     enabled: 1
     headText: '*windo breaks*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 5000
     shakeyradius: 1
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: static
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 3e9596596d21dbf46af57e2f706a756a, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: '*Panic! In static! Out manic!.....wait why am i typing lyrics in a
@@ -26,3 +25,5 @@ MonoBehaviour:
     shakeyspeed: 500
     shakeyradius: 0.3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

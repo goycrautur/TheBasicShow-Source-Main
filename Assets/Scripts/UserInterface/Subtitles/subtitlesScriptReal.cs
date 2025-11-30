@@ -8,7 +8,7 @@ using TMPro;
 public class subtitlesScriptReal : MonoBehaviour
 {
     // yea forgive me im too braindead to do scaling lol dont copystrike me yuri
-    private void Start()
+    public void Start()
     {
         shakespeed = subtitlys.shakeyspeed;
         shake = subtitlys.shakey;
@@ -16,9 +16,6 @@ public class subtitlesScriptReal : MonoBehaviour
         tmpTxt.text = "";
         hjea = subtitlys.headText;
         tmpTxt.color = subtitlys.textColor;
-        aspectRatio = 1f;
-        bg.localScale = new Vector3(1f, 1f, 1f);
-        bg.anchoredPosition = fixesPosition;
         
         checkStuff();
     }
@@ -55,15 +52,47 @@ public class subtitlesScriptReal : MonoBehaviour
                 StartCoroutine(TimingIthink(subtitlys.subtitleTimings[i].duration,i));
             }
         }
-
+    }
+    public void updateSubPostion()
+    {
         if (is3d)
         {
-            bg.anchoredPosition = new Vector3(0f, -266.66f / aspectRatio, 0f);
-            return;
+        Vector3 position = cameraTransf.position;
+        Vector3 position2 = producerAud.transform.position;
+        float num = Vector3.Distance(position2, position);
+        float maxDistance = producerAud.maxDistance;
+        float minDistance = producerAud.minDistance;
+        float num2 = 1f;
+        float num3 = Mathf.Atan2(position.z - position2.z, position.x - position2.x) * 57.29578f + cameraTransf.rotation.eulerAngles.y + 180f;
+        float num4 = 100f * producerAud.panStereo;
+        float num5 = 248.88f / aspectRatio;
+        float num6 = Mathf.Lerp(num5, -num5, producerAud.spread / 360f);
+        bg.anchoredPosition = new Vector3(Mathf.Cos(num3 * 0.017453292f) * num6 * num2 + num4, Mathf.Lerp(-266.66f / aspectRatio, Mathf.Sin(num3 * 0.017453292f) * num6, num2), 0f);
+        float num7 = 1f;
+            switch (producerAud.rolloffMode)
+            {
+                case AudioRolloffMode.Logarithmic:
+                    {
+                        float num8 = 1f;
+                        num7 = minDistance * (1f / (1f + num8 * (num - 1f)));
+                        break;
+                    }
+                case AudioRolloffMode.Linear:
+                    num7 = Mathf.Lerp(1f, 0f, num / maxDistance - minDistance / maxDistance);
+                    break;
+                case AudioRolloffMode.Custom:
+                    num7 = producerAud.GetCustomCurve(AudioSourceCurveType.CustomRolloff).Evaluate(num / maxDistance);
+                    break;
+            }
+        num7 = Mathf.Clamp01(1f * num7);
+        float num9 = Mathf.Lerp(1f, num7, num2);
+        num9 *= 1f;
+        bg.localScale = new Vector3(num9, num9, 1f);
         }
     }
     private void Update()
     {
+        updateSubPostion();
         if (shake)
         {
             Vector3 localPosition = new Vector3(Mathf.Sin(Time.time * shakespeed) * shakeyradius, Mathf.Cos(Time.time * shakespeed) * shakeyradius, 0f);
@@ -75,6 +104,7 @@ public class subtitlesScriptReal : MonoBehaviour
 
     private void LateUpdate()
     {
+        
         if (producerAud == null)
         {
             Destroy(base.gameObject);
@@ -94,58 +124,17 @@ public class subtitlesScriptReal : MonoBehaviour
             }
             duration -= Time.deltaTime;
         }
-        if (!is3d)
-        {
-            return;
-        }
-            Vector3 position = Camera.main.transform.position;
-            Vector3 position2 = producerAud.transform.position;
-            float num = Vector3.Distance(position2, position);
-            float maxDistance = producerAud.maxDistance;
-            float minDistance = producerAud.minDistance;
-            float num2 = 1f;
-            if ((num > maxDistance && num2 > 0.5f) || producerAud.volume == 0f)
-            {
-                bg.localScale = new Vector3(0f, 0f, 1f);
-            }
-            else
-            {
-                float num3 = Mathf.Atan2(position.z - position2.z, position.x - position2.x) * 57.29578f + Camera.main.transform.rotation.eulerAngles.y + 180f;
-                float num4 = 100f * producerAud.panStereo;
-                float num5 = 248.88f / aspectRatio;
-                float num6 = Mathf.Lerp(num5, -num5, producerAud.spread / 360f);
-                bg.anchoredPosition = new Vector3(Mathf.Cos(num3 * 0.017453292f) * num6 * num2 + num4, Mathf.Lerp(-266.66f / aspectRatio, Mathf.Sin(num3 * 0.017453292f) * num6, num2), 0f);
-                float num7 = 1f;
-                switch (producerAud.rolloffMode)
-                {
-                    case AudioRolloffMode.Logarithmic:
-                        {
-                            float num8 = 1f;
-                            num7 = minDistance * (1f / (1f + num8 * (num - 1f)));
-                            break;
-                        }
-                    case AudioRolloffMode.Linear:
-                        num7 = Mathf.Lerp(1f, 0f, num / maxDistance - minDistance / maxDistance);
-                        break;
-                    case AudioRolloffMode.Custom:
-                        num7 = producerAud.GetCustomCurve(AudioSourceCurveType.CustomRolloff).Evaluate(num / maxDistance);
-                        break;
-                }
-                num7 = Mathf.Clamp01(1f * num7);
-                float num9 = Mathf.Lerp(1f, num7, num2);
-                num9 *= 1f;
-                bg.localScale = new Vector3(num9, num9, 1f);
-            }
+        
         if (is3d)
         {
             if (producerAud != null)
             {
-                if (producerAud.mute)
+                if (producerAud.mute || producerAud.volume == 0f)
                 {
                     imagbg.enabled = false;
                     tmpTxt.enabled = false;
                 }
-                if (!producerAud.mute)
+                if (!producerAud.mute || producerAud.volume > 0f)
                 {
                     imagbg.enabled = true;
                     tmpTxt.enabled = true;
@@ -155,7 +144,6 @@ public class subtitlesScriptReal : MonoBehaviour
     }
     private IEnumerator TimingIthink(float time,int i)
     {
-
         yield return new WaitForSeconds(time);
         tmpTxt.text = "";
         tmpTxt.color = subtitlys.subtitleTimings[i].textColor;
@@ -183,6 +171,7 @@ public class subtitlesScriptReal : MonoBehaviour
         }
         yield break;
     }
+    public Transform cameraTransf;
     public string hjea;
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
@@ -193,5 +182,5 @@ public class subtitlesScriptReal : MonoBehaviour
     public Image imagbg;
     public RectTransform bg;
     public Vector3 fixesPosition = Vector3.zero;
-    private float aspectRatio;
+    public float aspectRatio;
 }

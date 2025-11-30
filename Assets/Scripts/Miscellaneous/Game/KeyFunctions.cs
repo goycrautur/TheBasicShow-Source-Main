@@ -81,12 +81,14 @@ public class KeyFunctions : MonoBehaviour
 
     public void ExitGame()
     {
+        Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         AudioListener.pause = false;
         SceneManager.LoadSceneAsync("MainMenu");
         Singleton<MusicManager>.Instance.PauseMidi(false);
     }
     public void ResetGame()
     {
+        Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         AudioListener.pause = false;
         SceneManager.LoadSceneAsync("GameArea");
         Singleton<MusicManager>.Instance.PauseMidi(false);

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: demoma
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 79e74b022c3575849a186e94275220fc, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: '*Laughing*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 2000
     shakeyradius: 5
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

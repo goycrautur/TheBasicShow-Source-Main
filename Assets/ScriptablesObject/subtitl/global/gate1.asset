@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: gate1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e0f9c057b43e7fe40810afc8c6aedd5c, type: 3}
-  subtitleType: 1
   subtitleOption:
     enabled: 1
     headText: '*concrete sliding sound*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1
     shakeyradius: 3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

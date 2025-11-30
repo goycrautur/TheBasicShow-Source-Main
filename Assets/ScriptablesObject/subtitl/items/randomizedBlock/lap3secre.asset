@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: lap3secre
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6dbbf0d5ced814f499f9484c32a56204, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: '*secret lap 3 theme intensify*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1
     shakeyradius: 0.3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

@@ -294,7 +294,7 @@ public class GameControllerScript : MonoBehaviour
         spoopMode = true;
         if (mode == "story")
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(10f);
+            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(180f);
             ObjectsToDisable.ForEach(o => o.SetActive(false));
             ObjectsToEnable.ForEach(o => o.SetActive(true));
             if (warrealest)
@@ -334,9 +334,7 @@ public class GameControllerScript : MonoBehaviour
 
         PlayerCamera.farClipPlane = gameOverDelay * 400f;
         gameOverDelay -= Time.unscaledDeltaTime;
-        timeout = false;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown = false;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 9999;
+        Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
 
         if (!gamaOvarDevice.isPlaying)
         {

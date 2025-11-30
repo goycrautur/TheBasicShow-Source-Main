@@ -154,10 +154,10 @@ public class MusicManager : Singleton<MusicManager>
     {
         if (drumsIsPlaying && gainDrumsToObject && syncedDrumsMidi != null)
         {
-            float drumsGain = 25f / (targetTransform.position - GameControllerScript.Instance.player.transform.position).magnitude;
-            if (drumsGain > 0.5f)
+            float drumsGain = 15f / (targetTransform.position - GameControllerScript.Instance.player.transform.position).magnitude;
+            if (drumsGain > 1f)
             {
-                drumsGain = 0.5f;
+                drumsGain = 1f;
             }
             syncedDrumsMidi.Gain = drumsGain;
         }

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ChainSawSweep
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6e5538b311a1bf546bdf64dc1b98051d, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: '*chainsaw maniac intensify*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 3000
     shakeyradius: 3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

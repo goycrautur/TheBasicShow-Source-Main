@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: potet
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 0cc91b221c6715c44a0961bbc4835596, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: Po-Teto-Teto-Teto
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1
     shakeyradius: 0.3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

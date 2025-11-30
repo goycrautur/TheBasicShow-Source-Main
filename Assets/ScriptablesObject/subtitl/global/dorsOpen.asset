@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: dorsOpen
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 11c1822a14c1661429aebdde359cbc73, type: 3}
-  subtitleType: 1
   subtitleOption:
     enabled: 1
     headText: '*Door opens*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1
     shakeyradius: 3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: glaceon
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc949b53daaa3a54b845f58170dc8be4, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: '*Crying noises*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 10000
     shakeyradius: 10
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

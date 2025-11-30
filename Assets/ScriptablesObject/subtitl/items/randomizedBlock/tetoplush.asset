@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: tetoplush
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: c6b119a830553c346846ba16bd6404ce, type: 3}
-  subtitleType: 0
   subtitleOption:
     enabled: 1
     headText: '*Plushie noises*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1
     shakeyradius: 0.3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: balslap
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: affac2acfe66b954cada2dca22605fed, type: 3}
-  subtitleType: 1
   subtitleOption:
     enabled: 1
     headText: '*SLAP*'
@@ -25,3 +24,5 @@ MonoBehaviour:
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
+    timedSub: 0
+    subtitleTimings: []

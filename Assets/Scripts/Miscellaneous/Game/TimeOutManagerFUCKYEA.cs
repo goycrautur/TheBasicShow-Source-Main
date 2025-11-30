@@ -59,4 +59,10 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
         TimeDuratiOk = durati;
         countItDown = true;
     }
+    public void ResetTimeoutStuff()
+    {
+        GameControllerScript.Instance.timeout = false;
+        countItDown = false;
+        TimeDuratiOk = 9999;
+    }
 }
