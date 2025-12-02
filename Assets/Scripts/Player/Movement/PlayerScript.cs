@@ -477,14 +477,14 @@ public class PlayerScript : MonoBehaviour
 		if (!jumpRope)
 		{
 
-			if (other.transform.name == "Playtime" & !jumpRope & playtime.playCool <= 0f)
+			if (other.transform.name == "Playtime" & !jumpRope & playtime.playCool <= 0f & playtime.IsHitboxValid)
 			{
 				if (!invisi && !invisichalk || !invisichalk && !invisi)
 				{
 					ActivateJumpRope();
 				}
 			}
-			else if (other.transform.name == "MemeMouse" & !jumpRope & playtime.playCool <= 0f)
+			else if (other.transform.name == "MemeMouse" & !jumpRope & playtime.playCool <= 0f & playtime.IsHitboxValid)
 			{
 				if (!invisi && !invisichalk || !invisichalk && !invisi)
 				{

@@ -31,6 +31,14 @@ public class CraftersScript : NPC
             AngryMeter = 0;
         }
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        if (base.stun)
+        {
+            agent.speed = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            agent.speed = base.agentSpeed;
+        }
         speedAlt1 = defspeedAlt1 * base.agentSpeedScale;
         speedAlt2 = defspeedAlt2 * base.agentSpeedScale;
 
@@ -131,12 +139,15 @@ public class CraftersScript : NPC
             }
             else
             {
+                if (base.IsHitboxValid)
+                {
                 GameObject attacker = Instantiate(attackingCrafters);
                 attacker.transform.position = transform.position + Vector3.up * 4f;
                 attacker.GetComponent<CraftersAttackerScript>().playerTransform = player;
                 attacker.GetComponent<CraftersAttackerScript>().crafters = gameObject;
                 attacker.GetComponent<CraftersAttackerScript>().craftersScript = this;
                 attacker.GetComponent<CraftersAttackerScript>().Attack();
+                }
                 gameObject.SetActive(false);
             }
         }
@@ -145,14 +156,15 @@ public class CraftersScript : NPC
     public void GiveConsequence()
     {
         cc.enabled = true;
-        gc.CraftersTeleport();
+        if (base.IsHitboxValid)
         {
-            chillBro = 20f;
-            angry = false;
-            agent.speed = base.agentSpeed;
-            spriteImage.sprite = normalSprite;
-            audioDevice.Stop();
+            gc.CraftersTeleport();
         }
+        chillBro = 20f;
+        angry = false;
+        agent.speed = base.agentSpeed;
+        spriteImage.sprite = normalSprite;
+        audioDevice.Stop();
     }
     #endregion
 

@@ -9,6 +9,16 @@ public class SausageJerry : NPC
 
 	public override void OnUpdate()
 	{
+		base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+		agent.speed = base.agentSpeed;
+		if (base.stun)
+        {
+            agent.speed = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            agent.speed = base.agentSpeed;
+        }
 		if (fartCooldown > 0f)
 		{
 			fartCooldown -= Time.deltaTime;
@@ -26,13 +36,6 @@ public class SausageJerry : NPC
 		Instantiate(Itemspawn, new Vector3(transform.position.x, 4f, transform.position.z), transform.rotation);
 		Instantiate(FartParticle, transform.position, transform.rotation);
 		fartCooldown = DefaultfartCooldown;
-	}
-
-	public override void OnFixedUpdate()
-	{
-		base.OnFixedUpdate();
-		base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-		agent.speed = base.agentSpeed;
 	}
 
 	//protected override void CheckForPlayer() => base.CheckForPlayer();

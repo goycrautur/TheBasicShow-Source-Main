@@ -51,9 +51,9 @@ public class TapePlayerScript : MonoBehaviour
                     tapeDevice.clip = welcomeOld;
                     tapeDevice.Play();
                     GameControllerScript.Instance.SubsManager.summonLeSubtitle(ohnoSubs.subtitleOption,ohnoSubs,0f,tapeDevice);
-                    TapeCD = AntiHearingDuration;
+                    TapeCD = welcomeOld.length;
                     TapeCDEnable = true;
-                    Singleton<OtherMainStuffManager>.Instance.deafshit(AntiHearingDuration,"All");
+                    Singleton<OtherMainStuffManager>.Instance.deafshit(welcomeOld.length,"All");
                     if (ZerullClassic.Instance.zs != null && ZerullClassic.Instance.RealBossStarted)
                     {
                         StartCoroutine(StunBoss());
@@ -63,7 +63,7 @@ public class TapePlayerScript : MonoBehaviour
                             {
                                 yield return null;
                             }
-                            ZerullClassic.Instance.OnHit(AntiHearingDuration/2,5f);
+                            ZerullClassic.Instance.OnHit(welcomeOld.length/2,5f);
                         }
                     }
                 }

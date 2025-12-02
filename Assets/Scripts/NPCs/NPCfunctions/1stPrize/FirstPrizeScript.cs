@@ -17,6 +17,14 @@ public class FirstPrizeScript : NPC
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         runSpeed = DefaultRunspeed * base.agentSpeedScale;
+        if (base.stun)
+        {
+            runSpeed = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            runSpeed = DefaultRunspeed * base.agentSpeedScale;
+        }
 
         UpdateAutoBrakeCooldown();
         UpdateRotationAndSpeed();
@@ -68,13 +76,28 @@ public class FirstPrizeScript : NPC
         playerSeen = true;
         TargetPlayer();
         currentSpeed = runSpeed;
+        if (base.stun)
+        {
+            currentSpeed = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            currentSpeed = runSpeed;
+        }
     }
 
     private void HandleLostPlayer()
     {
         if (coolDown <= 0f)
         {
-            currentSpeed = base.agentSpeed;
+            if (base.stun)
+            {
+                currentSpeed = 0f;
+            }
+            if (base.StunTime < 0f)
+            {
+                currentSpeed = base.agentSpeed;
+            }
             if (playerSeen)
             {
                 PlayLostAudio();
@@ -218,6 +241,14 @@ public class FirstPrizeScript : NPC
         if (Mathf.Abs(angleDiff) < 5f)
         {
             agent.speed = currentSpeed;
+            if (base.stun)
+            {
+                agent.speed = 0f;
+            }
+            if (base.StunTime < 0f)
+            {
+                agent.speed = currentSpeed;
+            }
         }
         else
         {

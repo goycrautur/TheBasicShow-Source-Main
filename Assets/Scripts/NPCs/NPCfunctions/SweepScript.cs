@@ -22,6 +22,14 @@ public class SweepScript : NPC
         }
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         agent.speed = base.agentSpeed;
+        if (base.stun)
+        {
+            agent.speed = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            agent.speed = base.agentSpeed;
+        }
 
         if (!active)
         {
@@ -79,14 +87,14 @@ public class SweepScript : NPC
     {
         if (other.CompareTag("NPC") || other.CompareTag("Player"))
         {
-            if (!audioDevice.isPlaying)
+            if (base.IsHitboxValid)
             {
                 audioDevice.PlayOneShot(aud_Sweep);
                 GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
-            }
-            if (other.transform.name == "Its a Bully")
-            {
-                base.Wander();
+                if (other.transform.name == "Its a Bully")
+                {
+                    base.Wander();
+                }
             }
         }
     }

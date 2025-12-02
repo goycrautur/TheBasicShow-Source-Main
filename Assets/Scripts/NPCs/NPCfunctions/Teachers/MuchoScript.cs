@@ -41,6 +41,17 @@ public class MuchoScript : NPC
         targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        if (base.stun)
+        {
+            stopMoving = true;
+            agent.speed = 0;
+        }
+        if (base.StunTime < 0f)
+        {
+            stopMoving = false;
+            resetWaitTime();
+            Move();
+        }
         if (baldiTempAnger > 0f)
         {
             baldiTempAnger -= 0.05f * Time.deltaTime;
@@ -132,7 +143,7 @@ public class MuchoScript : NPC
     {
         if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
-            if (!base.squished)
+            if (base.IsHitboxValid)
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2f / gc.player.PlayerDmgResistance, 0.0125f, false, true, false);
 				gc.player.killedbybaldi = true;

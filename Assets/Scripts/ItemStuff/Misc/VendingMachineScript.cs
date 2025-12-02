@@ -14,7 +14,7 @@ public class VendingMachineScript : MonoBehaviour
         if (crazyMode)
         {
             VendingFront.material = CrazyFront;
-            itemID = Random.Range(1, 37);
+            itemID = Random.Range(1, 42);
         }
     }
     #endregion
@@ -62,7 +62,7 @@ public class VendingMachineScript : MonoBehaviour
 
         if (crazyMode)
         {
-            itemID = Random.Range(1, 39);
+            itemID = Random.Range(1, 42);
         }
     }
 

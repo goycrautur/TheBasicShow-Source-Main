@@ -22,7 +22,16 @@ public class PrincipalScript : NPC
 
     public override void OnUpdate()
     {
-        agent.speed = movin ? base.agentSpeed : SPEEDY ? (base.agentSpeed*8) : 0;
+        agent.speed = movin ? base.agentSpeed * PrinSpeedMult : 0;
+        PrinSpeedMult = OGPrinSpeedMult;
+        if (base.stun)
+        {
+            PrinSpeedMult = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            PrinSpeedMult = OGPrinSpeedMult;
+        }
         base.OnUpdate();
         if (seesRuleBreak)
         {
@@ -173,7 +182,7 @@ public class PrincipalScript : NPC
     #region Movement & Navigation
     protected override void Wander(string locationType = "default")
     {
-        SPEEDY = false;
+        OGPrinSpeedMult = 1f;
         playerScript.principalBugFixer = 1;
         base.Wander(locationType);
         if (agent.isStopped)
@@ -201,7 +210,7 @@ public class PrincipalScript : NPC
 
     protected override void TargetPlayer()
     {
-        SPEEDY = false;
+        OGPrinSpeedMult = 1f;
         base.TargetPlayer();
         movin = true;
     }
@@ -210,7 +219,7 @@ public class PrincipalScript : NPC
     {
         if (!bullySeen)
         {
-            SPEEDY = false;
+            OGPrinSpeedMult = 1f;
             agent.SetDestination(bully.position);
             audioQueue.QueueAudio(audNoBullying,noBullyingCaptions);
             movin = true;
@@ -258,25 +267,29 @@ public class PrincipalScript : NPC
         }
     }
 
-    public void GiveDetention(Transform target)
+    public void GiveDetention(Transform target,bool isitPlayer)
     {
-        playerScript.alsoInOffice = true;
-        if (playerScript.hugging)
+        if (isitPlayer)
         {
-            playerScript.hugging = false;
-            playerScript.sweepingFailsave = 0f;
-            target.transform.SetParent(null);
-        }
-        if (playerScript.jumpRope)
-        {
-            playerScript.jumpRope = false;
-            playerScript.DeactivateJumpRope();
-            playerScript.playtime.Disappoint();
-            target.transform.SetParent(null);
+            playerScript.alsoInOffice = true;
+            if (playerScript.hugging)
+            {
+                playerScript.hugging = false;
+                playerScript.sweepingFailsave = 0f;
+                target.transform.SetParent(null);
+            }
+            if (playerScript.jumpRope)
+            {
+                playerScript.jumpRope = false;
+                playerScript.DeactivateJumpRope();
+                playerScript.playtime.Disappoint();
+                target.transform.SetParent(null);
+            }
+            playerScript.guilt = 0f;
+            playerScript.principalBugFixer = 0;
         }
         officeDoor.openTime = 0f;
-        inOffice = true;
-        playerScript.principalBugFixer = 0;
+            inOffice = true;
         agent.isStopped = true;
         cc.enabled = false;
         Vector3 vector = new Vector3(point.position.x, target.position.y, point.position.z);
@@ -310,7 +323,7 @@ public class PrincipalScript : NPC
         {
             detentions = lockTime.Length - 1;
         }
-        playerScript.guilt = 0f;
+        
         StartCoroutine(QuickDelay());
     }
 
@@ -328,7 +341,11 @@ public class PrincipalScript : NPC
     {
         if (other.name == "Player" & summon)
         {
+            if (base.IsHitboxValid)
+            {
             summon = false;
+            movin = true;
+            }
             movin = true;
         }
     }
@@ -341,14 +358,14 @@ public class PrincipalScript : NPC
         }
         if (other.CompareTag("Player") && angry)
         {
-            if (!squished)
+            if (base.IsHitboxValid)
             {
                 scoreSystemManager.Instance.AddScore(-500);
-                GiveDetention(other.transform);
+                GiveDetention(other.transform, true);
             }
-            else if (squished)
+            else if (!base.IsHitboxValid)
             {
-                GiveDetention(nonexistance.transform);
+                GiveDetention(nonexistance.transform,false);
             }
         }
     }
@@ -367,7 +384,7 @@ public class PrincipalScript : NPC
     #endregion
     public void callToSMTH(Vector3 tranfo)
     {
-    SPEEDY = true;
+    OGPrinSpeedMult = 6f;
 	agent.SetDestination(tranfo);
     }
 
@@ -392,7 +409,7 @@ public class PrincipalScript : NPC
     [SerializeField] private Sprite gaugeDetentionSprite;
 
     private int detentions;
-    private float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak;
+    private float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
     [SerializeField] private int[] lockTime = { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 99 };
     private AudioSource AudioDevice;
     private bool summon, seesRuleBreak, bullySeen, inOffice;
@@ -400,6 +417,6 @@ public class PrincipalScript : NPC
     private Vector3 aim;
     private Gauge gauge;
     [SerializeField] private Transform nonexistance;
-    [SerializeField] private bool movin,SPEEDY;
+    [SerializeField] private bool movin;
     #endregion
 }

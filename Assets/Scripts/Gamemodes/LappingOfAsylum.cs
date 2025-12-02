@@ -23,7 +23,7 @@ public class LappingOfAsylumController : MonoBehaviour
 		}
         if (scoreDecreaseTimer < 0f)
 		{
-            scoreSystemManager.Instance.AddScore(-10*CurrentLap);
+            scoreSystemManager.Instance.AddScore(-15*CurrentLap);
             scoreDecreaseTimer = 1f/CurrentLap;
         }
     }
@@ -203,7 +203,6 @@ public class LappingOfAsylumController : MonoBehaviour
         yield return new WaitForSeconds(zawarudo.length / 2);
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
         LapSound.Play();
-        LapSound.loop = true;
         gc.audioDevice2.PlayOneShot(BellSoundLapping);
         CurrentLap++;
         gc.player.walkSpeedMultipler += 0.45f;
@@ -214,7 +213,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         vanishScore = true;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(360f);
+        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap].LapMusik.length-1);
         yield return null;
         yield break;
     }
@@ -233,6 +232,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             if (!inportalALREADY)
             {
+                scoreSystemManager.Instance.AddScore(5500*CurrentLap);
                 if (Meeptimar.isActiveAndEnabled)
                 {
                     meepTimerScript.Instance.AddTime(55f,Color.green);
@@ -291,6 +291,7 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         if (CurrentLap == 1)
         {
+            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk += 90f;
             gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
         }
         if (CurrentLap == 2)
@@ -302,7 +303,6 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (CurrentLap == 3)
         {
-            gc.voxLight.ambientLight = Color.white;
             MeepTimer.SetActive(true);
             gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
         }

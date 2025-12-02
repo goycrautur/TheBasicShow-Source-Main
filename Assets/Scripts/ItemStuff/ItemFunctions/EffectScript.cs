@@ -49,10 +49,17 @@ public class EffectScript : MonoBehaviour
         {
             if (!notNpcEntirely)
             {
-                /*Vector3 pushDirection = (npcreal.GetComponent<Collider>().transform.position - other.transform.position).normalized;
-                StopCoroutine(npcreal.SmoothPush(npcreal.GetComponent<Transform>(), pushDirection, 4f, 0.1f));
-                StartCoroutine(npcreal.SmoothPush(npcreal.GetComponent<Transform>(), pushDirection, 4f, 0.1f));*/
+                npcreal.Stun(npcStunTime);
                 GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+                Destroy(other.gameObject, 0f);
+            }
+        }
+        else if (other.CompareTag("friesBday"))
+        {
+            if (!notNpcEntirely)
+            {
+                npcreal.Stun(npcStunTime);
+                Instantiate(GameControllerScript.Instance.ConfettiEffect, other.transform.position, other.transform.rotation);
                 Destroy(other.gameObject, 0f);
             }
         }
@@ -65,6 +72,7 @@ public class EffectScript : MonoBehaviour
     }
     #endregion
     [SerializeField] private NPC npcreal;
+    [SerializeField] private float npcStunTime;
     [SerializeField] private bool notNpcEntirely;
 
     #region Internal State

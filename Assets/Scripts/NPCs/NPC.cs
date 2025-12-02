@@ -33,6 +33,23 @@ public class NPC : MonoBehaviour
         {
             HandleMovement();
         }
+        confusionEffect.SetActive(stun);
+        if (!stun|| stopOverridingStun)
+		{
+        IsHitboxValid = !squished;
+        }
+        if (StunTime < 0f)
+		{
+            stun = false;
+            IsHitboxValid = true;
+            StunTime = 1f;
+		}
+        if (stun)
+		{
+			StunTime -= Time.deltaTime; 
+            IsHitboxValid = false;
+            
+		}
 
         OnUpdate();
     }
@@ -68,6 +85,11 @@ public class NPC : MonoBehaviour
         {
             Wander();
         }
+    }
+    public virtual void Stun(float Duration)
+    {
+        StunTime = Duration;
+        stun = true;
     }
 
     protected virtual void Wander(string locationType = "default")
@@ -144,8 +166,7 @@ public class NPC : MonoBehaviour
     [SerializeField] protected Transform player;
     public GameControllerScript gc;
     [SerializeField] protected AILocationSelectorScript wanderer;
-    public bool squished;
-    public bool isInteracting, canTargetPlayer;
+    public bool isInteracting, canTargetPlayer, IsHitboxValid = true;
 
     [Header("Gizmo Settings")]
     [SerializeField] private bool showPath = true;
@@ -156,9 +177,10 @@ public class NPC : MonoBehaviour
     #region Internal State
     protected float coolDown;
     public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;
+    public bool squished,stun,stopOverridingStun;
     public NavMeshAgent agent;
     public GameObject confusionEffect,StunSprite;
     #endregion
     public int hp, maxhp = 100;
-    public bool fuckingdead,stun,UsesStunSprite;
+    public bool fuckingdead,UsesStunSprite;
 }

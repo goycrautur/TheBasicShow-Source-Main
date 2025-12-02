@@ -38,6 +38,17 @@ public class BaldiScript : NPC
 		{
             antiHearing = false;
         }
+        if (base.stun)
+        {
+            stopMoving = true;
+            agent.speed = 0;
+        }
+        if (base.StunTime < 0f)
+        {
+            stopMoving = false;
+            resetWaitTime();
+            Move();
+        }
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (baldiTempAnger > 0f)
@@ -119,7 +130,7 @@ public class BaldiScript : NPC
     {
         if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
-            if (!base.squished)
+            if (!base.IsHitboxValid)
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 30 / gc.player.PlayerDmgResistance, 2f, false, true, false);
 				gc.player.killedbybaldi = true;

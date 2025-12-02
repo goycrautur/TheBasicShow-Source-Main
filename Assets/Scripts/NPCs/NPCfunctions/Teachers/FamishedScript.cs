@@ -63,6 +63,14 @@ public class FamishedScript : NPC
         if (this.isActiveAndEnabled)
         {
             agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
+            if (base.stun)
+            {
+                agent.speed = 0;
+            }
+            if (base.StunTime < 0f)
+            {
+                agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
+            }
         }
     }
     public void MOOOVEYOUBITCH()
@@ -101,7 +109,7 @@ public class FamishedScript : NPC
     {
         if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
-            if (!base.squished)
+            if (base.IsHitboxValid)
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 1.5f, false, true, false);
 				gc.player.killedbyfamished = true;

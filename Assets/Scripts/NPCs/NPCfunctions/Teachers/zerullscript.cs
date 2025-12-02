@@ -57,6 +57,17 @@ public class zerullscript : NPC
         {
             TempAnger = 0f;
         }
+        if (base.stun)
+        {
+            stopMoving = true;
+            agent.speed = 0;
+        }
+        if (base.StunTime < 0f)
+        {
+            stopMoving = false;
+            resetWaitTime();
+            Move();
+        }
         foreach (WindowScript w in FindObjectsOfType<WindowScript>())
         {
             w.enableOffMeshScript = offmesh;
@@ -143,7 +154,7 @@ public class zerullscript : NPC
     {
         if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
-            if (!base.squished)
+            if (base.IsHitboxValid)
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 2f, false, true, false);
 				gc.player.killedbybaldi = true;

@@ -23,6 +23,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 {
                     muc.stopMoving = true;
                     muc.agent.speed = 0;
+                    muc.stopOverridingStun = true;
+                    muc.IsHitboxValid = false;
                 }
             }
 		}
@@ -33,6 +35,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 if (muc.isActiveAndEnabled)
                 {
                     muc.stopMoving = false;
+                    muc.stopOverridingStun = false;
+                    muc.IsHitboxValid = true;
                     muc.resetWaitTime();
                     muc.Move();
                 }
@@ -58,6 +62,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 {
                     zes.stopMoving = true;
                     zes.agent.speed = 0;
+                    zes.stopOverridingStun = true;
+                    zes.IsHitboxValid = false;
                 }
             }
 		}
@@ -68,6 +74,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 if (zes.isActiveAndEnabled)
                 {
                     zes.stopMoving = false;
+                    zes.stopOverridingStun = false;
+                    zes.IsHitboxValid = true;
                     zes.resetWaitTime();
                     zes.Move();
                 }
@@ -85,6 +93,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 {
                     bal.stopMoving = true;
                     bal.agent.speed = 0;
+                    bal.stopOverridingStun = true;
+                    bal.IsHitboxValid = false;
                 }
             }
 		}
@@ -95,6 +105,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 if (bal.isActiveAndEnabled)
                 {
                     bal.stopMoving = false;
+                    bal.stopOverridingStun = false;
+                    bal.IsHitboxValid = true;
                     bal.resetWaitTime();
                     bal.Move();
                 }

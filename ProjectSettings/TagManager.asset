@@ -32,6 +32,7 @@ TagManager:
   - smoke
   - lapporta
   - TraingleLocker
+  - friesBday
   layers:
   - Default
   - TransparentFX

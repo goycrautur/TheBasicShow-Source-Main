@@ -292,7 +292,7 @@ public class GameControllerScript : MonoBehaviour
         spoopMode = true;
         if (mode == "story")
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(0f);
+            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(600f);
             ObjectsToDisable.ForEach(o => o.SetActive(false));
             ObjectsToEnable.ForEach(o => o.SetActive(true));
             if (warrealest)
@@ -807,7 +807,7 @@ public class GameControllerScript : MonoBehaviour
 
     [Header("Prefab Instances")]
     public GameObject learnpadmuehehe;
-    public GameObject popparti;
+    public GameObject popparti,ConfettiEffect;
 
     [Header("Player & Camera References")]
     public PlayerScript player;

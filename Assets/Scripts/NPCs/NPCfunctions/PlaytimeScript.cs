@@ -40,6 +40,14 @@ public class PlaytimeScript : NPC
     {
         base.OnFixedUpdate();
         base.agentSpeed = !runnin ? base.DefaultAgentSpeed * base.agentSpeedScale : DefaultRunSpeed * base.agentSpeedScale;
+        if (base.stun)
+        {
+            agentSpeed = 0f;
+        }
+        if (base.StunTime < 0f)
+        {
+            agentSpeed = base.agentSpeed;
+        }
         if (!ps.jumpRope)
         {
             if (!playerSeen && agent.velocity.magnitude <= 1f && coolDown <= 0f)
@@ -167,7 +175,7 @@ public class PlaytimeScript : NPC
 
         Vector3 moveBackPosition = transform.position - transform.forward * 10f;
         agent.SetDestination(moveBackPosition);
-        agent.speed = 16f;
+        agent.speed = base.agentSpeed;
 
         while (Vector3.Distance(transform.position, moveBackPosition) > 1f)
         {

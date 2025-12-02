@@ -8,7 +8,7 @@ public class ObstacleColliderScript : MonoBehaviour
 	
     private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player") && !obstacle.active)
+		if (other.gameObject.CompareTag("Player") && !obstacle.active)
 		{
 			obstacle.colliderId = id;
 		}
