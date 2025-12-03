@@ -9,6 +9,7 @@ public class MouseAppearingScript : MonoBehaviour
         baloo.SetActive(false);
         lockin.SetActive(false);
         coin.SetActive(false);
+        firInThe.SetActive(false);
         if (Sych.ScreenCenterRaycast(out RaycastHit hit))
         {
             Transform hitTransform = hit.transform;
@@ -72,12 +73,24 @@ public class MouseAppearingScript : MonoBehaviour
                     }
                 }
             }
+            if (hitTransform.CompareTag("HarderDifficulityFaceLock"))
+            {
+                for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+                {
+                    if (ItemManager.Instance.Inventory[i].ItemID == 35)
+                    {
+                        maxDistance = gc.player.LocalRange;
+                        firInThe.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+                        MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+                    }
+                }
+            }
         }
     }
 
     [Header("References")]
     [SerializeField] private GameObject MouseCursor;
-    [SerializeField] private GameObject killwindow, lockin,baloo, coin;
+    [SerializeField] private GameObject killwindow, lockin,baloo, coin, firInThe;
     [SerializeField] private GameControllerScript gc;
     [SerializeField] private Transform playerTransform;
 

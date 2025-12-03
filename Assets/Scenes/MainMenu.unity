@@ -2850,7 +2850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cursor: {fileID: 842}
   BaldiSource: {fileID: 1669895261}
-  aud_Thanks: {fileID: 8300000, guid: 11cb7ed5994eeae4bb7aaccbfd2912c7, type: 3}
+  aud_Thanks: {fileID: 8300000, guid: 6b6ab457c37b0374b8d7d57059e6cfc4, type: 3}
 --- !u!114 &814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13368,7 +13368,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applicationID: 1361672938826498276
-  cantConnect: 0
+  Refresh: 0
+  StateDetails: 
+  StateStatus: 
+  StateIMGLarge: 
+  StateIMGSmall: 
 --- !u!4 &897653112
 Transform:
   m_ObjectHideFlags: 0

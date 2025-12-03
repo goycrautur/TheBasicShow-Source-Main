@@ -31,7 +31,7 @@ public class BlockageScript : MonoBehaviour
 	
     private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player") && coolDown <= 0 && !active && UnityEngine.Random.Range(0, (ZerullClassic.Instance.health < 5 ? 4 : ZerullClassic.Instance.health)) > (ZerullClassic.Instance.health < 5 ? 4 : ZerullClassic.Instance.health) - (obstacles.Length+1))
+		if (other.gameObject.CompareTag("Player") && coolDown <= 0 && !active && UnityEngine.Random.Range(0, ZerullClassic.Instance.health < 11 ? 10 : ZerullClassic.Instance.health) > (ZerullClassic.Instance.health < 11 ? 10 : ZerullClassic.Instance.health) - (obstacles.Length+1))
 		{
 			active = true;
 			index = UnityEngine.Random.Range(0, obstacles.Length);

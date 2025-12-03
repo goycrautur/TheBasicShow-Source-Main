@@ -218,9 +218,9 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             isFlashlightOn = !isFlashlightOn;
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            ZerullClassic.Instance.SpawnProjectile(GameControllerScript.Instance.player.transform, true, Random.Range(2, ZerullClassic.Instance.projectileprefabs.Length));
+            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
         }
     }
     #endregion

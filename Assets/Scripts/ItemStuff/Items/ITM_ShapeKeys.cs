@@ -12,7 +12,7 @@ public class ITM_ShapeKeys : BaseItem
         canteat = false;
         if (SendRay("", out RaycastHit Ray, GameControllerScript.Instance.player.LocalRange))
         {
-            if (Ray.collider.tag == "TraingleLocker")
+            if (Ray.collider.tag == "HarderDifficulityFaceLock")
             {
                 canteat = true;
                 Ray.collider.GetComponent<ShapeLockerScript>().OpenDoor();

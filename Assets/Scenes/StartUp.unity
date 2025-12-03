@@ -647,7 +647,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applicationID: 1361672938826498276
-  cantConnect: 0
+  Refresh: 0
+  StateDetails: 
+  StateStatus: 
+  StateIMGLarge: 
+  StateIMGSmall: 
 --- !u!1 &505678922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,9 +2576,13 @@ MonoBehaviour:
   LoadingDetailsText: {fileID: 1141516317}
   splashScreens:
   - logoSprite: {fileID: 21300000, guid: 4242ecb3fb3fdbb40959dcff13b9b741, type: 3}
-    fadeDuration: 2
+    fadeDuration: 3
     displayDuration: 2
     soundEffect: {fileID: 8300000, guid: 698b86a4a97adb04fb77e333182684cb, type: 3}
+  - logoSprite: {fileID: 21300000, guid: e3a243b0a7ef87740a564ce249eef922, type: 3}
+    fadeDuration: 4
+    displayDuration: 3
+    soundEffect: {fileID: 8300000, guid: 9a55ddaad9bd0d14fb686c96c31b6140, type: 3}
   skipSplash: 0
   enableLoadingBar: 1
 --- !u!82 &1692269482

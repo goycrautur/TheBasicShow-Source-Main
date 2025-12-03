@@ -202,7 +202,6 @@ public class MathMachineScript : MonoBehaviour
                 Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 2f, true, "all");
                 ZerullClassic.Instance.maxHealth += 35;
                 ZerullClassic.Instance.health += 35;
-                ZerullClassic.Instance.healthSlider.maxValue = ZerullClassic.Instance.maxHealth - 1f;
             }
             audioSource.PlayOneShot(err);
             GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], 0f, audioSource);

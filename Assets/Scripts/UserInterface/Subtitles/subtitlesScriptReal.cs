@@ -92,6 +92,16 @@ public class subtitlesScriptReal : MonoBehaviour
     }
     private void Update()
     {
+        if (producerAud == null)
+        {
+            Destroy(base.gameObject);
+            return;
+        }
+        if (!producerAud.gameObject.activeInHierarchy)
+        {
+            Destroy(base.gameObject);
+            return;
+        }
         updateSubPostion();
         if (shake)
         {
@@ -104,17 +114,6 @@ public class subtitlesScriptReal : MonoBehaviour
 
     private void LateUpdate()
     {
-        
-        if (producerAud == null)
-        {
-            Destroy(base.gameObject);
-            return;
-        }
-        if (!producerAud.gameObject.activeInHierarchy)
-        {
-            Destroy(base.gameObject);
-            return;
-        }
         if (!infinite)
         {
             if (duration <= 0f)
@@ -129,12 +128,12 @@ public class subtitlesScriptReal : MonoBehaviour
         {
             if (producerAud != null)
             {
-                if (producerAud.mute || producerAud.volume == 0f)
+                if (producerAud.mute)
                 {
                     imagbg.enabled = false;
                     tmpTxt.enabled = false;
                 }
-                if (!producerAud.mute || producerAud.volume > 0f)
+                if (!producerAud.mute)
                 {
                     imagbg.enabled = true;
                     tmpTxt.enabled = true;

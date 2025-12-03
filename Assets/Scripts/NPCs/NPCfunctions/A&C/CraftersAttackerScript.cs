@@ -4,6 +4,13 @@ using System.Collections;
 public class CraftersAttackerScript : MonoBehaviour
 {
     public void Attack() => StartCoroutine(AttackPlayer());
+	public void Update()
+    {
+        for (int i = 0; i < StunEchoes.Length; i++)
+		{
+			StunEchoes[i].SetActive(!Teleport);
+		}
+    }
     
 	public IEnumerator AttackPlayer()
 	{
@@ -33,7 +40,7 @@ public class CraftersAttackerScript : MonoBehaviour
 			yield return null;
 		}
 		crafters.SetActive(true);
-        craftersScript.GiveConsequence();
+        craftersScript.GiveConsequence(Teleport);
 		Destroy(gameObject);
 		yield break;
 	}
@@ -42,7 +49,9 @@ public class CraftersAttackerScript : MonoBehaviour
     public Transform playerTransform;
     public GameObject crafters;
     public CraftersScript craftersScript;
+	public bool Teleport;
 
     [Header("Echoes & Positioning")]
 	[SerializeField] private Transform[] echos;
+	[SerializeField] private GameObject[] StunEchoes;
 }

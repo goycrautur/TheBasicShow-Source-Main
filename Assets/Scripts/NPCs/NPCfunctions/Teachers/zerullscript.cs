@@ -157,7 +157,7 @@ public class zerullscript : NPC
             if (base.IsHitboxValid)
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 2f, false, true, false);
-				gc.player.killedbybaldi = true;
+				gc.player.killedbyhim = true;
 			}
         }
     }

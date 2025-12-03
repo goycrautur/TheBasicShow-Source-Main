@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void Update()
 	{
+		titlecardtotem = false;
 		AdditionalGameCustomizer.Instance.ReworkedCurrency = false;
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
@@ -68,18 +69,22 @@ public class PlayerScript : MonoBehaviour
 			HudManager.Instance.colorVarSetter(true);
 		}
 		if (breakwindow)
+		{
+			foreach (WindowScript w in FindObjectsOfType<WindowScript>())
 			{
-				foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+				if (!w.broken)
 				{
-					if (!w.broken)
+					if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= windowbreakDistance)
 					{
-						if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= windowbreakDistance)
-						{
-							w.Window(true, true, 6f);
-						}
+						w.Window(true, true, 6f);
 					}
 				}
 			}
+		}
+		if (door.lockTime > 0f)
+		{
+			ResetGuilt("escape", 1f);
+		}
 	}
 	#endregion
 	private IEnumerator summonGaug()
@@ -556,7 +561,6 @@ public class PlayerScript : MonoBehaviour
 		if (other.name == "OfficeTrigger")
 		{
 			alsoInOffice = false;
-			ResetGuilt("escape", door.lockTime);
 		}
 	}
 
@@ -659,7 +663,7 @@ public class PlayerScript : MonoBehaviour
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;
-	public bool gameOver, jumpRope, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, outdoorsfr, IgnoreHpLimit, titlecard;
+	public bool gameOver, jumpRope, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard;
 
 	[Header("Private Variables")]
 	[SerializeField] private Vector3 frozenPosition;

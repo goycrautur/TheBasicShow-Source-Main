@@ -139,24 +139,22 @@ public class CraftersScript : NPC
             }
             else
             {
-                if (base.IsHitboxValid)
-                {
                 GameObject attacker = Instantiate(attackingCrafters);
                 attacker.transform.position = transform.position + Vector3.up * 4f;
                 attacker.GetComponent<CraftersAttackerScript>().playerTransform = player;
                 attacker.GetComponent<CraftersAttackerScript>().crafters = gameObject;
                 attacker.GetComponent<CraftersAttackerScript>().craftersScript = this;
                 attacker.GetComponent<CraftersAttackerScript>().Attack();
-                }
+                attacker.GetComponent<CraftersAttackerScript>().Teleport = base.IsHitboxValid;
                 gameObject.SetActive(false);
             }
         }
     }
 
-    public void GiveConsequence()
+    public void GiveConsequence(bool tp = true)
     {
         cc.enabled = true;
-        if (base.IsHitboxValid)
+        if (tp)
         {
             gc.CraftersTeleport();
         }

@@ -45,7 +45,7 @@ public class EffectScript : MonoBehaviour
             otherVelocity = other.GetComponent<Rigidbody>().velocity;
             failSave = 1;
         }
-        else if (other.CompareTag("cork"))
+        if (other.CompareTag("cork"))
         {
             if (!notNpcEntirely)
             {
@@ -54,7 +54,7 @@ public class EffectScript : MonoBehaviour
                 Destroy(other.gameObject, 0f);
             }
         }
-        else if (other.CompareTag("friesBday"))
+        if (other.CompareTag("friesBday"))
         {
             if (!notNpcEntirely)
             {
@@ -63,7 +63,7 @@ public class EffectScript : MonoBehaviour
                 Destroy(other.gameObject, 0f);
             }
         }
-        else if (other.transform.name == "Gotta Sweep" || other.transform.name == "1945 tom")
+        if (other.transform.name == "Gotta Sweep" || other.transform.name == "1945 tom")
         {
             inProjectile = true;
             otherVelocity = 0.1f * agent.speed * transform.forward + other.GetComponent<NavMeshAgent>().velocity;

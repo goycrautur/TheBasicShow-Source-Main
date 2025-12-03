@@ -42,7 +42,7 @@ public class ZerullClassic : MonoBehaviour
 
     [HideInInspector] public int objects = 0;
 
-    private float spawnCooldown;
+    private float spawnCooldown,curHealthValueForLerping;
 
     [Header("Blockages")]
     public bool spawnBlockagesDuringTheBossfight;
@@ -86,7 +86,7 @@ public class ZerullClassic : MonoBehaviour
     [Header("Shaders")]
     [SerializeField] private Material CellingMat;
     [SerializeField] private Material NoLightCeilingMat,WallMat, FloorMat, FenceMat, CarpetMat, NoLightCeilingMatGlitch, CellingMatGlitch, WallMatGlitch, FloorMatGlitch, FenceMatGlitch, CarpetMatGlitch;
-    private SongPlayer normalMidiPlayer, drumsMidiPlayer, normalMidiPlayerLoop;
+    public SongPlayer normalMidiPlayer, drumsMidiPlayer, normalMidiPlayerLoop;
     public bool bossStarted, realBossStarted,switchToBloxyb;
     public Animator yourflashbang;
 
@@ -140,17 +140,11 @@ public class ZerullClassic : MonoBehaviour
             }
             Singleton<VertexGlitchManager>.Instance.Midi = true;
         }
-        if (ShowHealthSlider)
-        {
-            if (healthSlider != null)
-            {
-                healthSlider.maxValue = maxHealth - 1f;
-            }
-        }
     }
 
     private void Update()
     {
+        curHealthValueForLerping = Mathf.Lerp(curHealthValueForLerping,health, 5*Time.deltaTime);
         if (replaceALLSAKES)
         {
             for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -165,11 +159,12 @@ public class ZerullClassic : MonoBehaviour
         }
         if (ShowHealthSlider)
         {
+            healthSlider.maxValue = maxHealth - 1f;
             if (healthSlider != null)
             {
-                if (healthSlider.value != health)
+                if (healthSlider.value != curHealthValueForLerping)
                 {
-                    healthSlider.value = health;
+                    healthSlider.value = curHealthValueForLerping;
                 }
             }
         }

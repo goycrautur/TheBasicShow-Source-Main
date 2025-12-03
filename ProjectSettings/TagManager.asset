@@ -31,8 +31,8 @@ TagManager:
   - Projectile
   - smoke
   - lapporta
-  - TraingleLocker
   - friesBday
+  - HarderDifficulityFaceLock
   layers:
   - Default
   - TransparentFX

@@ -291,7 +291,7 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         if (CurrentLap == 1)
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk += 90f;
+            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk += 100f;
             gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
         }
         if (CurrentLap == 2)

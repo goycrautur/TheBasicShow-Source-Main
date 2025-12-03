@@ -7,8 +7,7 @@ public class ITM_crac : BaseItem
     public override bool OnUse()
     {
         if (used) return false;
-        prevDistance = AdditionalGameCustomizer.Instance.FovAmmount;
-        AdditionalGameCustomizer.Instance.FovAmmount = FovAmmount;
+        AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
         GameControllerScript.Instance.audioDevice.PlayOneShot(Used);
         used = true;
         StartCoroutine(amwaitin(duration));
@@ -35,10 +34,10 @@ public class ITM_crac : BaseItem
 
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMult;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMult;
-        AdditionalGameCustomizer.Instance.FovAmmount = prevDistance;
+        AdditionalGameCustomizer.Instance.FovAmmount -= FovAmmount;
         yield break;
     }
-    [SerializeField] private float duration = 60f, speedMult,FovAmmount,prevDistance;
+    [SerializeField] private float duration = 60f, speedMult,FovAmmount;
     [SerializeField] private AudioClip Used;
     [SerializeField] private Sprite Sprite;
     [SerializeField] private bool used;

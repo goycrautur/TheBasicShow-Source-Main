@@ -320,11 +320,25 @@ public class GameControllerScript : MonoBehaviour
         }
     }
     #endregion
+    bool onetimeupdate = false;
 
     #region GameOverLogic
     private void GameOverFunction()
     {
+        
         if (!player.gameOver) return;
+        if (player.killedbyhim)
+        {
+            if (!onetimeupdate)
+            {
+                gameOverDelay = 7f;
+                onetimeupdate = true;
+            }
+            if (ZerullClassic.Instance.realBossStarted)
+            {
+            Singleton<MusicManager>.Instance.SetSpeed(0.001f, ZerullClassic.Instance.normalMidiPlayerLoop, null);
+            }
+        }
 
         AudioListener.pause = true;
         gamaOvarDevice.ignoreListenerPause = true;
@@ -355,8 +369,15 @@ public class GameControllerScript : MonoBehaviour
                 }
                 PlayerPrefs.SetInt("CurrentBooks", notebooks);
             }
+            if (player.killedbyhim)
+            {
+                Application.Quit();
+            }
             Time.timeScale = 1f;
+            if (!player.killedbyhim)
+            {
             SceneManager.LoadScene(gameoverScene);
+            }
         }
     }
     #endregion

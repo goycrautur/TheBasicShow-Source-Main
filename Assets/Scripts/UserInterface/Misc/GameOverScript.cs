@@ -26,6 +26,7 @@ public class GameOverScript : MonoBehaviour
 		{
 			image.sprite = rare;
 		}
+		 DiscordRPC_stuff.current.UpdateStatus("Game Over Screen", "bro died sobpray", "", "");
 	}
 	private void gameovertuff()
 	{

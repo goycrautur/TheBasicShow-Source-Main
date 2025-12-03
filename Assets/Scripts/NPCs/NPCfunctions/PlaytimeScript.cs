@@ -39,14 +39,21 @@ public class PlaytimeScript : NPC
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-        base.agentSpeed = !runnin ? base.DefaultAgentSpeed * base.agentSpeedScale : DefaultRunSpeed * base.agentSpeedScale;
+        if (!runnin)
+        {
+            agent.speed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        }
+        if (runnin)
+        {
+            agent.speed = DefaultRunSpeed * base.agentSpeedScale;
+        }
         if (base.stun)
         {
-            agentSpeed = 0f;
+            agent.speed = 0f;
         }
         if (base.StunTime < 0f)
         {
-            agentSpeed = base.agentSpeed;
+            agent.speed = base.agentSpeed;
         }
         if (!ps.jumpRope)
         {
