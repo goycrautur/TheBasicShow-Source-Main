@@ -99,6 +99,7 @@ public class MuchoScript : NPC
     {
         if (this.isActiveAndEnabled)
         {
+            slams++;
             base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
             gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,0f,baldiAudio);
             if (baldiAnger < 40f)
@@ -114,7 +115,15 @@ public class MuchoScript : NPC
 
             if (!stopMoving)
             {
-                Invoke(nameof(OnMoveDone), timeToMove);
+                if (slams == 20)
+                {
+                    Invoke(nameof(Teleport), teleportCD);
+                    slams = 0;
+                }
+                if (slams != 20)
+                {
+                    Invoke(nameof(OnMoveDone), timeToMove);
+                }
             }
             resetWaitTime();
         }
@@ -137,6 +146,18 @@ public class MuchoScript : NPC
         {
             Invoke(nameof(Move), baldiWait);
         }
+    }
+    private void Teleport()
+    {
+        agent.speed = 0;
+
+        if (agent.remainingDistance <= 0.1f)
+        {
+            Wander();
+        }
+
+        baldiAudio.PlayOneShot(snadtp);
+        this.transform.position = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
     }
     #endregion
     private void OnTriggerStay(Collider play)
@@ -231,12 +252,12 @@ public class MuchoScript : NPC
     public bool stopMoving, antiHearing;
 
     [Header("Anger Management")]
-    [SerializeField] private float angerRate;
+    [SerializeField] private float angerRate,slams,teleportCD;
     [SerializeField] private float angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
     public bool endless;
 
     [Header("Audio and Animation")]
-    [SerializeField] private AudioClip slap;
+    [SerializeField] private AudioClip slap,snadtp;
     [SerializeField] private Animator baldicator, baldiAnimator;
 
     private float currentPriority;

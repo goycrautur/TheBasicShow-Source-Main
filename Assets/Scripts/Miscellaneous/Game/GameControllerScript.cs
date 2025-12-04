@@ -737,6 +737,14 @@ public class GameControllerScript : MonoBehaviour
         {
             player.invisichalk = false;
         }
+        if (player.alsoInOffice)
+        {
+            player.alsoInOffice = false;
+        }
+        if (player.outdoorsfr)
+        {
+            player.outdoorsfr = false;
+        }
         if (isHiding)
         {
             isHiding = false;
@@ -758,7 +766,7 @@ public class GameControllerScript : MonoBehaviour
         //baldi.transform.position = newPos;
     }
 
-    public IEnumerator TeleporterFunction()
+    public IEnumerator TeleporterFunction(string thing = "normal")
     {
         player.titlecard = true;
         player.movementLocked = true;
@@ -766,6 +774,14 @@ public class GameControllerScript : MonoBehaviour
         if (player.invisichalk)
         {
             player.invisichalk = false;
+        }
+        if (player.alsoInOffice)
+        {
+            player.alsoInOffice = false;
+        }
+        if (player.outdoorsfr)
+        {
+            player.outdoorsfr = false;
         }
         if (isHiding)
         {
@@ -783,14 +799,14 @@ public class GameControllerScript : MonoBehaviour
             player.playtime.Disappoint();
         }
 
-        int teleports = UnityEngine.Random.Range(43, 49);
+        int teleports = UnityEngine.Random.Range(thing == "normal" ? 40 : thing == "evilleaf" ? 25 : 20, thing == "normal" ? 50 : thing == "evilleaf" ? 35 : 20);
         float delay = 0.05f;
         const float increaseFactor = 1.04f;
 
         for (int i = 0; i < teleports; i++)
         {
             yield return new WaitForSeconds(delay);
-            PlayerTeleport();
+            PlayerTeleport(thing);
             delay *= increaseFactor;
         }
 
@@ -808,10 +824,11 @@ public class GameControllerScript : MonoBehaviour
         SceneManager.LoadSceneAsync("GameArea");
     }
 
-    private void PlayerTeleport()
+    private void PlayerTeleport(string type)
     {
         player.transform.position = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
-        audioDevice.PlayOneShot(aud_Teleport);
+        TpSoundSource.PlayOneShot(type == "normal" ? aud_Teleport : type == "evilleaf" ? aud_EvilLeafyTP : aud_Teleport);
+        SubsManager.summonLeSubtitle2D(subtitlesScriptableObject[type == "normal" ? 11 : type == "evilleaf" ? 12 : 11].subtitleOption,subtitlesScriptableObject[type == "normal" ? 11 : type == "evilleaf" ? 12 : 11],0f,new Vector3(0f,-170.5f,0f),TpSoundSource);
     }
     #endregion
     [Serializable]
@@ -879,8 +896,8 @@ public class GameControllerScript : MonoBehaviour
     public AudioClip[] EvapV2FinaleTypeShit, NormalTbsFinale;
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
-    public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, deathbell, punchsoun, totem,loboto, gastervanish,LoudIncorecBugger,timeoutMusicAud;
+    public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic,TpSoundSource;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell, punchsoun, totem,loboto, gastervanish,LoudIncorecBugger,timeoutMusicAud;
     #endregion
 
     #region PrivateFields

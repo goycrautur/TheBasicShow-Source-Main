@@ -213,7 +213,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         vanishScore = true;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap].LapMusik.length-1);
+        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap-1].LapMusik.length);
         yield return null;
         yield break;
     }
@@ -291,11 +291,11 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         if (CurrentLap == 1)
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk += 100f;
-            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk += 120f;
         }
         if (CurrentLap == 2)
         {
+            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
             Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
             gc.zerull.zer.SetActive(true);
@@ -304,7 +304,6 @@ public class LappingOfAsylumController : MonoBehaviour
         if (CurrentLap == 3)
         {
             MeepTimer.SetActive(true);
-            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
         }
         if (CurrentLap == 4)
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using DG.Tweening;
 public class ItemManager : MonoBehaviour
 {
     #region Singleton & Initialization
@@ -11,6 +12,13 @@ public class ItemManager : MonoBehaviour
     {
         Instance = this;
         IndexItems();
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            ItemImages2Real[i].transform.DOScale(0f, 0f);
+            ItemImages2Real[i].transform.DOScale(2f, 0.5f);
+            ItemImages[i].transform.DOScale(0f, 0f);
+            ItemImages[i].transform.DOScale(2f, 0.5f);
+        }
     }
     #endregion
 
@@ -124,6 +132,10 @@ public class ItemManager : MonoBehaviour
 
     public void ClearItem(int index)
     {
+        ItemImages2Real[index].transform.DOScale(2f, 0f);
+        ItemImages2Real[index].transform.DOScale(0f, 0.5f);
+        ItemImages2Real[index].color = new Color(1,1,1,1);
+        ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
         Inventory[index].ItemID = 0;
         Inventory[index].ItemInstance = null;
     }
@@ -136,6 +148,10 @@ public class ItemManager : MonoBehaviour
 
         Inventory[index].ItemID = itemID;
         Inventory[index].ItemInstance = item;
+        ItemImages[index].transform.DOScale(0f, 0f);
+        ItemImages[index].transform.DOScale(2f, 0.5f);
+        ItemImages2Real[index].color = new Color(0,0,0,0);
+        ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
 
         CreateItemInstance(index);
 
@@ -155,7 +171,6 @@ public class ItemManager : MonoBehaviour
         {
             ItemImageBGs[i].color = Color.white;
             ItemImages[i].texture = Items.ElementAt(Inventory[i].ItemID).Value.SmallSprite;
-
         }
         ItemNameText.text = $"{SelectedItem.Name}";
         ItemInfoText.text = $"{SelectedItem.ItmInfoText}";
@@ -333,6 +348,10 @@ public class ItemManager : MonoBehaviour
 
     public void DropItem(int index)
     {
+        ItemImages2Real[index].transform.DOScale(2f, 0f);
+        ItemImages2Real[index].transform.DOScale(0f, 0.5f);
+        ItemImages2Real[index].color = new Color(1,1,1,1);
+        ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
         var item = Inventory[index];
         if (item.ItemID == 0 || item.ItemInstance == null)
         {
@@ -427,6 +446,7 @@ public class ItemManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private List<RawImage> ItemImages = new List<RawImage>();
+    [SerializeField] private List<RawImage> ItemImages2Real = new List<RawImage>();
     [SerializeField] private List<Image> ItemImageBGs = new List<Image>();
     [SerializeField] public TextMeshProUGUI ItemNameText, ItemInfoText;
     [SerializeField] private Color SelectionColor = Color.red;
