@@ -46,8 +46,16 @@ public class PickupScript : Interactable
     public override void Interact()
     {
         GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.aud_ItemCollect);
+        if (ID == 5)
+        {
+            if (ZerullClassic.Instance.realBossStarted)
+            {
+                ZerullClassic.Instance.objects -= 1;
+            }
+        }
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
         {
+            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.monesound);
             AdditionalGameCustomizer.Instance.Cash += 0.25;
             if (killafterpickup)
             {
@@ -57,10 +65,6 @@ public class PickupScript : Interactable
             {
                 transform.gameObject.SetActive(false);
                 mapIconSprite.enabled = false;
-            }
-            if (ZerullClassic.Instance.realBossStarted)
-            {
-                ZerullClassic.Instance.objects -= 1;
             }
             return;
         }

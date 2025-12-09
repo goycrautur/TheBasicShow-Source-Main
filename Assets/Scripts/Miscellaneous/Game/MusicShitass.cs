@@ -16,8 +16,10 @@ public class MusicShitass : Singleton<MusicShitass>
                 yield return new WaitForSeconds(GameControllerScript.Instance.NormalTbsFinale[0].length);
                 GameControllerScript.Instance.ElevdorRea.ForEach(ed => ed.Opendor = true);
                 GameControllerScript.Instance.Gatesrea.ForEach(g => g.Down(false));
-                GameControllerScript.Instance.finaleMode = true;
+                
                 StartCoroutine(basicShowMusicShit(1));
+                yield return new WaitForSeconds(0.1f);
+                GameControllerScript.Instance.finaleMode = true;
             }
             if (type <= 4 && type > 0)
             {

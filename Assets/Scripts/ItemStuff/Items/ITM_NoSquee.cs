@@ -9,6 +9,13 @@ public class ITM_NoSquee : BaseItem
 
         Instantiate(WDNSModel, snappedPosition, Quaternion.identity);
         GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Spray);
+        if (SummonSubtitles)
+        {
+            if (Subtitles != null)
+            {
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitles.subtitleOption,Subtitles,0f,new Vector3(0f,-170.5f,0f),GameControllerScript.Instance.audioDevice);
+            }
+        }
 
         return true;
     }
@@ -26,6 +33,9 @@ public class ITM_NoSquee : BaseItem
         return new Vector3(snappedX, 5, snappedZ);
     }
 
+
     [SerializeField] private GameObject WDNSModel;
     [SerializeField] protected AudioClip aud_Spray;
+    [SerializeField] private bool SummonSubtitles;
+    [SerializeField] private subsScriptableObject Subtitles;
 }

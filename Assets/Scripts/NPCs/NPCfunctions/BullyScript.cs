@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BullyScript : MonoBehaviour
 {
@@ -8,6 +9,15 @@ public class BullyScript : MonoBehaviour
     {
         audioDevice = GetComponent<AudioSource>();
         StartCoroutine(WaitAndActivate());
+    }
+    public void OnEnable()
+    {
+
+        GameControllerScript.Instance.buliScr.Add(this);
+    }
+    public void OnDisable()
+    {
+        GameControllerScript.Instance.buliScr.Remove(this);
     }
 
     private void Update()
@@ -26,12 +36,16 @@ public class BullyScript : MonoBehaviour
         }
 
         guilt = Mathf.Max(guilt - Time.deltaTime, 0f);
-
-        float distance = Vector3.Distance(Principal.position, Obstacle.transform.position);
-        Obstacle.enabled = distance >= ignoreDistance;
+        
+        foreach (PrincipalScript maxi in GameControllerScript.Instance.maxiScr)
+        {
+            float distance = Vector3.Distance(maxi.transform.position, Obstacle.transform.position);
+            Obstacle.enabled = distance >= ignoreDistance;
+        }
+        extraStuff();
     }
 
-    private void FixedUpdate()
+    private void extraStuff()
     {
         if (!active) return;
 
@@ -103,7 +117,7 @@ public class BullyScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.name == "Principal of the Thing" && guilt > 0f)
+        if (other.transform.GetComponent<PrincipalScript>() != null && guilt > 0f)
         {
             Reset();
         }
@@ -209,7 +223,6 @@ public class BullyScript : MonoBehaviour
 
     [Header("Activation and Guilt")]
     [SerializeField] private UnityEngine.AI.NavMeshObstacle Obstacle;
-    [SerializeField] private Transform Principal;
     [SerializeField] private float ignoreDistance;
     public float guilt;
 

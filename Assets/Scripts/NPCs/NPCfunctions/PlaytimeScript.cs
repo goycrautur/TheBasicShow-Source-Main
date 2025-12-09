@@ -14,72 +14,53 @@ public class PlaytimeScript : NPC
         audioDevice = GetComponent<AudioSource>();
         Wander();
     }
+    private IEnumerator PlayCoolFunctionality()
+    {
+        while (playCool >= 0f)
+        {
+            playCool -= Time.deltaTime;
+            yield return null;
+        }
+        while (animator.GetBool("disappointed"))
+        {
+            playCool = 0f;
+            animator.SetBool("disappointed", false);
+            yield return null;
+        }
+        yield break;
+    }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (ps.jumpRope && Vector3.Distance(transform.position, ps.transform.position) >= 25f)
+        if(!dontUpdateTheSpeedYOUFUCKINGBITCH)
         {
-            ps.DeactivateJumpRope();
-            Disappoint();
+            if (!runnin)
+            {
+                base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+            }
+            if (runnin)
+            {
+                base.agentSpeed = DefaultRunSpeed * base.agentSpeedScale;
+            }
+            agent.speed = base.agentSpeed;
         }
-
-        if (playCool >= 0f)
-        {
-            playCool -= Time.deltaTime;
-        }
-        else if (animator.GetBool("disappointed") && !ps.jumpRope)
-        {
-            playCool = 0f;
-            animator.SetBool("disappointed", false);
-        }
-    }
-
-    public override void OnFixedUpdate()
-    {
-        base.OnFixedUpdate();
-        if (!runnin)
-        {
-            agent.speed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        }
-        if (runnin)
-        {
-            agent.speed = DefaultRunSpeed * base.agentSpeedScale;
-        }
-        if (base.stun)
+        if (base.stun && !dontUpdateTheSpeedYOUFUCKINGBITCH)
         {
             agent.speed = 0f;
         }
-        if (base.StunTime < 0f)
+        if (base.StunTime < 0f && !dontUpdateTheSpeedYOUFUCKINGBITCH)
         {
             agent.speed = base.agentSpeed;
         }
-        if (!ps.jumpRope)
+        if (!jumpRopeStarted)
         {
             if (!playerSeen && agent.velocity.magnitude <= 1f && coolDown <= 0f)
             {
                 Wander();
             }
             jumpRopeStarted = false;
-        }
-        else if (!jumpRopeStarted)
-        {
-            if (playingRoutine != null)
-            {
-                StopCoroutine(playingRoutine);
-            }
-            playingRoutine = StartCoroutine(StartPlaying());
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player") && !ps.jumpRope)
-        {
-            Collider component = GetComponent<Collider>();
-            component.enabled = false;
-            component.enabled = true;
         }
     }
     #endregion
@@ -91,7 +72,7 @@ public class PlaytimeScript : NPC
         {
             bool playerInRange = (transform.position - player.position).magnitude <= 30f;
 
-            if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !gc.player.invisi && !gc.player.invisichalk && !gc.player.jumpRope)
+            if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f)
             {
                 playerSeen = true;
                 TargetPlayer();
@@ -109,6 +90,7 @@ public class PlaytimeScript : NPC
     protected override void TargetPlayer()
     {
         animator.SetBool("disappointed", false);
+        
         agent.SetDestination(player.position);
         agent.stoppingDistance = 2f;
         agent.angularSpeed = 200f;
@@ -141,8 +123,7 @@ public class PlaytimeScript : NPC
     #region Wandering
     protected override void Wander(string locationType = "hall")
     {
-        if (ps.jumpRope) return;
-
+        if (disablingWandering) return;
         base.Wander(locationType);
 
         agent.stoppingDistance = 1f;
@@ -161,16 +142,6 @@ public class PlaytimeScript : NPC
 
         ResetCooldown();
     }
-
-    public void ResumeWandering()
-    {
-        if (!ps.jumpRope)
-        {
-            runnin = false;
-            playingRoutine = null;
-            Wander();
-        }
-    }
     #endregion
 
     #region Jump Rope State Handling
@@ -178,42 +149,67 @@ public class PlaytimeScript : NPC
     {
         ps.isForcedToLook = true;
         canTargetPlayer = false;
-        jumpRopeStarted = true;
+        dontUpdateTheSpeedYOUFUCKINGBITCH = true;
+        disablingWandering = true;
+        runnin = false;
+        
 
         Vector3 moveBackPosition = transform.position - transform.forward * 10f;
         agent.SetDestination(moveBackPosition);
-        agent.speed = base.agentSpeed;
+        agent.speed = 16;
 
         while (Vector3.Distance(transform.position, moveBackPosition) > 1f)
         {
+            
             yield return null;
         }
-
         agent.speed = 0f;
-        playingRoutine = null;
+        
+        yield break;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && playCool <= 0f && !jumpRopeStarted && base.IsHitboxValid)
+        {
+            if (!ps.invisi && !ps.invisichalk || !ps.invisichalk && !ps.invisi)
+			{
+                audioDevice.PlayOneShot(aud_ReadyGo);
+                jumpRopeStarted = true;
+                JumpRopeScript jumprope = Instantiate(jumpRopeGame);
+                jumprope.jumpRopTime(this);
+                ps.jumpropes.Add(jumprope);
+                if (playingRoutine != null)
+                {
+                    StopCoroutine(playingRoutine);
+                }   
+                playingRoutine = StartCoroutine(StartPlaying());
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && ps.jumpropes.Count > 0)
+        {
+            Collider component = GetComponent<Collider>();
+            component.enabled = false;
+            component.enabled = true;
+        }
     }
 
     public void Disappoint()
     {
         if (!animator.GetBool("disappointed"))
         {
-            if (playingRoutine != null)
-            {
-                StopCoroutine(playingRoutine);
-                playingRoutine = null;
-            }
-
             Wander();
             runnin = false;
             animator.SetBool("disappointed", true);
-
             canTargetPlayer = true;
-            jumpRopeStarted = false;
-            playCool = 15f;
-
-            audioDevice.Stop();
-            audioDevice.PlayOneShot(aud_Sad);
-            //UIPopupTextManagerWithMovement.Show("MemeBoiLines_5", Color.red, base.transform, aud_Sad.length, 0f);
+			jumpRopeStarted = false;
+			playCool = 15f;
+            StartCoroutine(PlayCoolFunctionality());
+			audioDevice.Stop();
+			audioDevice.PlayOneShot(aud_Sad);
         }
     }
     #endregion
@@ -221,10 +217,27 @@ public class PlaytimeScript : NPC
     #region Movement Override
     protected override void HandleMovement()
     {
-        if (ps.jumpRope) return;
         base.HandleMovement();
     }
     #endregion
+    private float playCool;
+
+    public float PlayCool
+    {
+        get
+        {
+            return playCool;
+        }
+
+        set
+        {
+            if (playCool != value)
+            {
+                StartCoroutine(PlayCoolFunctionality());
+            }
+            playCool = value;
+        }
+    }
 
     #region Serialized Field States
     [Header("Movement Speeds")]
@@ -232,10 +245,8 @@ public class PlaytimeScript : NPC
     [SerializeField] private bool runnin;
     [Header("Player and Movement")]
     [SerializeField] private PlayerScript ps;
+    [Header("Jumprope"), SerializeField] private JumpRopeScript jumpRopeGame;
     public Transform eeek;
-
-    [Header("Timings")]
-    public float playCool;
 
     [Header("Audio and Animations")]
     [SerializeField] private Animator animator;
@@ -244,8 +255,9 @@ public class PlaytimeScript : NPC
     public audiofunny[] aud_Numbers;
     [SerializeField] private AudioClip aud_LetsPlay, aud_Sad;
     public AudioClip aud_Congrats, aud_ReadyGo, aud_Oops;
-    private Coroutine playingRoutine;
     private bool playerSeen, playerSpotted;
+    public bool dontUpdateTheSpeedYOUFUCKINGBITCH,disablingWandering;
+    private Coroutine playingRoutine;
     [HideInInspector] public bool jumpRopeStarted;
     #endregion
     [Serializable]

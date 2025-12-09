@@ -71,10 +71,6 @@ public class MuchoScript : NPC
             if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
             {
                 TargetPlayer();
-                //transform.LookAt(this.player.position);
-                //Vector3 direction = this.player.position - base.transform.position;
-                //Vector3 vector = new Vector3(base.transform.position.x, 5f, base.transform.position.z);
-                //Instantiate(bsodaSpray, transform.position, Quaternion.LookRotation(this.player.position - vector));
             }
         }
     }
@@ -100,7 +96,7 @@ public class MuchoScript : NPC
         if (this.isActiveAndEnabled)
         {
             slams++;
-            base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+            ThrowProjectile(Random.Range(2,2));
             gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,0f,baldiAudio);
             if (baldiAnger < 40f)
             {
@@ -115,14 +111,15 @@ public class MuchoScript : NPC
 
             if (!stopMoving)
             {
+                if (slams != 20)
+                {
+                    Invoke(nameof(OnMoveDone), timeToMove);
+                }
                 if (slams == 20)
                 {
                     Invoke(nameof(Teleport), teleportCD);
                     slams = 0;
-                }
-                if (slams != 20)
-                {
-                    Invoke(nameof(OnMoveDone), timeToMove);
+                    agent.speed = 0;
                 }
             }
             resetWaitTime();
@@ -130,7 +127,24 @@ public class MuchoScript : NPC
     }
     public void resetWaitTime()
     {
-        baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger+2 / baldiSpeedScale) + 3;
+        baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger+2f / baldiSpeedScale) + 3f;
+    }
+    public void ThrowProjectile(int val = 0)
+    {
+        if (val == 2)
+        {
+            if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
+            {
+                if (raycastHit.transform.CompareTag("Player"))
+                {
+                    transform.LookAt(this.player.position);
+                    Vector3 direction = this.player.position - base.transform.position;
+                    Vector3 vector = new Vector3(base.transform.position.x, 5f, base.transform.position.z);
+                    Vector3 upithink = new Vector3(base.transform.position.x, base.transform.position.y + 2f, base.transform.position.z);
+                    Instantiate(projectilePrefabs[Random.Range(0,projectilePrefabs.Length)], upithink, Quaternion.LookRotation(this.player.position - vector));
+                }
+            }
+        }
     }
 
     private void OnMoveDone()
@@ -149,14 +163,13 @@ public class MuchoScript : NPC
     }
     private void Teleport()
     {
-        agent.speed = 0;
-
         if (agent.remainingDistance <= 0.1f)
         {
             Wander();
         }
-
         baldiAudio.PlayOneShot(snadtp);
+        gc.SubsManager.summonLeSubtitle(snadtpsubs.subtitleOption,snadtpsubs,0f,baldiAudio);
+        Invoke(nameof(Move), teleportCD);
         this.transform.position = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
     }
     #endregion
@@ -240,7 +253,7 @@ public class MuchoScript : NPC
         AntiHearingDuratio = SetTime;
     }
     #endregion
-    [SerializeField] private GameObject bsodaSpray;
+    [SerializeField] private GameObject[] projectilePrefabs;
 
     #region Serialized Field States
     [Header("Baldi's Stats")]
@@ -252,8 +265,8 @@ public class MuchoScript : NPC
     public bool stopMoving, antiHearing;
 
     [Header("Anger Management")]
-    [SerializeField] private float angerRate,slams,teleportCD;
-    [SerializeField] private float angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
+    [SerializeField] private float angerRate;
+    [SerializeField] private float slams,teleportCD,angerRateRate, angerFrequency, timeToAnger,AntiHearingDuratio = 1f;
     public bool endless;
 
     [Header("Audio and Animation")]
@@ -262,6 +275,6 @@ public class MuchoScript : NPC
 
     private float currentPriority;
     [SerializeField] private AudioSource baldiAudio;
-    [SerializeField] private subsScriptableObject slamSound;
+    [SerializeField] private subsScriptableObject slamSound,snadtpsubs;
     #endregion
 }

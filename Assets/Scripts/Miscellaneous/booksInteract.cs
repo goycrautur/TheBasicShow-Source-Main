@@ -216,6 +216,7 @@ public class booksInteract : Interactable
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                gc.Gatesrea.ForEach(g => g.Down());
                                 StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(0));
                                 break;
                         }
@@ -226,7 +227,7 @@ public class booksInteract : Interactable
                 {
                     StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(0));
                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
-                        gc.Gatesrea.ForEach(g => g.Down(false));
+                    gc.Gatesrea.ForEach(g => g.Down(false));
                 }
             }
         }

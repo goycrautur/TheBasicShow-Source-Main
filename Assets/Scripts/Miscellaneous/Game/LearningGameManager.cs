@@ -135,6 +135,7 @@ public class LearningGameManager : MonoBehaviour
                                     gc.Gatesrea.ForEach(g => g.Down(false));
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                    gc.Gatesrea.ForEach(g => g.Down());
                                     StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(0));
                                     break;
                             }

@@ -14,10 +14,8 @@ public class ItemManager : MonoBehaviour
         IndexItems();
         for (int i = 0; i < Inventory.Length; i++)
         {
-            ItemImages2Real[i].transform.DOScale(0f, 0f);
-            ItemImages2Real[i].transform.DOScale(2f, 0.5f);
-            ItemImages[i].transform.DOScale(0f, 0f);
-            ItemImages[i].transform.DOScale(2f, 0.5f);
+            ItemImages2Real[i].transform.DOScale(2f, 0f);
+            ItemImages[i].transform.DOScale(2f, 0f);
         }
     }
     #endregion
@@ -134,6 +132,7 @@ public class ItemManager : MonoBehaviour
     {
         ItemImages2Real[index].transform.DOScale(2f, 0f);
         ItemImages2Real[index].transform.DOScale(0f, 0.5f);
+        ItemImages[index].transform.DOScale(0f, 0f);
         ItemImages2Real[index].color = new Color(1,1,1,1);
         ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
         Inventory[index].ItemID = 0;
@@ -348,10 +347,6 @@ public class ItemManager : MonoBehaviour
 
     public void DropItem(int index)
     {
-        ItemImages2Real[index].transform.DOScale(2f, 0f);
-        ItemImages2Real[index].transform.DOScale(0f, 0.5f);
-        ItemImages2Real[index].color = new Color(1,1,1,1);
-        ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
         var item = Inventory[index];
         if (item.ItemID == 0 || item.ItemInstance == null)
         {

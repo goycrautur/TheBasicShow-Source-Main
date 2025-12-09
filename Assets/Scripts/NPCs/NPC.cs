@@ -92,6 +92,7 @@ public class NPC : MonoBehaviour
         stun = true;
     }
 
+
     protected virtual void Wander(string locationType = "default")
     {
         wanderer?.SetNewTargetForAgent(agent, locationType);

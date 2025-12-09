@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class PlayerScript : MonoBehaviour
@@ -17,6 +18,17 @@ public class PlayerScript : MonoBehaviour
 
 	private void Update()
 	{
+		ApplyGravity();
+		HandleMouseMovement();
+		if (!movementLocked) PlayerMove();
+		GuiltCheck();
+		InitializeMiscellaneous();
+		randomAssStufV2();
+	}
+	#endregion
+	public void randomAssStufV2()
+    {
+		isMoving = false;
 		titlecardtotem = false;
 		AdditionalGameCustomizer.Instance.ReworkedCurrency = false;
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -34,12 +46,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			Iframes -= Time.deltaTime;
 		}
-		ApplyGravity();
-		HandleMouseMovement();
-		if (!movementLocked) PlayerMove();
-		GuiltCheck();
-		InitializeMiscellaneous();
-		runSpeed = DefaultRunSpeed * runSpeedMultipler;
+        runSpeed = DefaultRunSpeed * runSpeedMultipler;
 		walkSpeed = DefaultWalkSpeed * walkSpeedMultipler;
 		staminaDrop = DefaultstaminaDrop * staminaDropMultiple;
 		staminaRise = DefaultstaminaRise * staminaRiseMultiple;
@@ -57,12 +64,6 @@ public class PlayerScript : MonoBehaviour
 			{
 				SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
 			}
-			if (jumpRope)
-        	{
-            	jumpRope = false;
-            	DeactivateJumpRope();
-            	playtime.Disappoint();
-        	}
 		}
 		else
 		{
@@ -85,8 +86,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			ResetGuilt("escape", 1f);
 		}
-	}
-	#endregion
+    }
 	private IEnumerator summonGaug()
 	{
 		float time = 10f;
@@ -145,11 +145,6 @@ public class PlayerScript : MonoBehaviour
 		if (!gc.KF.gamePaused && cc.velocity.magnitude > 0f)
 		{
 			gc.KF.LockMouse();
-		}
-		if (jumpRope & ((transform.position - frozenPosition).magnitude >= 45f) && CamCam.jumpHeight < 0.1f)
-		{
-			DeactivateJumpRope();
-			playtime.Disappoint();
 		}
 		if (sweepingFailsave > 0f)
 		{
@@ -223,38 +218,33 @@ public class PlayerScript : MonoBehaviour
 
 	private void PlayerMove()
 	{
-		if (jumpRope && CamCam.jumpHeight <= 0.1f)
-		{
-			moveDirection = Vector3.zero;
-			cc.Move(Vector3.zero);
-			return;
-		}
-
 		Vector3 movement = Vector3.zero;
 		Vector3 lateralMovement = Vector3.zero;
 
 		if (Singleton<InputManager>.Instance.GetActionKey(InputAction.MoveForward))
 		{
 			movement = transform.forward;
+			isMoving = true;
 		}
 		if (Singleton<InputManager>.Instance.GetActionKey(InputAction.MoveBackward))
 		{
 			movement = -transform.forward;
+			isMoving = true;
 		}
 		if (Singleton<InputManager>.Instance.GetActionKey(InputAction.MoveLeft))
 		{
 			lateralMovement = -transform.right;
+			isMoving = true;
 		}
 		if (Singleton<InputManager>.Instance.GetActionKey(InputAction.MoveRight))
 		{
 			lateralMovement = transform.right;
+			isMoving = true;
 		}
-
-		if (jumpRope) moveDirection *= jumpRopeSpeedMultiplier;
 
 		AdjustSpeedAndSensitivity(movement, lateralMovement);
 		HandleSpecialMovement();
-		cc.Move(moveDirection);
+		cc.Move(moveDirection + pModManag.Addend);
 		secondaryMovementVelocity = new Vector3(cc.velocity.x, 0f, cc.velocity.z);
 	}
 
@@ -263,7 +253,7 @@ public class PlayerScript : MonoBehaviour
 		bool isRunning = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && stamina > 0f;
 		playerSpeed = isRunning ? runSpeed : walkSpeed;
 		sensitivity = sensitivityActive ? Mathf.Clamp((movement + lateralMovement).magnitude, 0f, 1f) : 1f;
-		moveDirection = (movement + lateralMovement).normalized * playerSpeed * sensitivity * Time.deltaTime;
+		moveDirection = (movement + lateralMovement).normalized * playerSpeed * pModManag.Multiplier * sensitivity * Time.deltaTime;
 
 		if (isRunning && secondaryMovementVelocity.magnitude > 0.1f && !hugging && !sweeping)
 		{
@@ -279,11 +269,8 @@ public class PlayerScript : MonoBehaviour
 
 	private void HandleSpecialMovement()
 	{
-		if (jumpRope && CamCam.jumpHeight > 0.1f)
-		{
-			moveDirection *= jumpRopeSpeedMultiplier;
-		}
-		else if (sweeping && !bootsActive)
+		
+		if (sweeping && !bootsActive)
 		{
 			moveDirection = gottaSweep.velocity * Time.deltaTime + moveDirection * 0.3f;
 		}
@@ -427,6 +414,10 @@ public class PlayerScript : MonoBehaviour
 	}
 	public void SetHP(HealthChangeMode mode, float fashionevalue, float invinciframes, bool ignoreIframes = false, bool playrandomizedPresetSound = false, bool dontResetIframes = true)
 	{
+
+		killedbybaldi = false;
+		killedbyfamished = false;
+		killedbyhim = false;
 		
 		if (Iframes > 0f && !ignoreIframes)
 		{
@@ -443,8 +434,12 @@ public class PlayerScript : MonoBehaviour
 			}
 		if (playrandomizedPresetSound)
 		{
+
 			audVal = (int)Random.Range(0f, GameControllerScript.Instance.HurtSounds.Length);
+			if (!GameControllerScript.Instance.audioDevice2.isPlaying)
+        	{
 			GameControllerScript.Instance.audioDevice2.PlayOneShot(GameControllerScript.Instance.HurtSounds[audVal]);
+			}
 		}
 		switch (mode)
 		{
@@ -479,25 +474,6 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
-		if (!jumpRope)
-		{
-
-			if (other.transform.name == "Playtime" & !jumpRope & playtime.playCool <= 0f & playtime.IsHitboxValid)
-			{
-				if (!invisi && !invisichalk || !invisichalk && !invisi)
-				{
-					ActivateJumpRope();
-				}
-			}
-			else if (other.transform.name == "MemeMouse" & !jumpRope & playtime.playCool <= 0f & playtime.IsHitboxValid)
-			{
-				if (!invisi && !invisichalk || !invisichalk && !invisi)
-				{
-					ActivateJumpRope();
-				}
-			}
-		}
-
 		if (other.name == "OfficeTrigger")
 		{
 			alsoInOffice = true;
@@ -569,36 +545,9 @@ public class PlayerScript : MonoBehaviour
 		while (gameOver)
 		{
 			hud.SetActive(false);
-			if (GameObject.Find("JumpRope(Clone)") != null)
-			{
-				GameObject.Find("JumpRope(Clone)").SetActive(false);
-			}
 			yield return new WaitForEndOfFrame();
 		}
 		yield break;
-	}
-
-	public void ActivateJumpRope()
-	{
-		playtime.audioDevice.PlayOneShot(playtime.aud_ReadyGo);
-		//UIPopupTextManagerWithMovement.Show("MemeBoiLines_2", Color.red, playtime.eeek.transform, playtime.aud_ReadyGo.length, 0f);
-		GameSet = Instantiate(jumpRopeGame);
-		GameSet.GetComponent<JumpRopeScript>().cs = CamCam;
-		CamCam.jumpHeight = 0f;
-		GameSet.GetComponent<JumpRopeScript>().ps = this;
-		GameSet.GetComponent<JumpRopeScript>().playtime = playtime;
-		jumpRope = true;
-		frozenPosition = transform.position;
-	}
-
-	public void DeactivateJumpRope()
-	{
-		if (GameSet != null)
-		{
-			Destroy(GameSet);
-			GameSet = null;
-		}
-		jumpRope = false;
 	}
 
 	public async void ActivateBoots()
@@ -628,7 +577,6 @@ public class PlayerScript : MonoBehaviour
 	[Header("References")]
 	public GameControllerScript gc;
 	[SerializeField] public DoorScript door;
-	public PlaytimeScript playtime;
 	[SerializeField] public CharacterController cc;
 	[SerializeField] private NavMeshAgent gottaSweep, firstPrize;
 	[SerializeField] private Transform firstPrizeTransform, PlayerTransform;
@@ -663,10 +611,10 @@ public class PlayerScript : MonoBehaviour
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;
-	public bool gameOver, jumpRope, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard;
+	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving;
+	public Vector3 frozenPosition;
 
 	[Header("Private Variables")]
-	[SerializeField] private Vector3 frozenPosition;
 	[SerializeField] private float mouseSensitivity, gravity;
 	public float guilt;
 	public Transform dropItemPos;
@@ -681,5 +629,7 @@ public class PlayerScript : MonoBehaviour
 
 	public enum StaminaChangeMode { Add, Remove, Multiply, Divide, Set }
 	public enum HealthChangeMode { Add, Remove, Multiply, Divide, Set }
+	public List<JumpRopeScript> jumpropes = new List<JumpRopeScript>();
+	public PlayerModifiers pModManag;
 	#endregion
 }

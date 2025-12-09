@@ -325,21 +325,30 @@ public class GameControllerScript : MonoBehaviour
     #region GameOverLogic
     private void GameOverFunction()
     {
-        
         if (!player.gameOver) return;
         if (player.killedbyhim)
         {
             if (!onetimeupdate)
             {
                 gameOverDelay = 7f;
+                Singleton<VertexGlitchManager>.Instance.ShakeGlitch();
+                Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
                 onetimeupdate = true;
             }
             if (ZerullClassic.Instance.realBossStarted)
             {
             Singleton<MusicManager>.Instance.SetSpeed(0.001f, ZerullClassic.Instance.normalMidiPlayerLoop, null);
             }
+            if (!gamaOvarDevice.isPlaying)
+            {
+                gamaOvarDevice.PlayOneShot(ZerullLoseSound);
+            }
+            AdditionalGameCustomizer.Instance.FovAmmount = 120;
         }
-
+        if (player.jumpropes.Count > 0)
+        {
+            player.jumpropes[0].End(false);
+        }
         AudioListener.pause = true;
         gamaOvarDevice.ignoreListenerPause = true;
         Time.timeScale = 0f;
@@ -348,7 +357,7 @@ public class GameControllerScript : MonoBehaviour
         gameOverDelay -= Time.unscaledDeltaTime;
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
 
-        if (!gamaOvarDevice.isPlaying)
+        if (!gamaOvarDevice.isPlaying && !player.killedbyhim)
         {
             audOverVal = (int)UnityEngine.Random.Range(0f, LoseSounds.Length);
             gamaOvarDevice.PlayOneShot(LoseSounds[audOverVal]);
@@ -371,12 +380,13 @@ public class GameControllerScript : MonoBehaviour
             }
             if (player.killedbyhim)
             {
+                Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
                 Application.Quit();
             }
             Time.timeScale = 1f;
             if (!player.killedbyhim)
             {
-            SceneManager.LoadScene(gameoverScene);
+                SceneManager.LoadScene(gameoverScene);
             }
         }
     }
@@ -754,11 +764,9 @@ public class GameControllerScript : MonoBehaviour
             player.hugging = false;
             player.sweepingFailsave = 0f;
         }
-        else if (player.jumpRope)
+        if (player.jumpropes.Count > 0)
         {
-            player.jumpRope = false;
-            player.DeactivateJumpRope();
-            player.playtime.Disappoint();
+            player.jumpropes[0].End(false);
         }
 
         var newPos = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
@@ -792,11 +800,9 @@ public class GameControllerScript : MonoBehaviour
             player.hugging = false;
             player.sweepingFailsave = 0f;
         }
-        if (player.jumpRope)
+        if (player.jumpropes.Count > 0)
         {
-            player.jumpRope = false;
-            player.DeactivateJumpRope();
-            player.playtime.Disappoint();
+            player.jumpropes[0].End(false);
         }
 
         int teleports = UnityEngine.Random.Range(thing == "normal" ? 40 : thing == "evilleaf" ? 25 : 20, thing == "normal" ? 50 : thing == "evilleaf" ? 35 : 20);
@@ -892,12 +898,13 @@ public class GameControllerScript : MonoBehaviour
 
     [Header("Audio References")]
     public AudioClip[] LoseSounds;
+    public AudioClip ZerullLoseSound;
     public AudioClip[] HurtSounds;
     public AudioClip[] EvapV2FinaleTypeShit, NormalTbsFinale;
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
     public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic,TpSoundSource;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell, punchsoun, totem,loboto, gastervanish,LoudIncorecBugger,timeoutMusicAud;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud;
     #endregion
 
     #region PrivateFields
@@ -934,6 +941,7 @@ public class GameControllerScript : MonoBehaviour
     public string modeDetails;
     public string modeState, largeImagething, largeImageText;
     [Header("teachers management and stuff")]
+    public List<BullyScript> buliScr = new List<BullyScript>();
     public List<PrincipalScript> maxiScr = new List<PrincipalScript>();
     public List<BaldiScript> balscr = new List<BaldiScript>();
     public List<zerullscript> zerscr = new List<zerullscript>();

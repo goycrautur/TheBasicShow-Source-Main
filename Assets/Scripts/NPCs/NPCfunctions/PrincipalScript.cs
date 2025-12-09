@@ -22,6 +22,7 @@ public class PrincipalScript : NPC
 
     public override void OnUpdate()
     {
+        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         agent.speed = movin ? base.agentSpeed * PrinSpeedMult : 0;
         PrinSpeedMult = OGPrinSpeedMult;
         if (base.stun)
@@ -52,6 +53,7 @@ public class PrincipalScript : NPC
                 gauge.Hide();
             }
         }
+        detectionStuff();
         /*{
             foreach (WindowScript w in FindObjectsOfType<WindowScript>())
             {
@@ -66,11 +68,8 @@ public class PrincipalScript : NPC
         }*/
     }
 
-    public override void OnFixedUpdate()
+    public void detectionStuff()
     {
-        base.OnFixedUpdate();
-        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        
         if (!angry)
         {
             HandlePlayerDetection();
@@ -87,7 +86,7 @@ public class PrincipalScript : NPC
 
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            if (!angry && !seesRuleBreak && !inOffice)
+            if (!angry && !seesRuleBreak && !inOffice && !brogotcalled)
             {
                 Wander();
             }
@@ -168,12 +167,15 @@ public class PrincipalScript : NPC
 
     private void HandleBullyDetection()
     {
-        aim = bully.position - transform.position;
-        if (transform.position.RaycastFromPosition(aim, out hit, QueryTriggerInteraction.UseGlobal))
+        foreach (BullyScript bul in GameControllerScript.Instance.buliScr)
         {
-            if (hit.transform.name == "Its a Bully" && hit.transform.GetComponent<BullyScript>().guilt > 0f && !inOffice)
+            aim = bul.transform.position - transform.position;
+            if (transform.position.RaycastFromPosition(aim, out hit, QueryTriggerInteraction.UseGlobal))
             {
-                TargetBully();
+                if (hit.transform.CompareTag("bully") && hit.transform.GetComponent<BullyScript>().guilt > 0f && !inOffice)
+                {
+                    TargetBully(hit.transform.GetComponent<BullyScript>().transform);
+                }
             }
         }
     }
@@ -182,12 +184,17 @@ public class PrincipalScript : NPC
     #region Movement & Navigation
     protected override void Wander(string locationType = "default")
     {
+        brogotcalled = false;
         OGPrinSpeedMult = 1f;
         playerScript.principalBugFixer = 1;
         base.Wander(locationType);
         if (agent.isStopped)
         {
             agent.isStopped = false;
+        }
+        if (bullySeen)
+        {
+            bullySeen = false;
         }
         ResetCooldown();
         if (Random.Range(0f, 10f) <= 1f)
@@ -210,17 +217,19 @@ public class PrincipalScript : NPC
 
     protected override void TargetPlayer()
     {
+        brogotcalled = false;
         OGPrinSpeedMult = 1f;
         base.TargetPlayer();
         movin = true;
     }
 
-    private void TargetBully()
+    private void TargetBully(Transform tranfo)
     {
         if (!bullySeen)
         {
+            brogotcalled = false;
             OGPrinSpeedMult = 1f;
-            agent.SetDestination(bully.position);
+            agent.SetDestination(tranfo.position);
             audioQueue.QueueAudio(audNoBullying,noBullyingCaptions);
             movin = true;
             bullySeen = true;
@@ -278,11 +287,9 @@ public class PrincipalScript : NPC
                 playerScript.sweepingFailsave = 0f;
                 target.transform.SetParent(null);
             }
-            if (playerScript.jumpRope)
+            if (playerScript.jumpropes.Count > 0)
             {
-                playerScript.jumpRope = false;
-                playerScript.DeactivateJumpRope();
-                playerScript.playtime.Disappoint();
+                playerScript.jumpropes[0].End(false);
                 target.transform.SetParent(null);
             }
             playerScript.guilt = 0f;
@@ -376,7 +383,7 @@ public class PrincipalScript : NPC
         {
             inOffice = false;
         }
-        if (other.name == "Bully")
+        if (other.CompareTag("bully"))
         {
             bullySeen = false;
         }
@@ -384,14 +391,15 @@ public class PrincipalScript : NPC
     #endregion
     public void callToSMTH(Vector3 tranfo)
     {
-    OGPrinSpeedMult = 6f;
-	agent.SetDestination(tranfo);
+        brogotcalled = true;
+        OGPrinSpeedMult = 6f;
+	    agent.SetDestination(tranfo);
     }
 
     #region Serialized Field States
     [Header("Player and Bully Detection")]
     [SerializeField] private PlayerScript playerScript;
-    [SerializeField] private Transform bully, point, prin;
+    [SerializeField] private Transform point, prin;
     public bool angry, onFaculty;
 
     [Header("Audio and Feedback")]
@@ -408,14 +416,14 @@ public class PrincipalScript : NPC
     [Header("References")]
     [SerializeField] private Sprite gaugeDetentionSprite;
 
-    private int detentions;
-    private float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
+    public int detentions;
+    public float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
     [SerializeField] private int[] lockTime = { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 99 };
-    private AudioSource AudioDevice;
-    private bool summon, seesRuleBreak, bullySeen, inOffice;
-    private RaycastHit hit;
-    private Vector3 aim;
-    private Gauge gauge;
+    public AudioSource AudioDevice;
+    public bool summon, seesRuleBreak, bullySeen, inOffice,brogotcalled;
+    public RaycastHit hit;
+    public Vector3 aim;
+    public Gauge gauge;
     [SerializeField] private Transform nonexistance;
     [SerializeField] private bool movin;
     #endregion

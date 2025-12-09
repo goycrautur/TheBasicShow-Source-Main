@@ -50,6 +50,7 @@ public class SweepScript : NPC
                 GoHome();
             }
         }
+        waitStuff();
     }
     #endregion
 
@@ -62,7 +63,7 @@ public class SweepScript : NPC
         }
     }
 
-    public override void OnFixedUpdate()
+    public void waitStuff()
     {
         if (waitTime > 0f) return;
         if (active && activeTime > 0f)

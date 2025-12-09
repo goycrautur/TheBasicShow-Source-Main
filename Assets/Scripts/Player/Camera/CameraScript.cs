@@ -2,24 +2,15 @@
 
 public class CameraScript : MonoBehaviour
 {
+    public static CameraScript Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start() => offset = transform.position - player.transform.position;
 
     private void Update()
     {
-        if (ps.jumpRope)
-        {
-            velocity -= gravity * Time.deltaTime;
-            jumpHeight += 2.7f * velocity * Time.deltaTime;
-            if (jumpHeight <= 0f)
-            {
-                jumpHeight = 0f;
-                if (Singleton<InputManager>.Instance.GetActionKey(InputAction.Jump))
-                {
-                    velocity = initVelocity;
-                }
-            }
-            jumpHeightV3 = new Vector3(0f, jumpHeight, 0f);
-        }
         if (!ps.gc.KF.gamePaused)
         {
             lookBehind = Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? 180 : 0;
@@ -30,7 +21,7 @@ public class CameraScript : MonoBehaviour
     {
         if (!ps.gameOver)
         {
-            transform.SetPositionAndRotation(player.transform.position + offset + (ps.jumpRope ? jumpHeightV3 : Vector3.zero), player.transform.rotation * Quaternion.Euler(0f, lookBehind, 0f));
+            transform.SetPositionAndRotation(new Vector3(player.transform.position.x,jumpfloatThing,player.transform.position.z) + offset + Vector3.zero, player.transform.rotation * Quaternion.Euler(0f, lookBehind, 0f));
         }
         else
         {
@@ -43,6 +34,11 @@ public class CameraScript : MonoBehaviour
             {
                 transform.position = famished.position + baldi.forward * 2f + Vector3.up * GameOverOffset;
                 transform.LookAt(famished.position + Vector3.up * 5f);
+            }
+            if (ps.killedbyhim)
+            {
+                transform.position = him.position + baldi.forward * 2f + Vector3.up * GameOverOffset;
+                transform.LookAt(him.position + Vector3.up * 5f);
             }
         }
     }
@@ -57,10 +53,11 @@ public class CameraScript : MonoBehaviour
 
     [Header("Jump Rope Physics")]
     [SerializeField] private float initVelocity, velocity, gravity;
-    public float jumpHeight;
+    public float jumpfloatThing = 4.88f;
 
     [Header("Baldi References")]
-    [SerializeField] private Transform baldi, famished;
+    [SerializeField] private Transform baldi;
+    [SerializeField] private Transform famished, him;
     
     private int lookBehind;
     private Vector3 jumpHeightV3;

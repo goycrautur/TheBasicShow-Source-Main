@@ -14,12 +14,10 @@ public class ITM_Scissors : BaseItem
 			    }
 		    }
         }
-
-        if (GameControllerScript.Instance.player.jumpRope)
+        if (GameControllerScript.Instance.player.jumpropes.Count > 0)
         {
-            GameControllerScript.Instance.player.DeactivateJumpRope();
+            GameControllerScript.Instance.player.jumpropes[0].End(false);
             GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Snip);
-            GameControllerScript.Instance.playtimeScript.Disappoint();
             return true;
         }
 

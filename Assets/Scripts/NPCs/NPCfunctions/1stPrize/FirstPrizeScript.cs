@@ -36,10 +36,6 @@ public class FirstPrizeScript : NPC
         {
             coolDown -= Time.deltaTime;
         }
-    }
-
-    public override void OnFixedUpdate()
-    {
         CheckForPlayer();
 
         if (!playerSeen)
@@ -183,11 +179,9 @@ public class FirstPrizeScript : NPC
 
     private void HandleHuggingPlayer()
     {
-        if (gc.player.jumpRope)
+        if (gc.player.jumpropes.Count > 0)
         {
-            gc.player.jumpRope = false;
-            gc.player.DeactivateJumpRope();
-            gc.player.playtime.Disappoint();
+            gc.player.jumpropes[0].End(false);
         }
         Vector3[] directions = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left };
         Vector3 furthestPoint = Vector3.zero;

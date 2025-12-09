@@ -59,7 +59,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
 	
 	public void ShakeGlitch()
 	{
-		GameOverGlitch_Delay = 3f;
+		GameOverGlitch_Delay = 7f;
 		isShakeGlitchUpdating = true;
 		time = 0f;
 	}

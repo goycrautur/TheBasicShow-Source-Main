@@ -27,12 +27,11 @@ public class LifetimeScript : MonoBehaviour
     #endregion
 
     #region Trigger Handlers
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("NPC"))
         {
             ToggleAudioSource(other.GetComponent<AudioSource>(), true);
-            Debug.Log("added");
         }
     }
 
@@ -48,7 +47,7 @@ public class LifetimeScript : MonoBehaviour
     #region Audio Management
     private void ToggleAudioSourcesInRange(bool mute)
     {
-        var colliders = Physics.OverlapBox(transform.position, new Vector3(25, 1, 25), Quaternion.identity);
+        var colliders = Physics.OverlapBox(transform.position, new Vector3(10*transform.localScale.x, 1, 10*transform.localScale.z), Quaternion.identity);
         foreach (var collider in colliders)
         {
             ToggleAudioSource(collider.GetComponent<AudioSource>(), mute);

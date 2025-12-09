@@ -435,7 +435,7 @@ public class ZerullClassic : MonoBehaviour
                 zs.totem();
                 health = 10;
                 zs.totemready = true;
-                gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
+                gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp || oh no he used totem of undying";
             }
             else
             BossEnd();

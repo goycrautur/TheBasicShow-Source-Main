@@ -33,6 +33,7 @@ TagManager:
   - lapporta
   - friesBday
   - HarderDifficulityFaceLock
+  - bully
   layers:
   - Default
   - TransparentFX

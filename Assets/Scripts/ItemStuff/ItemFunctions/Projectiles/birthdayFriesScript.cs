@@ -22,21 +22,24 @@ public class birthdayFriesScript : MonoBehaviour
     #endregion
     private void OnTriggerStay(Collider cork)
     {
-        if (cork.GetComponent<ZerullBossScript>() != null && !stunnedBoss)
+        if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.health != 1)
         {
-            StartCoroutine(StunBoss());
-            IEnumerator StunBoss()
+            if (cork.GetComponent<ZerullBossScript>() != null && !stunnedBoss)
             {
-                while (ZerullClassic.Instance.maxHealth == ZerullClassic.Instance.health - 1 && !ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.GetBoss().hitted || ZerullClassic.Instance.isbroyapping)
+                StartCoroutine(StunBoss());
+                IEnumerator StunBoss()
                 {
-                    yield return null;
+                    while (ZerullClassic.Instance.maxHealth == ZerullClassic.Instance.health - 1 && !ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.GetBoss().hitted || ZerullClassic.Instance.isbroyapping)
+                    {
+                        yield return null;
+                    }
+                    stunnedBoss = true;
+                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length);
+                    Instantiate(GameControllerScript.Instance.ConfettiEffect, transform.position, transform.rotation);
+                    Destroy(base.gameObject);
                 }
-                stunnedBoss = true;
-                ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length);
-                Instantiate(GameControllerScript.Instance.ConfettiEffect, transform.position, transform.rotation);
-                Destroy(base.gameObject);
+                return;
             }
-            return;
         }
     }
 

@@ -80,13 +80,16 @@ public class FamishedScript : NPC
         {
             agent.SetDestination(player.position);
         }
-
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
             if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
             {
                 TargetPlayer();
             }
+        }
+        if (agent.remainingDistance <= 0.1f)
+        {
+            Wander();
         }
     }
     #endregion

@@ -16,11 +16,10 @@ public class ITM_SharpRock : BaseItem
 		    }
         }
 
-        if (GameControllerScript.Instance.player.jumpRope)
+        if (GameControllerScript.Instance.player.jumpropes.Count > 0)
         {
-            GameControllerScript.Instance.player.DeactivateJumpRope();
+            GameControllerScript.Instance.player.jumpropes[0].End(false);
             GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
-            GameControllerScript.Instance.playtimeScript.Disappoint();
             return true;
         }
 
@@ -46,19 +45,22 @@ public class ITM_SharpRock : BaseItem
         }
         if (SendRay("", out RaycastHit RayUll, GameControllerScript.Instance.player.LocalRange))
         {
-            if (RayUll.transform.GetComponent<ZerullBossScript>() != null)
+            if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.health != 1)
             {
-                StartCoroutine(StunBoss());
-                IEnumerator StunBoss()
+                if (RayUll.transform.GetComponent<ZerullBossScript>() != null)
                 {
-                    while (ZerullClassic.Instance.maxHealth == ZerullClassic.Instance.health-1 && !ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.GetBoss().hitted || ZerullClassic.Instance.isbroyapping)
+                    StartCoroutine(StunBoss());
+                    IEnumerator StunBoss()
                     {
-                        yield return null;
+                        while (ZerullClassic.Instance.maxHealth == ZerullClassic.Instance.health-1 && !ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.GetBoss().hitted || ZerullClassic.Instance.isbroyapping)
+                        {
+                            yield return null;
+                        }
+                        ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length);
+                        GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
                     }
-                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length);
-                    GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                    return true;
                 }
-                return true;
             }
         }
         return false;

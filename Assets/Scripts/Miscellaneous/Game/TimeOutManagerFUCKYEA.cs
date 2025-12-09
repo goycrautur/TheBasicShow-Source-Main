@@ -14,7 +14,7 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
     {
 
         timeoutTVDurationStuffIncaseReachingFinaleLmfao -= Time.deltaTime; 
-        if (TimeDuratiOk < 0f)
+        if (TimeDuratiOk < 0f && countItDown)
 		{
             ohboy = true;
             countItDown = false;

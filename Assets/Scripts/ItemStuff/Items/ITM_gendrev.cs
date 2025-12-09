@@ -48,11 +48,27 @@ public class ITM_gendrev : BaseItem
     }
     public IEnumerator windBreakBlast()
     {
-        GameControllerScript.Instance.player.breakwindow = true;
-        GameControllerScript.Instance.player.windowbreakDistance += windobreakradius;
+        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+		{
+			if (!w.broken)
+			{
+				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, w.transform.position) <= windobreakradius+20f)
+				{
+					w.Window(true, true, 6f);
+				}
+			}
+		}
         yield return new WaitForSeconds(0.1f);
-        GameControllerScript.Instance.player.breakwindow = false;
-        GameControllerScript.Instance.player.windowbreakDistance -= windobreakradius;
+        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+		{
+			if (!w.broken)
+			{
+				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, w.transform.position) <= windobreakradius+20f)
+				{
+					w.Window(true, true, 6f);
+				}
+			}
+		}
         yield break;
     }
     private IEnumerator amwaitin(float time)
