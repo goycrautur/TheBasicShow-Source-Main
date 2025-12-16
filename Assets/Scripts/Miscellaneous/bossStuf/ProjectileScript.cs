@@ -9,7 +9,7 @@ public class ProjectileScript : MonoBehaviour
 
     private Vector3 initSpawnPoint;
 
-    private bool pickedUp,boshit,thrown;
+    public bool pickedUp,boshit,thrown;
 
     [SerializeField]
     private AudioSource audioDevice;
@@ -45,7 +45,7 @@ public class ProjectileScript : MonoBehaviour
                     audioDevice.PlayOneShot(throwSound);
                     if (subtitlesScriptableObjectREAL != null)
                     {
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, 0, audioDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, audioDevice);
                     }
                 }
                 Throw();

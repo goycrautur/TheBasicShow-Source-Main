@@ -3,7 +3,7 @@ using Discord;
 using UnityEngine;
 public class DiscordRPC_stuff : MonoBehaviour
 {
-    //please forgive me i stole this from ron caseoh basics i DONT want to deal with this headache anymore for god sake :sob:
+    //ron discord rpc x swordablet discord rpc yum
 	private void Awake()
     {
 		if (DiscordRPC_stuff.current == null)

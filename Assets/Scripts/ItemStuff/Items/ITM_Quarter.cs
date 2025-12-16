@@ -6,6 +6,7 @@ public class ITM_Quarter : BaseItem
     {
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
+            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.monesound);
             AdditionalGameCustomizer.Instance.Cash += 0.25;
             return true;
         }

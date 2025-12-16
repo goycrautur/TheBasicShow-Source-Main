@@ -94,7 +94,8 @@ public class AdditionalGameCustomizer : MonoBehaviour
     {
         if (StaminaPercentage && !ZerullClassic.Instance.BossStarted)
         {
-            percentageText.text = (int)GameControllerScript.Instance.player.stamina + "%";
+            what = Mathf.Lerp(what,GameControllerScript.Instance.player.stamina, 5*Time.deltaTime);
+            percentageText.text = (int)what + "%";
             if (GameControllerScript.Instance.player.stamina <= 15f)
             {
                 percentageText.color = Color.red;
@@ -297,24 +298,34 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #region RandomizedItems
     private void ScrambleItems()
     {
-        if (RandomizeItems)
+        if (RandomizeItems && !ActuallyRandomizeItems)
         {
             List<Vector3> list = new List<Vector3>();
 
             foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
             {
-                if (pickupScript.gameObject != quarter && !pickupScript.SpawnAtRandom)
+                if (pickupScript.ID != 5 && pickupScript.ID != 34 && !pickupScript.SpawnAtRandom)
                 {
                     list.Add(pickupScript.transform.position);
                 }
             }
             foreach (PickupScript pickupScript2 in FindObjectsOfType<PickupScript>())
             {
-                if (pickupScript2.gameObject != quarter && !pickupScript2.SpawnAtRandom)
+                if (pickupScript2.ID != 5 && pickupScript2.ID != 34 && !pickupScript2.SpawnAtRandom)
                 {
                     int index = Random.Range(0, list.Count);
                     pickupScript2.transform.position = list[index];
                     list.RemoveAt(index);
+                }
+            }
+        }
+        if (ActuallyRandomizeItems && !RandomizeItems)
+        {
+            foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
+            {
+                if (pickupScript.ID != 34 && pickupScript.ID != 13)
+                {
+                    pickupScript.itsPresentTime();
                 }
             }
         }
@@ -327,7 +338,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public bool RandomizeJumps;
     public bool rainbowTime;
     public Color donthaveanamelmfao, darkencanva, canvascolormain, zaColor;
-    public bool NoYCTP, DetentionAfterScissorUse, AnOldRule, ItemDropping, SkipCraftersAttack, ReworkedCurrency, RandomizeItems, ItemInfoShit,Subtitles;
+    public bool NoYCTP, DetentionAfterScissorUse, AnOldRule, ItemDropping, SkipCraftersAttack, ReworkedCurrency, RandomizeItems,ActuallyRandomizeItems, ItemInfoShit,Subtitles;
     public Image spee;
     public Sprite run1, run2, invincibl, dorMapLockedSprite, dorMapSprite;
     public Texture2D itemMapSprite,SpecialItemMapSprite;
@@ -340,13 +351,13 @@ public class AdditionalGameCustomizer : MonoBehaviour
     [Header("Serialized References")]
     public Image[] ExitImages;
     public Image rainboCanv;
-    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount;
+    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount,what;
     public Sprite[] BookColors;
     public Material NormalSky, NormalRedSky, NightSky, RedNightSky, TwilightSky, RedTwilightSky, DefaultSky;
     [SerializeField] private GameObject warning, Clock, TMP, OldStamina, PreOldStamina, NewStamina, VerticalStamina, CircleStamina, GaugeManager, Counter, staminapercent, healthpercent;
     [SerializeField] private TMP_Text currencyCounter, percentageText, healthPercentageText, modesText, ModifierText, speedtextmf,defmultText;
     [SerializeField] public AudioClip aud_Drop;
-    [SerializeField] private GameObject quarter,ItemInfostuffahah,subtitlesCanvas;
+    [SerializeField] private GameObject ItemInfostuffahah,subtitlesCanvas;
     #endregion
 
     #region RuntimeVariables
@@ -371,25 +382,14 @@ public class AdditionalGameCustomizer : MonoBehaviour
     [Header("item slot")]
 
     [SerializeField] public List<RawImage> ItemImages1slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages2slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages3slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages4slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages5slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages6slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages7slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages8slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages9slot = new List<RawImage>();
+    [SerializeField] public List<RawImage> ItemImages2slot,ItemImages3slot,ItemImages4slot,ItemImages5slot,ItemImages6slot,ItemImages7slot,ItemImages8slot,ItemImages9slot = new List<RawImage>();
+    [Header("item slot parte 2")]
 
+    [SerializeField] public List<RawImage> ItemImagesRea1slot = new List<RawImage>();
+    [SerializeField] public List<RawImage> ItemImagesRea2slot,ItemImagesRea3slot,ItemImagesRea4slot,ItemImagesRea5slot,ItemImagesRea6slot,ItemImagesRea7slot,ItemImagesRea8slot,ItemImagesRea9slot = new List<RawImage>();
     [Header("images background slots")]
 
     [SerializeField] public List<Image> ItemImageBGs1slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs2slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs3slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs4slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs5slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs6slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs7slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs8slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs9slot = new List<Image>();
+    [SerializeField] public List<Image> ItemImageBGs2slot,ItemImageBGs3slot,ItemImageBGs4slot,ItemImageBGs5slot,ItemImageBGs6slot,ItemImageBGs7slot,ItemImageBGs8slot,ItemImageBGs9slot = new List<Image>();
     public HeldItem[] Inventory1slot, Inventory2slot, Inventory3slot, Inventory4slot, Inventory5slot, Inventory6slot, Inventory7slot, Inventory8slot, Inventory9slot;
 }

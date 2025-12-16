@@ -56,6 +56,10 @@ public class ItemManager : MonoBehaviour
                 }
 
                 SelectedItemObject.Uses--;
+                if (Inventory[ItemSelection].ItemInstance != null)
+                {
+                    SlotsItemHandlingStuffIdk(ItemSelection,Inventory[ItemSelection].ItemID,SelectedItemObject);
+                }
                 if (SelectedItemObject.Uses <= 0)
                 {
                     ExecuteItem(GetSelectedItem(), ExecutionType.Deselect);
@@ -63,7 +67,7 @@ public class ItemManager : MonoBehaviour
                     {
                         Destroy(Inventory[ItemSelection].ItemInstance.gameObject);
                     }
-
+                    
                     ClearItem(ItemSelection);
                 }
             }
@@ -128,13 +132,20 @@ public class ItemManager : MonoBehaviour
         UpdateItemUI();
     }
 
-    public void ClearItem(int index)
+    public void ClearItem(int index,bool reduceinventory = true)
     {
+        
         ItemImages2Real[index].transform.DOScale(2f, 0f);
         ItemImages2Real[index].transform.DOScale(0f, 0.5f);
         ItemImages[index].transform.DOScale(0f, 0f);
         ItemImages2Real[index].color = new Color(1,1,1,1);
         ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
+        if (reduceinventory && Inventory[index].ItemID != 0)
+        {
+            //GameControllerScript.Instance.SlotsAmmount = GameControllerScript.Instance.SlotsAmmount-1;
+            //Singleton<OtherMainStuffManager>.Instance.slot();
+        }
+        SlotsItemHandlingStuffIdk(index,0,null);
         Inventory[index].ItemID = 0;
         Inventory[index].ItemInstance = null;
     }
@@ -147,6 +158,7 @@ public class ItemManager : MonoBehaviour
 
         Inventory[index].ItemID = itemID;
         Inventory[index].ItemInstance = item;
+        SlotsItemHandlingStuffIdk(index,itemID,item);
         ItemImages[index].transform.DOScale(0f, 0f);
         ItemImages[index].transform.DOScale(2f, 0.5f);
         ItemImages2Real[index].color = new Color(0,0,0,0);
@@ -161,6 +173,54 @@ public class ItemManager : MonoBehaviour
         }
     }
     #endregion
+    public void SlotsItemHandlingStuffIdk(int index, int itemID, BaseItem Whatitem = null)
+    {
+        for (int i = 0; i < 9; ++i)
+        {
+            AdditionalGameCustomizer.Instance.Inventory9slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory9slot[index].ItemInstance = Whatitem;
+            if (index < AdditionalGameCustomizer.Instance.Inventory8slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory8slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory8slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory7slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory7slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory7slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory6slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory6slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory6slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory5slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory5slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory5slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory4slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory4slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory4slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory3slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory3slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory3slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory2slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory2slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory2slot[index].ItemInstance = Whatitem;
+            }
+            if (index < AdditionalGameCustomizer.Instance.Inventory1slot.Length)
+            {
+            AdditionalGameCustomizer.Instance.Inventory1slot[index].ItemID = itemID;
+            AdditionalGameCustomizer.Instance.Inventory1slot[index].ItemInstance = Whatitem;
+            }
+        }
+    }
 
     #region UI Management
     public void UpdateItemUI()
@@ -247,7 +307,7 @@ public class ItemManager : MonoBehaviour
                 if (index >= 0 && index < Inventory.Length && Inventory[index].ItemInstance != null)
                 {
                     Destroy(Inventory[index].ItemInstance.gameObject);
-                    ClearItem(index);
+                    ClearItem(index,false);
                     break;
                 }
             }
@@ -365,8 +425,7 @@ public class ItemManager : MonoBehaviour
 
         var pickup = droppedItem.AddComponent<PickupScript>();
         pickup.DroppedItem = true;
-
-        typeof(PickupScript).GetField("ID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(pickup, Inventory[index].ItemID);
+        pickup.ID = Inventory[index].ItemID;
         pickup.GetType().GetField("PresentMode", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(pickup, false);
 
         var collider = droppedItem.AddComponent<CapsuleCollider>();
@@ -415,15 +474,16 @@ public class ItemManager : MonoBehaviour
         itemToDrop.transform.SetParent(droppedItem.transform);
         itemToDrop.gameObject.SetActive(true);
 
-        ClearItem(index);
+        ClearItem(index, false);
         UpdateItemUI();
     }
     #endregion
 
     #region Change References void (stolen from null decompile LOL)
-    public void ChangeReferences(List<RawImage> itemImages, List<Image> itemImgBgs)
+    public void ChangeReferences(List<RawImage> itemImages,List<RawImage> itemImages2, List<Image> itemImgBgs)
     {
         ItemImages = itemImages;
+        ItemImages2Real = itemImages2;
         ItemImageBGs = itemImgBgs;
     }
     #endregion

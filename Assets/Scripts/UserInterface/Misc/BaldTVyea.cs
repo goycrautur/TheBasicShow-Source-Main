@@ -21,7 +21,7 @@ public class BaldTVyea : MonoBehaviour
         {
             WarningMarks.SetActive(true);
             TelevisionDevice.PlayOneShot(markingSound == MarkingSoundType.Alert ? mus_Alert : aud_TimesOutBell);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(belltimeou.subtitleOption,belltimeou,0f,new Vector3(0f,40.5f,0f),TelevisionDevice);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(belltimeou.subtitleOption,belltimeou,new Vector3(0f,40.5f,0f),TelevisionDevice);
         }
 
         BaldiTVAnimator.Rebind();
@@ -49,7 +49,7 @@ public class BaldTVyea : MonoBehaviour
         if (clip == null) yield break;
 
         BaldiDevice.PlayOneShot(clip);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,0f,new Vector3(0f,40.5f,0f),BaldiDevice);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),BaldiDevice);
         float timer = 0f;
 
         while (timer < clip.length)

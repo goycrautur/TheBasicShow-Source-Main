@@ -36,7 +36,7 @@ public class ZerullClassic : MonoBehaviour
 
     [HideInInspector] public GameObject currentProjectile;
 
-    private bool projectilesDoNotExist,ok;
+    private bool projectilesDoNotExist,ok,AllowProjectileSpawn;
 
     public int maxObjects = 5;
 
@@ -168,7 +168,7 @@ public class ZerullClassic : MonoBehaviour
                 }
             }
         }
-        if (RealBossStarted)
+        if (AllowProjectileSpawn)
         {
             if (objects > maxObjects)
             {
@@ -312,6 +312,7 @@ public class ZerullClassic : MonoBehaviour
 
     private void BossBegin()
     {
+        AllowProjectileSpawn = true;
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
@@ -415,7 +416,7 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted && Midi)
         {
-            midiTempo += 0.02f * (zs.totemready ? 1 : hp);
+            midiTempo += (!switchToBloxyb ? 0.02f : 0.03f) * (zs.totemready ? 1 : hp);
             Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
         }
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
@@ -474,6 +475,7 @@ public class ZerullClassic : MonoBehaviour
             gc.warmusic.Stop();
         }
         PlayerPrefsExtension.SetBool("BeatedUpZerull", true);
+        AllowProjectileSpawn = false;
         GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
         GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed - GameControllerScript.Instance.player.DefaultRunSpeed;
         float ratioy = (float)Screen.width / 360f;

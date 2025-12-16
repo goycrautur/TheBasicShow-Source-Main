@@ -10,11 +10,11 @@ public class sumoningSubs : MonoBehaviour
         {
             if (type == "3d")
             {
-            GameControllerScript.Instance.SubsManager.summonLeSingleSubtitle(sub.subtitleOption, sub, 0f, audisourc);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(sub.subtitleOption, sub, audisourc);
             }
             if (type == "2d")
             {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(sub.subtitleOption,sub,0f,new Vector3(0f,-170.5f,0f),audisourc);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(sub.subtitleOption,sub,new Vector3(0f,-170.5f,0f),audisourc);
             }
         }
         if (DelaySpawning)
@@ -27,11 +27,11 @@ public class sumoningSubs : MonoBehaviour
         yield return new WaitForSeconds(spawnDelay);
         if (type == "3d")
         {
-        GameControllerScript.Instance.SubsManager.summonLeSingleSubtitle(sub.subtitleOption, sub, 0f, audisourc);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle(sub.subtitleOption, sub, audisourc);
         }
         if (type == "2d")
         {
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(sub.subtitleOption,sub,0f,new Vector3(0f,-170.5f,0f),audisourc);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(sub.subtitleOption,sub,new Vector3(0f,-170.5f,0f),audisourc);
         }
         yield break;
     }

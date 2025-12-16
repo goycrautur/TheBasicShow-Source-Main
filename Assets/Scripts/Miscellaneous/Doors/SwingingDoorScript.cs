@@ -104,7 +104,7 @@ public class SwingingDoorScript : MonoBehaviour
     private void PlayDoorSound()
     {
         myAudio.PlayOneShot(doorOpen);
-        gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[4].subtitleOption,gc.subtitlesScriptableObject[4],0f,GetComponent<AudioSource>());
+        gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[4].subtitleOption,gc.subtitlesScriptableObject[4],GetComponent<AudioSource>());
     }
     #endregion
 

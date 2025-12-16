@@ -28,7 +28,6 @@ public class PlayerScript : MonoBehaviour
 	#endregion
 	public void randomAssStufV2()
     {
-		isMoving = false;
 		titlecardtotem = false;
 		AdditionalGameCustomizer.Instance.ReworkedCurrency = false;
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -164,9 +163,15 @@ public class PlayerScript : MonoBehaviour
 		Vector3 grav = Vector3.zero;
 		if (!cc.isGrounded)
 		{
-			grav.y -= gravity * Time.deltaTime;
+			grav.y -= gravity * Time.deltaTime * curgrav;
+			curgrav += 0.02f;
 		}
+
 		cc.Move(grav * Time.deltaTime);
+		if (cc.isGrounded)
+		{
+			curgrav = 1f;
+		}
 	}
 
 	private void HandleMouseMovement()
@@ -218,6 +223,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void PlayerMove()
 	{
+		isMoving = false;
 		Vector3 movement = Vector3.zero;
 		Vector3 lateralMovement = Vector3.zero;
 
@@ -623,7 +629,7 @@ public class PlayerScript : MonoBehaviour
 	#region Internal State
 	private Quaternion playerRotation;
 	private bool sensitivityActive;
-	private float sensitivity, playerSpeed;
+	public float sensitivity, playerSpeed,curgrav = 1f;
 	private Vector3 moveDirection, secondaryMovementVelocity;
 	private GameObject GameSet;
 

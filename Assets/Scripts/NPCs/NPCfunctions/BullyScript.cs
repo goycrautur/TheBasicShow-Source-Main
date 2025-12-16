@@ -36,12 +36,31 @@ public class BullyScript : MonoBehaviour
         }
 
         guilt = Mathf.Max(guilt - Time.deltaTime, 0f);
-        
-        foreach (PrincipalScript maxi in GameControllerScript.Instance.maxiScr)
+        foreach (PrincipalScript prin in GameControllerScript.Instance.prinScr)
         {
-            float distance = Vector3.Distance(maxi.transform.position, Obstacle.transform.position);
-            Obstacle.enabled = distance >= ignoreDistance;
+            if (prin.isActiveAndEnabled)
+            {
+                prinvec3 = prin.transform.position;
+            }
         }
+        foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr)
+        {
+            if (maxi.isActiveAndEnabled)
+            {
+                maxvec3 = maxi.transform.position;
+            }
+        }
+        foreach (coolSkeleton97Scrip cs97 in GameControllerScript.Instance.cs97Scr)
+        {
+            if (cs97.isActiveAndEnabled)
+            {
+                cs97vec3 = cs97.transform.position;
+            }
+        }
+        Vector3 totalVectorShit = prinvec3 + maxvec3 + cs97vec3;
+        float distance = Vector3.Distance(totalVectorShit, Obstacle.transform.position);
+        Obstacle.enabled = distance >= ignoreDistance;
+
         extraStuff();
     }
 
@@ -117,7 +136,7 @@ public class BullyScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.GetComponent<PrincipalScript>() != null && guilt > 0f)
+        if ((other.transform.GetComponent<PrincipalScript>() != null && guilt > 0f) || (other.transform.GetComponent<MaxcipalScript>() != null && guilt > 0f))
         {
             Reset();
         }
@@ -163,7 +182,7 @@ public class BullyScript : MonoBehaviour
                 Destroy(ItemManager.Instance.Inventory[num].ItemInstance.gameObject);
             }
 
-            ItemManager.Instance.ClearItem(num);
+            ItemManager.Instance.ClearItem(num,false);
             ItemManager.Instance.UpdateItemUI();
 
             int num2 = Random.Range(0, aud_Thanks.Length);
@@ -224,6 +243,7 @@ public class BullyScript : MonoBehaviour
     [Header("Activation and Guilt")]
     [SerializeField] private UnityEngine.AI.NavMeshObstacle Obstacle;
     [SerializeField] private float ignoreDistance;
+    [SerializeField] private Vector3 prinvec3,maxvec3,cs97vec3;
     public float guilt;
 
     [Header("Audio")]

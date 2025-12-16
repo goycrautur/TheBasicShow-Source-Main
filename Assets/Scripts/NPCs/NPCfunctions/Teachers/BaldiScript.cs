@@ -94,7 +94,7 @@ public class BaldiScript : NPC
         if (this.isActiveAndEnabled)
         {
             agent.speed = base.agentSpeed;
-            gc.SubsManager.summonLeSubtitle(slapSound.subtitleOption, slapSound, 0f, baldiAudio);
+            gc.SubsManager.summonLeSubtitle(slapSound.subtitleOption, slapSound, baldiAudio);
             baldiAudio.PlayOneShot(slap);
             baldiAnimator.SetTrigger("slap");
 

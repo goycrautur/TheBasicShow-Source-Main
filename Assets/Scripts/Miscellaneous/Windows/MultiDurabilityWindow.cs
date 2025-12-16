@@ -1,7 +1,7 @@
 using UnityEngine.AI;
 using UnityEngine;
 using System;
-public class MultiDurabilityWindow : MonoBehaviour
+public class MultiDurabilityWindow : MonoBehaviour // when am i going to put this to use
 {
     private void Start()
     {
@@ -48,7 +48,7 @@ public class MultiDurabilityWindow : MonoBehaviour
             meshCollider_In.enabled = false;
             meshCollider_Out.enabled = false;
             broken = true;
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[0].subtitleOption, subtitlesObject[0], 0f, audioDevice);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[0].subtitleOption, subtitlesObject[0], audioDevice);
             Instantiate(amthing[2], transform.position, Quaternion.identity);
         }
         if (durabilityeal >= 1)
@@ -94,17 +94,17 @@ public class MultiDurabilityWindow : MonoBehaviour
             }
             if (!subtitlesAlt)
             {
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[1].subtitleOption, subtitlesObject[1], 0f, audioDevice);
+                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[1].subtitleOption, subtitlesObject[1], audioDevice);
             }
             if (subtitlesAlt)
             {
                 if (!uniqueDurabSound)
                 {
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[2].subtitleOption, subtitlesObject[2], 0f, audioDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[2].subtitleOption, subtitlesObject[2], audioDevice);
                 }
                 if (uniqueDurabSound)
                 {
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[2].subtitleOption, subtitlesObject[2], sounds[durabilityeal + 2].length, audioDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesObject[2].subtitleOption, subtitlesObject[2], audioDevice);
                 }
             }
             meshCollider_In.enabled = true;

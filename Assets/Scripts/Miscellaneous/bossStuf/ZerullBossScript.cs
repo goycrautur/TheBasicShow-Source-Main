@@ -77,7 +77,7 @@ public class ZerullBossScript : MonoBehaviour
         if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.BossStarted && other.CompareTag("Player"))
         {
             if (!GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)
-            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 2f, false, true, false);
+            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
             GameControllerScript.Instance.player.killedbyhim = true;
             return;
         }

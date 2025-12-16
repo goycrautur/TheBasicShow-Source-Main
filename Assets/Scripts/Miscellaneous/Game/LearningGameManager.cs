@@ -44,7 +44,7 @@ public class LearningGameManager : MonoBehaviour
         UnityEngine.Object.Destroy(subject);
     }
 
-    public void DeactivateLearningGame(GameObject subject)
+    public void DeactivateLearningGame(GameObject subject,int allAnswerWrong = 0)
     {
         scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 750, true,true);
         gc.schoolMusic.ignoreListenerPause = false;
@@ -71,11 +71,13 @@ public class LearningGameManager : MonoBehaviour
         {
             gc.ActivateSpoopMode();
         }
-        if (gc.spoopMode)
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f, 0f,false, "zerull");
+        if (allAnswerWrong == 1)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.05f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.3f, 0.15f,true, "zerull");
         }
 
         if (!gc.spoopMode && gc.mode == "story")

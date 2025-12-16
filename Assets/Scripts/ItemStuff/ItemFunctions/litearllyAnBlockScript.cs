@@ -27,7 +27,7 @@ public class litearllyAnBlockScript : MonoBehaviour
 			array[i].material = blockTypes[num].mat;
 		}
 		audioDevice111.PlayOneShot(blockTypes[num].audio);
-		GameControllerScript.Instance.SubsManager.summonLeSubtitle(blockTypes[num].subtitleObjectStuff.subtitleOption, blockTypes[num].subtitleObjectStuff, 0f, subsAudioDevice);
+		GameControllerScript.Instance.SubsManager.summonLeSubtitle(blockTypes[num].subtitleObjectStuff.subtitleOption, blockTypes[num].subtitleObjectStuff, subsAudioDevice);
 	}
 
 	public float lifeSpan;

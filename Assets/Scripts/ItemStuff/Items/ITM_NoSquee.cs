@@ -13,7 +13,7 @@ public class ITM_NoSquee : BaseItem
         {
             if (Subtitles != null)
             {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitles.subtitleOption,Subtitles,0f,new Vector3(0f,-170.5f,0f),GameControllerScript.Instance.audioDevice);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitles.subtitleOption,Subtitles,new Vector3(0f,-170.5f,0f),GameControllerScript.Instance.audioDevice);
             }
         }
 

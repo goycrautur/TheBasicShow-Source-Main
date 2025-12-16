@@ -27,6 +27,8 @@ public class FamishedScript : NPC
 
     public override void OnUpdate()
     {
+        famishedspr.SetActive(!gc.fmc.specialLmsToggle2);
+        femtanylspr.SetActive(gc.fmc.specialLmsToggle2);
         if (antiHearing)
 		{
 			AntiHearingDuratio -= Time.deltaTime;
@@ -87,10 +89,6 @@ public class FamishedScript : NPC
                 TargetPlayer();
             }
         }
-        if (agent.remainingDistance <= 0.1f)
-        {
-            Wander();
-        }
     }
     #endregion
 
@@ -114,7 +112,7 @@ public class FamishedScript : NPC
         {
             if (base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 1.5f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 0.5f, false, true, false);
 				gc.player.killedbyfamished = true;
 			}
         }
@@ -209,5 +207,6 @@ public class FamishedScript : NPC
     private float currentPriority;
     private AudioSource baldiAudio;
     public bool activatewindowbreak;
+    public GameObject famishedspr,femtanylspr;
     #endregion
 }

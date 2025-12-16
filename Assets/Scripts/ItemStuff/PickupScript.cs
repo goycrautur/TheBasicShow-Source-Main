@@ -25,6 +25,19 @@ public class PickupScript : Interactable
             transform.position = location.position + Vector3.up * 4f;
         }
     }
+    public void itsPresentTime(bool resetIDONLY = false)
+    {
+        if (resetIDONLY)
+        {
+            ID = Random.Range(1, 48);
+        }
+        if (!PresentMode && !resetIDONLY)
+        {
+            GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
+            ID = Random.Range(1, 48);
+            PresentMode = true;
+        }
+    }
     #endregion
     public void OnEnable()
     {
@@ -52,6 +65,10 @@ public class PickupScript : Interactable
             {
                 ZerullClassic.Instance.objects -= 1;
             }
+        }
+        if (PresentMode)
+        {
+            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.gambling);
         }
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
         {
@@ -139,7 +156,7 @@ public class PickupScript : Interactable
 
     #region Configuration & State
     [Header("Pickup Settings")]
-    [SerializeField] private int ID;
+    public int ID;
     [SerializeField] private bool PresentMode, killafterpickup;
     public bool SpawnAtRandom;
     public SpriteRenderer mapIconSprite;

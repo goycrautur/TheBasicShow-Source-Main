@@ -27,6 +27,7 @@ public class MathGameScript : MonoBehaviour
     #region Initialization
     private void InitializeGame()
     {
+        allanswerWrongInt = UnityEngine.Random.Range(0,2);
         specialCodes = new Dictionary<string, Action>
         {
             { "31718", () => { StartCoroutine(CheatText("THIS IS WHERE IT ALL BEGAN")); SceneManager.LoadSceneAsync("TestRoom"); } }
@@ -65,7 +66,7 @@ public class MathGameScript : MonoBehaviour
         if (gc.mode == "zerullclassic")
         {
             bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-            ProvideHintOrFeedback();
+            ProvideHintOrFeedback(allanswerWrongInt);
             Baldtalk.SetActive(false);
             BlackCoverUp.SetActive(false);
 			lg.learnMusic.Stop();
@@ -104,7 +105,7 @@ public class MathGameScript : MonoBehaviour
         {
             GC.Collect();
             ExitGame();
-            lg.DeactivateLearningGame(gameObject);
+            lg.DeactivateLearningGame(gameObject,allanswerWrongInt);
         }
                 
     }
@@ -187,18 +188,19 @@ public class MathGameScript : MonoBehaviour
 
     private void GenerateSimpleMathProblem()
     {
-        num1 = UnityEngine.Random.Range(0, 10);
-        num2 = UnityEngine.Random.Range(0, 10);
-        sign = UnityEngine.Random.Range(0, 2);
+        num1 = UnityEngine.Random.Range(0, 20);
+        num2 = UnityEngine.Random.Range(0, 20);
+        sign = UnityEngine.Random.Range(0, 4);
+        double dividedRoundUpNumb = Math.Round(num1 / num2);
 
-        QueueAudio(bal_numbers[Mathf.RoundToInt(num1)]);
-        solution = sign == 0 ? num1 + num2 : num1 - num2;
-
-        string signText = sign == 0 ? "+" : "-";
-        questionText.text = $"Solve Math Q{problem}: \n \n{num1}{signText}{num2}=?";
-        QueueAudio(sign == 0 ? bal_plus : bal_minus);
-        QueueAudio(bal_numbers[Mathf.RoundToInt(num2)]);
-        QueueAudio(bal_equals);
+        //QueueAudio(bal_numbers[Mathf.RoundToInt(num1)]);
+        solution = sign == 0 ? num1 + num2 : sign == 1 ? num1 - num2 : sign == 2 ? num1 * num2 : (float)dividedRoundUpNumb;
+        string RoundUpText = sign == 3 ? " (Then round up the number)": "";
+        string signText = sign == 0 ? "+" : sign == 1 ? "-": sign == 2 ? "x": "/";
+        questionText.text = $"Solve Math Q{problem}: \n \n{num1}{signText}{num2}{RoundUpText} = ?";
+        //QueueAudio(sign == 0 ? bal_plus : bal_minus);
+        //QueueAudio(bal_numbers[Mathf.RoundToInt(num2)]);
+        //QueueAudio(bal_equals);
     }
 
     private void GenerateImpossibleProblem()
@@ -269,7 +271,7 @@ public class MathGameScript : MonoBehaviour
 		{
 			GC.Collect();
             ExitGame();
-            lg.DeactivateLearningGame(gameObject);
+            lg.DeactivateLearningGame(gameObject,allanswerWrongInt);
 		}
 
         ResetInputState();
@@ -356,7 +358,7 @@ public class MathGameScript : MonoBehaviour
         }
     }
     
-    private void ProvideHintOrFeedback()
+    private void ProvideHintOrFeedback(int allanswerWrongInt = 0)
     {
         if (gc.mode == "endless" && problemsWrong <= 0)
         {
@@ -373,31 +375,42 @@ public class MathGameScript : MonoBehaviour
             if (!chairr)
             {
                 int index = UnityEngine.Random.Range(0, zerullQuotes.Length);
-                questionText.text = zerullQuotes[index];
+                if (gc.notebooks > 2 && allanswerWrongInt != 1)
+                {
+                    questionText.text = zerullQuotes[index];
+                }
+                if (gc.notebooks > 2 && allanswerWrongInt == 1)
+                {
+                    questionText.text = "bro.." + '\n' + "youre so fucking cooked LMFAO";
+                }
+                if (gc.notebooks == 2)
+                {
+                    questionText.text = "Jeezpers, you really want to suffer huh?";
+                }
+                if (gc.notebooks == 1)
+                {
+                    questionText.text = "Huh, why did i got teleported into this dimension?"+ '\n'+ "oh its you again, the fuck do you want";
+                }
             }
             if (chairr)
             {
                 questionText.text = "chair";
             }
             questionText2.text = questionText3.text = string.Empty;
-            problem = 1;
-            results[problem - 1].sprite = correct;
-            problem = 2;
-            results[problem - 1].sprite = correct;
-            problem = 3;
-            results[problem - 1].sprite = correct;
-            problem = 4;
-            results[problem - 1].sprite = correct;
-            problem = 5;
-            results[problem - 1].sprite = correct;
-            problem = 6;
-            results[problem - 1].sprite = correct;
-            problem = 7;
-            results[problem - 1].sprite = correct;
-            problem = 8;
-            results[problem - 1].sprite = correct;
-            problem = 9;
-            results[problem - 1].sprite = correct;
+            if (allanswerWrongInt == 1)
+            {
+                for (int i = 0; i < results.Length; ++i)
+                {
+                    results[i].sprite = incorrect;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < results.Length; ++i)
+                {
+                    results[i].sprite = correct;
+                }
+            }
 
 			return;
 		}
@@ -552,7 +565,6 @@ public class MathGameScript : MonoBehaviour
     public GameControllerScript gc;
     public Animator tbstransis,DitherTransis;
     public LearningGameManager lg;
-    public BaldiScript baldiScript;
     public Vector3 playerPosition;
 
     [Header("UI Elements")]
@@ -584,14 +596,14 @@ public class MathGameScript : MonoBehaviour
     [Header("Game State")]
     public string context = string.Empty;
     public float num1, num2, num3, solution;
-    public bool questionInProgress, impossibleMode, negative;
+    public bool questionInProgress, impossibleMode, negative,thepadgotaawed;
 
     private bool impossibleQuestionShown;
     private const int MaxAudioQueueSize = 20;
     private const int SampleDataLength = 64;
     private string[] hintText = { "I GET ANGRIER FOR EVERY PROBLEM YOU GET WRONG", "I HEAR EVERY DOOR YOU OPEN" }, endlessHintText = { "That's more like it...", "Keep up the good work or see me after class..." };
     private float endDelay;
-    private int problem, audioInQueue, problemsWrong, sign;
+    private int problem, audioInQueue, problemsWrong, sign,allanswerWrongInt;
     public float DelayPreSpoop = 4f, Delay = 0.5f;
     private AudioClip[] audioQueue = new AudioClip[MaxAudioQueueSize];
     private float[] clipSampleData = new float[SampleDataLength];

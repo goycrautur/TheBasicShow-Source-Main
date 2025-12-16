@@ -9,7 +9,7 @@ public class ShapeLockerScript : MonoBehaviour
         if (!opened)
         {
             opened = true;
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(Subtitlesthing.subtitleOption,Subtitlesthing,0f,lockSound);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(Subtitlesthing.subtitleOption,Subtitlesthing,lockSound);
             lockSound.Play();
             lockerAnim.enabled = true;
         }

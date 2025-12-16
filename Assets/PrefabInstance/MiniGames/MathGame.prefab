@@ -319,8 +319,8 @@ MonoBehaviour:
 
     STILL LOAD'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bc15ff1ca1bb1154eab4bd2dc589d1a8, type: 2}
-  m_sharedMaterial: {fileID: 1532673802376166379, guid: bc15ff1ca1bb1154eab4bd2dc589d1a8,
+  m_fontAsset: {fileID: 11400000, guid: a68fe58c555856946876c9c0e799c44a, type: 2}
+  m_sharedMaterial: {fileID: 21326651355975026, guid: a68fe58c555856946876c9c0e799c44a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -581,7 +581,6 @@ MonoBehaviour:
   tbstransis: {fileID: 7555982342711728627}
   DitherTransis: {fileID: 216720733891515011}
   lg: {fileID: 0}
-  baldiScript: {fileID: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   results:
   - {fileID: 6769326044434766996}
@@ -2371,8 +2370,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: the evap pad
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
-  m_sharedMaterial: {fileID: 824898514370142616, guid: 1f104ab5c06b6f34ab0816f086069b5b,
+  m_fontAsset: {fileID: 11400000, guid: a68fe58c555856946876c9c0e799c44a, type: 2}
+  m_sharedMaterial: {fileID: 21326651355975026, guid: a68fe58c555856946876c9c0e799c44a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

@@ -37,7 +37,7 @@ public class SweepScript : NPC
             activeTime = Random.Range(30f, 60f);
             Wander();
             audioDevice.PlayOneShot(aud_Intro);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
             return;
         }
 
@@ -91,7 +91,7 @@ public class SweepScript : NPC
             if (base.IsHitboxValid)
             {
                 audioDevice.PlayOneShot(aud_Sweep);
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
+                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
                 if (other.transform.name == "Its a Bully")
                 {
                     base.Wander();

@@ -32,8 +32,16 @@ public class LappingOfAsylumController : MonoBehaviour
         realCurrentMaxNoteboo = gc.maxNotebooks;
         CurrentMaxNotebooks = gc.maxNotebooks;
         LapPortals.ForEach(lap => lap.SetActive(false));
+        for (int i = 0; i < lappingHi.Length; i++)
+        {
+            stupidText[i] = PlayerPrefs.GetString($"Lap {i+1} Music", "Default");
+            if (stupidText[i] != "Default")
+            {
+                lappingHi[i].LapMusik = Sych.LoadSound(stupidText[i]);
+            }
+        }
     }
-     public void doShit(string stuff = "beginning")
+    public void doShit(string stuff = "beginning")
     {
         if (stuff == "beginning")
         {
@@ -111,9 +119,9 @@ public class LappingOfAsylumController : MonoBehaviour
             {
                 meepTimerScript.Instance.AddTime(25f, Meeptimar.startingTime <= 25f ? Color.green : Color.red, true);
             }
-            LapSound.clip = lap5Aud1;
+            /*LapSound.clip = lap5Aud1;
             LapSound.Play();
-            LapSound.loop = true;
+            LapSound.loop = true;*/
             Lap5TimingStuff = false;
             Lap5CheeseCount = 0;
         }
@@ -191,6 +199,10 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.npcCloneList.ForEach(o => o.SetActive(false));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
         yield return new WaitForSeconds(zawarudo.length);
+        gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
+        gc.TpSoundSource.PlayOneShot(gc.aud_EvilLeafyTP);
+        gc.SubsManager.summonLeSubtitle2D(gc.subtitlesScriptableObject[12].subtitleOption,gc.subtitlesScriptableObject[12],new Vector3(0f,-170.5f,0f),gc.TpSoundSource);
+        yield return new WaitForSeconds(0.1f);
         gc.player.maxHealth += 50;
         gc.player.totemshit(false);
         gc.maxNotebooks += realCurrentMaxNoteboo;
@@ -202,18 +214,26 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.UpdateNotebookCount();
         yield return new WaitForSeconds(zawarudo.length / 2);
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
+        LapSound.loop = false;
         LapSound.Play();
         gc.audioDevice2.PlayOneShot(BellSoundLapping);
         CurrentLap++;
-        gc.player.walkSpeedMultipler += 0.45f;
-        gc.player.runSpeedMultipler += 0.4f;
+        gc.player.walkSpeedMultipler += 0.25f;
+        gc.player.runSpeedMultipler += 0.25f;
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         vanishScore = true;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap-1].LapMusik.length);
+        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap-1].LapMusik.length-4);
+        foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+        {
+            if (muc.isActiveAndEnabled)
+            {
+                muc.baldiSpeedScale += 0.2f;
+            }
+        }
         yield return null;
         yield break;
     }
@@ -271,8 +291,8 @@ public class LappingOfAsylumController : MonoBehaviour
                 yield return new WaitForSeconds(PortalExitingSound.length);
                 LapSpecificsStuff();
                 gc.audioDevice2.PlayOneShot(BellSoundLapping);
-                gc.player.walkSpeedMultipler += 0.3f;
-                gc.player.runSpeedMultipler += 0.3f;
+                gc.player.walkSpeedMultipler += 0.25f;
+                gc.player.runSpeedMultipler += 0.25f;
                 CurrentLap++;
                 gc.UpdateNotebookCount();
                 if (CurrentLap > MaxLap - 1)
@@ -291,11 +311,18 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         if (CurrentLap == 1)
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk += 120f;
+            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = lappingHi[CurrentLap].LapMusik.length;
         }
         if (CurrentLap == 2)
         {
             gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+            if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems)
+            {
+                foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
+                {
+                    pickupScript.itsPresentTime(true);
+                }
+            }
             Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
             gc.zerull.zer.SetActive(true);
@@ -318,10 +345,18 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
         LapSound.Play();
+        LapSound.volume = lappingHi[CurrentLap].volumefuck;
         LapSound.loop = true;
         if (lappingHi[CurrentLap].usesFlag)
         {
             StartCoroutine(flagmove());
+        }
+        foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
+        {
+            if (muc.isActiveAndEnabled)
+            {
+                muc.baldiSpeedScale += 0.2f;
+            }
         }
     }
 
@@ -337,6 +372,7 @@ public class LappingOfAsylumController : MonoBehaviour
     public int CurrentLap, MaxLap, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount,ChaosCheeseCount,Chaos3CheeseCount;
     public float scoreDecreaseTimer;
     public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff, vanishScore;
+    public string[] stupidText;
     public lapVariablesStuff[] lappingHi;
     [Serializable]
 	public class lapVariablesStuff
@@ -344,5 +380,6 @@ public class LappingOfAsylumController : MonoBehaviour
         public bool usesFlag;
         public AudioClip LapMusik;
 		public Sprite LapFlag;
+        public float volumefuck =1f;
 	}
 }

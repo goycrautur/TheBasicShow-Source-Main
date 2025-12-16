@@ -26,7 +26,7 @@ public class CraftersScript : NPC
         {
             angry = true;
             audioDevice.PlayOneShot(aud_Intro);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
             spriteImage.sprite = angrySprite;
             AngryMeter = 0;
         }
@@ -73,7 +73,7 @@ public class CraftersScript : NPC
             if (!audioDevice.isPlaying)
             {
                 audioDevice.PlayOneShot(aud_Loop);
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, 0f, audioDevice);
+                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
             }
         }
     }
@@ -98,7 +98,7 @@ public class CraftersScript : NPC
                     if (AngryMeter < 5)
                     {
                     audioDevice.PlayOneShot(angrySound);
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptableang.subtitleOption, subsScriptableang, 0f, audioDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptableang.subtitleOption, subsScriptableang, audioDevice);
                     }
                 }
             }

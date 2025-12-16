@@ -1,59 +1,50 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class subtitlesScriptReal : MonoBehaviour
 {
-    // yea forgive me im too braindead to do scaling lol dont copystrike me yuri
     public void Start()
-    {
+    {   //some misc stuff dw
         shakespeed = subtitlys.shakeyspeed;
         shake = subtitlys.shakey;
         shakeyradius = subtitlys.shakeyradius;
         tmpTxt.text = "";
-        hjea = subtitlys.headText;
         tmpTxt.color = subtitlys.textColor;
         
         checkStuff();
     }
     private void checkStuff()
     {
-        if (subtitlys.duration != 0f && realduration == 0f)
+        if (audiObject.isTheSubtitlesTimed)
         {
-            duration = subtitlys.duration;
-        }
-        else if (realduration == 0f)
-        {
-            duration = audiObject.audioClip.length;
+            float prevDur = 0;
+            foreach (var subtitlys in audiObject.SubtitleTimingKey) // Calculate total duration
+            {
+                duration += subtitlys.duration;
+                duration -= prevDur;
+                prevDur = subtitlys.duration;
+            }
+            StartCoroutine(TimedSubtitle());
         }
         else
         {
-            if (!subtitlys.timedSub)
+            if (subtitlys.duration != 0f)
             {
-                duration = realduration;
-                
+                duration = subtitlys.duration; // if the subtitle scriptable object duration aint null, set this subtitle duration as the subtitle scriptable object duration
             }
-        }
-        if (subtitlys.utStyle)
-        {
-            StartCoroutine(TextAnimator(hjea,subtitlys.TextAppearSpeed));
-        }
-        if (!subtitlys.utStyle)
-        {
-            tmpTxt.text = subtitlys.headText;
-        }
-        if (subtitlys.timedSub)
-        {
-            for (int i = 0; i < subtitlys.subtitleTimings.Length; ++i)
+            if (subtitlys.duration == 0f)
             {
-                StartCoroutine(TimingIthink(subtitlys.subtitleTimings[i].duration,i));
+                duration = audiObject.audioClip.length; // if the subtitle scriptable object duration are null tho and you just so happend to attach an audio source to the object itself, the duration will be that audioclip duration
             }
+            sub = StartCoroutine(TextAnimator());
         }
     }
-    public void updateSubPostion()
+    public void updateSubPostion() // just make the position 3d lol, make sure to set the spatial blend to 3d/1 for it to take effect LMFAO
     {
         if (is3d)
         {
@@ -67,6 +58,10 @@ public class subtitlesScriptReal : MonoBehaviour
         float num4 = 100f * producerAud.panStereo;
         float num5 = 248.88f / aspectRatio;
         float num6 = Mathf.Lerp(num5, -num5, producerAud.spread / 360f);
+        //anchoredPos.x = Mathf.Cos(num * ((float)Math.PI / 180f)) * radius;
+        //anchoredPos.y = Mathf.Sin(num * ((float)Math.PI / 180f)) * radius;
+        //anchoredPos.z = 0f;
+        // math pi stuff from yuri that i dont think i know how to port
         bg.anchoredPosition = new Vector3(Mathf.Cos(num3 * 0.017453292f) * num6 * num2 + num4, Mathf.Lerp(-266.66f / aspectRatio, Mathf.Sin(num3 * 0.017453292f) * num6, num2), 0f);
         float num7 = 1f;
             switch (producerAud.rolloffMode)
@@ -91,7 +86,7 @@ public class subtitlesScriptReal : MonoBehaviour
         }
     }
     private void Update()
-    {
+    {   // subtitle will commit kys if the audio source is not found or not active in hierarchy
         if (producerAud == null)
         {
             Destroy(base.gameObject);
@@ -103,18 +98,21 @@ public class subtitlesScriptReal : MonoBehaviour
             return;
         }
         updateSubPostion();
-        if (shake)
+        if (shake) // shake the tmp text yummy
         {
-            Vector3 localPosition = new Vector3(Mathf.Sin(Time.time * shakespeed) * shakeyradius, Mathf.Cos(Time.time * shakespeed) * shakeyradius, 0f);
-            tmpTxt.transform.localPosition = localPosition;
+            Vector3 whyisthisnamedlocalpositionagain = new Vector3(Mathf.Sin(Time.time * shakespeed) * shakeyradius, Mathf.Cos(Time.time * shakespeed) * shakeyradius, 0f);
+            tmpTxt.transform.localPosition = whyisthisnamedlocalpositionagain;
             return;
         }
-        tmpTxt.transform.localPosition = Vector3.zero;
+        else // Reset position rea
+        {
+            if (tmpTxt.transform.localPosition != Vector3.zero) tmpTxt.transform.localPosition = Vector3.zero;
+        }
     }
 
     private void LateUpdate()
     {
-        if (!infinite)
+        if (!infinite) // dont despawn if its infinite etc
         {
             if (duration <= 0f)
             {
@@ -124,7 +122,7 @@ public class subtitlesScriptReal : MonoBehaviour
             duration -= Time.deltaTime;
         }
         
-        if (is3d)
+        if (is3d) // stays invis if the audio source is muted
         {
             if (producerAud != null)
             {
@@ -141,40 +139,79 @@ public class subtitlesScriptReal : MonoBehaviour
             }
         }
     }
-    private IEnumerator TimingIthink(float time,int i)
+    /// Reverses a given string.
+    private string ReverseString(string str)
     {
-        yield return new WaitForSeconds(time);
-        tmpTxt.text = "";
-        tmpTxt.color = subtitlys.subtitleTimings[i].textColor;
-        shake = subtitlys.subtitleTimings[i].shakey;
-        shakespeed = subtitlys.subtitleTimings[i].shakeyspeed;
-        shakeyradius = subtitlys.subtitleTimings[i].shakeyradius;
-        hjea = subtitlys.subtitleTimings[i].headText;
-        if (subtitlys.subtitleTimings[i].utStyle)
-        {
-            StartCoroutine(TextAnimator(hjea,subtitlys.subtitleTimings[i].TextAppearSpeed));
-        }
-        if (!subtitlys.subtitleTimings[i].utStyle)
-        {
-            tmpTxt.text = hjea;
-        }
-        Debug.Log("timing sub " + i);
-        yield break;
+        char[] charArray = str.ToCharArray();
+        Array.Reverse(charArray);
+        return new string(charArray);
     }
-    private IEnumerator TextAnimator(string Text,float textAppearSpeed)
+    /// Replaces each character in the string with a random alphanumeric character, preserving whitespace.
+    private string ReplaceWithRandomChars(string str)
     {
-        foreach (char c in Text)
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        System.Random random = new System.Random();
+        foreach (char c in str)
         {
-            tmpTxt.text += c.ToString();
-            yield return new WaitForSeconds(textAppearSpeed);
+            if (char.IsWhiteSpace(c))
+            {
+                sb.Append(c);
+            }
+            else
+            {
+                char randomChar = chars[random.Next(chars.Length)];
+                sb.Append(randomChar);
+            }
         }
-        yield break;
+        return sb.ToString();
+    }
+    private IEnumerator TimedSubtitle()
+    {
+        float prevSec = 0f; // Track previous subtitle duration
+        foreach (var thoseWhoSubtitles in audiObject.SubtitleTimingKey) // Iterate through each subtitle in the timed key
+        {
+            if (sub != null) StopCoroutine(sub);
+            subtitlys = thoseWhoSubtitles;
+            tmpTxt.text = "";
+            tmpTxt.color = thoseWhoSubtitles.textColor;
+            sub = StartCoroutine(TextAnimator());
+            yield return new WaitForSeconds(thoseWhoSubtitles.duration - prevSec);
+            prevSec = thoseWhoSubtitles.duration; // Update previous duration for next iteration
+        }
+    }
+    private IEnumerator TextAnimator()
+    {
+        StringBuilder sb = new StringBuilder(); // Use StringBuilder for efficient string concatenation
+        string headTexter = subtitlys.headText;
+        //LocalizationManager.Instance.GetText(subtitle.headText); later trust or youre using this from the tuto
+        if (subtitlys.textReverse)
+            headTexter = ReverseString(headTexter); // Reverse text if enabled
+        if (subtitlys.unreadable)
+            headTexter = ReplaceWithRandomChars(headTexter); // Replace text with random characters if unreadable
+        if (subtitlys.upsideDown)
+            tmpTxt.transform.rotation = Quaternion.Euler(0f, 0f, 180f); // Rotate text upside down if enabled
+        else
+            tmpTxt.transform.rotation = Quaternion.Euler(0f, 0f, 0f); // Reset rotation if not upside down
+        if (subtitlys.undertaleStyleTextAppearing) // Animate text if enabled and not in low motion mode
+        {
+            foreach (char c in headTexter)
+            {
+                sb.Append(c); // Append current character
+                tmpTxt.text = sb.ToString(); // Update text with current character
+                yield return new WaitForSeconds(subtitlys.TextAppearSpeed);
+            }
+        }
+        else // Directly set text if animation is disabled
+        {
+            tmpTxt.text = headTexter;
+        }
     }
     public Transform cameraTransf;
     public string hjea;
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
-    public float duration,realduration,shakespeed,shakeyradius;
+    public float duration,shakespeed,shakeyradius;
     public bool is3d, infinite,shake;
     public AudioSource producerAud;
     public TMP_Text tmpTxt;
@@ -182,4 +219,7 @@ public class subtitlesScriptReal : MonoBehaviour
     public RectTransform bg;
     public Vector3 fixesPosition = Vector3.zero;
     public float aspectRatio;
+    private Vector3 anchoredPos;
+
+    private Coroutine sub;
 }

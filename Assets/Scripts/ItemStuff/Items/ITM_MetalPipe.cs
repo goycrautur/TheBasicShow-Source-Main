@@ -18,7 +18,7 @@ public class ITM_MetalPipe : BaseItem
         }
         if (!CantUse)
         {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,0f,new Vector3(0f,-170.5f,0f),PipeDevice);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,new Vector3(0f,-170.5f,0f),PipeDevice);
             PipeDevice.PlayOneShot(audiopip);
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
             StopCoroutine(Waitin());

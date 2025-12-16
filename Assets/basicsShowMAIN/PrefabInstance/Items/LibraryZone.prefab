@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9034256c96c5e7c45ac9d3eeb9a88914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 300
+  lifetime: 45
   disabledAudioSources: []
 --- !u!65 &5518571319684483041
 BoxCollider:

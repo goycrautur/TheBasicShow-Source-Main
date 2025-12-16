@@ -60,7 +60,7 @@ public class DoorScript : MonoBehaviour
         if (!bDoorOpen)
         {
             myAudio.PlayOneShot(doorOpen);
-            GameC.SubsManager.summonLeSubtitle(GameC.subtitlesScriptableObject[0].subtitleOption,GameC.subtitlesScriptableObject[0],0f,GetComponent<AudioSource>());
+            GameC.SubsManager.summonLeSubtitle(GameC.subtitlesScriptableObject[0].subtitleOption,GameC.subtitlesScriptableObject[0],GetComponent<AudioSource>());
         }
         SetDoorState(true, time);
     }
@@ -69,7 +69,7 @@ public class DoorScript : MonoBehaviour
     {
         SetDoorState(false);
         myAudio.PlayOneShot(doorClose);
-        GameC.SubsManager.summonLeSubtitle(GameC.subtitlesScriptableObject[1].subtitleOption,GameC.subtitlesScriptableObject[1],0f,GetComponent<AudioSource>());
+        GameC.SubsManager.summonLeSubtitle(GameC.subtitlesScriptableObject[1].subtitleOption,GameC.subtitlesScriptableObject[1],GetComponent<AudioSource>());
     }
 
     private void SetDoorState(bool open, float time = 3)

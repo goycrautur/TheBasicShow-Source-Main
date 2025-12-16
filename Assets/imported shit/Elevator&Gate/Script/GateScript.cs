@@ -75,11 +75,11 @@ public class GateScript : MonoBehaviour
             audioSource.UnPause();
         }
     }
-    private IEnumerator gateSubsCoroutine()
+    private IEnumerator gateSubsCoroutine() //bru
     {
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[5].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[5], gateSlamClip.length - 2.4f, audioSource);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[5].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[5], audioSource);
         yield return new WaitForSeconds(gateSlamClip.length - 2.4f);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[6].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[6], 1.4f, audioSource);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[6].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[6], audioSource);
         yield break;
     }
 

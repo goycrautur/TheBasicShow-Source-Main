@@ -54,6 +54,17 @@ public class EffectScript : MonoBehaviour
                 Destroy(other.gameObject, 0f);
             }
         }
+        if (other.CompareTag("Projectile"))
+        {
+            if (other.GetComponent<ProjectileScript>().thrown)
+            {
+                if (!notNpcEntirely)
+                {
+                    npcreal.Stun(npcStunTime);
+                    Destroy(other.gameObject, 0f);
+                }
+            }
+        }
         if (other.CompareTag("friesBday"))
         {
             if (!notNpcEntirely)

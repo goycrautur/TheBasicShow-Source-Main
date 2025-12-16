@@ -131,7 +131,7 @@ public class MathMachineScript : MonoBehaviour
         {
             machineMapIcon.enabled = false;
             audioSource.PlayOneShot(gen);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[8].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[8], 0f, audioSource);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[8].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[8], audioSource);
             GameControllerScript.Instance.isHoldingBall = false;
             disabled = null;
             won = true;
@@ -196,6 +196,10 @@ public class MathMachineScript : MonoBehaviour
                     LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
                     scoreSystemManager.Instance.PointsMultiplier += 1f;
                 }
+                if (GameControllerScript.Instance.notebooks == 2 && GameControllerScript.Instance.mode == "famished")
+                {
+                    FamishedModeController.Instance.specialLmsToggle=true;
+                }
                 scoreSystemManager.Instance.AddScore(6500,false);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
                 Singleton<OtherMainStuffManager>.Instance.AngerShit(10f, 0, false, "all");
@@ -204,7 +208,7 @@ public class MathMachineScript : MonoBehaviour
                 ZerullClassic.Instance.health += 35;
             }
             audioSource.PlayOneShot(err);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], 0f, audioSource);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], audioSource);
             disabled = null;
             won = true;
             meshRenderer.material = wrong;

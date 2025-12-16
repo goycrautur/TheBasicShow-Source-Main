@@ -110,6 +110,7 @@ public class YouWonScript : MonoBehaviour
             if (Sdelay2 <= 0f)
             {
                 Subtitles.SetActive(true);
+                
                 EM.LoadSecretEnding();
                 GameControllerScript.Instance.TimeoutMusic.mute = true;
             }

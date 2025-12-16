@@ -1,5 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
+using UnityEngine.Networking;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 
 public static class Sych
 {
@@ -35,6 +40,28 @@ public static class Sych
     {
         Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !locked;
+    }
+    public static AudioClip LoadSound(string path) // thanks daldi
+    {
+        var audioLoader = UnityWebRequestMultimedia.GetAudioClip("file://" + path, AudioType.OGGVORBIS);
+        audioLoader.SendWebRequest();
+        while (!audioLoader.isDone) { }
+        var clip = DownloadHandlerAudioClip.GetContent(audioLoader);
+        return clip;
+    }
+
+    public static AudioClip[] LoadSounds(string folder)
+    {
+        List<AudioClip> loadedSounds = new List<AudioClip>();
+        foreach (var snd in Directory.GetFiles(folder))
+        {
+            if (!snd.Contains("meta") && snd.Contains("ogg"))
+            {
+                loadedSounds.Add(LoadSound(snd));
+            }
+        }
+
+        return loadedSounds.ToArray();
     }
 
     public static void PlayClip(this AudioSource audioSource, AudioClip clip, bool loop, float volume)

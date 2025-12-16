@@ -40,21 +40,25 @@ public class scoreSystemManager : MonoBehaviour
     }
     public void Detectrank()
     {
-        for (int i = 0; i < Ranks.Length; ++i)
-        {
-            if (Ranks[i].rankScore <= Mathf.Round(curScore))
+        string mode = PlayerPrefs.GetString("CurrentMode");
+        //if (mode != "LappingOfAsylum")
+        //{
+            for (int i = 0; i < Ranks.Length; ++i)
             {
-                colorTexreal = ColorUtility.ToHtmlStringRGB(Ranks[i].rankColor);
-                CurRank = Ranks[i].ranks;
-                if (Ranks[i].soundplay && !Ranks[i].diditplay)
+                if (Ranks[i].rankScore <= Mathf.Round(curScore))
                 {
-                    RankAudioSource.PlayOneShot(Ranks[i].rankSound);
-                    Ranks[i].diditplay = true;
-                    zoomRankval = 1.2f;
-                    stopzoomRank = false;
+                    colorTexreal = ColorUtility.ToHtmlStringRGB(Ranks[i].rankColor);
+                    CurRank = Ranks[i].ranks;
+                    if (Ranks[i].soundplay && !Ranks[i].diditplay)
+                    {
+                        RankAudioSource.PlayOneShot(Ranks[i].rankSound);
+                        Ranks[i].diditplay = true;
+                        zoomRankval = 1.2f;
+                        stopzoomRank = false;
+                    }
                 }
             }
-        }
+        //}
         if (!stopUpdatingTSDiscord)
         {
             GameControllerScript.Instance.discordupdate(discordUpdateType);
@@ -88,7 +92,7 @@ public class scoreSystemManager : MonoBehaviour
         public int rankScore;
         public bool usesTexture;
 		public Sprite rankTexture;
-        public bool soundplay,rankZoomed,diditplay;
+        public bool soundplay,rankZoomed,diditplay,dosentRankUpIfComboBreaks;
         public AudioClip rankSound;
 	}
     public bool stopUpdatingTSDiscord,stopzoombindown,stopzoomRank;

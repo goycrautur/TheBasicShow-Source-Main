@@ -50,7 +50,7 @@ public class booksInteract : Interactable
         Hide(false);
         hidden = false;
         audioDevice.Play();
-        gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[10].subtitleOption, gc.subtitlesScriptableObject[10], 0f, audioDevice);
+        gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[10].subtitleOption, gc.subtitlesScriptableObject[10], audioDevice);
         respawnTime = 120f;
     }
 
@@ -155,7 +155,6 @@ public class booksInteract : Interactable
         var mathGame = game.GetComponent<MathGameScript>();
         mathGame.gc = gc;
         mathGame.lg = lgm;
-        mathGame.baldiScript = gc.baldiScrpt;
         mathGame.playerPosition = player.position;
     }
     #endregion

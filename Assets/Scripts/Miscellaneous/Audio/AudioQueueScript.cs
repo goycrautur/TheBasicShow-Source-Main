@@ -52,7 +52,7 @@ public class AudioQueueScript : MonoBehaviour
     private void PlayNext()
     {
         audioDevice.PlayOneShot(queuedAudios[0]);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle(queuedSubtitles[0].subtitleOption, queuedSubtitles[0], 0f, audioDevice);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle(queuedSubtitles[0].subtitleOption, queuedSubtitles[0], audioDevice);
         queuedSubtitles.RemoveAt(0);
         queuedAudios.RemoveAt(0);
     }

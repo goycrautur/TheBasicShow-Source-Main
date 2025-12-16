@@ -96,8 +96,8 @@ public class MuchoScript : NPC
         if (this.isActiveAndEnabled)
         {
             slams++;
-            ThrowProjectile(Random.Range(2,2));
-            gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,0f,baldiAudio);
+            ThrowProjectile(Random.Range(0,3));
+            gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,baldiAudio);
             if (baldiAnger < 40f)
             {
                 agent.speed = base.agentSpeed;
@@ -168,7 +168,7 @@ public class MuchoScript : NPC
             Wander();
         }
         baldiAudio.PlayOneShot(snadtp);
-        gc.SubsManager.summonLeSubtitle(snadtpsubs.subtitleOption,snadtpsubs,0f,baldiAudio);
+        gc.SubsManager.summonLeSubtitle(snadtpsubs.subtitleOption,snadtpsubs,baldiAudio);
         Invoke(nameof(Move), teleportCD);
         this.transform.position = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
     }

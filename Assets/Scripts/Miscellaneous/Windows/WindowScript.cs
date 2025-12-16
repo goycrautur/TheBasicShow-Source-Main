@@ -21,7 +21,14 @@ public class WindowScript : MonoBehaviour
     {
         if (!broken && broke)
         {
-            foreach (PrincipalScript maxi in  GameControllerScript.Instance.maxiScr)
+            /*foreach (PrincipalScript prin in  GameControllerScript.Instance.prinScr)
+            {
+                if (prin.isActiveAndEnabled)
+                {
+                    prin.callToSMTH(this.transform.position);
+                }
+            }*/
+            foreach (MaxcipalScript maxi in  gc.maxiScr)
             {
                 if (maxi.isActiveAndEnabled)
                 {
@@ -41,7 +48,7 @@ public class WindowScript : MonoBehaviour
             meshCollider_In.enabled = false;
             meshCollider_Out.enabled = false;
             broken = true;
-            gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[2].subtitleOption,gc.subtitlesScriptableObject[2],0f,audioDevice);
+            gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[2].subtitleOption,gc.subtitlesScriptableObject[2],audioDevice);
             Instantiate(shattersPrefab, transform.position, Quaternion.identity);
         }
         if (broken && !broke)
@@ -55,7 +62,7 @@ public class WindowScript : MonoBehaviour
             meshCollider_In.enabled = true;
             meshCollider_Out.enabled = true;
             broken = false;
-            gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[3].subtitleOption,gc.subtitlesScriptableObject[3],0f,audioDevice);
+            gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[3].subtitleOption,gc.subtitlesScriptableObject[3],audioDevice);
             Instantiate(restorePrefab, transform.position, Quaternion.identity);
         }
     }
@@ -73,18 +80,39 @@ public class WindowScript : MonoBehaviour
             if (enableOffMeshScript)
             {
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
+                if (!UseCustomBoxCollider)
+                {
                 this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
+                }
             }
             else
             {
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+                if (!UseCustomBoxCollider)
+                {
                 this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
+                }
             }
             this.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+    }
+    public void OnTriggerEnter(Collider play)
+    {
+        if (broken && play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        {
+            //DamagPlaye(UnityEngine.Random.Range(0,2));
+        }
+    }
+    public void DamagPlaye(int rando)
+    {
+        if (rando == 1)
+        {
+            gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, UnityEngine.Random.Range(0,5), 1f, false, true, false);
         }
     }
 
     [SerializeField] public GameControllerScript gc;
     public AudioClip brokesound, restore;
     public AudioSource audioDevice;
+    public bool UseCustomBoxCollider = true;
 }

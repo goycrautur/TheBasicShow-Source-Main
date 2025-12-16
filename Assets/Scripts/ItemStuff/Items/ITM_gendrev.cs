@@ -25,7 +25,7 @@ public class ITM_gendrev : BaseItem
         meow.clip = boowoo;
         meow.loop = false;
         meow.Play();
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,0f,new Vector3(0f,-170.5f,0f),meow);
+        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,new Vector3(0f,-170.5f,0f),meow);
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMultAlt;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMultAlt;
         AdditionalGameCustomizer.Instance.FovAmmount -= AltFovAmmount;

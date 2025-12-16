@@ -40,7 +40,7 @@ public class TapePlayerScript : MonoBehaviour
                     sprite.sprite = closedSprite;
                     tapeDevice.clip = NormTapeAudio;
                     tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(NormTapeSubs.subtitleOption,NormTapeSubs,0f,tapeDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(NormTapeSubs.subtitleOption,NormTapeSubs,tapeDevice);
                     TapeCD = AntiHearingDuration;
                     TapeCDEnable = true;
                     Singleton<OtherMainStuffManager>.Instance.deafshit(AntiHearingDuration,"All");
@@ -50,7 +50,7 @@ public class TapePlayerScript : MonoBehaviour
                     sprite.sprite = closedSprite;
                     tapeDevice.clip = welcomeOld;
                     tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(ohnoSubs.subtitleOption,ohnoSubs,0f,tapeDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(ohnoSubs.subtitleOption,ohnoSubs,tapeDevice);
                     TapeCD = welcomeOld.length;
                     TapeCDEnable = true;
                     Singleton<OtherMainStuffManager>.Instance.deafshit(welcomeOld.length,"All");
@@ -72,7 +72,7 @@ public class TapePlayerScript : MonoBehaviour
                     sprite.sprite = closedSprite;
                     tapeDevice.clip = LitearllyPEAK;
                     tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(PeasSub.subtitleOption,PeasSub,0f,tapeDevice);
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(PeasSub.subtitleOption,PeasSub,tapeDevice);
                     TapeCD = LitearllyPEAK.length;
                     TapeCDEnable = true;
                     Singleton<OtherMainStuffManager>.Instance.PeakStun(LitearllyPEAK.length,"All");
@@ -83,7 +83,7 @@ public class TapePlayerScript : MonoBehaviour
                 sprite.sprite = closedSprite;
                 tapeDevice.clip = NormTapeAudio;
                 tapeDevice.Play();
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(NormTapeSubs.subtitleOption,NormTapeSubs,0f,tapeDevice);
+                GameControllerScript.Instance.SubsManager.summonLeSubtitle(NormTapeSubs.subtitleOption,NormTapeSubs,tapeDevice);
                 TapeCD = AntiHearingDuration;
                 TapeCDEnable = true;
                 Singleton<OtherMainStuffManager>.Instance.deafshit(AntiHearingDuration,"All");

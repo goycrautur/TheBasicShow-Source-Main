@@ -59,13 +59,13 @@ public class GameControllerScript : MonoBehaviour
         {
             npcmapicon.SetActive(ipleak ? true : false);
         }
-        escapeMusic.mute = timeout;
-        warmusic.mute = timeout;
+        escapeMusic.mute = !SecretEndingGot ? timeout : true;
+        warmusic.mute = !SecretEndingGot ? timeout : true;
         for (int i = 0; i < EvapV2FinaleSounSource.Length; ++i)
         {
             if (EvapV2FinaleSounSource[i] != null)
             {
-                EvapV2FinaleSounSource[i].mute = timeout;
+                EvapV2FinaleSounSource[i].mute = !SecretEndingGot ? timeout : true;
             }
         }
         if (maxNotebooks == failedNotebooks && !warrealest)
@@ -356,6 +356,10 @@ public class GameControllerScript : MonoBehaviour
         PlayerCamera.farClipPlane = gameOverDelay * 400f;
         gameOverDelay -= Time.unscaledDeltaTime;
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
+        if (Singleton<VertexGlitchManager>.Instance.mustGlitch)
+        {
+            Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
+        }
 
         if (!gamaOvarDevice.isPlaying && !player.killedbyhim)
         {
@@ -822,8 +826,12 @@ public class GameControllerScript : MonoBehaviour
     }
     public IEnumerator funnyportal()
     {
+
         EndingManager.Instance.black.SetActive(true);
         yield return new WaitForSeconds(0.7f);
+        Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
+        AudioListener.pause = false;
+        Singleton<MusicManager>.Instance.PauseMidi(false);
         PlayerPrefs.SetString("CurrentMode", "famished");
         PlayerPrefsExtension.SetBool("famishUnlockyippe", true);
         yield return new WaitForSeconds(0.1f);
@@ -834,7 +842,7 @@ public class GameControllerScript : MonoBehaviour
     {
         player.transform.position = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
         TpSoundSource.PlayOneShot(type == "normal" ? aud_Teleport : type == "evilleaf" ? aud_EvilLeafyTP : aud_Teleport);
-        SubsManager.summonLeSubtitle2D(subtitlesScriptableObject[type == "normal" ? 11 : type == "evilleaf" ? 12 : 11].subtitleOption,subtitlesScriptableObject[type == "normal" ? 11 : type == "evilleaf" ? 12 : 11],0f,new Vector3(0f,-170.5f,0f),TpSoundSource);
+        SubsManager.summonLeSubtitle2D(subtitlesScriptableObject[type == "normal" ? 11 : type == "evilleaf" ? 12 : 11].subtitleOption,subtitlesScriptableObject[type == "normal" ? 11 : type == "evilleaf" ? 12 : 11],new Vector3(0f,-170.5f,0f),TpSoundSource);
     }
     #endregion
     [Serializable]
@@ -871,7 +879,8 @@ public class GameControllerScript : MonoBehaviour
     public CraftersScript sockCript;
     public PlaytimeScript playtimeScript;
     public FirstPrizeScript firstPrizeScript;
-    public PrincipalScript principal,maxplayGames;
+    public PrincipalScript principal;
+    public MaxcipalScript maxplayGames;
     public MouseAppearingScript mousescript;
     public VoxelLightingMain voxLight;
     [SerializeField] private AILocationSelectorScript AILocationSelector;
@@ -904,7 +913,7 @@ public class GameControllerScript : MonoBehaviour
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
     public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic,TpSoundSource;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell,gambling, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud;
     #endregion
 
     #region PrivateFields
@@ -913,7 +922,7 @@ public class GameControllerScript : MonoBehaviour
     public float[] nuzzlesframeshit;
     [SerializeField] private float gameOverDelay, nuzzlframes;
     public int lastRespawnCount, failedNotebooks, exitsReached, cullingMask;
-    public bool spoopMode, finaleMode, FinaleSecret,war,warrealest,timeout;
+    public bool spoopMode, finaleMode, FinaleSecret,war,warrealest,timeout,SecretEndingGot;
     [HideInInspector] public Coroutine exitEasingCoroutine;
     [HideInInspector] public LearningGameManager Math;
     [HideInInspector] public EndingManager progress;
@@ -942,7 +951,9 @@ public class GameControllerScript : MonoBehaviour
     public string modeState, largeImagething, largeImageText;
     [Header("teachers management and stuff")]
     public List<BullyScript> buliScr = new List<BullyScript>();
-    public List<PrincipalScript> maxiScr = new List<PrincipalScript>();
+    public List<PrincipalScript> prinScr = new List<PrincipalScript>();
+    public List<MaxcipalScript> maxiScr = new List<MaxcipalScript>();
+    public List<coolSkeleton97Scrip> cs97Scr = new List<coolSkeleton97Scrip>();
     public List<BaldiScript> balscr = new List<BaldiScript>();
     public List<zerullscript> zerscr = new List<zerullscript>();
     public List<MuchoScript> muchscr = new List<MuchoScript>();

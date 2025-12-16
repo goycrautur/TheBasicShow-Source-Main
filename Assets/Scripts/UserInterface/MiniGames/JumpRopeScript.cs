@@ -97,10 +97,10 @@ public class JumpRopeScript : MonoBehaviour
             jumpropeMoveModifier.movementMultiplier = 0.25f;
             jumpHeight += startVelocity * Time.deltaTime + 0.5f * -42f * Time.deltaTime * Time.deltaTime * speedModifier;
             startVelocity += -42f * Time.deltaTime * speedModifier;
-            CameraScript.Instance.jumpfloatThing = jumpHeight + 4.88f;
+            CameraScript.Instance.jumpfloatThing = GameControllerScript.Instance.player.transform.position.y + jumpHeight;
             yield return null;
         }
-        CameraScript.Instance.jumpfloatThing = 4.88f;
+        CameraScript.Instance.jumpfloatThing = GameControllerScript.Instance.player.transform.position.y;
         jumpHeight = 0f;
         jumpropeMoveModifier.movementMultiplier = 0f;
         yield break;
@@ -135,6 +135,7 @@ public class JumpRopeScript : MonoBehaviour
 			
             playtime.Disappoint();
         }
+		CameraScript.Instance.jumpfloatThing = 4.88f;
 		playtime.dontUpdateTheSpeedYOUFUCKINGBITCH = false;
 		playtime.disablingWandering = false;
         GameControllerScript.Instance.player.jumpropes.Remove(this);

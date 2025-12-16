@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236c482ebd8096a48bb93a133aff9474, type: 3}
+  m_Name: coolskeletion_detention_99s
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 207f4c240bdde9a43a338d7045528251, type: 3}
+  subtitleOption:
+    enabled: 1
+    headText: <b>STEP 2:</b>
+    textColor: {r: 1, g: 0, b: 0, a: 1}
+    duration: 0
+    utStyle: 0
+    TextAppearSpeed: 0
+    shakey: 1
+    shakeyspeed: 1000
+    shakeyradius: 2
+    fonts: 0
+    timedSub: 1
+    subtitleTimings:
+    - enabled: 1
+      headText: <b>TRAP THEM IN THE ROOM FOR ETERNITY</b>
+      textColor: {r: 1, g: 0, b: 0, a: 1}
+      duration: 1.18
+      utStyle: 0
+      TextAppearSpeed: 0
+      shakey: 1
+      shakeyspeed: 1000
+      shakeyradius: 2
+      fonts: 0

@@ -52,9 +52,11 @@ public class EndingManager : MonoBehaviour
 
     public void LoadSecretEnding()
     {
+        pitHole.Instance.hiIgotChanged();
         Game.modeState = "???????????????????";
         StartCoroutine(BlackFlash());
 
+        Game.SecretEndingGot = true;
         if (Game.exitEasingCoroutine != null)
         {
             StopCoroutine(Game.exitEasingCoroutine);
