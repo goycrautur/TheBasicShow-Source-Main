@@ -111,7 +111,7 @@ public class YouWonScript : MonoBehaviour
             {
                 Subtitles.SetActive(true);
                 
-                EM.LoadSecretEnding();
+                EM.LoadSecretEnding(scoreSystemManager.Instance.CurRank);
                 GameControllerScript.Instance.TimeoutMusic.mute = true;
             }
         }

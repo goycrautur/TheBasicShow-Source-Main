@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void Update()
 	{
+		barcolo.color = gradi.Evaluate(health / maxHealth);
 		ApplyGravity();
 		HandleMouseMovement();
 		if (!movementLocked) PlayerMove();
@@ -128,7 +129,6 @@ public class PlayerScript : MonoBehaviour
 	#region Initialization
 	private void InitializeSettings()
 	{
-		gradiHealthbarCheck();
 		sensitivityActive = PlayerPrefs.GetInt("AnalogMove") == 1;
 		height = transform.position.y;
 		stamina = maxStamina;
@@ -468,12 +468,6 @@ public class PlayerScript : MonoBehaviour
 		{
 			StartCoroutine(HealthSlide());
 		}
-		gradiHealthbarCheck();
-		
-	}
-	public void gradiHealthbarCheck()
-	{
-		barcolo.color = gradi.Evaluate(health / maxHealth);
 	}
 	#endregion
 

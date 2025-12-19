@@ -27,7 +27,7 @@ public class MathGameScript : MonoBehaviour
     #region Initialization
     private void InitializeGame()
     {
-        allanswerWrongInt = UnityEngine.Random.Range(0,2);
+        
         specialCodes = new Dictionary<string, Action>
         {
             { "31718", () => { StartCoroutine(CheatText("THIS IS WHERE IT ALL BEGAN")); SceneManager.LoadSceneAsync("TestRoom"); } }
@@ -65,6 +65,10 @@ public class MathGameScript : MonoBehaviour
         }
         if (gc.mode == "zerullclassic")
         {
+            if (gc.notebooks > 2)
+            {
+                allanswerWrongInt = UnityEngine.Random.Range(0,2);
+            }
             bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
             ProvideHintOrFeedback(allanswerWrongInt);
             Baldtalk.SetActive(false);
@@ -385,7 +389,7 @@ public class MathGameScript : MonoBehaviour
                 }
                 if (gc.notebooks == 2)
                 {
-                    questionText.text = "Jeezpers, you really want to suffer huh?";
+                    questionText.text = "Jeezpers, you really want to suffer huh?"+ '\n'+ "fine by me i suppose";
                 }
                 if (gc.notebooks == 1)
                 {

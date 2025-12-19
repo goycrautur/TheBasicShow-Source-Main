@@ -12,11 +12,6 @@ public class ItemManager : MonoBehaviour
     {
         Instance = this;
         IndexItems();
-        for (int i = 0; i < Inventory.Length; i++)
-        {
-            ItemImages2Real[i].transform.DOScale(2f, 0f);
-            ItemImages[i].transform.DOScale(2f, 0f);
-        }
     }
     #endregion
 
@@ -82,11 +77,77 @@ public class ItemManager : MonoBehaviour
         }
     }
     #endregion
+    #region Animation Logic
+    private void AnimateSlotIfChanged(int slot)
+    {
+        bool hasItem = Inventory[slot].ItemID != 0;
+        RawImage slotImage = ItemImages[slot];
+        ItemImageSlide slider = slotImage.GetComponent<ItemImageSlide>();
+
+        if (slider != null)
+        {
+            if (hasItem && !SlotOccupied[slot])
+            {
+                slider.SlideIn(GetItemTexture(Inventory[slot].ItemID));
+                SlotOccupied[slot] = true;
+            }
+            else if (!hasItem && SlotOccupied[slot])
+            {
+                slider.SlideOut();
+                SlotOccupied[slot] = false;
+            }
+            else if (!hasItem)
+            {
+               slider.ForceClear();
+            }
+        }
+        else
+        {
+            slotImage.texture = hasItem ? GetItemTexture(Inventory[slot].ItemID) : null;
+            SlotOccupied[slot] = hasItem;
+        }
+    } 
+
+    private void AnimateSwap(int slot)
+    {
+        RawImage slotImage = ItemImages[slot];
+        ItemImageSlide slider = slotImage.GetComponent<ItemImageSlide>();
+        Texture newTex = GetItemTexture(Inventory[slot].ItemID);
+
+        if (slider != null)
+        {
+            if (Inventory[slot].ItemID != 0)
+            {
+                slider.PlaySwapAnimation(newTex);
+            }
+            else
+            {
+                slider.ForceClear();
+            }
+        }
+        else
+        {
+            slotImage.texture = newTex;
+        }
+    }
+    
+    private Texture GetItemTexture(int itemID)
+    {
+        if (itemID == 0)
+        {
+            return null;
+        }
+
+        var itemBase = Items.ElementAt(itemID).Value;
+        return itemBase != null ? itemBase.SmallSprite : null;
+    }
+    #endregion
 
     #region Item Execution & Inventory Management
     private void IndexItems()
     {
         BaseItem[] FoundItemObjects = GetComponentsInChildren<BaseItem>();
+        Items.Clear();
         for (int i = 0; i < FoundItemObjects.Length; i++)
         {
             Items.Add(FoundItemObjects[i].Name, FoundItemObjects[i]);
@@ -94,6 +155,21 @@ public class ItemManager : MonoBehaviour
 
         Array.Resize(ref Inventory, ItemImages.Count);
         Array.Resize(ref KeyIndex, Inventory.Length);
+
+        SlotOccupied = new bool[Inventory.Length];
+
+        for (int i = 0; i < ItemImages.Count; i++)
+        {
+            var slider = ItemImages[i].GetComponent<ItemImageSlide>();
+            if (slider != null) 
+            {
+                slider.ForceClear();
+            }
+            else 
+            {
+                ItemImages[i].texture = null; 
+            }
+        }
 
         UpdateItemUI();
     }
@@ -134,24 +210,21 @@ public class ItemManager : MonoBehaviour
 
     public void ClearItem(int index,bool reduceinventory = true)
     {
-        
-        ItemImages2Real[index].transform.DOScale(2f, 0f);
-        ItemImages2Real[index].transform.DOScale(0f, 0.5f);
-        ItemImages[index].transform.DOScale(0f, 0f);
-        ItemImages2Real[index].color = new Color(1,1,1,1);
-        ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
-        if (reduceinventory && Inventory[index].ItemID != 0)
-        {
-            //GameControllerScript.Instance.SlotsAmmount = GameControllerScript.Instance.SlotsAmmount-1;
-            //Singleton<OtherMainStuffManager>.Instance.slot();
-        }
-        SlotsItemHandlingStuffIdk(index,0,null);
+        // if (reduceinventory && Inventory[index].ItemID != 0)
+        // {
+        //     GameControllerScript.Instance.SlotsAmmount = GameControllerScript.Instance.SlotsAmmount-1;
+        //     Singleton<OtherMainStuffManager>.Instance.slot();
+        // }
         Inventory[index].ItemID = 0;
         Inventory[index].ItemInstance = null;
+        AnimateSlotIfChanged(index);
+        UpdateItemUI();
+        SlotsItemHandlingStuffIdk(index,0,null);
     }
 
     private void SetItem(int index, int itemID, BaseItem item = null)
     {
+        bool wasFull = Inventory[index].ItemID != 0;
         item?.transform.SetParent(GetItem(itemID).transform);
 
         ExecuteItem(Inventory[ItemSelection].ItemID, ExecutionType.Deselect);
@@ -159,10 +232,6 @@ public class ItemManager : MonoBehaviour
         Inventory[index].ItemID = itemID;
         Inventory[index].ItemInstance = item;
         SlotsItemHandlingStuffIdk(index,itemID,item);
-        ItemImages[index].transform.DOScale(0f, 0f);
-        ItemImages[index].transform.DOScale(2f, 0.5f);
-        ItemImages2Real[index].color = new Color(0,0,0,0);
-        ItemImages2Real[index].texture = Items.ElementAt(Inventory[index].ItemID).Value.SmallSprite;
 
         CreateItemInstance(index);
 
@@ -170,6 +239,14 @@ public class ItemManager : MonoBehaviour
         if (ItemSelection == index)
         {
             ExecuteItem(Inventory[index].ItemID, ExecutionType.Select);
+        }
+        if (wasFull)
+        {
+            AnimateSwap(index);
+        }
+        else
+        {
+            AnimateSlotIfChanged(index);
         }
     }
     #endregion
@@ -229,7 +306,6 @@ public class ItemManager : MonoBehaviour
         for (int i = 0; i < ItemImages.Count; i++)
         {
             ItemImageBGs[i].color = Color.white;
-            ItemImages[i].texture = Items.ElementAt(Inventory[i].ItemID).Value.SmallSprite;
         }
         ItemNameText.text = $"{SelectedItem.Name}";
         ItemInfoText.text = $"{SelectedItem.ItmInfoText}";
@@ -480,10 +556,9 @@ public class ItemManager : MonoBehaviour
     #endregion
 
     #region Change References void (stolen from null decompile LOL)
-    public void ChangeReferences(List<RawImage> itemImages,List<RawImage> itemImages2, List<Image> itemImgBgs)
+    public void ChangeReferences(List<RawImage> itemImages, List<Image> itemImgBgs)
     {
         ItemImages = itemImages;
-        ItemImages2Real = itemImages2;
         ItemImageBGs = itemImgBgs;
     }
     #endregion
@@ -501,12 +576,12 @@ public class ItemManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private List<RawImage> ItemImages = new List<RawImage>();
-    [SerializeField] private List<RawImage> ItemImages2Real = new List<RawImage>();
     [SerializeField] private List<Image> ItemImageBGs = new List<Image>();
     [SerializeField] public TextMeshProUGUI ItemNameText, ItemInfoText;
     [SerializeField] private Color SelectionColor = Color.red;
     [SerializeField] private RawImage ItemHoldImage;
     public static ItemManager Instance;
+    public bool[] SlotOccupied;
     
     #endregion 
 }

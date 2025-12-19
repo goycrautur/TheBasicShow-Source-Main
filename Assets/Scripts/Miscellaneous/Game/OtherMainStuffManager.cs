@@ -315,7 +315,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
         if (GameControllerScript.Instance.SlotsAmmount >= 9)
         {
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory9slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages9slot, AdditionalGameCustomizer.Instance.ItemImagesRea9slot, AdditionalGameCustomizer.Instance.ItemImageBGs9slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages9slot, AdditionalGameCustomizer.Instance.ItemImageBGs9slot);
             for (int i = 0; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
@@ -336,7 +336,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(8);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory8slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages8slot, AdditionalGameCustomizer.Instance.ItemImagesRea8slot, AdditionalGameCustomizer.Instance.ItemImageBGs8slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages8slot, AdditionalGameCustomizer.Instance.ItemImageBGs8slot);
             AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[8].SetActive(false);
             AdditionalGameCustomizer.Instance.ItemSlotsGameObj[8].SetActive(false);
             AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[8].SetActive(false);
@@ -361,7 +361,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(7);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory7slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages7slot, AdditionalGameCustomizer.Instance.ItemImagesRea7slot, AdditionalGameCustomizer.Instance.ItemImageBGs7slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages7slot, AdditionalGameCustomizer.Instance.ItemImageBGs7slot);
             for (int i = 6; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
@@ -388,7 +388,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(6);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory6slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages6slot, AdditionalGameCustomizer.Instance.ItemImagesRea6slot, AdditionalGameCustomizer.Instance.ItemImageBGs6slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages6slot, AdditionalGameCustomizer.Instance.ItemImageBGs6slot);
             for (int i = 5; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
@@ -415,7 +415,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(5);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory5slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages5slot, AdditionalGameCustomizer.Instance.ItemImagesRea5slot, AdditionalGameCustomizer.Instance.ItemImageBGs5slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages5slot, AdditionalGameCustomizer.Instance.ItemImageBGs5slot);
             for (int i = 4; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
@@ -442,7 +442,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(4);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory4slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages4slot, AdditionalGameCustomizer.Instance.ItemImagesRea4slot, AdditionalGameCustomizer.Instance.ItemImageBGs4slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages4slot, AdditionalGameCustomizer.Instance.ItemImageBGs4slot);
             for (int i = 3; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
@@ -469,7 +469,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(3);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory3slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages3slot, AdditionalGameCustomizer.Instance.ItemImagesRea3slot, AdditionalGameCustomizer.Instance.ItemImageBGs3slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages3slot, AdditionalGameCustomizer.Instance.ItemImageBGs3slot);
             for (int i = 2; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
@@ -496,7 +496,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(2);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory2slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages2slot, AdditionalGameCustomizer.Instance.ItemImagesRea2slot, AdditionalGameCustomizer.Instance.ItemImageBGs2slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages2slot, AdditionalGameCustomizer.Instance.ItemImageBGs2slot);
             for (int i = 1; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
@@ -519,7 +519,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 ItemManager.Instance.DropItem(1);
             }
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory1slot;
-            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages1slot, AdditionalGameCustomizer.Instance.ItemImagesRea1slot, AdditionalGameCustomizer.Instance.ItemImageBGs1slot);
+            ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages1slot, AdditionalGameCustomizer.Instance.ItemImageBGs1slot);
             for (int i = 0; i < 9; ++i)
             {
                 AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);

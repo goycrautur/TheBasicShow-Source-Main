@@ -50,9 +50,12 @@ public class EndingManager : MonoBehaviour
         }
     }
 
-    public void LoadSecretEnding()
+    public void LoadSecretEnding(string rankcheck = "none")
     {
-        pitHole.Instance.hiIgotChanged();
+        if (rankcheck == "J")
+        {
+            pitHole.Instance.hiIgotChanged();
+        }
         Game.modeState = "???????????????????";
         StartCoroutine(BlackFlash());
 

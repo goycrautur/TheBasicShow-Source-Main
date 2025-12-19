@@ -773,9 +773,23 @@ public class GameControllerScript : MonoBehaviour
             player.jumpropes[0].End(false);
         }
 
-        var newPos = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
-        player.transform.position = newPos;
-        //baldi.transform.position = newPos;
+        var playPos = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
+        player.transform.position = playPos;
+        float safeDistance = 15.0f;
+        int attempts = 0;
+        foreach (MuchoScript muc in muchscr)
+        {
+            Vector3 mucpos;
+
+            do
+            {
+                mucpos = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
+                attempts++;
+            }
+
+            while (Vector3.Distance(playPos, mucpos) < safeDistance && attempts < 10);
+            muc.transform.position = mucpos;
+        }
     }
 
     public IEnumerator TeleporterFunction(string thing = "normal")

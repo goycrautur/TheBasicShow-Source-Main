@@ -73,11 +73,14 @@ public class LearningGameManager : MonoBehaviour
         }
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
         Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
-        Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f, 0f,false, "zerull");
+        if (gc.notebooks > 2 && gc.mode == "zerullclassic")
+        {
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f, 0f,false, "zerull");
+        }
         if (allAnswerWrong == 1)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.05f, 0f,false, "zerull");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.3f, 0.15f,true, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.3f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 0.3f,true, "zerull");
         }
 
         if (!gc.spoopMode && gc.mode == "story")

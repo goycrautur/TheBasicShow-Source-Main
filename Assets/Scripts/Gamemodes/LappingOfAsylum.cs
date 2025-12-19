@@ -192,6 +192,7 @@ public class LappingOfAsylumController : MonoBehaviour
     public IEnumerator zawadro()
     {
         gc.audioDevice2.PlayOneShot(zawarudo);
+        vanishScore = false;
         LapSound.Stop();
         gc.player.movementLocked = true;
         gc.player.titlecard = true;
@@ -214,19 +215,19 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.UpdateNotebookCount();
         yield return new WaitForSeconds(zawarudo.length / 2);
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
-        LapSound.loop = false;
+        LapSound.loop = true;
         LapSound.Play();
         gc.audioDevice2.PlayOneShot(BellSoundLapping);
         CurrentLap++;
-        gc.player.walkSpeedMultipler += 0.25f;
-        gc.player.runSpeedMultipler += 0.25f;
+        gc.player.walkSpeedMultipler += 0.2f;
+        gc.player.runSpeedMultipler += 0.2f;
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         vanishScore = true;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap-1].LapMusik.length-4);
+        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap-1].LapMusik.length + lappingHi[CurrentLap].LapMusik.length);
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
         {
             if (muc.isActiveAndEnabled)
@@ -252,6 +253,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             if (!inportalALREADY)
             {
+                vanishScore = false;
                 scoreSystemManager.Instance.AddScore(5500*CurrentLap);
                 if (Meeptimar.isActiveAndEnabled)
                 {
@@ -291,8 +293,8 @@ public class LappingOfAsylumController : MonoBehaviour
                 yield return new WaitForSeconds(PortalExitingSound.length);
                 LapSpecificsStuff();
                 gc.audioDevice2.PlayOneShot(BellSoundLapping);
-                gc.player.walkSpeedMultipler += 0.25f;
-                gc.player.runSpeedMultipler += 0.25f;
+                gc.player.walkSpeedMultipler += 0.2f;
+                gc.player.runSpeedMultipler += 0.2f;
                 CurrentLap++;
                 gc.UpdateNotebookCount();
                 if (CurrentLap > MaxLap - 1)
@@ -309,20 +311,17 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void LapSpecificsStuff()
     {
-        if (CurrentLap == 1)
-        {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = lappingHi[CurrentLap].LapMusik.length;
-        }
+        vanishScore = true;
         if (CurrentLap == 2)
         {
-            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
-            if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems)
-            {
-                foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
-                {
-                    pickupScript.itsPresentTime(true);
-                }
-            }
+            // gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+            // if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems)
+            // {
+            //     foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
+            //     {
+            //         pickupScript.itsPresentTime(true);
+            //     }
+            // }
             Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
             gc.zerull.zer.SetActive(true);

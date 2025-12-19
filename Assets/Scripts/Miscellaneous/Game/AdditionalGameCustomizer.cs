@@ -383,10 +383,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
 
     [SerializeField] public List<RawImage> ItemImages1slot = new List<RawImage>();
     [SerializeField] public List<RawImage> ItemImages2slot,ItemImages3slot,ItemImages4slot,ItemImages5slot,ItemImages6slot,ItemImages7slot,ItemImages8slot,ItemImages9slot = new List<RawImage>();
-    [Header("item slot parte 2")]
-
-    [SerializeField] public List<RawImage> ItemImagesRea1slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImagesRea2slot,ItemImagesRea3slot,ItemImagesRea4slot,ItemImagesRea5slot,ItemImagesRea6slot,ItemImagesRea7slot,ItemImagesRea8slot,ItemImagesRea9slot = new List<RawImage>();
     [Header("images background slots")]
 
     [SerializeField] public List<Image> ItemImageBGs1slot = new List<Image>();
