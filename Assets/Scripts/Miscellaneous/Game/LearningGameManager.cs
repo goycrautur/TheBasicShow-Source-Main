@@ -72,12 +72,12 @@ public class LearningGameManager : MonoBehaviour
             Tutor.tutorSource.Stop();
             quarter.SetActive(true);
             Tutor.tutorSource.PlayOneShot(aud_Prize);
-            gc.SubsManager.killSubtitle(Tutor.TutorSub);
+            gc.SubsManager.hideSub(Tutor.TutorSub);
             gc.SubsManager.summonLeSubtitle(prizeSubs.subtitleOption,prizeSubs,Tutor.tutorSource);
         }
         if (gc.notebooks == 2 && !gc.spoopMode && gc.mode == "story")
         {
-            gc.SubsManager.killSubtitle(prizeSubs);
+            gc.SubsManager.hideSub(prizeSubs);
         }
         if (gc.notebooks == 2)
         {

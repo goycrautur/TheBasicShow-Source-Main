@@ -118,7 +118,7 @@ public class booksInteract : Interactable
             {
                 lgm.Tutor.tutorSource.Stop();
                 lgm.quarter.SetActive(true);
-                gc.SubsManager.killSubtitle(lgm.Tutor.TutorSub);
+                gc.SubsManager.hideSub(lgm.Tutor.TutorSub);
                 lgm.Tutor.tutorSource.PlayClip(lgm.aud_Prize, false, 1f);
                 gc.SubsManager.summonLeSubtitle(lgm.prizeSubs.subtitleOption,lgm.prizeSubs,lgm.Tutor.tutorSource);
 
@@ -131,7 +131,7 @@ public class booksInteract : Interactable
 
         if (gc.notebooks == 2)
         {
-            gc.SubsManager.killSubtitle(lgm.prizeSubs);
+            gc.SubsManager.hideSub(lgm.prizeSubs);
             gc.ActivateSpoopMode();
         }
 

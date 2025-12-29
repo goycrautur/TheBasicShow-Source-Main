@@ -37,45 +37,24 @@ public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : MonoBehaviour //atp this
         	component.bg.anchoredPosition = component.fixesPosition;
 			component.updateSubPostion();
 		}
-	public void killSubtitle(subsScriptableObject subscriptobj) // haha fuck you blue shitpor im stealing your code
+	public void hideSub(subsScriptableObject subscriptobj)
 	{
-		List<subtitlesScriptReal> subtitlesToClear = new List<subtitlesScriptReal>();
-        foreach(subtitlesScriptReal subtitle in subtitle2dList)
-        {
-            if (subtitle == null)
-            {
-                subtitlesToClear.Add(subtitle);
-                continue;
-            }
-            if (subtitle.audiObject = subscriptobj)
-            {
-                subtitle2dList.Remove(subtitle);
-                return;
-            }
-        }
-        foreach(subtitlesScriptReal subtitle in subtitlesToClear)
-        {
-            subtitle2dList.Remove(subtitle);
-        }
-        subtitlesToClear.Clear();
         foreach(subtitlesScriptReal subtitle in subtitle3dList)
         {
-            if (subtitle == null)
-            {
-                subtitlesToClear.Add(subtitle);
-                continue;
-            }
             if (subtitle.audiObject = subscriptobj)
             {
-                subtitle3dList.Remove(subtitle);
+                subtitle.hidesub = true;
                 return;
             }
         }
-        foreach(subtitlesScriptReal subtitle in subtitlesToClear)
+        foreach(subtitlesScriptReal subtitle in subtitle2dList)
         {
-            subtitle3dList.Remove(subtitle);
+            if (subtitle.audiObject = subscriptobj)
+            {
+                subtitle.hidesub = true;
+                return;
+            }
         }
-        subtitlesToClear.Clear();
 	}
     [SerializeField]
 	public Transform cameraTransorm;

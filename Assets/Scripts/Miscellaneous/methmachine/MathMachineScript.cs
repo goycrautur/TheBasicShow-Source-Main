@@ -188,7 +188,7 @@ public class MathMachineScript : MonoBehaviour
                 {
                     if (GameControllerScript.Instance.mode == "story")
                     {
-                        GameControllerScript.Instance.SubsManager.killSubtitle(LearningGameManager.Instance.Tutor.TutorSub);
+                        GameControllerScript.Instance.SubsManager.hideSub(LearningGameManager.Instance.Tutor.TutorSub);
                     }
                 }
                 if (GameControllerScript.Instance.mode == "story")

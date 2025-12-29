@@ -96,6 +96,16 @@ public class subtitlesScriptReal : MonoBehaviour
     }
     private void Update()
     {   // subtitle will commit kys if the audio source is not found or not active in hierarchy
+        if (hidesub) // are we deadass
+        {
+            imagbg.enabled = false;
+            tmpTxt.enabled = false;
+        }
+        if (!hidesub)
+        {
+            imagbg.enabled = true;
+            tmpTxt.enabled = true;
+        }
         if (producerAud == null)
         {
             Destroy(base.gameObject);
@@ -131,7 +141,7 @@ public class subtitlesScriptReal : MonoBehaviour
             duration -= Time.deltaTime;
         }
         
-        if (is3d) // stays invis if the audio source is muted
+        if (is3d && !hidesub) // stays invis if the audio source is muted
         {
             if (producerAud != null)
             {
@@ -227,7 +237,7 @@ public class subtitlesScriptReal : MonoBehaviour
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
     public float duration,shakespeed,shakeyradius;
-    public bool is3d, infinite,shake,textReversing,FuckTheText,upsideDownReal;
+    public bool is3d, infinite,shake,textReversing,FuckTheText,upsideDownReal,hidesub;
     public AudioSource producerAud;
     public TMP_Text tmpTxt;
     public Image imagbg;

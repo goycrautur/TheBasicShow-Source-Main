@@ -59,13 +59,13 @@ public class GameControllerScript : MonoBehaviour
         {
             npcmapicon.SetActive(ipleak ? true : false);
         }
-        escapeMusic.mute = !SecretEndingGot ? timeout : true;
-        warmusic.mute = !SecretEndingGot ? timeout : true;
+        escapeMusic.mute = !SecretEndingGot ? timeout : warrealest ? true : true;
+        warmusic.mute = !SecretEndingGot ? timeout : warrealest ? true : true;
         for (int i = 0; i < EvapV2FinaleSounSource.Length; ++i)
         {
             if (EvapV2FinaleSounSource[i] != null)
             {
-                EvapV2FinaleSounSource[i].mute = !SecretEndingGot ? timeout : true;
+                EvapV2FinaleSounSource[i].mute = !SecretEndingGot ? timeout : warrealest ? true : true;
             }
         }
         if (maxNotebooks == failedNotebooks && !warrealest)
@@ -292,7 +292,7 @@ public class GameControllerScript : MonoBehaviour
         spoopMode = true;
         if (mode == "story")
         {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(600f);
+            //Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(600f);
             ObjectsToDisable.ForEach(o => o.SetActive(false));
             ObjectsToEnable.ForEach(o => o.SetActive(true));
             if (warrealest)
@@ -301,10 +301,10 @@ public class GameControllerScript : MonoBehaviour
                 StartCoroutine(meeptimerwai());
             }
         }
-        /*if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic")
+        if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic")
         {
             Gatesrea.ForEach(g => g.Down());
-        }*/
+        }
 
         //midishit1.Stop();
         schoolMusic.Stop();
@@ -412,6 +412,10 @@ public class GameControllerScript : MonoBehaviour
                         finaleMode = true;
                         break;
                     case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                        ElevdorRea.ForEach(ed => ed.Opendor = true);
+                        finaleMode = true;
+                        break;
+                    case AdditionalGameCustomizer.EscapeFunsies.Taldi:
                         ElevdorRea.ForEach(ed => ed.Opendor = true);
                         finaleMode = true;
                         break;

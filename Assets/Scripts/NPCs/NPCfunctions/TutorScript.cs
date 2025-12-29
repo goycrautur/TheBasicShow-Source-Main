@@ -41,7 +41,7 @@ public class TutorScript : MonoBehaviour
             tutorSource.Stop();
             tutorAnimation.Play("BaldiWave", -1, 0f);
             tutorSource.PlayOneShot(aud_Hi);
-            gc.SubsManager.killSubtitle(TutorSub);
+            gc.SubsManager.hideSub(TutorSub);
             gc.SubsManager.summonLeSubtitle(TutorSub.subtitleOption,TutorSub,tutorSource);
         }
 

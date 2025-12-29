@@ -23,11 +23,24 @@ public class EndingManager : MonoBehaviour
 	}
     public void endingShit(int ID,bool secret = false)
     {
+        if (Game.warrealest)
+        {
+            LoadNormalResults(secret);
+            return;
+        }
         StartCoroutine(Game.easingExit(Color.white, 0, 2, 5));
         Game.audioDevice.loop = false;
         Game.audioDevice.Stop();
         Game.audioDevice2.Stop();
+        for (int i = 0; i < Game.EvapV2FinaleSounSource.Length; ++i)
+        {
+            if (Game.EvapV2FinaleSounSource[i] != null)
+            {
+                Game.EvapV2FinaleSounSource[i].Stop();
+            }
+        }
         Game.escapeMusic.clip = !secret ? NormEnd : SecretEnd;
+        Game.escapeMusic.loop = false;
         Game.escapeMusic.Play();
         hidehud=true;
         StartCoroutine(KeepTheHudOff());
