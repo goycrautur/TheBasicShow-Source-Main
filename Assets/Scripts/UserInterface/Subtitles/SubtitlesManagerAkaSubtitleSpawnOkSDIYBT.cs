@@ -10,6 +10,7 @@ public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : MonoBehaviour //atp this
 		public void summonLeSubtitle(subtitlingIt subtitle, subsScriptableObject subscriptobj, AudioSource audiSourc)
 		{
 			subtitlesScriptReal component = Instantiate<GameObject>(subtitlePrefab, subtitleCanvas.transform.position, Quaternion.identity, subtitleCanvas.transform).GetComponent<subtitlesScriptReal>();
+			subtitle3dList.Add(component);
 			component.producerAud = audiSourc;
             component.subtitlys = subtitle;
             component.audiObject = subscriptobj;
@@ -17,20 +18,13 @@ public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : MonoBehaviour //atp this
 			component.is3d = true;
 			component.cameraTransf = cameraTransorm;
 			component.aspectRatio = 1f;
-			if (!component.is3d)
-        	{
-        	component.bg.localScale = new Vector3(1f, 1f, 1f);
-        	component.bg.anchoredPosition = component.fixesPosition;
-        	}
-        	if (component.is3d)
-        	{
-            	component.bg.anchoredPosition = new Vector3(0f, -266.66f / component.aspectRatio, 0f);
-        	}
+            component.bg.anchoredPosition = new Vector3(0f, -266.66f / component.aspectRatio, 0f);
 			component.updateSubPostion();
 		}
 		public void summonLeSubtitle2D(subtitlingIt subtitle, subsScriptableObject subscriptobj, Vector3 position, AudioSource audiSourc)
 		{
 			subtitlesScriptReal component = Instantiate<GameObject>(subtitlePrefab, subtitleCanvas.transform.position, Quaternion.identity, subtitleCanvas.transform).GetComponent<subtitlesScriptReal>();
+			subtitle2dList.Add(component);
             component.producerAud = audiSourc;
             component.subtitlys = subtitle;
             component.audiObject = subscriptobj;
@@ -39,22 +33,55 @@ public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : MonoBehaviour //atp this
 			component.fixesPosition = position;
 			component.cameraTransf = cameraTransorm;
 			component.aspectRatio = 1f;
-			if (!component.is3d)
-        	{
         	component.bg.localScale = new Vector3(1f, 1f, 1f);
         	component.bg.anchoredPosition = component.fixesPosition;
-        	}
-        	if (component.is3d)
-        	{
-            	component.bg.anchoredPosition = new Vector3(0f, -266.66f / component.aspectRatio, 0f);
-        	}
 			component.updateSubPostion();
 		}
-
+	public void killSubtitle(subsScriptableObject subscriptobj) // haha fuck you blue shitpor im stealing your code
+	{
+		List<subtitlesScriptReal> subtitlesToClear = new List<subtitlesScriptReal>();
+        foreach(subtitlesScriptReal subtitle in subtitle2dList)
+        {
+            if (subtitle == null)
+            {
+                subtitlesToClear.Add(subtitle);
+                continue;
+            }
+            if (subtitle.audiObject = subscriptobj)
+            {
+                subtitle2dList.Remove(subtitle);
+                return;
+            }
+        }
+        foreach(subtitlesScriptReal subtitle in subtitlesToClear)
+        {
+            subtitle2dList.Remove(subtitle);
+        }
+        subtitlesToClear.Clear();
+        foreach(subtitlesScriptReal subtitle in subtitle3dList)
+        {
+            if (subtitle == null)
+            {
+                subtitlesToClear.Add(subtitle);
+                continue;
+            }
+            if (subtitle.audiObject = subscriptobj)
+            {
+                subtitle3dList.Remove(subtitle);
+                return;
+            }
+        }
+        foreach(subtitlesScriptReal subtitle in subtitlesToClear)
+        {
+            subtitle3dList.Remove(subtitle);
+        }
+        subtitlesToClear.Clear();
+	}
     [SerializeField]
 	public Transform cameraTransorm;
     public GameObject subtitlePrefab;
     public Canvas subtitleCanvas;
+	public List<subtitlesScriptReal> subtitle2dList, subtitle3dList= new List<subtitlesScriptReal>();
 	}
 //}
 [Serializable]
@@ -71,5 +98,5 @@ public class subtitlingIt
 	public float shakeyspeed = 1f;
     public float shakeyradius = 0.3f;
     public int fonts;
-	public bool unreadable = false,upsideDown = false,textReverse = false;
+	public bool useLocalization = false,unreadable = false,upsideDown = false,textReverse = false;
 }

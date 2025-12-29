@@ -13,86 +13,20 @@ MonoBehaviour:
   m_Name: balfine
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: f2d67667bd666a646adc0ed17ff2ee0e, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: Congratulation
+    headText: hi i was too lazy to make this timed ok
     textColor: {r: 0, g: 1, b: 0, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.02
     shakey: 0
     shakeyspeed: 10
     shakeyradius: 5
     fonts: 0
-    timedSub: 1
-    subtitleTimings:
-    - enabled: 1
-      headText: You found all notebooks!
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 2.16
-      utStyle: 1
-      TextAppearSpeed: 0.02
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: Now all you need to do is....
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 4.873
-      utStyle: 1
-      TextAppearSpeed: 0.02
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: GET OUT WHILE YOU STILL CAN!!!!!!!!!
-      textColor: {r: 1, g: 0, b: 0, a: 1}
-      duration: 7.22
-      utStyle: 1
-      TextAppearSpeed: 0.01
-      shakey: 1
-      shakeyspeed: 1000
-      shakeyradius: 5
-      fonts: 0
-    - enabled: 1
-      headText: .
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 11
-      utStyle: 1
-      TextAppearSpeed: 0.1
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: ..
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 11.5
-      utStyle: 1
-      TextAppearSpeed: 0.1
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: ...
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 11.5
-      utStyle: 1
-      TextAppearSpeed: 0.1
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: Hahaha!!!
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 14.39
-      utStyle: 1
-      TextAppearSpeed: 0.02
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

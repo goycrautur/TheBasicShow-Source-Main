@@ -114,12 +114,10 @@ public class MultiDurabilityWindow : MonoBehaviour // when am i going to put thi
     }
     public void FixedUpdate()
     {
-        amthing[0].layer = LayerMask.NameToLayer(gc.WindowLayermask);
-        amthing[1].layer = LayerMask.NameToLayer(gc.WindowLayermask);
         if (broken)
         {
             this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-            this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            this.gameObject.layer = LayerMask.NameToLayer("Broken Windows");
         }
         else
         {

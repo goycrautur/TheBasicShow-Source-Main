@@ -1,9 +1,19 @@
 fileFormatVersion: 2
 guid: ce110ddf9935c854ca0604b9fb8b5c8c
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoundTable_Umodel_Mesh_0Mat
+    second: {fileID: 2100000, guid: 2e6e9e459447fae40a1949d5f6a9cb5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoundTable_Umodel_Mesh_1Mat
+    second: {fileID: 2100000, guid: 470fdf1b5a71cce4fae87fe1731bdab6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,6 +50,7 @@ ModelImporter:
     addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -100,6 +111,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

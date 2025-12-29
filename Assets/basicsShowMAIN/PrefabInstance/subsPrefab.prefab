@@ -56,18 +56,18 @@ MonoBehaviour:
     headText: Placeholder
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 0
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 1
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 0.3
     fonts: 0
-    SubtitleID: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
   audiObject: {fileID: 0}
   duration: 0
-  realduration: 0
   shakespeed: 0
   shakeyradius: 0
   is3d: 0

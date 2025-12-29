@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7561554518868197736}
   - component: {fileID: 5270777727941983980}
   - component: {fileID: 1868624612681568905}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: EvaporvapeSmoke
   m_TagString: smoke
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 5, z: 30}
+  m_LocalScale: {x: 30, y: 10, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5530639664687495729}
@@ -682,7 +682,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.05
+      scalar: -0.01
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -941,7 +941,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10.69
+      scalar: 50
       minScalar: 10
       maxCurve:
         serializedVersion: 2

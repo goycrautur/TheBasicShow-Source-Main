@@ -23,9 +23,9 @@ public class mathMachineZonetrigger : MonoBehaviour
             if (!this.IsInsideBoxCollider(numBallScript.transform) && numBallScript.RoomID == RoomID)
             {
                 numBallScript.DownBall();
-				if (GameControllerScript.Instance.isHoldingBall)
+				if (GameControllerScript.Instance.isHoldingBall && !PlayerInTheRoom)
 				{
-				GameControllerScript.Instance.isHoldingBall = false;
+					GameControllerScript.Instance.isHoldingBall = false;
 				}
                 numBallScript.die();
 			}

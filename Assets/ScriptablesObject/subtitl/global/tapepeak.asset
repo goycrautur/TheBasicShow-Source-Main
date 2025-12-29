@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: tapepeak
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 1582b6025e077e2449b024f9502c58eb, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Absoloutely Peak Music And you cant tell me otherwise*'
+    headText: itemSubtitles_JerPeakTape
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 0
     shakeyspeed: 5000
     shakeyradius: 1
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

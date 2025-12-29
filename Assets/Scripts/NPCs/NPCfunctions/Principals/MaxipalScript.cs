@@ -117,6 +117,10 @@ public class MaxcipalScript : NPC
         aim = player.position - transform.position;
         if (transform.position.RaycastFromPosition(aim, out hit))
         {
+            if (transform.position.RaycastFromPosition(aim, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (hit.transform.CompareTag("Player") && playerScript.guilt > 0f && !playerScript.alsoInOffice && !gc.player.invisi && !gc.player.invisichalk)
             {
                 ruleBreakObservationTime += Time.deltaTime;
@@ -142,6 +146,10 @@ public class MaxcipalScript : NPC
         aim = player.position - transform.position;
         if (transform.position.RaycastFromPosition(aim, out hit))
         {
+            if (transform.position.RaycastFromPosition(aim, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (hit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
             {
                 TargetPlayer();

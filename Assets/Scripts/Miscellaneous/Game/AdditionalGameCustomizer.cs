@@ -264,7 +264,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (Sych.ScreenRaycastMatchesTag("VendingMachine", out RaycastHit hit, GameControllerScript.Instance.player.LocalRange))
+                    if (SendRayShit("VendingMachine", out RaycastHit hit, GameControllerScript.Instance.player.LocalRange))
                     {
                         var vendingMachine = hit.collider.GetComponent<VendingMachineScript>();
                         if (vendingMachine != null)
@@ -275,7 +275,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
                             }
                         }
                     }
-                    else if (Sych.ScreenRaycastMatchesTag("Phone", out hit, GameControllerScript.Instance.player.LocalRange))
+                    else if (SendRayShit("Phone", out hit, GameControllerScript.Instance.player.LocalRange))
                     {
                         var tapePlayer = hit.collider.GetComponent<TapePlayerScript>();
                         if (tapePlayer != null)
@@ -292,6 +292,25 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             Counter.SetActive(false);
         }
+    }
+    #endregion
+    #region Helpers
+    public bool SendRayShit(string tag, out RaycastHit rayHit, float range = 10f)
+    {
+        rayHit = default;
+
+        if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+        {
+            bool withinRange = hit.transform.IsWithinDistance(range);
+            bool tagMatch = string.IsNullOrEmpty(tag) || hit.collider.CompareTag(tag);
+
+            if (withinRange && tagMatch)
+            {
+                rayHit = hit;
+                return true;
+            }
+        }
+        return false;
     }
     #endregion
 
@@ -369,7 +388,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
 
     #region Enums
     public enum SkyboxStyle { Default, Day, Sunset, Night }
-    public enum EscapeFunsies { BBCR, Daldi, TBS}
+    public enum EscapeFunsies { BBCR, Daldi, TBS,Taldi}
     public enum StaminaDisplay { Old, PreOld, Normal, Vertical, Circle }
     #endregion
     [Header("doing This Cuz I Cant Be Bothered Spamming Shit")]

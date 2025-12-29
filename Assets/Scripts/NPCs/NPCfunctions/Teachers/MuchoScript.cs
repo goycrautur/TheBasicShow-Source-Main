@@ -65,9 +65,16 @@ public class MuchoScript : NPC
     public void targe()
     {
         if (player == null) return;
-
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
+            if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) 
+                {
+                    Debug.Log("saw bro but get blocked");
+                    return;
+                }
+            }
             if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
             {
                 TargetPlayer();
@@ -135,6 +142,14 @@ public class MuchoScript : NPC
         {
             if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
             {
+                if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+                {
+                    if (hitVape.transform.gameObject.layer == 11) 
+                    {
+                        Debug.Log("saw bro but get blocked");
+                        return;
+                    }
+                }
                 if (raycastHit.transform.CompareTag("Player"))
                 {
                     transform.LookAt(this.player.position);
@@ -231,18 +246,24 @@ public class MuchoScript : NPC
             agent.SetDestination(soundLocation);
             currentPriority = priority;
 
-            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                baldicator.Rebind();
-                baldicator.Play("BjIndicator_Heared", -1, 0f);
+                if (!antiHearing || !inNoSqueeArea)
+                {
+                    baldicator.Rebind();
+                    baldicator.Play("BjIndicator_Heared", -1, 0f);
+                }
             }
         }
         else
         {
-            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                baldicator.Rebind();
-                baldicator.Play("BjIndicator_Confused", -1, 0f);
+                if (!antiHearing || !inNoSqueeArea)
+                {
+                    baldicator.Rebind();
+                    baldicator.Play("BjIndicator_Confused", -1, 0f);
+                }
             }
         }
     }

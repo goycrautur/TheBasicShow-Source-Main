@@ -68,12 +68,13 @@ public class WindowScript : MonoBehaviour
     }
     public void Update()
     {
-        windo.layer = LayerMask.NameToLayer(gc.WindowLayermask);
-        windo2.layer = LayerMask.NameToLayer(gc.WindowLayermask);
+        this.gameObject.layer = broken ? LayerMask.NameToLayer("Broken Windows") : LayerMask.NameToLayer("Windows");
+        windo.layer = broken ? LayerMask.NameToLayer("Broken Windows") : LayerMask.NameToLayer("Windows");
+        windo2.layer = broken ? LayerMask.NameToLayer("Broken Windows") : LayerMask.NameToLayer("Windows");
         if (broken)
         {
             this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-            this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            
         }
         else
         {

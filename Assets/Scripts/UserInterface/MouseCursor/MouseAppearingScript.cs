@@ -40,7 +40,7 @@ public class MouseAppearingScript : MonoBehaviour
                     }
                 }
             }
-            if (hitTransform.CompareTag("VendingMachine") && !vent.isOutOfGoods || hitTransform.CompareTag("Phone"))
+            if (hitTransform.CompareTag("VendingMachine") || hitTransform.CompareTag("Phone"))
             {
                 if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
                 {

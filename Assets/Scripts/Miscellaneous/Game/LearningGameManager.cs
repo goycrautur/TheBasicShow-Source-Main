@@ -67,6 +67,18 @@ public class LearningGameManager : MonoBehaviour
         {
             gc.player.SetStamina(PlayerScript.StaminaChangeMode.Add, 50f);
         }
+        if (gc.notebooks == 1 && !gc.spoopMode && gc.mode == "story")
+        {
+            Tutor.tutorSource.Stop();
+            quarter.SetActive(true);
+            Tutor.tutorSource.PlayOneShot(aud_Prize);
+            gc.SubsManager.killSubtitle(Tutor.TutorSub);
+            gc.SubsManager.summonLeSubtitle(prizeSubs.subtitleOption,prizeSubs,Tutor.tutorSource);
+        }
+        if (gc.notebooks == 2 && !gc.spoopMode && gc.mode == "story")
+        {
+            gc.SubsManager.killSubtitle(prizeSubs);
+        }
         if (gc.notebooks == 2)
         {
             gc.ActivateSpoopMode();
@@ -88,16 +100,6 @@ public class LearningGameManager : MonoBehaviour
             gc.schoolMusic.Play();
             StartCoroutine(audioQueue.FadeOut(learnMusic, 0.25f));
         }
-
-        if (gc.notebooks == 1 && !gc.spoopMode && gc.mode == "story")
-        {
-            quarter.SetActive(true);
-            Tutor.tutorSource.PlayOneShot(aud_Prize);
-        }
-        if (gc.notebooks == 2 && !gc.spoopMode && gc.mode == "story")
-        {
-            Tutor.StartCoroutine(Tutor.captions());
-        }
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum")
         {
             if (gc.mode != "story")
@@ -109,8 +111,10 @@ public class LearningGameManager : MonoBehaviour
                 if (AdditionalGameCustomizer.Instance != null &&
                     AdditionalGameCustomizer.Instance.FinalModeTV)
                 {
-                    Television.baldingit = true;
-                    StartCoroutine(timeounaleshit(aud_AllNotebooks,balSubs));
+                    //Television.baldingit = true;
+                    //StartCoroutine(timeounaleshit(aud_AllNotebooks,balSubs));
+                    Television.TeacherJerryingIt = true;
+                    StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese,jerSubs));
                 }
                 else
                 {
@@ -120,6 +124,7 @@ public class LearningGameManager : MonoBehaviour
                 {
                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                     gc.Gatesrea.ForEach(g => g.Down(false));
+                    gc.finaleMode = true;
                 }
                 if (!gc.warrealest)
                 {
@@ -133,11 +138,23 @@ public class LearningGameManager : MonoBehaviour
                                     gc.escapeMusic.clip = gc.SchoolhouseEscape;
                                     gc.escapeMusic.loop = true;
                                     gc.escapeMusic.Play();
+                                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                     gc.Gatesrea.ForEach(g => g.Down(false));
+                                    gc.finaleMode = true;
+                                    break;
+                                case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                                    gc.escapeMusic.clip = gc.TaldiEscape;
+                                    gc.escapeMusic.loop = true;
+                                    gc.escapeMusic.Play();
+                                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                    gc.Gatesrea.ForEach(g => g.Down(false));
+                                    gc.finaleMode = true;
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.Daldi:
                                     StartCoroutine(gc.ambatudaldi());
+                                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                     gc.Gatesrea.ForEach(g => g.Down(false));
+                                    gc.finaleMode = true;
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                     gc.Gatesrea.ForEach(g => g.Down());
@@ -162,8 +179,8 @@ public class LearningGameManager : MonoBehaviour
     #region References
     [Header("References")]
     public AudioSource learnMusic;
-    public AudioClip aud_AllNotebooks,aud_Timeout, aud_Prize;
-    public subsScriptableObject famSubs,balSubs,balSubsTIMEOUT;
+    public AudioClip aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout, aud_Prize;
+    public subsScriptableObject prizeSubs,famSubs,balSubs,jerSubs,balSubsTIMEOUT;
     public GameObject quarter;
 
 

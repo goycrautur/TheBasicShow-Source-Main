@@ -2,7 +2,7 @@
 
 public class booksInteract : Interactable
 {
-    private bool hidden = false;
+    public bool hidden = false;
     private float respawnTime = 120f;
     private GameControllerScript gc;
     private Transform player;
@@ -116,25 +116,23 @@ public class booksInteract : Interactable
         {
             if (gc.mode == "story")
             {
-                scoreSystemManager.Instance.AddScore(1200, true,true);
                 lgm.Tutor.tutorSource.Stop();
                 lgm.quarter.SetActive(true);
+                gc.SubsManager.killSubtitle(lgm.Tutor.TutorSub);
                 lgm.Tutor.tutorSource.PlayClip(lgm.aud_Prize, false, 1f);
+                gc.SubsManager.summonLeSubtitle(lgm.prizeSubs.subtitleOption,lgm.prizeSubs,lgm.Tutor.tutorSource);
+
             }
         }
-        if (gc.notebooks >= 2)
+        if (gc.notebooks >= 1)
         {
         scoreSystemManager.Instance.AddScore(1400, true,true);
         }
 
         if (gc.notebooks == 2)
         {
-            
+            gc.SubsManager.killSubtitle(lgm.prizeSubs);
             gc.ActivateSpoopMode();
-            if (gc.mode == "story")
-            {
-                lgm.Tutor.StartCoroutine(lgm.Tutor.captions());
-            }
         }
 
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum")
@@ -168,8 +166,10 @@ public class booksInteract : Interactable
         {
             if (gc.mode == "story")
             {
-                lgm.Television.baldingit = true;
-                StartCoroutine(lgm.timeounaleshit(lgm.aud_AllNotebooks,lgm.balSubs));
+                //lgm.Television.baldingit = true;
+                //StartCoroutine(lgm.timeounaleshit(lgm.aud_AllNotebooks,lgm.balSubs));
+                lgm.Television.TeacherJerryingIt = true;
+                StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese,lgm.jerSubs));
             }
             if (gc.mode == "famished")
             {
@@ -195,6 +195,7 @@ public class booksInteract : Interactable
             {
                 gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                 gc.Gatesrea.ForEach(g => g.Down(false));
+                gc.finaleMode = true;
             }
             if (!gc.warrealest)
             {
@@ -208,11 +209,23 @@ public class booksInteract : Interactable
                                 gc.escapeMusic.clip = gc.SchoolhouseEscape;
                                 gc.escapeMusic.loop = true;
                                 gc.escapeMusic.Play();
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                                gc.escapeMusic.clip = gc.TaldiEscape;
+                                gc.escapeMusic.loop = true;
+                                gc.escapeMusic.Play();
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.Daldi:
                                 StartCoroutine(gc.ambatudaldi());
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 gc.Gatesrea.ForEach(g => g.Down());

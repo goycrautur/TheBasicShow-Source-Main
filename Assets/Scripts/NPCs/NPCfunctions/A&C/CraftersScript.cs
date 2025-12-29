@@ -89,6 +89,10 @@ public class CraftersScript : NPC
     {
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
+            if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (raycastHit.transform.CompareTag("Player") && craftersRenderer.isVisible && spriteImage.sprite == normalSprite && chillBro < 0f)
             {
                 if (!stopUpdate)

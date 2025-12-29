@@ -581,7 +581,7 @@ public class PlayerScript : MonoBehaviour
 	[SerializeField] private NavMeshAgent gottaSweep, firstPrize;
 	[SerializeField] private Transform firstPrizeTransform, PlayerTransform;
 	public Transform targetToForcelyLookAt;
-	[SerializeField] private GameObject jumpRopeGame, hud;
+	public GameObject hud;
 	[SerializeField] private Material blackSky;
 	[SerializeField] private CameraScript CamCam;
 	[SerializeField] private float staminaRate;

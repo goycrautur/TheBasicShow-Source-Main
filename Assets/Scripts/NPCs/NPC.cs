@@ -63,11 +63,13 @@ public class NPC : MonoBehaviour
     protected virtual void CheckForPlayer()
     {
         Vector3 direction = player.position - transform.position;
-
         if (transform.position.RaycastFromPosition(direction, out RaycastHit hit))
         {
             isInteracting = hit.transform.CompareTag("Player");
-
+            if (transform.position.RaycastFromPosition(direction, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (isInteracting && canTargetPlayer && !gc.player.invisi && !gc.player.invisichalk)
             {
                 TargetPlayer();
@@ -174,7 +176,7 @@ public class NPC : MonoBehaviour
     [SerializeField] private Color pathColor = Color.red;
     [SerializeField] private float pathWidth = 15f;
     #endregion
-
+    [Header("Misc Stuffs")]
     #region Internal State
     protected float coolDown;
     public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;

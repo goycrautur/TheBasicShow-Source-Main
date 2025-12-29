@@ -5,14 +5,23 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using YuriArchive.GlobalLocalization;
 
 public class subtitlesScriptReal : MonoBehaviour
 {
+    private void OnDestroy()
+    {
+        if (is3d) GameControllerScript.Instance.SubsManager.subtitle3dList.Remove(this);
+        if (!is3d) GameControllerScript.Instance.SubsManager.subtitle2dList.Remove(this);
+    }
     public void Start()
     {   //some misc stuff dw
         shakespeed = subtitlys.shakeyspeed;
         shake = subtitlys.shakey;
         shakeyradius = subtitlys.shakeyradius;
+        textReversing = subtitlys.textReverse;
+        FuckTheText = subtitlys.unreadable;
+        upsideDownReal = subtitlys.upsideDown;
         tmpTxt.text = "";
         tmpTxt.color = subtitlys.textColor;
         
@@ -173,6 +182,12 @@ public class subtitlesScriptReal : MonoBehaviour
         {
             if (sub != null) StopCoroutine(sub);
             subtitlys = thoseWhoSubtitles;
+            shakespeed = thoseWhoSubtitles.shakeyspeed;
+            shake = thoseWhoSubtitles.shakey;
+            shakeyradius = thoseWhoSubtitles.shakeyradius;
+            textReversing = thoseWhoSubtitles.textReverse;
+            FuckTheText = thoseWhoSubtitles.unreadable;
+            upsideDownReal = thoseWhoSubtitles.upsideDown;
             tmpTxt.text = "";
             tmpTxt.color = thoseWhoSubtitles.textColor;
             sub = StartCoroutine(TextAnimator());
@@ -183,13 +198,13 @@ public class subtitlesScriptReal : MonoBehaviour
     private IEnumerator TextAnimator()
     {
         StringBuilder sb = new StringBuilder(); // Use StringBuilder for efficient string concatenation
-        string headTexter = subtitlys.headText;
+        string headTexter = !subtitlys.useLocalization ? subtitlys.headText : LocalizationManager.Instance.GetText(subtitlys.headText);
         //LocalizationManager.Instance.GetText(subtitle.headText); later trust or youre using this from the tuto
-        if (subtitlys.textReverse)
+        if (textReversing)
             headTexter = ReverseString(headTexter); // Reverse text if enabled
-        if (subtitlys.unreadable)
+        if (FuckTheText)
             headTexter = ReplaceWithRandomChars(headTexter); // Replace text with random characters if unreadable
-        if (subtitlys.upsideDown)
+        if (upsideDownReal)
             tmpTxt.transform.rotation = Quaternion.Euler(0f, 0f, 180f); // Rotate text upside down if enabled
         else
             tmpTxt.transform.rotation = Quaternion.Euler(0f, 0f, 0f); // Reset rotation if not upside down
@@ -212,7 +227,7 @@ public class subtitlesScriptReal : MonoBehaviour
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
     public float duration,shakespeed,shakeyradius;
-    public bool is3d, infinite,shake;
+    public bool is3d, infinite,shake,textReversing,FuckTheText,upsideDownReal;
     public AudioSource producerAud;
     public TMP_Text tmpTxt;
     public Image imagbg;

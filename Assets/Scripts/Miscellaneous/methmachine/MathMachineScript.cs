@@ -184,16 +184,15 @@ public class MathMachineScript : MonoBehaviour
             }
             else
             {
-                if (!GameControllerScript.Instance.spoopMode & GameControllerScript.Instance.notebooks == 2)
+                if (!GameControllerScript.Instance.spoopMode & GameControllerScript.Instance.notebooks == 1)
                 {
                     if (GameControllerScript.Instance.mode == "story")
                     {
-                        LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
+                        GameControllerScript.Instance.SubsManager.killSubtitle(LearningGameManager.Instance.Tutor.TutorSub);
                     }
                 }
                 if (GameControllerScript.Instance.mode == "story")
                 {
-                    LearningGameManager.Instance.Tutor.StartCoroutine(LearningGameManager.Instance.Tutor.captions());
                     scoreSystemManager.Instance.PointsMultiplier += 1f;
                 }
                 if (GameControllerScript.Instance.notebooks == 2 && GameControllerScript.Instance.mode == "famished")

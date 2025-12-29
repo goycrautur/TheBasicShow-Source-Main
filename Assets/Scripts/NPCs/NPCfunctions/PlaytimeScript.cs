@@ -72,6 +72,10 @@ public class PlaytimeScript : NPC
         {
             bool playerInRange = (transform.position - player.position).magnitude <= 30f;
 
+            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 30f, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !ps.invisi && !ps.invisichalk)
             {
                 playerSeen = true;

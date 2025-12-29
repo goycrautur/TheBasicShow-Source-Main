@@ -13,56 +13,85 @@ MonoBehaviour:
   m_Name: baltimeOU
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6db2f32a14c8ff14cab06e7a98899657, type: 3}
+  volume: 0
   subtitleOption:
-    enabled: 1
+    enabled: 0
     headText: Class Dismisses!
     textColor: {r: 0, g: 1, b: 0, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.02
     shakey: 0
     shakeyspeed: 10
     shakeyradius: 5
     fonts: 0
-    timedSub: 1
-    subtitleTimings:
-    - enabled: 1
-      headText: School is no longer in session.
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 2
-      utStyle: 1
-      TextAppearSpeed: 0.02
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: Better wrap thing up soon...
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 4.78
-      utStyle: 1
-      TextAppearSpeed: 0.02
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: or else im gonna...
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 6.71
-      utStyle: 1
-      TextAppearSpeed: 0.02
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
-    - enabled: 1
-      headText: Fiiiiind yooou!
-      textColor: {r: 0, g: 1, b: 0, a: 1}
-      duration: 7.9
-      utStyle: 1
-      TextAppearSpeed: 0.04
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 1
+  SubtitleTimingKey:
+  - enabled: 1
+    headText: Class Dismisses!
+    textColor: {r: 0, g: 1, b: 0, a: 1}
+    duration: 2
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.02
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  - enabled: 1
+    headText: School is no longer in session.
+    textColor: {r: 0, g: 1, b: 0, a: 1}
+    duration: 4.78
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.05
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  - enabled: 1
+    headText: better wrap things up soon....
+    textColor: {r: 0, g: 1, b: 0, a: 1}
+    duration: 6.72
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.025
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  - enabled: 1
+    headText: or else im gonna
+    textColor: {r: 0, g: 1, b: 0, a: 1}
+    duration: 7.9
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.025
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  - enabled: 1
+    headText: Fiiiiind youuu!
+    textColor: {r: 0, g: 1, b: 0, a: 1}
+    duration: 10.359
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.05
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0

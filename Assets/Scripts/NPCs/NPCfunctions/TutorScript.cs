@@ -41,7 +41,8 @@ public class TutorScript : MonoBehaviour
             tutorSource.Stop();
             tutorAnimation.Play("BaldiWave", -1, 0f);
             tutorSource.PlayOneShot(aud_Hi);
-            //UIPopupTextManagerWithMovement.Show("baldhi", Color.green, base.transform, 2.221f, 1.319f);
+            gc.SubsManager.killSubtitle(TutorSub);
+            gc.SubsManager.summonLeSubtitle(TutorSub.subtitleOption,TutorSub,tutorSource);
         }
 
         if (Countdown && !triggeredCounting && gottothepositio)
@@ -61,13 +62,8 @@ public class TutorScript : MonoBehaviour
         tutorAnimation.Rebind();
         tutorSource.Stop();
         tutorAnimation.Play("BaldiWave", -1, 0f);
-        //tutorSource.PlayOneShot(aud_Hi);
-        //UIPopupTextManagerWithMovement.Show("baldhi", Color.green, base.transform, 5.221f, 1.319f);
-    }
-
-    public IEnumerator captions()
-    {
-        yield return new WaitForSeconds(1.7f);
+        tutorSource.PlayOneShot(aud_Hi);
+        gc.SubsManager.summonLeSubtitle(TutorSub.subtitleOption,TutorSub,tutorSource);
     }
 
     private IEnumerator PlayCountdown()
@@ -118,6 +114,7 @@ public class TutorScript : MonoBehaviour
     [Header("Basic")]
     [SerializeField] private Animator tutorAnimation;
     [SerializeField] private AudioClip aud_Hi, ReadyOrNot;
+    public subsScriptableObject TutorSub;
     [SerializeField] private List<AudioClip> countdownClips;
     [SerializeField] private bool Countdown;
 

@@ -11,7 +11,7 @@ public class ZerullClassic : MonoBehaviour
 {
     private bool replaceALLSAKES;
     [SerializeField] private GameControllerScript gc;
-    public GameObject zer,Payphone;
+    public GameObject zer;
     #region SingletonSetup
     private void Awake() => Instance = this;
     public static ZerullClassic Instance;
@@ -117,10 +117,6 @@ public class ZerullClassic : MonoBehaviour
     }
     private void Start()
     {
-        if (gc.mode == "zerullclassic")
-        {
-            Destroy(Payphone);
-        }
         health = maxHealth;
         bool shakeswitchFR = PlayerPrefsExtension.GetBool("WallShakeSwitch");
         bool shake = PlayerPrefsExtension.GetBool("WallShake");
@@ -594,7 +590,6 @@ public class ZerullClassic : MonoBehaviour
         {
             GlitchShaders(false);
             zer.SetActive(true);
-            gc.WindowLayermask = "Ignore Raycast";
             //if (!ChaosMode)
             //{
                 StartCoroutine(easingeee(new Color(0.5f, 0.5f, 0.5f, 1f), 0, 2, 2));

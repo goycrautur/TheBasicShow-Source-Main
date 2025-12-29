@@ -11,8 +11,53 @@ public class EndingManager : MonoBehaviour
     private void Awake() => Instance = this;
     public static EndingManager Instance;
     #endregion
-
+    public IEnumerator KeepTheHudOff()
+	{
+		while (hidehud)
+		{
+			Game.player.hud.SetActive(false);
+            Game.player.isForcedToLook = true;
+			yield return new WaitForEndOfFrame();
+		}
+		yield break;
+	}
+    public void endingShit(int ID,bool secret = false)
+    {
+        StartCoroutine(Game.easingExit(Color.white, 0, 2, 5));
+        Game.audioDevice.loop = false;
+        Game.audioDevice.Stop();
+        Game.audioDevice2.Stop();
+        Game.escapeMusic.clip = !secret ? NormEnd : SecretEnd;
+        Game.escapeMusic.Play();
+        hidehud=true;
+        StartCoroutine(KeepTheHudOff());
+        StartCoroutine(EndingSequence(!secret ? NormEnd.length : SecretEnd.length,!secret ? 8.2f : 10.5f,ID,secret));
+    }
     #region PublicMethods
+    public IEnumerator EndingSequence(float WaitTime,float timeflash,int ForceLookTargetInt,bool secretEnd)
+    {
+        ZerullClassic.Instance.yourflashbang.Rebind();
+        ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
+        Game.player.forceLookSpeed = 500f;
+        Game.player.targetToForcelyLookAt = EndingForceLook[ForceLookTargetInt];
+        Game.player.transform.position = EndingTransformTP[ForceLookTargetInt].transform.position + Vector3.up * Game.player.height;
+        Game.player.titlecard = true;
+        Game.player.movementLocked = true;
+        Game.playerCollider.enabled = false;
+        Game.npcCloneList.ForEach(o => o.SetActive(false));
+        yield return new WaitForSeconds(WaitTime-(WaitTime-timeflash));
+        ZerullClassic.Instance.yourflashbang.Rebind();
+        ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
+        
+        black.SetActive(true);
+        yield return new WaitForSeconds(WaitTime-timeflash);
+        black.SetActive(false);
+        LoadNormalResults(secretEnd);
+        hidehud = false;
+        Game.player.isForcedToLook = false;
+        Game.player.hud.SetActive(true);
+        yield return null;
+    }
     public void LoadNormalResults(bool secret = false)
     {
         PlayerPrefsExtension.SetBool("storyBeaten", true);
@@ -129,6 +174,8 @@ public class EndingManager : MonoBehaviour
     #region SerializedFields
     [Header("Ending References")]
     [SerializeField] private Transform SecretWallText;
+    [SerializeField] private Transform[] EndingTransformTP,EndingForceLook;
+    [SerializeField] private AudioClip NormEnd,SecretEnd;
     [SerializeField] private List<GameObject> Environment = new List<GameObject>();
     [SerializeField] public GameObject office, results, black, SecretWarpPoint, NULL, portal;
     #endregion
@@ -136,7 +183,7 @@ public class EndingManager : MonoBehaviour
     #region PublicFields
     [Header("Ending Detection")]
     public bool GetResults;
-    public bool GetSecret;
+    public bool GetSecret,hidehud;
     #endregion
 
     #region PrivateFields

@@ -38,6 +38,10 @@ public class BaldTVyea : MonoBehaviour
         {
             famished.SetActive(true);
         }
+        if (TeacherJerryingIt)
+        {
+            teacherJer.SetActive(true);
+        }
         if (baldingit)
         {
             Baldi.SetActive(true);
@@ -48,8 +52,22 @@ public class BaldTVyea : MonoBehaviour
     {
         if (clip == null) yield break;
 
-        BaldiDevice.PlayOneShot(clip);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),BaldiDevice);
+        if (famishingit)
+        {
+            famAudDevice.PlayOneShot(clip);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),famAudDevice);
+        }
+        if (TeacherJerryingIt)
+        {
+            teacherJerAudDevice.PlayOneShot(clip);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),teacherJerAudDevice);
+        }
+        if (baldingit)
+        {
+            BaldiDevice.PlayOneShot(clip);
+            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),BaldiDevice);
+        }
+        
         float timer = 0f;
 
         while (timer < clip.length)
@@ -63,6 +81,7 @@ public class BaldTVyea : MonoBehaviour
     {
         Baldi.SetActive(false);
         famished.SetActive(false);
+        teacherJer.SetActive(false);
         Static.SetActive(true);
         yield return new WaitForSeconds(0.25f);
         Static.SetActive(false);
@@ -73,12 +92,13 @@ public class BaldTVyea : MonoBehaviour
 
     [Header("Serialized References")]
     [SerializeField] private Animator BaldiTVAnimator;
-    [SerializeField] private GameObject Static, Baldi, WarningMarks, famished;
-    [SerializeField] private AudioSource TelevisionDevice, BaldiDevice;
+    [SerializeField] private GameObject Static, Baldi, WarningMarks, famished, teacherJer;
+    [SerializeField] private AudioSource TelevisionDevice, BaldiDevice,famAudDevice, teacherJerAudDevice;
     [SerializeField] private AudioClip mus_Alert, aud_TimesOutBell;
     [SerializeField] private subsScriptableObject belltimeou;
     [Header("Extras")]
-    public bool Markings, baldingit, famishingit;
+    public bool Markings;
+    public bool baldingit, famishingit,TeacherJerryingIt;
     [SerializeField] private MarkingSoundType markingSound = MarkingSoundType.Alert;
     public enum MarkingSoundType { Alert, Bell };
 }

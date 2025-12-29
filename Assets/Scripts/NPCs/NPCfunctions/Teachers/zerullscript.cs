@@ -83,9 +83,12 @@ public class zerullscript : NPC
     public void targe()
     {
         if (player == null) return;
-
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
+            if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
             {
                 TargetPlayer();
@@ -207,18 +210,24 @@ public class zerullscript : NPC
             agent.SetDestination(soundLocation);
             currentPriority = priority;
 
-            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
+                if (!antiHearing || !inNoSqueeArea)
+                {
                 baldicator.Rebind();
                 baldicator.Play("Indicator_Heared", -1, 0f);
+                }
             }
         }
         else
         {
-            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
+                if (!antiHearing || !inNoSqueeArea)
+                {
                 baldicator.Rebind();
                 baldicator.Play("Indicator_Confused", -1, 0f);
+                }
             }
         }
     }

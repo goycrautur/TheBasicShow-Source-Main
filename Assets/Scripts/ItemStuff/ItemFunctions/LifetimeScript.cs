@@ -19,6 +19,7 @@ public class LifetimeScript : MonoBehaviour
     #region Per-Frame Logic
     private void Update()
     {
+        if (lifetime != 0); ToggleAudioSourcesInRange(true);
         if (lifetime.CountdownWithDeltaTime() == 0)
         {
             Destroy(gameObject);

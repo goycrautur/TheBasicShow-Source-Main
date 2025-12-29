@@ -388,10 +388,7 @@ public class GameControllerScript : MonoBehaviour
                 Application.Quit();
             }
             Time.timeScale = 1f;
-            if (!player.killedbyhim)
-            {
-                SceneManager.LoadScene(gameoverScene);
-            }
+            SceneManager.LoadScene(gameoverScene);
         }
     }
     #endregion
@@ -840,7 +837,7 @@ public class GameControllerScript : MonoBehaviour
     }
     public IEnumerator funnyportal()
     {
-
+        //MessageBox.Show("this is streamer build exclusive, will be removed from actual release hah", "hi just so you know", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         EndingManager.Instance.black.SetActive(true);
         yield return new WaitForSeconds(0.7f);
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
@@ -927,7 +924,7 @@ public class GameControllerScript : MonoBehaviour
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
     public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic,TpSoundSource;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell,gambling, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape,TaldiEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell,gambling, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud;
     #endregion
 
     #region PrivateFields
@@ -947,7 +944,6 @@ public class GameControllerScript : MonoBehaviour
     public FamishedModeController fmc;
     public ZerullClassic zerull;
     public LappingOfAsylumController LapManag;
-    public string WindowLayermask;
     #endregion
     [Header("silly stuff")]
     public GameObject TETOOOOO;

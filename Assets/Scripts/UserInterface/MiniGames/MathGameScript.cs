@@ -177,7 +177,7 @@ public class MathGameScript : MonoBehaviour
             StartCoroutine(PlayClassicMusic());
         }
 
-        QueueAudio(bal_problems[problem - 1]);
+        //QueueAudio(bal_problems[problem - 1]);
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == 9 && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == 9))
         {
@@ -195,13 +195,13 @@ public class MathGameScript : MonoBehaviour
         num1 = UnityEngine.Random.Range(0, 20);
         num2 = UnityEngine.Random.Range(0, 20);
         sign = UnityEngine.Random.Range(0, 4);
-        double dividedRoundUpNumb = Math.Round(num1 / num2);
+        double dividedRoundUpNumb = Math.Round(num1 / num2,2);
 
         //QueueAudio(bal_numbers[Mathf.RoundToInt(num1)]);
         solution = sign == 0 ? num1 + num2 : sign == 1 ? num1 - num2 : sign == 2 ? num1 * num2 : (float)dividedRoundUpNumb;
-        string RoundUpText = sign == 3 ? " (Then round up the number)": "";
+        string RoundUpText = sign == 3 ? " (Then round up the number to 2 digits)": "";
         string signText = sign == 0 ? "+" : sign == 1 ? "-": sign == 2 ? "x": "/";
-        questionText.text = $"Solve Math Q{problem}: \n \n{num1}{signText}{num2}{RoundUpText} = ?";
+        questionText.text = $"Solve Math Q{problem}: \n{num1}{signText}{num2}{RoundUpText} = ?";
         //QueueAudio(sign == 0 ? bal_plus : bal_minus);
         //QueueAudio(bal_numbers[Mathf.RoundToInt(num2)]);
         //QueueAudio(bal_equals);

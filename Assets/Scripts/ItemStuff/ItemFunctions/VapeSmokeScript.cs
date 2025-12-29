@@ -12,7 +12,6 @@ public class VapeSmokeScript : MonoBehaviour
     }
     private void insane()
     {
-
         if (!GameControllerScript.Instance.player.invisichalk && !GameControllerScript.Instance.player.invisi) return;
 
         if (GameControllerScript.Instance.player.invisichalk && !GameControllerScript.Instance.player.invisi)

@@ -21,7 +21,6 @@ public class FamishedModeController : MonoBehaviour
             scoreSystemManager.Instance.PointsMultiplier += 1f;
             gc.UpdateNotebookCount();
             StartCoroutine(easing(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 0));
-            gc.WindowLayermask = "Ignore Raycast";
             Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
             //StartCoroutine(zoomtiem());
         }

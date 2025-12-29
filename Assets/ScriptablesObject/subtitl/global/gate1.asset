@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: gate1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e0f9c057b43e7fe40810afc8c6aedd5c, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
     headText: '*concrete sliding sound*'
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    duration: 0
-    utStyle: 1
+    duration: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

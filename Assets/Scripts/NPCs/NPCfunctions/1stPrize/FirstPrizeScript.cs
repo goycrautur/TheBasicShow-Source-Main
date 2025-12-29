@@ -49,8 +49,13 @@ public class FirstPrizeScript : NPC
     protected override void CheckForPlayer()
     {
         if (crazyTime > 0) return;
+        
         if (transform.position.RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
+            if (transform.position.RaycastFromPosition(player.position - transform.position, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) return;
+            }
             if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk || player.GetComponent<PlayerScript>().hugging)
             {
                 HandlePlayerSeen();

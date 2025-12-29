@@ -5,7 +5,7 @@ public class ElevatorTrigger : MonoBehaviour
     [SerializeField] private ElvDoorScript eDoor;
     [SerializeField] private EndingManager em;
     [SerializeField] private GameControllerScript gc;
-
+    public int WinID;
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && eDoor != null && eDoor.IsOpening())
@@ -19,11 +19,11 @@ public class ElevatorTrigger : MonoBehaviour
                 eDoor.Close();
                 if (gc.failedNotebooks >= gc.maxNotebooks)
                 {
-                    em.LoadNormalResults(true);
+                    em.endingShit(WinID,true);
                 }
                 else
                 {
-                    em.LoadNormalResults();
+                    em.endingShit(WinID,false);
                 }
             }
         }

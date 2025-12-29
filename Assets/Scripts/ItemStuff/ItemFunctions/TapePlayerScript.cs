@@ -77,6 +77,16 @@ public class TapePlayerScript : MonoBehaviour
                     TapeCDEnable = true;
                     Singleton<OtherMainStuffManager>.Instance.PeakStun(LitearllyPEAK.length,"All");
                 }
+                if (tapeType == "jerrypeakassDiscExpert")
+                {
+                    sprite.sprite = closedSprite;
+                    tapeDevice.clip = peakbutShorter;
+                    tapeDevice.Play();
+                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(peasShorterSub.subtitleOption,peasShorterSub,tapeDevice);
+                    TapeCD = peakbutShorter.length;
+                    TapeCDEnable = true;
+                    Singleton<OtherMainStuffManager>.Instance.PeakStun(peakbutShorter.length,"All");
+                }
             }
             if (holyshitIsItRealTape == IsTape.PayPhone)
             {
@@ -103,8 +113,8 @@ public class TapePlayerScript : MonoBehaviour
 
     #region Internal State
     private SpriteRenderer sprite;
-    public AudioClip NormTapeAudio,welcomeOld,LitearllyPEAK;
-    public subsScriptableObject NormTapeSubs,ohnoSubs,PeasSub;
+    public AudioClip NormTapeAudio,welcomeOld,LitearllyPEAK,peakbutShorter;
+    public subsScriptableObject NormTapeSubs,ohnoSubs,PeasSub,peasShorterSub;
     public AudioSource tapeDevice;
     #endregion
     public IsTape holyshitIsItRealTape;

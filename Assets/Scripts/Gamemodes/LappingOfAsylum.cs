@@ -17,6 +17,7 @@ public class LappingOfAsylumController : MonoBehaviour
     #endregion
     public void Update()
     {
+        
         if (vanishScore)
 		{
 			scoreDecreaseTimer -= Time.deltaTime;
@@ -40,6 +41,30 @@ public class LappingOfAsylumController : MonoBehaviour
                 lappingHi[i].LapMusik = Sych.LoadSound(stupidText[i]);
             }
         }
+    }
+    public IEnumerator FadeSound(AudioSource audioDevice, float duration,string fadetype = "")
+    {
+        if (fadetype == "fadeOut")
+        {
+            float startVolume = audioDevice.volume;
+            while (audioDevice.volume > 0)
+            {
+                audioDevice.volume -= startVolume * Time.unscaledDeltaTime / duration;
+                yield return null;
+            }
+            yield break;
+        }
+        if (fadetype == "fadeIn")
+        {
+            while (audioDevice.volume < lappingHi[CurrentLap-1].volumefuck)
+            {
+                audioDevice.volume += Time.unscaledDeltaTime / duration;
+                yield return null;
+            }
+            audioDevice.volume = lappingHi[CurrentLap-1].volumefuck;
+            yield break;
+        }
+        yield break;
     }
     public void doShit(string stuff = "beginning")
     {
@@ -210,12 +235,14 @@ public class LappingOfAsylumController : MonoBehaviour
         CurrentMaxNotebooks += realCurrentMaxNoteboo;
         for (int i = 0; i < noteboos.Length; ++i)
         {
-            noteboos[i].Respawn();
+            if (noteboos[i].hidden) noteboos[i].Respawn();
         }
         gc.UpdateNotebookCount();
         yield return new WaitForSeconds(zawarudo.length / 2);
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
+        //LapSound.time = 60f;
         LapSound.loop = true;
+        UnityEngine.Debug.Log(LapSound.timeSamples);
         LapSound.Play();
         gc.audioDevice2.PlayOneShot(BellSoundLapping);
         CurrentLap++;
@@ -267,9 +294,10 @@ public class LappingOfAsylumController : MonoBehaviour
                 {
                     StartCoroutine(gc.tweeniconSolo(new Color(0, 0, 0, 0), 0, 1, 1f, e));
                 }
+
                 for (int i = 0; i < noteboos.Length; ++i)
                 {
-                    noteboos[i].Respawn();
+                    if (noteboos[i].hidden) noteboos[i].Respawn();
                 }
                 gc.exitsReached = 0;
                 gc.maxNotebooks += realCurrentMaxNoteboo;
@@ -282,6 +310,7 @@ public class LappingOfAsylumController : MonoBehaviour
                 gc.audioDevice2.PlayOneShot(PortalEnteringSound);
                 gc.npcCloneList.ForEach(o => o.SetActive(false));
                 gc.CirclAnimator.SetTrigger("nooo");
+                StartCoroutine(FadeSound(LapSound,1.5f,"fadeOut"));
                 yield return new WaitForSeconds(PortalEnteringSound.length + 1);
                 gc.player.titlecard = false;
                 gc.player.movementLocked = false;
@@ -344,7 +373,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
         LapSound.Play();
-        LapSound.volume = lappingHi[CurrentLap].volumefuck;
+        StartCoroutine(FadeSound(LapSound,1.5f,"fadeIn"));
         LapSound.loop = true;
         if (lappingHi[CurrentLap].usesFlag)
         {
@@ -366,11 +395,11 @@ public class LappingOfAsylumController : MonoBehaviour
     public meepTimerScript Meeptimar;
     public Image lapFlagImages;
     public booksInteract[] noteboos;
-    public AudioSource LapSound;
+    public AudioSource LapSound,LapSound2;
     public AudioClip BellSoundLapping,PortalEnteringSound,PortalExitingSound,zawarudo, lap5Aud1;
     public int CurrentLap, MaxLap, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount,ChaosCheeseCount,Chaos3CheeseCount;
-    public float scoreDecreaseTimer;
-    public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff, vanishScore;
+    public float scoreDecreaseTimer,Lap1SongTimer;
+    public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff, vanishScore,lap1TimerReach1Min,lap1NearEndThing;
     public string[] stupidText;
     public lapVariablesStuff[] lappingHi;
     [Serializable]
