@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: numbloons
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 2bb9cb3aa8bbb4a40baf61dfe9d31423, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: AAAAAAAAA-
+    headText: Baloo_pop
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 0
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.01
     shakey: 1
     shakeyspeed: 5000
     shakeyradius: 10
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

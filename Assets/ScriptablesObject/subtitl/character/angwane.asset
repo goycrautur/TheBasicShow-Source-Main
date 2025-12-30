@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: angwane
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 4fe457955ce2f384f8775c266766545e, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Angry grunts*'
+    headText: Wane_Grunts
     textColor: {r: 1, g: 0.5, b: 0, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.01
     shakey: 1
     shakeyspeed: 3000
     shakeyradius: 1
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

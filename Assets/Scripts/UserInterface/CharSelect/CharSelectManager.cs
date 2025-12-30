@@ -9,10 +9,13 @@ public class CharSelectManager : MonoBehaviour
 {
     public void Start()
     {
-        Debug.Log(characterThing.Count);
+        changeCharStuff2(PlayerPrefs.GetInt("CurrentCharacter", 0));
     }
     public void changeCharStuff2(int CharacVal)
     {
+        PlayerPrefs.SetString("CurrentCharacter", characterThing[CharacVal].CharSaveFileTag);
+        PlayerPrefs.SetInt("CharInt", characterThing[CharacVal].characterValue);
+        PlayerPrefs.Save();
         ChangeSlotsIMGig(characterThing[CharacVal].SlotsSkin[0],characterThing[CharacVal].SlotsSkin[1],characterThing[CharacVal].SlotsSkin[2]);
         ChangeCharacter(characterThing[CharacVal].TextFontType,characterThing[CharacVal].SlotsAmmount,characterThing[CharacVal].CharSprite,characterThing[CharacVal].nameSprite,characterThing[CharacVal].TextUsesImagesSprite,characterThing[CharacVal].CharacterNameNormText);
     }
@@ -45,7 +48,7 @@ public class CharSelectManager : MonoBehaviour
         {
             ItemImageSlotsYea[i].sprite = ItemSlotsCharSprites[1];
         }
-        ItemImageSlotsYea[0].sprite = ItemSlotsCharSprites[0];
+        ItemImageSlotsYea[0].sprite = ItemSlotsCharSprites[slots != 1 ?0 :1];
     }
     public TMP_Text CharacterNameText;
     public Animator mainSlotsAnimator;
@@ -63,7 +66,9 @@ public class CharSelectManager : MonoBehaviour
         public string CharacterNameNormText;
         public int SlotsAmmount;
         public Sprite[] SlotsSkin;
+        public string CharacterDescription;
         public string CharSaveFileTag;
+        public float WalkSpeedStats,RunSpeedStats,MaxStamina,StaminaDrainRateStats,StaminaHealsRateStats,MaxHpStats,DefendMultiplierStats;
         public int characterValue;
 	}
 }

@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: glaceon
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc949b53daaa3a54b845f58170dc8be4, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Crying noises*'
+    headText: itemSubtitles_randomBlock_glaceo
     textColor: {r: 0.6784314, g: 0.84705883, b: 0.9019608, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 1
     shakeyspeed: 10000
     shakeyradius: 10
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

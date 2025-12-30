@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: machine_correc
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: b761103fc1e64394bbcf3e7ce9576792, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*LOUD CORRECT BUZZER*'
+    headText: methMachine_correct
     textColor: {r: 0, g: 1, b: 0, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.01
     shakey: 0
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

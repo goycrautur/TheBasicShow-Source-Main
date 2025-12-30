@@ -343,7 +343,7 @@ public class LappingOfAsylumController : MonoBehaviour
         vanishScore = true;
         if (CurrentLap == 2)
         {
-            // gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
             // if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems)
             // {
             //     foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())

@@ -312,7 +312,9 @@ public class MaxcipalScript : NPC
         target.transform.position = vector;
         agent.Warp(vector + target.forward * 10f);
         audioQueue.QueueAudio(audTimes[detentions], subtitlthingballs[detentions]);
-        audioQueue.QueueAudio(audDetention, detentionCaptions);
+        audioQueue.QueueAudio(audScoldsDetention[detentions],scoldsubsDetention[detentions]);
+        int num2 = (int)Random.Range(0f, audDetention.Length);
+        audioQueue.QueueAudio(audDetention[num2], detentionCaptions[num2]);
         int num = (int)Random.Range(0f, audScolds.Length);
         audioQueue.QueueAudio(audScolds[num],scoldsubs[num]);
         officeDoor.LockDoor(lockTime[detentions]);
@@ -412,10 +414,10 @@ public class MaxcipalScript : NPC
 
     [Header("Audio and Feedback")]
     [SerializeField] private AudioQueueScript audioQueue;
-    [SerializeField] private AudioClip[] audTimes, audScolds;
-    [SerializeField] private subsScriptableObject[] subtitlthingballs, scoldsubs;
-    [SerializeField] private AudioClip audDetention, audNoDrinking, audNoEating, audNoBullying, audNoFaculty, audNoRunning, audNoEscaping, audNoDestroying, aud_Whistle;
-    [SerializeField] private subsScriptableObject detentionCaptions,noDrinkingCaptions,noEatingCaptions, noBullyingCaptions, noFacultyCaptions, noRunningCaptions, noEscapingCaptions, noDestroyingCaptions, whistleCaptions;
+    [SerializeField] private AudioClip[] audTimes, audScolds,audScoldsDetention,audDetention;
+    [SerializeField] private subsScriptableObject[] subtitlthingballs, scoldsubs,scoldsubsDetention,detentionCaptions;
+    [SerializeField] private AudioClip audNoDrinking, audNoEating, audNoBullying, audNoFaculty, audNoRunning, audNoEscaping, audNoDestroying, aud_Whistle;
+    [SerializeField] private subsScriptableObject noDrinkingCaptions,noEatingCaptions, noBullyingCaptions, noFacultyCaptions, noRunningCaptions, noEscapingCaptions, noDestroyingCaptions, whistleCaptions;
 
     [Header("Office and Detention")]
     [SerializeField] private DoorScript officeDoor;

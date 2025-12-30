@@ -51,7 +51,7 @@ public class Billboard : MonoBehaviour
     #region Inspector Configuration
     [Header("Billboard Settings")]
     public bool doNotOptimize;
-    [SerializeField] private bool shaking;
+    public bool shaking;
     [SerializeField] private bool billboardX;
     [SerializeField] private bool applyRandomZRotation;
     #endregion

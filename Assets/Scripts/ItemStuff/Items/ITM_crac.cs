@@ -6,15 +6,13 @@ public class ITM_crac : BaseItem
 {
     public override bool OnUse()
     {
-        if (used) return false;
-        AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
         GameControllerScript.Instance.audioDevice.PlayOneShot(Used);
-        used = true;
         StartCoroutine(amwaitin(duration));
         return true;
     }
     private IEnumerator amwaitin(float time)
     {
+        AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
         GameControllerScript.Instance.player.walkSpeedMultipler += speedMult;
         GameControllerScript.Instance.player.runSpeedMultipler += speedMult;
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Sprite, duration);
@@ -30,8 +28,6 @@ public class ITM_crac : BaseItem
             yield return null;
         }
         newGauge.Hide();
-        used = false;
-
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMult;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMult;
         AdditionalGameCustomizer.Instance.FovAmmount -= FovAmmount;
@@ -40,5 +36,4 @@ public class ITM_crac : BaseItem
     [SerializeField] private float duration = 60f, speedMult,FovAmmount;
     [SerializeField] private AudioClip Used;
     [SerializeField] private Sprite Sprite;
-    [SerializeField] private bool used;
 }

@@ -13,26 +13,21 @@ MonoBehaviour:
   m_Name: boss_hurt
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 15813f963358d4549a2804f505244afe, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*minecraft hurt sound*'
+    headText: global_bosshurt
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 1
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings:
-    - enabled: 0
-      headText: 
-      textColor: {r: 0, g: 0, b: 0, a: 0}
-      duration: 0
-      utStyle: 0
-      TextAppearSpeed: 0
-      shakey: 0
-      shakeyspeed: 0
-      shakeyradius: 0
-      fonts: 0
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

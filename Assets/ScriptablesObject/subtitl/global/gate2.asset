@@ -16,7 +16,7 @@ MonoBehaviour:
   volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*LOUD BANGING SOUND*'
+    headText: ElevOrExitClosing_2
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 2.541
     undertaleStyleTextAppearing: 1
@@ -25,6 +25,7 @@ MonoBehaviour:
     shakeyspeed: 3000
     shakeyradius: 3
     fonts: 0
+    useLocalization: 1
     unreadable: 0
     upsideDown: 0
     textReverse: 0

@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: tapehell
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e36455db5f7966741a4c333aca15eb06, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*agony noise*'
+    headText: itemSubtitles_JerEarPierceDvd
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 0
     shakeyspeed: 5000
     shakeyradius: 1
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

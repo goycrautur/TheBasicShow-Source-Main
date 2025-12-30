@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: toothlesthem
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 9401503d070f6bb4288b21640dbd8979, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: stupid ass toothless theme intenstify
+    headText: MemeMouse_ambience
     textColor: {r: 1, g: 0.5, b: 0, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 0
     shakeyspeed: 3000
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

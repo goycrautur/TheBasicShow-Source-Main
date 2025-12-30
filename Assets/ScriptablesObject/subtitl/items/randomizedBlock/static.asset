@@ -13,17 +13,21 @@ MonoBehaviour:
   m_Name: static
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 3e9596596d21dbf46af57e2f706a756a, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Panic! In static! Out manic!.....wait why am i typing lyrics in a
-      captio*'
+    headText: itemSubtitles_randomBlock_static
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 1
     shakeyspeed: 500
     shakeyradius: 0.3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: lap3secre
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6dbbf0d5ced814f499f9484c32a56204, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*secret lap 3 theme intensify*'
+    headText: itemSubtitles_randomBlock_sotwLap3Fear
     textColor: {r: 0.7490196, g: 0.2509804, b: 0.7490196, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.01
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 0.3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: sylvscrea
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cd14568e3ed7fad46b8ed3242a1d1480, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Cute Screaming*'
+    headText: itemSubtitles_randomBlock_sylveo
     textColor: {r: 0.99607843, g: 0.003921569, b: 0.6039216, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 1
     shakeyspeed: 10000
     shakeyradius: 2
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

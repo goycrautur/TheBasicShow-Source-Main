@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: snwingdorsOpen
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 11c1822a14c1661429aebdde359cbc73, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Swinging door opens*'
+    headText: SwinDoor_open
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

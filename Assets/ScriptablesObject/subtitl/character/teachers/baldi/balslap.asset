@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: balslap
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: affac2acfe66b954cada2dca22605fed, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*SLAP*'
+    headText: bal_slap
     textColor: {r: 0, g: 1, b: 0, a: 1}
     duration: 1
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 1
     shakeyspeed: 1000
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

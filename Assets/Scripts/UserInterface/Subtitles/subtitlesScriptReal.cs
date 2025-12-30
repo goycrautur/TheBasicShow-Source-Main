@@ -233,7 +233,6 @@ public class subtitlesScriptReal : MonoBehaviour
         }
     }
     public Transform cameraTransf;
-    public string hjea;
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
     public float duration,shakespeed,shakeyradius;

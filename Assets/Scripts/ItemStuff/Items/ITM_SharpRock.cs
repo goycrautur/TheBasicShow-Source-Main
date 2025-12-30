@@ -39,7 +39,8 @@ public class ITM_SharpRock : BaseItem
             {
                 GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
                 w.Window(true, true, 6f);
-                GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 1f);
+                GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
+                CameraScript.Instance.TempShakeAmount += 0.5f;
                 return true;
             }
         }

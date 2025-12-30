@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: dorsClose
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 356e26f7aa0908a4b880e86c02f487cb, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*SLAM*'
+    headText: normDoor_close
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

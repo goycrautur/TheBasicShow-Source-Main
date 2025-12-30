@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: stun
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 883e3a233f460d448866af0c4a8300b1, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Stunned*'
+    headText: global_stunned
     textColor: {r: 1, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.01
     shakey: 0
     shakeyspeed: 10
     shakeyradius: 10
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

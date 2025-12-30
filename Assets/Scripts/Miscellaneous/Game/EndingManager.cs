@@ -16,13 +16,30 @@ public class EndingManager : MonoBehaviour
 		while (hidehud)
 		{
 			Game.player.hud.SetActive(false);
-            Game.player.isForcedToLook = true;
+            if (!movething)
+            {
+                Game.player.isForcedToLook = true;
+            }
 			yield return new WaitForEndOfFrame();
 		}
 		yield break;
 	}
+    public void Update()
+    {
+        Vector3 ogposforTs = EndingForceLook[CurExitID].position;
+        if (movething)
+        {
+            EndingForceLook[CurExitID].position = Vector3.MoveTowards(EndingForceLook[CurExitID].position, new Vector3(ogposforTs.x, 66, ogposforTs.z), 7 * Time.deltaTime);
+        }
+    }
     public void endingShit(int ID,bool secret = false)
     {
+        CurExitID = ID;
+        if (Game.mode != "story")
+        {
+            LoadNormalResults();
+            return;
+        }
         if (Game.warrealest)
         {
             LoadNormalResults(secret);
@@ -44,9 +61,24 @@ public class EndingManager : MonoBehaviour
         Game.escapeMusic.Play();
         hidehud=true;
         StartCoroutine(KeepTheHudOff());
-        StartCoroutine(EndingSequence(!secret ? NormEnd.length : SecretEnd.length,!secret ? 8.2f : 10.5f,ID,secret));
+        StartCoroutine(EndingSequence(!secret ? NormEnd.length : SecretEnd.length,!secret ? 11f : 10.5f,ID,secret));
+        StartCoroutine(byebus(!secret ? 5.44f : SecretEnd.length,ID));
     }
     #region PublicMethods
+    public IEnumerator byebus(float timetoActuallyMove,int whatWasTheObjectId)
+    {
+        yield return new WaitForSeconds(timetoActuallyMove);
+        movething = true;
+        EndingBillObj[whatWasTheObjectId].enabled = true;
+        EndingBillObj[whatWasTheObjectId].shaking = true;
+        EndingAudiSource[whatWasTheObjectId].clip = helicop;
+        EndingAudiSource[whatWasTheObjectId].loop = false;
+        EndingAudiSource[whatWasTheObjectId].Play();
+        Game.SubsManager.summonLeSubtitle(helisubs.subtitleOption,helisubs,EndingAudiSource[whatWasTheObjectId]);
+        yield return new WaitForSeconds(0.2f);
+        movething = false;
+        yield return null;
+    }
     public IEnumerator EndingSequence(float WaitTime,float timeflash,int ForceLookTargetInt,bool secretEnd)
     {
         ZerullClassic.Instance.yourflashbang.Rebind();
@@ -188,7 +220,10 @@ public class EndingManager : MonoBehaviour
     [Header("Ending References")]
     [SerializeField] private Transform SecretWallText;
     [SerializeField] private Transform[] EndingTransformTP,EndingForceLook;
-    [SerializeField] private AudioClip NormEnd,SecretEnd;
+    [SerializeField] private Billboard[] EndingBillObj;
+    [SerializeField] private AudioSource[] EndingAudiSource;
+    [SerializeField] private AudioClip NormEnd,SecretEnd,helicop;
+    [SerializeField] private subsScriptableObject helisubs;
     [SerializeField] private List<GameObject> Environment = new List<GameObject>();
     [SerializeField] public GameObject office, results, black, SecretWarpPoint, NULL, portal;
     #endregion
@@ -196,10 +231,11 @@ public class EndingManager : MonoBehaviour
     #region PublicFields
     [Header("Ending Detection")]
     public bool GetResults;
-    public bool GetSecret,hidehud;
+    public bool GetSecret,hidehud,movething;
     #endregion
 
     #region PrivateFields
     private GameControllerScript Game;
+    private int CurExitID;
     #endregion
 }

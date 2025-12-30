@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: ChainSawSweep
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6e5538b311a1bf546bdf64dc1b98051d, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*chainsaw maniac intensify*'
+    headText: 945_sweep
     textColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.025
     shakey: 1
     shakeyspeed: 3000
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

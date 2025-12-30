@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: evilLeaf
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: b82779cc96e1e3040afb921408db84ba, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '!??!?!!??!'
+    headText: itemSubtitles_evilFuckingLeafy
     textColor: {r: 1, g: 0, b: 0, a: 1}
     duration: 0.25
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

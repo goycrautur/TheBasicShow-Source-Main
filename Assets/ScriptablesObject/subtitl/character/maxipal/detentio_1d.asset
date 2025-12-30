@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: detentio_1d
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 09c9d28c51bbf464f99450b8cc5c7b88, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: 1 day.
+    headText: Maxcipal_detention_tier5
     textColor: {r: 0, g: 1, b: 1, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 0
     shakeyspeed: 100
     shakeyradius: 3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

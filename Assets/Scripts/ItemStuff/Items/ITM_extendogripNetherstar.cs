@@ -6,11 +6,7 @@ public class ITM_extendogripNetherstar : BaseItem
 {
     public override bool OnUse()
     {
-        if (used) return false;
-        prevDistance = GameControllerScript.Instance.player.defaultlocalRange;
-        GameControllerScript.Instance.player.LocalRange = distance;
         GameControllerScript.Instance.audioDevice.PlayOneShot(gloveUsed);
-        used = true;
         StartCoroutine(amwaitin(duration));
         return true;
     }
@@ -21,6 +17,8 @@ public class ITM_extendogripNetherstar : BaseItem
         yield return null;
         while (time > 0f)
         {
+            prevDistance = GameControllerScript.Instance.player.defaultlocalRange;
+            GameControllerScript.Instance.player.LocalRange = distance;
             time -= Time.deltaTime;
             if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
             {
@@ -30,7 +28,6 @@ public class ITM_extendogripNetherstar : BaseItem
         }
         newGauge.Hide();
         GameControllerScript.Instance.player.LocalRange = prevDistance;
-        used = false;
         yield break;
     }
     [SerializeField] private float duration = 60f, prevDistance;

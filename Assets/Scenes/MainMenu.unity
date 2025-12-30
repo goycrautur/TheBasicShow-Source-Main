@@ -1213,7 +1213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &193
 GameObject:
   m_ObjectHideFlags: 0
@@ -36914,13 +36914,21 @@ MonoBehaviour:
     CharSprite: {fileID: 21300000, guid: 8ae0b0e33a67fd04eaa84cfa36e9f130, type: 3}
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
-    CharacterNameNormText: gray creatur
+    CharacterNameNormText: mainAntag (basic show)
     SlotsAmmount: 9
     SlotsSkin:
     - {fileID: 8839654916173188765, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
     - {fileID: -1033735670183444960, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
     - {fileID: 7948025927414220139, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
-    CharSaveFileTag: 
+    CharacterDescription: 
+    CharSaveFileTag: MainPlayer
+    WalkSpeedStats: 16
+    RunSpeedStats: 22
+    MaxStamina: 100
+    StaminaDrainRateStats: 10
+    StaminaHealsRateStats: 20
+    MaxHpStats: 100
+    DefendMultiplierStats: 1
     characterValue: 0
   - nameSprite: {fileID: 0}
     CharSprite: {fileID: 21300000, guid: 053b1b9b6fe80a14ebe0f7dee8e1c4bb, type: 3}
@@ -36932,20 +36940,56 @@ MonoBehaviour:
     - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
     - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
     - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    CharSaveFileTag: 
-    characterValue: 0
+    CharacterDescription: 
+    CharSaveFileTag: ClassicPlayer
+    WalkSpeedStats: 10
+    RunSpeedStats: 16
+    MaxStamina: 100
+    StaminaDrainRateStats: 10
+    StaminaHealsRateStats: 10
+    MaxHpStats: 100
+    DefendMultiplierStats: 1
+    characterValue: 1
   - nameSprite: {fileID: 0}
-    CharSprite: {fileID: 21300000, guid: 9a793fd861437234d8b2844a315c7dea, type: 3}
+    CharSprite: {fileID: 21300000, guid: 053b1b9b6fe80a14ebe0f7dee8e1c4bb, type: 3}
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
-    CharacterNameNormText: why is bro here
-    SlotsAmmount: 7
+    CharacterNameNormText: cylinder (BBCR)
+    SlotsAmmount: 3
     SlotsSkin:
-    - {fileID: 8839654916173188765, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
-    - {fileID: -1033735670183444960, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
-    - {fileID: 7948025927414220139, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
-    CharSaveFileTag: 
-    characterValue: 0
+    - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
+    - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
+    - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
+    CharacterDescription: 
+    CharSaveFileTag: ClassicRemasteredPlayer
+    WalkSpeedStats: 10
+    RunSpeedStats: 16
+    MaxStamina: 100
+    StaminaDrainRateStats: 10
+    StaminaHealsRateStats: 20
+    MaxHpStats: 100
+    DefendMultiplierStats: 1
+    characterValue: 2
+  - nameSprite: {fileID: 0}
+    CharSprite: {fileID: 21300000, guid: 053b1b9b6fe80a14ebe0f7dee8e1c4bb, type: 3}
+    TextUsesImagesSprite: 0
+    TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
+    CharacterNameNormText: cylinder (Plus)
+    SlotsAmmount: 5
+    SlotsSkin:
+    - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
+    - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
+    - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
+    CharacterDescription: 
+    CharSaveFileTag: PlusPlayer
+    WalkSpeedStats: 12
+    RunSpeedStats: 18
+    MaxStamina: 100
+    StaminaDrainRateStats: 10
+    StaminaHealsRateStats: 20
+    MaxHpStats: 100
+    DefendMultiplierStats: 1
+    characterValue: 3
 --- !u!114 &1877723317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44196,7 +44240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2130317363
 RectTransform:
   m_ObjectHideFlags: 0

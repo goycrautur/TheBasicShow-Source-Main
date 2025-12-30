@@ -312,6 +312,12 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
         {
             ItemManager.Instance.ItemSelection = GameControllerScript.Instance.SlotsAmmount - 1;
         }
+        AdditionalGameCustomizer.Instance.ItemImageSlots[GameControllerScript.Instance.SlotsAmmount-1].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2];
+        for (int i = 1; i < GameControllerScript.Instance.SlotsAmmount-1; ++i)
+        {
+            AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1];
+        }
+        AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[GameControllerScript.Instance.SlotsAmmount != 1 ? 0 : 1];
         if (GameControllerScript.Instance.SlotsAmmount >= 9)
         {
             ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory9slot;
@@ -322,12 +328,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[8].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 8; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 8)
         {
@@ -346,13 +346,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[7].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 7; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
-            
         }
         if (GameControllerScript.Instance.SlotsAmmount == 7)
         {
@@ -374,12 +367,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[6].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 6; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 6)
         {
@@ -401,12 +388,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[5].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 5; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 5)
         {
@@ -428,12 +409,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[4].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 4; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 4)
         {
@@ -455,12 +430,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[3].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 3; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 3)
         {
@@ -482,12 +451,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[2].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            for (int i = 1; i < 2; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
-            }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 2)
         {
@@ -509,8 +472,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
                 AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
             }
-            AdditionalGameCustomizer.Instance.ItemImageSlots[1].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2+(GameControllerScript.Instance.CharacterIntVal*3)];
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[0+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         if (GameControllerScript.Instance.SlotsAmmount == 1)
         {
@@ -529,7 +490,6 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[0].SetActive(true);
             AdditionalGameCustomizer.Instance.ItemSlotsGameObj[0].SetActive(true);
             AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[0].SetActive(true);
-            AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1+(GameControllerScript.Instance.CharacterIntVal*3)];
         }
         ItemManager.Instance.UpdateItemUI();
     }

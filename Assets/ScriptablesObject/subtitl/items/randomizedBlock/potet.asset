@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: potet
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 0cc91b221c6715c44a0961bbc4835596, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: Po-Teto-Teto-Teto
+    headText: itemSubtitles_randomBlock_poteto
     textColor: {r: 1, g: 0, b: 0, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 0
     shakeyspeed: 1
     shakeyradius: 0.3
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []

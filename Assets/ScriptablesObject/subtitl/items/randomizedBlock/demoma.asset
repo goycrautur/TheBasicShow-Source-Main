@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: demoma
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 79e74b022c3575849a186e94275220fc, type: 3}
+  volume: 0
   subtitleOption:
     enabled: 1
-    headText: '*Laughing*'
+    headText: itemSubtitles_randomBlock_demoman
     textColor: {r: 0.15686275, g: 0.105882354, b: 0.050980393, a: 1}
     duration: 0
-    utStyle: 1
+    undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 1
     shakeyspeed: 2000
     shakeyradius: 5
     fonts: 0
-    timedSub: 0
-    subtitleTimings: []
+    useLocalization: 1
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+  isTheSubtitlesTimed: 0
+  SubtitleTimingKey: []
