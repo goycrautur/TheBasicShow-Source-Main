@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameObjectSwitchingThingIdkHowToSayIt : MonoBehaviour
 {
+    public void OnEnable()
+    {
+        if (SwitchToCharSelect)
+        {
+            currentValue = PlayerPrefs.GetInt("CharInt");
+        }
+    }
     public void pressedPreviousButton()
     {
         if (SwitchToCharSelect)

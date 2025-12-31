@@ -205,7 +205,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && ItemDropping)
         {
             int selectedSlot = ItemManager.Instance.ItemSelection;
-            if (ItemManager.Instance.Inventory[selectedSlot].ItemInstance != null)
+            if (ItemManager.Instance.Inventory[selectedSlot].ItemInstance != null && !ItemManager.Instance.Inventory[selectedSlot].ItemInstance.undropable)
             {
                 ItemManager.Instance.DropItem(selectedSlot);
             }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class EndingManager : MonoBehaviour
 {
@@ -24,17 +25,52 @@ public class EndingManager : MonoBehaviour
 		}
 		yield break;
 	}
-    public void Update()
-    {
-        Vector3 ogposforTs = EndingForceLook[CurExitID].position;
-        if (movething)
-        {
-            EndingForceLook[CurExitID].position = Vector3.MoveTowards(EndingForceLook[CurExitID].position, new Vector3(ogposforTs.x, 66, ogposforTs.z), 7 * Time.deltaTime);
-        }
-    }
     public void endingShit(int ID,bool secret = false)
     {
-        CurExitID = ID;
+        Game.youCantPause = true;
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("JumpRope(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)");
+        DestroyIfExists("waneAttacker(Clone)"); // just in case of chaos skull, could be optimized better but eh
+
+        if (AdditionalGameCustomizer.Instance != null)
+        {
+            switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+            {
+                case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                    LoadNormalResults(secret);
+                    break;
+                case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                    LoadNormalResults(secret);
+                    break;
+            }
+        }
         if (Game.mode != "story")
         {
             LoadNormalResults();
@@ -61,14 +97,16 @@ public class EndingManager : MonoBehaviour
         Game.escapeMusic.Play();
         hidehud=true;
         StartCoroutine(KeepTheHudOff());
-        StartCoroutine(EndingSequence(!secret ? NormEnd.length : SecretEnd.length,!secret ? 11f : 10.5f,ID,secret));
-        StartCoroutine(byebus(!secret ? 5.44f : SecretEnd.length,ID));
+        StartCoroutine(EndingSequence(!secret ? NormEnd.length : SecretEnd.length,!secret ? 11f : 10.323f,ID,secret));
+        StartCoroutine(byebus(!secret ? 5.44f : 5.2f,ID));
     }
     #region PublicMethods
     public IEnumerator byebus(float timetoActuallyMove,int whatWasTheObjectId)
     {
+        
         yield return new WaitForSeconds(timetoActuallyMove);
         movething = true;
+        EndingForceLook[whatWasTheObjectId].transform.DOMoveY(66, 15f);
         EndingBillObj[whatWasTheObjectId].enabled = true;
         EndingBillObj[whatWasTheObjectId].shaking = true;
         EndingAudiSource[whatWasTheObjectId].clip = helicop;
@@ -110,10 +148,6 @@ public class EndingManager : MonoBehaviour
         {
             GetResults = true;
         }
-
-        DestroyIfExists("JumpRope(Clone)");
-        DestroyIfExists("CraftersAttacker(Clone)");
-
         Game.baldiScrpt.stopMoving = true;
         results.SetActive(true);
         AudioListener.pause = true;
@@ -236,6 +270,5 @@ public class EndingManager : MonoBehaviour
 
     #region PrivateFields
     private GameControllerScript Game;
-    private int CurExitID;
     #endregion
 }

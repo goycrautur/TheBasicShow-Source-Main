@@ -7,9 +7,9 @@ using TMPro;
 
 public class CharSelectManager : MonoBehaviour
 {
-    public void Start()
+    public void OnEnable()
     {
-        changeCharStuff2(PlayerPrefs.GetInt("CurrentCharacter", 0));
+        changeCharStuff2(PlayerPrefs.GetInt("CharInt"));
     }
     public void changeCharStuff2(int CharacVal)
     {

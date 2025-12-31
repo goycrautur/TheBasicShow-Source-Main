@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class UISplashScreenManager : MonoBehaviour
 {
     #region Unity Lifecycle
-    private void Awake()
+    private void sploosh2()
     {
         SetSplashImageYPosition(enableLoadingBar ? 10f : 0f);
 
@@ -32,8 +32,9 @@ public class UISplashScreenManager : MonoBehaviour
         splashImage.gameObject.SetActive(true);
     }
 
-    private void Start()
+    public void sploosh()
     {
+        sploosh2();
         Singleton<Options>.Instance.GetVolume();
         Singleton<Options>.Instance.GetVSync();
 
