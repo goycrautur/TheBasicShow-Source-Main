@@ -20,8 +20,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public bool unloc, iteinfo,captio;
     private void InitializeGameTuff()
     {
-        unloc = PlayerPrefsExtension.GetBool("thonkPad");
-        if (unloc) PlayerPrefsExtension.SetBool("thonkPadFirstTime", true);
         iteinfo = PlayerPrefsExtension.GetBool("ItemInfo");
         captio = PlayerPrefsExtension.GetBool("Captions");
         ItemInfoShit = iteinfo;
@@ -30,14 +28,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         subtitlesCanvas.SetActive(Subtitles);
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         bool thonk = PlayerPrefsExtension.GetBool("thonkPadFirstTime");
-        if (!thonk)
-        {
-            NoYCTP = false;
-        }
-        if (thonk)
-        {
-            NoYCTP = !unloc;
-        }
+        NoYCTP = unloc;
         if (GameControllerScript.Instance.mode == "endless")
         {
             modesText.text = "Endless Mode";
