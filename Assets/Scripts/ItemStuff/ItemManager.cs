@@ -50,7 +50,7 @@ public class ItemManager : MonoBehaviour
                     return;
                 }
 
-                SelectedItemObject.Uses--;
+                if (!SelectedItemObject.InfiniteUses) SelectedItemObject.Uses--;
                 if (Inventory[ItemSelection].ItemInstance != null)
                 {
                     SlotsItemHandlingStuffIdk(ItemSelection,Inventory[ItemSelection].ItemID,SelectedItemObject);
@@ -533,7 +533,7 @@ public class ItemManager : MonoBehaviour
         pickup.mapIconSprite = spriteRanderer;
         if (itemToDrop.BigSprite is Texture2D texture)
         {
-            spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100);
+            spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), itemToDrop.TexturePPUThing);
         }
         else
         {

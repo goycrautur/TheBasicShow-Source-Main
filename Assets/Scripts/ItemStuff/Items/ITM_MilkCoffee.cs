@@ -3,16 +3,6 @@ using UnityEngine;
 
 public class ITM_MilkCoffee : BaseItem
 {
-    private void Update()
-    {
-        if (tue)
-        {
-            if (GameControllerScript.Instance.player.stamina <= 420f)
-			{
-			GameControllerScript.Instance.player.stamina += passivestamina * Time.deltaTime;
-			}
-        }
-    }
     public override bool OnUse()
     {
         GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
@@ -27,7 +17,6 @@ public class ITM_MilkCoffee : BaseItem
         GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerAdd;
         GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultiplerAdd;
         
-        tue = true;
         StartCoroutine(amwaitin(duration));
         return true;
     }
@@ -38,6 +27,10 @@ public class ITM_MilkCoffee : BaseItem
         yield return null;
         while (time > 0f)
         {
+            if (GameControllerScript.Instance.player.stamina <= (GameControllerScript.Instance.player.maxStamina * 4.2f))
+			{
+			GameControllerScript.Instance.player.stamina += (GameControllerScript.Instance.player.staminaRise+passivestamina) * Time.deltaTime;
+            }
             time -= Time.deltaTime;
             if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
             {
@@ -48,7 +41,6 @@ public class ITM_MilkCoffee : BaseItem
         newGauge.Hide();
         GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultiplerAdd;
         GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultiplerAdd;
-        tue = false;
         yield break;
     }
     [SerializeField] private float duration = 60f, energy, passivestamina, walkspeedmultiplerAdd,runspeedmultiplerAdd;

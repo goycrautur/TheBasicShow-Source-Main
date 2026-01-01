@@ -7,9 +7,9 @@ public class RuleFreeZone : MonoBehaviour
         if (other.CompareTag("Player") && Time.timeScale != 0f)
         {
             player.outdoorsfr = true;
-            if (player.stamina <= 420f)
+            if (player.stamina <= (player.maxStamina * 4.2f))
 			{
-				player.stamina += 15f * Time.deltaTime;
+				player.stamina += player.staminaRise*1.5f * Time.deltaTime;
 			}
         }
     }
@@ -18,9 +18,9 @@ public class RuleFreeZone : MonoBehaviour
         if (other.CompareTag("Player") && Time.timeScale != 0f)
         {
             player.outdoorsfr = true;
-            if (player.stamina <= 420f)
+            if (player.stamina <= (player.maxStamina * 4.2f))
 			{
-				player.stamina += 15f * Time.deltaTime;
+				player.stamina += player.staminaRise*1.5f * Time.deltaTime;
 			}
         }
     }

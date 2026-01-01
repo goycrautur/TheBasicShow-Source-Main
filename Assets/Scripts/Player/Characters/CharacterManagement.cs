@@ -10,6 +10,11 @@ public class CharacterManagement : MonoBehaviour
         CurrentCharID = PlayerPrefs.GetInt("CharInt", 0);
         updateRefrenceThing();
     }
+    public void doSpecialThing()
+    {
+        SpecialCharStuff charthingyes = CharactersReal[CurrentCharID].CustomCharExtension;
+        charthingyes.GiveItemOnSpawn();
+    }
     public void updateRefrenceThing()
     {
         if (CurrentCharID == null) CurrentCharID = 0;
@@ -22,9 +27,14 @@ public class CharacterManagement : MonoBehaviour
         play.DefaultstaminaDrop = CharactersReal[CurrentCharID].StaminaDrainRateStats;
         play.DefaultstaminaRise = CharactersReal[CurrentCharID].StaminaHealsRateStats;
         play.maxHealth = CharactersReal[CurrentCharID].MaxHpStats;
+        play.health = CharactersReal[CurrentCharID].MaxHpStats;
         play.maxStamina = CharactersReal[CurrentCharID].MaxStamina;
         play.PlayerDmgResistance = CharactersReal[CurrentCharID].DefendMultiplierStats;
         Singleton<OtherMainStuffManager>.Instance.slot();
+        if (CharactersReal[CurrentCharID].HasAnySpecialShit)
+        {
+            doSpecialThing();
+        }
     }
     public int CurrentCharID;
     public PlayerScript play;
@@ -35,5 +45,7 @@ public class CharacterManagement : MonoBehaviour
         public float WalkSpeedStats,RunSpeedStats,MaxStamina,StaminaDrainRateStats,StaminaHealsRateStats,MaxHpStats,DefendMultiplierStats;
         public int SlotsAmmount;
         public Sprite[] SlotsSkin;
+        public bool HasAnySpecialShit;
+        public SpecialCharStuff CustomCharExtension;
 	}
 }

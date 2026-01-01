@@ -29,12 +29,12 @@ public class PickupScript : Interactable
     {
         if (resetIDONLY)
         {
-            ID = Random.Range(1, 48);
+            ID = Random.Range(1, 45);
         }
         if (!PresentMode && !resetIDONLY)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, 48);
+            ID = Random.Range(1, 45);
             PresentMode = true;
         }
     }

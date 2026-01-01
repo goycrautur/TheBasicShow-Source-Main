@@ -248,7 +248,7 @@ public class MuchoScript : NPC
 
             if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                if (!antiHearing || !inNoSqueeArea)
+                if (!inNoSqueeArea)
                 {
                     baldicator.Rebind();
                     baldicator.Play("BjIndicator_Heared", -1, 0f);
@@ -259,7 +259,7 @@ public class MuchoScript : NPC
         {
             if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                if (!antiHearing || !inNoSqueeArea)
+                if (!inNoSqueeArea)
                 {
                     baldicator.Rebind();
                     baldicator.Play("BjIndicator_Confused", -1, 0f);

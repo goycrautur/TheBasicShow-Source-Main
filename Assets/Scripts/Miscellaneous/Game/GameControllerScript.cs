@@ -18,7 +18,6 @@ public class GameControllerScript : MonoBehaviour
     #region UnityCallbacks
     private void Start()
     {
-        
         InitializeGameSettings();
         UpdateNotebookCount();
         Singleton<OtherMainStuffManager>.Instance.slot();
@@ -937,7 +936,7 @@ public class GameControllerScript : MonoBehaviour
     public float[] nuzzlesframeshit;
     [SerializeField] private float gameOverDelay, nuzzlframes;
     public int lastRespawnCount, failedNotebooks, exitsReached, cullingMask;
-    public bool spoopMode, finaleMode, FinaleSecret,war,warrealest,timeout,SecretEndingGot;
+    public bool spoopMode, finaleMode, FinaleSecret,war,warrealest,timeout,SecretEndingGot,PadSEToggle;
     [HideInInspector] public Coroutine exitEasingCoroutine;
     [HideInInspector] public LearningGameManager Math;
     [HideInInspector] public EndingManager progress;

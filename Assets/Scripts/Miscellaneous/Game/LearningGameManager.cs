@@ -46,6 +46,10 @@ public class LearningGameManager : MonoBehaviour
 
     public void DeactivateLearningGame(GameObject subject,int allAnswerWrong = 0)
     {
+        if (!gc.spoopMode && gc.mode == "story")
+        {
+            gc.schoolMusic.Play();
+        }
         scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 750, true,true);
         gc.schoolMusic.ignoreListenerPause = false;
         AudioListener.pause = false;
@@ -93,12 +97,6 @@ public class LearningGameManager : MonoBehaviour
         {
             Singleton<OtherMainStuffManager>.Instance.AngerShit(0.3f, 0f,false, "zerull");
             Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 0.3f,true, "zerull");
-        }
-
-        if (!gc.spoopMode && gc.mode == "story")
-        {
-            gc.schoolMusic.Play();
-            StartCoroutine(audioQueue.FadeOut(learnMusic, 0.25f));
         }
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum")
         {

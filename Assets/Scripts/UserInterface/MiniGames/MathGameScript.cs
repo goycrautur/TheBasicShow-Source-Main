@@ -53,7 +53,7 @@ public class MathGameScript : MonoBehaviour
         if (gc.notebooks == 1 && gc.mode != "zerullclassic")
         {
             QueueAudio(bal_intro);
-            QueueAudio(bal_howto);
+            //QueueAudio(bal_howto);
         }
 
         if (gc.spoopMode && gc.mode != "zerullclassic")
@@ -177,7 +177,14 @@ public class MathGameScript : MonoBehaviour
             StartCoroutine(PlayClassicMusic());
         }
 
-        //QueueAudio(bal_problems[problem - 1]);
+        if (gc.notebooks == 2 && problem == 9)
+        {
+            QueueAudio(scaryproblem);
+        }
+        if (gc.notebooks != 2 && problem != 9)
+        {
+        QueueAudio(bal_problems[problem - 1]);
+        }
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == 9 && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == 9))
         {
@@ -192,6 +199,7 @@ public class MathGameScript : MonoBehaviour
 
     private void GenerateSimpleMathProblem()
     {
+        
         num1 = UnityEngine.Random.Range(0, 20);
         num2 = UnityEngine.Random.Range(0, 20);
         sign = UnityEngine.Random.Range(0, 4);
@@ -222,11 +230,11 @@ public class MathGameScript : MonoBehaviour
         questionText3.text = "\n" + ApplyGlitchEffect(baseQuestion);
 
         QueueAudio(bal_screech);
-        QueueAudio(bal_times);
+        //QueueAudio(bal_times);
         QueueAudio(bal_screech);
-        QueueAudio(bal_divided);
+        //QueueAudio(bal_divided);
         QueueAudio(bal_screech);
-        QueueAudio(bal_equals);
+        //QueueAudio(bal_equals);
     }
 
     private string ApplyGlitchEffect(string text)
@@ -317,9 +325,9 @@ public class MathGameScript : MonoBehaviour
 
         if (!gc.spoopMode)
         {
-            baldiFeedI.enabled = false;
-            baldiFeed.enabled = true;
-            baldiFeed.SetTrigger("angry");
+            //baldiFeedI.enabled = false;
+            //baldiFeed.enabled = true;
+            //baldiFeed.SetTrigger("angry");
             gc.ActivateSpoopMode();
         }
         scoreSystemManager.Instance.AddScore(250);
@@ -423,18 +431,21 @@ public class MathGameScript : MonoBehaviour
         if (gc.mode == "story" && problemsWrong >= 9)
         {
             gc.failedNotebooks++;
-            if (gc.failedNotebooks < gc.maxNotebooks)
+            if (gc.failedNotebooks < gc.maxNotebooks && gc.PadSEToggle)
             {
                 questionText.text = "Keep Doing TS shit my guy, " + gc.failedNotebooks + "/" + gc.maxNotebooks + " left";
                 questionText2.text = questionText3.text = string.Empty;
             }
             if (gc.failedNotebooks == 1 && gc.notebooks < gc.UnlockAmount)
             {
+                endDelay = jer_SecretAAW.length;
+                baldiAudio.PlayOneShot(jer_SecretAAW);
                 questionText.text = "fuck you, 2 of your slots will be gone";
                 questionText2.text = questionText3.text = string.Empty;
                 Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
                 gc.SlotsAmmount = gc.SlotsAmmount - 2;
                 Singleton<OtherMainStuffManager>.Instance.slot();
+                gc.PadSEToggle = true;
             }
             if (gc.failedNotebooks == gc.maxNotebooks)
             {
@@ -448,9 +459,10 @@ public class MathGameScript : MonoBehaviour
     private void HandleGameEnd()
     {
         endDelay -= Time.unscaledDeltaTime;
-
         if (endDelay <= 0f)
         {
+            lg.learnMusic.ignoreListenerPause = false;
+            lg.learnMusic.Stop();
             GC.Collect();
             ExitGame();
         }
@@ -588,7 +600,7 @@ public class MathGameScript : MonoBehaviour
 
     [Header("Audio Clips")]
     [SerializeField] private AudioSource baldiAudio;
-    [SerializeField] private AudioClip bal_intro, bal_howto, bal_plus, bal_minus, bal_times, bal_divided, bal_equals, bal_screech;
+    [SerializeField] private AudioClip bal_intro, bal_howto, bal_plus, bal_minus, bal_times, bal_divided, bal_equals, bal_screech,jer_SecretAAW,scaryproblem;
     [SerializeField] private AudioClip[] bal_numbers, bal_praises, bal_problems, learnMusics;
 
     [Header("Sprites")]

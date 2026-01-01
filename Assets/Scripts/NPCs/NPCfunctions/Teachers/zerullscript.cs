@@ -212,7 +212,7 @@ public class zerullscript : NPC
 
             if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                if (!antiHearing || !inNoSqueeArea)
+                if (!inNoSqueeArea)
                 {
                 baldicator.Rebind();
                 baldicator.Play("Indicator_Heared", -1, 0f);
@@ -223,7 +223,7 @@ public class zerullscript : NPC
         {
             if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                if (!antiHearing || !inNoSqueeArea)
+                if (!inNoSqueeArea)
                 {
                 baldicator.Rebind();
                 baldicator.Play("Indicator_Confused", -1, 0f);

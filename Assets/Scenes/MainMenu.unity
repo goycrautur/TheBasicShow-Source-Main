@@ -27756,7 +27756,7 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: currentJsonVersion
-      value: 3
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -27766,7 +27766,7 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.size
-      value: 95
+      value: 194
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -28141,7 +28141,527 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[94].key
+      value: global_stunned
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[95].key
+      value: bal_slap
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[96].key
+      value: mucho_tele
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[97].key
+      value: mucho_slam
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[98].key
+      value: global_bosshurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[99].key
+      value: 945_sweep
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[0].value
+      value: Hi, Quangg/Gray creatur here!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[100].key
+      value: MemeMouse_ambience
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[101].key
+      value: SausageJerry_ambience
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[102].key
+      value: SausageJerry_poo
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[103].key
+      value: Wane_Grunts
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[104].key
+      value: Wane_Angry
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[105].key
+      value: Maxcipal_detention
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[106].key
+      value: Maxcipal_detention_tier1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[107].key
+      value: Maxcipal_detention_tier2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[108].key
+      value: Maxcipal_detention_tier3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[109].key
+      value: Maxcipal_detention_tier4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[110].key
+      value: Maxcipal_detention_tier5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[111].key
+      value: Maxcipal_scold_detention_tier1_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[112].key
+      value: Maxcipal_scold_detention_tier1_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[113].key
+      value: Maxcipal_scold_detention_tier2_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[114].key
+      value: Maxcipal_scold_detention_tier2_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[115].key
+      value: Maxcipal_scold_detention_tier3_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[116].key
+      value: Maxcipal_scold_detention_tier3_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[117].key
+      value: Maxcipal_scold_detention_tier3_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[118].key
+      value: Maxcipal_scold_detention_tier4_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[119].key
+      value: Maxcipal_scold_detention_tier4_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[120].key
+      value: Maxcipal_scold_detention_tier4_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[121].key
+      value: Maxcipal_scold_detention_tier5_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[122].key
+      value: Maxcipal_scold_detention_tier5_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[123].key
+      value: Maxcipal_scold_detention_tier5_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[124].key
+      value: Maxcipal_scold_detention_tier5_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[125].key
+      value: Maxcipal_scold_detention_tier6
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[126].key
+      value: Maxcipal_scold_everywane
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[127].key
+      value: Maxcipal_scold_gosub_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[128].key
+      value: Maxcipal_scold_gosub_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[129].key
+      value: Maxcipal_scold_longWhistle_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[130].key
+      value: Maxcipal_scold_longWhistle_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[131].key
+      value: Maxcipal_scold_longWhistle_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[132].key
+      value: Maxcipal_Whistl
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[133].key
+      value: TeacherJerry_hi_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[134].key
+      value: TeacherJerry_hi_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[135].key
+      value: TeacherJerry_hi_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[136].key
+      value: TeacherJerry_hi_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[137].key
+      value: TeacherJerry_hi_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[138].key
+      value: TeacherJerry_hi_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[139].key
+      value: TeacherJerry_hi_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[140].key
+      value: TeacherJerry_mone_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[141].key
+      value: TeacherJerry_mone_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[142].key
+      value: TeacherJerry_finale_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[143].key
+      value: TeacherJerry_finale_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[144].key
+      value: TeacherJerry_finale_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[145].key
+      value: TeacherJerry_finale_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[146].key
+      value: TeacherJerry_finale_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[147].key
+      value: TeacherJerry_finale_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[148].key
+      value: TeacherJerry_finale_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[149].key
+      value: cheeseRespawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[150].key
+      value: SwinDoor_open
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[151].key
+      value: Baloo_pop
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[152].key
+      value: normDoor_open
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[153].key
+      value: normDoor_close
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[154].key
+      value: ElevOrExitClosing_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[155].key
+      value: ElevOrExitClosing_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[156].key
+      value: EndingHelicop_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[157].key
+      value: EndingHelicop_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[158].key
+      value: methMachine_correct
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[159].key
+      value: methMachine_wrong
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[160].key
+      value: windo_broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[161].key
+      value: windo_repaired
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[162].key
+      value: itemSubtitles_Confetti
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[163].key
+      value: itemSubtitles_Teleporter
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[164].key
+      value: itemSubtitles_evilFuckingLeafy
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[165].key
+      value: itemSubtitles_shapeBotomyKey
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[166].key
+      value: itemSubtitles_thmMetalPipe_use
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[167].key
+      value: itemSubtitles_randomBlock_bul
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[168].key
+      value: itemSubtitles_randomBlock_demoman
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[169].key
+      value: itemSubtitles_randomBlock_glaceo
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[170].key
+      value: itemSubtitles_randomBlock_sotwLap3Fear
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[171].key
+      value: itemSubtitles_randomBlock_poteto
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[172].key
+      value: itemSubtitles_randomBlock_static
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[173].key
+      value: itemSubtitles_randomBlock_sylveo
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[174].key
+      value: itemSubtitles_randomBlock_tetoplush
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[175].key
+      value: itemSubtitles_genderReveal
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[176].key
+      value: itemSubtitles_genderReveal_debuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[177].key
+      value: itemSubtitles_ogbalditape
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[178].key
+      value: itemSubtitles_JerEarPierceDvd
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[179].key
+      value: itemSubtitles_JerPeakTape
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[180].key
+      value: itemSubtitles_JerPeakTape_Expert_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[181].key
+      value: itemSubtitles_JerPeakTape_Expert_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[182].key
+      value: itemSubtitles_JerPeakTape_Expert_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[183].key
+      value: itemSubtitles_JerPeakTape_Expert_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[184].key
+      value: itemSubtitles_JerPeakTape_Expert_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[185].key
+      value: itemSubtitles_JerPeakTape_Expert_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[186].key
+      value: itemSubtitles_JerPeakTape_Expert_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[187].key
+      value: itemSubtitles_JerPeakTape_Expert_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[188].key
+      value: itemSubtitles_JerPeakTape_Expert_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[189].key
+      value: itemSubtitles_JerPeakTape_Expert_10
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[190].key
+      value: itemSubtitles_JerPeakTape_Expert_11
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[191].key
+      value: itemSubtitles_JerPeakTape_Expert_12
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[192].key
+      value: itemSubtitles_JerPeakTape_Expert_13
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[193].key
       value: loadaText
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[1].value
+      value: this build was made specifically for maxplay livestream,its abit rushed
+        i know,(like main mf chasing you in story is mucho mouse etc-)
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[2].value
+      value: 'there will be way more content in here instead of the demo so the stream
+        dosent end early :jerrytroll:,and dont leak this!!!
+
+        Trigger warning:
+        loud noises, flashing lights, etc'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[3].value
+      value: Have fun and <color=red>PROCEED
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -28523,6 +29043,502 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[94].value
+      value: '*Stunned*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[95].value
+      value: '*SLAP*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[96].value
+      value: '*Teleport Sound*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[97].value
+      value: '*SLAM*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[98].value
+      value: '*minecraft hurt sound*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[99].value
+      value: '*chainsaw maniac intensify*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[100].value
+      value: stupid ass toothless theme intenstify
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[101].value
+      value: '*run or ruined intenstify*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[102].value
+      value: '*Farting Sound*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[103].value
+      value: '*Angry grunts*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[104].value
+      value: WANE
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[105].value
+      value: Detention For You.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[106].value
+      value: 10 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[107].value
+      value: 20 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[108].value
+      value: 40 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[109].value
+      value: 60 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[110].value
+      value: 1 day.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[111].value
+      value: Please look at your mirror again
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[112].value
+      value: and think about yourself
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[113].value
+      value: Please...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[114].value
+      value: I dont wanna get fireddd...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[115].value
+      value: You should be..
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[116].value
+      value: More responsible
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[117].value
+      value: Buddy
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[118].value
+      value: i dont know what to say anymore
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[119].value
+      value: '*Cracking sound?*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[120].value
+      value: Okay hold up-
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[121].value
+      value: I
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[122].value
+      value: CANT
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[123].value
+      value: TAKE IT
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[124].value
+      value: ANYMORE....
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[125].value
+      value: fuck you
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[126].value
+      value: '''Elllo everywane'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[127].value
+      value: yo go subscribe to maxplay games
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[128].value
+      value: hes such a cool guy
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[129].value
+      value: '*Whistling*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[130].value
+      value: Alright, let me... let me try to whistle
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[131].value
+      value: '*whistling the tbs theme'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[132].value
+      value: '*Whistling*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[133].value
+      value: Oh.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[134].value
+      value: Hi!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[135].value
+      value: Id assume you came here to gather some cheese block n stuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[136].value
+      value: Honestly...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[137].value
+      value: Im quite chill with it
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[138].value
+      value: So...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[139].value
+      value: go ahead!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[140].value
+      value: You did good on that one honestly!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[141].value
+      value: im gonna give you free money cuz im feeling generous today
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[142].value
+      value: CONGRATULATION.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[143].value
+      value: YOU ACTUALLY FOUND ALL THOSE CHEESE BLOCKS!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[144].value
+      value: WELL I DIDNT FEEL LIKE HAVING ANYTHING TO SAY HERE EXPECT...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[145].value
+      value: FIND A WAY BEFORE I CATCH YOUU!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[146].value
+      value: .......
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[147].value
+      value: oh yea wait until the beat drops
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[148].value
+      value: this song is catchy as hell!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[149].value
+      value: '*Cheese Blocks Respawning*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[150].value
+      value: '*Swinging door opens*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[151].value
+      value: AAAAAAAAA-
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[152].value
+      value: '*Door opens*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[153].value
+      value: '*SLAM*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[154].value
+      value: '*concrete sliding sound*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[155].value
+      value: '*LOUD BANGING SOUND*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[156].value
+      value: Helicopter helicopter
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[157].value
+      value: '*Intense helicopter fan spinning*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[158].value
+      value: '*LOUD CORRECT BUZZER*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[159].value
+      value: '*Meme Mouse noises*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[160].value
+      value: '*windo breaks*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[161].value
+      value: '*windo repaire*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[162].value
+      value: '*Confetti SFX*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[163].value
+      value: '*BREOW*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[164].value
+      value: '!??!?!!??!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[165].value
+      value: Fire In The Hole!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[166].value
+      value: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*</b>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[167].value
+      value: Im bored.....
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[168].value
+      value: '*Laughing*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[169].value
+      value: '*Crying noises*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[170].value
+      value: '*secret lap 3 theme intensify*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[171].value
+      value: Po-Teto-Teto-Teto
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[172].value
+      value: '*Panic! In static! Out manic!.....wait why am i typing lyrics in a
+        captio*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[173].value
+      value: '*Cute Screaming*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[174].value
+      value: '*Plushie noises*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[175].value
+      value: '*Carameldansen intensify*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[176].value
+      value: Boo-womp
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[177].value
+      value: '*Annoying Noise*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[178].value
+      value: '*agony noise*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[179].value
+      value: '*Absoloutely Peak Music And you cant tell me otherwise*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[180].value
+      value: White people be like
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[181].value
+      value: Billy where are you-
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[182].value
+      value: <color=orange>*basement jerri singing*
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[183].value
+      value: <#00FFFF>*megalovania real*
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[184].value
+      value: <color=orange>SHUT YOUR FUCKIGN MOUTH.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[185].value
+      value: <#00FFFF>*loud ass sigh*
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[186].value
+      value: What is diddy blud
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[187].value
+      value: doing on the calculator
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[188].value
+      value: Is blud
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[189].value
+      value: Einstein
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[190].value
+      value: Epstein
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[191].value
+      value: '*goofy ahh*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[192].value
+      value: <#00FFFF>*boyfridg screaming*
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[193].value
       value: Loading
       objectReference: {fileID: 0}
     - target: {fileID: 7127100925093899789, guid: ec18831a37f4c604b91674cbda8b1d14,
