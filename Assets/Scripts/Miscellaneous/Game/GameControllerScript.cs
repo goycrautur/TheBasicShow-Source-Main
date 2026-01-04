@@ -153,6 +153,12 @@ public class GameControllerScript : MonoBehaviour
                     modeState = exitsReached + "/" + maxExits + " Exits" + " | its over..? | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
                 }
             }
+            if (mode == "wegaChallenge")
+            {
+                modeDetails = "holy shits its wega challenge" + chaosString;
+                largeImagething = "van";
+                largeImageText = "WEGA CHALLENGEEE";
+            }
             if (mode == "zerullclassic")
             {
                 bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
@@ -947,6 +953,7 @@ public class GameControllerScript : MonoBehaviour
     public FamishedModeController fmc;
     public ZerullClassic zerull;
     public LappingOfAsylumController LapManag;
+    public wegachallenge wegchal;
     #endregion
     [Header("silly stuff")]
     public GameObject TETOOOOO;

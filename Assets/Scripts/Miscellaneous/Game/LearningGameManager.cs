@@ -46,6 +46,8 @@ public class LearningGameManager : MonoBehaviour
 
     public void DeactivateLearningGame(GameObject subject,int allAnswerWrong = 0)
     {
+        learnMusic.ignoreListenerPause = false;
+        learnMusic.Stop();
         if (!gc.spoopMode && gc.mode == "story")
         {
             gc.schoolMusic.Play();

@@ -461,10 +461,7 @@ public class ZerullClassic : MonoBehaviour
             Singleton<MusicManager>.Instance.StopMidi(true, null, null);
         }
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
-        if (Midi)
-        {
-            Singleton<VertexGlitchManager>.Instance.Midi = false;
-        }
+        Singleton<VertexGlitchManager>.Instance.Midi = false;
         gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
         gc.Gatesrea.ForEach(g => g.Down(false));
         gc.ElevdorRea.ForEach(ed => ed.Opendor = true);

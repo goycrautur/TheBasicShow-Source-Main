@@ -69,34 +69,26 @@ public class booksInteract : Interactable
             gc.LapManag.UpdateManually();
         }
 
+        if (gc.mode == "famished")
+        {
+            gc.fmc.manualUpdate();
+        }
+        if (gc.mode == "zerullclassic")
+        {
+            gc.zerull.jusUpdatebr();
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
+        }
+        if (gc.mode == "wegaChallenge")
+        {
+            gc.wegchal.manualUpdate();
+        }
         if (AdditionalGameCustomizer.Instance?.NoYCTP == true)
         {
             NoYCTPMode();
-            if (gc.mode == "famished")
-            {
-                gc.fmc.manualUpdate();
-                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
-            }
-            if (gc.mode == "zerullclassic")
-            {
-                gc.zerull.jusUpdatebr();
-                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
-            }
         }
         else
         {
             StartLearningGame();
-            if (gc.mode == "famished")
-            {
-                gc.fmc.manualUpdate();
-                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "famished",false);
-            }
-            if (gc.mode == "zerullclassic")
-            {
-                gc.zerull.jusUpdatebr();
-                Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
-                
-            }
             return;
         }
     }
@@ -131,7 +123,10 @@ public class booksInteract : Interactable
 
         if (gc.notebooks == 2)
         {
-            gc.SubsManager.hideSub(lgm.prizeSubs);
+            if (gc.mode == "story")
+            {
+                gc.SubsManager.hideSub(lgm.prizeSubs);
+            }
             gc.ActivateSpoopMode();
         }
 

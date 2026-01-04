@@ -13,13 +13,13 @@ public class NPC : MonoBehaviour
     #region Unity Lifecycle
     protected virtual void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        gc.NPCThatGetAffectedByMetalPipe.Add(this);
+        if (!dosentUseNavmesh) agent = GetComponent<NavMeshAgent>();
+        if (!dosentUseNavmesh) gc.NPCThatGetAffectedByMetalPipe.Add(this);
         OnStart();
     }
      protected virtual void OnDestroy()
     {
-        gc.NPCThatGetAffectedByMetalPipe.Remove(this);
+        if (!dosentUseNavmesh) gc.NPCThatGetAffectedByMetalPipe.Remove(this);
     }
 
     protected virtual void Update()
@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
 
         if (!isInteracting)
         {
-            HandleMovement();
+            if (!dosentUseNavmesh) HandleMovement();
         }
         confusionEffect.SetActive(stun);
         if (!stun|| stopOverridingStun)
@@ -97,13 +97,13 @@ public class NPC : MonoBehaviour
 
     protected virtual void Wander(string locationType = "default")
     {
-        wanderer?.SetNewTargetForAgent(agent, locationType);
+        if (!dosentUseNavmesh) wanderer?.SetNewTargetForAgent(agent, locationType);
         ResetCooldown();
     }
 
     protected virtual void TargetPlayer()
     {
-        agent.SetDestination(player.position);
+        if (!dosentUseNavmesh) agent.SetDestination(player.position);
         ResetCooldown();
     }
     #endregion
@@ -186,4 +186,5 @@ public class NPC : MonoBehaviour
     #endregion
     public int hp, maxhp = 100;
     public bool fuckingdead,UsesStunSprite;
+    public bool dosentUseNavmesh;
 }

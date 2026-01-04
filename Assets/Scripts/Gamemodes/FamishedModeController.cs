@@ -385,6 +385,7 @@ public class FamishedModeController : MonoBehaviour
             StartCoroutine(easing(new Color(0.65f, 0.65f, 0.65f, 1f), 0, 1, 1));
             gc.modeState = gc.exitsReached + "/" + gc.maxExits + " Exits" + " | its over..?";
         }
+        Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, GameControllerScript.Instance.player.transform, new Vector3(0f,0f,0f), "famished",false);
     }
     public IEnumerator ohgodwhat()
     {

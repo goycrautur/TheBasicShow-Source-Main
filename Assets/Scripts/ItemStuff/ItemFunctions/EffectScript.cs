@@ -7,14 +7,31 @@ public class EffectScript : MonoBehaviour
 {
 
     #region Initialization
-    private void Start() => agent = GetComponent<NavMeshAgent>();
+    private void Start()
+    {
+        if (!npcreal.dosentUseNavmesh) 
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+        if (npcreal.dosentUseNavmesh) 
+        {
+            rigi = GetComponent<Rigidbody>();
+        }
+    }
     #endregion
     #region Per-Frame Logic
     private void Update()
     {
         if (inProjectile)
         {
-            agent.velocity = otherVelocity;
+            if (!npcreal.dosentUseNavmesh) 
+            {
+                agent.velocity = otherVelocity;
+            }
+            if (npcreal.dosentUseNavmesh) 
+            {
+                rigi.velocity = otherVelocity;
+            }
         }
 
         if (failSave.CountdownWithDeltaTime() == 0)
@@ -77,7 +94,7 @@ public class EffectScript : MonoBehaviour
         if (other.transform.name == "Gotta Sweep" || other.transform.name == "1945 tom")
         {
             inProjectile = true;
-            otherVelocity = 0.1f * agent.speed * transform.forward + other.GetComponent<NavMeshAgent>().velocity;
+            otherVelocity = 0.1f * agent.speed * transform.forward + (!npcreal.dosentUseNavmesh ? other.GetComponent<NavMeshAgent>().velocity : other.GetComponent<Rigidbody>().velocity);
             failSave = 1;
         }
     }
@@ -88,6 +105,7 @@ public class EffectScript : MonoBehaviour
 
     #region Internal State
     private NavMeshAgent agent;
+    private Rigidbody rigi;
     private Vector3 otherVelocity;
     private bool inProjectile;
     private float failSave;

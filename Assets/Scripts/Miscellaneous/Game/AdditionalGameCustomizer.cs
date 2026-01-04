@@ -27,7 +27,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         ItemInfostuffahah.SetActive(ItemInfoShit);
         subtitlesCanvas.SetActive(Subtitles);
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        bool thonk = PlayerPrefsExtension.GetBool("thonkPadFirstTime");
+        bool unloc = PlayerPrefsExtension.GetBool("thonkPad");
         NoYCTP = unloc;
         if (GameControllerScript.Instance.mode == "endless")
         {
@@ -42,6 +42,11 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             NoYCTP = true;
             modesText.text = "Famished Butch Takeover";
+        }
+        if (GameControllerScript.Instance.mode == "wegaChallenge")
+        {
+            NoYCTP = true;
+            modesText.text = "WEGA CHALLENGE";
         }
         if (GameControllerScript.Instance.mode == "zerullclassic")
         {
