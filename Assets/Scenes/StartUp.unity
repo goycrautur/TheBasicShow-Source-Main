@@ -1720,7 +1720,7 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: currentJsonVersion
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2861,7 +2861,8 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[66].value
-      value: enables or disable the evap pad at any time you want!
+      value: fucking kills the cheese pad when enabled, wont work in some modes ahaha
+        syba
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2957,7 +2958,7 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].value
-      value: EvapPad
+      value: kill cheese pad
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}

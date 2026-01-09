@@ -43,7 +43,6 @@ public class meepTimerScript : MonoBehaviour
 	public void AddTime(float timeToAdd,Color leColor, bool SetTime=false)
 	{
 		base.StartCoroutine(AnimateTimeAddCoroutine(timeToAdd, leColor,SetTime));
-		canTime = false;
 	}
 	private IEnumerator AnimateTimeAddCoroutine(float timeToAdd,Color leColor,bool SetTime)
 	{
@@ -60,6 +59,7 @@ public class meepTimerScript : MonoBehaviour
 		{
 			startingTime = Mathf.Lerp(initialTime, targetTime, elapsedTime / animationDuration);
 			elapsedTime += Time.deltaTime;
+			canTime = false;
 			yield return null;
 		}
 		countdownText.color = Color.white;

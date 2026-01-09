@@ -27,9 +27,9 @@ public class ITM_MilkCoffee : BaseItem
         yield return null;
         while (time > 0f)
         {
-            if (GameControllerScript.Instance.player.stamina <= (GameControllerScript.Instance.player.maxStamina * 4.2f))
+            if (GameControllerScript.Instance.player.stamina <= (GameControllerScript.Instance.player.maxStamina * 2.25f))
 			{
-			GameControllerScript.Instance.player.stamina += (GameControllerScript.Instance.player.staminaRise+passivestamina) * Time.deltaTime;
+			GameControllerScript.Instance.player.stamina += ((GameControllerScript.Instance.player.staminaRise/4)+passivestamina) * Time.deltaTime;
             }
             time -= Time.deltaTime;
             if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))

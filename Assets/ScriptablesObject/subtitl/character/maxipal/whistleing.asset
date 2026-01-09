@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236c482ebd8096a48bb93a133aff9474, type: 3}
   m_Name: whistleing
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: e3cc2b2bad78af547ae9f2993c1f1115, type: 3}
+  audioClip: {fileID: 8300000, guid: 8ad5c775a7e0e4c4a93583f72eb418e2, type: 3}
   volume: 0
   subtitleOption:
     enabled: 1

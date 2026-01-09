@@ -48,9 +48,9 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
             if (GameControllerScript.Instance.mode != "story")
             {
             StartCoroutine(GameControllerScript.Instance.easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5));
-            spamupdatethese =true;
             }
             GameControllerScript.Instance.timeout = true;
+            spamupdatethese =true;
             return;
         }
     }

@@ -13,19 +13,51 @@ public class CharSelectManager : MonoBehaviour
     }
     public void changeCharStuff2(int CharacVal)
     {
-        PlayerPrefs.SetString("CurrentCharacter", characterThing[CharacVal].CharSaveFileTag);
-        PlayerPrefs.SetInt("CharInt", characterThing[CharacVal].characterValue);
-        PlayerPrefs.Save();
+        if (characterThing[CharacVal].NeedRequirements)
+        {
+            switch (characterThing[CharacVal].whatsTheRequirements.itNeedSmth)
+            {
+                case Requirements.NeedTypes.String:
+                    string tempstring = PlayerPrefs.GetString(characterThing[CharacVal].whatsTheRequirements.ReqStringPPrefs, "");
+                    if (tempstring == characterThing[CharacVal].whatsTheRequirements.PPrefsStringVal) characterThing[CharacVal].unlocked = true;
+                    else characterThing[CharacVal].unlocked = false;
+                    break;
+                case Requirements.NeedTypes.Bool:
+                    string tempboolstring = characterThing[CharacVal].whatsTheRequirements.ReqBoolPPrefsName;
+                    bool tempbool = PlayerPrefsExtension.GetBool(tempboolstring);
+                    if (tempbool = true) characterThing[CharacVal].unlocked = true; // tue is 1 sob
+                    else characterThing[CharacVal].unlocked = false;
+                    break;
+                case Requirements.NeedTypes.Int:
+                    int tempint = PlayerPrefs.GetInt(characterThing[CharacVal].whatsTheRequirements.ReqIntPPrefsName, 0);
+                    if (tempint == characterThing[CharacVal].whatsTheRequirements.PPrefsIntVal) characterThing[CharacVal].unlocked = true;
+                    else characterThing[CharacVal].unlocked = false;
+                    break;
+            }
+        
+        }
         ChangeSlotsIMGig(characterThing[CharacVal].SlotsSkin[0],characterThing[CharacVal].SlotsSkin[1],characterThing[CharacVal].SlotsSkin[2]);
-        ChangeCharacter(characterThing[CharacVal].TextFontType,characterThing[CharacVal].SlotsAmmount,characterThing[CharacVal].CharSprite,characterThing[CharacVal].nameSprite,characterThing[CharacVal].TextUsesImagesSprite,characterThing[CharacVal].CharacterNameNormText);
+        ChangeCharacter(characterThing[CharacVal].TextFontType,characterThing[CharacVal].SlotsAmmount,characterThing[CharacVal].CharSprite,characterThing[CharacVal].nameSprite,characterThing[CharacVal].TextUsesImagesSprite,characterThing[CharacVal].CharacterNameNormText,CharacVal);
     }
-    public void ChangeCharacter(TMP_FontAsset whatFontToUse,int slots = 9,Sprite CharSpritese = null,Sprite nameSpriteaa = null,bool useTextImageSprites = false,string text = "")
+    public void ChangeCharacter(TMP_FontAsset whatFontToUse,int slots = 9,Sprite CharSpritese = null,Sprite nameSpriteaa = null,bool useTextImageSprites = false,string text = "",int num = 0 )
     {
-        CharacterNameText.text = !useTextImageSprites ?text : "";
         CharacterNameText.font = whatFontToUse;
         CharacterSprites.sprite = CharSpritese;
         TextNameSprites.enabled = useTextImageSprites;
         TextNameSprites.sprite = nameSpriteaa;
+        if (characterThing[num].unlocked)
+        {
+            CharacterSprites.color = Color.white;
+            CharacterNameText.text = !useTextImageSprites ?text : "";
+            PlayerPrefs.SetString("CurrentCharacter", characterThing[num].CharSaveFileTag);
+            PlayerPrefs.SetInt("CharInt", characterThing[num].characterValue);
+            PlayerPrefs.Save();
+        }
+        if (!characterThing[num].unlocked)
+        {
+            CharacterNameText.text = "LOCKED";
+            CharacterSprites.color = Color.black;
+        }
         ChangeSlots(slots);
     }
     public void ChangeSlotsIMGig(Sprite leftslot = null,Sprite middleslot = null,Sprite rightslot = null)
@@ -68,8 +100,11 @@ public class CharSelectManager : MonoBehaviour
         public Sprite[] SlotsSkin;
         public string CharacterDescription;
         public string CharSaveFileTag;
-        public float WalkSpeedStats,RunSpeedStats,MaxStamina,StaminaDrainRateStats,StaminaHealsRateStats,MaxHpStats,DefendMultiplierStats;
+        public PlayablesStats charStats;
         public int characterValue;
+        public bool NeedRequirements;
+        public Requirements whatsTheRequirements;
+        public bool unlocked = true;
 	}
 }
 

@@ -168,7 +168,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (FamishCheeseCount == 7)
         {
-            gc.fmc.angerMultipler = 0.65f;
+            gc.fmc.angerMultipler = 0.45f;
             gc.famishScrpt.activatewindowbreak = true;
             LapFamishShit = false;
             FamishCheeseCount = 0;
@@ -190,11 +190,17 @@ public class LappingOfAsylumController : MonoBehaviour
                             clone.GetComponent<FamishedScript>().famishedSpd = 0.5f;
                             clone.SetActive(true);
                         }
-                        if (gc.zerull.zer != null)
+                        /*if (gc.zerull.zer != null)
                         {
                             GameObject clone = Instantiate(gc.zerull.zer, gc.zerull.zer.transform.position, gc.zerull.zer.transform.rotation);
                             clone.name = gc.zerull.zer.name;
                             clone.GetComponent<zerullscript>().Anger = 0.5f;
+                            clone.SetActive(true);
+                        }*/
+                        if (gc.wegchal.WEGA != null)
+                        {
+                            GameObject clone = Instantiate(gc.wegchal.WEGA, gc.wegchal.WEGA.transform.position, gc.wegchal.WEGA.transform.rotation);
+                            clone.name = gc.wegchal.WEGA.name;
                             clone.SetActive(true);
                         }
                     }
@@ -353,15 +359,19 @@ public class LappingOfAsylumController : MonoBehaviour
             // }
             Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
-            gc.zerull.zer.SetActive(true);
+            //gc.zerull.zer.SetActive(true);
+            gc.wegchal.WEGA.SetActive(true);
+            gc.wegchal.globalWegaSpeed = 30;
             LapFamishShit = true;
         }
         if (CurrentLap == 3)
         {
+            gc.wegchal.globalWegaSpeed = 35;
             MeepTimer.SetActive(true);
         }
         if (CurrentLap == 4)
         {
+            gc.wegchal.globalWegaSpeed = 40;
             ZerullClassic.Instance.health = 20;
             if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight)
             {

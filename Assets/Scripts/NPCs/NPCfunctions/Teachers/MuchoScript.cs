@@ -185,7 +185,9 @@ public class MuchoScript : NPC
         baldiAudio.PlayOneShot(snadtp);
         gc.SubsManager.summonLeSubtitle(snadtpsubs.subtitleOption,snadtpsubs,baldiAudio);
         Invoke(nameof(Move), teleportCD);
-        this.transform.position = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
+        Vector3 tpTransform = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
+        agent.Warp(tpTransform);
+
     }
     #endregion
     private void OnTriggerStay(Collider play)
