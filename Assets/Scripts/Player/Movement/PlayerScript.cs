@@ -188,6 +188,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void MouseMove()
 	{
+		if (DisableCamMove) return;
 		playerRotation.eulerAngles = new Vector3(playerRotation.eulerAngles.x, playerRotation.eulerAngles.y);
 		playerRotation.eulerAngles += Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivity * Time.timeScale;
 		transform.rotation = playerRotation;
@@ -442,10 +443,7 @@ public class PlayerScript : MonoBehaviour
 		{
 
 			audVal = (int)Random.Range(0f, GameControllerScript.Instance.HurtSounds.Length);
-			if (!GameControllerScript.Instance.audioDevice2.isPlaying)
-        	{
 			GameControllerScript.Instance.audioDevice2.PlayOneShot(GameControllerScript.Instance.HurtSounds[audVal]);
-			}
 		}
 		switch (mode)
 		{
@@ -611,7 +609,7 @@ public class PlayerScript : MonoBehaviour
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;
-	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving;
+	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove;
 	public Vector3 frozenPosition;
 
 	[Header("Private Variables")]

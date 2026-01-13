@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c8412d3ec840347863c551e9fa1031, type: 3}
+  m_Name: storyMode
+  m_EditorClassIdentifier: 
+  StartWithWhatDifficulity: 1
+  difficulityeeee:
+  - DifficulitiesString: easy
+    DifficulitySprites: {fileID: 21300000, guid: 9075521878618b9499c650cfc6625094,
+      type: 3}
+    DifficulityInts: 0
+    NeedRequirements: 0
+    whatsTheRequirements:
+      itNeedSmth: 0
+      ReqStringPPrefs: 
+      PPrefsStringVal: 
+      ReqBoolPPrefsName: 
+      ReqIntPPrefsName: 
+      PPrefsIntVal: 0
+  - DifficulitiesString: normal
+    DifficulitySprites: {fileID: 21300000, guid: 4a1c1a478ae4a4e4091b780b49cbe9f1,
+      type: 3}
+    DifficulityInts: 1
+    NeedRequirements: 0
+    whatsTheRequirements:
+      itNeedSmth: 0
+      ReqStringPPrefs: 
+      PPrefsStringVal: 
+      ReqBoolPPrefsName: 
+      ReqIntPPrefsName: 
+      PPrefsIntVal: 0
+  - DifficulitiesString: hard
+    DifficulitySprites: {fileID: 21300000, guid: 1a46dbc2a48a9514aba88e911f0b4779,
+      type: 3}
+    DifficulityInts: 2
+    NeedRequirements: 0
+    whatsTheRequirements:
+      itNeedSmth: 0
+      ReqStringPPrefs: 
+      PPrefsStringVal: 
+      ReqBoolPPrefsName: 
+      ReqIntPPrefsName: 
+      PPrefsIntVal: 0
+  - DifficulitiesString: expert
+    DifficulitySprites: {fileID: 21300000, guid: 602bd157f6896ee4fb89ab867d8e05d6,
+      type: 3}
+    DifficulityInts: 3
+    NeedRequirements: 0
+    whatsTheRequirements:
+      itNeedSmth: 0
+      ReqStringPPrefs: 
+      PPrefsStringVal: 
+      ReqBoolPPrefsName: 
+      ReqIntPPrefsName: 
+      PPrefsIntVal: 0

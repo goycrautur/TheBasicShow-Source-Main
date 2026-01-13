@@ -1213,7 +1213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &193
 GameObject:
   m_ObjectHideFlags: 0
@@ -8560,56 +8560,7 @@ MonoBehaviour:
   GameobjectFunnyThing: []
   currentValue: 0
   csm: {fileID: 0}
-  StartWithWhatDifficulity: 1
-  Difficulity:
-  - DifficulitiesString: easy
-    DifficulitySprites: {fileID: 21300000, guid: 9075521878618b9499c650cfc6625094,
-      type: 3}
-    DifficulityInts: 0
-    NeedRequirements: 0
-    whatsTheRequirements:
-      itNeedSmth: 0
-      ReqStringPPrefs: 
-      PPrefsStringVal: 
-      ReqBoolPPrefsName: 
-      ReqIntPPrefsName: 
-      PPrefsIntVal: 0
-  - DifficulitiesString: normal
-    DifficulitySprites: {fileID: 21300000, guid: 4a1c1a478ae4a4e4091b780b49cbe9f1,
-      type: 3}
-    DifficulityInts: 1
-    NeedRequirements: 0
-    whatsTheRequirements:
-      itNeedSmth: 0
-      ReqStringPPrefs: 
-      PPrefsStringVal: 
-      ReqBoolPPrefsName: 
-      ReqIntPPrefsName: 
-      PPrefsIntVal: 0
-  - DifficulitiesString: hard
-    DifficulitySprites: {fileID: 21300000, guid: 1a46dbc2a48a9514aba88e911f0b4779,
-      type: 3}
-    DifficulityInts: 2
-    NeedRequirements: 0
-    whatsTheRequirements:
-      itNeedSmth: 0
-      ReqStringPPrefs: 
-      PPrefsStringVal: 
-      ReqBoolPPrefsName: 
-      ReqIntPPrefsName: 
-      PPrefsIntVal: 0
-  - DifficulitiesString: expert
-    DifficulitySprites: {fileID: 21300000, guid: 602bd157f6896ee4fb89ab867d8e05d6,
-      type: 3}
-    DifficulityInts: 3
-    NeedRequirements: 0
-    whatsTheRequirements:
-      itNeedSmth: 0
-      ReqStringPPrefs: 
-      PPrefsStringVal: 
-      ReqBoolPPrefsName: 
-      ReqIntPPrefsName: 
-      PPrefsIntVal: 0
+  Difficulity: {fileID: 11400000, guid: 9377b3d656102214e9ba6c695941d5c3, type: 2}
   SpriteObjects: {fileID: 543605433}
   newgamebutton: {fileID: 2048660988}
 --- !u!224 &405267107
@@ -19946,8 +19897,7 @@ MonoBehaviour:
   - {fileID: 2121048016}
   currentValue: 0
   csm: {fileID: 0}
-  StartWithWhatDifficulity: 0
-  Difficulity: []
+  Difficulity: {fileID: 0}
   SpriteObjects: {fileID: 0}
   newgamebutton: {fileID: 0}
 --- !u!1 &1088957634
@@ -38102,15 +38052,9 @@ MonoBehaviour:
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
     CharacterNameNormText: mainAntag (basic show)
-    SlotsAmmount: 9
-    SlotsSkin:
-    - {fileID: 8839654916173188765, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
-    - {fileID: -1033735670183444960, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
-    - {fileID: 7948025927414220139, guid: bb9037c3608e7db49a9719486af1f936, type: 3}
     CharacterDescription: 
     CharSaveFileTag: MainPlayer
-    charStats: {fileID: 0}
-    characterValue: 0
+    charStats: {fileID: 11400000, guid: 8278444b0e8f64c40beed0d1da45941b, type: 2}
     NeedRequirements: 0
     whatsTheRequirements:
       itNeedSmth: 0
@@ -38125,15 +38069,9 @@ MonoBehaviour:
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
     CharacterNameNormText: cylinder (BBC)
-    SlotsAmmount: 3
-    SlotsSkin:
-    - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
     CharacterDescription: 
     CharSaveFileTag: ClassicPlayer
-    charStats: {fileID: 0}
-    characterValue: 1
+    charStats: {fileID: 11400000, guid: 97081afbb45abf44aa8a18bfae9e53ff, type: 2}
     NeedRequirements: 0
     whatsTheRequirements:
       itNeedSmth: 0
@@ -38148,15 +38086,9 @@ MonoBehaviour:
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
     CharacterNameNormText: cylinder (BBCR)
-    SlotsAmmount: 3
-    SlotsSkin:
-    - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
     CharacterDescription: 
     CharSaveFileTag: ClassicRemasteredPlayer
-    charStats: {fileID: 0}
-    characterValue: 2
+    charStats: {fileID: 11400000, guid: e6b8c6560a5c14a4bbecb7dbf0828ba8, type: 2}
     NeedRequirements: 0
     whatsTheRequirements:
       itNeedSmth: 0
@@ -38171,15 +38103,9 @@ MonoBehaviour:
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
     CharacterNameNormText: cylinder (Plus)
-    SlotsAmmount: 5
-    SlotsSkin:
-    - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
     CharacterDescription: 
     CharSaveFileTag: PlusPlayer
-    charStats: {fileID: 0}
-    characterValue: 3
+    charStats: {fileID: 11400000, guid: 5040ccefca60f62478f4253a2e720a50, type: 2}
     NeedRequirements: 0
     whatsTheRequirements:
       itNeedSmth: 0
@@ -38194,15 +38120,9 @@ MonoBehaviour:
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
     CharacterNameNormText: Affect
-    SlotsAmmount: 3
-    SlotsSkin:
-    - {fileID: -625462795636426556, guid: c62518de5ceee724e9f1df0c075a73ed, type: 3}
-    - {fileID: 227963081545325898, guid: c62518de5ceee724e9f1df0c075a73ed, type: 3}
-    - {fileID: 3731436937111988094, guid: c62518de5ceee724e9f1df0c075a73ed, type: 3}
     CharacterDescription: 
     CharSaveFileTag: affect
-    charStats: {fileID: 0}
-    characterValue: 4
+    charStats: {fileID: 11400000, guid: b810314802b48384dbca91f9109d1115, type: 2}
     NeedRequirements: 1
     whatsTheRequirements:
       itNeedSmth: 1
@@ -38217,15 +38137,9 @@ MonoBehaviour:
     TextUsesImagesSprite: 0
     TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
     CharacterNameNormText: Wreckieboi
-    SlotsAmmount: 6
-    SlotsSkin:
-    - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-    - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
     CharacterDescription: 
     CharSaveFileTag: wreckage
-    charStats: {fileID: 0}
-    characterValue: 5
+    charStats: {fileID: 11400000, guid: 1c1c47cb170f0084dbbf0248d571c6f5, type: 2}
     NeedRequirements: 0
     whatsTheRequirements:
       itNeedSmth: 0
@@ -38251,8 +38165,7 @@ MonoBehaviour:
   GameobjectFunnyThing: []
   currentValue: 0
   csm: {fileID: 1877723316}
-  StartWithWhatDifficulity: 0
-  Difficulity: []
+  Difficulity: {fileID: 0}
   SpriteObjects: {fileID: 0}
   newgamebutton: {fileID: 0}
 --- !u!1 &1881225276
@@ -40239,7 +40152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1941619688
 MonoBehaviour:
   m_ObjectHideFlags: 0

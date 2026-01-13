@@ -14,7 +14,7 @@ public class GameObjectSwitchingThingIdkHowToSayIt : MonoBehaviour
                 currentValue = PlayerPrefs.GetInt("CharInt");
                 break;
             case SwitchToTypes.DifficulitySelect:
-                currentValue = StartWithWhatDifficulity;
+                currentValue = Difficulity.StartWithWhatDifficulity;
                 difficulitystuff();
                 break;
         }
@@ -79,7 +79,7 @@ public class GameObjectSwitchingThingIdkHowToSayIt : MonoBehaviour
         {
             if (currentValue == 0)
             {
-                currentValue = Difficulity.Count-1;
+                currentValue = Difficulity.difficulityeeee.Count-1;
                 difficulitystuff();
                 return;
             }
@@ -87,7 +87,7 @@ public class GameObjectSwitchingThingIdkHowToSayIt : MonoBehaviour
             difficulitystuff();
             return;
         }
-        if (currentValue == Difficulity.Count-1)
+        if (currentValue == Difficulity.difficulityeeee.Count-1)
         {
             currentValue = 0;
             difficulitystuff();
@@ -98,8 +98,8 @@ public class GameObjectSwitchingThingIdkHowToSayIt : MonoBehaviour
     }
     private void difficulitystuff()
     {
-        newgamebutton.Difficulity = Difficulity[currentValue].DifficulitiesString;
-        SpriteObjects.sprite = Difficulity[currentValue].DifficulitySprites;
+        newgamebutton.Difficulity = Difficulity.difficulityeeee[currentValue].DifficulitiesString;
+        SpriteObjects.sprite = Difficulity.difficulityeeee[currentValue].DifficulitySprites;
     }
     private void CharSelectBullshitLMFAO(bool PressPrevious)
     {
@@ -132,18 +132,7 @@ public class GameObjectSwitchingThingIdkHowToSayIt : MonoBehaviour
     [Header("Character Select Thing")]
     public CharSelectManager csm;
     [Header("Difficulity Select Thing")]
-    public int StartWithWhatDifficulity;
-    public List<DifficulitiesErmYea> Difficulity = new List<DifficulitiesErmYea>();
+    public ModesDifficulityList Difficulity;
     public Image SpriteObjects;
     public PlayButtonScri newgamebutton;
-    [Serializable]
-	public class DifficulitiesErmYea
-    {
-        public string DifficulitiesString;
-        public Sprite DifficulitySprites;
-        public int DifficulityInts;
-        public bool NeedRequirements;
-        public Requirements whatsTheRequirements;
-
-    }
 }

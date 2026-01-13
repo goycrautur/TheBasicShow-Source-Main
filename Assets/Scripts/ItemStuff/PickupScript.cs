@@ -8,10 +8,11 @@ public class PickupScript : Interactable
     {
         cachedSprites = new Dictionary<int, Sprite>();
 
+
         if (PresentMode)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, 37);
+            ID = Random.Range(1, 46);
         }
 
         if (SpawnAtRandom)
@@ -24,17 +25,24 @@ public class PickupScript : Interactable
             location.position = wanderer.SetNewTargetForAgent(null, "present");
             transform.position = location.position + Vector3.up * 4f;
         }
+        OriginalSprite = GetComponentInChildren<SpriteRenderer>().sprite;
+        originalId = ID;
+    }
+    public void ItemRespawning()
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = OriginalSprite;
+        ID = originalId;
     }
     public void itsPresentTime(bool resetIDONLY = false)
     {
         if (resetIDONLY)
         {
-            ID = Random.Range(1, 45);
+            ID = Random.Range(1, 46);
         }
         if (!PresentMode && !resetIDONLY)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, 45);
+            ID = Random.Range(1, 46);
             PresentMode = true;
         }
     }
@@ -120,7 +128,7 @@ public class PickupScript : Interactable
         if (!cachedSprites.ContainsKey(ID))
         {
             Texture itemTexture = ItemManager.Instance.GetItem(ID).BigSprite;
-            Sprite itemSprite = Sprite.Create((Texture2D)itemTexture, new Rect(0, 0, itemTexture.width, itemTexture.height), new Vector2(0.5f, 0.5f), 100);
+            Sprite itemSprite = Sprite.Create((Texture2D)itemTexture, new Rect(0, 0, itemTexture.width, itemTexture.height), new Vector2(0.5f, 0.5f), newItem.TexturePPUThing);
             cachedSprites.Add(ID, itemSprite);
         }
 
@@ -166,5 +174,7 @@ public class PickupScript : Interactable
 
     private AILocationSelectorScript wanderer;
     private Transform location;
+    private int originalId;
+    private Sprite OriginalSprite;
     #endregion
 }

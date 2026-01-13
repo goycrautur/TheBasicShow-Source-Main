@@ -36,8 +36,8 @@ public class CharSelectManager : MonoBehaviour
             }
         
         }
-        ChangeSlotsIMGig(characterThing[CharacVal].SlotsSkin[0],characterThing[CharacVal].SlotsSkin[1],characterThing[CharacVal].SlotsSkin[2]);
-        ChangeCharacter(characterThing[CharacVal].TextFontType,characterThing[CharacVal].SlotsAmmount,characterThing[CharacVal].CharSprite,characterThing[CharacVal].nameSprite,characterThing[CharacVal].TextUsesImagesSprite,characterThing[CharacVal].CharacterNameNormText,CharacVal);
+        ChangeSlotsIMGig(characterThing[CharacVal].charStats.SlotsSkin[0],characterThing[CharacVal].charStats.SlotsSkin[1],characterThing[CharacVal].charStats.SlotsSkin[2]);
+        ChangeCharacter(characterThing[CharacVal].TextFontType,characterThing[CharacVal].charStats.SlotsAmmount,characterThing[CharacVal].CharSprite,characterThing[CharacVal].nameSprite,characterThing[CharacVal].TextUsesImagesSprite,characterThing[CharacVal].CharacterNameNormText,CharacVal);
     }
     public void ChangeCharacter(TMP_FontAsset whatFontToUse,int slots = 9,Sprite CharSpritese = null,Sprite nameSpriteaa = null,bool useTextImageSprites = false,string text = "",int num = 0 )
     {
@@ -50,7 +50,7 @@ public class CharSelectManager : MonoBehaviour
             CharacterSprites.color = Color.white;
             CharacterNameText.text = !useTextImageSprites ?text : "";
             PlayerPrefs.SetString("CurrentCharacter", characterThing[num].CharSaveFileTag);
-            PlayerPrefs.SetInt("CharInt", characterThing[num].characterValue);
+            PlayerPrefs.SetInt("CharInt", characterThing[num].charStats.characterId);
             PlayerPrefs.Save();
         }
         if (!characterThing[num].unlocked)
@@ -96,12 +96,9 @@ public class CharSelectManager : MonoBehaviour
         public bool TextUsesImagesSprite;
         public TMP_FontAsset TextFontType;
         public string CharacterNameNormText;
-        public int SlotsAmmount;
-        public Sprite[] SlotsSkin;
         public string CharacterDescription;
         public string CharSaveFileTag;
         public PlayablesStats charStats;
-        public int characterValue;
         public bool NeedRequirements;
         public Requirements whatsTheRequirements;
         public bool unlocked = true;

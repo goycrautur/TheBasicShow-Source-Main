@@ -71,7 +71,7 @@ public class MuchoScript : NPC
             {
                 if (hitVape.transform.gameObject.layer == 11) 
                 {
-                    Debug.Log("saw bro but get blocked");
+                    //Debug.Log("saw bro but get blocked");
                     return;
                 }
             }
@@ -146,7 +146,7 @@ public class MuchoScript : NPC
                 {
                     if (hitVape.transform.gameObject.layer == 11) 
                     {
-                        Debug.Log("saw bro but get blocked");
+                        //Debug.Log("saw bro but get blocked");
                         return;
                     }
                 }

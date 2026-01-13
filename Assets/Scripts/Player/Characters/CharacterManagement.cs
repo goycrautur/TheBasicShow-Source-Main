@@ -18,34 +18,32 @@ public class CharacterManagement : MonoBehaviour
     public void updateRefrenceThing()
     {
         if (CurrentCharID == null) CurrentCharID = 0;
-        GameControllerScript.Instance.SlotsAmmount = CharactersReal[CurrentCharID].SlotsAmmount;
-        AdditionalGameCustomizer.Instance.ItemSlotsSprites[0] = CharactersReal[CurrentCharID].SlotsSkin[0];
-        AdditionalGameCustomizer.Instance.ItemSlotsSprites[1] = CharactersReal[CurrentCharID].SlotsSkin[1];
-        AdditionalGameCustomizer.Instance.ItemSlotsSprites[2] = CharactersReal[CurrentCharID].SlotsSkin[2];
-        play.DefaultWalkSpeed = CharactersReal[CurrentCharID].WalkSpeedStats;
-        play.DefaultRunSpeed = CharactersReal[CurrentCharID].RunSpeedStats;
-        play.DefaultstaminaDrop = CharactersReal[CurrentCharID].StaminaDrainRateStats;
-        play.DefaultstaminaRise = CharactersReal[CurrentCharID].StaminaHealsRateStats;
-        play.maxHealth = CharactersReal[CurrentCharID].MaxHpStats;
-        play.health = CharactersReal[CurrentCharID].MaxHpStats;
-        play.maxStamina = CharactersReal[CurrentCharID].MaxStamina;
-        play.PlayerDmgResistance = CharactersReal[CurrentCharID].DefendMultiplierStats;
+        GameControllerScript.Instance.SlotsAmmount = CharactersReal[CurrentCharID].CharStatsThing.SlotsAmmount;
+        AdditionalGameCustomizer.Instance.ItemSlotsSprites[0] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[0];
+        AdditionalGameCustomizer.Instance.ItemSlotsSprites[1] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[1];
+        AdditionalGameCustomizer.Instance.ItemSlotsSprites[2] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[2];
+        play.DefaultWalkSpeed = CharactersReal[CurrentCharID].CharStatsThing.WalkSpeedStats;
+        play.DefaultRunSpeed = CharactersReal[CurrentCharID].CharStatsThing.RunSpeedStats;
+        play.DefaultstaminaDrop = CharactersReal[CurrentCharID].CharStatsThing.StaminaDrainRateStats;
+        play.DefaultstaminaRise = CharactersReal[CurrentCharID].CharStatsThing.StaminaHealsRateStats;
+        play.maxHealth = CharactersReal[CurrentCharID].CharStatsThing.MaxHpStats;
+        play.health = CharactersReal[CurrentCharID].CharStatsThing.MaxHpStats;
+        play.maxStamina = CharactersReal[CurrentCharID].CharStatsThing.MaxStamina;
+        play.PlayerDmgResistance = CharactersReal[CurrentCharID].CharStatsThing.DefendMultiplierStats;
+        play.LocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
         Singleton<OtherMainStuffManager>.Instance.slot();
-        if (CharactersReal[CurrentCharID].HasAnySpecialShit)
+        if (CharactersReal[CurrentCharID].CharStatsThing.specialTypeShit)
         {
             doSpecialThing();
         }
     }
     public int CurrentCharID;
     public PlayerScript play;
-    public List<Character> CharactersReal = new List<Character>();
+    public List<charManagStats> CharactersReal = new List<charManagStats>();
     [Serializable]
-	public class Character
+    public class charManagStats
     {
-        public float WalkSpeedStats,RunSpeedStats,MaxStamina,StaminaDrainRateStats,StaminaHealsRateStats,MaxHpStats,DefendMultiplierStats;
-        public int SlotsAmmount;
-        public Sprite[] SlotsSkin;
-        public bool HasAnySpecialShit;
+        public PlayablesStats CharStatsThing;
         public SpecialCharStuff CustomCharExtension;
-	}
+    }
 }

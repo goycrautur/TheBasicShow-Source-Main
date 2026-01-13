@@ -46,9 +46,27 @@ public class subtitlesScriptReal : MonoBehaviour
             {
                 duration = subtitlys.duration; // if the subtitle scriptable object duration aint null, set this subtitle duration as the subtitle scriptable object duration
             }
-            if (subtitlys.duration == 0f)
+            else
             {
                 duration = audiObject.audioClip.length; // if the subtitle scriptable object duration are null tho and you just so happend to attach an audio source to the object itself, the duration will be that audioclip duration
+            }
+            if (subtitlys.colorMode == subtitlingIt.ColorMode.Default) // Apply fixed color
+            {
+                tmpTxt.color = subtitlys.textColor;
+            }
+            else if (subtitlys.colorMode == subtitlingIt.ColorMode.Gradient) // Apply gradient color
+            {
+                tmpTxt.enableVertexGradient = true; // Enable vertex gradient
+                if (subtitlys.textGradient != null)
+                {
+                    // Create a VertexGradient from the Gradient by sampling colors at different points
+                    tmpTxt.colorGradient = new VertexGradient(
+                        subtitlys.textGradient.Evaluate(0f), // top left
+                        subtitlys.textGradient.Evaluate(1f), // top right
+                        subtitlys.textGradient.Evaluate(0.5f), // bottom left
+                        subtitlys.textGradient.Evaluate(0.75f) // bottom right
+                    );
+                }
             }
             sub = StartCoroutine(TextAnimator());
         }
@@ -94,6 +112,88 @@ public class subtitlesScriptReal : MonoBehaviour
         bg.localScale = new Vector3(num9, num9, 1f);
         }
     }
+    private void ColorUpdatingBullshit() //dude youre insane for making this :sob:
+    {
+        if (subtitlys.colorMode == subtitlingIt.ColorMode.Gradient && subtitlys.gradientAnimate)
+        {
+            if (subtitlys.gradientAnimationMode == subtitlingIt.GradientAnimationMode.ColorChanging)  // if animate gradient by rotation
+            {
+                // Cycle through gradient colors over time
+                if (subtitlys.textGradient != null)
+                {
+                    float time = Time.time * subtitlys.gradientSpeed * 0.1f;
+                    tmpTxt.colorGradient = new VertexGradient(
+                        subtitlys.textGradient.Evaluate((time + 0f) % 1f), // top left
+                        subtitlys.textGradient.Evaluate((time + 0.33f) % 1f), // top right
+                        subtitlys.textGradient.Evaluate((time + 0.66f) % 1f), // bottom left
+                        subtitlys.textGradient.Evaluate((time + 0.99f) % 1f) // bottom right
+                    );
+                }
+            }
+            else if (subtitlys.gradientAnimationMode == subtitlingIt.GradientAnimationMode.Rotate) // if animate gradient by rotation
+            {
+                // Rotate the gradient colors around the text
+                if (subtitlys.textGradient != null)
+                {
+                    float time = Time.time * subtitlys.gradientSpeed * 0.1f;
+                        tmpTxt.colorGradient = new VertexGradient(
+                        subtitlys.textGradient.Evaluate((time + 0f) % 1f), // top left
+                        subtitlys.textGradient.Evaluate((time + 0.25f) % 1f), // top right
+                        subtitlys.textGradient.Evaluate((time + 0.5f) % 1f), // bottom left
+                        subtitlys.textGradient.Evaluate((time + 0.75f) % 1f) // bottom right
+                    );
+                }
+            }
+            else if (subtitlys.gradientAnimationMode == subtitlingIt.GradientAnimationMode.OrderLerp) // if animate gradient by order lerp
+            {
+                // Lerp between two sets of colors over time
+                if (subtitlys.textGradient != null)
+                {
+                    float time = (Mathf.Sin(Time.time * subtitlys.gradientSpeed) + 1f) / 2f; // Normalize to [0,1]
+                    tmpTxt.colorGradient = new VertexGradient(
+                        Color.Lerp(subtitlys.textGradient.Evaluate(0f), subtitlys.textGradient.Evaluate(1f), time), // top left
+                        Color.Lerp(subtitlys.textGradient.Evaluate(1f), subtitlys.textGradient.Evaluate(0f), time), // top right
+                        Color.Lerp(subtitlys.textGradient.Evaluate(0.5f), subtitlys.textGradient.Evaluate(0.75f), time), // bottom left
+                        Color.Lerp(subtitlys.textGradient.Evaluate(0.75f), subtitlys.textGradient.Evaluate(0.5f), time) // bottom right
+                    );
+                }
+            }
+            else if (subtitlys.gradientAnimationMode == subtitlingIt.GradientAnimationMode.LeftToRight) // if animate gradient left to right
+            {
+                // Move gradient from left to right over time
+                if (subtitlys.textGradient != null)
+                {
+                    float time = Mathf.PingPong(Time.time * subtitlys.gradientSpeed * 0.1f, 1f); // PingPong to [0,1]
+                    tmpTxt.colorGradient = new VertexGradient(
+                        subtitlys.textGradient.Evaluate(time), // top left
+                        subtitlys.textGradient.Evaluate(time), // top right
+                        subtitlys.textGradient.Evaluate(time), // bottom left
+                        subtitlys.textGradient.Evaluate(time) // bottom right
+                    );
+                }
+            }
+            else if (subtitlys.gradientAnimationMode == subtitlingIt.GradientAnimationMode.RightToLeft) // if animate gradient right to left
+            {
+                // Move gradient from right to left over time
+                if (subtitlys.textGradient != null)
+                {
+                    float time = Mathf.PingPong(Time.time * subtitlys.gradientSpeed * 0.1f, 1f); // PingPong to [0,1]
+                    tmpTxt.colorGradient = new VertexGradient(
+                        subtitlys.textGradient.Evaluate(1f - time), // top left
+                        subtitlys.textGradient.Evaluate(1f - time), // top right
+                        subtitlys.textGradient.Evaluate(1f - time), // bottom left
+                        subtitlys.textGradient.Evaluate(1f - time) // bottom right
+                    );
+                }
+            }
+        }
+        if (subtitlys.colorMode == subtitlingIt.ColorMode.Rainbow)
+        {
+            float time = Time.time * subtitlys.rainbowSpeed * 0.1f;
+            // Cycle through rainbow colors over time
+            tmpTxt.color = Color.HSVToRGB(time % 1f, 1f, 1f);
+        }
+    }
     private void Update()
     {   // subtitle will commit kys if the audio source is not found or not active in hierarchy
         if (hidesub) // are we deadass
@@ -117,6 +217,7 @@ public class subtitlesScriptReal : MonoBehaviour
             return;
         }
         updateSubPostion();
+        ColorUpdatingBullshit();
         if (shake) // shake the tmp text yummy
         {
             Vector3 whyisthisnamedlocalpositionagain = new Vector3(Mathf.Sin(Time.time * shakespeed) * shakeyradius, Mathf.Cos(Time.time * shakespeed) * shakeyradius, 0f);
@@ -199,7 +300,24 @@ public class subtitlesScriptReal : MonoBehaviour
             FuckTheText = thoseWhoSubtitles.unreadable;
             upsideDownReal = thoseWhoSubtitles.upsideDown;
             tmpTxt.text = "";
-            tmpTxt.color = thoseWhoSubtitles.textColor;
+            if (thoseWhoSubtitles.colorMode == subtitlingIt.ColorMode.Default) // Apply fixed color
+            {
+                tmpTxt.color = thoseWhoSubtitles.textColor;
+            }
+            else if (thoseWhoSubtitles.colorMode == subtitlingIt.ColorMode.Gradient) // Apply gradient color
+            {
+                tmpTxt.enableVertexGradient = true; // Enable vertex gradient
+                if (thoseWhoSubtitles.textGradient != null)
+                {
+                    // Create a VertexGradient from the Gradient by sampling colors at different points
+                    tmpTxt.colorGradient = new VertexGradient(
+                        thoseWhoSubtitles.textGradient.Evaluate(0f), // top left
+                        thoseWhoSubtitles.textGradient.Evaluate(1f), // top right
+                        thoseWhoSubtitles.textGradient.Evaluate(0.5f), // bottom left
+                        thoseWhoSubtitles.textGradient.Evaluate(0.75f) // bottom right
+                    );
+                }
+            }
             sub = StartCoroutine(TextAnimator());
             yield return new WaitForSeconds(thoseWhoSubtitles.duration - prevSec);
             prevSec = thoseWhoSubtitles.duration; // Update previous duration for next iteration

@@ -918,7 +918,7 @@ public class GameControllerScript : MonoBehaviour
     public List<GateScript> Gatesrea = new List<GateScript>();
     public List<ElvDoorScript> ElevdorRea = new List<ElvDoorScript>();
     public List<GameObject> ObjectsToDisable, ItemsToRespawn,NpcMinimapIcon = new List<GameObject>();
-    [SerializeField] private List<VendingMachineScript> MachinesToRestock = new List<VendingMachineScript>();
+    public List<VendingMachineScript> MachinesToRestock = new List<VendingMachineScript>();
     public List<NPC> NPCThatGetAffectedByMetalPipe = new List<NPC>();
     public Animator Icon,CirclAnimator;
     public Material SpriteRenderer;

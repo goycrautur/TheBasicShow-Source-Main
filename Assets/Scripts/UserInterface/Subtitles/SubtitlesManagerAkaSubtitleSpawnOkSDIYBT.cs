@@ -69,8 +69,17 @@ public class subtitlingIt
     // hi yuri if u reading this hi
 	public bool enabled = true;
 	public string headText = "Placeholder";
-	public Color textColor = new Color(1f, 1f, 1f, 1f);
 	[Min(0f)] public float duration;
+	public ColorMode colorMode = ColorMode.Default;
+    public Color textColor = new Color(1f, 1f, 1f, 1f);
+	[Header("rainbow and gradient color stuff")]
+    public Gradient textGradient = new Gradient();
+    public bool gradientAnimate = false;
+    public GradientAnimationMode gradientAnimationMode = GradientAnimationMode.Rotate;
+    public float gradientSpeed = 1f;
+    public float rainbowSpeed = 1f;
+	
+	[Header("funny other options")]
 	public bool undertaleStyleTextAppearing = true;
 	public float TextAppearSpeed = 1f;
 	public bool shakey;
@@ -78,4 +87,21 @@ public class subtitlingIt
     public float shakeyradius = 0.3f;
     public int fonts;
 	public bool useLocalization = false,unreadable = false,upsideDown = false,textReverse = false;
+	[HideInInspector] public ColorMode _FixedMode = ColorMode.Default;
+    [HideInInspector] public ColorMode _GradientMode = ColorMode.Gradient;
+    [HideInInspector] public ColorMode _RainbowMode = ColorMode.Rainbow;
+	public enum ColorMode // joink
+    {
+        Default,
+        Gradient,
+        Rainbow
+    }
+    public enum GradientAnimationMode
+    {
+        Rotate,
+        ColorChanging,
+        OrderLerp,
+        LeftToRight,
+        RightToLeft
+    }
 }

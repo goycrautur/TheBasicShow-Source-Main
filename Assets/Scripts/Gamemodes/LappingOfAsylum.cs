@@ -168,7 +168,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (FamishCheeseCount == 7)
         {
-            gc.fmc.angerMultipler = 0.45f;
+            gc.fmc.angerMultipler = 0.65f;
             gc.famishScrpt.activatewindowbreak = true;
             LapFamishShit = false;
             FamishCheeseCount = 0;
@@ -225,6 +225,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.audioDevice2.PlayOneShot(zawarudo);
         vanishScore = false;
         LapSound.Stop();
+        gc.player.DisableCamMove = true;
         gc.player.movementLocked = true;
         gc.player.titlecard = true;
         gc.playerCollider.enabled = false;
@@ -257,6 +258,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
+        gc.player.DisableCamMove = false;
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         vanishScore = true;
@@ -265,7 +267,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             if (muc.isActiveAndEnabled)
             {
-                muc.baldiSpeedScale += 0.2f;
+                muc.baldiSpeedScale += 0.1f;
             }
         }
         yield return null;
@@ -350,13 +352,8 @@ public class LappingOfAsylumController : MonoBehaviour
         if (CurrentLap == 2)
         {
             gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
-            // if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems)
-            // {
-            //     foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
-            //     {
-            //         pickupScript.itsPresentTime(true);
-            //     }
-            // }
+            gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
+            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine());
             Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
             //gc.zerull.zer.SetActive(true);
@@ -366,6 +363,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (CurrentLap == 3)
         {
+            gc.fmc.angerMultipler = 0.45f;
             gc.wegchal.globalWegaSpeed = 35;
             MeepTimer.SetActive(true);
         }
@@ -380,6 +378,7 @@ public class LappingOfAsylumController : MonoBehaviour
             gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
             mucho.SetActive(true);
             Lap5TimingStuff = true;
+            
         }
         LapSound.clip = lappingHi[CurrentLap].LapMusik;
         LapSound.Play();
@@ -393,7 +392,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             if (muc.isActiveAndEnabled)
             {
-                muc.baldiSpeedScale += 0.2f;
+                muc.baldiSpeedScale += 0.1f;
             }
         }
     }
