@@ -17,7 +17,7 @@ public class MathGameScript : MonoBehaviour
         HandleAudioFeedback();
         HandleInput();
 
-        if (problem > 9)
+        if (problem > problemcap)
         {
             HandleGameEnd();
         }
@@ -27,6 +27,9 @@ public class MathGameScript : MonoBehaviour
     #region Initialization
     private void InitializeGame()
     {
+        string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
+        problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
+        int problemCapAlt = dific == "easy" ? 9 : dific == "normal" ? 6 : dific == "hard" ? 3 : dific == "expert" || dific == "maniac" ? 0 : 6;
         
         specialCodes = new Dictionary<string, Action>
         {
@@ -40,6 +43,14 @@ public class MathGameScript : MonoBehaviour
         if (!gc.spoopMode && gc.mode != "zerullclassic")
         {
             gc.schoolMusic.ignoreListenerPause = true;
+        }
+        for (int i = 0; i < questionBlockerSlots.Length; ++i)
+        {
+            questionBlockerSlots[i].SetActive(false);
+        }
+        for (int i = 0; i < problemCapAlt; ++i)
+        {
+            questionBlockerSlots[i].SetActive(true);
         }
 
         endDelay = gc.spoopMode ? Delay : DelayPreSpoop;
@@ -152,7 +163,7 @@ public class MathGameScript : MonoBehaviour
     {
         ResetProblemUI();
 
-        if (problem <= 9)
+        if (problem <= problemcap)
         {
             GenerateMathProblem();
         }
@@ -177,16 +188,16 @@ public class MathGameScript : MonoBehaviour
             StartCoroutine(PlayClassicMusic());
         }
 
-        if (gc.notebooks == 2 && problem == 9)
+        if (gc.notebooks == 2 && problem == problemcap)
         {
             QueueAudio(scaryproblem);
         }
-        if (gc.notebooks != 2 && problem != 9)
+        if (gc.notebooks != 2 && problem != problemcap)
         {
         QueueAudio(bal_problems[problem - 1]);
         }
 
-        if ((gc.mode == "endless" && gc.notebooks == 2 && problem == 9 && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == 9))
+        if ((gc.mode == "endless" && gc.notebooks == 2 && problem == problemcap && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == problemcap))
         {
             GenerateImpossibleProblem();
             impossibleQuestionShown = true;
@@ -196,10 +207,17 @@ public class MathGameScript : MonoBehaviour
             GenerateSimpleMathProblem();
         }
     }
+    private void CreateQuestion(string Difficulity = "easy")
+    {
+        if (Difficulity == "easy")
+        {
+            
+        }
+    }
 
     private void GenerateSimpleMathProblem()
     {
-        
+        CreateQuestion(PlayerPrefs.GetString("CurDifficulity", "normal"));
         num1 = UnityEngine.Random.Range(0, 20);
         num2 = UnityEngine.Random.Range(0, 20);
         sign = UnityEngine.Random.Range(0, 4);
@@ -267,7 +285,7 @@ public class MathGameScript : MonoBehaviour
 
         if (gc.mode != "zerullclassic")
 		{
-			if (problem <= 9)
+			if (problem <= problemcap)
 			{
 				if (IsCorrectAnswer())
 				{
@@ -339,7 +357,7 @@ public class MathGameScript : MonoBehaviour
 
     private void HandleBaldiAnger()
     {
-        if (problem == 9)
+        if (problem == problemcap)
         {
             Singleton<OtherMainStuffManager>.Instance.AngerShit(0.2f, 0f,false, "all");
         }
@@ -376,7 +394,7 @@ public class MathGameScript : MonoBehaviour
         {
             questionText.text = endlessHintText[UnityEngine.Random.Range(0, endlessHintText.Length)];
         }
-        if (problemsWrong >= 9)
+        if (problemsWrong >= problemcap)
         {
             Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, null, playerPosition, "all", true);
             gc.audioDevice.PlayClip(gc.deathbell, false, 1f);
@@ -411,14 +429,14 @@ public class MathGameScript : MonoBehaviour
             questionText2.text = questionText3.text = string.Empty;
             if (allanswerWrongInt == 1)
             {
-                for (int i = 0; i < results.Length; ++i)
+                for (int i = 0; i < problemcap; ++i)
                 {
                     results[i].sprite = incorrect;
                 }
             }
             else
             {
-                for (int i = 0; i < results.Length; ++i)
+                for (int i = 0; i < problemcap; ++i)
                 {
                     results[i].sprite = correct;
                 }
@@ -428,7 +446,7 @@ public class MathGameScript : MonoBehaviour
 		}
             questionText.text = hintText[UnityEngine.Random.Range(0, hintText.Length)];
         questionText2.text = questionText3.text = string.Empty;
-        if (gc.mode == "story" && problemsWrong >= 9)
+        if (gc.mode == "story" && problemsWrong >= problemcap)
         {
             gc.failedNotebooks++;
             if (gc.failedNotebooks < gc.maxNotebooks && gc.PadSEToggle)
@@ -555,7 +573,7 @@ public class MathGameScript : MonoBehaviour
 
     public void ButtonPress(int value)
     {
-        if (value >= 0 && value <= 9)
+        if (value >= 0 && value <= problemcap)
         {
             context += value;
             playerAnswer.text = context;
@@ -585,6 +603,7 @@ public class MathGameScript : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private Image[] results = new Image[3];
+    [SerializeField] private GameObject[] questionBlockerSlots = new GameObject[3];
     [SerializeField] private TMP_InputField playerAnswer;
     [SerializeField] private TMP_Text questionText, questionText2, questionText3;
     [SerializeField] private Animator baldiFeed;
@@ -612,6 +631,7 @@ public class MathGameScript : MonoBehaviour
     [Header("Game State")]
     public string context = string.Empty;
     public float num1, num2, num3, solution;
+    public int problemcap = 9;
     public bool questionInProgress, impossibleMode, negative,thepadgotaawed;
 
     private bool impossibleQuestionShown;

@@ -210,11 +210,11 @@ public class ItemManager : MonoBehaviour
 
     public void ClearItem(int index,bool reduceinventory = true)
     {
-        // if (reduceinventory && Inventory[index].ItemID != 0)
-        // {
-        //     GameControllerScript.Instance.SlotsAmmount = GameControllerScript.Instance.SlotsAmmount-1;
-        //     Singleton<OtherMainStuffManager>.Instance.slot();
-        // }
+        //if (reduceinventory && Inventory[index].ItemID != 0)
+        //{
+        //    GameControllerScript.Instance.SlotsAmmount = GameControllerScript.Instance.SlotsAmmount-1;
+        //    Singleton<OtherMainStuffManager>.Instance.slot();
+        //}
         Inventory[index].ItemID = 0;
         Inventory[index].ItemInstance = null;
         AnimateSlotIfChanged(index);
