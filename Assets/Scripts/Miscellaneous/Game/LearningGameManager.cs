@@ -43,21 +43,14 @@ public class LearningGameManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime(1f);
         UnityEngine.Object.Destroy(subject);
     }
-    public IEnumerator forceSTFU(float duration)
-	{
-        while (duration > 0f)
-        {
-            duration -= Time.deltaTime;
-            learnMusic.ignoreListenerPause = false;
-            learnMusic.Stop();
-            yield return null;
-        }
-        yield break;
+    public void Update()
+    {
+        learnMusic.ignoreListenerPause = learningActive;
+        if (!learningActive)learnMusic.Stop();
     }
 
     public void DeactivateLearningGame(GameObject subject,int allAnswerWrong = 0)
     {
-        StartCoroutine(forceSTFU(4f));
         if (!gc.spoopMode && gc.mode == "story")
         {
             gc.schoolMusic.Play();

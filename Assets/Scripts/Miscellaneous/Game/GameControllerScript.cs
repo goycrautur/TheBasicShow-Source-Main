@@ -5,7 +5,6 @@ using System.Collections;
 using FluidMidi;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using System.Diagnostics;
 using System;
 
 public class GameControllerScript : MonoBehaviour

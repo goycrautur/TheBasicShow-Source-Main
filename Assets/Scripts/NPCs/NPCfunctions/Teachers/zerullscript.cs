@@ -115,7 +115,7 @@ public class zerullscript : NPC
 
     public void Move()
     {
-        if (this.isActiveAndEnabled)
+        if (isActiveAndEnabled)
         {
             if (Wait < 30f)
             {

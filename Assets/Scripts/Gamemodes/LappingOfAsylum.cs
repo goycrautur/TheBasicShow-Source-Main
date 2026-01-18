@@ -128,7 +128,7 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (Meeptimar.isActiveAndEnabled && Lap5CheeseCount != 7)
         {
-            meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 25f : 12.5f, Color.green);
+            meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 18/(CurrentLap+1) : 12.5f, Color.green);
         }
         if (LapFamishShit)
         {

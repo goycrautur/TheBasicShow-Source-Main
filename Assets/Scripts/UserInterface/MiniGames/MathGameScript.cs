@@ -21,6 +21,19 @@ public class MathGameScript : MonoBehaviour
         {
             HandleGameEnd();
         }
+        if (impossibleMode)
+        {
+            num = new float[]
+		    {
+			    (int)UnityEngine.Random.Range(0, 9999f),
+                (int)UnityEngine.Random.Range(0, 9999f),
+                (int)UnityEngine.Random.Range(0, 9999f)
+		    };
+            string baseQuestion = sign == 0 ? $"{num[0]} + ({num[1]} × {num[2]} = ?" : $"({num[0]} ÷ {num[1]}) + {num[2]} =?";
+            questionText.text = $"Solve Math Q{problem}: \n" + ApplyGlitchEffect(baseQuestion);
+            questionText2.text = "\n" + ApplyGlitchEffect(baseQuestion);
+            questionText3.text = "\n" + ApplyGlitchEffect(baseQuestion);
+        }
     }
     #endregion
 
@@ -192,9 +205,9 @@ public class MathGameScript : MonoBehaviour
         {
             QueueAudio(scaryproblem);
         }
-        if (gc.notebooks != 2 && problem != problemcap)
+        if (gc.notebooks <= 2 && problem != problemcap)
         {
-        QueueAudio(bal_problems[problem - 1]);
+            QueueAudio(bal_problems[problem - 1]);
         }
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == problemcap && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == problemcap))
@@ -204,49 +217,250 @@ public class MathGameScript : MonoBehaviour
         }
         else
         {
-            GenerateSimpleMathProblem();
+            if (!gc.PadSEToggle) GenerateMathProblemMain();
+            else GenerateImpossibleProblem();
         }
     }
-    private void CreateQuestion(string Difficulity = "easy")
+    private void CreateQuestion(string Difficulity = "easy") // what the actual fuck
     {
-        if (Difficulity == "easy")
+        int randomRangeInt = Difficulity == "easy" ? 10 : Difficulity == "normal" ? 50 : Difficulity == "hard" ? 100 : Difficulity == "expert" ? 250 : Difficulity == "maniac" ? 1000 : 10;
+        int MultiplicationDifficulity = Difficulity == "easy" ? 0 : Difficulity == "normal" ? 1 : Difficulity == "hard" ? 2 : Difficulity == "expert" ? 3 : Difficulity == "maniac" ? 4 : 1;
+        int[] ReduceArray = new int[]
+		{
+			1,
+			2,
+			3,
+			4,
+			5,
+            6,
+            7,
+            8,
+            9,
+            10
+		};
+        // math shits
+        num = new float[]
+		{
+			(int)UnityEngine.Random.Range(0, (float)randomRangeInt + 1),
+            (int)UnityEngine.Random.Range(0, (float)randomRangeInt + 1),
+            (int)UnityEngine.Random.Range(0, (float)randomRangeInt + 1),
+            (int)UnityEngine.Random.Range(0, (float)randomRangeInt + 1),
+            (int)UnityEngine.Random.Range(0, (float)randomRangeInt + 1)
+		};
+        float[] numMult = new float[]
+		{
+			(int)UnityEngine.Random.Range(0, 11),
+            (int)UnityEngine.Random.Range(0, 26),
+            (int)UnityEngine.Random.Range(0, 101),
+            (int)UnityEngine.Random.Range(0, 251),
+            (int)UnityEngine.Random.Range(0, 1001)
+		};
+        float[] numMult1 = new float[]
+		{
+			(int)UnityEngine.Random.Range(0, 11),
+            (int)UnityEngine.Random.Range(0, 26),
+            (int)UnityEngine.Random.Range(0, 101),
+            (int)UnityEngine.Random.Range(0, 251),
+            (int)UnityEngine.Random.Range(0, 1001)
+		};
+        float[] numMult2 = new float[]
+		{
+			(int)UnityEngine.Random.Range(0, 11),
+            (int)UnityEngine.Random.Range(0, 26),
+            (int)UnityEngine.Random.Range(0, 101),
+            (int)UnityEngine.Random.Range(0, 251),
+            (int)UnityEngine.Random.Range(0, 1001)
+		};
+        //calculating logic
+        int wuh = ReduceArray[UnityEngine.Random.Range(0,10)],wuh2 = (int)Math.Pow(2.0, wuh);
+        float plus = num[0] + num[1];
+        float plusplus = num[0] + num[1] + num[2];
+        float plusplusplus = num[0] + num[1] + num[2] + num[3];
+        float plusplusplusplus = num[0] + num[1] + num[2] + num[3] + num[4];
+        float minus = num[0] - num[1];
+        float minusminus = num[0] - num[1] - num[2];
+        float minusminusminus = num[0] - num[1] - num[2] - num[3];
+        float minusminusminusminus = num[0] - num[1] - num[2] - num[3] - num[4];
+        float plusminus = num[0] + num[1] - num[2];
+        float minusplus = num[0] - num[1] + num[2];
+        float plusplusminus = num[0] + num[1] + num[2] - num[3];
+        float plusminusplus = num[0] + num[1] - num[2] + num[3];
+        float minusplusplus = num[0] - num[1] + num[2] + num[3];
+        float minusminusplus = num[0] - num[1] - num[2] + num[3];
+        float minusplusminus = num[0] - num[1] + num[2] - num[3];
+        float plusplusplusminus = num[0] + num[1] + num[2] + num[3] - num[4]; // holy variable spam
+        float plusplusminusplus = num[0] + num[1] + num[2] - num[3] + num[4];
+        float plusminusplusplus = num[0] + num[1] - num[2] + num[3] + num[4];
+        float minusplusplusplus = num[0] - num[1] + num[2] + num[3] + num[4];
+        float plusminusminusminus = num[0] + num[1] - num[2] - num[3] - num[4];
+        float minusplusminusminus = num[0] - num[1] + num[2] - num[3] - num[4];
+        float minusminusplusminus = num[0] - num[1] - num[2] + num[3] - num[4];
+        float minusminusminusplus = num[0] - num[1] - num[2] - num[3] + num[4];
+        float minusplusminusplus = num[0] - num[1] + num[2] - num[3] + num[4];
+        float plusminusplusminus = num[0] + num[1] - num[2] + num[3] - num[4];
+        float plusplusminusminus = num[0] + num[1] + num[2] - num[3] - num[4];
+        float minusminusplusplus = num[0] - num[1] - num[2] + num[3] + num[4];
+        float minusplusplusminus = num[0] - num[1] + num[2] + num[3] - num[4];
+        float plusminusminusplus = num[0] + num[1] - num[2] - num[3] + num[4];
+        double mult = numMult[MultiplicationDifficulity] * numMult1[MultiplicationDifficulity];
+        double multplus = numMult[MultiplicationDifficulity] * (num[1]+num[2]);
+        double multminus = numMult[MultiplicationDifficulity] * (num[1]-num[2]);
+        double multmult = numMult[MultiplicationDifficulity] * numMult1[MultiplicationDifficulity] * numMult2[MultiplicationDifficulity];
+        int dividedIntNoRound = (int)num[0] >> wuh;
+        double powerOfZero = Math.Pow(num[0], 0.0f);
+        double square = Math.Pow(num[0], 2.0f);
+        double cube = Math.Pow(num[0], 3.0f);
+        double quart = Math.Pow(num[0], 4.0f);
+        //string text logic
+        string plustext = $"{num[0]} + {num[1]}";
+        string plusplustext = $"{num[0]} + {num[1]} + {num[2]}";
+        string plusplusplustext = $"{num[0]} + {num[1]} + {num[2]} + {num[3]}";
+        string plusplusplusplustext = $"{num[0]} + {num[1]} + {num[2]} + {num[3]} + {num[4]}";
+        string minustext = $"{num[0]} - {num[1]}";
+        string minusminustext = $"{num[0]} - {num[1]} - {num[2]}";
+        string minusminusminustext = $"{num[0]} - {num[1]} - {num[2]} - {num[3]}";
+        string minusminusminusminustext = $"{num[0]} - {num[1]} - {num[2]} - {num[3]} - {num[4]}";
+        string plusminustext = $"{num[0]} + {num[1]} - {num[2]}";
+        string minusplustext = $"{num[0]} - {num[1]} + {num[2]}";
+        string plusplusminustext = $"{num[0]} + {num[1]} + {num[2]} - {num[3]}";
+        string plusminusplustext = $"{num[0]} + {num[1]} - {num[2]} + {num[3]}";
+        string minusplusplustext = $"{num[0]} - {num[1]} + {num[2]} + {num[3]}";
+        string minusminusplustext = $"{num[0]} - {num[1]} - {num[2]} + {num[3]}";
+        string minusplusminustext = $"{num[0]} - {num[1]} + {num[2]} - {num[3]}";
+        string plusplusplusminustext = $"{num[0]} + {num[1]} + {num[2]} + {num[3]} - {num[4]}";
+        string plusplusminusplustext = $"{num[0]} + {num[1]} + {num[2]} - {num[3]} + {num[4]}";
+        string plusminusplusplustext = $"{num[0]} + {num[1]} - {num[2]} + {num[3]} + {num[4]}";
+        string minusplusplusplustext = $"{num[0]} - {num[1]} + {num[2]} + {num[3]} + {num[4]}";
+        string plusminusminusminustext = $"{num[0]} + {num[1]} - {num[2]} - {num[3]} - {num[4]}";
+        string minusplusminusminustext = $"{num[0]} - {num[1]} + {num[2]} - {num[3]} - {num[4]}";
+        string minusminusplusminustext = $"{num[0]} - {num[1]} - {num[2]} + {num[3]} - {num[4]}";
+        string minusminusminusplustext = $"{num[0]} - {num[1]} - {num[2]} - {num[3]} + {num[4]}";
+        string minusplusminusplustext = $"{num[0]} - {num[1]} + {num[2]} - {num[3]} + {num[4]}";
+        string plusminusplusminustext = $"{num[0]} + {num[1]} - {num[2]} + {num[3]} - {num[4]}";
+        string plusplusminusminustext = $"{num[0]} + {num[1]} + {num[2]} - {num[3]} - {num[4]}";
+        string minusminusplusplustext = $"{num[0]} - {num[1]} - {num[2]} + {num[3]} + {num[4]}";
+        string minusplusplusminustext = $"{num[0]} - {num[1]} + {num[2]} + {num[3]} - {num[4]}";
+        string plusminusminusplustext = $"{num[0]} + {num[1]} - {num[2]} - {num[3]} + {num[4]}";
+        string multtext = $"{numMult[MultiplicationDifficulity]} X {numMult1[MultiplicationDifficulity]}";
+        string multplustext = $"{numMult[MultiplicationDifficulity]} X ({num[1]} + {num[2]})";
+        string multminustext = $"{numMult[MultiplicationDifficulity]} X ({num[1]} - {num[2]})";
+        string multmulttext = $"{numMult[MultiplicationDifficulity]} X {numMult1[MultiplicationDifficulity]} X {numMult2[MultiplicationDifficulity]}";
+        string dividedIntNoRoundtext = $"{num[0]} / {wuh2} (no roundding stuff,interger type division)";
+        string powerOfZerotext = $"{num[0]}<sup>{0f}</sup>";
+        string squaretext = $"{num[0]}<sup>{2f}</sup>";
+        string cubetext = $"{num[0]}<sup>{3f}</sup>";
+        string quarttext = $"{num[0]}<sup>{4f}</sup>";
+
+        double[] MathType = new double[] //killme
         {
-            
-        }
+            plus,
+            plusplus,
+            plusplusplus,
+            plusplusplusplus,
+            minus,
+            minusminus,
+            minusminusminus,
+            minusminusminusminus,
+            plusminus,
+            minusplus,
+            plusplusminus,
+            plusminusplus,
+            minusplusplus,
+            minusminusplus,
+            minusplusminus,
+            plusplusplusminus,
+            minusplusminusminus,
+            plusminusplusplus,
+            minusplusplusplus,
+            plusminusminusminus,
+            minusplusminusminus,
+            minusminusplusminus,
+            minusminusminusplus,
+            minusplusminusplus,
+            plusminusplusminus,
+            plusplusminusminus,
+            minusminusplusplus,
+            minusplusplusminus,
+            plusminusminusplus,
+            mult,
+            multplus,
+            multminus,
+            multmult,
+            dividedIntNoRound,
+            powerOfZero,
+            square,
+            cube,
+            quart
+        };
+        string[] probleTex = new string[]
+        {
+            plustext,
+            plusplustext,
+            plusplusplustext,
+            plusplusplusplustext,
+            minustext,
+            minusminustext,
+            minusminusminustext,
+            minusminusminusminustext,
+            plusminustext,
+            minusplustext,
+            plusplusminustext,
+            plusminusplustext,
+            minusplusplustext,
+            minusminusplustext,
+            minusplusminustext,
+            plusplusplusminustext,
+            minusplusminusminustext,
+            plusminusplusplustext,
+            minusplusplusplustext,
+            plusminusminusminustext,
+            minusplusminusminustext,
+            minusminusplusminustext,
+            minusminusminusplustext,
+            minusplusminusplustext,
+            plusminusplusminustext,
+            plusplusminusminustext,
+            minusminusplusplustext,
+            minusplusplusminustext,
+            plusminusminusplustext,
+            multtext,
+            multplustext,
+            multminustext,
+            multmulttext,
+            dividedIntNoRoundtext,
+            powerOfZerotext,
+            squaretext,
+            cubetext,
+            quarttext
+        };
+        string problemTextThing = "";
+        int[] QuestionTypesInt = Difficulity == "easy" ? new int[] {0,1,4,5,8,9,29,30,31} : Difficulity == "normal" ? new int[] {0,1,2,4,5,6,7,8,29,30,21,32,34} : new int[] {0,1,3,4};
+        int randomrangeThing = QuestionTypesInt[UnityEngine.Random.Range(0,QuestionTypesInt.Length)];
+        solution = MathType[randomrangeThing].ToString();
+        problemTextThing = probleTex[randomrangeThing];
+        questionText.text = $"Solve Math Q{problem}: \n{problemTextThing} = ?";
     }
 
-    private void GenerateSimpleMathProblem()
+    private void GenerateMathProblemMain()
     {
         CreateQuestion(PlayerPrefs.GetString("CurDifficulity", "normal"));
-        num1 = UnityEngine.Random.Range(0, 20);
-        num2 = UnityEngine.Random.Range(0, 20);
-        sign = UnityEngine.Random.Range(0, 4);
-        double dividedRoundUpNumb = Math.Round(num1 / num2,2);
+        
+        double dividedRoundUpNumb = Math.Round(num[0] / num[1],2);
 
-        //QueueAudio(bal_numbers[Mathf.RoundToInt(num1)]);
-        solution = sign == 0 ? num1 + num2 : sign == 1 ? num1 - num2 : sign == 2 ? num1 * num2 : (float)dividedRoundUpNumb;
-        string RoundUpText = sign == 3 ? " (Then round up the number to 2 digits)": "";
-        string signText = sign == 0 ? "+" : sign == 1 ? "-": sign == 2 ? "x": "/";
-        questionText.text = $"Solve Math Q{problem}: \n{num1}{signText}{num2}{RoundUpText} = ?";
+        //QueueAudio(bal_numbers[Mathf.RoundToInt(num[0])]);
+        //solution = sign == 0 ? num[0] + num[1] : sign == 1 ? num[0] - num[1] : sign == 2 ? num[0] * num[1] : (float)dividedRoundUpNumb;
+        //string RoundUpText = sign == 3 ? " (Then round up the number to 2 digits)": "";
+        //string signText = sign == 0 ? "+" : sign == 1 ? "-": sign == 2 ? "x": "/";
+        //questionText.text = $"Solve Math Q{problem}: \n{num[0]}{signText}{num[1]}{RoundUpText} = ?";
         //QueueAudio(sign == 0 ? bal_plus : bal_minus);
-        //QueueAudio(bal_numbers[Mathf.RoundToInt(num2)]);
+        //QueueAudio(bal_numbers[Mathf.RoundToInt(num[1])]);
         //QueueAudio(bal_equals);
     }
 
     private void GenerateImpossibleProblem()
     {
         impossibleMode = true;
-        questionText.text = $"Solve Math Q{problem}: \n";
-
-        num1 = UnityEngine.Random.Range(1f, 9999f);
-        num2 = UnityEngine.Random.Range(1f, 9999f);
-        num3 = UnityEngine.Random.Range(1f, 9999f);
         sign = Mathf.RoundToInt(UnityEngine.Random.Range(0, 1));
-
-        string baseQuestion = sign == 0 ? $"{num1} + ({num2} × {num3} = ?" : $"({num1} ÷ {num2}) + {num3} =?";
-        questionText2.text = "\n" + ApplyGlitchEffect(baseQuestion);
-        questionText3.text = "\n" + ApplyGlitchEffect(baseQuestion);
-
         QueueAudio(bal_screech);
         //QueueAudio(bal_times);
         QueueAudio(bal_screech);
@@ -352,6 +566,7 @@ public class MathGameScript : MonoBehaviour
         HandleBaldiAnger();
         ClearAudioQueue();
         baldiAudio.Stop();
+        if (impossibleQuestionShown) impossibleMode = false;
         NewProblem();
     }
 
@@ -629,8 +844,8 @@ public class MathGameScript : MonoBehaviour
 
     #region Internal State
     [Header("Game State")]
-    public string context = string.Empty;
-    public float num1, num2, num3, solution;
+    public string context = string.Empty,solution= string.Empty;
+    public float[] num;
     public int problemcap = 9;
     public bool questionInProgress, impossibleMode, negative,thepadgotaawed;
 
