@@ -152,7 +152,7 @@ public class ItemManager : MonoBehaviour
         {
             Items.Add(FoundItemObjects[i].Name, FoundItemObjects[i]);
         }
-
+        Debug.Log($"{Items.Count} items total bitch real");
         Array.Resize(ref Inventory, ItemImages.Count);
         Array.Resize(ref KeyIndex, Inventory.Length);
 
@@ -314,6 +314,14 @@ public class ItemManager : MonoBehaviour
         {
             ItemNameText.text += $" ({SelectedItem.Uses})";
         }
+        ItemNameIdCheck();
+
+        ItemImageBGs[ItemSelection].color = SelectionColor;
+        //ItemHoldImage.texture = SelectedItem.SmallSprite;
+    }
+    public void ItemNameIdCheck()
+    {
+        BaseItem SelectedItem = GetSelectedItemObject();
         if (SelectedItem.ItemID == 15)
         {
             GameControllerScript.Instance.TETOOOOO.SetActive(true);
@@ -322,9 +330,6 @@ public class ItemManager : MonoBehaviour
         {
             GameControllerScript.Instance.TETOOOOO.SetActive(false);
         }
-
-        ItemImageBGs[ItemSelection].color = SelectionColor;
-        //ItemHoldImage.texture = SelectedItem.SmallSprite;
     }
     #endregion
 
@@ -569,7 +574,7 @@ public class ItemManager : MonoBehaviour
     #endregion
 
     #region Fields & Serialized
-    private Dictionary<string, BaseItem> Items = new Dictionary<string, BaseItem>();
+    public Dictionary<string, BaseItem> Items = new Dictionary<string, BaseItem>();
     public HeldItem[] Inventory;
     public int ItemSelection = 0;
     private KeyCode[] KeyIndex = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0 };

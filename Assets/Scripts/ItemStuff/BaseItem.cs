@@ -44,10 +44,13 @@ public class BaseItem : MonoBehaviour
     [Header("Sprite"), Tooltip("Sprite of the item used for pickups")] public Texture BigSprite;
 
     public Texture SmallSprite;
-    
-    [Header("Settings"), Tooltip("How many uses the item has")] public int Uses = 1;
-    [Tooltip("How many Stack the item can have")] public int MaxUsesCap = 1;
+    [Header("ID stuff")]
     [Tooltip("ID of the item.")] public int ItemID;
+    [Tooltip("Name ID of the item.")] public string NameID;
+    
+    [Header("Settings")]
+    [Tooltip("How many uses the item has")] public int Uses = 1;
+    [Tooltip("How many Stack the item can have")] public int MaxUsesCap = 1;
     [Tooltip("erm")] public int TexturePPUThing = 100;
     [Tooltip("Should the item get specified to be an starred item on the minimap")] public bool SpecialItemIcon;
     [Tooltip("Disable it from getting dropped fear")] public bool undropable;
