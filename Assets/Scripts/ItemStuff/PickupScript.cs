@@ -6,6 +6,7 @@ public class PickupScript : Interactable
     #region Initialization Logic
     public void Start()
     {
+        mpb = new MaterialPropertyBlock();
         cachedSprites = new Dictionary<int, Sprite>();
 
 
@@ -53,6 +54,7 @@ public class PickupScript : Interactable
         {
             mapIconSprite.enabled = true;
         }
+        hiding = false;
     }
     public void OnDisable()
     {
@@ -60,6 +62,7 @@ public class PickupScript : Interactable
         {
             mapIconSprite.enabled = false;
         }
+        hiding = true;
     }
 
 
@@ -161,6 +164,32 @@ public class PickupScript : Interactable
         return !trueOrNot;
     }
     #endregion
+    public void Update()
+    {
+        if (!hiding)
+        {
+            GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+            mpb.SetFloat("_OutlineSize", 0);
+            mpb.SetColor("_OutlineColor", Color.clear);
+            GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+            if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+            {
+                Transform hitTransform = hit.transform;
+                float maxDistance = 0f;
+                if (hitTransform.GetComponent<Collider>().gameObject == this.gameObject)
+                {
+                    maxDistance = GameControllerScript.Instance.player.LocalRange;
+                    if (hitTransform.IsWithinDistanceFrom(GameControllerScript.Instance.player.transform, maxDistance))
+                    {
+                        GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+                        mpb.SetFloat("_OutlineSize", 2);
+                        mpb.SetColor("_OutlineColor", Color.white);
+                        GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+                    }
+                }
+            }
+        }
+    }
 
     #region Configuration & State
     [Header("Pickup Settings")]
@@ -176,5 +205,7 @@ public class PickupScript : Interactable
     private Transform location;
     private int originalId;
     private Sprite OriginalSprite;
+    private MaterialPropertyBlock mpb;
+    private bool hiding;
     #endregion
 }

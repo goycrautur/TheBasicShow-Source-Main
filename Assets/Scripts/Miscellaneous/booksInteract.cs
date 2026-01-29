@@ -9,6 +9,8 @@ public class booksInteract : Interactable
     private AudioSource audioDevice;
     private SpriteRenderer notebooSprite;
     public GameObject CheeseMapIcon;
+    public Color HighlightColor;
+    private MaterialPropertyBlock mpb;
     #region Fields
     [Header("Think Pad")]
     private LearningGameManager lgm;
@@ -16,6 +18,7 @@ public class booksInteract : Interactable
 
     private void Start()
     {
+        mpb = new MaterialPropertyBlock();
         notebooSprite = GetComponentInChildren<SpriteRenderer>();
         respawnTime = 120f;
         audioDevice = GetComponent<AudioSource>();
@@ -33,6 +36,30 @@ public class booksInteract : Interactable
 
     private void Update()
     {
+        if (!hidden)
+        {
+            GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+		    mpb.SetFloat("_OutlineSize", 0);
+            mpb.SetColor("_OutlineColor", Color.clear);
+		    GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+            if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+            {
+                Transform hitTransform = hit.transform;
+                float maxDistance = 0f;
+                if (hitTransform.GetComponent<Collider>().gameObject == this.gameObject)
+                {
+                    maxDistance = GameControllerScript.Instance.player.LocalRange;
+                    if (hitTransform.IsWithinDistanceFrom(GameControllerScript.Instance.player.transform, maxDistance))
+                    {
+                        GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+                        mpb.SetFloat("_OutlineSize", 2);
+                        mpb.SetColor("_OutlineColor", HighlightColor);
+                        GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+                    }
+                }
+            }
+        }
+
         if (gc.mode != "endless") return;
 
         if (hidden && respawnTime > 0f)
