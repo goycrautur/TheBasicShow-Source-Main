@@ -35,10 +35,22 @@ public class ITM_SharpRock : BaseItem
         if (SendRay("", out RaycastHit Rayham, GameControllerScript.Instance.player.LocalRange))
         {
             WindowScript w = Rayham.collider.GetComponent<WindowScript>();
-            if (w != null && !w.broken)
+            if (w != null && !w.broken && w.isActiveAndEnabled)
             {
                 GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
                 w.Window(true, true, 6f);
+                GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
+                CameraScript.Instance.TempShakeAmount += 0.5f;
+                return true;
+            }
+        }
+        if (SendRay("", out RaycastHit Rayham2, GameControllerScript.Instance.player.LocalRange))
+        {
+            basicshowWindowScript w = Rayham2.collider.GetComponent<basicshowWindowScript>();
+            if (w != null && !w.broken)
+            {
+                GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                w.SetWindowState(true, 6f, 0f, 1);
                 GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
                 CameraScript.Instance.TempShakeAmount += 0.5f;
                 return true;

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4752ae747094a4187c18c5083912a8, type: 3}
+  m_Name: WoodWindowNormalWall
+  m_EditorClassIdentifier: 
+  durability: 1
+  uniqueCrackSound: 0
+  particlPrefab:
+  - {fileID: 2364439708341662873, guid: dcdfa3443b806e64a82aec2664ef4d7a, type: 3}
+  - {fileID: 1248687123021525828, guid: a8a4e83937d571b4ab0e22d4e250a200, type: 3}
+  crackParticlPrefab: {fileID: 0}
+  crackParticlPrefabArra: []
+  normalWinMats:
+  - {fileID: 2100000, guid: 178f988607b0b9341ab9de1f895e9b87, type: 2}
+  - {fileID: 2100000, guid: 178f988607b0b9341ab9de1f895e9b87, type: 2}
+  - {fileID: 2100000, guid: dce317c7b7a12c6499ed76ef56952319, type: 2}
+  - {fileID: 2100000, guid: dce317c7b7a12c6499ed76ef56952319, type: 2}
+  cracWindowMatsSide1: []
+  cracWindowMatsSide2: []
+  subtitlesObject:
+  - {fileID: 11400000, guid: 1207b72fac060204bb92b1c0dbb4868b, type: 2}
+  - {fileID: 11400000, guid: 419627147ef59e24e95acb2144678eed, type: 2}
+  CrackWindSubtitlesObject: {fileID: 0}
+  CrackWindSubtitlesObjectArrayified: []
+  sounds:
+  - {fileID: 8300000, guid: 3fc70047cfa07dc4ab4d1db6d7147389, type: 3}
+  - {fileID: 8300000, guid: a2705569c6d593f4388a1c546d100e1c, type: 3}
+  CrackedWindowSounds: {fileID: 0}
+  CrackedWindowSoundsButItsAnArray: []

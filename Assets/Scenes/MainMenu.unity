@@ -38149,6 +38149,23 @@ MonoBehaviour:
       ReqIntPPrefsName: 
       PPrefsIntVal: 0
     unlocked: 1
+  - nameSprite: {fileID: 0}
+    CharSprite: {fileID: 21300000, guid: 053b1b9b6fe80a14ebe0f7dee8e1c4bb, type: 3}
+    TextUsesImagesSprite: 0
+    TextFontType: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
+    CharacterNameNormText: player from craldi
+    CharacterDescription: 
+    CharSaveFileTag: craldplay
+    charStats: {fileID: 11400000, guid: 039541e95555044469f889969ae81293, type: 2}
+    NeedRequirements: 0
+    whatsTheRequirements:
+      itNeedSmth: 0
+      ReqStringPPrefs: 
+      PPrefsStringVal: 
+      ReqBoolPPrefsName: 
+      ReqIntPPrefsName: 
+      PPrefsIntVal: 0
+    unlocked: 1
 --- !u!114 &1877723317
 MonoBehaviour:
   m_ObjectHideFlags: 0

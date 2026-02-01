@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: PlusPlayer
   m_EditorClassIdentifier: 
   characterId: 3
-  WalkSpeedStats: 10
-  RunSpeedStats: 16
+  WalkSpeedStats: 14
+  RunSpeedStats: 24
   MaxStamina: 100
   StaminaDrainRateStats: 10
   StaminaHealsRateStats: 20
   MaxHpStats: 100
   DefendMultiplierStats: 1
-  ReachDistanceStats: 10
+  ReachDistanceStats: 15
   SlotsAmmount: 5
   SlotsSkin:
   - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}

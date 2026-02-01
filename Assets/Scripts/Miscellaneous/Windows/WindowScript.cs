@@ -15,7 +15,8 @@ public class WindowScript : MonoBehaviour
     public bool enableOffMeshScript,broken;
     public MeshRenderer window_In,window_Out;
     public MeshCollider meshCollider_In,meshCollider_Out;
-    public GameObject windo, windo2, windoIcon1, windoIcon2;
+    public GameObject windo, windo2;
+    public GameObject windoIcon1, windoIcon2;
     public Material[] WindowMats;
     public void Window(bool broke, bool sound, float soundval)
     {
@@ -91,7 +92,7 @@ public class WindowScript : MonoBehaviour
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
                 if (!UseCustomBoxCollider)
                 {
-                this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
+                this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
                 }
             }
             else
@@ -99,7 +100,7 @@ public class WindowScript : MonoBehaviour
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
                 if (!UseCustomBoxCollider)
                 {
-                this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
+                this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
                 }
             }
             this.gameObject.layer = LayerMask.NameToLayer("Default");
