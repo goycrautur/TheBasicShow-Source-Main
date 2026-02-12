@@ -11,6 +11,9 @@ public class LearningGameManager : MonoBehaviour
     #region UnityCallbacks
     private void Start()
     {
+        string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
+        angerMult = dific == "easy" ? 0.7f : dific == "normal" ? 1 : dific == "hard" ? 1.4f : dific == "expert" ? 1.7f : dific == "maniac" ? 2.2f : 1;
+        tempAngerMult = dific == "easy" ? 0.4f : dific == "normal" ? 0.8f : dific == "hard" ? 1.2f : dific == "expert" ? 1.6f : dific == "maniac" ? 2 : 0.8f;
         gc = GetComponent<GameControllerScript>();
         audioQueue = GetComponent<AudioQueueScript>();
     }
@@ -92,16 +95,16 @@ public class LearningGameManager : MonoBehaviour
         {
             gc.ActivateSpoopMode();
         }
-        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
-        Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*angerMult, 0f,false, "all");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f*angerMult, 0f,false, "famished");
         if (gc.notebooks > 2 && gc.mode == "zerullclassic")
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f*angerMult, 0f,false, "zerull");
         }
         if (allAnswerWrong == 1)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.3f, 0f,false, "zerull");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 0.3f,true, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.3f*angerMult, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 0.3f*tempAngerMult,true, "zerull");
         }
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum")
         {
@@ -181,6 +184,8 @@ public class LearningGameManager : MonoBehaviour
 
     #region References
     [Header("References")]
+    public float angerMult;
+    public float tempAngerMult,ScoreDifMult;
     public AudioSource learnMusic;
     public AudioClip aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout, aud_Prize;
     public subsScriptableObject prizeSubs,famSubs,balSubs,jerSubs,balSubsTIMEOUT;

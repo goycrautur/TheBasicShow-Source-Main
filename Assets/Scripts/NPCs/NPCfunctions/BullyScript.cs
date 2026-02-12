@@ -177,7 +177,7 @@ public class BullyScript : MonoBehaviour
                 num = Mathf.RoundToInt(Random.Range(0, ItemManager.Instance.Inventory.Length));
             }
 
-            if (ItemManager.Instance.Inventory[num].ItemInstance != null)
+            if (ItemManager.Instance.Inventory[num].ItemInstance != null && !ItemManager.Instance.Inventory[num].ItemInstance.unableToGetStealed)
             {
                 Destroy(ItemManager.Instance.Inventory[num].ItemInstance.gameObject);
             }

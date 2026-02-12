@@ -505,6 +505,7 @@ public class ItemManager : MonoBehaviour
         };
 
         var pickup = droppedItem.AddComponent<PickupScript>();
+        pickup.enabled = true;
         pickup.DroppedItem = true;
         pickup.ID = Inventory[index].ItemID;
         pickup.GetType().GetField("PresentMode", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(pickup, false);
@@ -551,9 +552,11 @@ public class ItemManager : MonoBehaviour
         spriteObject.AddComponent<Billboard>().doNotOptimize = true;
         spriteObject.AddComponent<PickupAnimationScript>();
         spriteObject.AddComponent<AddToLightingWhitelist>();
+        pickup.InstantiateReal();
 
         itemToDrop.transform.SetParent(droppedItem.transform);
         itemToDrop.gameObject.SetActive(true);
+        
 
         ClearItem(index, false);
         UpdateItemUI();

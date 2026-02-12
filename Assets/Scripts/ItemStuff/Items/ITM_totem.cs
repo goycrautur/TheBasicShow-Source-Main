@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ITM_totem : BaseItem
+public class ITM_Useless : BaseItem
 {
     public override bool OnUse() => false;
 }

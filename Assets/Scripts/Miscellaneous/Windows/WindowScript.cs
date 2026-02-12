@@ -20,8 +20,10 @@ public class WindowScript : MonoBehaviour
     public Material[] WindowMats;
     public void Window(bool broke, bool sound, float soundval)
     {
+        enableOffMeshScript = false;
         if (!broken && broke)
         {
+            
             /*foreach (PrincipalScript prin in  GameControllerScript.Instance.prinScr)
             {
                 if (prin.isActiveAndEnabled)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CraldiPlayer
   m_EditorClassIdentifier: 
   characterId: 6
-  WalkSpeedStats: 15
+  WalkSpeedStats: 14
   RunSpeedStats: 24
   MaxStamina: 100
   StaminaDrainRateStats: 10
@@ -26,4 +26,4 @@ MonoBehaviour:
   - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
   - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
   - {fileID: 7948025927414220139, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
-  specialTypeShit: 0
+  specialTypeShit: 1

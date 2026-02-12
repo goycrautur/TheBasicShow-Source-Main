@@ -68,7 +68,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         KeyFunctions();
         CurrencySystem();
         PercentageSystemShit();
-        speedtextmf.text = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && GameControllerScript.Instance.player.stamina > 0f ? ""+GameControllerScript.Instance.player.runSpeed : ""+GameControllerScript.Instance.player.walkSpeed;
+        speedtextmf.text = GameControllerScript.Instance.player.playerSpeed.ToString();
         spee.sprite = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && GameControllerScript.Instance.player.stamina > 0f ? run2 : run1;
         defmultText.text = GameControllerScript.Instance.player.PlayerDmgResistance+"X";
     }

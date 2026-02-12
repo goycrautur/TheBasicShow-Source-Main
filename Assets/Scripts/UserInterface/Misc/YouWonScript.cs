@@ -8,8 +8,9 @@ public class YouWonScript : MonoBehaviour
 {
     private void Start()
     {
+        GameControllerScript.Instance.SubtitlesHudFade.Rebind();
+        GameControllerScript.Instance.SubtitlesHudFade.Play("hudFadeOutsubs", -1, 0f);
         AudioSourcereal.ignoreListenerPause = true;
-        Subtitles.SetActive(false);
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
         LappingOfAsylumController.LapInstance.vanishScore = false;
@@ -109,8 +110,6 @@ public class YouWonScript : MonoBehaviour
             }
             if (Sdelay2 <= 0f)
             {
-                Subtitles.SetActive(true);
-                
                 EM.LoadSecretEnding(scoreSystemManager.Instance.CurRank);
                 GameControllerScript.Instance.TimeoutMusic.mute = true;
             }
@@ -118,7 +117,6 @@ public class YouWonScript : MonoBehaviour
     }
 
     [Header("Scene Transition Settings")]
-    public GameObject Subtitles;
     public GameObject scoretext,ranktext,restartObjec,quitObjec;
     public Sprite Yippe;
     public Image uwon;

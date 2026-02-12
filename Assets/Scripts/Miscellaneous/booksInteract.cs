@@ -42,7 +42,7 @@ public class booksInteract : Interactable
 		    mpb.SetFloat("_OutlineSize", 0);
             mpb.SetColor("_OutlineColor", Color.clear);
 		    GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
-            if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+            if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
             {
                 Transform hitTransform = hit.transform;
                 float maxDistance = 0f;
@@ -124,6 +124,10 @@ public class booksInteract : Interactable
         
         gc.Icon.Rebind();
         gc.Icon.Play("IconSpinMain", -1, 0f);
+        string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
+        int problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
+        scoreSystemManager.Instance.AddScore(1000+(75*problemcap), true,true);
+        
         gc.audioDevice2.PlayOneShot(gc.aud_Collected);
 
         if (gc.player.stamina < 100f)
@@ -143,10 +147,6 @@ public class booksInteract : Interactable
 
             }
         }
-        if (gc.notebooks >= 1)
-        {
-        scoreSystemManager.Instance.AddScore(1400, true,true);
-        }
 
         if (gc.notebooks == 2)
         {
@@ -163,9 +163,9 @@ public class booksInteract : Interactable
         }
         if (gc.spoopMode)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f, 0f,false, "all");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f, 0f,false, "famished");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f, 0f,false, "zerull");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f*LearningGameManager.Instance.angerMult, 0f,false, "zerull");
         }
     }
     #region Learning Game Launch

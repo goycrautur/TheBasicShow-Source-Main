@@ -9,14 +9,8 @@ public class EffectScript : MonoBehaviour
     #region Initialization
     private void Start()
     {
-        if (!npcreal.dosentUseNavmesh) 
-        {
-            agent = GetComponent<NavMeshAgent>();
-        }
-        if (npcreal.dosentUseNavmesh) 
-        {
-            rigi = GetComponent<Rigidbody>();
-        }
+        if ((!notNpcEntirely && !npcreal.dosentUseNavmesh) || (notNpcEntirely && notNpcUseNavmesh)) agent = GetComponent<NavMeshAgent>();
+        if ((!notNpcEntirely && npcreal.dosentUseNavmesh) || (notNpcEntirely && !notNpcUseNavmesh)) rigi = GetComponent<Rigidbody>();
     }
     #endregion
     #region Per-Frame Logic
@@ -24,14 +18,8 @@ public class EffectScript : MonoBehaviour
     {
         if (inProjectile)
         {
-            if (!npcreal.dosentUseNavmesh) 
-            {
-                agent.velocity = otherVelocity;
-            }
-            if (npcreal.dosentUseNavmesh) 
-            {
-                rigi.velocity = otherVelocity;
-            }
+            if ((!notNpcEntirely && !npcreal.dosentUseNavmesh) || (notNpcEntirely && notNpcUseNavmesh)) agent.velocity = otherVelocity;
+            if ((!notNpcEntirely && npcreal.dosentUseNavmesh) || (notNpcEntirely && !notNpcUseNavmesh)) rigi.velocity = otherVelocity;
         }
 
         if (failSave.CountdownWithDeltaTime() == 0)
@@ -101,7 +89,7 @@ public class EffectScript : MonoBehaviour
     #endregion
     [SerializeField] private NPC npcreal;
     [SerializeField] private float npcStunTime;
-    [SerializeField] private bool notNpcEntirely;
+    [SerializeField] public bool notNpcEntirely, notNpcUseNavmesh;
 
     #region Internal State
     private NavMeshAgent agent;

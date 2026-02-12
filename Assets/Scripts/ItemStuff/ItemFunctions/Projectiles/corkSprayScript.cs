@@ -47,7 +47,7 @@ public class corkSparyScript : MonoBehaviour
                         yield return null;
                     }
                     stunnedBoss = true;
-                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length);
+                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length, 0);
                     GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
                     Destroy(base.gameObject);
                 }

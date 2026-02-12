@@ -312,6 +312,7 @@ public class FamishedModeController : MonoBehaviour
     }
     public void manualUpdate()
     {
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
         if (gc.notebooks == 2)
         {
             gc.voxLight.ambientLight = Color.black;

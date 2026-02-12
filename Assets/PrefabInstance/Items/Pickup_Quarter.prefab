@@ -166,7 +166,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09b46f1ab00cc5f4e9e419a724e668ba, type: 2}
+  - {fileID: 2100000, guid: f7cfb8b82b7044802b656cb356f2a075, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,5 +312,6 @@ MonoBehaviour:
   PresentMode: 0
   killafterpickup: 1
   SpawnAtRandom: 0
+  instahide: 0
   mapIconSprite: {fileID: 5738541306556404015}
   DroppedItem: 0

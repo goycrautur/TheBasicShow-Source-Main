@@ -255,7 +255,6 @@ MonoBehaviour:
   jumpCount: {fileID: 3006269338170069605}
   Instructions: {fileID: 3006269338170069606}
   rope: {fileID: 3006269338170069206}
-  ps: {fileID: 0}
   playtime: {fileID: 0}
   initVelocity: 16
   jumpropeMoveModifier:
@@ -265,11 +264,12 @@ MonoBehaviour:
   jumpDelay: 0
   jumpHeight: 0
   velocity: 0
+  jumpBuffer: 0.05
   ropeHit: 0
   initialized: 0
   startPos: {x: 0, y: 0, z: 0}
   maxJumps: 5
-  speedModifier: 1
+  speedModifier: 2
 --- !u!1 &3006269338170085343
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,7 +102,7 @@ public class KeyFunctions : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact))
         {
-            if (Sych.ScreenCenterRaycast(out RaycastHit hit) && hit.transform.IsWithinDistance(gc.player.LocalRange))
+            if (Sych.ScreenCenterRaycast(out RaycastHit hit,PlayerClickablesLayer.value) && hit.transform.IsWithinDistance(gc.player.LocalRange))
             {
                 if (hit.collider.TryGetComponent(out Interactable interactable))
                 {
@@ -137,6 +137,7 @@ public class KeyFunctions : MonoBehaviour
     [SerializeField] private GameControllerScript gc;
     [SerializeField] private CursorControllerScript cursorController;
     [SerializeField] private AudioSource audballs;
+    public LayerMask PlayerClickablesLayer;
     #endregion
 
     #region PublicState

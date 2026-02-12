@@ -18,9 +18,15 @@ public class ITM_SharpRock : BaseItem
 
         if (GameControllerScript.Instance.player.jumpropes.Count > 0)
         {
-            GameControllerScript.Instance.player.jumpropes[0].End(false);
-            GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
-            return true;
+            foreach (JumpRopeScript jumpro in GameControllerScript.Instance.player.jumpropes)
+        	{
+            	if (jumpro != null)
+				{
+					jumpro.End(false);
+                    GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                    return true;
+				}
+        	}
         }
 
         if (SendRay("", out RaycastHit Ray, GameControllerScript.Instance.player.LocalRange))
@@ -29,6 +35,16 @@ public class ITM_SharpRock : BaseItem
             {
                 GameControllerScript.Instance.firstPrizeScript.GoCrazy();
                 GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                return true;
+            }
+        }
+        if (SendRay("", out RaycastHit Ray2, GameControllerScript.Instance.player.LocalRange))
+        {
+            NPC ennPeeCee = Ray2.collider.GetComponent<NPC>();
+            if (ennPeeCee != null)
+            {
+                GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                ennPeeCee.Stun(2f);
                 return true;
             }
         }

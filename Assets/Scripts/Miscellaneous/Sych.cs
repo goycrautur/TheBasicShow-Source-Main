@@ -8,17 +8,17 @@ using System.IO;
 
 public static class Sych
 {
-    public static bool ScreenRaycastMatchesTagAndTransform(this Transform target, string tag, out RaycastHit hit, float maxDistance) => ScreenCenterRaycast(out hit) && hit.transform == target && target.IsWithinDistance(maxDistance) && hit.transform.CompareTag(tag);
+    public static bool ScreenRaycastMatchesTagAndTransform(this Transform target, string tag, out RaycastHit hit, float maxDistance,int layerMas = Physics.DefaultRaycastLayers,QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.UseGlobal) => ScreenCenterRaycast(out hit,layerMas,triggerInteraction) && hit.transform == target && target.IsWithinDistance(maxDistance) && hit.transform.CompareTag(tag);
 
-    public static bool ScreenRaycastMatchesTag(string tag, out RaycastHit hit, float maxDistance) => ScreenCenterRaycast(out hit) && hit.transform.IsWithinDistance(maxDistance) && hit.transform.CompareTag(tag);
+    public static bool ScreenRaycastMatchesTag(string tag, out RaycastHit hit, float maxDistance,int layerMas = Physics.DefaultRaycastLayers,QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.UseGlobal) => ScreenCenterRaycast(out hit,layerMas,triggerInteraction) && hit.transform.IsWithinDistance(maxDistance) && hit.transform.CompareTag(tag);
 
-    public static bool ScreenRaycastMatchesCollider(this Collider col, out RaycastHit hit, float maxDistance) => ScreenCenterRaycast(out hit) && hit.transform.IsWithinDistance(maxDistance) && hit.collider == col;
+    public static bool ScreenRaycastMatchesCollider(this Collider col, out RaycastHit hit, float maxDistance,int layerMas = Physics.DefaultRaycastLayers,QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.UseGlobal) => ScreenCenterRaycast(out hit,layerMas,triggerInteraction) && hit.transform.IsWithinDistance(maxDistance) && hit.collider == col;
 
     public static bool RaycastFromPosition(this Vector3 origin, Vector3 direction, out RaycastHit hit, QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.Ignore, int Layermask = -5) => Physics.Raycast(origin, direction, out hit, Mathf.Infinity, Layermask, triggerInteraction);
 
     public static bool RaycastFromPositionWithDistance(this Vector3 origin, Vector3 direction, out RaycastHit hit, float maxDistance = Mathf.Infinity, QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.Ignore, int Layermask = -5) => Physics.Raycast(origin, direction, out hit, maxDistance, Layermask, QueryTriggerInteraction.Ignore);
     
-    public static bool ScreenCenterRaycast(out RaycastHit hit) => Physics.Raycast(Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)), out hit);
+    public static bool ScreenCenterRaycast(out RaycastHit hit,int layerMas = Physics.DefaultRaycastLayers,QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.UseGlobal) => Physics.Raycast(Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)), out hit,Mathf.Infinity,layerMas,triggerInteraction);
 
     public static bool IsWithinDistance(this Transform t, float maxDistance) => Vector3.Distance(Camera.main.transform.position, t.position) <= maxDistance;
 

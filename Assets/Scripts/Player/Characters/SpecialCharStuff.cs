@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class SpecialCharStuff : MonoBehaviour
 {
-    public virtual void OnUpdate() { }
-    public virtual void OnRunning() { }
-    public virtual void OnWalking() { }
+    public virtual void OnStarts() { }
+    public virtual void OnUpdates() { }
     public virtual void WhenHurted() { }
     public virtual void WhenHealed() { }
     public virtual void OnAbility1() { }

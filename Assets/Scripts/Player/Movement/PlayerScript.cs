@@ -59,6 +59,14 @@ public class PlayerScript : MonoBehaviour
 		}
 		if (invisi || invisichalk)
 		{
+			
+			foreach (JumpRopeScript jumpro in jumpropes)
+        	{
+            	if (jumpro != null)
+				{
+					jumpro.End(false);
+				}
+        	}
 			HudManager.Instance.colorVarSetter(false);
 			if (ZerullClassic.Instance.RealBossStarted || FamishedModeController.Instance.OneBounceFamis)
 			{
@@ -258,7 +266,7 @@ public class PlayerScript : MonoBehaviour
 	private void AdjustSpeedAndSensitivity(Vector3 movement, Vector3 lateralMovement)
 	{
 		bool isRunning = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && stamina > 0f;
-		playerSpeed = isRunning ? runSpeed : walkSpeed;
+		if (!OverridePlayerSpeed) playerSpeed = isRunning ? runSpeed : walkSpeed;
 		sensitivity = sensitivityActive ? Mathf.Clamp((movement + lateralMovement).magnitude, 0f, 1f) : 1f;
 		moveDirection = (movement + lateralMovement).normalized * playerSpeed * pModManag.Multiplier * sensitivity * Time.deltaTime;
 
@@ -443,7 +451,7 @@ public class PlayerScript : MonoBehaviour
 		{
 
 			audVal = (int)Random.Range(0f, GameControllerScript.Instance.HurtSounds.Length);
-			GameControllerScript.Instance.audioDevice2.PlayOneShot(GameControllerScript.Instance.HurtSounds[audVal]);
+			lowBudgetAudioManagementShit.Instance.HurtSource.PlayOneShot(GameControllerScript.Instance.HurtSounds[audVal]);
 		}
 		switch (mode)
 		{
@@ -502,12 +510,12 @@ public class PlayerScript : MonoBehaviour
 			sweeping = true;
 			sweepingFailsave = 1f;
 		}
-		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f)
+		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0)
 		{
 			hugging = true;
 			sweepingFailsave = 1f;
 		}
-		else if (other.transform.name == "washingmachine" & firstPrize.velocity.magnitude > 5f)
+		else if (other.transform.name == "washingmachine" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0)
 		{
 			hugging = true;
 			sweepingFailsave = 1f;
@@ -548,10 +556,12 @@ public class PlayerScript : MonoBehaviour
 		yield break;
 	}
 
-	public async void ActivateBoots()
+	public async void ActivateBoots(int time = 60000,bool isboots = true)
 	{
+		if (isboots) isactuallyusingboots = true;
 		bootsActive = true;
-		await Task.Delay(60000);
+		await Task.Delay(time);
+		if (isboots) isactuallyusingboots = false;
 		bootsActive = false;
 	}
 	#endregion
@@ -577,8 +587,8 @@ public class PlayerScript : MonoBehaviour
 	[SerializeField] public DoorScript door;
 	[SerializeField] public CharacterController cc;
 	[SerializeField] private NavMeshAgent gottaSweep, firstPrize;
-	[SerializeField] private Transform firstPrizeTransform, PlayerTransform;
-	public Transform targetToForcelyLookAt;
+	[SerializeField] private Transform firstPrizeTransform;
+	public Transform PlayerTransform,targetToForcelyLookAt;
 	public GameObject hud;
 	[SerializeField] private Material blackSky;
 	[SerializeField] private CameraScript CamCam;
@@ -591,7 +601,8 @@ public class PlayerScript : MonoBehaviour
 	[Header("healthstuff Refrences")]
 	[SerializeField] private Slider healthbar;
 	[SerializeField] private Image barcolo;
-	[SerializeField] private Gradient gradi;
+	[SerializeField] private Gradient gradi,KarmaGradi;
+	
 	[Header("totem Refrences")]
 	public Animator TotemAnimator;
 	public GameObject totemParticl;
@@ -605,7 +616,7 @@ public class PlayerScript : MonoBehaviour
 
 	[Header("Stamina & Player Settings")]
 	public bool sweeping;
-	public bool breakwindow, train, titlecardtotem;
+	public bool breakwindow, train, titlecardtotem,isactuallyusingboots,OverridePlayerSpeed,OverridePlayerRange;
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;

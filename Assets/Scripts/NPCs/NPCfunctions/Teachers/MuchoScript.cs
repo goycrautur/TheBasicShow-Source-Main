@@ -79,6 +79,7 @@ public class MuchoScript : NPC
             {
                 TargetPlayer();
             }
+            //else Debug.Log("didnt saw bro");
         }
     }
     #endregion
@@ -196,7 +197,7 @@ public class MuchoScript : NPC
         {
             if (base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2f / gc.player.PlayerDmgResistance, 0.0125f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2f / gc.player.PlayerDmgResistance, 0.025f, false, true, false);
 				gc.player.killedbybaldi = true;
 			}
         }

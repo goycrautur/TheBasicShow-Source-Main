@@ -699,10 +699,8 @@ MonoBehaviour:
   incorrect: {fileID: -6783477298386761599, guid: 0ea353a601c7ade4cb27d80ac2694365,
     type: 3}
   context: 
-  num1: 0
-  num2: 0
-  num3: 0
   solution: 0
+  num: []
   problemcap: 9
   questionInProgress: 0
   impossibleMode: 0
@@ -2756,7 +2754,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 18
-  m_CharacterLimit: 10
+  m_CharacterLimit: 45
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []

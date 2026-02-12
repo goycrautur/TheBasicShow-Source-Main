@@ -46,7 +46,21 @@ public class MathGameScript : MonoBehaviour
         
         specialCodes = new Dictionary<string, Action>
         {
-            { "31718", () => { StartCoroutine(CheatText("THIS IS WHERE IT ALL BEGAN")); SceneManager.LoadSceneAsync("TestRoom"); } }
+            { "31718", () => 
+                { 
+                    StartCoroutine(CheatText("THIS IS WHERE IT ALL BEGAN")); SceneManager.LoadSceneAsync("TestRoom"); 
+                } 
+            }
+        };
+        ChallengeCodes = new Dictionary<string, Action>
+        {
+            { "92.28.211.234", () => 
+                { 
+                    gc.ExclusiveRoute = "SecretEndChal";
+                    questionText.text = ".......did you really tryna dox me bro?";
+                    padChallengeCode = true;
+                }
+            }
         };
         tbstransis.Rebind();
         tbstransis.Play("yooo", -1, 0f);
@@ -434,7 +448,7 @@ public class MathGameScript : MonoBehaviour
             quarttext
         };
         string problemTextThing = "";
-        int[] QuestionTypesInt = Difficulity == "easy" ? new int[] {0,1,4,5,8,9,29,30,31} : Difficulity == "normal" ? new int[] {0,1,2,4,5,6,7,8,29,30,21,32,34} : new int[] {0,1,3,4};
+        int[] QuestionTypesInt = Difficulity == "easy" ? new int[] {0,1,4,5,8,9,29,30,31} : Difficulity == "normal" ? new int[] {0,1,2,4,5,6,7,8,29,30,21,31,34} : new int[] {0,1,3,4};
         int randomrangeThing = QuestionTypesInt[UnityEngine.Random.Range(0,QuestionTypesInt.Length)];
         solution = MathType[randomrangeThing].ToString();
         problemTextThing = probleTex[randomrangeThing];
@@ -531,6 +545,16 @@ public class MathGameScript : MonoBehaviour
 
         return false;
     }
+    private bool CheckChallengeCodes(string answer)
+    {
+        if (ChallengeCodes.TryGetValue(answer, out Action action))
+        {
+            action.Invoke();
+            return false;
+        }
+
+        return false;
+    }
 
     private bool IsCorrectAnswer()
     {
@@ -547,11 +571,12 @@ public class MathGameScript : MonoBehaviour
         QueueAudio(bal_praises[praiseIndex]);
 
         NewProblem();
-        scoreSystemManager.Instance.AddScore(50);
+        scoreSystemManager.Instance.AddScore(75);
     }
 
     private void HandleIncorrectAnswer()
     {
+        if (CheckChallengeCodes(playerAnswer.text) && problemsWrong == (problemcap-1)) return;
         problemsWrong++;
         results[problem - 1].sprite = incorrect;
 
@@ -562,7 +587,7 @@ public class MathGameScript : MonoBehaviour
             //baldiFeed.SetTrigger("angry");
             gc.ActivateSpoopMode();
         }
-        scoreSystemManager.Instance.AddScore(250);
+        scoreSystemManager.Instance.AddScore(275);
         HandleBaldiAnger();
         ClearAudioQueue();
         baldiAudio.Stop();
@@ -574,11 +599,11 @@ public class MathGameScript : MonoBehaviour
     {
         if (problem == problemcap)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.2f, 0f,false, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.2f*lg.angerMult, 0f,false, "all");
         }
         else
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.15f,true, "all");
+            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.15f*lg.tempAngerMult,true, "all");
         }
     }
 
@@ -673,11 +698,33 @@ public class MathGameScript : MonoBehaviour
             {
                 endDelay = jer_SecretAAW.length;
                 baldiAudio.PlayOneShot(jer_SecretAAW);
-                questionText.text = "fuck you, 2 of your slots will be gone";
+                if (!padChallengeCode)
+                {
+                    if (gc.SlotsAmmount >= 5)
+                    {
+                        questionText.text = "fuck you, 2 of your slots will be gone";
+                        Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
+                        gc.SlotsAmmount = gc.SlotsAmmount - 2;
+                        Singleton<OtherMainStuffManager>.Instance.slot();
+                    }
+                    else if (gc.SlotsAmmount <= 5)
+                    {
+                        questionText.text = "fuck you, 2 of your slots will be go- oh wait you have under 5 slots my bad gang";
+                    }
+                }
+                else if (padChallengeCode)
+                {
+                    string CurrentCharName = PlayerPrefs.GetString("CurrentCharacter", "");
+                    if (CurrentCharName == "ClassicPlayer") 
+                    {
+                        gc.ExclusiveRoute = "ClassicPlayerSecretEndChal";
+                        questionText.text = ".......did you really tryna dox me bro?.... wait no way youre trying it as that weak ass playables character, yknow what? lets gave you the suffering you wanted";
+                        Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
+                        gc.SlotsAmmount = 1;
+                        Singleton<OtherMainStuffManager>.Instance.slot();
+                    }
+                }
                 questionText2.text = questionText3.text = string.Empty;
-                Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
-                gc.SlotsAmmount = gc.SlotsAmmount - 2;
-                Singleton<OtherMainStuffManager>.Instance.slot();
                 gc.PadSEToggle = true;
             }
             if (gc.failedNotebooks == gc.maxNotebooks)
@@ -849,7 +896,7 @@ public class MathGameScript : MonoBehaviour
     public int problemcap = 9;
     public bool questionInProgress, impossibleMode, negative,thepadgotaawed;
 
-    private bool impossibleQuestionShown;
+    [SerializeField] private bool impossibleQuestionShown,padChallengeCode;
     private const int MaxAudioQueueSize = 20;
     private const int SampleDataLength = 64;
     private string[] hintText = { "I GET ANGRIER FOR EVERY PROBLEM YOU GET WRONG", "I HEAR EVERY DOOR YOU OPEN" }, endlessHintText = { "That's more like it...", "Keep up the good work or see me after class..." };
@@ -858,6 +905,6 @@ public class MathGameScript : MonoBehaviour
     public float DelayPreSpoop = 4f, Delay = 0.5f;
     private AudioClip[] audioQueue = new AudioClip[MaxAudioQueueSize];
     private float[] clipSampleData = new float[SampleDataLength];
-    private Dictionary<string, Action> specialCodes;
+    private Dictionary<string, Action> specialCodes,ChallengeCodes;
     #endregion
 }

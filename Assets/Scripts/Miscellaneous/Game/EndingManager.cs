@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class EndingManager : MonoBehaviour
 {
+    private float EndingSequenceWaitTime,EndingSequenceFlashTime,EndingSequenceHelicopTime;
     #region UnityCallbacks
     private void Start() => Game = FindObjectOfType<GameControllerScript>();
     #endregion
@@ -12,19 +13,6 @@ public class EndingManager : MonoBehaviour
     private void Awake() => Instance = this;
     public static EndingManager Instance;
     #endregion
-    public IEnumerator KeepTheHudOff()
-	{
-		while (hidehud)
-		{
-			Game.player.hud.SetActive(false);
-            if (!movething)
-            {
-                Game.player.isForcedToLook = true;
-            }
-			yield return new WaitForEndOfFrame();
-		}
-		yield break;
-	}
     public void endingShit(int ID,bool secret = false)
     {
         Game.youCantPause = true;
@@ -92,13 +80,38 @@ public class EndingManager : MonoBehaviour
                 Game.EvapV2FinaleSounSource[i].Stop();
             }
         }
-        Game.escapeMusic.clip = !secret ? NormEnd : SecretEnd;
+        
         Game.escapeMusic.loop = false;
         Game.escapeMusic.Play();
-        hidehud=true;
-        StartCoroutine(KeepTheHudOff());
-        StartCoroutine(EndingSequence(!secret ? NormEnd.length : SecretEnd.length,!secret ? 11f : 10.323f,ID,secret));
-        StartCoroutine(byebus(!secret ? 5.44f : 5.2f,ID));
+        GameControllerScript.Instance.MainHudFade.Rebind();
+        GameControllerScript.Instance.MainHudFade.Play("hudFadeOutNearly", -1, 0f);
+        GameControllerScript.Instance.RainbowHudFade.Rebind();
+        GameControllerScript.Instance.RainbowHudFade.Play("hudFadeOutRainb", -1, 0f);
+        
+        if (!secret) 
+        {
+            Game.escapeMusic.clip = NormEnd;
+            EndingSequenceWaitTime = NormEnd.length;
+            EndingSequenceFlashTime = 11f;
+            EndingSequenceHelicopTime = 5.44f;
+        }
+        else if (secret && Game.ExclusiveRoute == "") 
+        {
+            Game.escapeMusic.clip = SecretEnd;
+            EndingSequenceWaitTime = SecretEnd.length;
+            EndingSequenceFlashTime = 10.323f;
+            EndingSequenceHelicopTime = 5.2f;
+        }
+        else if (secret && Game.ExclusiveRoute == "ClassicPlayerSecretEndChal") 
+        {
+            Game.escapeMusic.clip = ExclusivFinaleSecretEndClassicPlayer;
+            EndingSequenceWaitTime = ExclusivFinaleSecretEndClassicPlayer.length;
+            EndingSequenceFlashTime = 8f;
+            EndingSequenceHelicopTime = 1f;
+        }
+        Game.escapeMusic.Play();
+        StartCoroutine(EndingSequence(EndingSequenceWaitTime,EndingSequenceFlashTime,ID,secret));
+        StartCoroutine(byebus(EndingSequenceHelicopTime,ID));
     }
     #region PublicMethods
     public IEnumerator byebus(float timetoActuallyMove,int whatWasTheObjectId)
@@ -136,7 +149,6 @@ public class EndingManager : MonoBehaviour
         yield return new WaitForSeconds(WaitTime-timeflash);
         black.SetActive(false);
         LoadNormalResults(secretEnd);
-        hidehud = false;
         Game.player.isForcedToLook = false;
         Game.player.hud.SetActive(true);
         yield return null;
@@ -176,6 +188,12 @@ public class EndingManager : MonoBehaviour
 
     public void LoadSecretEnding(string rankcheck = "none")
     {
+        GameControllerScript.Instance.MainHudFade.Rebind();
+        GameControllerScript.Instance.MainHudFade.Play("hudFadeIn", -1, 0f);
+        GameControllerScript.Instance.RainbowHudFade.Rebind();
+        GameControllerScript.Instance.RainbowHudFade.Play("hudFadeInRainb", -1, 0f);
+        GameControllerScript.Instance.SubtitlesHudFade.Rebind();
+        GameControllerScript.Instance.SubtitlesHudFade.Play("hudFadeInsubs", -1, 0f);
         if (rankcheck == "J")
         {
             pitHole.Instance.hiIgotChanged();
@@ -256,7 +274,7 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Transform[] EndingTransformTP,EndingForceLook;
     [SerializeField] private Billboard[] EndingBillObj;
     [SerializeField] private AudioSource[] EndingAudiSource;
-    [SerializeField] private AudioClip NormEnd,SecretEnd,helicop;
+    [SerializeField] private AudioClip NormEnd,SecretEnd,ExclusivFinaleSecretEndClassicPlayer,helicop;
     [SerializeField] private subsScriptableObject helisubs;
     [SerializeField] private List<GameObject> Environment = new List<GameObject>();
     [SerializeField] public GameObject office, results, black, SecretWarpPoint, NULL, portal;
@@ -265,7 +283,7 @@ public class EndingManager : MonoBehaviour
     #region PublicFields
     [Header("Ending Detection")]
     public bool GetResults;
-    public bool GetSecret,hidehud,movething;
+    public bool GetSecret,movething;
     #endregion
 
     #region PrivateFields

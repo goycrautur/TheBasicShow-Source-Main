@@ -201,8 +201,8 @@ public class MathMachineScript : MonoBehaviour
                 }
                 scoreSystemManager.Instance.AddScore(6500,false);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
-                Singleton<OtherMainStuffManager>.Instance.AngerShit(10f, 0, false, "all");
-                Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 2f, true, "all");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(10f*LearningGameManager.Instance.angerMult, 0, false, "all");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(0, 2f*LearningGameManager.Instance.tempAngerMult, true, "all");
                 ZerullClassic.Instance.maxHealth += 35;
                 ZerullClassic.Instance.health += 35;
             }

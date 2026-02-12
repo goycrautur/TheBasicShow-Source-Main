@@ -6,9 +6,11 @@ using FluidMidi;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.Video;
 
 public class GameControllerScript : MonoBehaviour
 {
+    
     #region SingletonSetup
     private void Awake() => Instance = this;
     public static GameControllerScript Instance;
@@ -17,6 +19,8 @@ public class GameControllerScript : MonoBehaviour
     #region UnityCallbacks
     private void Start()
     {
+        vidplay.enabled = false;
+        thatRawImageThatIHate.enabled = false;
         InitializeGameSettings();
         UpdateNotebookCount();
         Singleton<OtherMainStuffManager>.Instance.slot();
@@ -86,6 +90,19 @@ public class GameControllerScript : MonoBehaviour
     #region Initialization
     private void InitializeGameSettings()
     {
+        foreach (PickupScript pick in FindObjectsOfType<PickupScript>())
+        {
+            ItemsToRespawn.Add(pick.transform.gameObject);
+            if (pick.instahide)
+            {
+                pick.transform.gameObject.SetActive(false);
+                pick.mapIconSprite.enabled = false;
+            }
+        }
+        foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>())
+        {
+            if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
+        }
         war = PlayerPrefsExtension.GetBool("warreal");
         warrealest = war;
         Singleton<Options>.Instance.GetVolume();
@@ -322,6 +339,10 @@ public class GameControllerScript : MonoBehaviour
         {
             StartCoroutine(audioQueue.FadeOut(schoolMusic, 2f));
         }
+    }
+    public void VideoStuff()
+    {
+        
     }
     #endregion
     bool onetimeupdate = false;
@@ -873,6 +894,8 @@ public class GameControllerScript : MonoBehaviour
         public string name;
     }
     #region SerializedFields
+    public VideoPlayer vidplay;
+    public RawImage thatRawImageThatIHate;
     [Header("subtitles object stuff")]
     public subsScriptableObject[] subtitlesScriptableObject;
 
@@ -906,8 +929,9 @@ public class GameControllerScript : MonoBehaviour
 
     [Header("Game Mode & Settings")]
     public string mode;
+    public string ExclusiveRoute;
     public int notebooks, maxNotebooks, maxExits, UnlockAmount, SlotsAmmount, CharacterIntVal;
-    [SerializeField] public bool debugMode, isHiding, MusicGO,youCantPause,metalpipeStun,ipleak;
+    public bool debugMode, isHiding, MusicGO,youCantPause,metalpipeStun,ipleak;
     [SerializeField] private string gameoverScene;
 
     [Header("Serialized References")]
@@ -960,6 +984,9 @@ public class GameControllerScript : MonoBehaviour
     [Header("casual pause menu stuff")]
     public GameObject bal;
     public GameObject moie, famishit;
+    [Header("cool animators stuff")]
+    public Animator VideoFade;
+    public Animator MainHudFade,RainbowHudFade,SubtitlesHudFade;
 
     [Header("math machine stuff")]
     public int numOfBall;

@@ -55,5 +55,7 @@ public class BaseItem : MonoBehaviour
     [Tooltip("Should the item get specified to be an starred item on the minimap")] public bool SpecialItemIcon;
     [Tooltip("Disable it from getting dropped fear")] public bool undropable;
     [Tooltip("litearlly infinite uses yea")] public bool InfiniteUses;
+    [Tooltip("its in the name")] public bool unableToGetStealed;
+    [Tooltip("prevents swapping the item when ur inventory full")] public bool Unswapable;
     #endregion
 }

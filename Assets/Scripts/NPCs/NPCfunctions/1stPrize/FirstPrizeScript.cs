@@ -15,6 +15,8 @@ public class FirstPrizeScript : NPC
     public override void OnUpdate()
     {
         base.OnUpdate();
+        NormalModel.SetActive(!base.stun);
+        StunModel.SetActive(base.stun);
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         runSpeed = DefaultRunspeed * base.agentSpeedScale;
         if (base.stun)
@@ -25,7 +27,6 @@ public class FirstPrizeScript : NPC
         {
             runSpeed = DefaultRunspeed * base.agentSpeedScale;
         }
-
         UpdateAutoBrakeCooldown();
         UpdateRotationAndSpeed();
         HandleCrazyMode();
@@ -44,7 +45,11 @@ public class FirstPrizeScript : NPC
         }
     }
     #endregion
-
+    public override void Stun(float duration)
+    {
+        base.Stun(duration);
+        crazyTime += duration/2;
+    }
     #region Player Detection
     protected override void CheckForPlayer()
     {
@@ -119,7 +124,7 @@ public class FirstPrizeScript : NPC
         if (!audioDevice.isPlaying)
         {
             int num = (int)Random.Range(0f, aud_Found.Length);
-            audioDevice.PlayOneShot(aud_Found[num]);
+            //audioDevice.PlayOneShot(aud_Found[num]);
         }
     }
 
@@ -128,7 +133,7 @@ public class FirstPrizeScript : NPC
         if (!audioDevice.isPlaying)
         {
             int num2 = (int)Random.Range(0f, aud_Lost.Length);
-            audioDevice.PlayOneShot(aud_Lost[num2]);
+            //audioDevice.PlayOneShot(aud_Lost[num2]);
         }
     }
 
@@ -138,7 +143,7 @@ public class FirstPrizeScript : NPC
         if (!audioDevice.isPlaying && num == 0 && coolDown <= 0f)
         {
             int num3 = (int)Random.Range(0f, aud_Random.Length);
-            audioDevice.PlayOneShot(aud_Random[num3]);
+            //audioDevice.PlayOneShot(aud_Random[num3]);
         }
     }
 
@@ -147,7 +152,7 @@ public class FirstPrizeScript : NPC
         if (!audioDevice.isPlaying & !hugAnnounced)
         {
             int num4 = (int)Random.Range(0f, aud_Hug.Length);
-            audioDevice.PlayOneShot(aud_Hug[num4]);
+            //audioDevice.PlayOneShot(aud_Hug[num4]);
             hugAnnounced = true;
         }
     }
@@ -272,28 +277,28 @@ public class FirstPrizeScript : NPC
     {
         if (prevSpeed - agent.velocity.magnitude > 25f)
         {
+            Stun(2f);
+            if (!GameControllerScript.Instance.player.isactuallyusingboots) GameControllerScript.Instance.player.ActivateBoots(2000,false);
             foreach (WindowScript w in FindObjectsOfType<WindowScript>())
             {
                 if (!w.broken)
                 {
                     if (Vector3.Distance(transform.position, w.transform.position) <= 10)
                     {
+                        w.enableOffMeshScript = true;
                         w.Window(true, true, 8f);
                     }
                 }
             }
             audioDevice.PlayOneShot(audBang);
-            //if (hugAnnounced)
-            //{
-                Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
-            //}
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
         }
         prevSpeed = agent.velocity.magnitude;
     }
     #endregion
 
     #region Triggers and Events
-    public void GoCrazy() => crazyTime += 15f;
+    public void GoCrazy(float duration = 15f) => Stun(duration);
 
     private void OnTriggerEnter(Collider other)
     {
@@ -316,9 +321,11 @@ public class FirstPrizeScript : NPC
 
     #region Serialized Variables
 
+    [SerializeField] private GameObject NormalModel,StunModel;
     [Header("Movement & Speed Settings")]
     [SerializeField] private float turnSpeed;
-    [SerializeField] private float runSpeed,DefaultRunspeed, currentSpeed, autoBrakeCool, crazyTime, angleDiff;
+    [SerializeField] private float runSpeed,DefaultRunspeed, currentSpeed, autoBrakeCool, angleDiff;
+    public float crazyTime;
 
     [Header("Player Interaction")]
     [SerializeField] private bool playerSeen;
@@ -332,5 +339,6 @@ public class FirstPrizeScript : NPC
 
     #region Internal State
     private float prevSpeed;
+    
     #endregion
 }

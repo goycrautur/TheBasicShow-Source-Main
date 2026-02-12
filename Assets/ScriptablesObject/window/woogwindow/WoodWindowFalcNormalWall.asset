@@ -20,9 +20,9 @@ MonoBehaviour:
   crackParticlPrefab: {fileID: 0}
   crackParticlPrefabArra: []
   normalWinMats:
+  - {fileID: 2100000, guid: de4a12ba113ce4042990f976fe13955b, type: 2}
   - {fileID: 2100000, guid: 178f988607b0b9341ab9de1f895e9b87, type: 2}
-  - {fileID: 2100000, guid: 178f988607b0b9341ab9de1f895e9b87, type: 2}
-  - {fileID: 2100000, guid: dce317c7b7a12c6499ed76ef56952319, type: 2}
+  - {fileID: 2100000, guid: 89968fb59c585924a9abc8b708a7d40e, type: 2}
   - {fileID: 2100000, guid: dce317c7b7a12c6499ed76ef56952319, type: 2}
   cracWindowMatsSide1: []
   cracWindowMatsSide2: []

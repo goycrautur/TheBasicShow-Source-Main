@@ -33,7 +33,7 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
     {
         if (spamupdatethese)
         {
-        Singleton<OtherMainStuffManager>.Instance.AngerShit(GameControllerScript.Instance.mode == "story" ? 0.0025f : 0.0001f, 0f,false, "all");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(GameControllerScript.Instance.mode == "story" ? 0.0025f*LearningGameManager.Instance.angerMult : 0.0001f*LearningGameManager.Instance.angerMult, 0f,false, "all");
         GameControllerScript.Instance.player.ResetGuilt("running", 1f);
         }
         if (!GameControllerScript.Instance.timeout)

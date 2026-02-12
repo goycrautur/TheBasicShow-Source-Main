@@ -4,16 +4,27 @@ using System.Collections.Generic;
 public class PickupScript : Interactable
 {
     #region Initialization Logic
-    public void Start()
+    public void Awake()
+    {
+       InstantiateReal();
+    }
+    public void InstantiateReal()
     {
         mpb = new MaterialPropertyBlock();
+        GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+        mpb.SetFloat("_OutlineSize", 1);
+        mpb.SetColor("_OutlineColor", Color.clear);
+        GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+    }
+    public void Start()
+    {
         cachedSprites = new Dictionary<int, Sprite>();
 
 
         if (PresentMode)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, 46);
+            ID = Random.Range(1, ItemManager.Instance.Items.Count);
         }
 
         if (SpawnAtRandom)
@@ -38,12 +49,12 @@ public class PickupScript : Interactable
     {
         if (resetIDONLY)
         {
-            ID = Random.Range(1, 46);
+            ID = Random.Range(1, ItemManager.Instance.Items.Count);
         }
         if (!PresentMode && !resetIDONLY)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, 46);
+            ID = Random.Range(1, ItemManager.Instance.Items.Count);
             PresentMode = true;
         }
     }
@@ -69,6 +80,7 @@ public class PickupScript : Interactable
     #region Player Interaction
     public override void Interact()
     {
+        BaseItem holdingitem = ItemManager.Instance.GetSelectedItemObject();
         GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.aud_ItemCollect);
         if (ID == 5)
         {
@@ -120,11 +132,12 @@ public class PickupScript : Interactable
             ItemManager.Instance.CollectItem(ID, GetHeldInstance());
             return;
         }
-
         int orgID = ID;
         BaseItem orgItem = GetHeldInstance();
+        
 
         ID = ItemManager.Instance.GetSelectedItem();
+
         BaseItem newItem = ItemManager.Instance.GetSelectedItemObject();
         newItem.transform.parent = transform;
 
@@ -140,6 +153,7 @@ public class PickupScript : Interactable
 
         if (SlotStuffs(false))
         {
+            if (holdingitem.Unswapable) return;
             transform.gameObject.SetActive(true);
             mapIconSprite.enabled = true;
         }
@@ -169,10 +183,10 @@ public class PickupScript : Interactable
         if (!hiding)
         {
             GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-            mpb.SetFloat("_OutlineSize", 0);
+            mpb.SetFloat("_OutlineSize", 1);
             mpb.SetColor("_OutlineColor", Color.clear);
             GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
-            if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+            if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
             {
                 Transform hitTransform = hit.transform;
                 float maxDistance = 0f;
@@ -195,7 +209,7 @@ public class PickupScript : Interactable
     [Header("Pickup Settings")]
     public int ID;
     [SerializeField] private bool PresentMode, killafterpickup;
-    public bool SpawnAtRandom;
+    public bool SpawnAtRandom,instahide;
     public SpriteRenderer mapIconSprite;
 
     private static Dictionary<int, Sprite> cachedSprites = new Dictionary<int, Sprite>();
@@ -207,5 +221,6 @@ public class PickupScript : Interactable
     private Sprite OriginalSprite;
     private MaterialPropertyBlock mpb;
     private bool hiding;
+    
     #endregion
 }

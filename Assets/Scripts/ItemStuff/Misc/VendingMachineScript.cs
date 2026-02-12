@@ -16,7 +16,7 @@ public class VendingMachineScript : MonoBehaviour
         if (crazyMode)
         {
             VendingFront.material = CrazyFront;
-            itemID = Random.Range(1, 46);
+            itemID = Random.Range(1, ItemManager.Instance.Items.Count);
         }
         WasItShowItemLeftBefor = showsHowManyItemLeft;
         WasItShowMoneyNeededBefor = showsHowManyMoneyNeeded;
@@ -87,16 +87,17 @@ public class VendingMachineScript : MonoBehaviour
 
         if (crazyMode)
         {
-            itemID = Random.Range(1, 46);
+            itemID = Random.Range(1, ItemManager.Instance.Items.Count);
         }
     }
 
-    public void RestockVendingMachine()
+    public void RestockVendingMachine(bool AddOnto = false)
     {
-        whenToOutOfGoods = ogOutOfGoodsValue;
         if (!gameObject.CompareTag("Untagged")) return;
         showsHowManyItemLeft = WasItShowItemLeftBefor;
         showsHowManyMoneyNeeded = WasItShowMoneyNeededBefor;
+        if (!AddOnto) whenToOutOfGoods = ogOutOfGoodsValue;
+        else whenToOutOfGoods += ogOutOfGoodsValue;
         gameObject.tag = "VendingMachine";
         VendingFront.material = NormalFront;
     }

@@ -34,23 +34,22 @@ public class PlaytimeScript : NPC
     {
         base.OnUpdate();
 
-        if(!dontUpdateTheSpeedYOUFUCKINGBITCH)
+        if (!runnin)
         {
-            if (!runnin)
-            {
-                base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-            }
-            if (runnin)
-            {
-                base.agentSpeed = DefaultRunSpeed * base.agentSpeedScale;
-            }
-            agent.speed = base.agentSpeed;
+            base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         }
-        if (base.stun && !dontUpdateTheSpeedYOUFUCKINGBITCH)
+        if (runnin)
+        {
+            base.agentSpeed = DefaultRunSpeed * base.agentSpeedScale;
+        }
+        agent.speed = base.agentSpeed;
+        if (base.stun)
         {
             agent.speed = 0f;
+            playerSeen = false;
+            if (thosewhojumprope != null) thosewhojumprope.End(false);
         }
-        if (base.StunTime < 0f && !dontUpdateTheSpeedYOUFUCKINGBITCH)
+        if (base.StunTime < 0f)
         {
             agent.speed = base.agentSpeed;
         }
@@ -62,31 +61,59 @@ public class PlaytimeScript : NPC
             }
             jumpRopeStarted = false;
         }
+        else jumpropeRaycastCheck();
     }
     #endregion
 
     #region Player Detection & Targeting
     protected override void CheckForPlayer()
     {
-        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 30f))
+        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 50f))
         {
-            bool playerInRange = (transform.position - player.position).magnitude <= 30f;
+            bool playerInRange = (transform.position - player.position).magnitude <= 50f;
 
-            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 30f, QueryTriggerInteraction.UseGlobal))
+            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 50f, QueryTriggerInteraction.UseGlobal))
             {
-                if (hitVape.transform.gameObject.layer == 11) return;
+                if (hitVape.transform.gameObject.layer == 11) 
+                {
+                    return;
+                }
             }
             if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !ps.invisi && !ps.invisichalk)
             {
                 playerSeen = true;
                 TargetPlayer();
             }
+            
             else if (playerSeen && coolDown <= 0f)
             {
                 playerSeen = false;
                 Opposition();
                 runnin = false;
                 Wander();
+            }
+        }
+        
+    }
+    public void jumpropeRaycastCheck()
+    {
+        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 50f))
+        {
+            bool playerInRange = (transform.position - player.position).magnitude <= 50f;
+            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 50f, QueryTriggerInteraction.UseGlobal))
+            {
+                if (hitVape.transform.gameObject.layer == 11) 
+                {
+                    if (thosewhojumprope != null) thosewhojumprope.End(false);
+                    return;
+                }
+            }
+            if (raycastHit.transform.CompareTag("Player") && playerInRange && !gc.player.invisi && !gc.player.invisichalk)
+            {
+            }
+            else 
+            {
+                if (thosewhojumprope != null) thosewhojumprope.End(false);
             }
         }
     }
@@ -153,7 +180,6 @@ public class PlaytimeScript : NPC
     {
         ps.isForcedToLook = true;
         canTargetPlayer = false;
-        dontUpdateTheSpeedYOUFUCKINGBITCH = true;
         disablingWandering = true;
         runnin = false;
         
@@ -164,7 +190,6 @@ public class PlaytimeScript : NPC
 
         while (Vector3.Distance(transform.position, moveBackPosition) > 1f)
         {
-            
             yield return null;
         }
         agent.speed = 0f;
@@ -181,6 +206,7 @@ public class PlaytimeScript : NPC
                 jumpRopeStarted = true;
                 JumpRopeScript jumprope = Instantiate(jumpRopeGame);
                 jumprope.jumpRopTime(this);
+                thosewhojumprope = jumprope;
                 ps.jumpropes.Add(jumprope);
                 if (playingRoutine != null)
                 {
@@ -189,6 +215,7 @@ public class PlaytimeScript : NPC
                 playingRoutine = StartCoroutine(StartPlaying());
             }
         }
+        else if (other.CompareTag("Player") && playCool <= 0f && !jumpRopeStarted && !base.IsHitboxValid) Disappoint();
     }
 
     private void OnTriggerStay(Collider other)
@@ -263,6 +290,7 @@ public class PlaytimeScript : NPC
     public bool dontUpdateTheSpeedYOUFUCKINGBITCH,disablingWandering;
     private Coroutine playingRoutine;
     [HideInInspector] public bool jumpRopeStarted;
+    [HideInInspector] public JumpRopeScript thosewhojumprope;
     #endregion
     [Serializable]
     public class audiofunny

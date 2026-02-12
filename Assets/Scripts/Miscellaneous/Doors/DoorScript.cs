@@ -36,7 +36,7 @@ public class DoorScript : MonoBehaviour
 
     private void HandleDoorInteraction()
     {
-        if ((Input.GetMouseButtonDown(0) | Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)) && trigger.ScreenRaycastMatchesCollider(out _, GameC.player.LocalRange) && Time.timeScale != 0f)
+        if ((Input.GetMouseButtonDown(0) | Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)) && trigger.ScreenRaycastMatchesCollider(out _, GameC.player.LocalRange,KeyFunctions.hi.PlayerClickablesLayer.value) && Time.timeScale != 0f)
         {
             if (bDoorLocked)
             {

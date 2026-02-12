@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<MidiSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SoundFonts>
+    <SoundFontInfo>
+      <Name>gmgsx_unmodified</Name>
+      <PatchCount>236</PatchCount>
+      <WaveCount>505</WaveCount>
+      <WaveSize>7376370</WaveSize>
+      <SF2Path>C:/Users/nicho/AppData/LocalLow/Basically Games/Baldi's Basics Plus\SoundFont\gmgsx_unmodified.sf2</SF2Path>
+    </SoundFontInfo>
+    <SoundFontInfo>
+      <Name>GMGSx</Name>
+      <PatchCount>236</PatchCount>
+      <WaveCount>505</WaveCount>
+      <WaveSize>7376370</WaveSize>
+      <SF2Path>C:/Users/Admin/AppData/LocalLow/quagteamtrust/The Basics Show\SoundFont\GMGSx.sf2</SF2Path>
+    </SoundFontInfo>
+    <SoundFontInfo>
+      <Name>GS Wavetable Synth</Name>
+      <PatchCount>0</PatchCount>
+      <WaveCount>0</WaveCount>
+      <WaveSize>0</WaveSize>
+      <SF2Path>C:/Users/Admin/AppData/LocalLow/quagteamtrust/The Basics Show\SoundFont\GS Wavetable Synth.sf2</SF2Path>
+    </SoundFontInfo>
+    <SoundFontInfo>
+      <Name>soundfont</Name>
+      <PatchCount>0</PatchCount>
+      <WaveCount>0</WaveCount>
+      <WaveSize>0</WaveSize>
+      <SF2Path>C:/Users/Admin/AppData/LocalLow/quagteamtrust/The Basics Show\SoundFont\soundfont.sf2</SF2Path>
+    </SoundFontInfo>
+  </SoundFonts>
+  <IndexSelectedSF>0</IndexSelectedSF>
+  <MidiFiles>
+    <string>rulerSmashLoop</string>
+  </MidiFiles>
+</MidiSet>

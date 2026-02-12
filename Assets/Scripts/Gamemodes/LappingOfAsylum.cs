@@ -353,7 +353,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
             gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
-            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine());
+            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
             Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
             gc.fmc.butch.SetActive(true);
             //gc.zerull.zer.SetActive(true);

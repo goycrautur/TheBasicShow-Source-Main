@@ -23,7 +23,7 @@ public class AlarmClockScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Time.timeScale != 0 && trigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange) && !rang && (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)))
+        if (Time.timeScale != 0 && trigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange,KeyFunctions.hi.PlayerClickablesLayer.value) && !rang && (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)))
         {
             CyclePreset();
         }

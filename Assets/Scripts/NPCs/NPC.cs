@@ -178,7 +178,7 @@ public class NPC : MonoBehaviour
     #endregion
     [Header("Misc Stuffs")]
     #region Internal State
-    protected float coolDown;
+    public float coolDown;
     public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;
     public bool squished,stun,stopOverridingStun;
     public NavMeshAgent agent;

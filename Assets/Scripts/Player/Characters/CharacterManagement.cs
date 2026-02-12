@@ -10,10 +10,21 @@ public class CharacterManagement : MonoBehaviour
         CurrentCharID = PlayerPrefs.GetInt("CharInt", 0);
         updateRefrenceThing();
     }
+    public void Update()
+    {
+        if (SpecialUpdate)
+        {
+            SpecialCharStuff charthingyes = CharactersReal[CurrentCharID].CustomCharExtension;
+            charthingyes.OnUpdates();
+        }
+    }
     public void doSpecialThing()
     {
         SpecialCharStuff charthingyes = CharactersReal[CurrentCharID].CustomCharExtension;
+        charthingyes.OnStarts();
         charthingyes.GiveItemOnSpawn();
+        SpecialUpdate = true;
+        Debug.Log("updated!!");
     }
     public void updateRefrenceThing()
     {
@@ -31,6 +42,7 @@ public class CharacterManagement : MonoBehaviour
         play.maxStamina = CharactersReal[CurrentCharID].CharStatsThing.MaxStamina;
         play.PlayerDmgResistance = CharactersReal[CurrentCharID].CharStatsThing.DefendMultiplierStats;
         play.LocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
+        play.defaultlocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
         Singleton<OtherMainStuffManager>.Instance.slot();
         if (CharactersReal[CurrentCharID].CharStatsThing.specialTypeShit)
         {
@@ -39,6 +51,7 @@ public class CharacterManagement : MonoBehaviour
     }
     public int CurrentCharID;
     public PlayerScript play;
+    private bool SpecialUpdate = false;
     public List<charManagStats> CharactersReal = new List<charManagStats>();
     [Serializable]
     public class charManagStats

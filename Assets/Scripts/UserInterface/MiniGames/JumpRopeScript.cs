@@ -13,7 +13,7 @@ public class JumpRopeScript : MonoBehaviour
 			maxJumps = Random.Range(1, 10);
 		}
 
-		startPos = GameControllerScript.Instance.player.transform.position;
+		startPos = playtime.transform.position;
 		initialized = true;
 		jumpDelay = 1f;
 		ropeHit = true;
@@ -67,12 +67,13 @@ public class JumpRopeScript : MonoBehaviour
 	{
 		if (initialized)
 		{
+			startPos = playtime.transform.position;
         	if (Singleton<InputManager>.Instance.GetActionKeyDown(InputAction.Jump) && jumpHeight <= 0f)
 			{
         	    StartCoroutine(Jump());
 			}
 
-        	if ((GameControllerScript.Instance.player.transform.position - startPos).magnitude >= 20f)
+        	if ((GameControllerScript.Instance.player.transform.position - startPos).magnitude >= 35f)
 			{
             	End(false);
 			}
@@ -83,9 +84,9 @@ public class JumpRopeScript : MonoBehaviour
 	private void RopeHit()
 	{
 		ropeHit = true;
-		if (jumpHeight <= 0.2f)
+		if (jumpHeight <= jumpBuffer)
             Fail();
-        else
+        else if (jumpHeight >= jumpBuffer)
             Success();
         jumpDelay = 0.7f;
     }
@@ -94,7 +95,7 @@ public class JumpRopeScript : MonoBehaviour
         float startVelocity = initVelocity;
         while (jumpHeight >= 0f)
         {
-            jumpropeMoveModifier.movementMultiplier = 0.25f;
+            jumpropeMoveModifier.movementMultiplier = 0.5f;
             jumpHeight += startVelocity * Time.deltaTime + 0.5f * -42f * Time.deltaTime * Time.deltaTime * speedModifier;
             startVelocity += -42f * Time.deltaTime * speedModifier;
             CameraScript.Instance.jumpfloatThing = GameControllerScript.Instance.player.transform.position.y + jumpHeight;
@@ -135,6 +136,7 @@ public class JumpRopeScript : MonoBehaviour
 			
             playtime.Disappoint();
         }
+		playtime.thosewhojumprope = null;
 		CameraScript.Instance.jumpfloatThing = 4.88f;
 		playtime.dontUpdateTheSpeedYOUFUCKINGBITCH = false;
 		playtime.disablingWandering = false;
@@ -162,6 +164,7 @@ public class JumpRopeScript : MonoBehaviour
     [SerializeField] private int jumps;
     [SerializeField] private float jumpDelay;
     [SerializeField] private float jumpHeight, velocity;
+	[SerializeField] private float jumpBuffer = 0.05f;
 
     [Header("State Variables")]
     [SerializeField] private bool ropeHit;

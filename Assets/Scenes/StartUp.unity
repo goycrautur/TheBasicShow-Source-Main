@@ -649,6 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applicationID: 1361672938826498276
   Refresh: 0
+  Dont: 0
   StateDetails: 
   StateStatus: 
   StateIMGLarge: 
@@ -4078,7 +4079,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797992248}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 59347191921455d41948c4cdd5772ec2, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 3635b8100940a794a91d83800ba33b9b, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 18}
@@ -4089,7 +4090,7 @@ VideoPlayer:
   m_RenderMode: 1
   m_AspectRatio: 2
   m_DataSource: 0
-  m_TimeUpdateMode: 2
+  m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:

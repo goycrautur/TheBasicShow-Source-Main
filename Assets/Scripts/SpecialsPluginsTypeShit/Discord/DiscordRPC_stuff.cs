@@ -34,7 +34,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 	}
 	private void OnDisable()
     {
-        discord.Dispose();
+		if (discord != null) discord.Dispose();
     }
 
 	private void Update()
@@ -49,6 +49,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 			catch
 			{
 				Debug.LogWarning("discord was found dead cuz you dont have it on haha"); // dont spam console please
+				
 				Refresh = true;
 			}
 		}
@@ -80,7 +81,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 	public static DiscordRPC_stuff current;
 	public Discord.Discord discord;
 	public long applicationID;
-	public bool Refresh;
+	public bool Refresh,Dont;
 	public string StateDetails,StateStatus,StateIMGLarge,StateIMGSmall;
 	private Activity currentActivity; 
 }
