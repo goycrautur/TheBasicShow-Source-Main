@@ -38,8 +38,24 @@ public class VendingMachineScript : MonoBehaviour
     }
 
     #region Public Actions
+    public void rollItem()
+    {
+        int itemid = Random.Range(1, ItemManager.Instance.Items.Count);
+        BaseItem item = ItemManager.Instance.GetItem(itemid);
+        if (item.blacklistFromGamblingVending) 
+        {
+            rollItem();
+            Debug.Log("item blacklisted, rerolling");
+            return;
+        }
+        else itemID = itemid;
+    }
     public void DispenseItem()
     {
+        if (crazyMode)
+        {
+            rollItem();
+        }
         AudioSource audioDevice = GameControllerScript.Instance.audioDevice;
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
@@ -82,18 +98,11 @@ public class VendingMachineScript : MonoBehaviour
             }
 
         }
-
-        
-
-        if (crazyMode)
-        {
-            itemID = Random.Range(1, ItemManager.Instance.Items.Count);
-        }
     }
 
     public void RestockVendingMachine(bool AddOnto = false)
     {
-        if (!gameObject.CompareTag("Untagged")) return;
+        //if (!gameObject.CompareTag("Untagged")) return;
         showsHowManyItemLeft = WasItShowItemLeftBefor;
         showsHowManyMoneyNeeded = WasItShowMoneyNeededBefor;
         if (!AddOnto) whenToOutOfGoods = ogOutOfGoodsValue;

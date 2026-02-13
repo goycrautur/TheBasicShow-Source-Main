@@ -58,7 +58,7 @@ public class LearningGameManager : MonoBehaviour
         {
             gc.schoolMusic.Play();
         }
-        scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 750, true,true);
+        scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 1000, true,true);
         gc.schoolMusic.ignoreListenerPause = false;
         AudioListener.pause = false;
         Time.timeScale = 1f;

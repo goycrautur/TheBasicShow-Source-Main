@@ -48,13 +48,18 @@ MonoBehaviour:
   - language: EN
     pairs:
     - key: warnMenu_Warning
-      value: hey uhhhhh
+      value: Hi, Quangg/Gray creatur here!
     - key: warnMenu_Disclaimer
-      value: cool text disclaimer am i right
+      value: this build was made specifically for maxplay livestream,its abit rushed
+        i know,(like main mf chasing you in story is mucho mouse etc-)
     - key: warnMenu_dontleak
-      value: so basicly, this is a dev build, dont leak it ok bye
+      value: 'there will be way more content in here instead of the demo so the stream
+        dosent end early :jerrytroll:,and dont leak this!!!
+
+        Trigger warning:
+        loud noises, flashing lights, etc'
     - key: warnMenu_playmf
-      value: <color=red>PROCEED
+      value: Have fun and <color=red>PROCEED
     - key: Menu_play
       value: <#E5B67E>press on this text or press enter
     - key: Menu_VersionText
@@ -186,7 +191,8 @@ MonoBehaviour:
       value: teacher jerry didnt feel like teaching rn, so he tell his subtitute
         cousin mucho mouse to take his place!
     - key: HoverInfoText_Modifiers_EvapPad
-      value: enables or disable the evap pad at any time you want!
+      value: fucking kills the cheese pad when enabled, wont work in some modes ahaha
+        syba
     - key: HoverInfoText_Modifiers_Meeptimer
       value: pizza tower war timer, litearlly
     - key: HoverInfoText_Modifiers_ChaosMode
@@ -196,6 +202,8 @@ MonoBehaviour:
         with Zerull Mode)
     - key: ModeSelectMen_Back
       value: Back
+    - key: ModeSelectMen_locked
+      value: ?????????
     - key: ModeSelectMen_modifi
       value: Modifiers
     - key: ModeSelectMen_stor
@@ -203,9 +211,9 @@ MonoBehaviour:
     - key: ModeSelectMen_bruhmished
       value: famished
     - key: ModeSelectMen_erull
-      value: hell
+      value: z?ERR?!!?!?@null
     - key: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
-      value: Lappin
+      value: deadass pizza mode
     - key: ModeSelectMen_PlayMenStuff_notfound
       value: mode not found, defaulting to story mode
     - key: ModeSelectMen_PlayMenStuff_storyMode
@@ -223,7 +231,7 @@ MonoBehaviour:
     - key: Playmenu_Modifier_muchomous
       value: mucho
     - key: Playmenu_Modifier_EvapPad
-      value: EvapPad
+      value: kill cheese pad
     - key: Playmenu_Modifier_Meeptimer
       value: MEEP Timer
     - key: Playmenu_Modifier_ChaosMode
@@ -240,7 +248,206 @@ MonoBehaviour:
       value: LOCKED
     - key: Playmenu_Modifier_bloxyzerull_Locked
       value: LOCKED
+    - key: global_stunned
+      value: '*Stunned*'
+    - key: bal_slap
+      value: '*SLAP*'
+    - key: mucho_tele
+      value: '*Teleport Sound*'
+    - key: mucho_slam
+      value: '*SLAM*'
+    - key: global_bosshurt
+      value: '*minecraft hurt sound*'
+    - key: 945_sweep
+      value: '*chainsaw maniac intensify*'
+    - key: MemeMouse_ambience
+      value: stupid ass toothless theme intenstify
+    - key: SausageJerry_ambience
+      value: '*goofy ahh music*'
+    - key: SausageJerry_poo
+      value: '*Farting Sound*'
+    - key: Wane_Grunts
+      value: '*Angry grunts*'
+    - key: Wane_Angry
+      value: WANE
+    - key: Maxcipal_detention
+      value: Detention For You.
+    - key: Maxcipal_detention_tier1
+      value: 10 Seconds!
+    - key: Maxcipal_detention_tier2
+      value: 20 Seconds!
+    - key: Maxcipal_detention_tier3
+      value: 40 Seconds!
+    - key: Maxcipal_detention_tier4
+      value: 60 Seconds!
+    - key: Maxcipal_detention_tier5
+      value: 1 day.
+    - key: Maxcipal_scold_detention_tier1_1
+      value: Please look at your mirror again
+    - key: Maxcipal_scold_detention_tier1_2
+      value: and think about yourself
+    - key: Maxcipal_scold_detention_tier2_1
+      value: Please...
+    - key: Maxcipal_scold_detention_tier2_2
+      value: I dont wanna get fireddd...
+    - key: Maxcipal_scold_detention_tier3_1
+      value: You should be..
+    - key: Maxcipal_scold_detention_tier3_2
+      value: More responsible
+    - key: Maxcipal_scold_detention_tier3_3
+      value: Buddy
+    - key: Maxcipal_scold_detention_tier4_1
+      value: i dont know what to say anymore
+    - key: Maxcipal_scold_detention_tier4_2
+      value: '*Cracking sound?*'
+    - key: Maxcipal_scold_detention_tier4_3
+      value: Okay hold up-
+    - key: Maxcipal_scold_detention_tier5_1
+      value: I
+    - key: Maxcipal_scold_detention_tier5_2
+      value: CANT
+    - key: Maxcipal_scold_detention_tier5_3
+      value: TAKE IT
+    - key: Maxcipal_scold_detention_tier5_4
+      value: ANYMORE....
+    - key: Maxcipal_scold_detention_tier6
+      value: fuck you
+    - key: Maxcipal_scold_everywane
+      value: '''Elllo everywane'
+    - key: Maxcipal_scold_gosub_1
+      value: yo go subscribe to maxplay games
+    - key: Maxcipal_scold_gosub_2
+      value: hes such a cool guy
+    - key: Maxcipal_scold_longWhistle_1
+      value: '*Whistling*'
+    - key: Maxcipal_scold_longWhistle_2
+      value: Alright, let me... let me try to whistle
+    - key: Maxcipal_scold_longWhistle_3
+      value: '*whistling the tbs theme'
+    - key: Maxcipal_Whistl
+      value: '*Whistling*'
+    - key: TeacherJerry_hi_1
+      value: Oh.
+    - key: TeacherJerry_hi_2
+      value: Hi!
+    - key: TeacherJerry_hi_3
+      value: Id assume you came here to gather some cheese block n stuff
+    - key: TeacherJerry_hi_4
+      value: Honestly...
+    - key: TeacherJerry_hi_5
+      value: Im quite chill with it
+    - key: TeacherJerry_hi_6
+      value: So...
+    - key: TeacherJerry_hi_7
+      value: go ahead!
+    - key: TeacherJerry_mone_1
+      value: You did good on that one honestly!
+    - key: TeacherJerry_mone_2
+      value: im gonna give you free money cuz im feeling generous today
+    - key: TeacherJerry_finale_1
+      value: CONGRATULATION.
+    - key: TeacherJerry_finale_2
+      value: YOU ACTUALLY FOUND ALL THOSE CHEESE BLOCKS!
+    - key: TeacherJerry_finale_3
+      value: WELL I DIDNT FEEL LIKE HAVING ANYTHING TO SAY HERE EXPECT...
+    - key: TeacherJerry_finale_4
+      value: FIND A WAY BEFORE I CATCH YOUU!
+    - key: TeacherJerry_finale_5
+      value: .......
+    - key: TeacherJerry_finale_6
+      value: oh yea wait until the beat drops
+    - key: TeacherJerry_finale_7
+      value: this song is catchy as hell!
+    - key: cheeseRespawn
+      value: '*Cheese Blocks Respawning*'
+    - key: SwinDoor_open
+      value: '*Swinging door opens*'
+    - key: Baloo_pop
+      value: AAAAAAAAA-
+    - key: normDoor_open
+      value: '*Door opens*'
+    - key: normDoor_close
+      value: '*SLAM*'
+    - key: ElevOrExitClosing_1
+      value: '*concrete sliding sound*'
+    - key: ElevOrExitClosing_2
+      value: '*LOUD BANGING SOUND*'
+    - key: EndingHelicop_1
+      value: Helicopter helicopter
+    - key: EndingHelicop_2
+      value: '*Intense helicopter fan spinning*'
+    - key: methMachine_correct
+      value: '*LOUD CORRECT BUZZER*'
+    - key: methMachine_wrong
+      value: '*Meme Mouse noises*'
+    - key: windo_broken
+      value: '*windo breaks*'
+    - key: windo_repaired
+      value: '*windo repaire*'
+    - key: itemSubtitles_Confetti
+      value: '*Confetti SFX*'
+    - key: itemSubtitles_Teleporter
+      value: '*BREOW*'
+    - key: itemSubtitles_evilFuckingLeafy
+      value: '!??!?!!??!'
+    - key: itemSubtitles_shapeBotomyKey
+      value: Fire In The Hole!
+    - key: itemSubtitles_thmMetalPipe_use
+      value: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*</b>'
+    - key: itemSubtitles_randomBlock_bul
+      value: Im bored.....
+    - key: itemSubtitles_randomBlock_demoman
+      value: '*Laughing*'
+    - key: itemSubtitles_randomBlock_glaceo
+      value: '*Crying noises*'
+    - key: itemSubtitles_randomBlock_sotwLap3Fear
+      value: '*secret lap 3 theme intensify*'
+    - key: itemSubtitles_randomBlock_poteto
+      value: Po-Teto-Teto-Teto
+    - key: itemSubtitles_randomBlock_static
+      value: '*Panic! In static! Out manic!.....wait why am i typing lyrics in a
+        captio*'
+    - key: itemSubtitles_randomBlock_sylveo
+      value: '*Cute Screaming*'
+    - key: itemSubtitles_randomBlock_tetoplush
+      value: '*Plushie noises*'
+    - key: itemSubtitles_genderReveal
+      value: '*Carameldansen intensify*'
+    - key: itemSubtitles_genderReveal_debuff
+      value: Boo-womp
+    - key: itemSubtitles_ogbalditape
+      value: '*Annoying Noise*'
+    - key: itemSubtitles_JerEarPierceDvd
+      value: '*agony noise*'
+    - key: itemSubtitles_JerPeakTape
+      value: '*Absoloutely Peak Music And you cant tell me otherwise*'
+    - key: itemSubtitles_JerPeakTape_Expert_1
+      value: White people be like
+    - key: itemSubtitles_JerPeakTape_Expert_2
+      value: Billy where are you-
+    - key: itemSubtitles_JerPeakTape_Expert_3
+      value: <color=orange>*basement jerri singing*
+    - key: itemSubtitles_JerPeakTape_Expert_4
+      value: <#00FFFF>*megalovania real*
+    - key: itemSubtitles_JerPeakTape_Expert_5
+      value: <color=orange>SHUT YOUR FUCKIGN MOUTH.
+    - key: itemSubtitles_JerPeakTape_Expert_6
+      value: <#00FFFF>*loud ass sigh*
+    - key: itemSubtitles_JerPeakTape_Expert_7
+      value: What is this diddy blud
+    - key: itemSubtitles_JerPeakTape_Expert_8
+      value: doing on the calculator
+    - key: itemSubtitles_JerPeakTape_Expert_9
+      value: Is blud
+    - key: itemSubtitles_JerPeakTape_Expert_10
+      value: Einstein
+    - key: itemSubtitles_JerPeakTape_Expert_11
+      value: Epstein
+    - key: itemSubtitles_JerPeakTape_Expert_12
+      value: '*goofy ahh*'
+    - key: itemSubtitles_JerPeakTape_Expert_13
+      value: <#00FFFF>*boyfridg screaming*
     - key: loadaText
       value: Loading
   currentLang: EN
-  currentJsonVersion: 1
+  currentJsonVersion: 19

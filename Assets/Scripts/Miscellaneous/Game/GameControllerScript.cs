@@ -456,6 +456,7 @@ public class GameControllerScript : MonoBehaviour
             ElevdorRea.ForEach(ed => ed.Opendor = true);
             finaleMode = true;
         }
+        FinaleObjectToDisable.ForEach(o => o.SetActive(false));
     }
 
     public IEnumerator ambatudaldi()
@@ -940,7 +941,7 @@ public class GameControllerScript : MonoBehaviour
     public List<GameObject> ObjectsToEnable,npcCloneList = new List<GameObject>();
     public List<GateScript> Gatesrea = new List<GateScript>();
     public List<ElvDoorScript> ElevdorRea = new List<ElvDoorScript>();
-    public List<GameObject> ObjectsToDisable, ItemsToRespawn,NpcMinimapIcon = new List<GameObject>();
+    public List<GameObject> FinaleObjectToDisable, ObjectsToDisable, ItemsToRespawn,NpcMinimapIcon = new List<GameObject>();
     public List<VendingMachineScript> MachinesToRestock = new List<VendingMachineScript>();
     public List<NPC> NPCThatGetAffectedByMetalPipe = new List<NPC>();
     public Animator Icon,CirclAnimator;

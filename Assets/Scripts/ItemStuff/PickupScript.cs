@@ -11,10 +11,13 @@ public class PickupScript : Interactable
     public void InstantiateReal()
     {
         mpb = new MaterialPropertyBlock();
-        GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-        mpb.SetFloat("_OutlineSize", 1);
-        mpb.SetColor("_OutlineColor", Color.clear);
-        GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+        if (GetComponentInChildren<SpriteRenderer>()!=null) 
+        {
+            GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+            mpb.SetFloat("_OutlineSize", 1);
+            mpb.SetColor("_OutlineColor", Color.clear);
+            GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+        }
     }
     public void Start()
     {
@@ -24,7 +27,7 @@ public class PickupScript : Interactable
         if (PresentMode)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, ItemManager.Instance.Items.Count);
+            rollItem();
         }
 
         if (SpawnAtRandom)
@@ -45,18 +48,26 @@ public class PickupScript : Interactable
         GetComponentInChildren<SpriteRenderer>().sprite = OriginalSprite;
         ID = originalId;
     }
+    public void rollItem()
+    {
+        int itemid = Random.Range(1, ItemManager.Instance.Items.Count);
+        BaseItem item = ItemManager.Instance.GetItem(itemid);
+        if (item.blacklistFromGamblingVending) 
+        {
+            rollItem();
+            Debug.Log("item blacklisted, rerolling");
+            return;
+        }
+        else ID = itemid;
+    }
     public void itsPresentTime(bool resetIDONLY = false)
     {
-        if (resetIDONLY)
-        {
-            ID = Random.Range(1, ItemManager.Instance.Items.Count);
-        }
-        if (!PresentMode && !resetIDONLY)
+        if (!PresentMode && !resetIDONLY) 
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
-            ID = Random.Range(1, ItemManager.Instance.Items.Count);
             PresentMode = true;
         }
+        rollItem();
     }
     #endregion
     public void OnEnable()
@@ -82,6 +93,12 @@ public class PickupScript : Interactable
     {
         BaseItem holdingitem = ItemManager.Instance.GetSelectedItemObject();
         GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.aud_ItemCollect);
+       if (SlotStuffs(false))
+        {
+            if (holdingitem.Unswapable) return;
+            transform.gameObject.SetActive(true);
+            mapIconSprite.enabled = true;
+        }
         if (ID == 5)
         {
             if (ZerullClassic.Instance.realBossStarted)
@@ -108,7 +125,7 @@ public class PickupScript : Interactable
             }
             return;
         }
-        else if (SlotStuffs(true))
+        if (SlotStuffs(true))
         {
             if (!DroppedItem)
             {
@@ -151,13 +168,6 @@ public class PickupScript : Interactable
         GetComponentInChildren<SpriteRenderer>().sprite = cachedSprites[ID];
         gameObject.name = $"Pickup_{ItemManager.Instance.GetItem(ID).Name}";
 
-        if (SlotStuffs(false))
-        {
-            if (holdingitem.Unswapable) return;
-            transform.gameObject.SetActive(true);
-            mapIconSprite.enabled = true;
-        }
-
         ItemManager.Instance.CollectItem(orgID, orgItem);
     }
     #endregion
@@ -182,10 +192,13 @@ public class PickupScript : Interactable
     {
         if (!hiding)
         {
-            GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-            mpb.SetFloat("_OutlineSize", 1);
-            mpb.SetColor("_OutlineColor", Color.clear);
-            GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+            if (GetComponentInChildren<SpriteRenderer>()!=null) 
+            {
+                GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
+                mpb.SetFloat("_OutlineSize", 1);
+                mpb.SetColor("_OutlineColor", Color.clear);
+                GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+            }
             if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
             {
                 Transform hitTransform = hit.transform;
@@ -195,10 +208,13 @@ public class PickupScript : Interactable
                     maxDistance = GameControllerScript.Instance.player.LocalRange;
                     if (hitTransform.IsWithinDistanceFrom(GameControllerScript.Instance.player.transform, maxDistance))
                     {
+                        if (GetComponentInChildren<SpriteRenderer>()!=null) 
+                        {
                         GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
                         mpb.SetFloat("_OutlineSize", 2);
                         mpb.SetColor("_OutlineColor", Color.white);
                         GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+                        }
                     }
                 }
             }

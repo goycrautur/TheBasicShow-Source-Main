@@ -57,5 +57,6 @@ public class BaseItem : MonoBehaviour
     [Tooltip("litearlly infinite uses yea")] public bool InfiniteUses;
     [Tooltip("its in the name")] public bool unableToGetStealed;
     [Tooltip("prevents swapping the item when ur inventory full")] public bool Unswapable;
+    [Tooltip("yea exactly what it said")] public bool blacklistFromGamblingVending;
     #endregion
 }

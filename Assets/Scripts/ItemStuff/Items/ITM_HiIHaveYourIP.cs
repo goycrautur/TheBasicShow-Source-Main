@@ -7,6 +7,7 @@ public class ITM_HiIHaveYourIP : BaseItem
     public override bool OnUse()
     {
         if (used) return false;
+        GameControllerScript.Instance.player.PlayerDmgResistance += DefendAdd;
         GameControllerScript.Instance.audioDevice.PlayOneShot(Used);
         used = true;
         StartCoroutine(amwaitin(duration));
@@ -30,9 +31,10 @@ public class ITM_HiIHaveYourIP : BaseItem
         newGauge.Hide();
         used = false;
         GameControllerScript.Instance.ipleak = false;
+        GameControllerScript.Instance.player.PlayerDmgResistance -= DefendAdd;
         yield break;
     }
-    [SerializeField] private float duration = 60f;
+    [SerializeField] private float duration = 60f,DefendAdd;
     [SerializeField] private AudioClip Used;
     [SerializeField] private Sprite Sprite;
     [SerializeField] private bool used;
