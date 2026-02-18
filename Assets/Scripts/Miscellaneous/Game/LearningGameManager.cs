@@ -120,7 +120,7 @@ public class LearningGameManager : MonoBehaviour
                     //Television.baldingit = true;
                     //StartCoroutine(timeounaleshit(aud_AllNotebooks,balSubs));
                     Television.TeacherJerryingIt = true;
-                    StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese,jerSubs));
+                    if (!gc.FinaleSecret) StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese,jerSubs));
                 }
                 else
                 {

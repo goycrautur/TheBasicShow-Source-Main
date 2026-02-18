@@ -191,7 +191,7 @@ public class booksInteract : Interactable
                 //lgm.Television.baldingit = true;
                 //StartCoroutine(lgm.timeounaleshit(lgm.aud_AllNotebooks,lgm.balSubs));
                 lgm.Television.TeacherJerryingIt = true;
-                StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese,lgm.jerSubs));
+                if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese,lgm.jerSubs));
             }
             if (gc.mode == "famished")
             {
