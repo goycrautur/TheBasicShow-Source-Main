@@ -47,7 +47,7 @@ public class CameraScript : MonoBehaviour
             }
             if (ps.killedbyhim)
             {
-                transform.position = him.position + baldi.forward * 2f + Vector3.up * GameOverOffset;
+                transform.position = him.position + baldi.forward * 16f + Vector3.up * GameOverOffset;
                 transform.LookAt(him.position + Vector3.up * 5f);
             }
         }

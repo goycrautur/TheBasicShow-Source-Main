@@ -136,7 +136,6 @@ public class ZerullBossScript : MonoBehaviour
         {
             audioDevice.QueueAudio(bossStart, bossyapStart_captions);
         }
-        ToggleState(false, firstHit, true);
         agent.speed += 0.75f * hp;
         GameControllerScript.Instance.player.DefaultWalkSpeed += 0.7f * hp;
         GameControllerScript.Instance.player.DefaultRunSpeed += 0.7f * hp;
@@ -153,6 +152,9 @@ public class ZerullBossScript : MonoBehaviour
     {
         while (time > 0f)
         {
+            agent.isStopped = true;
+            ZerullClassic.Instance.debug = true;
+            if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.Midi) Singleton<MusicManager>.Instance.SetSpeed(0.001f, ZerullClassic.Instance.normalMidiPlayerLoop, null);
             time -= Time.deltaTime;
             spriteProperties.SetFloat("_Percent", 0.9f);
             spriteProperties.SetFloat("_Seed", Random.Range(0f, 4096f));
@@ -166,7 +168,8 @@ public class ZerullBossScript : MonoBehaviour
         spriteProperties.SetFloat("_Percent", 0f);
         spriteProperties.SetFloat("_Seed", 0f);
         normalSprite.SetPropertyBlock(spriteProperties);
-        ToggleState(true, firsthit, false);
+        ZerullClassic.Instance.debug = firsthit;
+        agent.isStopped = firsthit;
         
         ZerullClassic.Instance.AfterHit();
         hitted = false;
@@ -178,23 +181,6 @@ public class ZerullBossScript : MonoBehaviour
         audioDevice.QueueAudio(bossIntro,bossyapIntro_captions);
         audioDevice.QueueAudio(bossIntro_Loop,bossyapIntroloop_captions);
         //audioDevice.SetLoop(true);
-    }
-
-    public void ToggleState(bool toggle, bool firstHit, bool delay)
-    {
-        if (firstHit)
-        {
-            return;
-        }
-        if (delay)
-        {
-            StopCoroutine(ToggleDelay(toggle));
-            StartCoroutine(ToggleDelay(toggle));
-        }
-        else
-        {
-            agent.isStopped = !toggle;
-        }
     }
 
     private IEnumerator ToggleDelay(bool toggle)

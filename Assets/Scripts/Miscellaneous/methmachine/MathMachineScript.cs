@@ -198,6 +198,7 @@ public class MathMachineScript : MonoBehaviour
                 if (GameControllerScript.Instance.notebooks == 2 && GameControllerScript.Instance.mode == "famished")
                 {
                     FamishedModeController.Instance.specialLmsToggle=true;
+                    FamishedModeController.Instance.bro();
                 }
                 scoreSystemManager.Instance.AddScore(6500,false);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);

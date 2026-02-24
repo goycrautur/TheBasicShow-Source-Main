@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class CharacterManagement : MonoBehaviour
 {
-    private void Start()
+    #region SingletonSetup
+    private void Awake() => Instance = this;
+    public static CharacterManagement Instance;
+    #endregion
+
+    public void noiseiscallingpickupphone()
     {
         CurrentCharID = PlayerPrefs.GetInt("CharInt", 0);
         updateRefrenceThing();
@@ -28,21 +33,22 @@ public class CharacterManagement : MonoBehaviour
     }
     public void updateRefrenceThing()
     {
+        GameControllerScript gc = GameControllerScript.Instance;
         if (CurrentCharID == null) CurrentCharID = 0;
-        GameControllerScript.Instance.SlotsAmmount = CharactersReal[CurrentCharID].CharStatsThing.SlotsAmmount;
-        AdditionalGameCustomizer.Instance.ItemSlotsSprites[0] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[0];
-        AdditionalGameCustomizer.Instance.ItemSlotsSprites[1] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[1];
-        AdditionalGameCustomizer.Instance.ItemSlotsSprites[2] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[2];
-        play.DefaultWalkSpeed = CharactersReal[CurrentCharID].CharStatsThing.WalkSpeedStats;
-        play.DefaultRunSpeed = CharactersReal[CurrentCharID].CharStatsThing.RunSpeedStats;
-        play.DefaultstaminaDrop = CharactersReal[CurrentCharID].CharStatsThing.StaminaDrainRateStats;
-        play.DefaultstaminaRise = CharactersReal[CurrentCharID].CharStatsThing.StaminaHealsRateStats;
-        play.maxHealth = CharactersReal[CurrentCharID].CharStatsThing.MaxHpStats;
-        play.health = CharactersReal[CurrentCharID].CharStatsThing.MaxHpStats;
-        play.maxStamina = CharactersReal[CurrentCharID].CharStatsThing.MaxStamina;
-        play.PlayerDmgResistance = CharactersReal[CurrentCharID].CharStatsThing.DefendMultiplierStats;
-        play.LocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
-        play.defaultlocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
+        Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue(true, CharactersReal[CurrentCharID].CharStatsThing.SlotsAmmount);
+        ItemManager.Instance.ItemSlotsSprites[0] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[0];
+        ItemManager.Instance.ItemSlotsSprites[1] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[1];
+        ItemManager.Instance.ItemSlotsSprites[2] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[2];
+        gc.player.DefaultWalkSpeed = CharactersReal[CurrentCharID].CharStatsThing.WalkSpeedStats;
+        gc.player.DefaultRunSpeed = CharactersReal[CurrentCharID].CharStatsThing.RunSpeedStats;
+        gc.player.DefaultstaminaDrop = CharactersReal[CurrentCharID].CharStatsThing.StaminaDrainRateStats;
+        gc.player.DefaultstaminaRise = CharactersReal[CurrentCharID].CharStatsThing.StaminaHealsRateStats;
+        gc.player.maxHealth = CharactersReal[CurrentCharID].CharStatsThing.MaxHpStats;
+        gc.player.health = CharactersReal[CurrentCharID].CharStatsThing.MaxHpStats;
+        gc.player.maxStamina = CharactersReal[CurrentCharID].CharStatsThing.MaxStamina;
+        gc.player.PlayerDmgResistance = CharactersReal[CurrentCharID].CharStatsThing.DefendMultiplierStats;
+        gc.player.LocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
+        gc.player.defaultlocalRange = CharactersReal[CurrentCharID].CharStatsThing.ReachDistanceStats;
         Singleton<OtherMainStuffManager>.Instance.slot();
         if (CharactersReal[CurrentCharID].CharStatsThing.specialTypeShit)
         {
@@ -50,7 +56,6 @@ public class CharacterManagement : MonoBehaviour
         }
     }
     public int CurrentCharID;
-    public PlayerScript play;
     private bool SpecialUpdate = false;
     public List<charManagStats> CharactersReal = new List<charManagStats>();
     [Serializable]

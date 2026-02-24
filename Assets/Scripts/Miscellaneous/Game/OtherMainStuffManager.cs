@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
@@ -306,194 +307,78 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             }
         }
     }
+    public void UpdateItemSizeAssignValue(bool setSlotNum = false, int SlotNumber = 1)
+    {
+        if (setSlotNum) GameControllerScript.Instance.SlotsAmmount = SlotNumber;
+        if (GameControllerScript.Instance.SlotsAmmount >= ItemManager.Instance.Inventory.Length) 
+        {
+            SlotsAmmou = ItemManager.Instance.Inventory.Length;
+            MaxSlotsAmmou = ItemManager.Instance.Inventory.Length;
+        }
+        else SlotsAmmou = GameControllerScript.Instance.SlotsAmmount;
+        GameControllerScript.Instance.SlotsAmmount = SlotsAmmou;
+        
+    }
+    public void ResizeAltInventory() // bru
+    {
+        Array.Resize(ref AltInventory, MaxSlotsAmmou);
+    }
+    public void UpdateAltInventory()
+    {
+        for (int i = 0; i < SlotsAmmou; ++i)
+        {
+            AltInventory[i].ItemID = ItemManager.Instance.Inventory[i].ItemID;
+            AltInventory[i].ItemInstance = ItemManager.Instance.Inventory[i].ItemInstance;
+            AltInventory[i].ItemImages = ItemManager.Instance.Inventory[i].ItemImages;
+            AltInventory[i].ItemImageBGs = ItemManager.Instance.Inventory[i].ItemImageBGs;
+            AltInventory[i].ItemImageSlots = ItemManager.Instance.Inventory[i].ItemImageSlots;
+            AltInventory[i].SlotID = ItemManager.Instance.Inventory[i].SlotID;
+        }
+    }
     public void slot()
     {
-        if (ItemManager.Instance.ItemSelection >= GameControllerScript.Instance.SlotsAmmount)
+        Debug.Log("slotted");
+        if (ItemManager.Instance.ItemSelection >= SlotsAmmou) ItemManager.Instance.ItemSelection = SlotsAmmou - 1;
+        if (SlotsAmmou == 0)
         {
-            ItemManager.Instance.ItemSelection = GameControllerScript.Instance.SlotsAmmount - 1;
+            AltInventory[0].ItemImages.enabled = false;
+            AltInventory[0].ItemImageBGs.enabled = false;
+            AltInventory[0].ItemImageSlots.enabled = false;
+            return;
         }
-        AdditionalGameCustomizer.Instance.ItemImageSlots[GameControllerScript.Instance.SlotsAmmount-1].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[2];
-        for (int i = 1; i < GameControllerScript.Instance.SlotsAmmount-1; ++i)
+        ItemManager.Instance.Inventory[SlotsAmmou-1].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[2];
+        for (int i = 1; i < SlotsAmmou-1; ++i)
         {
-            AdditionalGameCustomizer.Instance.ItemImageSlots[i].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[1];
+            ItemManager.Instance.Inventory[i].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[1];
         }
-        AdditionalGameCustomizer.Instance.ItemImageSlots[0].sprite = AdditionalGameCustomizer.Instance.ItemSlotsSprites[GameControllerScript.Instance.SlotsAmmount != 1 ? 0 : 1];
-        if (GameControllerScript.Instance.SlotsAmmount >= 9)
+        ItemManager.Instance.Inventory[0].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[GameControllerScript.Instance.SlotsAmmount != 1 ? 0 : 1];
+        for (int i = SlotsAmmou-1; i < MaxSlotsAmmou; ++i)
         {
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory9slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages9slot, AdditionalGameCustomizer.Instance.ItemImageBGs9slot);
-            for (int i = 0; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
+            AltInventory[i].ItemImages.enabled = false;
+            AltInventory[i].ItemImageBGs.enabled = false;
+            AltInventory[i].ItemImageSlots.enabled = false;
         }
-        if (GameControllerScript.Instance.SlotsAmmount == 8)
+        for (int i = 0; i < SlotsAmmou; ++i)
         {
-            if (ItemManager.Instance.Inventory[8].ItemInstance != null&& ItemManager.Instance.ItemSelection != 7)
-            {
-                ItemManager.Instance.DropItem(8);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory8slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages8slot, AdditionalGameCustomizer.Instance.ItemImageBGs8slot);
-            AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[8].SetActive(false);
-            AdditionalGameCustomizer.Instance.ItemSlotsGameObj[8].SetActive(false);
-            AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[8].SetActive(false);
-            for (int i = 0; i < 8; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
+            AltInventory[i].ItemImages.enabled = true;
+            AltInventory[i].ItemImageBGs.enabled = true;
+            AltInventory[i].ItemImageSlots.enabled = true;
         }
-        if (GameControllerScript.Instance.SlotsAmmount == 7)
+        Array.Resize(ref ItemManager.Instance.Inventory, SlotsAmmou);
+        for (int i = 0; i < ItemManager.Instance.Inventory.Length; ++i)
         {
-            if (ItemManager.Instance.Inventory[7].ItemInstance != null && ItemManager.Instance.ItemSelection != 6)
-            {
-                ItemManager.Instance.DropItem(7);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory7slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages7slot, AdditionalGameCustomizer.Instance.ItemImageBGs7slot);
-            for (int i = 6; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            for (int i = 0; i < 7; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
-        }
-        if (GameControllerScript.Instance.SlotsAmmount == 6)
-        {
-            if (ItemManager.Instance.Inventory[6].ItemInstance != null && ItemManager.Instance.ItemSelection != 5)
-            {
-                ItemManager.Instance.DropItem(6);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory6slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages6slot, AdditionalGameCustomizer.Instance.ItemImageBGs6slot);
-            for (int i = 5; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            for (int i = 0; i < 6; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
-        }
-        if (GameControllerScript.Instance.SlotsAmmount == 5)
-        {
-            if (ItemManager.Instance.Inventory[5].ItemInstance != null && ItemManager.Instance.ItemSelection != 4)
-            {
-                ItemManager.Instance.DropItem(5);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory5slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages5slot, AdditionalGameCustomizer.Instance.ItemImageBGs5slot);
-            for (int i = 4; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            for (int i = 0; i < 5; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
-        }
-        if (GameControllerScript.Instance.SlotsAmmount == 4)
-        {
-            if (ItemManager.Instance.Inventory[4].ItemInstance != null && ItemManager.Instance.ItemSelection != 3)
-            {
-                ItemManager.Instance.DropItem(4);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory4slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages4slot, AdditionalGameCustomizer.Instance.ItemImageBGs4slot);
-            for (int i = 3; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            for (int i = 0; i < 4; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
-        }
-        if (GameControllerScript.Instance.SlotsAmmount == 3)
-        {
-            if (ItemManager.Instance.Inventory[3].ItemInstance != null && ItemManager.Instance.ItemSelection != 2)
-            {
-                ItemManager.Instance.DropItem(3);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory3slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages3slot, AdditionalGameCustomizer.Instance.ItemImageBGs3slot);
-            for (int i = 2; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            for (int i = 0; i < 3; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
-        }
-        if (GameControllerScript.Instance.SlotsAmmount == 2)
-        {
-            if (ItemManager.Instance.Inventory[2].ItemInstance != null && ItemManager.Instance.ItemSelection != 1)
-            {
-                ItemManager.Instance.DropItem(2);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory2slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages2slot, AdditionalGameCustomizer.Instance.ItemImageBGs2slot);
-            for (int i = 1; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            for (int i = 0; i < 2; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(true);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(true);
-            }
-        }
-        if (GameControllerScript.Instance.SlotsAmmount == 1)
-        {
-            if (ItemManager.Instance.Inventory[1].ItemInstance != null && ItemManager.Instance.ItemSelection != 0)
-            {
-                ItemManager.Instance.DropItem(1);
-            }
-            ItemManager.Instance.Inventory = AdditionalGameCustomizer.Instance.Inventory1slot;
-            //ItemManager.Instance.ChangeReferences(AdditionalGameCustomizer.Instance.ItemImages1slot, AdditionalGameCustomizer.Instance.ItemImageBGs1slot);
-            for (int i = 0; i < 9; ++i)
-            {
-                AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsGameObj[i].SetActive(false);
-                AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[i].SetActive(false);
-            }
-            AdditionalGameCustomizer.Instance.ItemBackgroundsGameObj[0].SetActive(true);
-            AdditionalGameCustomizer.Instance.ItemSlotsGameObj[0].SetActive(true);
-            AdditionalGameCustomizer.Instance.ItemSlotsImagesGameObj[0].SetActive(true);
+            ItemManager.Instance.Inventory[i].ItemID = AltInventory[i].ItemID;
+            ItemManager.Instance.Inventory[i].ItemInstance = AltInventory[i].ItemInstance;
+            ItemManager.Instance.Inventory[i].ItemImages = AltInventory[i].ItemImages;
+            ItemManager.Instance.Inventory[i].ItemImageBGs = AltInventory[i].ItemImageBGs;
+            ItemManager.Instance.Inventory[i].ItemImageSlots = AltInventory[i].ItemImageSlots;
+            ItemManager.Instance.Inventory[i].SlotID = AltInventory[i].SlotID;
         }
         ItemManager.Instance.UpdateItemUI();
     }
     #endregion
     public float MuchoStunDura,FamStunDura,ZerStunDura,BalStunDura;
+    public HeldItem[] AltInventory;
     public bool MuchoStunCount,FamStunCount,ZerStunCount,BalStunCount;
+    public int SlotsAmmou,MaxSlotsAmmou;
 }

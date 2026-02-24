@@ -19,13 +19,8 @@ public class GameControllerScript : MonoBehaviour
     #region UnityCallbacks
     private void Start()
     {
-        vidplay.enabled = false;
-        thatRawImageThatIHate.enabled = false;
         InitializeGameSettings();
         UpdateNotebookCount();
-        Singleton<OtherMainStuffManager>.Instance.slot();
-        Shader.SetGlobalFloat("_VertexGlitchIntensity", 0f);
-        Shader.SetGlobalFloat("_VertexGlitchSeed", 0f);
     }
     private void FixedUpdate()
     {
@@ -90,6 +85,12 @@ public class GameControllerScript : MonoBehaviour
     #region Initialization
     private void InitializeGameSettings()
     {
+        vidplay.enabled = false;
+        thatRawImageThatIHate.enabled = false;
+        Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue();
+        Singleton<OtherMainStuffManager>.Instance.ResizeAltInventory();
+        Singleton<OtherMainStuffManager>.Instance.UpdateAltInventory();
+        CharacterManagement.Instance.noiseiscallingpickupphone();
         foreach (PickupScript pick in FindObjectsOfType<PickupScript>())
         {
             ItemsToRespawn.Add(pick.transform.gameObject);
@@ -897,6 +898,9 @@ public class GameControllerScript : MonoBehaviour
     #region SerializedFields
     public VideoPlayer vidplay;
     public RawImage thatRawImageThatIHate;
+    [Header("Target Materials")]
+    public List<Material> targetMaterials = new List<Material>();
+    public List<Material> MaterialsThatNeedSpecialCare = new List<Material>();
     [Header("subtitles object stuff")]
     public subsScriptableObject[] subtitlesScriptableObject;
 
@@ -957,7 +961,7 @@ public class GameControllerScript : MonoBehaviour
     public AudioSource[] EvapV2FinaleSounSource;
     public SongPlayer midishit1;
     public AudioSource audioDevice, audioDevice2, schoolMusic, escapeMusic, gamaOvarDevice,warmusic,TimeoutMusic,TpSoundSource;
-    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape,TaldiEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell,gambling, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud;
+    public AudioClip aud_Hang, aud_Rattling, aud_Unlocked, aud_ItemCollect, SchoolhouseEscape,TaldiEscape, shithourIntro, shithourLoop, aud_Collected, aud_ChaosStart, aud_ChaosStartLoop, aud_ChaosBuildUp, aud_ChaosFinal, aud_Teleport, aud_EvilLeafyTP, deathbell,gambling, punchsoun, totem,loboto, gastervanish,monesound,LoudIncorecBugger,timeoutMusicAud,deltaexplode,agonyscream,gastersfx;
     #endregion
 
     #region PrivateFields

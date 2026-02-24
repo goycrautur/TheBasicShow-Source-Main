@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 public class BsodaSparyScript : MonoBehaviour
 {
@@ -12,15 +13,19 @@ public class BsodaSparyScript : MonoBehaviour
             transform.eulerAngles = eulerAngles;
         }
 
-        rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
+        cc = GetComponent<CharacterController>();
+        ccDirection = GameControllerScript.Instance.cameraTransform.TransformDirection(Vector3.forward) * speed/200;
+        //rb = GetComponent<Rigidbody>();
+        //rb.velocity = transform.forward * speed;
     }
     #endregion
 
     #region Per-Frame Logic
     private void Update()
     {
-        rb.velocity = transform.forward * speed;
+        
+        //rb.velocity = transform.forward * speed;
+        cc.Move(ccDirection);
 
         lifeSpan -= Time.deltaTime;
         if (lifeSpan < 0f)
@@ -33,15 +38,17 @@ public class BsodaSparyScript : MonoBehaviour
     #region Serialized Configuration
     [Header("Movement Settings")]
     [SerializeField] private float speed;
+    public Vector3 ccDirection;
 
     [Header("Lifespan Settings")]
     [SerializeField] private float lifeSpan;
 
     [Header("Rotation Settings")]
-    [SerializeField] private bool shouldRotate;
+    public bool shouldRotate;
     #endregion
 
     #region Internal References
     private Rigidbody rb;
+    private CharacterController cc;
     #endregion
 }

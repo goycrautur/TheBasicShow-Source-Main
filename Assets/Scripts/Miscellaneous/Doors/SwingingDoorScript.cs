@@ -18,6 +18,17 @@ public class SwingingDoorScript : MonoBehaviour
         HandleUnlocking();
         HandleTimers();
         HandleDoorClosing();
+        //end myself
+        inside.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
+        inside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        inside.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
+        inside.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
+        inside.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
+        outside.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
+        outside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        outside.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
+        outside.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
+        outside.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
     }
 
     private void HandleUnlocking()
@@ -113,8 +124,9 @@ public class SwingingDoorScript : MonoBehaviour
     {
         heardDoor = set;
         bDoorOpen = set;
-        inside.material = set ? opened : normal;
-        outside.material = set ? opened2 : normal2;
+        int shift = set ? 1 : 0;
+        inside.material.SetInt("_Swap", shift);
+        outside.material.SetInt("_Swap", shift);
     }
 
     private void SetLock(bool lockState)
@@ -125,8 +137,8 @@ public class SwingingDoorScript : MonoBehaviour
         SwinDorMapSprite1.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
         SwinDorMapSprite2.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
 
-        inside.material = lockState ? locked : normal;
-        outside.material = lockState ? locked2 : normal2;
+        inside.material = lockState ? lockedIn : normal1;
+        outside.material = lockState ? lockedOut : normal2;
     }
     #endregion
 
@@ -138,7 +150,7 @@ public class SwingingDoorScript : MonoBehaviour
     [SerializeField] private MeshCollider barrier;
     [SerializeField] private GameObject obstacle;
     [SerializeField] private MeshRenderer inside, outside;
-    [SerializeField] private Material normal, opened, locked, normal2, opened2, locked2;
+    [SerializeField] private Material normal1, lockedIn, normal2, lockedOut;
     [SerializeField] private SpriteRenderer SwinDorMapSprite1,SwinDorMapSprite2;
 
     [Header("Door state and timing")]

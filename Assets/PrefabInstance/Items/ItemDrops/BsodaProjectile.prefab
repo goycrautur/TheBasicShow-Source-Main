@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 212142863783493363}
   - component: {fileID: 2746797494140787922}
   - component: {fileID: 1948837574017423969}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpraySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprRen: {fileID: 0}
 --- !u!1 &1892088781258348
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +128,8 @@ GameObject:
   - component: {fileID: 33536421679606499}
   - component: {fileID: 136214343616139527}
   - component: {fileID: 114926411782789747}
-  m_Layer: 0
+  - component: {fileID: -9075621347080798864}
+  m_Layer: 12
   m_Name: BsodaProjectile
   m_TagString: BSODA
   m_Icon: {fileID: 0}
@@ -222,8 +224,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  ccDirection: {x: 0, y: 0, z: 0}
   lifeSpan: 30
   shouldRotate: 1
+--- !u!143 &-9075621347080798864
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892088781258348}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8064142088068789262
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +264,7 @@ GameObject:
   - component: {fileID: 1012416525513641706}
   - component: {fileID: 7207744039095150601}
   - component: {fileID: 165306434497304942}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

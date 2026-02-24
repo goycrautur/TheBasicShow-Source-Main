@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class AdditionalGameCustomizer : MonoBehaviour
 {
@@ -68,7 +69,8 @@ public class AdditionalGameCustomizer : MonoBehaviour
         KeyFunctions();
         CurrencySystem();
         PercentageSystemShit();
-        speedtextmf.text = GameControllerScript.Instance.player.playerSpeed.ToString();
+        
+        speedtextmf.text = Math.Round(GameControllerScript.Instance.player.playerSpeed,2).ToString();
         spee.sprite = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && GameControllerScript.Instance.player.stamina > 0f ? run2 : run1;
         defmultText.text = GameControllerScript.Instance.player.PlayerDmgResistance+"X";
     }
@@ -149,7 +151,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
             if (cameraComponent != null)
             {
                 
-                cameraComponent.fieldOfView = CameraShake ? Random.Range(58, 62) : Mathf.Lerp(cameraComponent.fieldOfView, FovAmmount, 5f * Time.deltaTime);
+                cameraComponent.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(cameraComponent.fieldOfView, FovAmmount, 5f * Time.deltaTime);
             }
         }
     }
@@ -337,7 +339,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
             {
                 if (pickupScript2.ID != 5 && pickupScript2.ID != 34 && !pickupScript2.SpawnAtRandom)
                 {
-                    int index = Random.Range(0, list.Count);
+                    int index = UnityEngine.Random.Range(0, list.Count);
                     pickupScript2.transform.position = list[index];
                     list.RemoveAt(index);
                 }
@@ -396,20 +398,5 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public enum EscapeFunsies { BBCR, Daldi, TBS,Taldi}
     public enum StaminaDisplay { Old, PreOld, Normal, Vertical, Circle }
     #endregion
-    [Header("doing This Cuz I Cant Be Bothered Spamming Shit")]
-    public GameObject[] ItemBackgroundsGameObj;
-    public GameObject[] ItemSlotsGameObj,ItemSlotsImagesGameObj;
-    public Sprite[] ItemSlotsSprites;
-    public List<Image> ItemImageSlots = new List<Image>();
 
-
-    [Header("item slot")]
-
-    [SerializeField] public List<RawImage> ItemImages1slot = new List<RawImage>();
-    [SerializeField] public List<RawImage> ItemImages2slot,ItemImages3slot,ItemImages4slot,ItemImages5slot,ItemImages6slot,ItemImages7slot,ItemImages8slot,ItemImages9slot = new List<RawImage>();
-    [Header("images background slots")]
-
-    [SerializeField] public List<Image> ItemImageBGs1slot = new List<Image>();
-    [SerializeField] public List<Image> ItemImageBGs2slot,ItemImageBGs3slot,ItemImageBGs4slot,ItemImageBGs5slot,ItemImageBGs6slot,ItemImageBGs7slot,ItemImageBGs8slot,ItemImageBGs9slot = new List<Image>();
-    public HeldItem[] Inventory1slot, Inventory2slot, Inventory3slot, Inventory4slot, Inventory5slot, Inventory6slot, Inventory7slot, Inventory8slot, Inventory9slot;
 }

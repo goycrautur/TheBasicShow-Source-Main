@@ -18,10 +18,16 @@ public class ItemManager : MonoBehaviour
     #region Input Handling
     private void Update()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0) return;
+        bool hisquidward= false;
+        if (GameControllerScript.Instance.SlotsAmmount == 0)
         {
-            return;
+            hisquidward = true;
         }
+        ItemNameText.enabled = !hisquidward;
+        ItemInfoText.enabled = !hisquidward;
+        theRestOfTheItemInfo.SetActive(!hisquidward);
+        if (hisquidward) return;
 
         for (int i = 0; i < KeyIndex.Length; i++)
         {
@@ -51,10 +57,6 @@ public class ItemManager : MonoBehaviour
                 }
 
                 if (!SelectedItemObject.InfiniteUses) SelectedItemObject.Uses--;
-                if (Inventory[ItemSelection].ItemInstance != null)
-                {
-                    SlotsItemHandlingStuffIdk(ItemSelection,Inventory[ItemSelection].ItemID,SelectedItemObject);
-                }
                 if (SelectedItemObject.Uses <= 0)
                 {
                     ExecuteItem(GetSelectedItem(), ExecutionType.Deselect);
@@ -81,7 +83,7 @@ public class ItemManager : MonoBehaviour
     private void AnimateSlotIfChanged(int slot)
     {
         bool hasItem = Inventory[slot].ItemID != 0;
-        RawImage slotImage = ItemImages[slot];
+        RawImage slotImage = Inventory[slot].ItemImages;
         ItemImageSlide slider = slotImage.GetComponent<ItemImageSlide>();
 
         if (slider != null)
@@ -110,7 +112,8 @@ public class ItemManager : MonoBehaviour
 
     private void AnimateSwap(int slot)
     {
-        RawImage slotImage = ItemImages[slot];
+        
+        RawImage slotImage = Inventory[slot].ItemImages;
         ItemImageSlide slider = slotImage.GetComponent<ItemImageSlide>();
         Texture newTex = GetItemTexture(Inventory[slot].ItemID);
 
@@ -153,21 +156,22 @@ public class ItemManager : MonoBehaviour
             Items.Add(FoundItemObjects[i].Name, FoundItemObjects[i]);
         }
         Debug.Log($"{Items.Count} items total bitch real");
-        Array.Resize(ref Inventory, ItemImages.Count);
         Array.Resize(ref KeyIndex, Inventory.Length);
 
         SlotOccupied = new bool[Inventory.Length];
+        for (int i = 0; i < Inventory.Length; i++) Inventory[i].SlotID = i;
+        
 
-        for (int i = 0; i < ItemImages.Count; i++)
+        for (int i = 0; i < Inventory.Length; i++)
         {
-            var slider = ItemImages[i].GetComponent<ItemImageSlide>();
+            var slider = Inventory[i].ItemImages.GetComponent<ItemImageSlide>();
             if (slider != null) 
             {
                 slider.ForceClear();
             }
             else 
             {
-                ItemImages[i].texture = null; 
+                Inventory[i].ItemImages.texture = null; 
             }
         }
 
@@ -210,16 +214,22 @@ public class ItemManager : MonoBehaviour
 
     public void ClearItem(int index,bool reduceinventory = true)
     {
-        //if (reduceinventory && Inventory[index].ItemID != 0)
-        //{
-        //    GameControllerScript.Instance.SlotsAmmount = GameControllerScript.Instance.SlotsAmmount-1;
-        //    Singleton<OtherMainStuffManager>.Instance.slot();
-        //}
-        Inventory[index].ItemID = 0;
-        Inventory[index].ItemInstance = null;
-        AnimateSlotIfChanged(index);
+        /*if (reduceinventory && Inventory[index].ItemID != 0)
+        {
+            Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue(true, GameControllerScript.Instance.SlotsAmmount-1);
+            Singleton<OtherMainStuffManager>.Instance.slot();
+        }*/
+        if (index >= 0 && index < Inventory.Length)
+        {
+            if (Inventory != null)
+            {
+                Inventory[index].ItemID = 0;
+                Inventory[index].ItemInstance = null;
+                AnimateSlotIfChanged(index);
+            }
+            else return;
+        }
         UpdateItemUI();
-        SlotsItemHandlingStuffIdk(index,0,null);
     }
 
     private void SetItem(int index, int itemID, BaseItem item = null)
@@ -231,7 +241,6 @@ public class ItemManager : MonoBehaviour
 
         Inventory[index].ItemID = itemID;
         Inventory[index].ItemInstance = item;
-        SlotsItemHandlingStuffIdk(index,itemID,item);
 
         CreateItemInstance(index);
 
@@ -250,62 +259,15 @@ public class ItemManager : MonoBehaviour
         }
     }
     #endregion
-    public void SlotsItemHandlingStuffIdk(int index, int itemID, BaseItem Whatitem = null)
-    {
-        for (int i = 0; i < 9; ++i)
-        {
-            AdditionalGameCustomizer.Instance.Inventory9slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory9slot[index].ItemInstance = Whatitem;
-            if (index < AdditionalGameCustomizer.Instance.Inventory8slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory8slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory8slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory7slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory7slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory7slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory6slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory6slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory6slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory5slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory5slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory5slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory4slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory4slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory4slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory3slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory3slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory3slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory2slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory2slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory2slot[index].ItemInstance = Whatitem;
-            }
-            if (index < AdditionalGameCustomizer.Instance.Inventory1slot.Length)
-            {
-            AdditionalGameCustomizer.Instance.Inventory1slot[index].ItemID = itemID;
-            AdditionalGameCustomizer.Instance.Inventory1slot[index].ItemInstance = Whatitem;
-            }
-        }
-    }
+
 
     #region UI Management
     public void UpdateItemUI()
     {
         BaseItem SelectedItem = GetSelectedItemObject();
-        for (int i = 0; i < ItemImages.Count; i++)
+        for (int i = 0; i < Inventory.Length; i++)
         {
-            ItemImageBGs[i].color = Color.white;
+            Inventory[i].ItemImageBGs.color = Color.white;
         }
         ItemNameText.text = $"{SelectedItem.Name}";
         ItemInfoText.text = $"{SelectedItem.ItmInfoText}";
@@ -316,7 +278,8 @@ public class ItemManager : MonoBehaviour
         }
         ItemNameIdCheck();
 
-        ItemImageBGs[ItemSelection].color = SelectionColor;
+        Inventory[ItemSelection].ItemImageBGs.color = SelectionColor;
+        Singleton<OtherMainStuffManager>.Instance.UpdateAltInventory();
         //ItemHoldImage.texture = SelectedItem.SmallSprite;
     }
     public void ItemNameIdCheck()
@@ -563,14 +526,6 @@ public class ItemManager : MonoBehaviour
     }
     #endregion
 
-    #region Change References void (stolen from null decompile LOL)
-    public void ChangeReferences(List<RawImage> itemImages, List<Image> itemImgBgs)
-    {
-        ItemImages = itemImages;
-        ItemImageBGs = itemImgBgs;
-    }
-    #endregion
-
     #region Nested Types
     [Serializable]
     private enum ExecutionType { Use, Pickup, Select, Deselect }
@@ -583,9 +538,9 @@ public class ItemManager : MonoBehaviour
     private KeyCode[] KeyIndex = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0 };
 
     [Header("UI References")]
-    [SerializeField] private List<RawImage> ItemImages = new List<RawImage>();
-    [SerializeField] private List<Image> ItemImageBGs = new List<Image>();
+    public Sprite[] ItemSlotsSprites = new Sprite[3];
     [SerializeField] public TextMeshProUGUI ItemNameText, ItemInfoText;
+    public GameObject theRestOfTheItemInfo;
     [SerializeField] private Color SelectionColor = Color.red;
     [SerializeField] private RawImage ItemHoldImage;
     public static ItemManager Instance;

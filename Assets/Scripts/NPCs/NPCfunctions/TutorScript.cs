@@ -32,7 +32,7 @@ public class TutorScript : MonoBehaviour
         if (tiemer < 0f && !gottothepositio)
         {
             gottothepositio = true;
-            agent.speed = 0f;
+            //agent.speed = 1f;
             intro();
         }
         if (Input.GetKeyDown(KeyCode.P) && !triggeredCounting && gottothepositio)

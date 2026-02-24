@@ -34,6 +34,8 @@ TagManager:
   - friesBday
   - HarderDifficulityFaceLock
   - bully
+  - idi3
+  - idi1
   layers:
   - Default
   - TransparentFX
@@ -44,11 +46,11 @@ TagManager:
   - Navigation
   - Windows
   - shutdownNoiseZone
-  - Layer9Real
+  - PlayerLayer
   - mapIconLayer
-  - RaycastBlocker
-  - 
-  - 
+  - NpcRaycastBlocker
+  - ccInteractionLayer
+  - npcLayer
   - 
   - 
   - 

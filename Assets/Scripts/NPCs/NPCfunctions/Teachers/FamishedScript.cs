@@ -7,6 +7,9 @@ public class FamishedScript : NPC
     public override void OnStart()
     {
         base.OnStart();
+        appear(false,false);
+        femtanylspr.SetActive(false);
+        famishedspr.SetActive(true);
         baldiAudio = GetComponent<AudioSource>();
         GetAngry(0f);
         if (endless)
@@ -24,11 +27,29 @@ public class FamishedScript : NPC
     {
         gc.famishscr.Remove(this);
     }
-
+    public void uhh(AudioClip clip)
+    {
+        baldiAudio.PlayOneShot(clip);
+    }
+    public void explode()
+    {
+        baldiAudio.PlayOneShot(gc.deltaexplode);
+        Vector3 upithink = new Vector3(base.transform.position.x, base.transform.position.y + 2f, base.transform.position.z);
+        Instantiate(explodePrefab, upithink, new Quaternion(0f,0f,0f,0f));
+        femtanylspr.SetActive(false);
+        famishedspr.SetActive(false);
+    }
+    public void appear(bool femtan = false,bool playnoise = true)
+    {
+        if (femtan) 
+        {
+            femtanylspr.SetActive(true);
+            famishedspr.SetActive(false);
+        }
+        if (playnoise) baldiAudio.PlayOneShot(gc.gastersfx);
+    }
     public override void OnUpdate()
     {
-        famishedspr.SetActive(!gc.fmc.specialLmsToggle2);
-        femtanylspr.SetActive(gc.fmc.specialLmsToggle2);
         if (antiHearing)
 		{
 			AntiHearingDuratio -= Time.deltaTime;
@@ -161,7 +182,7 @@ public class FamishedScript : NPC
                 break;
             }
         }
-
+        if (gc.fmc.alwaysKnowIp) return;
         if (canHear)
         {
             agent.SetDestination(soundLocation);
@@ -209,8 +230,8 @@ public class FamishedScript : NPC
     [SerializeField] private Animator famishedcator;
 
     private float currentPriority;
-    private AudioSource baldiAudio;
+    public AudioSource baldiAudio;
     public bool activatewindowbreak;
-    public GameObject famishedspr,femtanylspr;
+    public GameObject famishedspr,femtanylspr,explodePrefab;
     #endregion
 }

@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.01
   m_ReferenceResolution: {x: 640, y: 480}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0

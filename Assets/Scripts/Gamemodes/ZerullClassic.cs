@@ -68,7 +68,7 @@ public class ZerullClassic : MonoBehaviour
 
     [SerializeField, Tooltip("Does the start & hit song is a midi version.")] private bool StartSongsIsMidi = true;
 
-    [SerializeField, Tooltip("Does the loop song is a midi version.")] private bool Midi = true;
+    [Tooltip("Does the loop song is a midi version.")] public bool Midi = true;
 
     [Tooltip("BTM of the Midi")] public float Midi_BTM = 120f;
 
@@ -82,10 +82,6 @@ public class ZerullClassic : MonoBehaviour
     [Tooltip("Length of Start MIDI")] public float midiStartLength = 7f;
     public GameObject[] tweenOutitems,tweenitemsAlt;
     public Transform[] StartingBossfightProjectileSpawnLocaltion;
-
-    [Header("Shaders")]
-    [SerializeField] private Material CellingMat;
-    [SerializeField] private Material NoLightCeilingMat,WallMat, FloorMat, FenceMat, CarpetMat, NoLightCeilingMatGlitch, CellingMatGlitch, WallMatGlitch, FloorMatGlitch, FenceMatGlitch, CarpetMatGlitch;
     public SongPlayer normalMidiPlayer, drumsMidiPlayer, normalMidiPlayerLoop;
     public bool bossStarted, realBossStarted,switchToBloxyb;
     public Animator yourflashbang;
@@ -180,7 +176,7 @@ public class ZerullClassic : MonoBehaviour
                 {
                     SpawnProjectile(false, false);
                 }
-                spawnCooldown = 5f;
+                spawnCooldown = 25f;
             }
             if (!projectilesDoNotExist && objects == 0)
             {
@@ -275,7 +271,6 @@ public class ZerullClassic : MonoBehaviour
             Debug.Log("Boss Pissed");
 
         isbroyapping = true;
-        GlitchShaders(true);
 
         RemoveProjectiles(); // Remove projectiles
 
@@ -309,6 +304,7 @@ public class ZerullClassic : MonoBehaviour
     private void BossBegin()
     {
         AllowProjectileSpawn = true;
+        SpawnProjectile(false, false);
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
@@ -389,8 +385,7 @@ public class ZerullClassic : MonoBehaviour
     public void OnHit(float tiem, float hp = 1f) // When player hit null by a projectile
     {
 
-        if (alreadyHit && !realBossStarted || (zs.iframes > 0f))
-            return;
+        if (alreadyHit && !realBossStarted || (zs.iframes > 0f))return;
 
         zs.Hit(!realBossStarted, tiem, zs.totemready ? 1 : hp);
         if (health <= maxHealth / 2 && !ok && switchToBloxyb)
@@ -410,15 +405,10 @@ public class ZerullClassic : MonoBehaviour
             yourflashbang.Rebind();
 		    yourflashbang.Play("flashAnim", -1, 0f);
         }
-        if (realBossStarted && Midi)
-        {
-            midiTempo += (!switchToBloxyb ? 0.02f : 0.03f) * (zs.totemready ? 1 : hp);
-            Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
-        }
-        if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
-        {
-            meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
-        }
+        if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.02f : 0.03f) * (zs.totemready ? 1 : hp);
+        if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
+        SpawnProjectile(false, false);
+        SpawnProjectile(false, false);
         scoreSystemManager.Instance.AddScore(zs.totemready ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= zs.totemready ? 1 : hp; // Decreases null health
@@ -448,7 +438,6 @@ public class ZerullClassic : MonoBehaviour
         musicAudio.Stop();
         musicLoop.Stop();
 
-        GlitchShaders(false);
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         Shader.SetGlobalFloat("_VertexGlitchIntensity", 0f);
         Shader.SetGlobalFloat("_VertexGlitchSeed", 0f);
@@ -546,51 +535,11 @@ public class ZerullClassic : MonoBehaviour
         }
     }
     public ZerullBossScript GetBoss() => zs;
-    public void GlitchShaders(bool toggle)
-    {
-        Material noligCeliMat = toggle ? NoLightCeilingMatGlitch : NoLightCeilingMat;
-        Material CelingMat = toggle ? CellingMatGlitch : CellingMat;
-        Material WalMat = toggle ? WallMatGlitch : WallMat;
-        Material FlorMat = toggle ? FloorMatGlitch : FloorMat;
-        Material fencMat = toggle ? FenceMatGlitch : FenceMat;
-        Material carpMat = toggle ? CarpetMatGlitch : CarpetMat;
-        MeshRenderer[] renderers = Object.FindObjectsOfType<MeshRenderer>(true);
-
-        foreach (MeshRenderer renderer in renderers)
-        {
-            Material currentMat = renderer.sharedMaterial ?? renderer.material;
-            if (currentMat.name.StartsWith(NoLightCeilingMat.name))
-            {
-                renderer.sharedMaterial = noligCeliMat;
-            }
-            if (currentMat.name.StartsWith(CellingMat.name))
-            {
-                renderer.sharedMaterial = CelingMat;
-            }
-            else if (currentMat.name.StartsWith(WallMat.name))
-            {
-                renderer.sharedMaterial = WalMat;
-            }
-            else if (currentMat.name.StartsWith(FloorMat.name))
-            {
-                renderer.sharedMaterial = FlorMat;
-            }
-            else if (currentMat.name.StartsWith(FenceMat.name))
-            {
-                renderer.sharedMaterial = fencMat;
-            }
-            else if (currentMat.name.StartsWith(CarpetMat.name))
-            {
-                renderer.sharedMaterial = carpMat;
-            }
-        }
-    }
     public void dosomeupdatebitch()
     {
         bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
         if (gc.mode == "zerullclassic")
         {
-            GlitchShaders(false);
             zer.SetActive(true);
             //if (!ChaosMode)
             //{

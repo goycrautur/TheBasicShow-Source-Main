@@ -266,9 +266,9 @@ public class PlayerScript : MonoBehaviour
 	private void AdjustSpeedAndSensitivity(Vector3 movement, Vector3 lateralMovement)
 	{
 		bool isRunning = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && stamina > 0f;
-		if (!OverridePlayerSpeed) playerSpeed = isRunning ? runSpeed : walkSpeed;
+		if (!OverridePlayerSpeed) playerSpeed = isRunning ? runSpeed* pModManag.Multiplier : walkSpeed* pModManag.Multiplier;
 		sensitivity = sensitivityActive ? Mathf.Clamp((movement + lateralMovement).magnitude, 0f, 1f) : 1f;
-		moveDirection = (movement + lateralMovement).normalized * playerSpeed * pModManag.Multiplier * sensitivity * Time.deltaTime;
+		moveDirection = (movement + lateralMovement).normalized * playerSpeed * sensitivity * Time.deltaTime;
 
 		if (isRunning && secondaryMovementVelocity.magnitude > 0.1f && !hugging && !sweeping)
 		{
