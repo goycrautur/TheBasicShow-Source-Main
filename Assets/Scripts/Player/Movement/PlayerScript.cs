@@ -59,7 +59,6 @@ public class PlayerScript : MonoBehaviour
 		}
 		if (invisi || invisichalk)
 		{
-			
 			foreach (JumpRopeScript jumpro in jumpropes)
         	{
             	if (jumpro != null)
@@ -68,10 +67,7 @@ public class PlayerScript : MonoBehaviour
 				}
         	}
 			HudManager.Instance.colorVarSetter(false);
-			if (ZerullClassic.Instance.RealBossStarted || FamishedModeController.Instance.OneBounceFamis)
-			{
-				SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
-			}
+			if (ZerullClassic.Instance.RealBossStarted || FamishedModeController.Instance.OneBounceFamis) SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
 		}
 		else
 		{
