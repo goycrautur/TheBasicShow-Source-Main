@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 		GuiltCheck();
 		InitializeMiscellaneous();
 		randomAssStufV2();
+		uhh();
 	}
 	#endregion
 	public void randomAssStufV2()
@@ -225,6 +226,27 @@ public class PlayerScript : MonoBehaviour
 		playerRotation = transform.rotation;
 		movementLocked = true;
 	}
+	public void asgor(MovementModifier movmen,float fuel = 1f)
+	{
+		carfuel = fuel;
+		maxcarfuel = fuel;
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.dimcraab, fuel); //jro
+		
+	}
+	private void uhh()
+	{
+		
+		while (time > 0f)
+		{
+			time -= Time.deltaTime;
+			if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
+			{
+				newGauge.Set(10f, time);
+				yield return null;
+			}
+		}
+		newGauge.Hide();
+	}
 
 	private void PlayerMove()
 	{
@@ -268,13 +290,7 @@ public class PlayerScript : MonoBehaviour
 
 		if (isRunning && secondaryMovementVelocity.magnitude > 0.1f && !hugging && !sweeping)
 		{
-			if (!outdoorsfr)
-			{
-				if (door.lockTime <= 0f)
-				{
-				ResetGuilt("running", 0.1f);
-				}
-			}
+			if (!outdoorsfr && door.lockTime <= 0f) ResetGuilt("running", 0.1f);
 		}
 	}
 
@@ -631,6 +647,7 @@ public class PlayerScript : MonoBehaviour
 	public float sensitivity, playerSpeed,curgrav = 1f;
 	private Vector3 moveDirection, secondaryMovementVelocity;
 	private GameObject GameSet;
+	private float carfuel,maxcarfuel;
 
 	public enum StaminaChangeMode { Add, Remove, Multiply, Divide, Set }
 	public enum HealthChangeMode { Add, Remove, Multiply, Divide, Set }

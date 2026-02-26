@@ -14,7 +14,6 @@ public class ITM_NukaQuantum : BaseItem
     }
     private IEnumerator amwaitin(float time)
     {
-        
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Spritee, duration);
         time = duration;
         yield return null;

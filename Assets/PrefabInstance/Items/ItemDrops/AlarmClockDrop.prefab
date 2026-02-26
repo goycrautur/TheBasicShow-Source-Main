@@ -245,7 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcreal: {fileID: 0}
-  notNpcEntirely: 0
+  npcStunTime: 0
+  notNpcEntirely: 1
+  notNpcUseNavmesh: 1
 --- !u!1 &1580657998132333942
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprRen: {fileID: 0}
 --- !u!1 &5164610551852298340
 GameObject:
   m_ObjectHideFlags: 0

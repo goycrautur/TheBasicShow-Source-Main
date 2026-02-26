@@ -23,15 +23,12 @@ public class BsodaSparyScript : MonoBehaviour
     #region Per-Frame Logic
     private void Update()
     {
-        
+        if (Time.timeScale != 1) return;
         //rb.velocity = transform.forward * speed;
         cc.Move(ccDirection);
 
         lifeSpan -= Time.deltaTime;
-        if (lifeSpan < 0f)
-        {
-            Destroy(gameObject, 0f);
-        }
+        if (lifeSpan < 0f) Destroy(gameObject, 0f);
     }
     #endregion
 

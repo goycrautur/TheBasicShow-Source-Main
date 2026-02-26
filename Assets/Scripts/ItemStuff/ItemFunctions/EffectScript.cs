@@ -47,7 +47,6 @@ public class EffectScript : MonoBehaviour
         if (other.CompareTag("BSODA"))
         {
             inProjectile = true;
-            Debug.Log("it in projectile!!");
             otherVelocity = other.GetComponent<CharacterController>().velocity;
             failSave = 1;
         }
