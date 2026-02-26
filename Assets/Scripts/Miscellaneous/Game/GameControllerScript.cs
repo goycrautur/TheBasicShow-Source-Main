@@ -48,14 +48,13 @@ public class GameControllerScript : MonoBehaviour
     #endregion
     public void randomASSstuff()
     {
-        foreach (NPC enpeecee in NPCThatGetAffectedByMetalPipe)
+        foreach (NPC enpeecee in GlobalNpcList)
         {
             enpeecee.agentSpeedScale = metalpipeStun ? 0f : 1f;
+            enpeecee.SetToXrayLayer(ipleak);
         }
-        foreach (GameObject npcmapicon in NpcMinimapIcon)
-        {
-            npcmapicon.SetActive(ipleak ? true : false);
-        }
+        foreach (GameObject npcmapicon in NpcMinimapIcon) npcmapicon.SetActive(ipleak ? true : false);
+        foreach (GameObject dox in xrayObjectList) if (dox != null) dox.layer = !ipleak ? LayerMask.NameToLayer("npcLayer") : LayerMask.NameToLayer("npcXrayLayer");
         escapeMusic.mute = !SecretEndingGot ? timeout : warrealest ? true : true;
         warmusic.mute = !SecretEndingGot ? timeout : warrealest ? true : true;
         for (int i = 0; i < EvapV2FinaleSounSource.Length; ++i)
@@ -87,9 +86,10 @@ public class GameControllerScript : MonoBehaviour
     {
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
-        Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue();
+        Singleton<OtherMainStuffManager>.Instance.UpdateInventoryLength();
         Singleton<OtherMainStuffManager>.Instance.ResizeAltInventory();
         Singleton<OtherMainStuffManager>.Instance.UpdateAltInventory();
+        ItemManager.Instance.enabled = true;
         CharacterManagement.Instance.noiseiscallingpickupphone();
         foreach (PickupScript pick in FindObjectsOfType<PickupScript>())
         {
@@ -942,12 +942,12 @@ public class GameControllerScript : MonoBehaviour
     [Header("Serialized References")]
     public TMP_Text notebookCount;
     [SerializeField] public GameObject highScoreText, baldi, tutorobj;
-    public List<GameObject> ObjectsToEnable,npcCloneList = new List<GameObject>();
+    public List<GameObject> ObjectsToEnable,npcCloneList,xrayObjectList = new List<GameObject>();
     public List<GateScript> Gatesrea = new List<GateScript>();
     public List<ElvDoorScript> ElevdorRea = new List<ElvDoorScript>();
     public List<GameObject> FinaleObjectToDisable, ObjectsToDisable, ItemsToRespawn,NpcMinimapIcon = new List<GameObject>();
     public List<VendingMachineScript> MachinesToRestock = new List<VendingMachineScript>();
-    public List<NPC> NPCThatGetAffectedByMetalPipe = new List<NPC>();
+    public List<NPC> GlobalNpcList = new List<NPC>();
     public Animator Icon,CirclAnimator;
     public Material SpriteRenderer;
     public Sprite Present;

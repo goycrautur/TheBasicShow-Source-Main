@@ -51,7 +51,7 @@ TagManager:
   - NpcRaycastBlocker
   - ccInteractionLayer
   - npcLayer
-  - 
+  - npcXrayLayer
   - 
   - 
   - 

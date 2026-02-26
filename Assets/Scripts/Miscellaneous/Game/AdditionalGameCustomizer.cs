@@ -133,6 +133,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #region Initialization
     private void InitializeCustomAdditions()
     {
+        DefaultFovAmmount = FovAmmount;
         TMP.SetActive(OldDetentionTimer);
         Clock.SetActive(!OldDetentionTimer);
         GaugeManager.SetActive(Gauges);
@@ -144,16 +145,8 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #region VisualEffects
     private void CameraShaking()
     {
-        GameObject cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
-        if (cameraObject != null)
-        {
-            Camera cameraComponent = cameraObject.GetComponent<Camera>();
-            if (cameraComponent != null)
-            {
-                
-                cameraComponent.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(cameraComponent.fieldOfView, FovAmmount, 5f * Time.deltaTime);
-            }
-        }
+        CameraScript.Instance.MainCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.MainCamera.fieldOfView, FovAmmount, 5f * Time.deltaTime);
+        CameraScript.Instance.XrayCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.XrayCamera.fieldOfView, FovAmmount, 5f * Time.deltaTime);
     }
 
     private void FlashlightCode()
@@ -377,7 +370,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     [Header("Serialized References")]
     public Image[] ExitImages;
     public Image rainboCanv;
-    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount,what;
+    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount,DefaultFovAmmount,what;
     public Sprite[] BookColors;
     public Material NormalSky, NormalRedSky, NightSky, RedNightSky, TwilightSky, RedTwilightSky, DefaultSky;
     [SerializeField] private GameObject warning, Clock, TMP, OldStamina, PreOldStamina, NewStamina, VerticalStamina, CircleStamina, GaugeManager, Counter, staminapercent, healthpercent;

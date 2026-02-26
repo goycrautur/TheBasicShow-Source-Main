@@ -214,11 +214,7 @@ public class ItemManager : MonoBehaviour
 
     public void ClearItem(int index,bool reduceinventory = true)
     {
-        /*if (reduceinventory && Inventory[index].ItemID != 0)
-        {
-            Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue(true, GameControllerScript.Instance.SlotsAmmount-1);
-            Singleton<OtherMainStuffManager>.Instance.slot();
-        }*/
+        //if (reduceinventory && Inventory[index].ItemID != 0) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(GameControllerScript.Instance.SlotsAmmount-1);
         if (index >= 0 && index < Inventory.Length)
         {
             if (Inventory != null)

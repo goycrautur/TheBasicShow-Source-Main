@@ -60,6 +60,7 @@ public class CameraScript : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private float GameOverOffset;
     public Vector3 offset;
+    public Camera MainCamera,XrayCamera;
 
     [Header("Jump Rope Physics")]
     [SerializeField] private float initVelocity, velocity, gravity;

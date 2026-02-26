@@ -27,16 +27,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932417759486796683}
-  m_LocalRotation: {x: -0, y: 0.07975464, z: -0, w: 0.99681455}
+  m_LocalRotation: {x: -0, y: 0.042322572, z: -0, w: 0.999104}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8893435607648977554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -1.0803168}
+  m_AnchoredPosition: {x: -0, y: -2.5806897}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9106377844088883684
@@ -160,7 +160,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.4787126, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3428057073515285070}
@@ -282,7 +282,7 @@ MonoBehaviour:
   theSpriteREND: {fileID: 7487137391670823497}
   subtitlesScriptableObjectREAL: {fileID: 11400000, guid: 6cf8869d8bd83d44eb9b6ddc06a1abb5,
     type: 2}
-  rotateOffset: 90
+  rotateOffset: 0
   projectileDamage: 3
   ProjectileSpeed: 60
 --- !u!114 &-2452637138297308520

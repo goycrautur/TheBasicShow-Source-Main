@@ -297,6 +297,12 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             }
         }
     }
+    public void ChangeItemSlot(int SlotAmmount = 1,bool DropAllAvailableItemInInventory = false)
+    {
+        if (DropAllAvailableItemInInventory) HighSchoolDropOut();
+        UpdateInventoryLength(true,SlotAmmount);
+        slot();
+    }
     public void HighSchoolDropOut()
     {
         for (int i = 0; i < GameControllerScript.Instance.SlotsAmmount; ++i)
@@ -307,10 +313,10 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             }
         }
     }
-    public void UpdateItemSizeAssignValue(bool setSlotNum = false, int SlotNumber = 1)
+    public void UpdateInventoryLength(bool setSlotNum = false, int SlotNumber = 1)
     {
         if (setSlotNum) GameControllerScript.Instance.SlotsAmmount = SlotNumber;
-        if (GameControllerScript.Instance.SlotsAmmount >= ItemManager.Instance.Inventory.Length) 
+        if (GameControllerScript.Instance.SlotsAmmount == ItemManager.Instance.Inventory.Length) 
         {
             SlotsAmmou = ItemManager.Instance.Inventory.Length;
             MaxSlotsAmmou = ItemManager.Instance.Inventory.Length;
@@ -325,7 +331,12 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     }
     public void UpdateAltInventory()
     {
-        for (int i = 0; i < SlotsAmmou; ++i)
+        for (int i = 0; i < AltInventory.Length; ++i)
+        {
+            AltInventory[i].ItemID = 0;
+            AltInventory[i].ItemInstance = null;
+        }
+        for (int i = 0; i < ItemManager.Instance.Inventory.Length; ++i)
         {
             AltInventory[i].ItemID = ItemManager.Instance.Inventory[i].ItemID;
             AltInventory[i].ItemInstance = ItemManager.Instance.Inventory[i].ItemInstance;
@@ -338,20 +349,24 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     public void slot()
     {
         Debug.Log("slotted");
+        for (int i = 0; i < AltInventory.Length; ++i) if (i != ItemManager.Instance.ItemSelection) AltInventory[i].ItemImages.texture = null;
+        for (int i = 0; i < ItemManager.Instance.Inventory.Length; ++i)
+        {
+            if (i != ItemManager.Instance.ItemSelection)
+            {
+                ItemManager.Instance.Inventory[i].ItemID = 0;
+                ItemManager.Instance.Inventory[i].ItemInstance = null;
+            }
+        }
         if (ItemManager.Instance.ItemSelection >= SlotsAmmou) ItemManager.Instance.ItemSelection = SlotsAmmou - 1;
         if (SlotsAmmou == 0)
         {
             AltInventory[0].ItemImages.enabled = false;
             AltInventory[0].ItemImageBGs.enabled = false;
             AltInventory[0].ItemImageSlots.enabled = false;
+            Debug.Log("mf have 0 slots left holy skull");
             return;
         }
-        ItemManager.Instance.Inventory[SlotsAmmou-1].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[2];
-        for (int i = 1; i < SlotsAmmou-1; ++i)
-        {
-            ItemManager.Instance.Inventory[i].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[1];
-        }
-        ItemManager.Instance.Inventory[0].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[GameControllerScript.Instance.SlotsAmmount != 1 ? 0 : 1];
         for (int i = SlotsAmmou-1; i < MaxSlotsAmmou; ++i)
         {
             AltInventory[i].ItemImages.enabled = false;
@@ -364,7 +379,10 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             AltInventory[i].ItemImageBGs.enabled = true;
             AltInventory[i].ItemImageSlots.enabled = true;
         }
+        
+        
         Array.Resize(ref ItemManager.Instance.Inventory, SlotsAmmou);
+        Debug.Log($"resized array to {SlotsAmmou} slots");
         for (int i = 0; i < ItemManager.Instance.Inventory.Length; ++i)
         {
             ItemManager.Instance.Inventory[i].ItemID = AltInventory[i].ItemID;
@@ -374,6 +392,9 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             ItemManager.Instance.Inventory[i].ItemImageSlots = AltInventory[i].ItemImageSlots;
             ItemManager.Instance.Inventory[i].SlotID = AltInventory[i].SlotID;
         }
+        ItemManager.Instance.Inventory[SlotsAmmou-1].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[2];
+        for (int i = 1; i < SlotsAmmou-1; ++i) ItemManager.Instance.Inventory[i].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[1];
+        ItemManager.Instance.Inventory[0].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[GameControllerScript.Instance.SlotsAmmount != 1 ? 0 : 1];
         ItemManager.Instance.UpdateItemUI();
     }
     #endregion

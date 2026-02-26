@@ -93,7 +93,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
 		Shader.SetGlobalFloat("_VertexGlitchSeed", UnityEngine.Random.Range(vertexseedRandomRangeMin, vertexseedRandomRangeMax));
 		Shader.SetGlobalFloat("_VertexGlitchIntensity", glitchVal);
         global_VertexGlitchIntensity = glitchVal/4;
-        global_VertexGlitchIntensitySpecialCare = glitchVal*4;
+        global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
         global_VertexGlitchSeed = randomSeedVal;
         global_glitchColorRvalue = UnityEngine.Random.Range(0, 32);
         global_glitchColorGvalue = UnityEngine.Random.Range(0, 32);
@@ -109,7 +109,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
             
 			Shader.SetGlobalFloat("_VertexGlitchIntensity", glitchVal/2);
             global_VertexGlitchIntensity = glitchVal/4;
-            global_VertexGlitchIntensitySpecialCare = glitchVal*4;
+            global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
             global_VertexGlitchSeed = randomSeedVal;
             global_glitchColorRvalue = UnityEngine.Random.Range(0, 32);
             global_glitchColorGvalue = UnityEngine.Random.Range(0, 32);

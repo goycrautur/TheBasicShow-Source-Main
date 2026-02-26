@@ -102,7 +102,7 @@ public class ProjectileScript : MonoBehaviour
                 if (GetComponent<Billboard>() != null)
                 {
                     wasBillboard = true;
-                    Destroy(GetComponent<Billboard>());
+                    GetComponent<Billboard>().enabled = false;
                 }
                 ZerullClassic.Instance.currentProjectile = base.gameObject;
                 if (theSpriteREND != null)
@@ -146,7 +146,7 @@ public class ProjectileScript : MonoBehaviour
         transform.position = initSpawnPoint;
         if (wasBillboard)
         {
-            gameObject.AddComponent<Billboard>();
+            GetComponent<Billboard>().enabled = true;
             wasBillboard = false;
         }
     }

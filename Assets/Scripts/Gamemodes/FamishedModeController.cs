@@ -55,6 +55,7 @@ public class FamishedModeController : MonoBehaviour
                 {
                     onetime = true;
                     TimethatUhhh = puppyplay.length;
+                    GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.deathbell);
                     StartCoroutine(evenmorepeak());
                     
                 }
@@ -217,12 +218,14 @@ public class FamishedModeController : MonoBehaviour
         gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
         gc.Gatesrea.ForEach(g => g.Down(false));
         gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
-        if ( specialLmsToggle)StartCoroutine(ExplodeLmfao());
+        if (specialLmsToggle)StartCoroutine(ExplodeLmfao(0,0,false));
         return;
     }
 
     public void onebounc(Transform ok)
     {
+        dontKillBru = true;
+        alwaysKnowIp = true;
         ZerullClassic.Instance.yourflashbang.Rebind();
         ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
         ZerullClassic.Instance.health = 10;
@@ -268,9 +271,7 @@ public class FamishedModeController : MonoBehaviour
             gc.modeState = "fear";
             if (Singleton<VertexGlitchManager>.Instance.Midi) Singleton<VertexGlitchManager>.Instance.Midi = false;
             Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
-            Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
-            Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue(true, 5);
-            Singleton<OtherMainStuffManager>.Instance.slot();
+            Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(7,true);
             angerMultipler = 0f;
             isAbleToMove = false;
             StartCoroutine(ERMMMMMM());
@@ -289,7 +290,7 @@ public class FamishedModeController : MonoBehaviour
         funnyaudiotuff.loop = false;
         funnyaudiotuff.Play();
         isAbleToMove = true;
-        alwaysKnowIp = true;
+        dontKillBru = false;
         AllowCountdown = true;
         OneBounceFamis = true;
         obTimer.SetActive(true);
@@ -297,37 +298,20 @@ public class FamishedModeController : MonoBehaviour
     public IEnumerator peakalt(float delay)
     {
         yield return new WaitForSeconds(delay);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.uhh(GameControllerScript.Instance.agonyscream);
-        }
-        yield return new WaitForSeconds(GameControllerScript.Instance.agonyscream.length*1.3f);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.explode();
-        }
-        yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +2f);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.appear(true);
-        }
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(GameControllerScript.Instance.agonyscream);
+        yield return new WaitForSeconds(GameControllerScript.Instance.agonyscream.length*0.95f);
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
+        yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +2.5f);
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.appear(true);
         yield return new WaitForSeconds(GameControllerScript.Instance.gastersfx.length +2f);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.explode();
-        }
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
         yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +1f);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.appear(true);
-        }
-        foreach (GameObject chaosclon in gc.npcCloneList)
-        {
-            chaosclon.SetActive(false);
-        }
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.appear(true);
+        foreach (GameObject chaosclon in gc.npcCloneList) chaosclon.SetActive(false);
         angerMultipler = 0.5f;
         isAbleToMove = true;
         obTimer.SetActive(true);
+        dontKillBru = true;
         if (!specialLmsToggle2) specialLmsToggle2=true;
         
     }
@@ -335,39 +319,27 @@ public class FamishedModeController : MonoBehaviour
     {
         GameControllerScript.Instance.audioDevice.PlayOneShot(windCras);
         yield return new WaitForSeconds(windCras.length-1);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
-        }
-        yield return new WaitForSeconds(getbackhere.length+1);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.uhh(whuh);
-        }
-         yield return new WaitForSeconds(whuh.length);
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
+        yield return new WaitForSeconds(getbackhere.length+0.25f);
+        Singleton<VertexGlitchManager>.Instance.Glitch();
+        yield return new WaitForSeconds(0.75f);
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(whuh);
+        yield return new WaitForSeconds(whuh.length);
         GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.ZerullLoseSound);
         Singleton<VertexGlitchManager>.Instance.ShakeGlitch();
         Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
         StartCoroutine(peakalt(2f));
     }
-    public IEnumerator ExplodeLmfao(float delay = 0f,float sounddelay= 0f)
+    public IEnumerator ExplodeLmfao(float delay = 0f,float sounddelay= 0f,bool playsound = true)
     { 
         yield return new WaitForSeconds(sounddelay);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.uhh(ohnoheexploding);
-        }
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled && playsound) fam.uhh(ohnoheexploding);
+        dontKillBru = true;
         yield return new WaitForSeconds(delay);
         isAbleToMove = false;
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.explode();
-        }
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
         yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +1f);
-        foreach (GameObject chaosclon in gc.npcCloneList)
-        {
-            chaosclon.SetActive(false);
-        }
+        foreach (GameObject chaosclon in gc.npcCloneList) chaosclon.SetActive(false);
     }
     public IEnumerator evenmorepeak()
     {
@@ -378,10 +350,10 @@ public class FamishedModeController : MonoBehaviour
         funnyaudiotuff.clip = puppyplay;
         funnyaudiotuff.loop = false;
         funnyaudiotuff.Play();
-        alwaysKnowIp = true;
         frameCountShit = true;
         AllowCountdown = true;
         OneBounceFamis = true;
+        dontKillBru = false;
         obTimer.SetActive(true);
     }
     public void bro()
@@ -487,13 +459,16 @@ public class FamishedModeController : MonoBehaviour
         funnyaudiotuff.Play();
         angerMultipler = 0.001f;
         yield return new WaitForSeconds(wierd.length);
-        angerMultipler = 0.4f;
+        angerMultipler = 0.5f;
         funnyaudiotuff.clip = specialLmsIntro;
         funnyaudiotuff.Play();
-        StartCoroutine(easing(new Color(1f, 0f, 0f, 1f), 0, 1, 1));
+        StartCoroutine(easing(new Color(1f, 0f, 0f, 1f), 0, 1, 0));
         yield return new WaitForSeconds(specialLmsIntro.length);
-        angerMultipler = 1.45f;
-        StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 1));
+        CameraScript.Instance.TempShakeAmount += 0.2f;
+        AdditionalGameCustomizer.Instance.FovAmmount -= 125f;
+        AdditionalGameCustomizer.Instance.FovAmmount += 125f;
+        angerMultipler = 1.25f;
+        StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 0));
         funnyaudiotuff.clip = specialLmsLoop;
         funnyaudiotuff.loop = true;
         funnyaudiotuff.Play();
@@ -559,7 +534,7 @@ public class FamishedModeController : MonoBehaviour
     }
     [SerializeField] private GameControllerScript gc;
     public GameObject[] tweenOutitems;
-    public bool corspesspawn, isAbleToMove, alwaysKnowIp,AllowCountdown, pitchdown,dontupdatebr,OneBounceFamis,turnOnLightAutoChange;
+    public bool corspesspawn, isAbleToMove, alwaysKnowIp,dontKillBru,AllowCountdown, pitchdown,dontupdatebr,OneBounceFamis,turnOnLightAutoChange;
     public float angerMultipler,TimethatUhhh,pitchval = 1f;
 	public TMP_Text TimerText;
     private string colortext;

@@ -135,7 +135,7 @@ public class FamishedScript : NPC
     {
         if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
-            if (base.IsHitboxValid)
+            if (base.IsHitboxValid && !gc.fmc.dontKillBru)
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 0.5f, false, true, false);
 				gc.player.killedbyfamished = true;

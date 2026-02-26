@@ -142,18 +142,12 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             if (enableOffMeshScript)
             {
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                if (!UseCustomBoxCollider)
-                {
-                    this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
-                }
+                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
             }
             else
             {
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-                if (!UseCustomBoxCollider)
-                {
-                    this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
-                }
+                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
             }
             this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
@@ -167,10 +161,7 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
     }
     public void DamagPlaye(int rando)
     {
-        if (rando == 1)
-        {
-            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, UnityEngine.Random.Range(0,5), 1f, false, true, false);
-        }
+        if (rando == 1) GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, UnityEngine.Random.Range(0,5), 1f, false, true, false);
     }
 
     private AudioSource audioDevice;

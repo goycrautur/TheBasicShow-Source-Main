@@ -6,7 +6,8 @@ using UnityEngine;
 public class WindowData : ScriptableObject
 {
     public int durability = 1;
-    public bool uniqueCrackSound;
+    [Tooltip("allow for uhh yknow the particle prefab to get instaniate")] public bool CreateParticles;
+    [Tooltip(":eyes:")] public bool uniqueCrackSound;
     [Header("particles prefab\n")]
     [Tooltip("array 0 and 1 is for broken window particl and repair prefab")] public GameObject[] particlPrefab;
     [Header("materials stuff\n")]

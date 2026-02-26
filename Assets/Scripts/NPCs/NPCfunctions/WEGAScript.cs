@@ -5,10 +5,12 @@ public class WEGAScript : NPC
 	public override void OnStart()
 	{
 		base.OnStart();
+		
 	}
 
 	public override void OnUpdate()
 	{
+		base.SetToXrayLayer();
 		CurWegaSpeed = gc.wegchal.globalWegaSpeed;
 		if (base.stun)
         {

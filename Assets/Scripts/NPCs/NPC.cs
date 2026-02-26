@@ -14,12 +14,14 @@ public class NPC : MonoBehaviour
     protected virtual void Start()
     {
         if (!dosentUseNavmesh) agent = GetComponent<NavMeshAgent>();
-        if (!dosentUseNavmesh) gc.NPCThatGetAffectedByMetalPipe.Add(this);
+        if (!dosentUseNavmesh) gc.GlobalNpcList.Add(this);
+        OgLayerName = "npcLayer";
+        XrayLayerName = "npcXrayLayer";
         OnStart();
     }
      protected virtual void OnDestroy()
     {
-        if (!dosentUseNavmesh) gc.NPCThatGetAffectedByMetalPipe.Remove(this);
+        if (!dosentUseNavmesh) gc.GlobalNpcList.Remove(this);
     }
 
     protected virtual void Update()
@@ -92,6 +94,10 @@ public class NPC : MonoBehaviour
     {
         StunTime = Duration;
         stun = true;
+    }
+    public virtual void SetToXrayLayer(bool xray = true)
+    {
+        for (int i = 0; i < ObjectToGetXrayed.Length; ++i) if (ObjectToGetXrayed[i] != null) ObjectToGetXrayed[i].layer = !xray ? LayerMask.NameToLayer(OgLayerName) : LayerMask.NameToLayer(XrayLayerName);
     }
 
 
@@ -169,6 +175,8 @@ public class NPC : MonoBehaviour
     [SerializeField] protected Transform player;
     public GameControllerScript gc;
     [SerializeField] protected AILocationSelectorScript wanderer;
+    public GameObject[] ObjectToGetXrayed;
+    public string OgLayerName,XrayLayerName;
     public bool isInteracting, canTargetPlayer, IsHitboxValid = true;
 
     [Header("Gizmo Settings")]

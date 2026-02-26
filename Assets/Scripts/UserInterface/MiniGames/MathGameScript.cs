@@ -703,9 +703,7 @@ public class MathGameScript : MonoBehaviour
                     if (gc.SlotsAmmount >= 5)
                     {
                         questionText.text = "fuck you, 2 of your slots will be gone";
-                        Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
-                        Singleton<OtherMainStuffManager>.Instance.UpdateItemSizeAssignValue(true, GameControllerScript.Instance.SlotsAmmount-2);
-                        Singleton<OtherMainStuffManager>.Instance.slot();
+                        Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(GameControllerScript.Instance.SlotsAmmount-2,true);
                     }
                     else if (gc.SlotsAmmount <= 5)
                     {
