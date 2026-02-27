@@ -86,10 +86,10 @@ public class GameControllerScript : MonoBehaviour
     {
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
+        ItemManager.Instance.enabled = true;
         Singleton<OtherMainStuffManager>.Instance.UpdateInventoryLength();
         Singleton<OtherMainStuffManager>.Instance.ResizeAltInventory();
         Singleton<OtherMainStuffManager>.Instance.UpdateAltInventory();
-        ItemManager.Instance.enabled = true;
         CharacterManagement.Instance.noiseiscallingpickupphone();
         foreach (PickupScript pick in FindObjectsOfType<PickupScript>())
         {

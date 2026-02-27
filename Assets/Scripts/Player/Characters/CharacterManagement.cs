@@ -35,7 +35,8 @@ public class CharacterManagement : MonoBehaviour
     {
         GameControllerScript gc = GameControllerScript.Instance;
         if (CurrentCharID == null) CurrentCharID = 0;
-        Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(CharactersReal[CurrentCharID].CharStatsThing.SlotsAmmount);
+        Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(CharactersReal[CurrentCharID].CharStatsThing.SlotsAmmount,true,CharactersReal[CurrentCharID].CharStatsThing.SlotsAmmount,true);
+        
         ItemManager.Instance.ItemSlotsSprites[0] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[0];
         ItemManager.Instance.ItemSlotsSprites[1] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[1];
         ItemManager.Instance.ItemSlotsSprites[2] = CharactersReal[CurrentCharID].CharStatsThing.SlotsSkin[2];

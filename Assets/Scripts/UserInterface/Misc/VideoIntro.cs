@@ -7,6 +7,8 @@ public class VideoIntro : MonoBehaviour
 {
 	private void Start()
 	{
+		bool skip = PlayerPrefsExtension.GetBool("warnskip");
+		if (skip) SceneManager.LoadScene(scenenaem);
 		videoPlayer.Play();
 		videoPlayer.loopPointReached += OnVideoFinished;
 	}
@@ -19,4 +21,5 @@ public class VideoIntro : MonoBehaviour
 
 	public VideoPlayer videoPlayer;
     public UISplashScreenManager splash;
+	public string scenenaem;
 }

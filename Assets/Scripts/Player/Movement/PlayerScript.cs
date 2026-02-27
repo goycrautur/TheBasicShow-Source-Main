@@ -257,7 +257,7 @@ public class PlayerScript : MonoBehaviour
 			}
 			if (!isMoving) FowardValue -= fowardVeloDowning * Time.deltaTime;
 			if (FowardValue <= FowardMinValue) FowardValue = 0;
-			if (FowardValue >= 3f) breakwind(true,5f);
+			if (FowardValue >= 2.5f) breakwind(true,5f);
 			
 		}
 		else if (carfuel < 0f)
@@ -544,12 +544,12 @@ public class PlayerScript : MonoBehaviour
 			sweeping = true;
 			sweepingFailsave = 1f;
 		}
-		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0)
+		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 || (invisi || invisichalk))
 		{
 			hugging = true;
 			sweepingFailsave = 1f;
 		}
-		else if (other.transform.name == "washingmachine" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0)
+		else if (other.transform.name == "washingmachine" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 || (invisi || invisichalk))
 		{
 			hugging = true;
 			sweepingFailsave = 1f;

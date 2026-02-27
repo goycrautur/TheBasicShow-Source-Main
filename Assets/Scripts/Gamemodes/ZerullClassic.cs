@@ -113,14 +113,13 @@ public class ZerullClassic : MonoBehaviour
     }
     private void Start()
     {
-        health = maxHealth;
+        string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
+        int extraHealth = dific == "easy" ? 5 : dific == "normal" ? 10 : dific == "hard" ? 15 : dific == "expert" ? 20 : dific == "maniac" ? 25 : 5;
+        health = maxHealth + extraHealth;
         bool shakeswitchFR = PlayerPrefsExtension.GetBool("WallShakeSwitch");
         bool shake = PlayerPrefsExtension.GetBool("WallShake");
         bool blox = PlayerPrefsExtension.GetBool("bloxy");
-        if(!shakeswitchFR )
-        {
-        PlayerPrefsExtension.SetBool("WallShake", true);
-        }
+        if(!shakeswitchFR) PlayerPrefsExtension.SetBool("WallShake", true);
         VertexShake = !shakeswitchFR ? true : shake;
         switchToBloxyb = blox;
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;

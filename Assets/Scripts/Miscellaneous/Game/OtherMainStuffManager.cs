@@ -297,10 +297,10 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             }
         }
     }
-    public void ChangeItemSlot(int SlotAmmount = 1,bool DropAllAvailableItemInInventory = false)
+    public void ChangeItemSlot(int SlotAmmount = 1,bool DropAllAvailableItemInInventory = false,int maxSlotsAmmount = 1,bool setMaxSlotAmmount = false)
     {
         if (DropAllAvailableItemInInventory) HighSchoolDropOut();
-        UpdateInventoryLength(true,SlotAmmount);
+        UpdateInventoryLength(true,SlotAmmount,maxSlotsAmmount,setMaxSlotAmmount);
         slot();
     }
     public void HighSchoolDropOut()
@@ -313,13 +313,16 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             }
         }
     }
-    public void UpdateInventoryLength(bool setSlotNum = false, int SlotNumber = 1)
+    public void UpdateInventoryLength(bool setSlotNum = false, int SlotNumber = 1,int maxSlotsAmmount = 1,bool setMaxSlotAmmount = false)
     {
         if (setSlotNum) GameControllerScript.Instance.SlotsAmmount = SlotNumber;
+        if (setMaxSlotAmmount) realMaxSlotsAmmou = maxSlotsAmmount;
+
         if (GameControllerScript.Instance.SlotsAmmount == ItemManager.Instance.Inventory.Length) 
         {
             SlotsAmmou = ItemManager.Instance.Inventory.Length;
             MaxSlotsAmmou = ItemManager.Instance.Inventory.Length;
+            
         }
         else SlotsAmmou = GameControllerScript.Instance.SlotsAmmount;
         GameControllerScript.Instance.SlotsAmmount = SlotsAmmou;
@@ -401,5 +404,5 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     public float MuchoStunDura,FamStunDura,ZerStunDura,BalStunDura;
     public HeldItem[] AltInventory;
     public bool MuchoStunCount,FamStunCount,ZerStunCount,BalStunCount;
-    public int SlotsAmmou,MaxSlotsAmmou;
+    public int SlotsAmmou,MaxSlotsAmmou,realMaxSlotsAmmou;
 }

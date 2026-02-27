@@ -269,7 +269,7 @@ MonoBehaviour:
   initialized: 0
   startPos: {x: 0, y: 0, z: 0}
   maxJumps: 5
-  speedModifier: 2
+  speedModifier: 1
 --- !u!1 &3006269338170085343
 GameObject:
   m_ObjectHideFlags: 0

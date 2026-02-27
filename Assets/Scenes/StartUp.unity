@@ -1721,12 +1721,12 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: currentJsonVersion
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.size
-      value: 194
+      value: 199
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -1736,892 +1736,921 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[21].key
-      value: Options_Back
+      value: Options_skipwarning
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[22].key
-      value: CMapper_Back
+      value: Options_Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[23].key
-      value: CMapper_Restore
+      value: CMapper_Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[24].key
-      value: CMapper_Pause
+      value: CMapper_Restore
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[25].key
-      value: CMapper_Confirm
+      value: CMapper_Pause
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[26].key
-      value: CMapper_Interact
+      value: CMapper_Confirm
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[27].key
-      value: CMapper_UseItem
+      value: CMapper_Interact
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[28].key
-      value: CMapper_Jump
+      value: CMapper_UseItem
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[29].key
-      value: CMapper_itemSlots_1
+      value: CMapper_Jump
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[30].key
-      value: CMapper_itemSlots_2
+      value: CMapper_itemSlots_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[31].key
-      value: CMapper_itemSlots_3
+      value: CMapper_itemSlots_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[32].key
-      value: CMapper_itemSlots_4
+      value: CMapper_itemSlots_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[33].key
-      value: CMapper_itemSlots_5
+      value: CMapper_itemSlots_4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[34].key
-      value: CMapper_itemSlots_6
+      value: CMapper_itemSlots_5
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[35].key
-      value: CMapper_itemSlots_7
+      value: CMapper_itemSlots_6
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[36].key
-      value: CMapper_itemSlots_8
+      value: CMapper_itemSlots_7
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[37].key
-      value: CMapper_itemSlots_9
+      value: CMapper_itemSlots_8
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[38].key
-      value: CMapper_Movements_Fowards
+      value: CMapper_itemSlots_9
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[39].key
-      value: CMapper_Movements_Backwards
+      value: CMapper_Movements_Fowards
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[40].key
-      value: CMapper_Movements_Left
+      value: CMapper_Movements_Backwards
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[41].key
-      value: CMapper_Movements_Right
+      value: CMapper_Movements_Left
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[42].key
-      value: CMapper_Movements_Run
+      value: CMapper_Movements_Right
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[43].key
-      value: CMapper_Movements_behindyou
+      value: CMapper_Movements_Run
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[44].key
-      value: CMapper_Confirm_walltext
+      value: CMapper_Movements_behindyou
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[45].key
-      value: CMapper_Confirm_Yes
+      value: CMapper_Confirm_walltext
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[46].key
-      value: CMapper_Confirm_No
+      value: CMapper_Confirm_Yes
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[47].key
-      value: HoverInfoText_none
+      value: CMapper_Confirm_No
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[48].key
-      value: HoverInfoText_Menu_Play
+      value: HoverInfoText_none
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[49].key
-      value: HoverInfoText_Menu_Options
+      value: HoverInfoText_Menu_Play
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[50].key
-      value: HoverInfoText_Menu_goback
+      value: HoverInfoText_Menu_Options
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[51].key
-      value: HoverInfoText_Options_sensitiv
+      value: HoverInfoText_Menu_goback
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[52].key
-      value: HoverInfoText_Options_controlsconfigu
+      value: HoverInfoText_Options_sensitiv
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[53].key
-      value: HoverInfoText_Options_volum
+      value: HoverInfoText_Options_controlsconfigu
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[54].key
-      value: HoverInfoText_Options_reso
+      value: HoverInfoText_Options_volum
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[55].key
-      value: HoverInfoText_Options_anaismovemen
+      value: HoverInfoText_Options_reso
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[56].key
-      value: HoverInfoText_Options_rumb
+      value: HoverInfoText_Options_anaismovemen
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[57].key
-      value: HoverInfoText_Options_vsync
+      value: HoverInfoText_Options_rumb
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[58].key
-      value: HoverInfoText_Options_fulscren
+      value: HoverInfoText_Options_vsync
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[59].key
-      value: HoverInfoText_Options_runinbg
+      value: HoverInfoText_Options_fulscren
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[60].key
-      value: HoverInfoText_Options_itminfo
+      value: HoverInfoText_Options_runinbg
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[61].key
-      value: HoverInfoText_Options_subs
+      value: HoverInfoText_Options_itminfo
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[62].key
-      value: HoverInfoText_Options_zershake
+      value: HoverInfoText_Options_subs
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[63].key
-      value: HoverInfoText_Options_goback
+      value: HoverInfoText_Options_zershake
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[64].key
-      value: HoverInfoText_Modifiers_syfm
+      value: HoverInfoText_Options_nowarnballs
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[65].key
-      value: HoverInfoText_Modifiers_muchomous
+      value: HoverInfoText_Options_goback
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[66].key
-      value: HoverInfoText_Modifiers_EvapPad
+      value: HoverInfoText_Modifiers_syfm
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[67].key
-      value: HoverInfoText_Modifiers_Meeptimer
+      value: HoverInfoText_Modifiers_muchomous
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[68].key
-      value: HoverInfoText_Modifiers_ChaosMode
+      value: HoverInfoText_Modifiers_EvapPad
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[69].key
-      value: HoverInfoText_Modifiers_bloxyzerull
+      value: HoverInfoText_Modifiers_Meeptimer
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[70].key
-      value: ModeSelectMen_Back
+      value: HoverInfoText_Modifiers_ChaosMode
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].key
-      value: ModeSelectMen_locked
+      value: HoverInfoText_Modifiers_bloxyzerull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[72].key
-      value: ModeSelectMen_modifi
+      value: HoverInfoText_Modifiers_shrinkinginventory
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].key
-      value: ModeSelectMen_stor
+      value: ModeSelectMen_Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].key
-      value: ModeSelectMen_bruhmished
+      value: ModeSelectMen_locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].key
-      value: ModeSelectMen_erull
+      value: ModeSelectMen_modifi
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].key
-      value: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
+      value: ModeSelectMen_stor
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].key
-      value: ModeSelectMen_PlayMenStuff_notfound
+      value: ModeSelectMen_bruhmished
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].key
-      value: ModeSelectMen_PlayMenStuff_storyMode
+      value: ModeSelectMen_erull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].key
-      value: ModeSelectMen_PlayMenStuff_famished
+      value: ModeSelectMen_LAPPINGOFGODDAMMASYLUM
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].key
-      value: ModeSelectMen_PlayMenStuff_zerull
+      value: ModeSelectMen_PlayMenStuff_notfound
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].key
-      value: ModeSelectMen_PlayMenStuff_lappingOfAsylum
+      value: ModeSelectMen_PlayMenStuff_storyMode
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].key
-      value: Playmenu_back
+      value: ModeSelectMen_PlayMenStuff_famished
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[83].key
-      value: Playmenu_newga
+      value: ModeSelectMen_PlayMenStuff_zerull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[84].key
-      value: Playmenu_Modifier_muchomous
+      value: ModeSelectMen_PlayMenStuff_lappingOfAsylum
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].key
-      value: Playmenu_Modifier_EvapPad
+      value: Playmenu_back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[86].key
-      value: Playmenu_Modifier_Meeptimer
+      value: Playmenu_newga
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[87].key
-      value: Playmenu_Modifier_ChaosMode
+      value: Playmenu_Modifier_muchomous
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[88].key
-      value: Playmenu_Modifier_bloxyzerull
+      value: Playmenu_Modifier_EvapPad
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[89].key
-      value: Playmenu_Modifier_muchomous_Locked
+      value: Playmenu_Modifier_Meeptimer
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[90].key
-      value: Playmenu_Modifier_EvapPad_Locked
+      value: Playmenu_Modifier_ChaosMode
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[91].key
-      value: Playmenu_Modifier_Meeptimer_Locked
+      value: Playmenu_Modifier_bloxyzerull
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[92].key
-      value: Playmenu_Modifier_ChaosMode_Locked
+      value: Playmenu_Modifier_ShrinkingInven
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[93].key
-      value: Playmenu_Modifier_bloxyzerull_Locked
+      value: Playmenu_Modifier_muchomous_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[94].key
-      value: global_stunned
+      value: Playmenu_Modifier_EvapPad_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[95].key
-      value: bal_slap
+      value: Playmenu_Modifier_Meeptimer_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[96].key
-      value: mucho_tele
+      value: Playmenu_Modifier_ChaosMode_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[97].key
-      value: mucho_slam
+      value: Playmenu_Modifier_bloxyzerull_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[98].key
-      value: global_bosshurt
+      value: Playmenu_Modifier_ShrinkingInven_Locked
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[99].key
-      value: 945_sweep
+      value: global_stunned
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[0].value
-      value: Hi, Quangg/Gray creatur here!
+      value: hi hello hawwo hello
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[100].key
-      value: MemeMouse_ambience
+      value: bal_slap
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[101].key
-      value: SausageJerry_ambience
+      value: mucho_tele
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[102].key
-      value: SausageJerry_poo
+      value: mucho_slam
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[103].key
-      value: Wane_Grunts
+      value: global_bosshurt
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[104].key
-      value: Wane_Angry
+      value: 945_sweep
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[105].key
-      value: Maxcipal_detention
+      value: MemeMouse_ambience
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[106].key
-      value: Maxcipal_detention_tier1
+      value: SausageJerry_ambience
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[107].key
-      value: Maxcipal_detention_tier2
+      value: SausageJerry_poo
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[108].key
-      value: Maxcipal_detention_tier3
+      value: Wane_Grunts
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[109].key
-      value: Maxcipal_detention_tier4
+      value: Wane_Angry
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[110].key
-      value: Maxcipal_detention_tier5
+      value: Maxcipal_detention
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[111].key
-      value: Maxcipal_scold_detention_tier1_1
+      value: Maxcipal_detention_tier1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[112].key
-      value: Maxcipal_scold_detention_tier1_2
+      value: Maxcipal_detention_tier2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[113].key
-      value: Maxcipal_scold_detention_tier2_1
+      value: Maxcipal_detention_tier3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[114].key
-      value: Maxcipal_scold_detention_tier2_2
+      value: Maxcipal_detention_tier4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[115].key
-      value: Maxcipal_scold_detention_tier3_1
+      value: Maxcipal_detention_tier5
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[116].key
-      value: Maxcipal_scold_detention_tier3_2
+      value: Maxcipal_scold_detention_tier1_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[117].key
-      value: Maxcipal_scold_detention_tier3_3
+      value: Maxcipal_scold_detention_tier1_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[118].key
-      value: Maxcipal_scold_detention_tier4_1
+      value: Maxcipal_scold_detention_tier2_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[119].key
-      value: Maxcipal_scold_detention_tier4_2
+      value: Maxcipal_scold_detention_tier2_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[120].key
-      value: Maxcipal_scold_detention_tier4_3
+      value: Maxcipal_scold_detention_tier3_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[121].key
-      value: Maxcipal_scold_detention_tier5_1
+      value: Maxcipal_scold_detention_tier3_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[122].key
-      value: Maxcipal_scold_detention_tier5_2
+      value: Maxcipal_scold_detention_tier3_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[123].key
-      value: Maxcipal_scold_detention_tier5_3
+      value: Maxcipal_scold_detention_tier4_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[124].key
-      value: Maxcipal_scold_detention_tier5_4
+      value: Maxcipal_scold_detention_tier4_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[125].key
-      value: Maxcipal_scold_detention_tier6
+      value: Maxcipal_scold_detention_tier4_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[126].key
-      value: Maxcipal_scold_everywane
+      value: Maxcipal_scold_detention_tier5_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[127].key
-      value: Maxcipal_scold_gosub_1
+      value: Maxcipal_scold_detention_tier5_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[128].key
-      value: Maxcipal_scold_gosub_2
+      value: Maxcipal_scold_detention_tier5_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[129].key
-      value: Maxcipal_scold_longWhistle_1
+      value: Maxcipal_scold_detention_tier5_4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[130].key
-      value: Maxcipal_scold_longWhistle_2
+      value: Maxcipal_scold_detention_tier6
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[131].key
-      value: Maxcipal_scold_longWhistle_3
+      value: Maxcipal_scold_everywane
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[132].key
-      value: Maxcipal_Whistl
+      value: Maxcipal_scold_gosub_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[133].key
-      value: TeacherJerry_hi_1
+      value: Maxcipal_scold_gosub_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[134].key
-      value: TeacherJerry_hi_2
+      value: Maxcipal_scold_longWhistle_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[135].key
-      value: TeacherJerry_hi_3
+      value: Maxcipal_scold_longWhistle_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[136].key
-      value: TeacherJerry_hi_4
+      value: Maxcipal_scold_longWhistle_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[137].key
-      value: TeacherJerry_hi_5
+      value: Maxcipal_Whistl
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[138].key
-      value: TeacherJerry_hi_6
+      value: TeacherJerry_hi_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[139].key
-      value: TeacherJerry_hi_7
+      value: TeacherJerry_hi_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[140].key
-      value: TeacherJerry_mone_1
+      value: TeacherJerry_hi_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[141].key
-      value: TeacherJerry_mone_2
+      value: TeacherJerry_hi_4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[142].key
-      value: TeacherJerry_finale_1
+      value: TeacherJerry_hi_5
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[143].key
-      value: TeacherJerry_finale_2
+      value: TeacherJerry_hi_6
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[144].key
-      value: TeacherJerry_finale_3
+      value: TeacherJerry_hi_7
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[145].key
-      value: TeacherJerry_finale_4
+      value: TeacherJerry_mone_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[146].key
-      value: TeacherJerry_finale_5
+      value: TeacherJerry_mone_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[147].key
-      value: TeacherJerry_finale_6
+      value: TeacherJerry_finale_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[148].key
-      value: TeacherJerry_finale_7
+      value: TeacherJerry_finale_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[149].key
-      value: cheeseRespawn
+      value: TeacherJerry_finale_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[150].key
-      value: SwinDoor_open
+      value: TeacherJerry_finale_4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[151].key
-      value: Baloo_pop
+      value: TeacherJerry_finale_5
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[152].key
-      value: normDoor_open
+      value: TeacherJerry_finale_6
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[153].key
-      value: normDoor_close
+      value: TeacherJerry_finale_7
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[154].key
-      value: ElevOrExitClosing_1
+      value: cheeseRespawn
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[155].key
-      value: ElevOrExitClosing_2
+      value: SwinDoor_open
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[156].key
-      value: EndingHelicop_1
+      value: Baloo_pop
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[157].key
-      value: EndingHelicop_2
+      value: normDoor_open
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[158].key
-      value: methMachine_correct
+      value: normDoor_close
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[159].key
-      value: methMachine_wrong
+      value: ElevOrExitClosing_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[160].key
-      value: windo_broken
+      value: ElevOrExitClosing_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[161].key
-      value: windo_repaired
+      value: EndingHelicop_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[162].key
-      value: itemSubtitles_Confetti
+      value: EndingHelicop_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[163].key
-      value: itemSubtitles_Teleporter
+      value: methMachine_correct
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[164].key
-      value: itemSubtitles_evilFuckingLeafy
+      value: methMachine_wrong
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[165].key
-      value: itemSubtitles_shapeBotomyKey
+      value: windo_broken
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[166].key
-      value: itemSubtitles_thmMetalPipe_use
+      value: windo_repaired
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[167].key
-      value: itemSubtitles_randomBlock_bul
+      value: itemSubtitles_Confetti
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[168].key
-      value: itemSubtitles_randomBlock_demoman
+      value: itemSubtitles_Teleporter
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[169].key
-      value: itemSubtitles_randomBlock_glaceo
+      value: itemSubtitles_evilFuckingLeafy
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[170].key
-      value: itemSubtitles_randomBlock_sotwLap3Fear
+      value: itemSubtitles_shapeBotomyKey
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[171].key
-      value: itemSubtitles_randomBlock_poteto
+      value: itemSubtitles_thmMetalPipe_use
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[172].key
-      value: itemSubtitles_randomBlock_static
+      value: itemSubtitles_randomBlock_bul
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[173].key
-      value: itemSubtitles_randomBlock_sylveo
+      value: itemSubtitles_randomBlock_demoman
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[174].key
-      value: itemSubtitles_randomBlock_tetoplush
+      value: itemSubtitles_randomBlock_glaceo
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[175].key
-      value: itemSubtitles_genderReveal
+      value: itemSubtitles_randomBlock_sotwLap3Fear
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[176].key
-      value: itemSubtitles_genderReveal_debuff
+      value: itemSubtitles_randomBlock_poteto
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[177].key
-      value: itemSubtitles_ogbalditape
+      value: itemSubtitles_randomBlock_static
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[178].key
-      value: itemSubtitles_JerEarPierceDvd
+      value: itemSubtitles_randomBlock_sylveo
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[179].key
-      value: itemSubtitles_JerPeakTape
+      value: itemSubtitles_randomBlock_tetoplush
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[180].key
-      value: itemSubtitles_JerPeakTape_Expert_1
+      value: itemSubtitles_genderReveal
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[181].key
-      value: itemSubtitles_JerPeakTape_Expert_2
+      value: itemSubtitles_genderReveal_debuff
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[182].key
-      value: itemSubtitles_JerPeakTape_Expert_3
+      value: itemSubtitles_ogbalditape
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[183].key
-      value: itemSubtitles_JerPeakTape_Expert_4
+      value: itemSubtitles_JerEarPierceDvd
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[184].key
-      value: itemSubtitles_JerPeakTape_Expert_5
+      value: itemSubtitles_JerPeakTape
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[185].key
-      value: itemSubtitles_JerPeakTape_Expert_6
+      value: itemSubtitles_JerPeakTape_Expert_1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[186].key
-      value: itemSubtitles_JerPeakTape_Expert_7
+      value: itemSubtitles_JerPeakTape_Expert_2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[187].key
-      value: itemSubtitles_JerPeakTape_Expert_8
+      value: itemSubtitles_JerPeakTape_Expert_3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[188].key
-      value: itemSubtitles_JerPeakTape_Expert_9
+      value: itemSubtitles_JerPeakTape_Expert_4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[189].key
-      value: itemSubtitles_JerPeakTape_Expert_10
+      value: itemSubtitles_JerPeakTape_Expert_5
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[190].key
-      value: itemSubtitles_JerPeakTape_Expert_11
+      value: itemSubtitles_JerPeakTape_Expert_6
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[191].key
-      value: itemSubtitles_JerPeakTape_Expert_12
+      value: itemSubtitles_JerPeakTape_Expert_7
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[192].key
-      value: itemSubtitles_JerPeakTape_Expert_13
+      value: itemSubtitles_JerPeakTape_Expert_8
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[193].key
+      value: itemSubtitles_JerPeakTape_Expert_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[194].key
+      value: itemSubtitles_JerPeakTape_Expert_10
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[195].key
+      value: itemSubtitles_JerPeakTape_Expert_11
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[196].key
+      value: itemSubtitles_JerPeakTape_Expert_12
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[197].key
+      value: itemSubtitles_JerPeakTape_Expert_13
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[198].key
       value: loadaText
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[1].value
-      value: this build was made specifically for maxplay livestream,its abit rushed
-        i know,(like main mf chasing you in story is mucho mouse etc-)
+      value: Finnally new warning text lol
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[2].value
-      value: 'there will be way more content in here instead of the demo so the stream
-        dosent end early :jerrytroll:,and dont leak this!!!
+      value: 'if you somehow got your hands on this build (for non playtester) this
+        mod is in a phase of me wana overhaul shit realrealrealreal
 
-        Trigger warning:
-        loud noises, flashing lights, etc'
+        for
+        playtester have fun ig lol'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[3].value
       value: Have fun and <color=red>PROCEED
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[5].value
+      value: <#808080>overhaul_0.1_part2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -2631,370 +2660,371 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[21].value
-      value: Back
+      value: Skip the warning menu entirely
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[22].value
-      value: done configu
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[23].value
-      value: Restore defaul
+      value: done configu
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[24].value
-      value: Pause
+      value: Restore defaul
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[25].value
-      value: Confirm
+      value: Pause
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[26].value
-      value: Interact
+      value: Confirm
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[27].value
-      value: Use Item
+      value: Interact
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[28].value
-      value: Jump
+      value: Use Item
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[29].value
-      value: Item Slot 1
+      value: Jump
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[30].value
-      value: Item Slot 2
+      value: Item Slot 1
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[31].value
-      value: Item Slot 3
+      value: Item Slot 2
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[32].value
-      value: Item Slot 4
+      value: Item Slot 3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[33].value
-      value: Item Slot 5
+      value: Item Slot 4
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[34].value
-      value: Item Slot 6
+      value: Item Slot 5
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[35].value
-      value: Item Slot 7
+      value: Item Slot 6
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[36].value
-      value: Item Slot 8
+      value: Item Slot 7
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[37].value
-      value: Item Slot 9
+      value: Item Slot 8
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[38].value
-      value: Move Forward
+      value: Item Slot 9
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[39].value
-      value: Move Backward
+      value: Move Forward
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[40].value
-      value: Strafe Left
+      value: Move Backward
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[41].value
-      value: Strafe Right
+      value: Strafe Left
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[42].value
-      value: Run
+      value: Strafe Right
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[43].value
-      value: Look Back
+      value: Run
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[44].value
+      value: Look Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[45].value
       value: 'Are You Sure You Want
 
         To Rebind This Key?'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[45].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[46].value
       value: Yez
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[46].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[47].value
       value: Na
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[47].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[48].value
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[48].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[49].value
       value: the main shit lol
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[49].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[50].value
       value: this is where u configure stuff lol
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[50].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[51].value
       value: go back to the title screen realism
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[51].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[52].value
       value: i dont need to explain to you what this does,aintcha?
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[52].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[53].value
       value: GO [CONFIGURE] YOURSELF
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[53].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[54].value
       value: probally will not fully work im not sure,just use the windows volume
         shit lol
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[54].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[55].value
       value: having a decompile allowing ppl to change resolution is so peak oml
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[55].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[56].value
       value: makes ur movement analog,dont really kno what it does but ok
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[56].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[57].value
       value: makes screen rumble,pretty cool righ
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[57].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[58].value
       value: locks ur fps to ur monitor refresh rate, quite stable
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[58].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[59].value
       value: 'it does what it said :shrugs:'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[59].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[60].value
       value: makes the game run in background, really useful if you want to stream
         the mod ig
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[60].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[61].value
       value: enables the item info text,it shows item info thats all
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[61].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[62].value
       value: enables bbcr ahh captions yea
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[62].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[63].value
       value: Enables/Disables wall shake in zerull/chair bossfight (for those who
         had low focus)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[63].value
-      value: goin back already?.,.,,.,.,.,.,
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[64].value
-      value: nuh uh, cant use that yet buddy,go beat story mode first
+      value: 'erm yea its in the name :cold_face:'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[65].value
+      value: goin back already?.,.,,.,.,.,.,
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[66].value
+      value: nuh uh, cant use that yet buddy,go beat story mode first
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[67].value
       value: teacher jerry didnt feel like teaching rn, so he tell his subtitute
         cousin mucho mouse to take his place!
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[66].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[68].value
       value: fucking kills the cheese pad when enabled, wont work in some modes ahaha
         syba
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[67].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[69].value
       value: pizza tower war timer, litearlly
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[68].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[70].value
       value: ehm, what are you talking about?? it aint bbcr chaos mode trust me-
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[69].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].value
       value: just switch out the music for your lapping problem trust- (Only compatible
         with Zerull Mode)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[70].value
-      value: Back
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[71].value
-      value: ?????????
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[72].value
-      value: Modifiers
+      value: shrinks your inventory everytime you successfully use an item (dosent
+        count when you drop it,yes i recreated a bb+ challenges pray)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[73].value
-      value: Story Mode
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].value
-      value: famished
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].value
-      value: z?ERR?!!?!?@null
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].value
-      value: deadass pizza mode
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].value
-      value: mode not found, defaulting to story mode
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].value
-      value: Story Mode
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].value
-      value: famished
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].value
-      value: z33rull M3D3
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].value
-      value: story mode (hard,trust)
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].value
       value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[74].value
+      value: ?????????
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[75].value
+      value: Modifiers
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[76].value
+      value: Story Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[77].value
+      value: famished
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[78].value
+      value: z?ERR?!!?!?@null
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[79].value
+      value: deadass pizza mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[80].value
+      value: mode not found, defaulting to story mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[81].value
+      value: Story Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[82].value
+      value: famished
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[83].value
-      value: Start New Game
+      value: z33rull M3D3
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[84].value
-      value: mucho
+      value: story mode (hard,trust)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[85].value
-      value: kill cheese pad
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[86].value
-      value: MEEP Timer
+      value: Start New Game
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[87].value
-      value: Chaos.. Mode!
+      value: mucho
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[88].value
-      value: Bloxifyed
+      value: kill cheese pad
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[89].value
-      value: LOCKED
+      value: MEEP Timer
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[90].value
-      value: LOCKED
+      value: Chaos.. Mode!
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[91].value
-      value: LOCKED
+      value: Bloxifyed (one mode only)
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[92].value
-      value: LOCKED
+      value: Shrinking Inventory
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
@@ -3004,502 +3034,527 @@ PrefabInstance:
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[94].value
-      value: '*Stunned*'
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[95].value
-      value: '*SLAP*'
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[96].value
-      value: '*Teleport Sound*'
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[97].value
-      value: '*SLAM*'
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[98].value
-      value: '*minecraft hurt sound*'
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[99].value
-      value: '*chainsaw maniac intensify*'
+      value: '*Stunned*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[100].value
-      value: stupid ass toothless theme intenstify
+      value: '*SLAP*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[101].value
-      value: '*goofy ahh music*'
+      value: '*Teleport Sound*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[102].value
-      value: '*Farting Sound*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[103].value
-      value: '*Angry grunts*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[104].value
-      value: WANE
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[105].value
-      value: Detention For You.
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[106].value
-      value: 10 Seconds!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[107].value
-      value: 20 Seconds!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[108].value
-      value: 40 Seconds!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[109].value
-      value: 60 Seconds!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[110].value
-      value: 1 day.
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[111].value
-      value: Please look at your mirror again
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[112].value
-      value: and think about yourself
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[113].value
-      value: Please...
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[114].value
-      value: I dont wanna get fireddd...
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[115].value
-      value: You should be..
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[116].value
-      value: More responsible
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[117].value
-      value: Buddy
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[118].value
-      value: i dont know what to say anymore
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[119].value
-      value: '*Cracking sound?*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[120].value
-      value: Okay hold up-
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[121].value
-      value: I
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[122].value
-      value: CANT
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[123].value
-      value: TAKE IT
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[124].value
-      value: ANYMORE....
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[125].value
-      value: fuck you
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[126].value
-      value: '''Elllo everywane'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[127].value
-      value: yo go subscribe to maxplay games
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[128].value
-      value: hes such a cool guy
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[129].value
-      value: '*Whistling*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[130].value
-      value: Alright, let me... let me try to whistle
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[131].value
-      value: '*whistling the tbs theme'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[132].value
-      value: '*Whistling*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[133].value
-      value: Oh.
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[134].value
-      value: Hi!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[135].value
-      value: Id assume you came here to gather some cheese block n stuff
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[136].value
-      value: Honestly...
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[137].value
-      value: Im quite chill with it
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[138].value
-      value: So...
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[139].value
-      value: go ahead!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[140].value
-      value: You did good on that one honestly!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[141].value
-      value: im gonna give you free money cuz im feeling generous today
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[142].value
-      value: CONGRATULATION.
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[143].value
-      value: YOU ACTUALLY FOUND ALL THOSE CHEESE BLOCKS!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[144].value
-      value: WELL I DIDNT FEEL LIKE HAVING ANYTHING TO SAY HERE EXPECT...
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[145].value
-      value: FIND A WAY BEFORE I CATCH YOUU!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[146].value
-      value: .......
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[147].value
-      value: oh yea wait until the beat drops
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[148].value
-      value: this song is catchy as hell!
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[149].value
-      value: '*Cheese Blocks Respawning*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[150].value
-      value: '*Swinging door opens*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[151].value
-      value: AAAAAAAAA-
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[152].value
-      value: '*Door opens*'
-      objectReference: {fileID: 0}
-    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
-        type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[153].value
       value: '*SLAM*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[103].value
+      value: '*minecraft hurt sound*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[104].value
+      value: '*chainsaw maniac intensify*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[105].value
+      value: stupid ass toothless theme intenstify
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[106].value
+      value: '*goofy ahh music*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[107].value
+      value: '*Farting Sound*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[108].value
+      value: '*Angry grunts*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[109].value
+      value: WANE
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[110].value
+      value: Detention For You.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[111].value
+      value: 10 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[112].value
+      value: 20 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[113].value
+      value: 40 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[114].value
+      value: 60 Seconds!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[115].value
+      value: 1 day.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[116].value
+      value: Please look at your mirror again
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[117].value
+      value: and think about yourself
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[118].value
+      value: Please...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[119].value
+      value: I dont wanna get fireddd...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[120].value
+      value: You should be..
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[121].value
+      value: More responsible
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[122].value
+      value: Buddy
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[123].value
+      value: i dont know what to say anymore
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[124].value
+      value: '*Cracking sound?*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[125].value
+      value: Okay hold up-
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[126].value
+      value: I
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[127].value
+      value: CANT
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[128].value
+      value: TAKE IT
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[129].value
+      value: ANYMORE....
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[130].value
+      value: fuck you
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[131].value
+      value: '''Elllo everywane'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[132].value
+      value: yo go subscribe to maxplay games
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[133].value
+      value: hes such a cool guy
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[134].value
+      value: '*Whistling*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[135].value
+      value: Alright, let me... let me try to whistle
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[136].value
+      value: '*whistling the tbs theme'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[137].value
+      value: '*Whistling*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[138].value
+      value: Oh.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[139].value
+      value: Hi!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[140].value
+      value: Id assume you came here to gather some cheese block n stuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[141].value
+      value: Honestly...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[142].value
+      value: Im quite chill with it
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[143].value
+      value: So...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[144].value
+      value: go ahead!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[145].value
+      value: You did good on that one honestly!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[146].value
+      value: im gonna give you free money cuz im feeling generous today
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[147].value
+      value: CONGRATULATION.
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[148].value
+      value: YOU ACTUALLY FOUND ALL THOSE CHEESE BLOCKS!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[149].value
+      value: WELL I DIDNT FEEL LIKE HAVING ANYTHING TO SAY HERE EXPECT...
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[150].value
+      value: FIND A WAY BEFORE I CATCH YOUU!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[151].value
+      value: .......
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[152].value
+      value: oh yea wait until the beat drops
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[153].value
+      value: this song is catchy as hell!
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[154].value
-      value: '*concrete sliding sound*'
+      value: '*Cheese Blocks Respawning*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[155].value
-      value: '*LOUD BANGING SOUND*'
+      value: '*Swinging door opens*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[156].value
-      value: Helicopter helicopter
+      value: AAAAAAAAA-
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[157].value
-      value: '*Intense helicopter fan spinning*'
+      value: '*Door opens*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[158].value
-      value: '*LOUD CORRECT BUZZER*'
+      value: '*SLAM*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[159].value
-      value: '*Meme Mouse noises*'
+      value: '*concrete sliding sound*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[160].value
-      value: '*windo breaks*'
+      value: '*LOUD BANGING SOUND*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[161].value
-      value: '*windo repaire*'
+      value: Helicopter helicopter
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[162].value
-      value: '*Confetti SFX*'
+      value: '*Intense helicopter fan spinning*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[163].value
-      value: '*BREOW*'
+      value: '*LOUD CORRECT BUZZER*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[164].value
-      value: '!??!?!!??!'
+      value: '*Meme Mouse noises*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[165].value
-      value: Fire In The Hole!
+      value: '*windo breaks*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[166].value
-      value: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*</b>'
+      value: '*windo repaire*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[167].value
-      value: Im bored.....
+      value: '*Confetti SFX*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[168].value
-      value: '*Laughing*'
+      value: '*BREOW*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[169].value
-      value: '*Crying noises*'
+      value: '!??!?!!??!'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[170].value
-      value: '*secret lap 3 theme intensify*'
+      value: Fire In The Hole!
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[171].value
-      value: Po-Teto-Teto-Teto
+      value: '*metal pipe sound effect o em gee aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*</b>'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
       propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[172].value
+      value: Im bored.....
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[173].value
+      value: '*Laughing*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[174].value
+      value: '*Crying noises*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[175].value
+      value: '*secret lap 3 theme intensify*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[176].value
+      value: Po-Teto-Teto-Teto
+      objectReference: {fileID: 0}
+    - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
+        type: 3}
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[177].value
       value: '*Panic! In static! Out manic!.....wait why am i typing lyrics in a
         captio*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[173].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[178].value
       value: '*Cute Screaming*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[174].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[179].value
       value: '*Plushie noises*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[175].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[180].value
       value: '*Carameldansen intensify*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[176].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[181].value
       value: Boo-womp
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[177].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[182].value
       value: '*Annoying Noise*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[178].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[183].value
       value: '*agony noise*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[179].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[184].value
       value: '*Absoloutely Peak Music And you cant tell me otherwise*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[180].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[185].value
       value: White people be like
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[181].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[186].value
       value: Billy where are you-
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[182].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[187].value
       value: <color=orange>*basement jerri singing*
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[183].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[188].value
       value: <#00FFFF>*megalovania real*
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[184].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[189].value
       value: <color=orange>SHUT YOUR FUCKIGN MOUTH.
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[185].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[190].value
       value: <#00FFFF>*loud ass sigh*
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[186].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[191].value
       value: What is this diddy blud
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[187].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[192].value
       value: doing on the calculator
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[188].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[193].value
       value: Is blud
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[189].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[194].value
       value: Einstein
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[190].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[195].value
       value: Epstein
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[191].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[196].value
       value: '*goofy ahh*'
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[192].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[197].value
       value: <#00FFFF>*boyfridg screaming*
       objectReference: {fileID: 0}
     - target: {fileID: 768994507842043771, guid: ec18831a37f4c604b91674cbda8b1d14,
         type: 3}
-      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[193].value
+      propertyPath: defaultLanguages.Array.data[0].pairs.Array.data[198].value
       value: Loading
       objectReference: {fileID: 0}
     - target: {fileID: 7127100925093899789, guid: ec18831a37f4c604b91674cbda8b1d14,
@@ -4071,6 +4126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 1797992251}
   splash: {fileID: 1692269481}
+  scenenaem: MainMenu
 --- !u!328 &1797992251
 VideoPlayer:
   m_ObjectHideFlags: 0

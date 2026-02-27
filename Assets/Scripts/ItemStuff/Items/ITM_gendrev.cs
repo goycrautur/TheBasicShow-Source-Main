@@ -26,6 +26,8 @@ public class ITM_gendrev : BaseItem
         meow.loop = false;
         meow.Play();
         GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,new Vector3(0f,-170.5f,0f),meow);
+        GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.deltaexplode);
+        GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, howManyHpToRemove, 0f, true,false);
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMultAlt;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMultAlt;
         AdditionalGameCustomizer.Instance.FovAmmount -= AltFovAmmount;
@@ -46,34 +48,9 @@ public class ITM_gendrev : BaseItem
         used = false;
         yield break;
     }
-    public IEnumerator windBreakBlast()
-    {
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		{
-			if (!w.broken)
-			{
-				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, w.transform.position) <= windobreakradius+20f)
-				{
-					w.Window(true, true, 6f);
-				}
-			}
-		}
-        yield return new WaitForSeconds(0.1f);
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		{
-			if (!w.broken)
-			{
-				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, w.transform.position) <= windobreakradius+20f)
-				{
-					w.Window(true, true, 6f);
-				}
-			}
-		}
-        yield break;
-    }
     private IEnumerator amwaitin(float time)
     {
-        StartCoroutine(windBreakBlast());
+        GameControllerScript.Instance.player.breakwind(true,windobreakradius+20f);
         GameControllerScript.Instance.player.walkSpeedMultipler += speedMult;
         GameControllerScript.Instance.player.runSpeedMultipler += speedMult;
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Sprite, duration);
@@ -96,7 +73,7 @@ public class ITM_gendrev : BaseItem
         StartCoroutine(boowo(downDuration));
         yield break;
     }
-    [SerializeField] private float duration = 60f,downDuration, speedMult,speedMultAlt,FovAmmount,AltFovAmmount,windobreakradius;
+    [SerializeField] private float duration = 60f,downDuration,howManyHpToRemove, speedMult,speedMultAlt,FovAmmount,AltFovAmmount,windobreakradius;
     [SerializeField] private GameObject meowloop;
     [SerializeField] private AudioSource meow,mwloop;
     [SerializeField] private AudioClip peak,boowoo;

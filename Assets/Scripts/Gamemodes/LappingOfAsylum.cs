@@ -263,6 +263,8 @@ public class LappingOfAsylumController : MonoBehaviour
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         vanishScore = true;
         Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(lappingHi[CurrentLap-1].LapMusik.length + lappingHi[CurrentLap].LapMusik.length);
+        bool shrinky = PlayerPrefsExtension.GetBool("shrink");
+        if (shrinky) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(Singleton<OtherMainStuffManager>.Instance.realMaxSlotsAmmou);
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
         {
             if (muc.isActiveAndEnabled)
@@ -341,6 +343,8 @@ public class LappingOfAsylumController : MonoBehaviour
                 inportalALREADY = false;
                 gc.Gatesrea.ForEach(g => g.Down(false));
                 LapPortals.ForEach(lap => lap.SetActive(false));
+                bool shrinky = PlayerPrefsExtension.GetBool("shrink");
+                if (shrinky) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(Singleton<OtherMainStuffManager>.Instance.realMaxSlotsAmmou);
                 yield return null;
             }
         }

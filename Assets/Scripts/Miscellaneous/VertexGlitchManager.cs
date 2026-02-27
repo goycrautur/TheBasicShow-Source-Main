@@ -105,15 +105,15 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
 		yield return null;
 		while (glitchVal > 0f)
 		{
-			glitchVal -= Time.deltaTime * (2f*ZerullClassic.Instance.midiTempo);
+			glitchVal -= Time.deltaTime * 2f*(ZerullClassic.Instance.midiTempo*1.5f);
             
 			Shader.SetGlobalFloat("_VertexGlitchIntensity", glitchVal/2);
             global_VertexGlitchIntensity = glitchVal/4;
             global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
             global_VertexGlitchSeed = randomSeedVal;
-            global_glitchColorRvalue = UnityEngine.Random.Range(0, 32);
-            global_glitchColorGvalue = UnityEngine.Random.Range(0, 32);
-            global_glitchColorBvalue = UnityEngine.Random.Range(0, 32);
+            global_glitchColorRvalue = UnityEngine.Random.Range(0, 16);
+            global_glitchColorGvalue = UnityEngine.Random.Range(0, 16);
+            global_glitchColorBvalue = UnityEngine.Random.Range(0, 16);
 			yield return null;
 		}
 		glitchVal = 0f;
