@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour
 		GuiltCheck();
 		InitializeMiscellaneous();
 		randomAssStufV2();
-		uhh();
+		uhhwha();
 	}
 	#endregion
 	public void randomAssStufV2()
@@ -74,19 +74,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			HudManager.Instance.colorVarSetter(true);
 		}
-		if (breakwindow)
-		{
-			foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-			{
-				if (!w.broken)
-				{
-					if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= windowbreakDistance)
-					{
-						w.Window(true, true, 6f);
-					}
-				}
-			}
-		}
+		if (breakwindow) breakwind();
 		if (door.lockTime > 0f)
 		{
 			ResetGuilt("escape", 1f);
@@ -219,6 +207,20 @@ public class PlayerScript : MonoBehaviour
 		movementLocked = false;
 		isForcedToLook = false;
 	}
+	public void breakwind(bool forcerange = false, float forcedrange = 0f)
+	{
+		float WinBreakDist = forcerange ? forcedrange : windowbreakDistance;
+		foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+		{
+			if (!w.broken)
+			{
+				if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= WinBreakDist)
+				{
+					w.Window(true, true, 6f);
+				}
+			}
+		}
+	}
 
 	private void RotateTowardsTarget(float angleDiff)
 	{
@@ -230,22 +232,42 @@ public class PlayerScript : MonoBehaviour
 	{
 		carfuel = fuel;
 		maxcarfuel = fuel;
-		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.dimcraab, fuel); //jro
-		
+		CargaugeReal = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.dimcraab, maxcarfuel); //jro
+		thosewhoSpeed = movmen;
+		pModManag.movementModifiers.Add(thosewhoSpeed);
+		lowBudgetAudioManagementShit.Instance.PlayAudioClip(lowBudgetAudioManagementShit.Instance.drivinginmy,lowBudgetAudioManagementShit.Instance.DIMCSource,true);
+		oncar = true;
 	}
-	private void uhh()
+	private void uhhwha()
 	{
-		
-		while (time > 0f)
+		if (carfuel > 0f)
 		{
-			time -= Time.deltaTime;
-			if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
+			if (isMoving) 
 			{
-				newGauge.Set(10f, time);
-				yield return null;
+				if (FowardValue >= FowardMinValue)FowardValue += (fowardVeloAccelerate + fowardVeloAccelerate/5) * Time.deltaTime;
+				carfuel -= Time.deltaTime;
+				if (CargaugeReal != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))CargaugeReal.Set(maxcarfuel, carfuel);
 			}
+			if (FowardValue >= FowardMaxValue) 
+			{
+				FowardValue = 0.5f;
+				GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.agonyscream);
+				GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+				CameraScript.Instance.TempShakeAmount += 0.5f;
+			}
+			if (!isMoving) FowardValue -= fowardVeloDowning * Time.deltaTime;
+			if (FowardValue <= FowardMinValue) FowardValue = 0;
+			if (FowardValue >= 3f) breakwind(true,5f);
+			
 		}
-		newGauge.Hide();
+		else if (carfuel < 0f)
+		{
+			if (CargaugeReal != null) CargaugeReal.Hide();
+			pModManag.movementModifiers.Remove(thosewhoSpeed);
+			lowBudgetAudioManagementShit.Instance.DIMCSource.Stop();
+			oncar = false;
+		}
+		if (thosewhoSpeed != null)thosewhoSpeed.movementMultiplier = FowardValue;
 	}
 
 	private void PlayerMove()
@@ -632,7 +654,7 @@ public class PlayerScript : MonoBehaviour
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;
-	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove;
+	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar;
 	public Vector3 frozenPosition;
 
 	[Header("Private Variables")]
@@ -645,9 +667,17 @@ public class PlayerScript : MonoBehaviour
 	private Quaternion playerRotation;
 	private bool sensitivityActive;
 	public float sensitivity, playerSpeed,curgrav = 1f;
-	private Vector3 moveDirection, secondaryMovementVelocity;
+	public Vector3 moveDirection, secondaryMovementVelocity;
 	private GameObject GameSet;
-	private float carfuel,maxcarfuel;
+
+
+
+
+
+	public float carfuel,maxcarfuel;
+	private Gauge CargaugeReal;
+	private MovementModifier thosewhoSpeed;
+	public float FowardValue,FowardMinValue=0,FowardMaxValue=10,fowardVeloAccelerate=1f,fowardVeloDowning=1.5f;
 
 	public enum StaminaChangeMode { Add, Remove, Multiply, Divide, Set }
 	public enum HealthChangeMode { Add, Remove, Multiply, Divide, Set }
