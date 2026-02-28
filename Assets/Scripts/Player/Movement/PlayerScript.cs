@@ -544,12 +544,12 @@ public class PlayerScript : MonoBehaviour
 			sweeping = true;
 			sweepingFailsave = 1f;
 		}
-		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 || (invisi || invisichalk))
+		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 && !invisi && !invisichalk)
 		{
 			hugging = true;
 			sweepingFailsave = 1f;
 		}
-		else if (other.transform.name == "washingmachine" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 || (invisi || invisichalk))
+		else if (other.transform.name == "washingmachine" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 && !invisi && !invisichalk)
 		{
 			hugging = true;
 			sweepingFailsave = 1f;

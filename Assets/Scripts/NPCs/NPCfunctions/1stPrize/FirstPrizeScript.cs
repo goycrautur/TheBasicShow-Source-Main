@@ -22,6 +22,7 @@ public class FirstPrizeScript : NPC
         if (base.stun)
         {
             runSpeed = 0f;
+            HandleLostPlayer();
         }
         if (base.StunTime < 0f)
         {
