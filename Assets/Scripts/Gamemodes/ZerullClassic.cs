@@ -42,7 +42,7 @@ public class ZerullClassic : MonoBehaviour
 
     [HideInInspector] public int objects = 0;
 
-    private float spawnCooldown,curHealthValueForLerping,thrownDelay;
+    [HideInInspector] public float spawnCooldown,curHealthValueForLerping,thrownDelay;
 
     [Header("Blockages")]
     public bool spawnBlockagesDuringTheBossfight;
@@ -114,7 +114,7 @@ public class ZerullClassic : MonoBehaviour
     private void Start()
     {
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
-        int extraHealth = dific == "easy" ? 5 : dific == "normal" ? 10 : dific == "hard" ? 15 : dific == "expert" ? 20 : dific == "maniac" ? 25 : 5;
+        int extraHealth = dific == "easy" ? 5 : dific == "normal" ? 12 : dific == "hard" ? 18 : dific == "expert" ? 25 : dific == "maniac" ? 30 : 5;
         maxHealth += extraHealth;
         health = maxHealth;
         bool shakeswitchFR = PlayerPrefsExtension.GetBool("WallShakeSwitch");
@@ -137,6 +137,7 @@ public class ZerullClassic : MonoBehaviour
     private void Update()
     {
         curHealthValueForLerping = Mathf.Lerp(curHealthValueForLerping,health, 5*Time.deltaTime);
+        if (thrownDelay > 0f)thrownDelay -= Time.deltaTime;
         if (replaceALLSAKES)
         {
             for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -167,7 +168,6 @@ public class ZerullClassic : MonoBehaviour
                 objects = maxObjects;
             }
             if (spawnCooldown > 0f)spawnCooldown -= Time.deltaTime;
-            if (thrownDelay > 0f)thrownDelay -= Time.deltaTime;
             if (spawnCooldown <= 0f)
             {
                 if (objects < maxObjects)
@@ -403,15 +403,22 @@ public class ZerullClassic : MonoBehaviour
             yourflashbang.Rebind();
 		    yourflashbang.Play("flashAnim", -1, 0f);
         }
-        if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.02f : 0.03f) * (zs.totemready ? 1 : hp);
+        if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.015f : 0.025f) * (zs.totemready ? 1 : hp);
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
         SpawnProjectile(false, false);
         SpawnProjectile(false, false);
         scoreSystemManager.Instance.AddScore(zs.totemready ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
-        health -= zs.totemready ? 1 : hp; // Decreases null health
+        health -= (zs.totemready && hp !=0) ? 1 : (zs.totemready && hp == 0) ? 1 : hp; // Decreases null health
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
+        if (health == 1)
+        {
+            spawnCooldown = 5f;
+            maxObjects = 5;
+            RemoveProjectiles();
+            RemoveItems();
+        }
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
@@ -424,6 +431,11 @@ public class ZerullClassic : MonoBehaviour
             }
             else
             BossEnd();
+        }
+        if (!realBossStarted)
+        {
+            StartHit(); // Piss the boss
+            return;
         }
         return;
     }
@@ -443,10 +455,7 @@ public class ZerullClassic : MonoBehaviour
         if (spawnBlockagesDuringTheBossfight)
             blockages.SetActive(false);
 
-        if (Midi)
-        {
-            Singleton<MusicManager>.Instance.StopMidi(true, null, null);
-        }
+        if (Midi)Singleton<MusicManager>.Instance.StopMidi(true, null, null);
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         Singleton<VertexGlitchManager>.Instance.Midi = false;
         gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
@@ -465,38 +474,23 @@ public class ZerullClassic : MonoBehaviour
         GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed - GameControllerScript.Instance.player.DefaultRunSpeed;
         float ratioy = (float)Screen.width / 360f;
         tweenitemsAlt[0].transform.DOMoveY(ratioy*425, 3f);
+
     }
     public void AfterHit()
     {
-        if (!realBossStarted)
+        debug = false;
+        if (Midi)
         {
-            StartHit(); // Piss the boss
-            return;
-        }
-        else
-        {
-            debug = false;
-            if (Midi)
+            if (health > 1)
             {
-                if (health > 1)
-                {
-                    Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
-                    Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
-                    Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
-                }
-                if (health == 1)
-                {
-                    Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
-                    Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
-                }
+                Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
+                Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
+                Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
             }
-
             if (health == 1)
             {
-                spawnCooldown = 5f;
-                maxObjects = 5;
-                RemoveProjectiles();
-                RemoveItems();
+                Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
+                Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
             }
         }
     }

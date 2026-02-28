@@ -120,26 +120,18 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void Hit(bool firstHit, float time, float hp = 1f)
     {
+        stuntiem = time;
         hitted = true;
         audioDevice.ClearQueue();
         
         bool chairh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        if (!chairh)
-        {
-            audioDevice.QueueAudio(hit, bossHit_Captions);
-        }
-        if (chairh)
-        {
-            audioDevice.QueueAudio(ChairHit, chairHit_Captions);
-        }
-        if (!ZerullClassic.Instance.RealBossStarted)
-        {
-            audioDevice.QueueAudio(bossStart, bossyapStart_captions);
-        }
+        if (!chairh) audioDevice.QueueAudio(hit, bossHit_Captions);
+        if (chairh) audioDevice.QueueAudio(ChairHit, chairHit_Captions);
+        if (!ZerullClassic.Instance.RealBossStarted)audioDevice.QueueAudio(bossStart, bossyapStart_captions);
         agent.speed += 0.75f * hp;
         GameControllerScript.Instance.player.DefaultWalkSpeed += 0.7f * hp;
         GameControllerScript.Instance.player.DefaultRunSpeed += 0.7f * hp;
-        StartCoroutine(Stun(hp, time, firstHit));
+        StartCoroutine(Stun(hp, firstHit));
     }
     public void totem()
     {
@@ -148,14 +140,14 @@ public class ZerullBossScript : MonoBehaviour
         iframes = 10f;
         iframedown = true;
     }
-    private IEnumerator Stun(float hp, float time, bool firstHit)
+    private IEnumerator Stun(float hp, bool firstHit)
     {
-        while (time > 0f)
+        while (stuntiem > 0f)
         {
             agent.isStopped = true;
             ZerullClassic.Instance.debug = true;
             if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.Midi) Singleton<MusicManager>.Instance.SetSpeed(0.001f, ZerullClassic.Instance.normalMidiPlayerLoop, null);
-            time -= Time.deltaTime;
+            stuntiem -= Time.deltaTime;
             spriteProperties.SetFloat("_Percent", 0.9f);
             spriteProperties.SetFloat("_Seed", Random.Range(0f, 4096f));
             normalSprite.SetPropertyBlock(spriteProperties);
@@ -183,15 +175,9 @@ public class ZerullBossScript : MonoBehaviour
         //audioDevice.SetLoop(true);
     }
 
-    private IEnumerator ToggleDelay(bool toggle)
-    {
-        yield return new WaitForSeconds(0.2f);
-        agent.isStopped = !toggle;
-    }
-
     [Header("Chase Music")]
     [SerializeField] private AudioSource audioChase;
     private bool midiDrums,iframedown;
-    public float iframes = 0f;
+    public float iframes = 0f,stuntiem;
     [HideInInspector] public bool hitted,totemready;
 }

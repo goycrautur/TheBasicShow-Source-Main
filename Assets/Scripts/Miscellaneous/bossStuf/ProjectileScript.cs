@@ -43,10 +43,7 @@ public class ProjectileScript : MonoBehaviour
                 if (ZerullClassic.Instance.playSoundWhenProjectileThrown && audioDevice != null)
                 {
                     audioDevice.PlayOneShot(throwSound);
-                    if (subtitlesScriptableObjectREAL != null)
-                    {
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, audioDevice);
-                    }
+                    if (subtitlesScriptableObjectREAL != null)GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, audioDevice);
                 }
                 Throw();
             }
@@ -92,7 +89,6 @@ public class ProjectileScript : MonoBehaviour
                     yield return null;
                 }
                 boshit = true;
-                ZerullClassic.Instance.objects -= 1;
                 ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length,projectileDamage);
                 Destroy(base.gameObject);
             }
@@ -105,9 +101,10 @@ public class ProjectileScript : MonoBehaviour
                     GetComponent<Billboard>().enabled = false;
                 }
                 ZerullClassic.Instance.currentProjectile = base.gameObject;
-                ZerullClassic.Instance.thrownDelay = 0.1;
+                ZerullClassic.Instance.thrownDelay = 0.5f;
                 if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 0.5f);
                 pickedUp = true;
+                return;
             }
     }
 
@@ -122,10 +119,8 @@ public class ProjectileScript : MonoBehaviour
     private void Throw()
     {
         audioDevice.mute = false;
-        if (theSpriteREND != null)
-        {
-            theSpriteREND.color = new Color(1f, 1f, 1f, 1f);
-        }
+        if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 1f);
+        ZerullClassic.Instance.objects -= 1;
         thrown = true;
         transform.position = cameraTransform.position;
         transform.rotation = cameraTransform.rotation;
