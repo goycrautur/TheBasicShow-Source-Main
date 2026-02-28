@@ -42,7 +42,7 @@ public class ZerullClassic : MonoBehaviour
 
     [HideInInspector] public int objects = 0;
 
-    private float spawnCooldown,curHealthValueForLerping;
+    private float spawnCooldown,curHealthValueForLerping,thrownDelay;
 
     [Header("Blockages")]
     public bool spawnBlockagesDuringTheBossfight;
@@ -115,7 +115,8 @@ public class ZerullClassic : MonoBehaviour
     {
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
         int extraHealth = dific == "easy" ? 5 : dific == "normal" ? 10 : dific == "hard" ? 15 : dific == "expert" ? 20 : dific == "maniac" ? 25 : 5;
-        health = maxHealth + extraHealth;
+        maxHealth += extraHealth;
+        health = maxHealth;
         bool shakeswitchFR = PlayerPrefsExtension.GetBool("WallShakeSwitch");
         bool shake = PlayerPrefsExtension.GetBool("WallShake");
         bool blox = PlayerPrefsExtension.GetBool("bloxy");
@@ -165,10 +166,8 @@ public class ZerullClassic : MonoBehaviour
             {
                 objects = maxObjects;
             }
-            if (spawnCooldown > 0f)
-            {
-                spawnCooldown -= Time.deltaTime;
-            }
+            if (spawnCooldown > 0f)spawnCooldown -= Time.deltaTime;
+            if (thrownDelay > 0f)thrownDelay -= Time.deltaTime;
             if (spawnCooldown <= 0f)
             {
                 if (objects < maxObjects)

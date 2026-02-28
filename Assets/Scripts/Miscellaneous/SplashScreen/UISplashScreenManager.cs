@@ -35,8 +35,6 @@ public class UISplashScreenManager : MonoBehaviour
     public void sploosh()
     {
         sploosh2();
-        Singleton<Options>.Instance.GetVolume();
-        Singleton<Options>.Instance.GetVSync();
 
         if (skipSplash)
         {

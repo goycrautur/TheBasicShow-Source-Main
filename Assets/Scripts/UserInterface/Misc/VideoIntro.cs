@@ -7,6 +7,9 @@ public class VideoIntro : MonoBehaviour
 {
 	private void Start()
 	{
+		Singleton<Options>.Instance.Start();
+		Singleton<Options>.Instance.GetVolume();
+        Singleton<Options>.Instance.GetVSync();
 		bool skip = PlayerPrefsExtension.GetBool("warnskip");
 		if (skip) SceneManager.LoadScene(scenenaem);
 		videoPlayer.Play();

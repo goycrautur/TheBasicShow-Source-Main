@@ -301,7 +301,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     {
         if (DropAllAvailableItemInInventory) HighSchoolDropOut();
         UpdateInventoryLength(true,SlotAmmount,maxSlotsAmmount,setMaxSlotAmmount);
-        slot();
+        slot(DropAllAvailableItemInInventory);
     }
     public void HighSchoolDropOut()
     {
@@ -349,10 +349,10 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             AltInventory[i].SlotID = ItemManager.Instance.Inventory[i].SlotID;
         }
     }
-    public void slot()
+    public void slot(bool wipe = true)
     {
         Debug.Log("slotted");
-        for (int i = 0; i < AltInventory.Length; ++i) if (i != ItemManager.Instance.ItemSelection) AltInventory[i].ItemImages.texture = null;
+        if (wipe) for (int i = 0; i < AltInventory.Length; ++i) if (i != ItemManager.Instance.ItemSelection) AltInventory[i].ItemImages.texture = null;
         for (int i = 0; i < ItemManager.Instance.Inventory.Length; ++i)
         {
             if (i != ItemManager.Instance.ItemSelection)

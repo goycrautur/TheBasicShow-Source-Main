@@ -97,7 +97,7 @@ public class ProjectileScript : MonoBehaviour
                 Destroy(base.gameObject);
             }
         }
-        if (other.tag == "Player" && !pickedUp & !thrown && ZerullClassic.Instance.currentProjectile == null)
+        if (other.tag == "Player" && !pickedUp & !thrown && ZerullClassic.Instance.currentProjectile == null && ZerullClassic.Instance.thrownDelay <= 0)
             {
                 if (GetComponent<Billboard>() != null)
                 {
@@ -105,10 +105,8 @@ public class ProjectileScript : MonoBehaviour
                     GetComponent<Billboard>().enabled = false;
                 }
                 ZerullClassic.Instance.currentProjectile = base.gameObject;
-                if (theSpriteREND != null)
-                {
-                    theSpriteREND.color = new Color(1f, 1f, 1f, 0.5f);
-                }
+                ZerullClassic.Instance.thrownDelay = 0.1;
+                if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 0.5f);
                 pickedUp = true;
             }
     }
