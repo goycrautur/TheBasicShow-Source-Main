@@ -45,10 +45,12 @@ public class ProjectileScript : MonoBehaviour
                     audioDevice.PlayOneShot(throwSound);
                     if (subtitlesScriptableObjectREAL != null)GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, audioDevice);
                 }
+                pickedUp = false;
+                thrown = true;
                 Throw();
             }
         }
-        if (thrown)
+        else if (thrown)
         {
             transform.position += transform.forward * ProjectileSpeed * Time.deltaTime;
             lifeSpan -= Time.deltaTime;
@@ -93,7 +95,9 @@ public class ProjectileScript : MonoBehaviour
                 Destroy(base.gameObject);
             }
         }
-        if (other.tag == "Player" && !pickedUp & !thrown && ZerullClassic.Instance.currentProjectile == null && ZerullClassic.Instance.thrownDelay <= 0)
+        if (other.tag == "Player" && !pickedUp & !thrown)
+        {
+            if (ZerullClassic.Instance.currentProjectile == null)
             {
                 if (GetComponent<Billboard>() != null)
                 {
@@ -101,11 +105,12 @@ public class ProjectileScript : MonoBehaviour
                     GetComponent<Billboard>().enabled = false;
                 }
                 ZerullClassic.Instance.currentProjectile = base.gameObject;
-                ZerullClassic.Instance.thrownDelay = 0.5f;
                 if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 0.5f);
                 pickedUp = true;
-                return;
+                thrown = false;
             }
+            else return;
+        }
     }
 
     private void LateUpdate()
@@ -121,11 +126,10 @@ public class ProjectileScript : MonoBehaviour
         audioDevice.mute = false;
         if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 1f);
         ZerullClassic.Instance.objects -= 1;
-        thrown = true;
         transform.position = cameraTransform.position;
         transform.rotation = cameraTransform.rotation;
-        pickedUp = false;
         ZerullClassic.Instance.currentProjectile = null;
+        return;
     }
 
     private void Respawn()
