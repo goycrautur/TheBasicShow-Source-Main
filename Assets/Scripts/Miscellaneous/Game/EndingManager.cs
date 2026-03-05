@@ -213,7 +213,7 @@ public class EndingManager : MonoBehaviour
         AudioListener.pause = false;
         //NULL.SetActive(true);
 
-        Game.voxLight.ambientLight = new Color(0.45f, 0.45f, 0.45f, 1f);
+        RenderSettings.ambientLight = new Color(0.45f, 0.45f, 0.45f, 1f);
         ApplySkybox();
 
         Game.player.transform.position = SecretWarpPoint.transform.position + Vector3.up * Game.player.height;

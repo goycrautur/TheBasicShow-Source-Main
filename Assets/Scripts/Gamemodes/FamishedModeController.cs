@@ -113,11 +113,11 @@ public class FamishedModeController : MonoBehaviour
         TimerText.text = string.Format("{0:00}:{1:00}", num, num2);
         if (turnOnLightAutoChange && !specialLmsToggle)
         {
-            gc.voxLight.ambientLight = colortext == "red" ? new Color(1f, 0f, 0f, 1f) : colortext == "white" ? new Color(0.65f, 0.65f, 0.65f, 1f) : new Color(0.65f, 0.65f, 0.65f, 1f);
+            RenderSettings.ambientLight = colortext == "red" ? new Color(1f, 0f, 0f, 1f) : colortext == "white" ? new Color(0.65f, 0.65f, 0.65f, 1f) : new Color(0.65f, 0.65f, 0.65f, 1f);
         }
         if (forceupdatelight)
         {
-            gc.voxLight.ambientLight = new Color(1f, 1f, 1f, 1f);
+            RenderSettings.ambientLight = new Color(1f, 1f, 1f, 1f);
         }
     }
     public void DoEvent(SpecialLMSEventType EventTypes,Color wha,string EventDetails,float fovIncreaseAmmount= 0)
@@ -128,28 +128,13 @@ public class FamishedModeController : MonoBehaviour
             Singleton<VertexGlitchManager>.Instance.Glitch();
             break;
             case SpecialLMSEventType.lightingChange:
-            if (wha != new Color(1f, 1f, 1f, 1f))
-            {
-            gc.voxLight.ambientLight = wha;
-            }
+            if (wha != new Color(1f, 1f, 1f, 1f)) RenderSettings.ambientLight = wha;
             break;
             case SpecialLMSEventType.camfuck:
-            if (EventDetails == "playerCamShakeLow") 
-            {
-            CameraScript.Instance.TempShakeAmount += 0.6f;
-            }
-            if (EventDetails == "playerCamShake") 
-            {
-            CameraScript.Instance.TempShakeAmount += 1.5f;
-            }
-            if (EventDetails == "playerCamShakeLong") 
-            {
-            CameraScript.Instance.TempShakeAmount += 2f;
-            }
-            if (EventDetails == "fovstuff")
-            {
-                AdditionalGameCustomizer.Instance.FovAmmount += fovIncreaseAmmount;
-            }
+            if (EventDetails == "playerCamShakeLow") CameraScript.Instance.TempShakeAmount += 0.6f;
+            if (EventDetails == "playerCamShake") CameraScript.Instance.TempShakeAmount += 1.5f;
+            if (EventDetails == "playerCamShakeLong") CameraScript.Instance.TempShakeAmount += 2f;
+            if (EventDetails == "fovstuff") AdditionalGameCustomizer.Instance.FovAmmount += fovIncreaseAmmount;
             break;
             case SpecialLMSEventType.normal:
             if (EventDetails == "spawnbutch")
@@ -184,10 +169,7 @@ public class FamishedModeController : MonoBehaviour
                 stopbouncezoom = false;
                 StartCoroutine(zoomtiem());
             }
-            if (EventDetails == "EndConstantZoom")
-            {
-                stopbouncezoom = true;
-            }
+            if (EventDetails == "EndConstantZoom") stopbouncezoom = true;
             break;
         }
     }
@@ -367,7 +349,7 @@ public class FamishedModeController : MonoBehaviour
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
         if (gc.notebooks == 2)
         {
-            gc.voxLight.ambientLight = Color.black;
+            RenderSettings.ambientLight = Color.black;
             StartCoroutine(easing(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 2));
             angerMultipler = 2.5f;
             StartCoroutine(ohgodwhat());
@@ -399,7 +381,7 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!specialLmsToggle)
             {
-                gc.voxLight.ambientLight = new Color(0.05f, 0.05f, 0.05f, 0f);
+                RenderSettings.ambientLight = new Color(0.05f, 0.05f, 0.05f, 0f);
                 StartCoroutine(easing(new Color(0.35f, 0.35f, 0.35f, 1f), 0, 1, 1));
                 StopCoroutine(ohgodwhat());
                 StartCoroutine(imdespairingit());
@@ -415,7 +397,7 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!specialLmsToggle)
             {
-                gc.voxLight.ambientLight = new Color(1f, 0f, 0f, 1f);
+                RenderSettings.ambientLight = new Color(1f, 0f, 0f, 1f);
                 StartCoroutine(easing(new Color(0.25f, 0.25f, 0.25f, 1f), 0, 1, 1));
                 angerMultipler = 1.35f;
                 corspesspawn = true;
@@ -522,15 +504,15 @@ public class FamishedModeController : MonoBehaviour
 
     public IEnumerator easing(Color kolor, float a, float b, float duration)
     {
-        Color start = gc.voxLight.ambientLight;
+        Color start = RenderSettings.ambientLight;
 
         for (float t = a; t < b; t += Time.deltaTime / duration)
         {
-            gc.voxLight.ambientLight = Color.Lerp(start, kolor, Mathf.SmoothStep(0, 1, t));
+            RenderSettings.ambientLight = Color.Lerp(start, kolor, Mathf.SmoothStep(0, 1, t));
             yield return null;
         }
 
-        gc.voxLight.ambientLight = kolor;
+        RenderSettings.ambientLight = kolor;
     }
     [SerializeField] private GameControllerScript gc;
     public GameObject[] tweenOutitems;

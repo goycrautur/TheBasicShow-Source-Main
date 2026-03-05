@@ -573,14 +573,15 @@ public class ZerullClassic : MonoBehaviour
     }
     public IEnumerator easingeee(Color kolor, float a, float b, float duration)
     {
-        Color start = gc.voxLight.ambientLight;
+        Color start = RenderSettings.ambientLight;
 
         for (float t = a; t < b; t += Time.deltaTime / duration)
         {
-            gc.voxLight.ambientLight = Color.Lerp(start, kolor, Mathf.SmoothStep(0, 1, t));
+            RenderSettings.ambientLight = Color.Lerp(start, kolor, Mathf.SmoothStep(0, 1, t));
             yield return null;
         }
 
-        gc.voxLight.ambientLight = kolor;
+        RenderSettings.ambientLight = kolor;
     }
+
 }

@@ -7,6 +7,7 @@ public class AddToLightingWhitelist : MonoBehaviour
 
     private void Start()
     {
+        return; 
         sprRen = GetComponent<SpriteRenderer>();
         if (sprRen != null)
         {
@@ -15,6 +16,7 @@ public class AddToLightingWhitelist : MonoBehaviour
     }
     private void OnEnable()
     {
+        return; 
         sprRen = GetComponent<SpriteRenderer>();
         if (sprRen != null)
         {
@@ -23,6 +25,7 @@ public class AddToLightingWhitelist : MonoBehaviour
     }
     private void OnDisable()
     {
+        return; 
         sprRen = GetComponent<SpriteRenderer>();
         if (sprRen != null)
         {
@@ -31,6 +34,7 @@ public class AddToLightingWhitelist : MonoBehaviour
     }
     private void OnDestroy()
     {
+        return; 
         sprRen = GetComponent<SpriteRenderer>();
         if (sprRen != null)
         {
