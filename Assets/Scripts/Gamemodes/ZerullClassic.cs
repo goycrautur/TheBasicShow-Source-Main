@@ -3,9 +3,9 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using FluidMidi;
 using TMPro;
 using DG.Tweening;
+using MidiPlayerTK;
 
 public class ZerullClassic : MonoBehaviour
 {
@@ -72,19 +72,19 @@ public class ZerullClassic : MonoBehaviour
 
     [Tooltip("BTM of the Midi")] public float Midi_BTM = 120f;
 
-    [Tooltip("Boss Intro MIDI version")] public StreamingAsset midiIntro;
+    [Tooltip("Boss Intro MIDI Name String")] public string midiIntro;
 
-    [Tooltip("Boss Start MIDI version")] public StreamingAsset midiStart;
+    [Tooltip("Boss Start MIDI Name String")] public string midiStart;
 
-    [Tooltip("Boss Loop MIDI version")] public StreamingAsset midiLoop;
-    [Tooltip("Boss Loop MIDI the bloxyver")] public StreamingAsset bloxyLoop1,bloxyLoop2;
+    [Tooltip("Boss Loop MIDI Name String")] public string midiLoop;
+    [Tooltip("Boss Loop MIDI the bloxyver Name String")] public string bloxyLoop1,bloxyLoop2;
 
     [Tooltip("Length of Start MIDI")] public float midiStartLength = 7f;
     public GameObject[] tweenOutitems,tweenitemsAlt;
     public Transform[] StartingBossfightProjectileSpawnLocaltion;
-    public SongPlayer normalMidiPlayer, drumsMidiPlayer, normalMidiPlayerLoop;
-    public bool bossStarted, realBossStarted,switchToBloxyb;
+    public bool ableToStart,bossStarted, realBossStarted,switchToBloxyb;
     public Animator yourflashbang;
+    private bool taggedonetime;
 
     public bool BossStarted
     {
@@ -124,20 +124,49 @@ public class ZerullClassic : MonoBehaviour
         VertexShake = !shakeswitchFR ? true : shake;
         switchToBloxyb = blox;
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
-        if (Midi)
+        if (Midi) if (zs != null) zs.DrumsMidi = true;
+    }
+    public void OnEnable()
+	{
+		MusicManagerMaes.OnMidiEvent += MidiEvent;
+		MusicManagerMaes.OnMidiTransitionComplete += MidiTransitionComplete;
+	}
+
+	public void OnDisable()
+	{
+		MusicManagerMaes.OnMidiEvent -= MidiEvent;
+		MusicManagerMaes.OnMidiTransitionComplete -= MidiTransitionComplete;
+	}
+
+    private void tryTOStartBoss()
+    {
+        if (StartSongsIsMidi)
         {
-            if (zs != null)
+            if (ableToStart && !taggedonetime)
             {
-                zs.DrumsMidi = true;
+                BossBegin();
+                taggedonetime = true;
+                return;
             }
-            Singleton<VertexGlitchManager>.Instance.Midi = true;
         }
     }
+    private void MidiTransitionComplete()
+    {
+        ableToStart = true;
+    }
+    private void MidiEvent(MPTKEvent midiEvent)
+	{
+		if (ableToStart && midiEvent.Command == MPTKCommand.MetaEvent && midiEvent.Meta == MPTKMeta.TextEvent)
+		{
+			Singleton<VertexGlitchManager>.Instance.Glitch();
+		}
+	}
 
     private void Update()
     {
         curHealthValueForLerping = Mathf.Lerp(curHealthValueForLerping,health, 5*Time.deltaTime);
         if (thrownDelay > 0f)thrownDelay -= Time.deltaTime;
+        if (!taggedonetime) tryTOStartBoss();
         if (replaceALLSAKES)
         {
             for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -160,6 +189,10 @@ public class ZerullClassic : MonoBehaviour
                     healthSlider.value = curHealthValueForLerping;
                 }
             }
+        }
+        if (realBossStarted)
+        {
+            Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_ChannelVolumeSet(9, Mathf.Clamp(1f - (Vector3.Distance(zs.transform.position, GameControllerScript.Instance.player.transform.position) - 75f) / 150f, 0f, 1f));
         }
         if (AllowProjectileSpawn)
         {
@@ -239,9 +272,8 @@ public class ZerullClassic : MonoBehaviour
         }
         else
         {
-            normalMidiPlayer = Singleton<MusicManager>.Instance.PlayNormalMidi(midiIntro, true);
-            //Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayer);
-            Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayer, null);
+            Singleton<MusicManagerMaes>.Instance.PlayMidi(midiIntro, loop: true);
+            Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         }
         zs.StartBossIntro();
     }
@@ -280,10 +312,10 @@ public class ZerullClassic : MonoBehaviour
         }
         else
         {
-            Singleton<MusicManager>.Instance.StopMidi(false, normalMidiPlayer, null);
-
-            normalMidiPlayer = Singleton<MusicManager>.Instance.PlayNormalMidi(midiStart, false);
-            Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayer, null);
+            Singleton<MusicManagerMaes>.Instance.StopMidi();
+            Singleton<MusicManagerMaes>.Instance.PlayMidi(midiStart, loop: true);
+            if (StartSongsIsMidi) Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true);
+            Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         }
 
         GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
@@ -295,8 +327,11 @@ public class ZerullClassic : MonoBehaviour
     private IEnumerator BeforeBossBegin()
     {
         gc.modeState = "he pissed";
-        yield return new WaitForSeconds(StartSongsIsMidi ? (midiStartLength/midiTempo) : Boss_Music[1].length); // Wait until the music will end
-        BossBegin(); // Start boss
+        if (!StartSongsIsMidi) 
+        {
+            yield return new WaitForSeconds(Boss_Music[1].length); // Wait until the music will end
+            BossBegin(); // Start boss
+        }
     }
 
     private void BossBegin()
@@ -331,10 +366,6 @@ public class ZerullClassic : MonoBehaviour
         {
             Singleton<VertexGlitchManager>.Instance.BossStartShake(); // Start null angry vertex shake
             Singleton<VertexGlitchManager>.Instance.mustGlitch = true; // Make walls to shake
-            if (Midi)
-            {
-                Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
-            }
         }
 
         realBossStarted = true; // Real Boss Started
@@ -347,19 +378,7 @@ public class ZerullClassic : MonoBehaviour
         }
         else // If Midi bool is enabled
         {
-            if (musicLoop != null) // Play midi music
-            {
-                musicLoop.Stop();
-            }
-            if (StartSongsIsMidi)
-            {
-                Singleton<MusicManager>.Instance.StopMidi(false, normalMidiPlayer, null);
-            }
-            normalMidiPlayerLoop = Singleton<MusicManager>.Instance.PlayMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true);
-            drumsMidiPlayer = Singleton<MusicManager>.Instance.PlayDrumsMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true, normalMidiPlayerLoop);
-            Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
-            Singleton<MusicManager>.Instance.GainDrums(zs.transform, drumsMidiPlayer);
-            Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
+            if (musicLoop != null) musicLoop.Stop();
         }
         ShowCustomThings();
     }
@@ -389,12 +408,9 @@ public class ZerullClassic : MonoBehaviour
         if (health <= maxHealth / 2 && !ok && switchToBloxyb)
         {
             AdditionalGameCustomizer.Instance.FovAmmount = 80;
-            Singleton<MusicManager>.Instance.StopMidi(true, null, null);
-            normalMidiPlayerLoop = Singleton<MusicManager>.Instance.PlayMidi(bloxyLoop2, true);
-            drumsMidiPlayer = Singleton<MusicManager>.Instance.PlayDrumsMidi(bloxyLoop2, true, normalMidiPlayerLoop);
-            Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
-            Singleton<MusicManager>.Instance.GainDrums(zs.transform, drumsMidiPlayer);
-            Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
+            Singleton<MusicManagerMaes>.Instance.StopMidi();
+            Singleton<MusicManagerMaes>.Instance.PlayMidi(bloxyLoop2, loop: true);
+            Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
             gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
             
             StartCoroutine(easingeee(new Color(1f, 0.92f, 0.016f, 1f), 0, 2, 2));
@@ -419,6 +435,8 @@ public class ZerullClassic : MonoBehaviour
             RemoveProjectiles();
             RemoveItems();
         }
+        Singleton<MusicManagerMaes>.Instance.HangMidi(true,true);
+        Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
@@ -455,7 +473,7 @@ public class ZerullClassic : MonoBehaviour
         if (spawnBlockagesDuringTheBossfight)
             blockages.SetActive(false);
 
-        if (Midi)Singleton<MusicManager>.Instance.StopMidi(true, null, null);
+        if (Midi) Singleton<MusicManagerMaes>.Instance.KillMidi();
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         Singleton<VertexGlitchManager>.Instance.Midi = false;
         gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
@@ -479,20 +497,8 @@ public class ZerullClassic : MonoBehaviour
     public void AfterHit()
     {
         debug = false;
-        if (Midi)
-        {
-            if (health > 1)
-            {
-                Singleton<MusicManager>.Instance.SetSpeed(midiTempo, normalMidiPlayerLoop, drumsMidiPlayer);
-                Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
-                Singleton<MusicManager>.Instance.SeekToDrums(normalMidiPlayerLoop, drumsMidiPlayer);
-            }
-            if (health == 1)
-            {
-                Singleton<MusicManager>.Instance.SetSpeed(0.001f, normalMidiPlayerLoop, null);
-                Singleton<VertexGlitchManager>.Instance.MidiBTM = Midi_BTM * midiTempo;
-            }
-        }
+        if (health != 1) Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
+
     }
     private void PlayMusic(AudioSource source, AudioClip clip, bool loop = false)
     {

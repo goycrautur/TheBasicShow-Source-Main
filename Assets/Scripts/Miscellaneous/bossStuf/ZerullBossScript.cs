@@ -146,7 +146,6 @@ public class ZerullBossScript : MonoBehaviour
         {
             agent.isStopped = true;
             ZerullClassic.Instance.debug = true;
-            if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.Midi) Singleton<MusicManager>.Instance.SetSpeed(0.001f, ZerullClassic.Instance.normalMidiPlayerLoop, null);
             stuntiem -= Time.deltaTime;
             spriteProperties.SetFloat("_Percent", 0.9f);
             spriteProperties.SetFloat("_Seed", Random.Range(0f, 4096f));

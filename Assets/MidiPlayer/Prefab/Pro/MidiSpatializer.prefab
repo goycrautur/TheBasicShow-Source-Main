@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207128984433118}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4178816625693396}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114711833869552618
 MonoBehaviour:
@@ -77,13 +78,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735678026735066}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4157581141049346}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114404562875146932
 MonoBehaviour:
@@ -103,7 +105,6 @@ MonoBehaviour:
   AudioBufferLenght: 0
   AudioNumBuffers: 0
   AudioEngine: FMOD
-  MPTK_ResetChannel: 1
   playOnlyFirstWave: 0
   playNoteOff: 0
   MPTK_EnablePresetDrum: 0
@@ -124,11 +125,14 @@ MonoBehaviour:
   StatDspLoadAVG: 0
   StatDspBufferSize: 0
   StatDspChannelCount: 0
+  GcCollectionCout: 0
+  AllocatedBytesForCurrentThread: 0
   StatDeltaThreadMidiMS: 0
   StatDeltaThreadMidiMAX: 0
   StatDeltaThreadMidiMIN: 0
   StatDeltaThreadMidiAVG: 0
   StatReadMidiMS: 0
+  StatDeltaTimeMidi: 0
   StatEnqueueMidiMS: 0
   StatProcessMidiMS: 0
   StatProcessMidiMAX: 0
@@ -156,6 +160,7 @@ MonoBehaviour:
   MPTK_LogWave: 0
   MPTK_StatVoiceCountPlaying: 0
   MPTK_StatVoiceCountActive: 0
+  MPTK_StatVoiceCountReused: 0
   MPTK_StatVoiceCountFree: 0
   MPTK_StatVoiceRatioReused: 0
   MPTK_StatVoicePlayed: 0
@@ -168,9 +173,11 @@ MonoBehaviour:
   VerboseSynth: 0
   VerboseOverload: 0
   VerboseVoice: 0
+  VerboseChannel: 0
   VerboseKillByExclusive: 0
   VerboseGenerator: 0
   VerboseCalcGen: 0
+  VerboseCalcADSR: 0
   VerboseController: 0
   VerboseEnvVolume: 0
   VerboseEnvModulation: 0
@@ -200,47 +207,12 @@ MonoBehaviour:
   showEvents: 0
   showDefault: 0
   spatialize: 0
-  MPTK_SFFilterFreqOffset: 0
-  filterQModOffset: 0
-  applySFReverb: 0
-  applySFChorus: 0
-  applySFFilter: 0
-  MPTK_SFReverbAmplify: 0
-  MPTK_SFChorusAmplify: 0
-  sfReverbRoomSize: 0.2
-  sfReverbDamp: 0
-  sfReverbWidth: 0.5
-  sfReverbLevel: 0.9
-  sfChorusLevel: 0.9
-  sfChorusSpeed: 0.3
-  sfChorusDepth: 8
-  sfChorusWidth: 10
-  applyReverb: 0
-  reverbRoom: 0
-  reverbRoomHF: 0
-  reverbRoomLF: 0
-  reverbReflectionLevel: 0
-  reverbReflectionDelay: 0
-  reverbDryLevel: 0
-  reverbDecayTime: 0.1
-  reverbDecayHFRatio: 0.1
-  reverbLevel: 0
-  reverbDelay: 0
-  reverbHfReference: 1000
-  reverbLfReference: 20
-  reverbDiffusion: 0
-  reverbDensity: 0
-  applyChorus: 0
-  chorusDryMix: 0
-  chorusWetMix1: 0
-  chorusWetMix2: 0
-  chorusWetMix3: 0
-  chorusDelay: 0.1
-  chorusRate: 0
-  chorusDepth: 0
+  MPTK_EffectSoundFont: {fileID: 0}
+  MPTK_EffectUnity: {fileID: 0}
   MPTK_ModeSpatializer: 0
   MPTK_MaxSpatialSynth: 16
   MPTK_SpatialSynthEnabled: 0
+  MPTK_InstrumentNum: 0
   midiNameToPlay: Higelin Jacques - Champagne
   MPTK_StartPlayAtFirstNote: 0
   MPTK_ModeStopVoice: 1
@@ -256,12 +228,15 @@ MonoBehaviour:
   OnEventStartPlayMidi:
     m_PersistentCalls:
       m_Calls: []
+  OnEventEndPlayMidi:
+    m_PersistentCalls:
+      m_Calls: []
   quantization: 0
   playOnStart: 1
   replayMidi: 0
   stopMidi: 0
   midiIsPlaying: 0
-  loop: 0
+  midiAutoRestart: 0
   keepNoteOff: 0
   keepEndTrack: 0
   needDelayToStart: 0

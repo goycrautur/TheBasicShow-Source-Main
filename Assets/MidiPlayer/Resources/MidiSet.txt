@@ -32,6 +32,24 @@
   </SoundFonts>
   <IndexSelectedSF>0</IndexSelectedSF>
   <MidiFiles>
+    <string>bossLoop</string>
+    <string>bossStart</string>
+    <string>bossTransition</string>
+    <string>dess revenge loop</string>
+    <string>kicking_your_bucket_loop</string>
+    <string>kicking_your_bucket_posthit</string>
+    <string>kicking_your_bucket_preboss</string>
+    <string>MathCheckThoughTheSkull</string>
+    <string>MathCheckThoughTheSkullIntro</string>
+    <string>mondaytrouble</string>
+    <string>rulasmashintroHit</string>
+    <string>rulerSmashIntro</string>
     <string>rulerSmashLoop</string>
+    <string>shockhouse trouble intro unedited</string>
+    <string>shockhouse trouble loop unedited</string>
+    <string>The Final Demo - Copy</string>
+    <string>traphouse_trouble_loop</string>
+    <string>YLP_BossLoop_Phase1</string>
+    <string>YLP_BossLoop_Phase1_Part_2</string>
   </MidiFiles>
 </MidiSet>

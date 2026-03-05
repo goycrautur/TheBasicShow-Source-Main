@@ -63,7 +63,7 @@ public class KeyFunctions : MonoBehaviour
     public void ToggleGamePause(bool isPaused)
     {
         Time.timeScale = isPaused ? 0f : 1f;
-        Singleton<MusicManager>.Instance.PauseMidi(isPaused ? true : false);
+        Singleton<MusicManagerMaes>.Instance.PauseMidi(isPaused ? true : false);
         audballs.ignoreListenerPause = isPaused;
         AudioListener.pause = isPaused;
         gamePaused = isPaused;

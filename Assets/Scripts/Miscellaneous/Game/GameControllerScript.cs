@@ -363,7 +363,7 @@ public class GameControllerScript : MonoBehaviour
             }
             if (ZerullClassic.Instance.realBossStarted)
             {
-            Singleton<MusicManager>.Instance.SetSpeed(0.001f, ZerullClassic.Instance.normalMidiPlayerLoop, null);
+                Singleton<MusicManagerMaes>.Instance.HangMidi(true);
             }
             if (!gamaOvarDevice.isPlaying)
             {
