@@ -10,23 +10,16 @@ public class ITM_gendrev : BaseItem
         AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
         AdditionalGameCustomizer.Instance.rainbowTime = true;
         used = true;
-        meowloop.SetActive(true);
-        mwloop.clip = peak;
-        mwloop.loop = true;
-        mwloop.Play();
+        GenderRevealSource1.PlaySingleClip(peak);
         StartCoroutine(amwaitin(duration));
         return true;
     }
     public IEnumerator boowo(float downDuration)
     {
         float time = downDuration;
-        mwloop.Stop();
-        meowloop.SetActive(false);
-        meow.clip = boowoo;
-        meow.loop = false;
-        meow.Play();
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,new Vector3(0f,-170.5f,0f),meow);
-        GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.deltaexplode);
+        GenderRevealSource1.ClearQueue(true);
+        GenderRevealSource2.PlaySingleClip(boowoo);
+        lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.deltaruneExplud);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, howManyHpToRemove, 0f, true,false);
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMultAlt;
         GameControllerScript.Instance.player.runSpeedMultipler -= speedMultAlt;
@@ -74,10 +67,8 @@ public class ITM_gendrev : BaseItem
         yield break;
     }
     [SerializeField] private float duration = 60f,downDuration,howManyHpToRemove, speedMult,speedMultAlt,FovAmmount,AltFovAmmount,windobreakradius;
-    [SerializeField] private GameObject meowloop;
-    [SerializeField] private AudioSource meow,mwloop;
-    [SerializeField] private AudioClip peak,boowoo;
+    [SerializeField] private AudioManagerLiveReaction GenderRevealSource1,GenderRevealSource2;
+    [SerializeField] private AudioObjectyeah peak,boowoo;
     [SerializeField] private Sprite Sprite,sadbob;
-    [SerializeField] private subsScriptableObject Subtitlesthing;
     [SerializeField] private bool used;
 }

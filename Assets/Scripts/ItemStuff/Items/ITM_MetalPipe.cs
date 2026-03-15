@@ -5,21 +5,19 @@ public class ITM_MetalPipe : BaseItem
 {
     [SerializeField] private float duration = 60f,invinciDuration, cantuseduration, energy, walkspeedmultAdd,runspeedmultAdd,staminaDropmultAdd,staminaRisemultAdd;
     [SerializeField] private Sprite pipeSprite,UnuseablepipeSprite,invicible;
-    [SerializeField] private AudioClip audiopip, fail;
+    [SerializeField] private AudioObjectyeah audiopip, fail;
     [SerializeField] private bool piped, CantUse;
-    [SerializeField] private subsScriptableObject Subtitlesthing;
-    [SerializeField] private AudioSource PipeDevice;
+    [SerializeField] private AudioManagerLiveReaction PipeDevice;
     public override bool OnUse()
     {
         if (CantUse)
         {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.LoudIncorecBugger);
+            lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(fail);
             return false;
         }
         if (!CantUse)
         {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitlesthing.subtitleOption,Subtitlesthing,new Vector3(0f,-170.5f,0f),PipeDevice);
-            PipeDevice.PlayOneShot(audiopip);
+            PipeDevice.PlaySingleClip(audiopip);
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
             StopCoroutine(Waitin());
             StartCoroutine(Waitin());

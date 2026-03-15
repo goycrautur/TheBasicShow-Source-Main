@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
-
-// Token: 0x0200000D RID: 13
 public class litearllyAnBlockScript : MonoBehaviour
 {
-	public AudioSource audioDevice111,subsAudioDevice;
+	public AudioManagerLiveReaction audioDeviceMain;
 	private void Start()
 	{
 		okdothething();
@@ -22,12 +20,8 @@ public class litearllyAnBlockScript : MonoBehaviour
 		MeshRenderer[] componentsInChildren = gameObject.GetComponentsInChildren<MeshRenderer>(true);
 		int num = UnityEngine.Random.Range(0, blockTypes.Length);
 		MeshRenderer[] array = componentsInChildren;
-		for (int i = 0; i < array.Length; i++)
-		{
-			array[i].material = blockTypes[num].mat;
-		}
-		audioDevice111.PlayOneShot(blockTypes[num].audio);
-		GameControllerScript.Instance.SubsManager.summonLeSubtitle(blockTypes[num].subtitleObjectStuff.subtitleOption, blockTypes[num].subtitleObjectStuff, subsAudioDevice);
+		for (int i = 0; i < array.Length; i++) array[i].material = blockTypes[num].mat;
+		audioDeviceMain.PlaySingleClip(blockTypes[num].audio);
 	}
 
 	public float lifeSpan;
@@ -36,11 +30,7 @@ public class litearllyAnBlockScript : MonoBehaviour
 	[Serializable]
 	public class blockType
 	{
-		[SerializeField]
-		public Material mat;
-		[SerializeField]
-		public AudioClip audio;
-		[SerializeField]
-		public subsScriptableObject subtitleObjectStuff;
+		[SerializeField] public Material mat;
+		[SerializeField] public AudioObjectyeah audio;
 	}
 }

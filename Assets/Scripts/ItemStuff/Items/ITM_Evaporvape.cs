@@ -3,14 +3,14 @@ using UnityEngine;
 public class ITM_Evaporvape : BaseItem
 {
     [SerializeField] private GameObject vapeclouds;
-    [SerializeField] protected AudioClip yummyvape;
+    [SerializeField] protected AudioObjectyeah yummyvape;
 
     public override bool OnUse()
     {
         Vector3 playerPosition = GameControllerScript.Instance.player.transform.position;
         Vector3 snappedPosition = SnapToGrid(playerPosition);
         GameObject gameObject = Instantiate(vapeclouds, snappedPosition, Quaternion.identity);
-        GameControllerScript.Instance.audioDevice.PlayOneShot(yummyvape);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,yummyvape);
         return true;
     }
     private Vector3 SnapToGrid(Vector3 position)

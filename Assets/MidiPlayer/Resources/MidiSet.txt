@@ -49,6 +49,7 @@
     <string>shockhouse trouble loop unedited</string>
     <string>The Final Demo - Copy</string>
     <string>traphouse_trouble_loop</string>
+    <string>traphouse_trouble_req_loop</string>
     <string>YLP_BossLoop_Phase1</string>
     <string>YLP_BossLoop_Phase1_Part_2</string>
   </MidiFiles>

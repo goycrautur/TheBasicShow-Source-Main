@@ -10,12 +10,9 @@ public class FamishedScript : NPC
         appear(false,false);
         femtanylspr.SetActive(false);
         famishedspr.SetActive(true);
-        baldiAudio = GetComponent<AudioSource>();
+        FamAudio = GetComponent<AudioManagerLiveReaction>();
         GetAngry(0f);
-        if (endless)
-        {
-            Endless();
-        }
+        if (endless) Endless();
 
         Wander();
     }
@@ -27,13 +24,13 @@ public class FamishedScript : NPC
     {
         gc.famishscr.Remove(this);
     }
-    public void uhh(AudioClip clip)
+    public void uhh(AudioObjectyeah clip)
     {
-        baldiAudio.PlayOneShot(clip);
+        FamAudio.PlaySingleClip(clip);
     }
     public void explode()
     {
-        baldiAudio.PlayOneShot(gc.deltaexplode);
+        FamAudio.PlaySingleClip(gc.lbams.deltaruneExplud);
         Vector3 upithink = new Vector3(base.transform.position.x, base.transform.position.y + 2f, base.transform.position.z);
         Instantiate(explodePrefab, upithink, new Quaternion(0f,0f,0f,0f));
         femtanylspr.SetActive(false);
@@ -46,73 +43,43 @@ public class FamishedScript : NPC
             femtanylspr.SetActive(true);
             famishedspr.SetActive(false);
         }
-        if (playnoise) baldiAudio.PlayOneShot(gc.gastersfx);
+        if (playnoise) FamAudio.PlaySingleClip(gc.lbams.gasterSfx);
     }
     public override void OnUpdate()
     {
-        if (antiHearing)
-		{
-			AntiHearingDuratio -= Time.deltaTime;
-		}
-        if (AntiHearingDuratio < 0f)
-		{
-            antiHearing = false;
-        }
+        if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
+        if (AntiHearingDuratio < 0f) antiHearing = false;
         MOOOVEYOUBITCH();
         base.OnUpdate();
         base.agentSpeed = !gc.fmc.isAbleToMove ? 0 : base.DefaultAgentSpeed * base.agentSpeedScale;
-        if (famishedtempSpd > 0f)
-        {
-            famishedtempSpd -= 0.02f * Time.deltaTime;
-        }
-        else
-        {
-            famishedtempSpd = 0f;
-        }
+        if (famishedtempSpd > 0f) famishedtempSpd -= 0.02f * Time.deltaTime;
+        else famishedtempSpd = 0f;
         if (activatewindowbreak)
         {
-            foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+            foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) 
             {
                 w.enableOffMeshScript = true;
-                if (!w.broken)
-                {
-                    if (Vector3.Distance(transform.position, w.transform.position) <= 10)
-                    {
-                        w.Window(true, false, 0f);
-                    }
-                }
+                if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 10) w.SetWindowState(false, 6f, 0f, 0, true, 0);
             }
         }
         if (this.isActiveAndEnabled)
         {
             agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
-            if (base.stun)
-            {
-                agent.speed = 0;
-            }
-            if (base.StunTime < 0f)
-            {
-                agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
-            }
+            if (base.stun) agent.speed = 0;
+            if (base.StunTime < 0f) agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
         }
     }
     public void MOOOVEYOUBITCH()
     {
         if (player == null) return;
-        if (player != null && agent.enabled && gameObject.activeSelf && gc.fmc.alwaysKnowIp)
-        {
-            agent.SetDestination(player.position);
-        }
+        if (player != null && agent.enabled && gameObject.activeSelf && gc.fmc.alwaysKnowIp) agent.SetDestination(player.position);
         if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
         {
             if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
             {
                 if (hitVape.transform.gameObject.layer == 11 && !gc.fmc.alwaysKnowIp) return;
             }
-            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
-            {
-                TargetPlayer();
-            }
+            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk) TargetPlayer();
         }
     }
     #endregion
@@ -148,10 +115,7 @@ public class FamishedScript : NPC
     {
         famishedSpd += value;
 
-        if (famishedSpd < 0.5f)
-        {
-            famishedSpd = 0.5f;
-        }
+        if (famishedSpd < 0.5f) famishedSpd = 0.5f;
     }
 
     public void GetTempAngry(float value) => famishedtempSpd += value;
@@ -230,7 +194,7 @@ public class FamishedScript : NPC
     [SerializeField] private Animator famishedcator;
 
     private float currentPriority;
-    public AudioSource baldiAudio;
+    public AudioManagerLiveReaction FamAudio;
     public bool activatewindowbreak;
     public GameObject famishedspr,femtanylspr,explodePrefab;
     #endregion

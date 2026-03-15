@@ -8,16 +8,13 @@ public class ITM_Scissors : BaseItem
         {
             if (!GameControllerScript.Instance.player.outdoorsfr)
 		    {
-			    if (GameControllerScript.Instance.player.door.lockTime <= 0f)
-			    {
-			    GameControllerScript.Instance.player.ResetGuilt("bully", 1f);
-			    }
+			    if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("bully", 1f);
 		    }
         }
         if (GameControllerScript.Instance.player.jumpropes.Count > 0)
         {
             GameControllerScript.Instance.player.jumpropes[0].End(false);
-            GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Snip);
+            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Snip);
             return true;
         }
 
@@ -26,12 +23,12 @@ public class ITM_Scissors : BaseItem
             if (Ray.collider.name == "1st Prize" || Ray.collider.name == "washingmachine")
             {
                 GameControllerScript.Instance.firstPrizeScript.GoCrazy();
-                GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Snip);
+                GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Snip);
                 return true;
             }
         }
         return false;
     }
     
-    [SerializeField] protected AudioClip aud_Snip;
+    [SerializeField] protected AudioObjectyeah aud_Snip;
 }

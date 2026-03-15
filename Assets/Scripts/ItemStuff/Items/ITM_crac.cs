@@ -6,7 +6,7 @@ public class ITM_crac : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(Used);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,Used);
         StartCoroutine(amwaitin(duration));
         return true;
     }
@@ -34,6 +34,6 @@ public class ITM_crac : BaseItem
         yield break;
     }
     [SerializeField] private float duration = 60f, speedMult,FovAmmount;
-    [SerializeField] private AudioClip Used;
+    [SerializeField] private AudioObjectyeah Used;
     [SerializeField] private Sprite Sprite;
 }

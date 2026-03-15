@@ -9,8 +9,7 @@ public class ShapeLockerScript : MonoBehaviour
         if (!opened)
         {
             opened = true;
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(Subtitlesthing.subtitleOption,Subtitlesthing,lockSound);
-            lockSound.Play();
+            audi.PlaySingleClip(lockSound);
             lockerAnim.enabled = true;
         }
     }
@@ -19,8 +18,8 @@ public class ShapeLockerScript : MonoBehaviour
 
     public Animator lockerAnim;
 
-    public AudioSource lockSound;
-    [SerializeField] private subsScriptableObject Subtitlesthing;
+    public AudioObjectyeah lockSound;
+    public AudioManagerLiveReaction audi;
     public ShapeLocktypes ShapeLockerType;
     public enum ShapeLocktypes
     {

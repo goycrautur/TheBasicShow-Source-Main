@@ -38,25 +38,13 @@ public class zerullscript : NPC
 
     public override void OnUpdate()
     {
-        if (antiHearing)
-		{
-			AntiHearingDuratio -= Time.deltaTime;
-		}
-        if (AntiHearingDuratio < 0f)
-		{
-            antiHearing = false;
-        }
+        if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
+        if (AntiHearingDuratio < 0f) antiHearing = false;
         targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        if (TempAnger > 0f)
-        {
-            TempAnger -= 0.02f * Time.deltaTime;
-        }
-        else
-        {
-            TempAnger = 0f;
-        }
+        if (TempAnger > 0f) TempAnger -= 0.02f * Time.deltaTime;
+        else TempAnger = 0f;
         if (base.stun)
         {
             stopMoving = true;
@@ -68,16 +56,10 @@ public class zerullscript : NPC
             resetWaitTime();
             Move();
         }
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+        foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) 
         {
             w.enableOffMeshScript = offmesh;
-            if (!w.broken)
-            {
-                if (Vector3.Distance(transform.position, w.transform.position) <= 10)
-                {
-                    w.Window(true, false, 0f);
-                }
-            }
+            if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 10) w.SetWindowState(false, 0f, 0f, 0, true, 0);
         }
     }
     public void targe()
@@ -89,10 +71,7 @@ public class zerullscript : NPC
             {
                 if (hitVape.transform.gameObject.layer == 11) return;
             }
-            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
-            {
-                TargetPlayer();
-            }
+            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk) TargetPlayer();
         }
     }
     #endregion

@@ -4,21 +4,14 @@ public class ITM_jukijuice : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(aud);
-
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,drink);
         if (!GameControllerScript.Instance.player.outdoorsfr)
 		{
-			if (GameControllerScript.Instance.player.door.lockTime <= 0f)
-			{
-			GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
-			}
+			if (GameControllerScript.Instance.player.door.lockTime <= 0f)GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, Stamina);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, helth, 0f, true,false);
-        if (replaceitem)
-        {
-            ItemManager.Instance.ReplaceCurrentItem(idyum);
-        }
+        if (replaceitem) ItemManager.Instance.ReplaceCurrentItem(idyum);
         return true;
     }
 
@@ -26,5 +19,5 @@ public class ITM_jukijuice : BaseItem
     [SerializeField] private float helth;
     [SerializeField] private bool replaceitem;
 
-    [SerializeField] private AudioClip aud;
+    [SerializeField] private AudioObjectyeah drink;
 }

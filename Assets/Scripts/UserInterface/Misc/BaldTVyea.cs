@@ -3,11 +3,11 @@ using System.Collections;
 
 public class BaldTVyea : MonoBehaviour
 {
-    public IEnumerator StartTVSequence(AudioClip baldiClip,subsScriptableObject subtitlObjec)
+    public IEnumerator StartTVSequence(AudioObjectyeah baldiClip)
     {
         yield return StartCoroutine(StartLoweringTV());
 
-        yield return StartCoroutine(PlayBaldiClip(baldiClip,subtitlObjec));
+        yield return StartCoroutine(PlayBaldiClip(baldiClip));
 
         yield return StartCoroutine(StartLiftingTV());
     }
@@ -20,8 +20,7 @@ public class BaldTVyea : MonoBehaviour
         if (showMarkings)
         {
             WarningMarks.SetActive(true);
-            TelevisionDevice.PlayOneShot(markingSound == MarkingSoundType.Alert ? mus_Alert : aud_TimesOutBell);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(belltimeou.subtitleOption,belltimeou,new Vector3(0f,40.5f,0f),TelevisionDevice);
+            TelevisionDevice.PlaySingleClip(markingSound == MarkingSoundType.Alert ? mus_Alert : aud_TimesOutBell);
         }
 
         BaldiTVAnimator.Rebind();
@@ -34,43 +33,22 @@ public class BaldTVyea : MonoBehaviour
         Static.SetActive(true);
         yield return new WaitForSeconds(0.25f);
         Static.SetActive(false);
-        if (famishingit)
-        {
-            famished.SetActive(true);
-        }
-        if (TeacherJerryingIt)
-        {
-            teacherJer.SetActive(true);
-        }
-        if (baldingit)
-        {
-            Baldi.SetActive(true);
-        }
+        if (famishingit) famished.SetActive(true);
+        if (TeacherJerryingIt) teacherJer.SetActive(true);
+        if (baldingit) Baldi.SetActive(true);
     }
 
-    public IEnumerator PlayBaldiClip(AudioClip clip,subsScriptableObject subtitlObjec)
+    public IEnumerator PlayBaldiClip(AudioObjectyeah clip)
     {
         if (clip == null) yield break;
 
-        if (famishingit)
-        {
-            famAudDevice.PlayOneShot(clip);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),famAudDevice);
-        }
-        if (TeacherJerryingIt)
-        {
-            teacherJerAudDevice.PlayOneShot(clip);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),teacherJerAudDevice);
-        }
-        if (baldingit)
-        {
-            BaldiDevice.PlayOneShot(clip);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(subtitlObjec.subtitleOption,subtitlObjec,new Vector3(0f,40.5f,0f),BaldiDevice);
-        }
+        if (famishingit) famAudDevice.PlaySingleClip(clip);
+        if (TeacherJerryingIt) teacherJerAudDevice.PlaySingleClip(clip);
+        if (baldingit) BaldiDevice.PlaySingleClip(clip);
         
         float timer = 0f;
 
-        while (timer < clip.length)
+        while (timer < clip.audClip.length)
         {
             if (!AudioListener.pause) timer += Time.unscaledDeltaTime;
             yield return null;
@@ -93,8 +71,8 @@ public class BaldTVyea : MonoBehaviour
     [Header("Serialized References")]
     [SerializeField] private Animator BaldiTVAnimator;
     [SerializeField] private GameObject Static, Baldi, WarningMarks, famished, teacherJer;
-    [SerializeField] private AudioSource TelevisionDevice, BaldiDevice,famAudDevice, teacherJerAudDevice;
-    [SerializeField] private AudioClip mus_Alert, aud_TimesOutBell;
+    [SerializeField] private AudioManagerLiveReaction TelevisionDevice, BaldiDevice,famAudDevice, teacherJerAudDevice;
+    [SerializeField] private AudioObjectyeah mus_Alert, aud_TimesOutBell;
     [SerializeField] private subsScriptableObject belltimeou;
     [Header("Extras")]
     public bool Markings;

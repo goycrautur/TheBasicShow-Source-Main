@@ -6,23 +6,13 @@ public class ITM_sake : BaseItem
     {
         GameControllerScript Contoller = GameControllerScript.Instance;
         Instantiate(sakeSpray, Contoller.player.transform.position, Contoller.cameraTransform.rotation);
-        if (blastcork)
-        {
-            Instantiate(cork, Contoller.player.transform.position, Contoller.cameraTransform.rotation);
-        }
-
-        if (!Contoller.player.outdoorsfr)
-		{
-			if (Contoller.player.door.lockTime <= 0f)
-			{
-			Contoller.player.ResetGuilt("drink", 1f);
-			}
-		}
-        GameControllerScript.Instance.audioDevice.PlayOneShot(sake);
+        if (blastcork) Instantiate(cork, Contoller.player.transform.position, Contoller.cameraTransform.rotation);
+        if (!Contoller.player.outdoorsfr) if (Contoller.player.door.lockTime <= 0f)Contoller.player.ResetGuilt("drink", 1f);
+        Contoller.lbams.PlayClip(Contoller.lbams.MainSource3,sake);
         return true;
     }
 
     [SerializeField] private GameObject sakeSpray, cork;
-    [SerializeField] private AudioClip sake;
+    [SerializeField] private AudioObjectyeah sake;
     [SerializeField] private bool blastcork;
 }

@@ -8,7 +8,7 @@ public class ITM_HiIHaveYourIP : BaseItem
     {
         if (used) return false;
         GameControllerScript.Instance.player.PlayerDmgResistance += DefendAdd;
-        GameControllerScript.Instance.audioDevice.PlayOneShot(Used);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,Used);
         used = true;
         StartCoroutine(amwaitin(duration));
         return true;
@@ -35,7 +35,7 @@ public class ITM_HiIHaveYourIP : BaseItem
         yield break;
     }
     [SerializeField] private float duration = 60f,DefendAdd;
-    [SerializeField] private AudioClip Used;
+    [SerializeField] private AudioObjectyeah Used;
     [SerializeField] private Sprite Sprite;
     [SerializeField] private bool used;
 }

@@ -21,7 +21,7 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
     public WindowData WinData;
     public void Start()
     {
-        audioDevice = GetComponent<AudioSource>();
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
         durability = WinData.durability;
         ogDurability = WinData.durability;
         window_In.material = WinData.normalWinMats[0];
@@ -37,17 +37,12 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             broken = true;
             if (sound)
             {
-                foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr)
-                {
-                    if (maxi.isActiveAndEnabled)
-                    {
-                        maxi.callToSMTH(this.transform.position);
-                    }
-                }
+                foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
-            if (WinData.sounds[0] != null) audioDevice.PlayOneShot(WinData.sounds[0]);
-            else Debug.Log($"le sounds data array number 1 (broken window sound) is null!!!! go assign it dumbass");
+            audioDevice.ClearQueue(true);
+            if (WinData.sounds[0] != null) audioDevice.QueueAudio(WinData.sounds[0]);
+            else Debug.Log($"le sounds data array number 1 (broken window sound object) is null!!!! go assign it dumbass");
             if (WinData.normalWinMats[2] != null) window_In.material = WinData.normalWinMats[2];
             else Debug.Log($"le normalwinmats data array 3 (broken window side 1) is null!!!! go assign it dumbass");
             if (WinData.normalWinMats[3] != null) window_Out.material = WinData.normalWinMats[3];
@@ -57,8 +52,6 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             windoIcon1.SetActive(false);
             windoIcon2.SetActive(false);
             broken = true;
-            if (WinData.subtitlesObject[0] != null) GameControllerScript.Instance.SubsManager.summonLeSubtitle(WinData.subtitlesObject[0].subtitleOption, WinData.subtitlesObject[0], audioDevice);
-            else Debug.Log($"le subtitles object data array 1 (broken window subtitles) is null!!!! go assign it dumbass");
             if (WinData.particlPrefab[0] != null) Instantiate(WinData.particlPrefab[0], transform.position, Quaternion.identity);
             else Debug.Log($"le particle Prefab data array 1 (broken window particle prefab) is null!!!! go assign it dumbass");
             
@@ -68,45 +61,36 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             broken = false;
             if (sound)
             {
-                foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr)
-                {
-                    if (maxi.isActiveAndEnabled)
-                    {
-                        maxi.callToSMTH(this.transform.position);
-                    }
-                }
+                foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
             if (durability == ogDurability)
             {
-                if (WinData.sounds[1] != null) audioDevice.PlayOneShot(WinData.sounds[1]);
-                else Debug.Log($"le sounds data array number 2 (window repair sound) is null!!!! go assign it dumbass");
+                audioDevice.ClearQueue(true);
+                if (WinData.sounds[1] != null) audioDevice.QueueAudio(WinData.sounds[1]);
+                else Debug.Log($"le sounds data array number 2 (window repair sound object) is null!!!! go assign it dumbass");
                 if (WinData.normalWinMats[0] != null) window_In.material = WinData.normalWinMats[0];
                 else Debug.Log($"le normalwinmats data array 1 (normal window side 1) is null!!!! go assign it dumbass");
                 if (WinData.normalWinMats[1] != null) window_Out.material = WinData.normalWinMats[1];
                 else Debug.Log($"le normalwinmats data array 2 (normal window side 2) is null!!!! go assign it dumbass");
-                if (WinData.subtitlesObject[1] != null) GameControllerScript.Instance.SubsManager.summonLeSubtitle(WinData.subtitlesObject[1].subtitleOption, WinData.subtitlesObject[0], audioDevice);
-                else Debug.Log($"le subtitles object data array 2 (repair window subtitles) is null!!!! go assign it dumbass");
                 if (WinData.particlPrefab[1] != null) Instantiate(WinData.particlPrefab[1], transform.position, Quaternion.identity);
-                else  Debug.Log($"le particle Prefab data array 2 (window repair particle prefab) is null!!!! go assign it dumbass");
+                else Debug.Log($"le particle Prefab data array 2 (window repair particle prefab) is null!!!! go assign it dumbass");
             }
             else if (durability != ogDurability)
             {
                 if (!WinData.uniqueCrackSound)
                 {
-                    if (WinData.CrackedWindowSounds != null) audioDevice.PlayOneShot(WinData.CrackedWindowSounds);
-                    else Debug.Log($"le cracked window sounds data is null!!!! go assign it dumbass");
-                    if (WinData.CrackWindSubtitlesObject != null) GameControllerScript.Instance.SubsManager.summonLeSubtitle(WinData.CrackWindSubtitlesObject.subtitleOption, WinData.CrackWindSubtitlesObject, audioDevice);
-                    else Debug.Log($"le cracked window subtitles object is null!!!! go assign it dumbass");
+                    audioDevice.ClearQueue(true);
+                    if (WinData.CrackedWindowSounds != null) audioDevice.QueueAudio(WinData.CrackedWindowSounds);
+                    else Debug.Log($"le cracked window sounds object data is null!!!! go assign it dumbass");
                     if (WinData.crackParticlPrefab != null) Instantiate(WinData.crackParticlPrefab, transform.position, Quaternion.identity);
                     else Debug.Log($"le crack Particle Prefab data is null!!!! go assign it dumbass");
                 }
                 else 
                 {
-                    if (WinData.CrackedWindowSoundsButItsAnArray[durability-1] != null) audioDevice.PlayOneShot(WinData.CrackedWindowSoundsButItsAnArray[durability-1]);
-                    else Debug.Log($"le cracked window sounds data array {durability} is null!!!! go assign it dumbass");
-                    if (WinData.CrackWindSubtitlesObjectArrayified[durability-1] != null) GameControllerScript.Instance.SubsManager.summonLeSubtitle(WinData.CrackWindSubtitlesObjectArrayified[durability-1].subtitleOption, WinData.CrackWindSubtitlesObjectArrayified[durability-1], audioDevice);
-                    else Debug.Log($"le cracked window subtitles object data array {durability} is null!!!! go assign it dumbass");
+                    audioDevice.ClearQueue(true);
+                    if (WinData.CrackedWindowSoundsButItsAnArray[durability-1] != null) audioDevice.QueueAudio(WinData.CrackedWindowSoundsButItsAnArray[durability-1]);
+                    else Debug.Log($"le cracked window sounds object data array {durability} is null!!!! go assign it dumbass");
                     if (WinData.crackParticlPrefabArra[durability-1] != null) Instantiate(WinData.crackParticlPrefabArra[durability-1], transform.position, Quaternion.identity);
                     else Debug.Log($"le crack Particle Prefab data array {durability} is null!!!! go assign it dumbass");
                 }
@@ -132,11 +116,7 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             windo.layer = LayerMask.NameToLayer("Ignore Raycast");
             windo2.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
-        if (broken)
-        {
-            this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-            
-        }
+        if (broken) this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
         else
         {
             if (enableOffMeshScript)
@@ -164,5 +144,5 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
         if (rando == 1) GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, UnityEngine.Random.Range(0,5), 1f, false, true, false);
     }
 
-    private AudioSource audioDevice;
+    private AudioManagerLiveReaction audioDevice;
 }

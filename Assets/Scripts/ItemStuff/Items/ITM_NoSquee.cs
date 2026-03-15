@@ -8,14 +8,7 @@ public class ITM_NoSquee : BaseItem
         Vector3 snappedPosition = SnapToGrid(playerPosition);
 
         Instantiate(WDNSModel, snappedPosition, Quaternion.identity);
-        GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Spray);
-        if (SummonSubtitles)
-        {
-            if (Subtitles != null)
-            {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitles.subtitleOption,Subtitles,new Vector3(0f,-170.5f,0f),GameControllerScript.Instance.audioDevice);
-            }
-        }
+        lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(aud_Spray);
 
         return true;
     }
@@ -35,7 +28,5 @@ public class ITM_NoSquee : BaseItem
 
 
     [SerializeField] private GameObject WDNSModel;
-    [SerializeField] protected AudioClip aud_Spray;
-    [SerializeField] private bool SummonSubtitles;
-    [SerializeField] private subsScriptableObject Subtitles;
+    [SerializeField] protected AudioObjectyeah aud_Spray;
 }

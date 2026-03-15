@@ -31,9 +31,9 @@ public class MuchoProjectileScript : MonoBehaviour
     #endregion
     private void OnTriggerStay(Collider proj)
     {
-        if (proj.CompareTag("Window") && proj.GetComponent<WindowScript>() != null && !proj.GetComponent<WindowScript>().broken && projectileColor != "Blue")
+        if (proj.CompareTag("Window") && proj.GetComponent<basicshowWindowScript>() != null && !proj.GetComponent<basicshowWindowScript>().broken && projectileColor != "Blue")
         {
-            proj.GetComponent<WindowScript>().Window(true, true, 6f);
+            proj.GetComponent<basicshowWindowScript>().SetWindowState(true, 6f, 0f, 1);
             Destroy(gameObject, 0f);
             return;
         }

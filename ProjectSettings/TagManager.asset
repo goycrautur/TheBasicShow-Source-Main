@@ -36,6 +36,7 @@ TagManager:
   - bully
   - idi3
   - idi1
+  - floor
   layers:
   - Default
   - TransparentFX

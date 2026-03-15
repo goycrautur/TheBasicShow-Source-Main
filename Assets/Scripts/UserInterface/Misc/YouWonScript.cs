@@ -10,7 +10,7 @@ public class YouWonScript : MonoBehaviour
     {
         GameControllerScript.Instance.SubtitlesHudFade.Rebind();
         GameControllerScript.Instance.SubtitlesHudFade.Play("hudFadeOutsubs", -1, 0f);
-        AudioSourcereal.ignoreListenerPause = true;
+        AudioSourcereal.SetIgnoreListenerPause(true);
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
         LappingOfAsylumController.LapInstance.vanishScore = false;
@@ -20,20 +20,14 @@ public class YouWonScript : MonoBehaviour
 
     private void Update()
     {
-        AudioSourcereal.pitch = audPitch;
+        AudioSourcereal.audioDevice.pitch = audPitch;
         if (!updateExecuted)
         {
             ScoreDelay -= Time.deltaTime;
             RankDelay -= Time.deltaTime;
             ResultDelay -= Time.deltaTime;
-            if (youCanGoNow)
-            {
-                resAndQuiDelay -= Time.deltaTime;
-            }
-            if (secretCount)
-            {
-                secreDelay -= Time.deltaTime;
-            }
+            if (youCanGoNow) resAndQuiDelay -= Time.deltaTime;
+            if (secretCount) secreDelay -= Time.deltaTime;
             if (ScoreDelay <= 0f)
             {
                 scorePreRoundup = Mathf.Lerp(scorePreRoundup,scoreSystemManager.Instance.scorevalue, 5f * Time.deltaTime);
@@ -43,10 +37,8 @@ public class YouWonScript : MonoBehaviour
                 if (!diditVineBoo)
                 {
                     GameControllerScript.Instance.modeState = "Score: " + scoreSystemManager.Instance.scorevalue;
-                    AudioSourcereal.clip = vinebo;
-                    AudioSourcereal.loop = false;
-                    audPitch = 1f;
-                    AudioSourcereal.Play();
+                    AudioSourcereal.PlaySingleClip(vinebo);
+                    AudioSourcereal.SetPitch(1f);
                     diditVineBoo = true;
                 }
             }
@@ -57,20 +49,15 @@ public class YouWonScript : MonoBehaviour
                 if (!diditVineBoo2)
                 {
                     GameControllerScript.Instance.modeState = "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
-                    AudioSourcereal.clip = vinebo;
-                    AudioSourcereal.loop = false;
-                    audPitch = 2f;
-                    AudioSourcereal.Play();
+                    AudioSourcereal.PlaySingleClip(vinebo);
+                    AudioSourcereal.SetPitch(2f);
                     diditVineBoo2 = true;
                 }
             }
             if (ResultDelay <= 0f)
             {
                 uwon.sprite = Yippe;
-                if (secreDelay > 0f)
-                {
-                audPitch = 1f;
-                }
+                if (secreDelay > 0f) AudioSourcereal.SetPitch(1f);
                 for (int i = 0; i < RanksMusicKys.Length; ++i)
                 {
                     if (RanksMusicKys[i].rankScore <= scoreSystemManager.Instance.scorevalue)
@@ -78,20 +65,12 @@ public class YouWonScript : MonoBehaviour
                         RanksMusicKys[i].ranks = scoreSystemManager.Instance.CurRank;
                         if (!RanksMusicKys[i].diditPlay)
                         {
-                            AudioSourcereal.clip = RanksMusicKys[i].rankMusic;
-                            resAndQuiDelay = RanksMusicKys[i].rankMusic.length;
-                            secreDelay = RanksMusicKys[i].rankMusic.length-3f;
-                            AudioSourcereal.loop = false;
-                            AudioSourcereal.Play();
+                            resAndQuiDelay = RanksMusicKys[i].rankMusic.audClip.length;
+                            secreDelay = RanksMusicKys[i].rankMusic.audClip.length-3f;
+                            AudioSourcereal.PlaySingleClip(RanksMusicKys[i].rankMusic);
                             RanksMusicKys[i].diditPlay = true;
-                            if (EM.GetResults)
-                            {
-                                youCanGoNow = true;
-                            }
-                            if (EM.GetSecret)
-                            {
-                                secretCount = true;
-                            }
+                            if (EM.GetResults) youCanGoNow = true;
+                            if (EM.GetSecret) secretCount = true;
                         }
                     }
                 }  
@@ -111,7 +90,7 @@ public class YouWonScript : MonoBehaviour
             if (Sdelay2 <= 0f)
             {
                 EM.LoadSecretEnding(scoreSystemManager.Instance.CurRank);
-                GameControllerScript.Instance.TimeoutMusic.mute = true;
+                GameControllerScript.Instance.lbams.TimeoutMusic.ClearQueue(true);
             }
         }
     }
@@ -123,7 +102,7 @@ public class YouWonScript : MonoBehaviour
     public TMP_Text ScoreTXTrea, RanksTXTrea; 
     public float ScoreDelay,RankDelay,ResultDelay,resAndQuiDelay,secreDelay,Sdelay2=3f,scorePreRoundup,score,audPitch=1f;
 	public bool updateExecuted = false,diditVineBoo,diditVineBoo2,youCanGoNow,secretCount;
-    public AudioSource AudioSourcereal;
+    public AudioManagerLiveReaction AudioSourcereal;
     public RanksMusi[] RanksMusicKys;
     [Serializable]
 	public class RanksMusi
@@ -131,10 +110,10 @@ public class YouWonScript : MonoBehaviour
         public string ranks;
         public int rankScore;
         public bool diditPlay;
-        public AudioClip rankMusic;
+        public AudioObjectyeah rankMusic;
 
 	}
-    public AudioClip vinebo;
+    public AudioObjectyeah vinebo;
     [SerializeField] private EndingManager EM;
     [SerializeField] private CursorControllerScript cursor;
 }

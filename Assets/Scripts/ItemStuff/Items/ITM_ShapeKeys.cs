@@ -6,7 +6,7 @@ public class ITM_ShapeKeys : BaseItem
 {
     [SerializeField] private bool canteat;
     [SerializeField] private float stamina, health;
-    [SerializeField] private AudioClip aud_Crunch,firintheho;
+    [SerializeField] private AudioObjectyeah aud_Crunch,firintheho;
     public override bool OnUse()
     {
         canteat = false;
@@ -21,8 +21,8 @@ public class ITM_ShapeKeys : BaseItem
         }
         if (!canteat)
         {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Crunch);
-            GameControllerScript.Instance.audioDevice.PlayOneShot(firintheho);
+            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Crunch);
+            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,firintheho);
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, stamina);
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, health, 0f, true, false);
             return true;

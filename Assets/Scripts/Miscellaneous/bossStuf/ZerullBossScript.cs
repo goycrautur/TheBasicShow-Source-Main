@@ -5,11 +5,9 @@ using UnityEngine.AI;
 public class ZerullBossScript : MonoBehaviour
 {
     [Header("Audio"), SerializeField]
-    private AudioQueueScript audioDevice;
+    private AudioManagerLiveReaction audioDevice;
 
-    [SerializeField] public AudioClip hit, bossIntro, bossIntro_Loop,totemSound, bossStart,ChairHit,ChairStart;
-    [SerializeField] private subsScriptableObject bossHit_Captions, chairHit_Captions,bossyapStart_captions, bossyapIntro_captions,bossyapIntroloop_captions,totem_Captions;
-
+    [SerializeField] public AudioObjectyeah hit, bossIntro, bossIntro_Loop,totemSound, bossStart,ChairHit,ChairStart;
     [Header("References"), SerializeField]
     private NavMeshAgent agent;
     private Transform target;
@@ -37,40 +35,20 @@ public class ZerullBossScript : MonoBehaviour
 
     private void Update()
     {
-        if (iframedown)
-        {
-            iframes -= Time.deltaTime;
-        }
-        if (iframes < 0f)
-        {
-            iframedown = false;
-        }
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
+        if (iframedown)iframes -= Time.deltaTime;
+        if (iframes < 0f) iframedown = false;
+        foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) 
         {
             w.enableOffMeshScript = true;
-            if (!w.broken)
-            {
-                if (Vector3.Distance(transform.position, w.transform.position) <= 10)
-                {
-                    w.Window(true, false, 0f);
-                }
-            }
+            if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 10) w.SetWindowState(false, 6f, 0f, 0, true, 0);
         }
-        if (target != null && agent.enabled && gameObject.activeSelf)
-        {
-            agent.SetDestination(target.position);
-        }
+        if (target != null && agent.enabled && gameObject.activeSelf) agent.SetDestination(target.position);
+        if (stuntiem > 0f) stuntiem -= Time.deltaTime * stunTimeMult;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!ZerullClassic.Instance.BossStarted && other.CompareTag("bosSpawn"))
-        {
-            if (other.GetComponent<bosTrig>().IsEnterBossTrigger())
-            {
-                ZerullClassic.Instance.Encounter();
-            }
-        }
+        if (!ZerullClassic.Instance.BossStarted && other.CompareTag("bosSpawn")) if (other.GetComponent<bosTrig>().IsEnterBossTrigger()) ZerullClassic.Instance.Encounter();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -125,9 +103,9 @@ public class ZerullBossScript : MonoBehaviour
         audioDevice.ClearQueue();
         
         bool chairh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        if (!chairh) audioDevice.QueueAudio(hit, bossHit_Captions);
-        if (chairh) audioDevice.QueueAudio(ChairHit, chairHit_Captions);
-        if (!ZerullClassic.Instance.RealBossStarted)audioDevice.QueueAudio(bossStart, bossyapStart_captions);
+        if (!chairh) audioDevice.QueueAudio(hit);
+        if (chairh) audioDevice.QueueAudio(ChairHit);
+        if (!ZerullClassic.Instance.RealBossStarted)audioDevice.QueueAudio(bossStart);
         agent.speed += 0.75f * hp;
         GameControllerScript.Instance.player.DefaultWalkSpeed += 0.7f * hp;
         GameControllerScript.Instance.player.DefaultRunSpeed += 0.7f * hp;
@@ -135,8 +113,8 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void totem()
     {
-        audioDevice.ClearQueue();
-        audioDevice.QueueAudio(totemSound, totem_Captions);
+        audioDevice.ClearQueue(true);
+        audioDevice.QueueAudio(totemSound);
         iframes = 10f;
         iframedown = true;
     }
@@ -146,7 +124,7 @@ public class ZerullBossScript : MonoBehaviour
         {
             agent.isStopped = true;
             ZerullClassic.Instance.debug = true;
-            stuntiem -= Time.deltaTime;
+            stunTimeMult = 1f;
             spriteProperties.SetFloat("_Percent", 0.9f);
             spriteProperties.SetFloat("_Seed", Random.Range(0f, 4096f));
             normalSprite.SetPropertyBlock(spriteProperties);
@@ -156,6 +134,7 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void gng(float hp, bool firsthit)
     {
+        stunTimeMult = 0f;
         spriteProperties.SetFloat("_Percent", 0f);
         spriteProperties.SetFloat("_Seed", 0f);
         normalSprite.SetPropertyBlock(spriteProperties);
@@ -168,15 +147,15 @@ public class ZerullBossScript : MonoBehaviour
 
     public void StartBossIntro()
     {
-        audioDevice.ClearQueue();
-        audioDevice.QueueAudio(bossIntro,bossyapIntro_captions);
-        audioDevice.QueueAudio(bossIntro_Loop,bossyapIntroloop_captions);
+        audioDevice.ClearQueue(true);
+        audioDevice.QueueAudio(bossIntro);
+        audioDevice.QueueAudio(bossIntro_Loop);
         //audioDevice.SetLoop(true);
     }
 
     [Header("Chase Music")]
     [SerializeField] private AudioSource audioChase;
     private bool midiDrums,iframedown;
-    public float iframes = 0f,stuntiem;
+    public float iframes = 0f,stuntiem,stunTimeMult;
     [HideInInspector] public bool hitted,totemready;
 }

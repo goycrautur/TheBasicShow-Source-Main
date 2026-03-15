@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932417759486796683}
-  m_LocalRotation: {x: -0, y: 0.9966251, z: -0, w: -0.08208784}
+  m_LocalRotation: {x: -0, y: 0.48502022, z: -0, w: 0.87450296}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -1.8900894}
+  m_AnchoredPosition: {x: -0, y: -1.0546367}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9106377844088883684
@@ -274,13 +274,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01852a817bc55874bbda8c99f4f1f43a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickedUp: 0
+  boshit: 0
+  thrown: 0
   audioDevice: {fileID: 7581270106364978491}
   throwSound: {fileID: 8300000, guid: d8913fdfb590c88498fe0314cc9a5f07, type: 3}
   theSpriteREND: {fileID: 7487137391670823497}
   subtitlesScriptableObjectREAL: {fileID: 11400000, guid: 6cf8869d8bd83d44eb9b6ddc06a1abb5,
     type: 2}
   rotateOffset: 90
-  projectileDamage: 3
+  projectileDamage: 2
   ProjectileSpeed: 60
 --- !u!114 &-2452637138297308520
 MonoBehaviour:

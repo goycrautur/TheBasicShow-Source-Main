@@ -7,14 +7,10 @@ public class TeacherJerScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        jerAudio = GetComponent<AudioSource>();
+        jerAudio = GetComponent<AudioManagerLiveReaction>();
         GetAngry(0f);
         Move();
-
-        if (endless)
-        {
-            Endless();
-        }
+        if (endless) Endless();
 
         Wander();
     }
@@ -30,18 +26,9 @@ public class TeacherJerScript : NPC
 
     public override void OnUpdate()
     {
-        if (antiHearing)
-		{
-			AntiHearingDuratio -= Time.deltaTime;
-		}
-        if (AntiHearingDuratio < 0f)
-		{
-            antiHearing = false;
-        }
-        if (SlashCoolDown > 0f)
-		{
-            SlashCoolDown -= Time.deltaTime; 
-        }
+        if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
+        if (AntiHearingDuratio < 0f) antiHearing = false;
+        if (SlashCoolDown > 0f) SlashCoolDown -= Time.deltaTime; 
         if (base.stun)
         {
             stopMoving = true;
@@ -56,14 +43,8 @@ public class TeacherJerScript : NPC
         }
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        if (jerTempAnger > 0f)
-        {
-            jerTempAnger -= 0.05f * Time.deltaTime;
-        }
-        else
-        {
-            jerTempAnger = 0f;
-        }
+        if (jerTempAnger > 0f) jerTempAnger -= 0.05f * Time.deltaTime;
+        else jerTempAnger = 0f;
     }
 
     public override void OnFixedUpdate()
@@ -75,10 +56,7 @@ public class TeacherJerScript : NPC
             {
                 if (hitVape.transform.gameObject.layer == 11) return;
             }
-            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
-            {
-                TargetPlayer();
-            }
+            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)  TargetPlayer();
         }
     }
     #endregion
@@ -106,14 +84,9 @@ public class TeacherJerScript : NPC
         if (this.isActiveAndEnabled)
         {
             agent.speed = base.agentSpeed;
-            gc.SubsManager.summonLeSubtitle(slashSound.subtitleOption, slashSound, jerAudio);
-            jerAudio.PlayOneShot(slash);
+            jerAudio.PlaySingleClip(slash);
             jerAnimator.SetTrigger("slap");
-
-            if (!stopMoving)
-            {
-                Invoke(nameof(OnMoveDone), timeToMove);
-            }
+            if (!stopMoving)  Invoke(nameof(OnMoveDone), timeToMove);
             resetWaitTime();
         }
     }
@@ -126,27 +99,13 @@ public class TeacherJerScript : NPC
     private void OnMoveDone()
     {
         agent.speed = 0;
-
-        if (agent.remainingDistance <= 0.1f)
-        {
-            Wander();
-        }
-
-        if (!stopMoving)
-        {
-            Invoke(nameof(Move), jerWait);
-        }
+        if (agent.remainingDistance <= 0.1f)  Wander();
+        if (!stopMoving) Invoke(nameof(Move), jerWait);
     }
     #endregion
     private void OnTriggerStay(Collider play)
     {
-        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
-        {
-            if (!base.IsHitboxValid)
-			{
-                Slashing();
-			}
-        }
+        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard) if (!base.IsHitboxValid) Slashing();
     }
     private void Slashing()
     {
@@ -163,10 +122,7 @@ public class TeacherJerScript : NPC
     {
         jerAnger += value;
 
-        if (jerAnger < 0.5f)
-        {
-            jerAnger = 0.5f;
-        }
+        if (jerAnger < 0.5f) jerAnger = 0.5f;
     }
 
     public void GetTempAngry(float value) => jerTempAnger += value;
@@ -207,8 +163,8 @@ public class TeacherJerScript : NPC
             {
                 if (!antiHearing || !inNoSqueeArea)
                 {
-                baldicator.Rebind();
-                baldicator.Play("Indicator_Heared", -1, 0f);
+                    tjerCator.Rebind();
+                    tjerCator.Play("Indicator_Heared", -1, 0f);
                 }
             }
         }
@@ -218,8 +174,8 @@ public class TeacherJerScript : NPC
             {
                 if (!antiHearing || !inNoSqueeArea)
                 {
-                baldicator.Rebind();
-                baldicator.Play("Indicator_Confused", -1, 0f);
+                    tjerCator.Rebind();
+                    tjerCator.Play("Indicator_Confused", -1, 0f);
                 }
             }
         }
@@ -247,12 +203,12 @@ public class TeacherJerScript : NPC
     public bool endless;
 
     [Header("Audio and Animation")]
-    [SerializeField] private AudioClip slash;
-    [SerializeField] private Animator baldicator, jerAnimator;
+    [SerializeField] private AudioObjectyeah slash;
+    [SerializeField] private Animator tjerCator, jerAnimator;
     [SerializeField] private GameObject sprite;
 
     private float currentPriority;
-    private AudioSource jerAudio;
+    private AudioManagerLiveReaction jerAudio;
     [SerializeField] private subsScriptableObject slashSound;
     #endregion
 }

@@ -15,7 +15,7 @@ public class FamishedModeController : MonoBehaviour
     #endregion
     private void Start()
     {
-        TimethatUhhh = Onebouncemain.length;
+        TimethatUhhh = Onebouncemain.audClip.length;
         if (gc.mode == "famished")
         {
             scoreSystemManager.Instance.PointsMultiplier += 1f;
@@ -47,15 +47,15 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!AllowCountdown)
             {
-                TimethatUhhh = Mathf.Lerp(TimethatUhhh,puppyplay.length, 3*Time.deltaTime);
+                TimethatUhhh = Mathf.Lerp(TimethatUhhh,puppyplay.audClip.length, 3*Time.deltaTime);
             }
-            if (TimethatUhhh >= puppyplay.length-1)
+            if (TimethatUhhh >= puppyplay.audClip.length-1)
             {
                 if (!onetime)
                 {
                     onetime = true;
-                    TimethatUhhh = puppyplay.length;
-                    GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.deathbell);
+                    TimethatUhhh = puppyplay.audClip.length;
+                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.deadbel);
                     StartCoroutine(evenmorepeak());
                     
                 }
@@ -69,32 +69,17 @@ public class FamishedModeController : MonoBehaviour
                 {
                     eventTypes[i].alreadyActivated = true;
                     
-                    if (eventTypes[i].wallshake)
-                    {
-                        DoEvent(SpecialLMSEventType.wallshake,new Color(1f, 1f, 1f, 1f),eventTypes[i].SpecificsEventDetailsWallShake);
-                    }
-                    if (eventTypes[i].camchangestuff)
-                    {
-                        DoEvent(SpecialLMSEventType.camfuck,new Color(1f, 1f, 1f, 1f),eventTypes[i].SpecificsEventDetailsCamera,eventTypes[i].addedFov);
-                    }
-                    if (eventTypes[i].lightingchange)
-                    {
-                        DoEvent(SpecialLMSEventType.lightingChange,eventTypes[i].lightingColor,eventTypes[i].SpecificsEventDetailsLightingChange);
-                    }
-                    if (eventTypes[i].customEvent)
-                    {
-                        DoEvent(SpecialLMSEventType.normal,new Color(1f, 1f, 1f, 1f),eventTypes[i].SpecificsEventDetailsCustom);
-                    }
+                    if (eventTypes[i].wallshake) DoEvent(SpecialLMSEventType.wallshake,new Color(1f, 1f, 1f, 1f),eventTypes[i].SpecificsEventDetailsWallShake);
+                    if (eventTypes[i].camchangestuff)DoEvent(SpecialLMSEventType.camfuck,new Color(1f, 1f, 1f, 1f),eventTypes[i].SpecificsEventDetailsCamera,eventTypes[i].addedFov);
+                    if (eventTypes[i].lightingchange) DoEvent(SpecialLMSEventType.lightingChange,eventTypes[i].lightingColor,eventTypes[i].SpecificsEventDetailsLightingChange);
+                    if (eventTypes[i].customEvent)  DoEvent(SpecialLMSEventType.normal,new Color(1f, 1f, 1f, 1f),eventTypes[i].SpecificsEventDetailsCustom);
                 }
             }
         }
         if (TimethatUhhh < 0f)
 		{
             AllowCountdown = false;
-            if (!dontupdatebr)
-            {
-            Endonebounc();
-            } 
+            if (!dontupdatebr) Endonebounc();
 		}
         if (AllowCountdown)
 		{
@@ -105,7 +90,7 @@ public class FamishedModeController : MonoBehaviour
         if (pitchdown)
 		{
 			pitchval -= Time.deltaTime;
-            funnyaudiotuff.pitch = pitchval;
+            funnyaudiotuff.SetPitch(pitchval);
             
 		}
         int num = Mathf.FloorToInt(TimethatUhhh / 60f);
@@ -115,10 +100,7 @@ public class FamishedModeController : MonoBehaviour
         {
             RenderSettings.ambientLight = colortext == "red" ? new Color(1f, 0f, 0f, 1f) : colortext == "white" ? new Color(0.65f, 0.65f, 0.65f, 1f) : new Color(0.65f, 0.65f, 0.65f, 1f);
         }
-        if (forceupdatelight)
-        {
-            RenderSettings.ambientLight = new Color(1f, 1f, 1f, 1f);
-        }
+        if (forceupdatelight) RenderSettings.ambientLight = new Color(1f, 1f, 1f, 1f);
     }
     public void DoEvent(SpecialLMSEventType EventTypes,Color wha,string EventDetails,float fovIncreaseAmmount= 0)
     {
@@ -189,13 +171,12 @@ public class FamishedModeController : MonoBehaviour
         if (!specialLmsToggle)
         {
             pitchdown = true;
-            funnyaudiotuff.clip = OneBounceEnd;
-            funnyaudiotuff.loop = false;
-            funnyaudiotuff.Play();
+            funnyaudiotuff.ClearQueue(true);
+            funnyaudiotuff.PlaySingleClip(OneBounceEnd);
             dontupdatebr = true;
             gc.player.DefaultWalkSpeed -= 40;
             gc.player.DefaultRunSpeed -= 50;
-            StartCoroutine(ExplodeLmfao(ohnoheexploding.length,1f));
+            StartCoroutine(ExplodeLmfao(ohnoheexploding.audClip.length,1f));
         }
         gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
         gc.Gatesrea.ForEach(g => g.Down(false));
@@ -211,29 +192,11 @@ public class FamishedModeController : MonoBehaviour
         ZerullClassic.Instance.yourflashbang.Rebind();
         ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
         ZerullClassic.Instance.health = 10;
-        if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight)
-        {
-            ZerullClassic.Instance.blockages.SetActive(true);
-        }
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-        {
-            if (!w.broken)
-            {
-                w.Window(true, false, 0f);
-            }
-        }
-        for (int a = 0; a < tweenOutitems.Length; ++a)
-        {
-            tweenOutitems[a].transform.DOMoveX(-700, 3f);
-        }
-        funnyaudiotuff.Stop();
-        foreach (FamishedScript fam in gc.famishscr)
-        {
-            if (fam.isActiveAndEnabled)
-            {
-                fam.agent.Warp(new Vector3(ok.position.x,fam.transform.position.y,ok.position.z));
-            }
-        }
+        if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight) ZerullClassic.Instance.blockages.SetActive(true);
+        foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) if (!w.broken) w.SetWindowState(false, 6f, 0f, 0, true, 0);
+        for (int a = 0; a < tweenOutitems.Length; ++a) tweenOutitems[a].transform.DOMoveX(-700, 3f);
+        funnyaudiotuff.ClearQueue(true);
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.agent.Warp(new Vector3(ok.position.x,fam.transform.position.y,ok.position.z));
         scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
         if (!specialLmsToggle)
         {
@@ -261,16 +224,12 @@ public class FamishedModeController : MonoBehaviour
     }
     public IEnumerator peak()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(windCras);
-        yield return new WaitForSeconds(windCras.length-1);
-        foreach (FamishedScript fam in gc.famishscr) 
-        {
-            if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
-        }
-        yield return new WaitForSeconds(getbackhere.length);
-        funnyaudiotuff.clip = Onebouncemain;
-        funnyaudiotuff.loop = false;
-        funnyaudiotuff.Play();
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,windCras);
+        yield return new WaitForSeconds(windCras.audClip.length-1);
+        foreach (FamishedScript fam in gc.famishscr)  if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
+        yield return new WaitForSeconds(getbackhere.audClip.length);
+        funnyaudiotuff.ClearQueue(true);
+        funnyaudiotuff.QueueAudio(Onebouncemain);
         isAbleToMove = true;
         dontKillBru = false;
         AllowCountdown = true;
@@ -280,14 +239,14 @@ public class FamishedModeController : MonoBehaviour
     public IEnumerator peakalt(float delay)
     {
         yield return new WaitForSeconds(delay);
-        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(GameControllerScript.Instance.agonyscream);
-        yield return new WaitForSeconds(GameControllerScript.Instance.agonyscream.length*0.95f);
+        foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(GameControllerScript.Instance.lbams.agonyScream);
+        yield return new WaitForSeconds(GameControllerScript.Instance.lbams.agonyScream.audClip.length*0.95f);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
-        yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +2.5f);
+        yield return new WaitForSeconds(GameControllerScript.Instance.lbams.deltaruneExplud.audClip.length +2.5f);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.appear(true);
-        yield return new WaitForSeconds(GameControllerScript.Instance.gastersfx.length +2f);
+        yield return new WaitForSeconds(GameControllerScript.Instance.lbams.gasterSfx.audClip.length +2f);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
-        yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +1f);
+        yield return new WaitForSeconds(GameControllerScript.Instance.lbams.deltaruneExplud.audClip.length +1f);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.appear(true);
         foreach (GameObject chaosclon in gc.npcCloneList) chaosclon.SetActive(false);
         angerMultipler = 0.5f;
@@ -299,15 +258,15 @@ public class FamishedModeController : MonoBehaviour
     }
     public IEnumerator ERMMMMMM()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(windCras);
-        yield return new WaitForSeconds(windCras.length-1);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,windCras);
+        yield return new WaitForSeconds(windCras.audClip.length-1);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
-        yield return new WaitForSeconds(getbackhere.length+0.25f);
+        yield return new WaitForSeconds(getbackhere.audClip.length+0.25f);
         Singleton<VertexGlitchManager>.Instance.Glitch();
         yield return new WaitForSeconds(0.75f);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(whuh);
-        yield return new WaitForSeconds(whuh.length);
-        GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.ZerullLoseSound);
+        yield return new WaitForSeconds(whuh.audClip.length);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.zerullGameover);
         Singleton<VertexGlitchManager>.Instance.ShakeGlitch();
         Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
         StartCoroutine(peakalt(2f));
@@ -320,7 +279,7 @@ public class FamishedModeController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         isAbleToMove = false;
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
-        yield return new WaitForSeconds(GameControllerScript.Instance.deltaexplode.length +1f);
+        yield return new WaitForSeconds(GameControllerScript.Instance.lbams.deltaruneExplud.audClip.length +1f);
         foreach (GameObject chaosclon in gc.npcCloneList) chaosclon.SetActive(false);
     }
     public IEnumerator evenmorepeak()
@@ -329,9 +288,8 @@ public class FamishedModeController : MonoBehaviour
         forceupdatelight = true;
         yield return new WaitForSeconds(0.3f);
         forceupdatelight = false;
-        funnyaudiotuff.clip = puppyplay;
-        funnyaudiotuff.loop = false;
-        funnyaudiotuff.Play();
+        funnyaudiotuff.ClearQueue(true);
+        funnyaudiotuff.QueueAudio(puppyplay);
         frameCountShit = true;
         AllowCountdown = true;
         OneBounceFamis = true;
@@ -340,7 +298,6 @@ public class FamishedModeController : MonoBehaviour
     }
     public void bro()
     {
-        StopCoroutine(ohgodwhat());
         StartCoroutine(WhatHaveYouDone());
         gc.famishScrpt.activatewindowbreak = true;
     }
@@ -352,47 +309,34 @@ public class FamishedModeController : MonoBehaviour
             RenderSettings.ambientLight = Color.black;
             StartCoroutine(easing(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 2));
             angerMultipler = 2.5f;
-            StartCoroutine(ohgodwhat());
+            funnyaudiotuff.ClearQueue(true);
+            funnyaudiotuff.QueueAudio(despairIntro);
+            funnyaudiotuff.QueueAudio(despairloop1);
+            funnyaudiotuff.SetLoop(true);
             butch.SetActive(true);
             gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
             ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
-            if (gc.warrealest)
-            {
-                gc.LapManag.MeepTimer.SetActive(true);
-            }
+            if (gc.warrealest) gc.LapManag.MeepTimer.SetActive(true);
         }
-        if (gc.notebooks == 3)
-        {
-            if (!specialLmsToggle)angerMultipler = 1.9f;
-        }
-        if (gc.notebooks == 4)
-        {
-            if (!specialLmsToggle)angerMultipler = 1.75f;
-        }
-        if (gc.notebooks == 5)
-        {
-            if (!specialLmsToggle)angerMultipler = 1.55f;
-        }
-        if (gc.notebooks == 6)
-        {
-            if (!specialLmsToggle)angerMultipler = 1.35f;
-        }
+        if (gc.notebooks == 3) if (!specialLmsToggle)angerMultipler = 1.9f;
+        if (gc.notebooks == 4) if (!specialLmsToggle)angerMultipler = 1.75f;
+        if (gc.notebooks == 5) if (!specialLmsToggle)angerMultipler = 1.55f;
+        if (gc.notebooks == 6) if (!specialLmsToggle)angerMultipler = 1.35f;
         if (gc.notebooks == 7)
         {
             if (!specialLmsToggle)
             {
                 RenderSettings.ambientLight = new Color(0.05f, 0.05f, 0.05f, 0f);
                 StartCoroutine(easing(new Color(0.35f, 0.35f, 0.35f, 1f), 0, 1, 1));
-                StopCoroutine(ohgodwhat());
-                StartCoroutine(imdespairingit());
+                funnyaudiotuff.ClearQueue(true);
+                funnyaudiotuff.QueueAudio(despairIntro2);
+                funnyaudiotuff.QueueAudio(despairloop2);
+                funnyaudiotuff.SetLoop(true);
                 angerMultipler = 1.65f;
                 gc.famishScrpt.activatewindowbreak = true;
             }
         }
-        if (gc.notebooks == 8)
-        {
-            if (!specialLmsToggle)angerMultipler = 1.15f;
-        }
+        if (gc.notebooks == 8) if (!specialLmsToggle)angerMultipler = 1.15f;
         if (gc.notebooks == gc.maxNotebooks && gc.exitsReached == 0)
         {
             if (!specialLmsToggle)
@@ -401,18 +345,18 @@ public class FamishedModeController : MonoBehaviour
                 StartCoroutine(easing(new Color(0.25f, 0.25f, 0.25f, 1f), 0, 1, 1));
                 angerMultipler = 1.35f;
                 corspesspawn = true;
-                funnyaudiotuff.clip = despairloopfinale1;
-                funnyaudiotuff.loop = true;
-                funnyaudiotuff.Play();
+                funnyaudiotuff.ClearQueue(true);
+                funnyaudiotuff.QueueAudio(despairloopfinale1);
+                funnyaudiotuff.SetLoop(true);
             }
         }
         if (gc.exitsReached == 1)
         {
             if (!specialLmsToggle)
             {
-                funnyaudiotuff.clip = despairloopfinale2;
-                funnyaudiotuff.loop = true;
-                funnyaudiotuff.Play();
+                funnyaudiotuff.ClearQueue(true);
+                funnyaudiotuff.QueueAudio(despairloopfinale2);
+                funnyaudiotuff.SetLoop(true);
                 StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 1));
             }
         }
@@ -420,15 +364,20 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!specialLmsToggle)
             {
-                StartCoroutine(finale());
+                funnyaudiotuff.ClearQueue(true);
+                funnyaudiotuff.QueueAudio(despairSuddenstop);
+                funnyaudiotuff.QueueAudio(despairloopfinale3);
+                funnyaudiotuff.SetLoop(true);
                 StartCoroutine(easing(new Color(0.15f, 0.15f, 0.15f, 1f), 0, 1, 1));
             }
         }
         if (gc.exitsReached == 5)
         {
             angerMultipler = 0.1f;
-            StopCoroutine(finale());
-            StartCoroutine(finaleaga());
+            funnyaudiotuff.ClearQueue(true);
+            funnyaudiotuff.QueueAudio(despairSuddenstop2);
+            funnyaudiotuff.QueueAudio(despairloopfinale4);
+            funnyaudiotuff.SetLoop(true);
             StartCoroutine(easing(new Color(0.65f, 0.65f, 0.65f, 1f), 0, 1, 1));
 
             gc.modeState = gc.exitsReached + "/" + gc.maxExits + " Exits" + " | its over..?";
@@ -437,59 +386,23 @@ public class FamishedModeController : MonoBehaviour
     }
     public IEnumerator WhatHaveYouDone()
     {
-        funnyaudiotuff.clip = wierd;
-        funnyaudiotuff.Play();
+        funnyaudiotuff.ClearQueue(true);
+        funnyaudiotuff.PlaySingleClip(wierd);
         angerMultipler = 0.001f;
-        yield return new WaitForSeconds(wierd.length);
+        yield return new WaitForSeconds(wierd.audClip.length);
         angerMultipler = 0.5f;
-        funnyaudiotuff.clip = specialLmsIntro;
-        funnyaudiotuff.Play();
+        funnyaudiotuff.ClearQueue(true);
+        funnyaudiotuff.PlaySingleClip(specialLmsIntro);
         StartCoroutine(easing(new Color(1f, 0f, 0f, 1f), 0, 1, 0));
-        yield return new WaitForSeconds(specialLmsIntro.length);
+        yield return new WaitForSeconds(specialLmsIntro.audClip.length);
         CameraScript.Instance.TempShakeAmount += 0.2f;
         AdditionalGameCustomizer.Instance.FovAmmount -= 125f;
         AdditionalGameCustomizer.Instance.FovAmmount += 125f;
         angerMultipler = 1.25f;
         StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 0));
-        funnyaudiotuff.clip = specialLmsLoop;
-        funnyaudiotuff.loop = true;
-        funnyaudiotuff.Play();
-    }
-    public IEnumerator ohgodwhat()
-    {
-        funnyaudiotuff.clip = despairIntro;
-        funnyaudiotuff.Play();
-        yield return new WaitForSeconds(despairIntro.length);
-        funnyaudiotuff.clip = despairloop1;
-        funnyaudiotuff.loop = true;
-        funnyaudiotuff.Play();
-    }
-    public IEnumerator imdespairingit()
-    {
-        funnyaudiotuff.clip = despairIntro2;
-        funnyaudiotuff.Play();
-        yield return new WaitForSeconds(despairIntro2.length);
-        funnyaudiotuff.clip = despairloop2;
-        funnyaudiotuff.loop = true;
-        funnyaudiotuff.Play();
-    }
-    public IEnumerator finale()
-    {
-        funnyaudiotuff.clip = despairSuddenstop;
-        funnyaudiotuff.Play();
-        yield return new WaitForSeconds(despairSuddenstop.length);
-        funnyaudiotuff.clip = despairloopfinale3;
-        funnyaudiotuff.loop = true;
-        funnyaudiotuff.Play();
-    }
-    public IEnumerator finaleaga()
-    {
-        funnyaudiotuff.clip = despairSuddenstop2;
-        funnyaudiotuff.Play();
-        yield return new WaitForSeconds(despairSuddenstop2.length);
-        funnyaudiotuff.clip = despairloopfinale4;
-        funnyaudiotuff.loop = true;
-        funnyaudiotuff.Play();
+        funnyaudiotuff.ClearQueue(true);
+        funnyaudiotuff.PlaySingleClip(specialLmsLoop);
+        funnyaudiotuff.SetLoop(true);
     }
     public IEnumerator zoomtiem()
     {
@@ -522,12 +435,12 @@ public class FamishedModeController : MonoBehaviour
     private string colortext;
     public GameObject butch,token,obTimer;
     
-    public AudioSource funnyaudiotuff;
-    public AudioClip despairIntro, despairloop1, despairIntro2, despairloop2, despairloopfinale1, despairloopfinale2, despairSuddenstop, despairloopfinale3, despairSuddenstop2,despairloopfinale4,windCras,getbackhere,ohnoheexploding,Onebouncemain,OneBounceEnd;
+    public AudioManagerLiveReaction funnyaudiotuff;
+    public AudioObjectyeah despairIntro, despairloop1, despairIntro2, despairloop2, despairloopfinale1, despairloopfinale2, despairSuddenstop, despairloopfinale3, despairSuddenstop2,despairloopfinale4,windCras,getbackhere,ohnoheexploding,Onebouncemain,OneBounceEnd;
     
     [Header("oh boy")]
-    public AudioClip puppyplay;
-    public AudioClip wierd,whuh,specialLmsIntro,specialLmsLoop;
+    public AudioObjectyeah puppyplay;
+    public AudioObjectyeah wierd,whuh,specialLmsIntro,specialLmsLoop;
     public bool specialLmsToggle,specialLmsToggle2,frameCountShit,forceupdatelight,onetime,stopbouncezoom;
     public enum SpecialLMSEventType {wallshake,normal,camfuck,lightingChange};
     public float lmsFrame;

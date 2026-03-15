@@ -19,10 +19,7 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
             ohboy = true;
             countItDown = false;
 		}
-        if (countItDown)
-		{
-			TimeDuratiOk -= Time.deltaTime; 
-		}
+        if (countItDown)TimeDuratiOk -= Time.deltaTime; 
         if (ohboy)
         {
             itsfuckingtimeout();
@@ -38,9 +35,9 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
         }
         if (!GameControllerScript.Instance.timeout)
         {
-            timeoutTVDurationStuffIncaseReachingFinaleLmfao = LearningGameManager.Instance.aud_Timeout.length + (LearningGameManager.Instance.Television.Markings ? 3.1f : 0.85f);
+            timeoutTVDurationStuffIncaseReachingFinaleLmfao = LearningGameManager.Instance.aud_Timeout.audClip.length + (LearningGameManager.Instance.Television.Markings ? 3.1f : 0.85f);
             LearningGameManager.Instance.Television.baldingit = true;
-            StartCoroutine(LearningGameManager.Instance.Television.StartTVSequence(LearningGameManager.Instance.aud_Timeout,LearningGameManager.Instance.balSubsTIMEOUT));
+            StartCoroutine(LearningGameManager.Instance.Television.StartTVSequence(LearningGameManager.Instance.aud_Timeout));
             if (GameControllerScript.Instance.mode == "story")
             {
             StartCoroutine(GameControllerScript.Instance.tiemoutStu());

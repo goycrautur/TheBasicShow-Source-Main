@@ -6,20 +6,18 @@ public class ITM_Quarter : BaseItem
     {
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.monesound);
+            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.MoneyCollect);
             AdditionalGameCustomizer.Instance.Cash += 0.25;
             return true;
         }
         if (SendRay("", out RaycastHit Ray, GameControllerScript.Instance.player.LocalRange))
         {
-            AudioSource audioDevice = GameControllerScript.Instance.audioDevice;
-
             if (Ray.collider.CompareTag("VendingMachine"))
             {
                 VendingMachineScript vendingMachine = Ray.collider.GetComponent<VendingMachineScript>();
                 if (vendingMachine != null)
                 {
-                    audioDevice.PlayOneShot(aud_Drop);
+                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Drop);
                     vendingMachine.insertedMoney++;
                     vendingMachine.DispenseItem();
                 }
@@ -31,7 +29,7 @@ public class ITM_Quarter : BaseItem
                 if (tapePlayer != null && !tapePlayer.TapeCDEnable)
                 {
                     tapePlayer.Play();
-                    audioDevice.PlayOneShot(aud_Drop);
+                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Drop);
                     return true;
                 }
             }
@@ -39,5 +37,5 @@ public class ITM_Quarter : BaseItem
         return false;
     }
     
-    [SerializeField] private AudioClip aud_Drop;
+    [SerializeField] private AudioObjectyeah aud_Drop;
 }

@@ -6,7 +6,7 @@ public class DoorScript : MonoBehaviour
     #region Initialization
     private void Start()
     {
-        myAudio = GetComponent<AudioSource>();
+        myAudio = GetComponent<AudioManagerLiveReaction>();
     }
     #endregion
 
@@ -31,34 +31,22 @@ public class DoorScript : MonoBehaviour
 
     private void HandleLockTimer()
     {
-        if (lockTime.CountdownWithDeltaTime(1f) == 0 & bDoorLocked)
-        {
-            UnlockDoor();
-        }
+        if (lockTime.CountdownWithDeltaTime(1f) == 0 & bDoorLocked) UnlockDoor();
     }
 
     private void HandleOpenTimer()
     {
-        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen)
-        {
-            CloseDoor();
-        }
+        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen) CloseDoor();
     }
 
     private void HandleDoorInteraction()
     {
         if ((Input.GetMouseButtonDown(0) | Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)) && trigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange,KeyFunctions.hi.PlayerClickablesLayer.value) && Time.timeScale != 0f)
         {
-            if (bDoorLocked)
-            {
-                myAudio.PlayOneShot(GameControllerScript.Instance.aud_Rattling);
-            }
+            if (bDoorLocked) myAudio.PlaySingleClip(Rattle);
             else
             {
-                if (!bDoorOpen)
-                {
-                    Singleton<OtherMainStuffManager>.Instance.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
-                }
+                if (!bDoorOpen) Singleton<OtherMainStuffManager>.Instance.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
                 OpenDoor(3);
             }
         }
@@ -68,19 +56,14 @@ public class DoorScript : MonoBehaviour
     #region DoorStateManagement
     public void OpenDoor(float time)
     {
-        if (!bDoorOpen)
-        {
-            myAudio.PlayOneShot(doorOpen);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[0].subtitleOption,GameControllerScript.Instance.subtitlesScriptableObject[0],GetComponent<AudioSource>());
-        }
+        if (!bDoorOpen) myAudio.PlaySingleClip(doorOpen);
         SetDoorState(true, time);
     }
 
     private void CloseDoor()
     {
         SetDoorState(false);
-        myAudio.PlayOneShot(doorClose);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[1].subtitleOption,GameControllerScript.Instance.subtitlesScriptableObject[1],GetComponent<AudioSource>());
+        myAudio.PlaySingleClip(doorClose);
     }
 
     private void SetDoorState(bool open, float time = 3)
@@ -104,7 +87,7 @@ public class DoorScript : MonoBehaviour
     #region LockingMechanics
     public void LockDoor(float time)
     {
-        myAudio.PlayOneShot(Click);
+        myAudio.PlaySingleClip(Click);
         bDoorLocked = true;
         DorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
         DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
@@ -116,7 +99,7 @@ public class DoorScript : MonoBehaviour
         bDoorLocked = false;
         DorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
         DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
-        myAudio.PlayOneShot(GameControllerScript.Instance.aud_Unlocked);
+        myAudio.PlaySingleClip(Unlocked);
     }
 
     public bool DoorLocked => bDoorLocked;
@@ -149,33 +132,12 @@ public class DoorScript : MonoBehaviour
     {
         if (Faculty)
         {
-            if (FacultyTimesTwo)
-            {
-                if (!bDoorOpen)
-                {
-                    StartCoroutine(FacultyDoor());
-                }
-            }
+            if (FacultyTimesTwo && !bDoorOpen) StartCoroutine(FacultyDoor());
             else
             {
-                if (GameControllerScript.Instance.principal.isActiveAndEnabled)
-                {
-                    if (GameControllerScript.Instance.principal.onFaculty)
-                    {
-                        GameControllerScript.Instance.principal.onFaculty = false;
-                    }
-                }
-                if (GameControllerScript.Instance.maxplayGames.isActiveAndEnabled)
-                {
-                    if (GameControllerScript.Instance.maxplayGames.onFaculty)
-                    {
-                        GameControllerScript.Instance.maxplayGames.onFaculty = false;
-                    }
-                }
-                else if (!bDoorOpen)
-                {
-                    StartCoroutine(FacultyDoor());
-                }
+                if (GameControllerScript.Instance.principal.isActiveAndEnabled && GameControllerScript.Instance.principal.onFaculty)GameControllerScript.Instance.principal.onFaculty = false;
+                if (GameControllerScript.Instance.maxplayGames.isActiveAndEnabled && GameControllerScript.Instance.maxplayGames.onFaculty)GameControllerScript.Instance.maxplayGames.onFaculty = false;
+                else if (!bDoorOpen) StartCoroutine(FacultyDoor());
             }
         }
 
@@ -187,16 +149,10 @@ public class DoorScript : MonoBehaviour
 
     public IEnumerator FacultyDoor()
     {
-        myAudio.PlayOneShot(KnockKnock, 1f);
+        myAudio.PlaySingleClip(KnockKnock);
         Check = true;
-        if (GameControllerScript.Instance.principal.isActiveAndEnabled)
-        {
-            StartCoroutine(GameControllerScript.Instance.principal.CheckTheDoor());
-        }
-        if (GameControllerScript.Instance.maxplayGames.isActiveAndEnabled)
-        {
-            StartCoroutine(GameControllerScript.Instance.maxplayGames.CheckTheDoor());
-        }
+        if (GameControllerScript.Instance.principal.isActiveAndEnabled) StartCoroutine(GameControllerScript.Instance.principal.CheckTheDoor());
+        if (GameControllerScript.Instance.maxplayGames.isActiveAndEnabled) StartCoroutine(GameControllerScript.Instance.maxplayGames.CheckTheDoor());
         yield return new WaitForSeconds(2);
         Check = false;
     }
@@ -204,10 +160,9 @@ public class DoorScript : MonoBehaviour
 
     #region SerializedConfig
     [Header("Audio Settings")]
-    [SerializeField] private AudioClip doorOpen;
-    [SerializeField] private AudioClip doorClose, KnockKnock, Click;
-    private AudioSource myAudio;
-
+    private AudioManagerLiveReaction myAudio;
+    [SerializeField] private AudioObjectyeah doorOpen,doorClose, KnockKnock, Click,Rattle,Unlocked;
+    
     [Header("Barrier Settings")]
     [SerializeField] private MeshCollider barrier;
     [SerializeField] private MeshCollider secondBarrier, trigger, invisibleBarrier;
@@ -220,6 +175,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private bool Faculty;
     [SerializeField] private bool FacultyTimesTwo, Check;
     [SerializeField] private SpriteRenderer DorMapSprite1,DorMapSprite2;
+   
 
     [Header("Lock/Unlock Settings")]
     public float lockTime;

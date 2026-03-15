@@ -13,18 +13,9 @@ public class TapePlayerScript : MonoBehaviour
     #region Per-Frame Logic
     private void Update()
     {
-        if (!GameControllerScript.Instance.baldiScrpt.antiHearing)
-        {
-            sprite.sprite = openSprite;
-        }
-        if (TapeCDEnable)
-		{
-			TapeCD -= Time.deltaTime;
-		}
-        if (TapeCD < 0f)
-		{
-            TapeCDEnable = false;
-        }
+        if (!GameControllerScript.Instance.baldiScrpt.antiHearing) sprite.sprite = openSprite;
+        if (TapeCDEnable) TapeCD -= Time.deltaTime;
+        if (TapeCD < 0f) TapeCDEnable = false;
     }
     #endregion
 
@@ -38,9 +29,8 @@ public class TapePlayerScript : MonoBehaviour
                 if (tapeType == "normal")
                 {
                     sprite.sprite = closedSprite;
-                    tapeDevice.clip = NormTapeAudio;
-                    tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(NormTapeSubs.subtitleOption,NormTapeSubs,tapeDevice);
+                    tapeDevice.ClearQueue(true);
+                    tapeDevice.PlaySingleClip(NormTapeAudio);
                     TapeCD = AntiHearingDuration;
                     TapeCDEnable = true;
                     Singleton<OtherMainStuffManager>.Instance.deafshit(AntiHearingDuration,"All");
@@ -48,12 +38,11 @@ public class TapePlayerScript : MonoBehaviour
                 if (tapeType == "JEPDVDD")
                 {
                     sprite.sprite = closedSprite;
-                    tapeDevice.clip = welcomeOld;
-                    tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(ohnoSubs.subtitleOption,ohnoSubs,tapeDevice);
-                    TapeCD = welcomeOld.length;
+                    tapeDevice.ClearQueue(true);
+                    tapeDevice.PlaySingleClip(welcomeOld);
+                    TapeCD = welcomeOld.audClip.length;
                     TapeCDEnable = true;
-                    Singleton<OtherMainStuffManager>.Instance.deafshit(welcomeOld.length,"All");
+                    Singleton<OtherMainStuffManager>.Instance.deafshit(welcomeOld.audClip.length,"All");
                     if (ZerullClassic.Instance.zs != null && ZerullClassic.Instance.RealBossStarted)
                     {
                         StartCoroutine(StunBoss());
@@ -63,37 +52,34 @@ public class TapePlayerScript : MonoBehaviour
                             {
                                 yield return null;
                             }
-                            ZerullClassic.Instance.OnHit(welcomeOld.length/2,5f);
+                            ZerullClassic.Instance.OnHit(welcomeOld.audClip.length/2,5f);
                         }
                     }
                 }
                 if (tapeType == "jerrypeakassDisc")
                 {
                     sprite.sprite = closedSprite;
-                    tapeDevice.clip = LitearllyPEAK;
-                    tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(PeasSub.subtitleOption,PeasSub,tapeDevice);
-                    TapeCD = LitearllyPEAK.length;
+                    tapeDevice.ClearQueue(true);
+                    tapeDevice.PlaySingleClip(LitearllyPEAK);
+                    TapeCD = LitearllyPEAK.audClip.length;
                     TapeCDEnable = true;
-                    Singleton<OtherMainStuffManager>.Instance.PeakStun(LitearllyPEAK.length,"All");
+                    Singleton<OtherMainStuffManager>.Instance.PeakStun(LitearllyPEAK.audClip.length,"All");
                 }
                 if (tapeType == "jerrypeakassDiscExpert")
                 {
                     sprite.sprite = closedSprite;
-                    tapeDevice.clip = peakbutShorter;
-                    tapeDevice.Play();
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(peasShorterSub.subtitleOption,peasShorterSub,tapeDevice);
-                    TapeCD = peakbutShorter.length;
+                    tapeDevice.ClearQueue(true);
+                    tapeDevice.PlaySingleClip(peakbutShorter);
+                    TapeCD = peakbutShorter.audClip.length;
                     TapeCDEnable = true;
-                    Singleton<OtherMainStuffManager>.Instance.PeakStun(peakbutShorter.length,"All");
+                    Singleton<OtherMainStuffManager>.Instance.PeakStun(peakbutShorter.audClip.length,"All");
                 }
             }
             if (holyshitIsItRealTape == IsTape.PayPhone)
             {
                 sprite.sprite = closedSprite;
-                tapeDevice.clip = NormTapeAudio;
-                tapeDevice.Play();
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(NormTapeSubs.subtitleOption,NormTapeSubs,tapeDevice);
+                tapeDevice.ClearQueue(true);
+                tapeDevice.PlaySingleClip(NormTapeAudio);
                 TapeCD = AntiHearingDuration;
                 TapeCDEnable = true;
                 Singleton<OtherMainStuffManager>.Instance.deafshit(AntiHearingDuration,"All");
@@ -113,9 +99,8 @@ public class TapePlayerScript : MonoBehaviour
 
     #region Internal State
     private SpriteRenderer sprite;
-    public AudioClip NormTapeAudio,welcomeOld,LitearllyPEAK,peakbutShorter;
-    public subsScriptableObject NormTapeSubs,ohnoSubs,PeasSub,peasShorterSub;
-    public AudioSource tapeDevice;
+    public AudioObjectyeah NormTapeAudio,welcomeOld,LitearllyPEAK,peakbutShorter;
+    public AudioManagerLiveReaction tapeDevice;
     #endregion
     public IsTape holyshitIsItRealTape;
     public enum IsTape

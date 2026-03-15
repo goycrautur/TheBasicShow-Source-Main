@@ -30,10 +30,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         bool unloc = PlayerPrefsExtension.GetBool("thonkPad");
         NoYCTP = unloc;
-        if (GameControllerScript.Instance.mode == "endless")
-        {
-            modesText.text = "Endless Mode";
-        }
+        if (GameControllerScript.Instance.mode == "endless") modesText.text = "Endless Mode";
         if (GameControllerScript.Instance.mode == "story")
         {
             modesText.text = "Story Mode";
@@ -54,10 +51,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
             NoYCTP = false;
             modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3";
         }
-        if (GameControllerScript.Instance.mode == "LappingOfAsylum")
-        {
-            modesText.text = "Lapping Of Asylum";
-        }
+        if (GameControllerScript.Instance.mode == "LappingOfAsylum") modesText.text = "Lapping Of Asylum";
     }
 
     private void Update()
@@ -77,22 +71,13 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #endregion
     public void therainbo()
     {
-        if (!rainbowTime)
-        {
-            rainboCanv.color = donthaveanamelmfao;
-        }
+        if (!rainbowTime) rainboCanv.color = donthaveanamelmfao;
         if (rainbowTime) // haha fuck you groomcradia im gonna stole your code
         {
-            if (rainboCanv.color.a < 0.1f)
-            {
-                rainboCanv.color = new Color(1f, 0f, 0f, rainboCanv.color.a + (rainboSpee * Time.deltaTime));
-            }
+            if (rainboCanv.color.a < 0.1f) rainboCanv.color = new Color(1f, 0f, 0f, rainboCanv.color.a + (rainboSpee * Time.deltaTime));
             Color.RGBToHSV(rainboCanv.color, out huehuehue, out saturati, out brignes);
             huehuehue += rainboSpee * Time.deltaTime;
-            if (huehuehue > 1f)
-            {
-                huehuehue = 0f;
-            }
+            if (huehuehue > 1f) huehuehue = 0f;
             rainboCanv.color = Color.HSVToRGB(huehuehue, saturati, brignes);
             rainboCanv.color = new Color(rainboCanv.color.r, rainboCanv.color.g, rainboCanv.color.b, transparenci);
         }
@@ -103,30 +88,15 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             what = Mathf.Lerp(what,GameControllerScript.Instance.player.stamina, 5*Time.deltaTime);
             percentageText.text = (int)what + "%";
-            if (GameControllerScript.Instance.player.stamina <= 15f)
-            {
-                percentageText.color = Color.red;
-            }
-            else
-            {
-                percentageText.color = Color.black;
-            }
+            if (GameControllerScript.Instance.player.stamina <= 15f) percentageText.color = Color.red;
+            else percentageText.color = Color.black;
         }
-        if (ZerullClassic.Instance.BossStarted || ZerullClassic.Instance.RealBossStarted)
-        {
-            percentageText.text = "∞%";
-        }
+        if (ZerullClassic.Instance.BossStarted || ZerullClassic.Instance.RealBossStarted) percentageText.text = "∞%";
         if (HealthPercentage)
         {
             healthPercentageText.text = GameControllerScript.Instance.player.health + "/" + GameControllerScript.Instance.player.maxHealth;
-            if (GameControllerScript.Instance.player.health <= 15f)
-            {
-                healthPercentageText.color = Color.red;
-            }
-            else
-            {
-                healthPercentageText.color = Color.white;
-            }
+            if (GameControllerScript.Instance.player.health <= 15f) healthPercentageText.color = Color.red;
+            else healthPercentageText.color = Color.white;
         }
     }
 
@@ -155,10 +125,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (cameraObject != null)
         {
             Light light = cameraObject.GetComponent<Light>();
-            if (light != null)
-            {
-                light.enabled = isFlashlightOn;
-            }
+            if (light != null) light.enabled = isFlashlightOn;
         }
     }
     #endregion
@@ -181,18 +148,12 @@ public class AdditionalGameCustomizer : MonoBehaviour
         VerticalStamina.SetActive(false);
         CircleStamina.SetActive(false);
 
-        if (staminaMap.ContainsKey(StaminaStyle))
-        {
-            staminaMap[StaminaStyle].SetActive(true);
-        }
+        if (staminaMap.ContainsKey(StaminaStyle)) staminaMap[StaminaStyle].SetActive(true);
 
         if (StaminaStyle == StaminaDisplay.Old)
         {
             bool YouNeedRest = GameControllerScript.Instance.player.stamina < 0f;
-            if (warning.activeSelf != YouNeedRest)
-            {
-                warning.SetActive(YouNeedRest);
-            }
+            if (warning.activeSelf != YouNeedRest) warning.SetActive(YouNeedRest);
         }
     }
     #endregion
@@ -205,24 +166,14 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && ItemDropping)
         {
             int selectedSlot = ItemManager.Instance.ItemSelection;
-            if (ItemManager.Instance.Inventory[selectedSlot].ItemInstance != null && !ItemManager.Instance.Inventory[selectedSlot].ItemInstance.undropable)
+            if (ItemManager.Instance.Inventory[selectedSlot].ItemInstance != null && !ItemManager.Instance.Inventory[selectedSlot].ItemInstance.undropable) 
             {
                 ItemManager.Instance.DropItem(selectedSlot);
             }
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Singleton<VertexGlitchManager>.Instance.Glitch();
-        }
-
-        if (FlashLight && Input.GetKeyDown(KeyCode.F))
-        {
-            isFlashlightOn = !isFlashlightOn;
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
-        }
+        if (Input.GetKeyDown(KeyCode.G)) Singleton<VertexGlitchManager>.Instance.Glitch();
+        if (FlashLight && Input.GetKeyDown(KeyCode.F)) isFlashlightOn = !isFlashlightOn;
+        if (Input.GetKeyDown(KeyCode.T)) Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
     }
     #endregion
 
@@ -257,7 +208,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (ReworkedCurrency)
         {
             Counter.SetActive(true);
-            AudioSource audioDevice = GameControllerScript.Instance.audioDevice;
             currencyCounter.text = "$" + Cash.ToString("F2");
 
             if (Cash >= 0.25)
@@ -267,13 +217,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
                     if (SendRayShit("VendingMachine", out RaycastHit hit, GameControllerScript.Instance.player.LocalRange))
                     {
                         var vendingMachine = hit.collider.GetComponent<VendingMachineScript>();
-                        if (vendingMachine != null)
-                        {
-                            if (!ItemManager.Instance.IsInventoryFull())
-                            {
-                                vendingMachine.DispenseItem();
-                            }
-                        }
+                        if (vendingMachine != null) if (!ItemManager.Instance.IsInventoryFull()) vendingMachine.DispenseItem();
                     }
                     else if (SendRayShit("Phone", out hit, GameControllerScript.Instance.player.LocalRange))
                     {
@@ -281,17 +225,14 @@ public class AdditionalGameCustomizer : MonoBehaviour
                         if (tapePlayer != null)
                         {
                             Cash = Cash - 0.25;
-                            audioDevice.PlayOneShot(aud_Drop);
+                            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.quarterDrop);
                             tapePlayer.Play();
                         }
                     }
                 }
             }
         }
-        else
-        {
-            Counter.SetActive(false);
-        }
+        else Counter.SetActive(false);
     }
     #endregion
     #region Helpers
@@ -323,10 +264,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
 
             foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
             {
-                if (pickupScript.ID != 5 && pickupScript.ID != 34 && !pickupScript.SpawnAtRandom)
-                {
-                    list.Add(pickupScript.transform.position);
-                }
+                if (pickupScript.ID != 5 && pickupScript.ID != 34 && !pickupScript.SpawnAtRandom) list.Add(pickupScript.transform.position);
             }
             foreach (PickupScript pickupScript2 in FindObjectsOfType<PickupScript>())
             {
@@ -342,10 +280,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         {
             foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
             {
-                if (pickupScript.ID != 34 && pickupScript.ID != 13)
-                {
-                    pickupScript.itsPresentTime();
-                }
+                if (pickupScript.ID != 34 && pickupScript.ID != 13) pickupScript.itsPresentTime();
             }
         }
     }

@@ -5,7 +5,7 @@ public class ITM_AllTheModiumEdibles : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,eat);
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerAdd;
         GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultiplerAdd;
@@ -34,5 +34,5 @@ public class ITM_AllTheModiumEdibles : BaseItem
     }
     [SerializeField] private float duration = 60f, energy, walkspeedmultiplerAdd,runspeedmultiplerAdd;
     [SerializeField] private Sprite Spritee;
-    [SerializeField] private AudioClip audioa;
+    [SerializeField] private AudioObjectyeah eat;
 }

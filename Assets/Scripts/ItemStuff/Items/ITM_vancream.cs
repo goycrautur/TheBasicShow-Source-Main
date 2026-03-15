@@ -5,7 +5,7 @@ public class ITM_vancream : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,splat);
         StartCoroutine(amwaitin(duration));
         return true;
     }
@@ -30,5 +30,5 @@ public class ITM_vancream : BaseItem
     }
     [SerializeField] private float duration = 60f;
     [SerializeField] private Sprite vancream;
-    [SerializeField] private AudioClip audioa;
+    [SerializeField] private AudioObjectyeah splat;
 }

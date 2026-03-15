@@ -7,7 +7,6 @@ public class MaxcipalScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        AudioDevice = GetComponent<AudioSource>();
         Wander();
     }
     public void OnEnable()
@@ -25,33 +24,15 @@ public class MaxcipalScript : NPC
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         agent.speed = movin ? base.agentSpeed * PrinSpeedMult : 0;
         PrinSpeedMult = OGPrinSpeedMult;
-        if (base.stun)
-        {
-            PrinSpeedMult = 0f;
-        }
-        if (base.StunTime < 0f)
-        {
-            PrinSpeedMult = OGPrinSpeedMult;
-        }
+        if (base.stun) PrinSpeedMult = 0f;
+        if (base.StunTime < 0f)  PrinSpeedMult = OGPrinSpeedMult;
         base.OnUpdate();
-        if (seesRuleBreak)
-        {
-            HandleRuleBreaking();
-        }
-        else if (timeSeenRuleBreak > 0f)
-        {
-            timeSeenRuleBreak -= 0.5f * Time.deltaTime;
-        }
+        if (seesRuleBreak) HandleRuleBreaking();
+        else if (timeSeenRuleBreak > 0f) timeSeenRuleBreak -= 0.5f * Time.deltaTime;
         if (gauge != null)
         {
-            if (officeDoor.lockTime > 0f)
-            {
-                gauge.Set(maxGaugeLockTime, officeDoor.lockTime);
-            }
-            if (officeDoor.lockTime <= 0f)
-            {
-                gauge.Hide();
-            }
+            if (officeDoor.lockTime > 0f)  gauge.Set(maxGaugeLockTime, officeDoor.lockTime);
+            if (officeDoor.lockTime <= 0f)  gauge.Hide();
         }
         detectionStuff();
         /*{
@@ -73,23 +54,13 @@ public class MaxcipalScript : NPC
         if (!angry)
         {
             HandlePlayerDetection();
-
-            if (!seesRuleBreak)
-            {
-                HandleBullyDetection();
-            }
+            if (!seesRuleBreak)  HandleBullyDetection();
         }
-        else
-        {
-            HandlePlayerTargeting();
-        }
+        else HandlePlayerTargeting();
 
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            if (!angry && !seesRuleBreak && !inOffice && !brogotcalled)
-            {
-                Wander();
-            }
+            if (!angry && !seesRuleBreak && !inOffice && !brogotcalled) Wander();
         }
     }
     #endregion
@@ -100,7 +71,7 @@ public class MaxcipalScript : NPC
         timeSeenRuleBreak += Time.deltaTime;
 
         float ruleBreakThreshold = playerScript.guiltType == "escape" ? 0f : playerScript.guiltType == "faculty" ? 0f : playerScript.guiltType == "running" ? 0.25f : 0.35f;
-        audioQueue.ClearQueue();
+        audioQueue.ClearQueue(true);
         if (timeSeenRuleBreak >= ruleBreakThreshold && !angry)
         {
             angry = true;
@@ -117,28 +88,17 @@ public class MaxcipalScript : NPC
         aim = player.position - transform.position;
         if (transform.position.RaycastFromPosition(aim, out hit))
         {
-            if (transform.position.RaycastFromPosition(aim, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
-            {
-                if (hitVape.transform.gameObject.layer == 11) return;
-            }
+            if (transform.position.RaycastFromPosition(aim, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal)) if (hitVape.transform.gameObject.layer == 11) return;
             if (hit.transform.CompareTag("Player") && playerScript.guilt > 0f && !playerScript.alsoInOffice && !gc.player.invisi && !gc.player.invisichalk)
             {
                 ruleBreakObservationTime += Time.deltaTime;
 
-                if (ruleBreakObservationTime >= 0.5f)
-                {
-                    seesRuleBreak = true;
-                }
+                if (ruleBreakObservationTime >= 0.5f) seesRuleBreak = true;
+
             }
-            else
-            {
-                ruleBreakObservationTime = 0f;
-            }
+            else ruleBreakObservationTime = 0f;
         }
-        else
-        {
-            ruleBreakObservationTime = 0f;
-        }
+        else ruleBreakObservationTime = 0f;
     }
 
     private void HandlePlayerTargeting()
@@ -146,31 +106,16 @@ public class MaxcipalScript : NPC
         aim = player.position - transform.position;
         if (transform.position.RaycastFromPosition(aim, out hit))
         {
-            if (transform.position.RaycastFromPosition(aim, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))
-            {
-                if (hitVape.transform.gameObject.layer == 11) return;
-            }
-            if (hit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
-            {
-                TargetPlayer();
-            }
-            else
-            {
-                LosePlayer();
-            }
+            if (transform.position.RaycastFromPosition(aim, out RaycastHit hitVape, QueryTriggerInteraction.UseGlobal))  if (hitVape.transform.gameObject.layer == 11) return;
+            if (hit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)  TargetPlayer();
+            else LosePlayer();
         }
-        else
-        {
-            LosePlayer();
-        }
+        else LosePlayer();
     }
 
     private void LosePlayer()
     {
-        if (angry && !agent.isStopped)
-        {
-            WanderWithAnger();
-        }
+        if (angry && !agent.isStopped) WanderWithAnger();
     }
 
     private void HandleBullyDetection()
@@ -180,10 +125,7 @@ public class MaxcipalScript : NPC
             aim = bul.transform.position - transform.position;
             if (transform.position.RaycastFromPosition(aim, out hit, QueryTriggerInteraction.UseGlobal))
             {
-                if (hit.transform.CompareTag("bully") && hit.transform.GetComponent<BullyScript>().guilt > 0f && !inOffice)
-                {
-                    TargetBully(hit.transform.GetComponent<BullyScript>().transform);
-                }
+                if (hit.transform.CompareTag("bully") && hit.transform.GetComponent<BullyScript>().guilt > 0f && !inOffice) TargetBully(hit.transform.GetComponent<BullyScript>().transform);
             }
         }
     }
@@ -196,23 +138,10 @@ public class MaxcipalScript : NPC
         OGPrinSpeedMult = 1f;
         playerScript.principalBugFixer = 1;
         base.Wander(locationType);
-        if (agent.isStopped)
-        {
-            agent.isStopped = false;
-        }
-        if (bullySeen)
-        {
-            bullySeen = false;
-        }
+        if (agent.isStopped) agent.isStopped = false;
+        if (bullySeen) bullySeen = false;
         ResetCooldown();
-        if (Random.Range(0f, 10f) <= 1f)
-        {
-            if (!AudioDevice.isPlaying)
-            {
-                AudioDevice.PlayOneShot(aud_Whistle);
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(whistleCaptions.subtitleOption, whistleCaptions, GetComponent<AudioSource>());
-            }
-        }
+        if (Random.Range(0f, 10f) <= 1f) audioQueue.PlaySingleClip(aud_Whistle);
     }
 
     private void WanderWithAnger()
@@ -238,7 +167,8 @@ public class MaxcipalScript : NPC
             brogotcalled = false;
             OGPrinSpeedMult = 1f;
             agent.SetDestination(tranfo.position);
-            audioQueue.QueueAudio(audNoBullying,noBullyingCaptions);
+            audioQueue.ClearQueue(true);
+            audioQueue.QueueAudio(audNoBullying);
             movin = true;
             bullySeen = true;
         }
@@ -257,29 +187,29 @@ public class MaxcipalScript : NPC
 
     private void CorrectPlayer()
     {
-        audioQueue.ClearQueue();
+        audioQueue.ClearQueue(true);
         switch (playerScript.guiltType)
         {
             case "faculty":
-                audioQueue.QueueAudio(audNoFaculty, noFacultyCaptions);
+                audioQueue.QueueAudio(audNoFaculty);
                 break;
             case "running":
-                audioQueue.QueueAudio(audNoRunning, noRunningCaptions);
+                audioQueue.QueueAudio(audNoRunning);
                 break;
             case "drink":
-                audioQueue.QueueAudio(audNoDrinking, noDrinkingCaptions);
+                audioQueue.QueueAudio(audNoDrinking);
                 break;
             case "escape":
-                audioQueue.QueueAudio(audNoEscaping, noEscapingCaptions);
+                audioQueue.QueueAudio(audNoEscaping);
                 break;
             case "eat":
-                audioQueue.QueueAudio(audNoEating, noEatingCaptions);
+                audioQueue.QueueAudio(audNoEating);
                 break;
             case "bully":
-                audioQueue.QueueAudio(audNoBullying, noBullyingCaptions);
+                audioQueue.QueueAudio(audNoBullying);
                 break;
             case "destroyingproperty":
-                audioQueue.QueueAudio(audNoDestroying, noDestroyingCaptions);
+                audioQueue.QueueAudio(audNoDestroying);
                 break;
         }
     }
@@ -304,42 +234,30 @@ public class MaxcipalScript : NPC
             playerScript.principalBugFixer = 0;
         }
         officeDoor.openTime = 0f;
-            inOffice = true;
+        inOffice = true;
         agent.isStopped = true;
         cc.enabled = false;
         Vector3 vector = new Vector3(point.position.x, target.position.y, point.position.z);
         cc.enabled = true;
         target.transform.position = vector;
         agent.Warp(vector + target.forward * 10f);
-        audioQueue.QueueAudio(audTimes[detentions], subtitlthingballs[detentions]);
-        audioQueue.QueueAudio(audScoldsDetention[detentions],scoldsubsDetention[detentions]);
+        audioQueue.QueueAudio(audTimes[detentions]);
+        audioQueue.QueueAudio(audScoldsDetention[detentions]);
         int num2 = (int)Random.Range(0f, audDetention.Length);
-        audioQueue.QueueAudio(audDetention[num2], detentionCaptions[num2]);
+        audioQueue.QueueAudio(audDetention[num2]);
         int num = (int)Random.Range(0f, audScolds.Length);
-        audioQueue.QueueAudio(audScolds[num],scoldsubs[num]);
+        audioQueue.QueueAudio(audScolds[num]);
         officeDoor.LockDoor(lockTime[detentions]);
         maxGaugeLockTime = lockTime[detentions];
-        if (gauge == null)
-        {
-            gauge = GaugeManager.Instance.CreateGaugeInstance(gaugeDetentionSprite, maxGaugeLockTime);
-        }
+        if (gauge == null) gauge = GaugeManager.Instance.CreateGaugeInstance(gaugeDetentionSprite, maxGaugeLockTime);
         Singleton<OtherMainStuffManager>.Instance.HearingShit(9f, this.transform, new Vector3(0f,0f,0f), "all",false);
 
-        if (officeDoor.lockTime <= 99f)
-        {
-            coolDown = 3f;
-        }
-        else
-        {
-            coolDown = 10f;
-        }
+        if (officeDoor.lockTime <= 99f) coolDown = 3f;
+        else coolDown = 10f;
         angry = false;
         seesRuleBreak = false;
         detentions++;
-        if (detentions > lockTime.Length - 1)
-        {
-            detentions = lockTime.Length - 1;
-        }
+        if (detentions > lockTime.Length - 1) detentions = lockTime.Length - 1;
         
         StartCoroutine(QuickDelay());
     }
@@ -369,10 +287,7 @@ public class MaxcipalScript : NPC
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "OfficeTrigger")
-        {
-            inOffice = true;
-        }
+        if (other.name == "OfficeTrigger") inOffice = true;
         if (other.CompareTag("Player") && angry)
         {
             if (base.IsHitboxValid)
@@ -380,23 +295,14 @@ public class MaxcipalScript : NPC
                 scoreSystemManager.Instance.AddScore(-500);
                 GiveDetention(other.transform, true);
             }
-            else if (!base.IsHitboxValid)
-            {
-                GiveDetention(nonexistance.transform,false);
-            }
+            else if (!base.IsHitboxValid) GiveDetention(nonexistance.transform,false);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "OfficeTrigger")
-        {
-            inOffice = false;
-        }
-        if (other.CompareTag("bully"))
-        {
-            bullySeen = false;
-        }
+        if (other.name == "OfficeTrigger") inOffice = false;
+        if (other.CompareTag("bully"))  bullySeen = false;
     }
     #endregion
     public void callToSMTH(Vector3 tranfo)
@@ -413,12 +319,9 @@ public class MaxcipalScript : NPC
     public bool angry, onFaculty;
 
     [Header("Audio and Feedback")]
-    [SerializeField] private AudioQueueScript audioQueue;
-    [SerializeField] private AudioClip[] audTimes, audScolds,audScoldsDetention,audDetention;
-    [SerializeField] private subsScriptableObject[] subtitlthingballs, scoldsubs,scoldsubsDetention,detentionCaptions;
-    [SerializeField] private AudioClip audNoDrinking, audNoEating, audNoBullying, audNoFaculty, audNoRunning, audNoEscaping, audNoDestroying, aud_Whistle;
-    [SerializeField] private subsScriptableObject noDrinkingCaptions,noEatingCaptions, noBullyingCaptions, noFacultyCaptions, noRunningCaptions, noEscapingCaptions, noDestroyingCaptions, whistleCaptions;
-
+    [SerializeField] private AudioManagerLiveReaction audioQueue;
+    [SerializeField] private AudioObjectyeah[] audTimes, audScolds,audScoldsDetention,audDetention;
+    [SerializeField] private AudioObjectyeah audNoDrinking, audNoEating, audNoBullying, audNoFaculty, audNoRunning, audNoEscaping, audNoDestroying, aud_Whistle;
     [Header("Office and Detention")]
     [SerializeField] private DoorScript officeDoor;
     [SerializeField] private CharacterController cc;
@@ -429,7 +332,6 @@ public class MaxcipalScript : NPC
     public int detentions;
     public float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
     [SerializeField] private int[] lockTime = { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 99 };
-    public AudioSource AudioDevice;
     public bool summon, seesRuleBreak, bullySeen, inOffice,brogotcalled;
     public RaycastHit hit;
     public Vector3 aim;

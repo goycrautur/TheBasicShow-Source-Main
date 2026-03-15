@@ -8,17 +8,16 @@ public class GateScript : MonoBehaviour
     [SerializeField] private float moveSpeed = 9f;
     [SerializeField] private float gateDownY = -10f;
     [SerializeField] private float gateneutralY = 0f;
+    [SerializeField] private AudioObjectyeah CloseSound;
     public GameObject barrier;
     public GameObject gate;
     [SerializeField] private GameObject MapSideIcon;
-    [SerializeField] private AudioClip gateSlamClip;
-    [SerializeField] public GameControllerScript gc;
 
     [Header("State")]
     public bool closed = false;
     public bool activated = false;
 
-    private AudioSource audioSource;
+    private AudioManagerLiveReaction audioSource;
     private Transform gateTransform;
     private Vector3 upPosition;
     private Vector3 downPosition,neutralPosition;
@@ -26,7 +25,7 @@ public class GateScript : MonoBehaviour
     private void Start()
     {
         gateTransform = transform;
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioManagerLiveReaction>();
 
         upPosition = gateTransform.position;
         downPosition = new Vector3(upPosition.x, gateDownY, upPosition.z);
@@ -66,23 +65,15 @@ public class GateScript : MonoBehaviour
     {
         if (Time.timeScale == 0)
         {
-            audioSource.Pause();
+            audioSource.audioDevice.Pause();
             return;
         }
 
-        if (!audioSource.isPlaying && activated)
+        if (!audioSource.audioDevice.isPlaying && activated)
         {
-            audioSource.UnPause();
+            audioSource.audioDevice.UnPause();
         }
     }
-    private IEnumerator gateSubsCoroutine() //bru
-    {
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[5].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[5], audioSource);
-        yield return new WaitForSeconds(gateSlamClip.length - 2.4f);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[6].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[6], audioSource);
-        yield break;
-    }
-
     public void Down(bool hi = true)
     {
         activated = hi;
@@ -90,8 +81,7 @@ public class GateScript : MonoBehaviour
         {
             if (hi)
             {
-                audioSource.PlayOneShot(gateSlamClip);
-                StartCoroutine(gateSubsCoroutine());
+                audioSource.PlaySingleClip(CloseSound);
                 return;
             }
             return;

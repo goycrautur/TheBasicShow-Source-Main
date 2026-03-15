@@ -34,51 +34,24 @@ public class PlayerScript : MonoBehaviour
 		AdditionalGameCustomizer.Instance.ReworkedCurrency = false;
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
-			if (ItemManager.Instance.Inventory[i].ItemID == 31)
-			{
-				titlecardtotem = true;
-			}
-			if (ItemManager.Instance.Inventory[i].ItemID == 34)
-			{
-				AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
-			}
+			if (ItemManager.Instance.Inventory[i].ItemID == 31)titlecardtotem = true;
+			if (ItemManager.Instance.Inventory[i].ItemID == 34)AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
 		}
-		if (Iframes > 0)
-		{
-			Iframes -= Time.deltaTime;
-		}
+		if (Iframes > 0)Iframes -= Time.deltaTime;
         runSpeed = DefaultRunSpeed * runSpeedMultipler;
 		walkSpeed = DefaultWalkSpeed * walkSpeedMultipler;
 		staminaDrop = DefaultstaminaDrop * staminaDropMultiple;
 		staminaRise = DefaultstaminaRise * staminaRiseMultiple;
-		if (!IgnoreHpLimit)
-		{
-			if (health > maxHealth)
-			{
-				health = maxHealth;
-			}
-		}
+		if (!IgnoreHpLimit)if (health > maxHealth)health = maxHealth;
 		if (invisi || invisichalk)
 		{
-			foreach (JumpRopeScript jumpro in jumpropes)
-        	{
-            	if (jumpro != null)
-				{
-					jumpro.End(false);
-				}
-        	}
+			foreach (JumpRopeScript jumpro in jumpropes)if (jumpro != null)jumpro.End(false);
 			HudManager.Instance.colorVarSetter(false);
 			if (ZerullClassic.Instance.RealBossStarted || FamishedModeController.Instance.OneBounceFamis) SetHP(HealthChangeMode.Add, 0.05f, 0f, true, false);
 		}
-		else
-		{
-			HudManager.Instance.colorVarSetter(true);
-		}
+		else HudManager.Instance.colorVarSetter(true);
 		if (breakwindow) breakwind();
-		if (door.lockTime > 0f)
-		{
-			ResetGuilt("escape", 1f);
-		}
+		if (door.lockTime > 0f) ResetGuilt("escape", 1f);
     }
 	private IEnumerator summonGaug()
 	{
@@ -104,7 +77,7 @@ public class PlayerScript : MonoBehaviour
 		TotemAnimator.Rebind();
 		TotemAnimator.Play("toteOfUndyused", -1, 0f);
 		totemParticl.SetActive(true);
-		GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.totem);
+		GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.totem);
 		SetHP(HealthChangeMode.Set, maxHealth, 10f, true, false, false);
 		if (consumetotem)
 		{
@@ -134,14 +107,8 @@ public class PlayerScript : MonoBehaviour
 
 	private void InitializeMiscellaneous()
 	{
-		if (!gc.KF.gamePaused && cc.velocity.magnitude > 0f)
-		{
-			gc.KF.LockMouse();
-		}
-		if (sweepingFailsave > 0f)
-		{
-			sweepingFailsave -= Time.deltaTime;
-		}
+		if (!gc.KF.gamePaused && cc.velocity.magnitude > 0f) gc.KF.LockMouse();
+		if (sweepingFailsave > 0f )sweepingFailsave -= Time.deltaTime;
 		else
 		{
 			sweeping = false;
@@ -161,22 +128,13 @@ public class PlayerScript : MonoBehaviour
 		}
 
 		cc.Move(grav * Time.deltaTime);
-		if (cc.isGrounded)
-		{
-			curgrav = 1f;
-		}
+		if (cc.isGrounded) curgrav = 1f;
 	}
 
 	private void HandleMouseMovement()
 	{
-		if (!isForcedToLook)
-		{
-			MouseMove();
-		}
-		else
-		{
-			HandleForcedLook();
-		}
+		if (!isForcedToLook) MouseMove();
+		else HandleForcedLook();
 	}
 
 	private void MouseMove()
@@ -190,14 +148,8 @@ public class PlayerScript : MonoBehaviour
 	private void HandleForcedLook()
 	{
 		float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.y, Mathf.Atan2(targetToForcelyLookAt.position.x - transform.position.x, targetToForcelyLookAt.position.z - transform.position.z) * Mathf.Rad2Deg);
-		if (Mathf.Abs(angleDiff) < 5f)
-		{
-			LockOnTarget();
-		}
-		else
-		{
-			RotateTowardsTarget(angleDiff);
-		}
+		if (Mathf.Abs(angleDiff) < 5f) LockOnTarget();
+		else RotateTowardsTarget(angleDiff);
 	}
 
 	private void LockOnTarget()
@@ -210,16 +162,10 @@ public class PlayerScript : MonoBehaviour
 	public void breakwind(bool forcerange = false, float forcedrange = 0f)
 	{
 		float WinBreakDist = forcerange ? forcedrange : windowbreakDistance;
-		foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		{
-			if (!w.broken)
-			{
-				if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= WinBreakDist)
-				{
-					w.Window(true, true, 6f);
-				}
-			}
-		}
+		foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) 
+        {
+            if (!w.broken) if (Vector3.Distance(PlayerTransform.position, w.transform.position) <= WinBreakDist) w.SetWindowState(true, 6f, 0f, 2);
+        }
 	}
 
 	private void RotateTowardsTarget(float angleDiff)
@@ -230,12 +176,13 @@ public class PlayerScript : MonoBehaviour
 	}
 	public void asgor(MovementModifier movmen,float fuel = 1f)
 	{
+		lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
 		carfuel = fuel;
 		maxcarfuel = fuel;
 		CargaugeReal = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.dimcraab, maxcarfuel); //jro
 		thosewhoSpeed = movmen;
 		pModManag.movementModifiers.Add(thosewhoSpeed);
-		lowBudgetAudioManagementShit.Instance.PlayAudioClip(lowBudgetAudioManagementShit.Instance.drivinginmy,lowBudgetAudioManagementShit.Instance.DIMCSource,true);
+		lbams.PlayClip(lbams.DIMCSource,lbams.drivinginmy,true);
 		oncar = true;
 	}
 	private void uhhwha()
@@ -251,8 +198,8 @@ public class PlayerScript : MonoBehaviour
 			if (FowardValue >= FowardMaxValue) 
 			{
 				FowardValue = 0.5f;
-				GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.agonyscream);
-				GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+				GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.agonyScream);
+				GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.punchSound);
 				CameraScript.Instance.TempShakeAmount += 0.5f;
 			}
 			if (!isMoving) FowardValue -= fowardVeloDowning * Time.deltaTime;
@@ -264,7 +211,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			if (CargaugeReal != null) CargaugeReal.Hide();
 			pModManag.movementModifiers.Remove(thosewhoSpeed);
-			lowBudgetAudioManagementShit.Instance.DIMCSource.Stop();
+			lowBudgetAudioManagementShit.Instance.DIMCSource.ClearQueue(true);
 			oncar = false;
 		}
 		if (thosewhoSpeed != null)thosewhoSpeed.movementMultiplier = FowardValue;
@@ -484,8 +431,8 @@ public class PlayerScript : MonoBehaviour
 		if (playrandomizedPresetSound)
 		{
 
-			audVal = (int)Random.Range(0f, GameControllerScript.Instance.HurtSounds.Length);
-			lowBudgetAudioManagementShit.Instance.HurtSource.PlayOneShot(GameControllerScript.Instance.HurtSounds[audVal]);
+			audVal = (int)Random.Range(0f, lowBudgetAudioManagementShit.Instance.HurtSounds.Length);
+			lowBudgetAudioManagementShit.Instance.HurtSource.PlaySingleClip(lowBudgetAudioManagementShit.Instance.HurtSounds[audVal]);
 		}
 		switch (mode)
 		{

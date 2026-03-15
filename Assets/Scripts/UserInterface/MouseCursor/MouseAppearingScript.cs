@@ -14,7 +14,7 @@ public class MouseAppearingScript : MonoBehaviour
         {
             Transform hitTransform = hit.transform;
             float maxDistance = 0f;
-            WindowScript w = hit.collider.GetComponent<WindowScript>();
+            basicshowWindowScript w = hit.collider.GetComponent<basicshowWindowScript>();
             VendingMachineScript vent = hit.collider.GetComponent<VendingMachineScript>();
 
             if (hitTransform.CompareTag("Door") | hitTransform.CompareTag("TapePlayer") | hitTransform.CompareTag("Item") | hitTransform.CompareTag("Notebook") | hitTransform.CompareTag("Phone"))

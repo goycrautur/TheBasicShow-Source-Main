@@ -13,19 +13,10 @@ public class ITM_BSODA : BaseItem
 			Contoller.player.ResetGuilt("drink", 1f);
 			}
 		}
-        GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Soda);
-        if (SummonSubtitles)
-        {
-            if (Subtitles != null)
-            {
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(Subtitles.subtitleOption,Subtitles,new Vector3(0f,-170.5f,0f),GameControllerScript.Instance.audioDevice);
-            }
-        }
+        lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(aud_Soda);
         return true;
     }
     
     [SerializeField] private GameObject bsodaSpray;
-    [SerializeField] private AudioClip aud_Soda;
-    [SerializeField] private bool SummonSubtitles;
-    [SerializeField] private subsScriptableObject Subtitles;
+    [SerializeField] private AudioObjectyeah aud_Soda;
 }

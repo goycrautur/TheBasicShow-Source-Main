@@ -9,11 +9,6 @@ using YuriArchive.GlobalLocalization;
 
 public class subtitlesScriptReal : MonoBehaviour
 {
-    private void OnDestroy()
-    {
-        if (is3d) GameControllerScript.Instance.SubsManager.subtitle3dList.Remove(this);
-        if (!is3d) GameControllerScript.Instance.SubsManager.subtitle2dList.Remove(this);
-    }
     public void Start()
     {   //some misc stuff dw
         shakespeed = subtitlys.shakeyspeed;
@@ -22,6 +17,7 @@ public class subtitlesScriptReal : MonoBehaviour
         textReversing = subtitlys.textReverse;
         FuckTheText = subtitlys.unreadable;
         upsideDownReal = subtitlys.upsideDown;
+        IgnoreTimescale = subtitlys.IgnoreTimescale;
         tmpTxt.text = "";
         tmpTxt.color = subtitlys.textColor;
         
@@ -75,41 +71,41 @@ public class subtitlesScriptReal : MonoBehaviour
     {
         if (is3d)
         {
-        Vector3 position = cameraTransf.position;
-        Vector3 position2 = producerAud.transform.position;
-        float num = Vector3.Distance(position2, position);
-        float maxDistance = producerAud.maxDistance;
-        float minDistance = producerAud.minDistance;
-        float num2 = 1f;
-        float num3 = Mathf.Atan2(position.z - position2.z, position.x - position2.x) * 57.29578f + cameraTransf.rotation.eulerAngles.y + 180f;
-        float num4 = 100f * producerAud.panStereo;
-        float num5 = 248.88f / aspectRatio;
-        float num6 = Mathf.Lerp(num5, -num5, producerAud.spread / 360f);
-        //anchoredPos.x = Mathf.Cos(num * ((float)Math.PI / 180f)) * radius;
-        //anchoredPos.y = Mathf.Sin(num * ((float)Math.PI / 180f)) * radius;
-        //anchoredPos.z = 0f;
-        // math pi stuff from yuri that i dont think i know how to port
-        bg.anchoredPosition = new Vector3(Mathf.Cos(num3 * 0.017453292f) * num6 * num2 + num4, Mathf.Lerp(-266.66f / aspectRatio, Mathf.Sin(num3 * 0.017453292f) * num6, num2), 0f);
-        float num7 = 1f;
-            switch (producerAud.rolloffMode)
-            {
-                case AudioRolloffMode.Logarithmic:
-                    {
-                        float num8 = 1f;
-                        num7 = minDistance * (1f / (1f + num8 * (num - 1f)));
+            Vector3 position = cameraTransf.position;
+            Vector3 position2 = producerAud.transform.position;
+            float num = Vector3.Distance(position2, position);
+            float maxDistance = producerAud.maxDistance;
+            float minDistance = producerAud.minDistance;
+            float num2 = 1f;
+            float num3 = Mathf.Atan2(position.z - position2.z, position.x - position2.x) * 57.29578f + cameraTransf.rotation.eulerAngles.y + 180f;
+            float num4 = 100f * producerAud.panStereo;
+            float num5 = 248.88f / aspectRatio;
+            float num6 = Mathf.Lerp(num5, -num5, producerAud.spread / 360f);
+            //anchoredPos.x = Mathf.Cos(num * ((float)Math.PI / 180f)) * radius;
+            //anchoredPos.y = Mathf.Sin(num * ((float)Math.PI / 180f)) * radius;
+            //anchoredPos.z = 0f;
+            // math pi stuff from yuri that i dont think i know how to port
+            bg.anchoredPosition = new Vector3(Mathf.Cos(num3 * 0.017453292f) * num6 * num2 + num4, Mathf.Lerp(-266.66f / aspectRatio, Mathf.Sin(num3 * 0.017453292f) * num6, num2), 0f);
+            float num7 = 1f;
+                switch (producerAud.rolloffMode)
+                {
+                    case AudioRolloffMode.Logarithmic:
+                        {
+                            float num8 = 1f;
+                            num7 = minDistance * (1f / (1f + num8 * (num - 1f)));
+                            break;
+                        }
+                    case AudioRolloffMode.Linear:
+                        num7 = Mathf.Lerp(1f, 0f, num / maxDistance - minDistance / maxDistance);
                         break;
-                    }
-                case AudioRolloffMode.Linear:
-                    num7 = Mathf.Lerp(1f, 0f, num / maxDistance - minDistance / maxDistance);
-                    break;
-                case AudioRolloffMode.Custom:
-                    num7 = producerAud.GetCustomCurve(AudioSourceCurveType.CustomRolloff).Evaluate(num / maxDistance);
-                    break;
-            }
-        num7 = Mathf.Clamp01(1f * num7);
-        float num9 = Mathf.Lerp(1f, num7, num2);
-        num9 *= 1f;
-        bg.localScale = new Vector3(num9, num9, 1f);
+                    case AudioRolloffMode.Custom:
+                        num7 = producerAud.GetCustomCurve(AudioSourceCurveType.CustomRolloff).Evaluate(num / maxDistance);
+                        break;
+                }
+            num7 = Mathf.Clamp01(1f * num7);
+            float num9 = Mathf.Lerp(1f, num7, num2);
+            num9 *= 1f;
+            bg.localScale = new Vector3(num9, num9, 1f);
         }
     }
     private void ColorUpdatingBullshit() //dude youre insane for making this :sob:
@@ -239,7 +235,7 @@ public class subtitlesScriptReal : MonoBehaviour
                 Destroy(base.gameObject);
                 return;
             }
-            duration -= Time.deltaTime;
+            duration -= IgnoreTimescale ? Time.unscaledDeltaTime : Time.deltaTime;
         }
         
         if (is3d && !hidesub) // stays invis if the audio source is muted
@@ -299,6 +295,8 @@ public class subtitlesScriptReal : MonoBehaviour
             textReversing = thoseWhoSubtitles.textReverse;
             FuckTheText = thoseWhoSubtitles.unreadable;
             upsideDownReal = thoseWhoSubtitles.upsideDown;
+            bg.anchoredPosition = thoseWhoSubtitles.twoDeePosition;
+            IgnoreTimescale = thoseWhoSubtitles.IgnoreTimescale;
             tmpTxt.text = "";
             if (thoseWhoSubtitles.colorMode == subtitlingIt.ColorMode.Default) // Apply fixed color
             {
@@ -319,7 +317,9 @@ public class subtitlesScriptReal : MonoBehaviour
                 }
             }
             sub = StartCoroutine(TextAnimator());
-            yield return new WaitForSeconds(thoseWhoSubtitles.duration - prevSec);
+
+            if (!IgnoreTimescale) yield return new WaitForSeconds(thoseWhoSubtitles.duration - prevSec);
+            else yield return new WaitForSecondsRealtime(thoseWhoSubtitles.duration - prevSec);
             prevSec = thoseWhoSubtitles.duration; // Update previous duration for next iteration
         }
     }
@@ -342,7 +342,8 @@ public class subtitlesScriptReal : MonoBehaviour
             {
                 sb.Append(c); // Append current character
                 tmpTxt.text = sb.ToString(); // Update text with current character
-                yield return new WaitForSeconds(subtitlys.TextAppearSpeed);
+                if (!IgnoreTimescale) yield return new WaitForSeconds(subtitlys.TextAppearSpeed);
+                else yield return new WaitForSecondsRealtime(subtitlys.TextAppearSpeed);
             }
         }
         else // Directly set text if animation is disabled
@@ -354,7 +355,7 @@ public class subtitlesScriptReal : MonoBehaviour
     public subtitlingIt subtitlys;
     public subsScriptableObject audiObject;
     public float duration,shakespeed,shakeyradius;
-    public bool is3d, infinite,shake,textReversing,FuckTheText,upsideDownReal,hidesub;
+    public bool is3d, infinite,shake,textReversing,FuckTheText,upsideDownReal,hidesub,IgnoreTimescale;
     public AudioSource producerAud;
     public TMP_Text tmpTxt;
     public Image imagbg;

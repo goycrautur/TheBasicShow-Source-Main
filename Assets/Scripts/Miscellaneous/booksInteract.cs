@@ -6,11 +6,13 @@ public class booksInteract : Interactable
     private float respawnTime = 120f;
     private GameControllerScript gc;
     private Transform player;
-    private AudioSource audioDevice;
+    private AudioManagerLiveReaction audioDevice;
     private SpriteRenderer notebooSprite;
     public GameObject CheeseMapIcon;
     public Color HighlightColor;
     private MaterialPropertyBlock mpb;
+    [Header("Audio stuff")]
+    public AudioObjectyeah cheeseCollect,RespawnSound;
     #region Fields
     [Header("Think Pad")]
     private LearningGameManager lgm;
@@ -21,16 +23,14 @@ public class booksInteract : Interactable
         mpb = new MaterialPropertyBlock();
         notebooSprite = GetComponentInChildren<SpriteRenderer>();
         respawnTime = 120f;
-        audioDevice = GetComponent<AudioSource>();
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
         gc = GameControllerScript.Instance;
         lgm = LearningGameManager.Instance;
         player = GameControllerScript.Instance.player.transform;
 
         if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.RandomizeBookColor)
         {
-            notebooSprite.sprite = AdditionalGameCustomizer.Instance.BookColors[
-                Random.Range(0, AdditionalGameCustomizer.Instance.BookColors.Length)
-            ];
+            notebooSprite.sprite = AdditionalGameCustomizer.Instance.BookColors[Random.Range(0, AdditionalGameCustomizer.Instance.BookColors.Length)];
         }
     }
 
@@ -62,57 +62,34 @@ public class booksInteract : Interactable
 
         if (gc.mode != "endless") return;
 
-        if (hidden && respawnTime > 0f)
-        {
-            respawnTime -= Time.deltaTime;
-        }
-        else if (!transform.IsWithinDistanceFrom(player, gc.player.LocalRange) && respawnTime <= 0f && hidden)
-        {
-            Respawn();
-        }
+        if (hidden && respawnTime > 0f) respawnTime -= Time.deltaTime;
+        else if (!transform.IsWithinDistanceFrom(player, gc.player.LocalRange) && respawnTime <= 0f && hidden) Respawn();
     }
 
     public void Respawn()
     {
         Hide(false);
         hidden = false;
-        audioDevice.Play();
-        gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[10].subtitleOption, gc.subtitlesScriptableObject[10], audioDevice);
+        audioDevice.PlaySingleClip(RespawnSound);
         respawnTime = 120f;
     }
 
     public override void Interact()
     {
-        if (hidden)
-        {
-            return;
-        }
+        if (hidden)return;
         Hide(true);
         respawnTime = 120f;
-
         gc.CollectNotebook(1);
-        if (gc.mode == "LappingOfAsylum")
-        {
-            gc.LapManag.UpdateManually();
-        }
+        if (gc.mode == "LappingOfAsylum") gc.LapManag.UpdateManually();
 
-        if (gc.mode == "famished")
-        {
-            gc.fmc.manualUpdate();
-        }
+        if (gc.mode == "famished") gc.fmc.manualUpdate();
         if (gc.mode == "zerullclassic")
         {
             gc.zerull.jusUpdatebr();
             Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
         }
-        if (gc.mode == "wegaChallenge")
-        {
-            gc.wegchal.manualUpdate();
-        }
-        if (AdditionalGameCustomizer.Instance?.NoYCTP == true)
-        {
-            NoYCTPMode();
-        }
+        if (gc.mode == "wegaChallenge")  gc.wegchal.manualUpdate();
+        if (AdditionalGameCustomizer.Instance?.NoYCTP == true) NoYCTPMode();
         else
         {
             StartLearningGame();
@@ -121,46 +98,28 @@ public class booksInteract : Interactable
     }
     private void NoYCTPMode()
     {
-        
         gc.Icon.Rebind();
         gc.Icon.Play("IconSpinMain", -1, 0f);
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
         int problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
         scoreSystemManager.Instance.AddScore(1000+(75*problemcap), true,true);
-        
-        gc.audioDevice2.PlayOneShot(gc.aud_Collected);
-
-        if (gc.player.stamina < 100f)
-        {
-            gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
-        }
-
+        lowBudgetAudioManagementShit.Instance.MainSource2.PlaySingleClip(cheeseCollect);
+        if (gc.player.stamina < 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
         if (gc.notebooks == 1 && !gc.spoopMode)
         {
             if (gc.mode == "story")
             {
-                lgm.Tutor.tutorSource.Stop();
                 lgm.quarter.SetActive(true);
-                gc.SubsManager.hideSub(lgm.Tutor.TutorSub);
-                lgm.Tutor.tutorSource.PlayClip(lgm.aud_Prize, false, 1f);
-                gc.SubsManager.summonLeSubtitle(lgm.prizeSubs.subtitleOption,lgm.prizeSubs,lgm.Tutor.tutorSource);
-
+                lgm.Tutor.tutorSource.ClearQueue(true);
+                lgm.Tutor.tutorSource.QueueAudio(lgm.aud_Prize);
             }
         }
-
         if (gc.notebooks == 2)
         {
-            if (gc.mode == "story")
-            {
-                gc.SubsManager.hideSub(lgm.prizeSubs);
-            }
+            if (gc.mode == "story") lgm.Tutor.tutorSource.ClearQueue(true);
             gc.ActivateSpoopMode();
         }
-
-        if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum")
-        {
-            TriggerFinalSequence();
-        }
+        if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum") TriggerFinalSequence();
         if (gc.spoopMode)
         {
             Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "all");
@@ -176,14 +135,13 @@ public class booksInteract : Interactable
         mathGame.gc = gc;
         mathGame.lg = lgm;
         mathGame.playerPosition = player.position;
+        mathGame.nbScri = this;
     }
     #endregion
     private void TriggerFinalSequence()
     {
-        if (gc.mode != "story")
-        {
-            gc.Gatesrea.ForEach(g => g.Down(false));
-        }
+        lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
+        if (gc.mode != "story") gc.Gatesrea.ForEach(g => g.Down(false));
         if (AdditionalGameCustomizer.Instance?.FinalModeTV == true)
         {
             if (gc.mode == "story")
@@ -191,24 +149,18 @@ public class booksInteract : Interactable
                 //lgm.Television.baldingit = true;
                 //StartCoroutine(lgm.timeounaleshit(lgm.aud_AllNotebooks,lgm.balSubs));
                 lgm.Television.TeacherJerryingIt = true;
-                if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese,lgm.jerSubs));
+                if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
             }
             if (gc.mode == "famished")
             {
                 lgm.Television.famishingit = true;
-                StartCoroutine(lgm.timeounaleshit(gc.deathbell,lgm.famSubs));
+                StartCoroutine(lgm.timeounaleshit(lbams.deadbel));
             }
         }
         else
         {
-            if (gc.mode == "story")
-            {
-                gc.audioDevice.PlayClip(lgm.aud_AllNotebooks, true, 0.8f);
-            }
-            if (gc.mode == "famished")
-            {
-                gc.audioDevice.PlayClip(gc.deathbell, true, 0.8f);
-            }
+            if (gc.mode == "story") lbams.MainSource3.PlaySingleClip(lgm.aud_AllNotebooks);
+            if (gc.mode == "famished") lbams.MainSource3.PlaySingleClip(lbams.deadbel);
         }
 
         if (gc.mode == "story")
@@ -228,17 +180,15 @@ public class booksInteract : Interactable
                         switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
                         {
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                                gc.escapeMusic.clip = gc.SchoolhouseEscape;
-                                gc.escapeMusic.loop = true;
-                                gc.escapeMusic.Play();
+                                lbams.EscapeMusic.ClearQueue(true);
+                                lbams.PlayClip(lbams.EscapeMusic,lbams.SchoolhouseEscape,true);
                                 gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 gc.finaleMode = true;
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.Taldi:
-                                gc.escapeMusic.clip = gc.TaldiEscape;
-                                gc.escapeMusic.loop = true;
-                                gc.escapeMusic.Play();
+                                lbams.EscapeMusic.ClearQueue(true);
+                                lbams.PlayClip(lbams.EscapeMusic,lbams.TaldiEscape,true);
                                 gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 gc.finaleMode = true;
@@ -251,7 +201,7 @@ public class booksInteract : Interactable
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 gc.Gatesrea.ForEach(g => g.Down());
-                                StartCoroutine(Singleton<MusicShitass>.Instance.basicShowMusicShit(0));
+                                StartCoroutine(gc.basicShowMusicShit());
                                 break;
                         }
                     }
@@ -259,7 +209,10 @@ public class booksInteract : Interactable
                 
                 if (gc.FinaleSecret)
                 {
-                    StartCoroutine(Singleton<MusicShitass>.Instance.truerfinale(0));
+                    lbams.EscapeMusic.ClearQueue(true);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[0]);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[0]);
+                    lbams.EscapeMusic.SetLoop(true);
                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                     gc.Gatesrea.ForEach(g => g.Down(false));
                 }

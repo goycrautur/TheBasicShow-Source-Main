@@ -6,8 +6,7 @@ public class ITM_extendogripNetherstar : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(gloveUsed);
-        
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,gloveUsed);
         StartCoroutine(amwaitin(duration));
         return true;
     }
@@ -35,7 +34,7 @@ public class ITM_extendogripNetherstar : BaseItem
     }
     [SerializeField] private float duration = 60f, prevDistance;
     [SerializeField] private int distance = 60;
-    [SerializeField] private AudioClip gloveUsed;
+    [SerializeField] private AudioObjectyeah gloveUsed;
     [SerializeField] private Sprite gloveSprite;
     [SerializeField] private bool used;
 }

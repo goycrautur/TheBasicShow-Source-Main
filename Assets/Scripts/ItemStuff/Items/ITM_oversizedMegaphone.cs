@@ -8,18 +8,16 @@ public class ITM_oversizedMegaphone : BaseItem
     {
         if (used) return false;
         AdditionalGameCustomizer.Instance.FovAmmount -= FovMinus;
-        itemSoundSource.PlayOneShot(inhal);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(InhaleSub.subtitleOption,InhaleSub,new Vector3(0f,-170.5f,0f),itemSoundSource);
+        itemSoundSource.PlaySingleClip(inhal);
         used = true;
-        StartCoroutine(amwaitin(inhal.length+InhaleDelay));
+        StartCoroutine(amwaitin(inhal.audClip.length+InhaleDelay));
         return true;
     }
     public IEnumerator fah(float downDuration)
     {
         float time = downDuration;
-        itemSoundSource.PlayOneShot(screa);
-        GameControllerScript.Instance.SubsManager.summonLeSubtitle2D(ScreaSub.subtitleOption,ScreaSub,new Vector3(0f,-170.5f,0f),itemSoundSource);
-        StartCoroutine(windBreakBlast());
+        itemSoundSource.PlaySingleClip(screa);
+        GameControllerScript.Instance.player.breakwind(true,windoBreakRadius);
         StartCoroutine(stunBlast());
         while (time > 0f)
         {
@@ -57,31 +55,6 @@ public class ITM_oversizedMegaphone : BaseItem
 		}
         yield break;
     }
-    public IEnumerator windBreakBlast()
-    {
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		{
-			if (!w.broken)
-			{
-				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, w.transform.position) <= windoBreakRadius)
-				{
-					w.Window(true, true, 6f);
-				}
-			}
-		}
-        yield return new WaitForSeconds(0.1f);
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		{
-			if (!w.broken)
-			{
-				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, w.transform.position) <= windoBreakRadius)
-				{
-					w.Window(true, true, 6f);
-				}
-			}
-		}
-        yield break;
-    }
     private IEnumerator amwaitin(float time)
     {
         yield return null;
@@ -90,12 +63,12 @@ public class ITM_oversizedMegaphone : BaseItem
             time -= Time.deltaTime;
             yield return null;
         }
-        StartCoroutine(fah(screa.length));
+        StartCoroutine(fah(screa.audClip.length));
         yield break;
     }
     [SerializeField] private float InhaleDelay,FovMinus,FovMin,FovMax,windoBreakRadius,stunRadius,stuntime;
-    [SerializeField] private AudioClip inhal,screa;
-    [SerializeField] private AudioSource itemSoundSource;
+    [SerializeField] private AudioObjectyeah inhal,screa;
+    [SerializeField] private AudioManagerLiveReaction itemSoundSource;
     [SerializeField] private subsScriptableObject InhaleSub,ScreaSub;
     [SerializeField] private bool used;
 }

@@ -5,15 +5,15 @@ using TMPro;
 public class ITM_shucks : BaseItem
 {
     [SerializeField] private float duration = 60f;
-    [SerializeField] private AudioClip shucy;
+    [SerializeField] private AudioObjectyeah shucy;
     [SerializeField] private Sprite iwatchasyoubleed;
-    [SerializeField] private AudioSource[] audiosourceToSDIYBT;
+    [SerializeField] private AudioManagerLiveReaction[] audioManagersToSDIYBT;
     [SerializeField] private bool used;
 
     public override bool OnUse()
     {
         if (used) return false;
-        GameControllerScript.Instance.audioDevice.PlayOneShot(shucy);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,shucy);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Set, (int)GameControllerScript.Instance.player.maxHealth/2f, 6f, true, true, false);
         GameControllerScript.Instance.player.maxHealth += 50f;
         used = true;
@@ -23,11 +23,11 @@ public class ITM_shucks : BaseItem
 
     private IEnumerator Wait()
     {
-        for (int i = 0; i < audiosourceToSDIYBT.Length; ++i)
+        for (int i = 0; i < audioManagersToSDIYBT.Length; ++i)
         {
-            audiosourceToSDIYBT[i].mute = true;
+            audioManagersToSDIYBT[i].SetMute(true);
         }
-        float time = shucy.length;
+        float time = shucy.audClip.length;
         GameControllerScript.Instance.player.breakwindow = true;
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(iwatchasyoubleed, duration);
         while (time > 0f)
@@ -35,15 +35,15 @@ public class ITM_shucks : BaseItem
             time -= Time.deltaTime;
             if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
             {
-                newGauge.Set(shucy.length, time);
+                newGauge.Set(shucy.audClip.length, time);
             }
             yield return null;
         }
         newGauge.Hide();
         GameControllerScript.Instance.player.breakwindow = false;
-        for (int i = 0; i < audiosourceToSDIYBT.Length; ++i)
+        for (int i = 0; i < audioManagersToSDIYBT.Length; ++i)
         {
-            audiosourceToSDIYBT[i].mute = false;
+            audioManagersToSDIYBT[i].SetMute(false);
         }
         used = false;
         yield break;

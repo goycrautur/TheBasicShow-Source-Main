@@ -1,0 +1,733 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fc016379c7c5341a7cfddd093c2e33, type: 3}
+  m_Name: zerull start
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 8ca7997a0372183498236fb2d4b73272, type: 3}
+  subtitleOption:
+    enabled: 1
+    headText: Placeholder
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 0
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 1
+    rainbowSpeed: 1
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 1
+    shakey: 0
+    shakeyspeed: 1
+    shakeyradius: 0.3
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 1
+    _RainbowMode: 2
+  isTheSubtitlesTimed: 1
+  SubtitleTimingKey:
+  - enabled: 1
+    headText: OWWWWWW
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 0.85
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.005
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: DID YOU NOT HEAR-
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 2.3
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.01
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: WHAT I JUST SAID????
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 3.696
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.01
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: I LITEARLLY TOLD YOU
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 5.075
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.01
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: THAT YOU
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 5.5
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.005
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: '*unintelligible*'
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 6.5
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.005
+    shakey: 1
+    shakeyspeed: 1000
+    shakeyradius: 1
+    fonts: 0
+    useLocalization: 0
+    unreadable: 1
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: BUT YOU
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 7
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.005
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: DID IT ANYWAY
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 7.9
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.001
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: Y'know what?
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 8.4
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.01
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: Get over here!
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 9.1
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.005
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: '*inhaling*'
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 9.5
+    colorMode: 0
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 0
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.0005
+    shakey: 0
+    shakeyspeed: 0
+    shakeyradius: 0
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0
+  - enabled: 1
+    headText: '*ROARING*'
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
+    duration: 12.8
+    colorMode: 1
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 655
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 1
+    gradientAnimationMode: 0
+    gradientSpeed: 1000
+    rainbowSpeed: 0
+    undertaleStyleTextAppearing: 1
+    TextAppearSpeed: 0.0005
+    shakey: 1
+    shakeyspeed: 1000
+    shakeyradius: 1
+    fonts: 0
+    useLocalization: 0
+    unreadable: 0
+    upsideDown: 0
+    textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 0
+    _RainbowMode: 0

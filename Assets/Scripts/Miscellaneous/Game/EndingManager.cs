@@ -53,10 +53,10 @@ public class EndingManager : MonoBehaviour
             {
                 case AdditionalGameCustomizer.EscapeFunsies.Daldi:
                     LoadNormalResults(secret);
-                    break;
+                    return;
                 case AdditionalGameCustomizer.EscapeFunsies.Taldi:
                     LoadNormalResults(secret);
-                    break;
+                    return;
             }
         }
         if (Game.mode != "story")
@@ -69,20 +69,10 @@ public class EndingManager : MonoBehaviour
             LoadNormalResults(secret);
             return;
         }
-        StartCoroutine(Game.easingExit(Color.white, 0, 2, 5));
-        Game.audioDevice.loop = false;
-        Game.audioDevice.Stop();
-        Game.audioDevice2.Stop();
-        for (int i = 0; i < Game.EvapV2FinaleSounSource.Length; ++i)
-        {
-            if (Game.EvapV2FinaleSounSource[i] != null)
-            {
-                Game.EvapV2FinaleSounSource[i].Stop();
-            }
-        }
-        
-        Game.escapeMusic.loop = false;
-        Game.escapeMusic.Play();
+        Game.lbams.MainSource1.ClearQueue(true);
+        Game.lbams.MainSource2.ClearQueue(true);
+        Game.lbams.MainSource3.ClearQueue(true);
+        Game.lbams.EscapeMusic.ClearQueue(true);
         GameControllerScript.Instance.MainHudFade.Rebind();
         GameControllerScript.Instance.MainHudFade.Play("hudFadeOutNearly", -1, 0f);
         GameControllerScript.Instance.RainbowHudFade.Rebind();
@@ -90,26 +80,25 @@ public class EndingManager : MonoBehaviour
         
         if (!secret) 
         {
-            Game.escapeMusic.clip = NormEnd;
-            EndingSequenceWaitTime = NormEnd.length;
+            Game.lbams.EndingMusic.PlaySingleClip(NormEnd);
+            EndingSequenceWaitTime = NormEnd.audClip.length;
             EndingSequenceFlashTime = 11f;
             EndingSequenceHelicopTime = 5.44f;
         }
         else if (secret && Game.ExclusiveRoute == "") 
         {
-            Game.escapeMusic.clip = SecretEnd;
-            EndingSequenceWaitTime = SecretEnd.length;
+            Game.lbams.EndingMusic.PlaySingleClip(SecretEnd);
+            EndingSequenceWaitTime = SecretEnd.audClip.length;
             EndingSequenceFlashTime = 10.323f;
             EndingSequenceHelicopTime = 5.2f;
         }
         else if (secret && Game.ExclusiveRoute == "ClassicPlayerSecretEndChal") 
         {
-            Game.escapeMusic.clip = ExclusivFinaleSecretEndClassicPlayer;
-            EndingSequenceWaitTime = ExclusivFinaleSecretEndClassicPlayer.length;
+            Game.lbams.EndingMusic.PlaySingleClip(ExclusivFinaleSecretEndClassicPlayer);
+            EndingSequenceWaitTime = ExclusivFinaleSecretEndClassicPlayer.audClip.length;
             EndingSequenceFlashTime = 8f;
             EndingSequenceHelicopTime = 1f;
         }
-        Game.escapeMusic.Play();
         StartCoroutine(EndingSequence(EndingSequenceWaitTime,EndingSequenceFlashTime,ID,secret));
         StartCoroutine(byebus(EndingSequenceHelicopTime,ID));
     }
@@ -122,10 +111,7 @@ public class EndingManager : MonoBehaviour
         EndingForceLook[whatWasTheObjectId].transform.DOMoveY(66, 15f);
         EndingBillObj[whatWasTheObjectId].enabled = true;
         EndingBillObj[whatWasTheObjectId].shaking = true;
-        EndingAudiSource[whatWasTheObjectId].clip = helicop;
-        EndingAudiSource[whatWasTheObjectId].loop = false;
-        EndingAudiSource[whatWasTheObjectId].Play();
-        Game.SubsManager.summonLeSubtitle(helisubs.subtitleOption,helisubs,EndingAudiSource[whatWasTheObjectId]);
+        EndingAudiSource[whatWasTheObjectId].PlaySingleClip(helicop);
         yield return new WaitForSeconds(0.2f);
         movething = false;
         yield return null;
@@ -163,11 +149,10 @@ public class EndingManager : MonoBehaviour
         Game.baldiScrpt.stopMoving = true;
         results.SetActive(true);
         AudioListener.pause = true;
-
-        Game.audioDevice.loop = false;
-        Game.audioDevice.Stop();
-        Game.audioDevice2.Stop();
-        Game.escapeMusic.Stop();
+        Game.lbams.MainSource1.ClearQueue(true);
+        Game.lbams.MainSource2.ClearQueue(true);
+        Game.lbams.MainSource3.ClearQueue(true);
+        Game.lbams.EscapeMusic.ClearQueue(true);
 
         Game.playerCharacter.enabled = true;
         Game.playerCollider.enabled = true;
@@ -176,14 +161,11 @@ public class EndingManager : MonoBehaviour
             Game.LapManag.Meeptimar.AddTime(60f, Color.green);
             Game.LapManag.Meeptimar.inEnding = true;
             Game.LapManag.Meeptimar.canTime = false;
-            Game.warmusic.Stop();
+            Game.lbams.WarMusic.ClearQueue(true);
         }
 
         Game.npcCloneList.ForEach(o => o.SetActive(false));
-        if (secret)
-        {
-            GetSecret = true;
-        }
+        if (secret) GetSecret = true;
     }
 
     public void LoadSecretEnding(string rankcheck = "none")
@@ -194,10 +176,7 @@ public class EndingManager : MonoBehaviour
         GameControllerScript.Instance.RainbowHudFade.Play("hudFadeInRainb", -1, 0f);
         GameControllerScript.Instance.SubtitlesHudFade.Rebind();
         GameControllerScript.Instance.SubtitlesHudFade.Play("hudFadeInsubs", -1, 0f);
-        if (rankcheck == "J")
-        {
-            pitHole.Instance.hiIgotChanged();
-        }
+        if (rankcheck == "J") pitHole.Instance.hiIgotChanged();
         Game.modeState = "???????????????????";
         StartCoroutine(BlackFlash());
 
@@ -208,28 +187,16 @@ public class EndingManager : MonoBehaviour
             Game.exitEasingCoroutine = null;
         }
         results.SetActive(false);
-
         portal.SetActive(true);
         AudioListener.pause = false;
         //NULL.SetActive(true);
-
         RenderSettings.ambientLight = new Color(0.45f, 0.45f, 0.45f, 1f);
         ApplySkybox();
-
         Game.player.transform.position = SecretWarpPoint.transform.position + Vector3.up * Game.player.height;
-
         Environment.ForEach(s => s.SetActive(false));
-
         Game.player.forceLookSpeed = 750f;
         Game.player.targetToForcelyLookAt = SecretWallText;
         Game.player.isForcedToLook = true;
-        if (Game.LapManag.Meeptimar.isActiveAndEnabled)
-        {
-            Game.LapManag.Meeptimar.AddTime(60f, Color.green);
-            Game.LapManag.Meeptimar.inEnding = true;
-            Game.LapManag.Meeptimar.canTime = false;
-            Game.warmusic.Stop();
-        }
     }
     #endregion
 
@@ -273,9 +240,8 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Transform SecretWallText;
     [SerializeField] private Transform[] EndingTransformTP,EndingForceLook;
     [SerializeField] private Billboard[] EndingBillObj;
-    [SerializeField] private AudioSource[] EndingAudiSource;
-    [SerializeField] private AudioClip NormEnd,SecretEnd,ExclusivFinaleSecretEndClassicPlayer,helicop;
-    [SerializeField] private subsScriptableObject helisubs;
+    [SerializeField] private AudioManagerLiveReaction[] EndingAudiSource;
+    [SerializeField] private AudioObjectyeah NormEnd,SecretEnd,ExclusivFinaleSecretEndClassicPlayer,helicop;
     [SerializeField] private List<GameObject> Environment = new List<GameObject>();
     [SerializeField] public GameObject office, results, black, SecretWarpPoint, NULL, portal;
     #endregion

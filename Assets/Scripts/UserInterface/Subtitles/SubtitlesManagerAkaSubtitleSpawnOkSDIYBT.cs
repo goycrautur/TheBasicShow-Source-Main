@@ -5,62 +5,43 @@ using UnityEngine;
 using UnityEngine.UI;
 //namespace quangg.YuriArchive.subtitlesYaoiYuri
 //{
-public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : MonoBehaviour //atp this is just yuri script with semi decent ammount of modification kms
+public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : Singleton<SubtitlesManagerAkaSubtitleSpawnOkSDIYBT> //atp this is just yuri script with semi decent ammount of modification kms
 	{
-		public void summonLeSubtitle(subtitlingIt subtitle, subsScriptableObject subscriptobj, AudioSource audiSourc)
+		public void summonLeSubtitle(subtitlingIt subtitle, int id, subsScriptableObject subscriptobj, AudioSource audiSourc, Vector3 SubPos)
 		{
-			subtitlesScriptReal component = Instantiate<GameObject>(subtitlePrefab, subtitleCanvas.transform.position, Quaternion.identity, subtitleCanvas.transform).GetComponent<subtitlesScriptReal>();
-			subtitle3dList.Add(component);
+            if (subsObjectIdSon[id] != null) Destroy(subsObjectIdSon[id]);
+			subsObjectIdSon[id] = Instantiate<GameObject>(subtitlePrefab, subtitleCanvas.transform.position, Quaternion.identity, subtitleCanvas.transform);
+			subtitlesScriptReal component = subsObjectIdSon[id].GetComponent<subtitlesScriptReal>();
 			component.producerAud = audiSourc;
             component.subtitlys = subtitle;
             component.audiObject = subscriptobj;
 			component.infinite = audiSourc.loop;
-			component.is3d = true;
+			component.is3d = component.subtitlys.isit3d;
 			component.cameraTransf = cameraTransorm;
 			component.aspectRatio = 1f;
-            component.bg.anchoredPosition = new Vector3(0f, -266.66f / component.aspectRatio, 0f);
+            if (SubPos == Vector3.zero) component.bg.anchoredPosition = new Vector3(0f, -266.66f / component.aspectRatio, 0f);
+            else
+            {
+                component.fixesPosition = SubPos;
+                component.bg.localScale = new Vector3(1f, 1f, 1f);
+                component.bg.anchoredPosition = component.fixesPosition;
+            }
 			component.updateSubPostion();
 		}
-		public void summonLeSubtitle2D(subtitlingIt subtitle, subsScriptableObject subscriptobj, Vector3 position, AudioSource audiSourc)
-		{
-			subtitlesScriptReal component = Instantiate<GameObject>(subtitlePrefab, subtitleCanvas.transform.position, Quaternion.identity, subtitleCanvas.transform).GetComponent<subtitlesScriptReal>();
-			subtitle2dList.Add(component);
-            component.producerAud = audiSourc;
-            component.subtitlys = subtitle;
-            component.audiObject = subscriptobj;
-			component.infinite = audiSourc.loop;
-			component.is3d = false;
-			component.fixesPosition = position;
-			component.cameraTransf = cameraTransorm;
-			component.aspectRatio = 1f;
-        	component.bg.localScale = new Vector3(1f, 1f, 1f);
-        	component.bg.anchoredPosition = component.fixesPosition;
-			component.updateSubPostion();
-		}
-	public void hideSub(subsScriptableObject subscriptobj)
-	{
-        foreach(subtitlesScriptReal subtitle in subtitle3dList)
+        public void endSubtitle(int id, bool endall = false)
         {
-            if (subtitle.audiObject = subscriptobj)
+            if (endall) 
             {
-                subtitle.hidesub = true;
+                for (int i = 0; i < subsObjectIdSon.Length; i++) Destroy(subsObjectIdSon[i]);
                 return;
             }
+            if (subsObjectIdSon[id] != null) Destroy(subsObjectIdSon[id]);
         }
-        foreach(subtitlesScriptReal subtitle in subtitle2dList)
-        {
-            if (subtitle.audiObject = subscriptobj)
-            {
-                subtitle.hidesub = true;
-                return;
-            }
-        }
-	}
-    [SerializeField]
-	public Transform cameraTransorm;
-    public GameObject subtitlePrefab;
-    public Canvas subtitleCanvas;
-	public List<subtitlesScriptReal> subtitle2dList, subtitle3dList= new List<subtitlesScriptReal>();
+        public Transform cameraTransorm;
+        public GameObject subtitlePrefab;
+        public Canvas subtitleCanvas;
+        public static int SubtitleTotalId = 512;
+        public GameObject[] subsObjectIdSon = new GameObject[512];
 	}
 //}
 [Serializable]
@@ -69,6 +50,9 @@ public class subtitlingIt
     // hi yuri if u reading this hi
 	public bool enabled = true;
 	public string headText = "Placeholder";
+    public bool isit3d = true;
+    [Tooltip("yeah")] public bool IgnoreTimescale;
+    public Vector3 twoDeePosition;
 	[Min(0f)] public float duration;
 	public ColorMode colorMode = ColorMode.Default;
     public Color textColor = new Color(1f, 1f, 1f, 1f);

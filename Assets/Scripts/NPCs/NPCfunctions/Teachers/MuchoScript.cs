@@ -8,18 +8,12 @@ public class MuchoScript : NPC
     {
         base.OnStart();
         GetAngry(0f);
-
-        if (endless)
-        {
-            Endless();
-        }
-
+        if (endless) Endless();
         Wander();
         Move();
     }
     public void OnEnable()
     {
-
         gc.muchscr.Add(this);
         Move();
     }
@@ -30,14 +24,8 @@ public class MuchoScript : NPC
 
     public override void OnUpdate()
     {
-        if (antiHearing)
-		{
-			AntiHearingDuratio -= Time.deltaTime;
-		}
-        if (AntiHearingDuratio < 0f)
-		{
-            antiHearing = false;
-        }
+        if (antiHearing) AntiHearingDuratio -= Time.deltaTime;
+        if (AntiHearingDuratio < 0f) antiHearing = false;
         targe();
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
@@ -52,15 +40,8 @@ public class MuchoScript : NPC
             resetWaitTime();
             Move();
         }
-        if (baldiTempAnger > 0f)
-        {
-            baldiTempAnger -= 0.05f * Time.deltaTime;
-        }
-        else
-        {
-            baldiTempAnger = 0f;
-        }
-
+        if (MuchoTempAnger > 0f) MuchoTempAnger -= 0.05f * Time.deltaTime;
+        else MuchoTempAnger = 0f;
     }
     public void targe()
     {
@@ -105,25 +86,14 @@ public class MuchoScript : NPC
         {
             slams++;
             ThrowProjectile(Random.Range(0,3));
-            gc.SubsManager.summonLeSubtitle(slamSound.subtitleOption,slamSound,baldiAudio);
-            if (baldiAnger < 40f)
-            {
-                agent.speed = base.agentSpeed;
-            }
-            if (baldiAnger > 40f)
-            {
-                agent.speed = base.agentSpeed * (baldiAnger/40);
-            }
-            baldiAudio.PlayOneShot(slap);
-            baldiAnimator.SetTrigger("slam");
-
+            if (MuchoAnger < 40f) agent.speed = base.agentSpeed;
+            if (MuchoAnger > 40f) agent.speed = base.agentSpeed * (MuchoAnger/40);
+            MuchoAudio.PlaySingleClip(slam);
+            MuchoAnimator.SetTrigger("slam");
             if (!stopMoving)
             {
-                if (slams != 20)
-                {
-                    Invoke(nameof(OnMoveDone), timeToMove);
-                }
-                if (slams == 20)
+                if (slams != 20) Invoke(nameof(OnMoveDone), timeToMove);
+                if (slams >= 20)
                 {
                     Invoke(nameof(Teleport), teleportCD);
                     slams = 0;
@@ -135,7 +105,7 @@ public class MuchoScript : NPC
     }
     public void resetWaitTime()
     {
-        baldiWait = (-3 - baldiTempAnger) * baldiAnger / (baldiAnger+2f / baldiSpeedScale) + 3f;
+        MuchoWait = (-3 - MuchoTempAnger) * MuchoAnger / (MuchoAnger+2f / MuchoSpeedScale) + 3f;
     }
     public void ThrowProjectile(int val = 0)
     {
@@ -166,25 +136,13 @@ public class MuchoScript : NPC
     private void OnMoveDone()
     {
         agent.speed = 0;
-
-        if (agent.remainingDistance <= 0.1f)
-        {
-            Wander();
-        }
-
-        if (!stopMoving)
-        {
-            Invoke(nameof(Move), baldiWait);
-        }
+        if (agent.remainingDistance <= 0.1f) Wander();
+        if (!stopMoving) Invoke(nameof(Move), MuchoWait);
     }
     private void Teleport()
     {
-        if (agent.remainingDistance <= 0.1f)
-        {
-            Wander();
-        }
-        baldiAudio.PlayOneShot(snadtp);
-        gc.SubsManager.summonLeSubtitle(snadtpsubs.subtitleOption,snadtpsubs,baldiAudio);
+        if (agent.remainingDistance <= 0.1f) Wander();
+        MuchoAudio.PlaySingleClip(snadtp);
         Invoke(nameof(Move), teleportCD);
         Vector3 tpTransform = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
         agent.Warp(tpTransform);
@@ -206,16 +164,11 @@ public class MuchoScript : NPC
     #region Anger System
     public void GetAngry(float value)
     {
-        baldiAnger += value;
-
-        if (baldiAnger < 0.5f)
-        {
-            baldiAnger = 0.5f;
-        }
-
+        MuchoAnger += value;
+        if (MuchoAnger < 0.5f) MuchoAnger = 0.5f;
     }
 
-    public void GetTempAngry(float value) => baldiTempAnger += value;
+    public void GetTempAngry(float value) => MuchoTempAnger += value;
 
     public void Endless()
     {
@@ -253,8 +206,8 @@ public class MuchoScript : NPC
             {
                 if (!inNoSqueeArea)
                 {
-                    baldicator.Rebind();
-                    baldicator.Play("BjIndicator_Heared", -1, 0f);
+                    Muchocator.Rebind();
+                    Muchocator.Play("BjIndicator_Heared", -1, 0f);
                 }
             }
         }
@@ -264,8 +217,8 @@ public class MuchoScript : NPC
             {
                 if (!inNoSqueeArea)
                 {
-                    baldicator.Rebind();
-                    baldicator.Play("BjIndicator_Confused", -1, 0f);
+                    Muchocator.Rebind();
+                    Muchocator.Play("BjIndicator_Confused", -1, 0f);
                 }
             }
         }
@@ -280,9 +233,9 @@ public class MuchoScript : NPC
     [SerializeField] private GameObject[] projectilePrefabs;
 
     #region Serialized Field States
-    [Header("Baldi's Stats")]
-    [SerializeField] private float baldiAnger;
-    public float baldiTempAnger, baldiWait, baldiSpeedScale;
+    [Header("Stats")]
+    [SerializeField] private float MuchoAnger;
+    public float MuchoTempAnger, MuchoWait, MuchoSpeedScale;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;
@@ -294,11 +247,10 @@ public class MuchoScript : NPC
     public bool endless;
 
     [Header("Audio and Animation")]
-    [SerializeField] private AudioClip slap,snadtp;
-    [SerializeField] private Animator baldicator, baldiAnimator;
+    [SerializeField] private AudioObjectyeah slam,snadtp;
+    [SerializeField] private Animator Muchocator, MuchoAnimator;
 
     private float currentPriority;
-    [SerializeField] private AudioSource baldiAudio;
-    [SerializeField] private subsScriptableObject slamSound,snadtpsubs;
+    [SerializeField] private AudioManagerLiveReaction MuchoAudio;
     #endregion
 }

@@ -14,10 +14,7 @@ public class VapeSmokeScript : MonoBehaviour
     {
         if (!GameControllerScript.Instance.player.invisichalk && !GameControllerScript.Instance.player.invisi) return;
 
-        if (GameControllerScript.Instance.player.invisichalk && !GameControllerScript.Instance.player.invisi)
-        {
-            GameControllerScript.Instance.player.invisichalk = false;
-        }
+        if (GameControllerScript.Instance.player.invisichalk && !GameControllerScript.Instance.player.invisi) GameControllerScript.Instance.player.invisichalk = false;
     }
     private void OnTriggerStay(Collider smok)
     {

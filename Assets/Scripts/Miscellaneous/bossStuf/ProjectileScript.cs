@@ -12,15 +12,12 @@ public class ProjectileScript : MonoBehaviour
     public bool pickedUp,boshit,thrown;
 
     [SerializeField]
-    private AudioSource audioDevice;
+    private AudioManagerLiveReaction auDevice;
 
     [SerializeField]
-    private AudioClip throwSound;
+    private AudioObjectyeah throwSound;
     [SerializeField]
     private SpriteRenderer theSpriteREND;
-    [SerializeField]
-    private subsScriptableObject subtitlesScriptableObjectREAL;
-
     [SerializeField]
     private float rotateOffset, projectileDamage = 1f, ProjectileSpeed = 30f;
 
@@ -35,16 +32,12 @@ public class ProjectileScript : MonoBehaviour
     private void Update()
     {
         
-        if (pickedUp)
+        if (pickedUp && ZerullClassic.Instance.currentProjectile != null)
         {
             transform.localEulerAngles = cameraTransform.localEulerAngles + rotateOffset * Vector3.up;
             if (Input.GetMouseButton(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact))
             {
-                if (ZerullClassic.Instance.playSoundWhenProjectileThrown && audioDevice != null)
-                {
-                    audioDevice.PlayOneShot(throwSound);
-                    if (subtitlesScriptableObjectREAL != null)GameControllerScript.Instance.SubsManager.summonLeSubtitle(subtitlesScriptableObjectREAL.subtitleOption, subtitlesScriptableObjectREAL, audioDevice);
-                }
+                if (ZerullClassic.Instance.playSoundWhenProjectileThrown && auDevice != null) auDevice.PlaySingleClip(throwSound);
                 pickedUp = false;
                 thrown = true;
                 Throw();
@@ -54,20 +47,8 @@ public class ProjectileScript : MonoBehaviour
         {
             transform.position += transform.forward * ProjectileSpeed * Time.deltaTime;
             lifeSpan -= Time.deltaTime;
-            if (lifeSpan <= 0f)
-            {
-                Respawn();
-            }
-            foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		    {
-			    if (!w.broken)
-			    {
-				    if (Vector3.Distance(this.transform.position, w.transform.position) <= 4)
-				    {
-				    	w.Window(true, true, 6f);
-				    }
-			    }
-		    }
+            if (lifeSpan <= 0f) Respawn();
+            foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 4) w.SetWindowState(true, 6f, 0f, 0, true, 0);
         }
     }
 
@@ -78,20 +59,14 @@ public class ProjectileScript : MonoBehaviour
             StartCoroutine(StunBoss());
             IEnumerator StunBoss()
             {
-                if (GetComponent<MeshRenderer>() != null)
-                {
-                    GetComponent<MeshRenderer>().enabled = false;
-                }
-                if (GetComponent<SpriteRenderer>() != null)
-                {
-                    GetComponent<SpriteRenderer>().enabled = false;
-                }
+                if (GetComponent<MeshRenderer>() != null) GetComponent<MeshRenderer>().enabled = false;
+                if (GetComponent<SpriteRenderer>() != null) GetComponent<SpriteRenderer>().enabled = false;
                 while (ZerullClassic.Instance.maxHealth == ZerullClassic.Instance.health-1 && !ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.GetBoss().hitted || ZerullClassic.Instance.isbroyapping)
                 {
                     yield return null;
                 }
                 boshit = true;
-                ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length,projectileDamage);
+                ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length,projectileDamage);
                 Destroy(base.gameObject);
             }
         }
@@ -99,17 +74,16 @@ public class ProjectileScript : MonoBehaviour
         {
             if (ZerullClassic.Instance.currentProjectile == null)
             {
+                pickedUp = true;
+                thrown = false;
+                ZerullClassic.Instance.currentProjectile = base.gameObject;
                 if (GetComponent<Billboard>() != null)
                 {
                     wasBillboard = true;
                     GetComponent<Billboard>().enabled = false;
                 }
-                ZerullClassic.Instance.currentProjectile = base.gameObject;
                 if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 0.5f);
-                pickedUp = true;
-                thrown = false;
             }
-            else return;
         }
     }
 
@@ -123,7 +97,6 @@ public class ProjectileScript : MonoBehaviour
 
     private void Throw()
     {
-        audioDevice.mute = false;
         if (theSpriteREND != null) theSpriteREND.color = new Color(1f, 1f, 1f, 1f);
         ZerullClassic.Instance.objects -= 1;
         transform.position = cameraTransform.position;
@@ -134,8 +107,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void Respawn()
     {
-        audioDevice.mute = true;
-        audioDevice.Stop();
+        auDevice.ClearQueue(true);
         thrown = false;
         pickedUp = false;
         lifeSpan = 10f;

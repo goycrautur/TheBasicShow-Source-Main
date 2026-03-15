@@ -142,10 +142,13 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 			Debug.LogError("MusicManager: synthSource is not assigned in the Inspector!");
 			return;
 		}
-
-		midiPlayer.MPTK_KeepNoteOff = true;
-		midiSource.ignoreListenerPause = true;
-		synthSource.ignoreListenerPause = true;
+		SetIgnoreListenerPause();
+	}
+	public void SetIgnoreListenerPause(bool hi = true)
+	{
+		midiPlayer.MPTK_KeepNoteOff = hi;
+		midiSource.ignoreListenerPause = hi;
+		synthSource.ignoreListenerPause = hi;
 
 		if (musicChannelSource != null)
 		{
@@ -154,7 +157,7 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 			{
 				if (array[i] != null)
 				{
-					array[i].ignoreListenerPause = true;
+					array[i].ignoreListenerPause = hi;
 				}
 			}
 		}
@@ -165,7 +168,7 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 			{
 				if (array[i] != null)
 				{
-					array[i].ignoreListenerPause = true;
+					array[i].ignoreListenerPause = hi;
 				}
 			}
 		}

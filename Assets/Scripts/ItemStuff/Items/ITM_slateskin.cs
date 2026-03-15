@@ -5,13 +5,10 @@ public class ITM_slateskin : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,drink);
         if (!GameControllerScript.Instance.player.outdoorsfr)
 		{
-			if (GameControllerScript.Instance.player.door.lockTime <= 0f)
-			{
-			GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
-			}
+			if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultiplerminus;
@@ -42,5 +39,5 @@ public class ITM_slateskin : BaseItem
     }
     [SerializeField] private float duration = 60f, energy, shieldadd, walkspeedmultiplerminus,runspeedmultiplerminus;
     [SerializeField] private Sprite slatespr;
-    [SerializeField] private AudioClip audioa;
+    [SerializeField] private AudioObjectyeah drink;
 }

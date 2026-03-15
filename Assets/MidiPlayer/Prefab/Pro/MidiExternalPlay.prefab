@@ -24,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173980774317252}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.05641595, y: -21.79889, z: 0.44003153}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 4978815131252002}
   m_Father: {fileID: 4178816625693396}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114622339249289428
 MonoBehaviour:
@@ -74,13 +74,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207128984433118}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4178816625693396}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114711833869552618
 MonoBehaviour:
@@ -128,6 +128,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735678026735066}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -136,7 +137,6 @@ Transform:
   - {fileID: 4157581141049346}
   - {fileID: 4357285891764900}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114676593232834628
 MonoBehaviour:
@@ -215,7 +215,7 @@ MonoBehaviour:
   MPTK_StatVoiceCountFree: 0
   MPTK_StatVoiceRatioReused: 0
   MPTK_StatVoicePlayed: 0
-  playPause: 1
+  playPause: 0
   distanceToListener: 0
   transpose: 0
   transExcludedChannel: 9
@@ -234,7 +234,7 @@ MonoBehaviour:
   VerboseEnvModulation: 0
   VerboseFilter: 0
   VerboseVolume: 0
-  state: 0
+  state: 1
   AudiosourceTemplate: {fileID: 114622339249289428}
   AdsrSimplified: 0
   MPTK_WeakDevice: 0
@@ -264,19 +264,22 @@ MonoBehaviour:
   MPTK_MaxSpatialSynth: 0
   MPTK_SpatialSynthEnabled: 0
   MPTK_InstrumentNum: 0
-  midiNameToPlay: 
+  midiNameToPlay: file://C:/Users/Admin/Desktop/unitir/projects/TheBasicShow-Source-Main/Assets/MIDI/h/traphouse_trouble_req_loop.mid
   MPTK_StartPlayAtFirstNote: 0
   MPTK_ModeStopVoice: 1
-  midiIndexToPlay: 0
+  midiIndexToPlay: -1
   speed: 1
   durationEditorModeOnly: 
   playTimeEditorModeOnly: 
   MPTK_LogLoadEvents: 0
-  MPTK_StatusLastMidiLoaded: 0
+  MPTK_StatusLastMidiLoaded: -1
   OnEventNotesMidi:
     m_PersistentCalls:
       m_Calls: []
   OnEventStartPlayMidi:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEventEndPlayMidi:
     m_PersistentCalls:
       m_Calls: []
   quantization: 0
@@ -292,7 +295,7 @@ MonoBehaviour:
   nextMidi: 0
   prevMidi: 0
   MPTK_PauseOnFocusLoss: 0
-  pathmidiNameToPlay: http://www.midiworld.com/midis/other/bach/bwv1060b.mid
+  pathmidiNameToPlay: file://C:/Users/Admin/Desktop/unitir/projects/TheBasicShow-Source-Main/Assets/MIDI/h/traphouse_trouble_req_loop.mid
 --- !u!82 &82513183748308566
 AudioSource:
   m_ObjectHideFlags: 0
@@ -454,13 +457,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941304572055484}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4357285891764900}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &82735001349539428
 AudioSource:

@@ -9,10 +9,7 @@ public class ITM_SharpRock : BaseItem
         {
             if (!GameControllerScript.Instance.player.outdoorsfr)
 		    {
-			    if (GameControllerScript.Instance.player.door.lockTime <= 0f)
-			    {
-			    GameControllerScript.Instance.player.ResetGuilt("bully", 1f);
-			    }
+			    if (GameControllerScript.Instance.player.door.lockTime <= 0f)GameControllerScript.Instance.player.ResetGuilt("bully", 1f);
 		    }
         }
 
@@ -23,7 +20,7 @@ public class ITM_SharpRock : BaseItem
             	if (jumpro != null)
 				{
 					jumpro.End(false);
-                    GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                    lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
                     return true;
 				}
         	}
@@ -34,7 +31,7 @@ public class ITM_SharpRock : BaseItem
             if (Ray.collider.name == "1st Prize" || Ray.collider.name == "washingmachine")
             {
                 GameControllerScript.Instance.firstPrizeScript.GoCrazy();
-                GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
                 return true;
             }
         }
@@ -43,20 +40,8 @@ public class ITM_SharpRock : BaseItem
             NPC ennPeeCee = Ray2.collider.GetComponent<NPC>();
             if (ennPeeCee != null)
             {
-                GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
-                ennPeeCee.Stun(2f);
-                return true;
-            }
-        }
-        if (SendRay("", out RaycastHit Rayham, GameControllerScript.Instance.player.LocalRange))
-        {
-            WindowScript w = Rayham.collider.GetComponent<WindowScript>();
-            if (w != null && !w.broken && w.isActiveAndEnabled)
-            {
-                GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
-                w.Window(true, true, 6f);
-                GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
-                CameraScript.Instance.TempShakeAmount += 0.5f;
+                lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
+                ennPeeCee.Stun(2.5f);
                 return true;
             }
         }
@@ -65,7 +50,7 @@ public class ITM_SharpRock : BaseItem
             basicshowWindowScript w = Rayham2.collider.GetComponent<basicshowWindowScript>();
             if (w != null && !w.broken)
             {
-                GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
                 w.SetWindowState(true, 6f, 0f, 1);
                 GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
                 CameraScript.Instance.TempShakeAmount += 0.5f;
@@ -85,8 +70,8 @@ public class ITM_SharpRock : BaseItem
                         {
                             yield return null;
                         }
-                        ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length);
-                        GameControllerScript.Instance.audioDevice.PlayOneShot(punc);
+                        ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length);
+                        lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
                     }
                     return true;
                 }
@@ -94,5 +79,5 @@ public class ITM_SharpRock : BaseItem
         }
         return false;
     }
-    [SerializeField] protected AudioClip punc;
+    [SerializeField] protected AudioObjectyeah punc;
 }

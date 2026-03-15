@@ -75,36 +75,21 @@ public class FirstPrizeScript : NPC
 
     private void HandlePlayerSeen()
     {
-        if (!playerSeen)
-        {
-            PlayFoundAudio();
-        }
+        if (!playerSeen) PlayFoundAudio();
 
         playerSeen = true;
         TargetPlayer();
         currentSpeed = runSpeed;
-        if (base.stun)
-        {
-            currentSpeed = 0f;
-        }
-        if (base.StunTime < 0f)
-        {
-            currentSpeed = runSpeed;
-        }
+        if (base.stun) currentSpeed = 0f;
+        if (base.StunTime < 0f)  currentSpeed = runSpeed;
     }
 
     private void HandleLostPlayer()
     {
         if (coolDown <= 0f)
         {
-            if (base.stun)
-            {
-                currentSpeed = 0f;
-            }
-            if (base.StunTime < 0f)
-            {
-                currentSpeed = base.agentSpeed;
-            }
+            if (base.stun) currentSpeed = 0f;
+            if (base.StunTime < 0f) currentSpeed = base.agentSpeed;
             if (playerSeen)
             {
                 PlayLostAudio();
@@ -112,10 +97,7 @@ public class FirstPrizeScript : NPC
                 Wander();
             }
         }
-        else if (coolDown <= 0f && agent.remainingDistance <= 1f && !agent.pathPending)
-        {
-            Wander();
-        }
+        else if (coolDown <= 0f && agent.remainingDistance <= 1f && !agent.pathPending) Wander();
     }
     #endregion
 
@@ -170,30 +152,18 @@ public class FirstPrizeScript : NPC
 
     private void HandleWandering()
     {
-        if (!playerSeen && agent.remainingDistance <= 0.5f && !agent.pathPending && coolDown <= 0f)
-        {
-            Wander();
-        }
+        if (!playerSeen && agent.remainingDistance <= 0.5f && !agent.pathPending && coolDown <= 0f) Wander();
     }
 
     protected override void TargetPlayer()
     {
-        if (player.GetComponent<PlayerScript>().hugging)
-        {
-            HandleHuggingPlayer();
-        }
-        else
-        {
-            MoveTowardsPlayer();
-        }
+        if (player.GetComponent<PlayerScript>().hugging) HandleHuggingPlayer();
+        else MoveTowardsPlayer();
     }
 
     private void HandleHuggingPlayer()
     {
-        if (gc.player.jumpropes.Count > 0)
-        {
-            gc.player.jumpropes[0].End(false);
-        }
+        if (gc.player.jumpropes.Count > 0) gc.player.jumpropes[0].End(false);
         Vector3[] directions = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left };
         Vector3 furthestPoint = Vector3.zero;
         float maxDistance = 0f;
@@ -230,14 +200,8 @@ public class FirstPrizeScript : NPC
     #region Motion and Rotation
     private void UpdateAutoBrakeCooldown()
     {
-        if (autoBrakeCool > 0f)
-        {
-            autoBrakeCool -= Time.deltaTime;
-        }
-        else
-        {
-            agent.autoBraking = true;
-        }
+        if (autoBrakeCool > 0f) autoBrakeCool -= Time.deltaTime;
+        else agent.autoBraking = true;
     }
 
     private void UpdateRotationAndSpeed()
@@ -246,14 +210,8 @@ public class FirstPrizeScript : NPC
         if (Mathf.Abs(angleDiff) < 5f)
         {
             agent.speed = currentSpeed;
-            if (base.stun)
-            {
-                agent.speed = 0f;
-            }
-            if (base.StunTime < 0f)
-            {
-                agent.speed = currentSpeed;
-            }
+            if (base.stun)  agent.speed = 0f;
+            if (base.StunTime < 0f) agent.speed = currentSpeed;
         }
         else
         {
@@ -280,17 +238,7 @@ public class FirstPrizeScript : NPC
         {
             Stun(2f);
             if (!GameControllerScript.Instance.player.isactuallyusingboots) GameControllerScript.Instance.player.ActivateBoots(2000,false);
-            foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-            {
-                if (!w.broken)
-                {
-                    if (Vector3.Distance(transform.position, w.transform.position) <= 10)
-                    {
-                        w.enableOffMeshScript = true;
-                        w.Window(true, true, 8f);
-                    }
-                }
-            }
+            foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>())  if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 10) w.SetWindowState(true, 8f, 0f, 3);
             audioDevice.PlayOneShot(audBang);
             Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
         }
@@ -313,10 +261,7 @@ public class FirstPrizeScript : NPC
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            autoBrakeCool = 1f;
-        }
+        if (other.CompareTag("Player")) autoBrakeCool = 1f;
     }
     #endregion
 

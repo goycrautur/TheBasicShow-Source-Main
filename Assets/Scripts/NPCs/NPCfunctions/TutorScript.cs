@@ -8,27 +8,20 @@ public class TutorScript : MonoBehaviour
     private void Start()
     {
         tutorAnimation.enabled = false;
-        tutorSource.Stop();
+        tutorSource.ClearQueue(true);
         agent = GetComponent<NavMeshAgent>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerTransform = playerObject.transform;
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        tutorSource = GetComponent<AudioSource>();
+        tutorSource = GetComponent<AudioManagerLiveReaction>();
         gc = FindObjectOfType<GameControllerScript>();
     }
 
     private void Update()
     {
-        if (tiemer > 0f)
-        {
-           tiemer -= Time.deltaTime;
-        }
-        
-        if (agent.enabled && gameObject.activeSelf)
-        {
-            agent.SetDestination(target.position);
-        }
+        if (tiemer > 0f) tiemer -= Time.deltaTime;
+        if (agent.enabled && gameObject.activeSelf) agent.SetDestination(target.position);
         if (tiemer < 0f && !gottothepositio)
         {
             gottothepositio = true;
@@ -38,11 +31,9 @@ public class TutorScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P) && !triggeredCounting && gottothepositio)
         {
             tutorAnimation.Rebind();
-            tutorSource.Stop();
             tutorAnimation.Play("BaldiWave", -1, 0f);
-            tutorSource.PlayOneShot(aud_Hi);
-            gc.SubsManager.hideSub(TutorSub);
-            gc.SubsManager.summonLeSubtitle(TutorSub.subtitleOption,TutorSub,tutorSource);
+            tutorSource.ClearQueue(true);
+            tutorSource.QueueAudio(aud_Hi);
         }
 
         if (Countdown && !triggeredCounting && gottothepositio)
@@ -60,10 +51,9 @@ public class TutorScript : MonoBehaviour
         gc.musi();
         tutorAnimation.enabled = true;
         tutorAnimation.Rebind();
-        tutorSource.Stop();
         tutorAnimation.Play("BaldiWave", -1, 0f);
-        tutorSource.PlayOneShot(aud_Hi);
-        gc.SubsManager.summonLeSubtitle(TutorSub.subtitleOption,TutorSub,tutorSource);
+        tutorSource.ClearQueue(true);
+        tutorSource.QueueAudio(aud_Hi);
     }
 
     private IEnumerator PlayCountdown()
@@ -74,13 +64,13 @@ public class TutorScript : MonoBehaviour
         }
         tutorAnimation.enabled = false;
 
-        foreach (AudioClip clip in countdownClips)
+        foreach (AudioObjectyeah clip in countdownClips)
         {
             yield return StartCoroutine(DelayWithSpriteChange());
 
             spriteRenderer.sprite = talkingSprite;
-            tutorSource.PlayOneShot(clip);
-            yield return new WaitForSeconds(clip.length);
+            tutorSource.QueueAudio(clip);
+            yield return new WaitForSeconds(clip.audClip.length);
         }
 
         if (ReadyOrNot != null)
@@ -88,8 +78,8 @@ public class TutorScript : MonoBehaviour
             yield return StartCoroutine(DelayWithSpriteChange());
 
             spriteRenderer.sprite = talkingSprite;
-            tutorSource.PlayOneShot(ReadyOrNot);
-            yield return new WaitForSeconds(ReadyOrNot.length);
+            tutorSource.QueueAudio(ReadyOrNot);
+            yield return new WaitForSeconds(ReadyOrNot.audClip.length);
         }
 
         GameControllerScript.Instance.ActivateSpoopMode();
@@ -99,23 +89,15 @@ public class TutorScript : MonoBehaviour
     private IEnumerator DelayWithSpriteChange()
     {
         float rand = Random.value;
-        if (rand < peekChance)
-        {
-            spriteRenderer.sprite = peekingSprite;
-        }
-        else
-        {
-            spriteRenderer.sprite = closedSprite;
-        }
-
+        if (rand < peekChance) spriteRenderer.sprite = peekingSprite;
+        else spriteRenderer.sprite = closedSprite;
         yield return new WaitForSeconds(delayClips);
     }
 
     [Header("Basic")]
     [SerializeField] private Animator tutorAnimation;
-    [SerializeField] private AudioClip aud_Hi, ReadyOrNot;
-    public subsScriptableObject TutorSub;
-    [SerializeField] private List<AudioClip> countdownClips;
+    [SerializeField] private AudioObjectyeah aud_Hi, ReadyOrNot;
+    [SerializeField] private List<AudioObjectyeah> countdownClips;
     [SerializeField] private bool Countdown;
 
     [Header("Sprite States")]
@@ -130,6 +112,6 @@ public class TutorScript : MonoBehaviour
     [SerializeField] private float tiemer;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform playerTransform, target;
-    [HideInInspector] public AudioSource tutorSource;
+    [HideInInspector] public AudioManagerLiveReaction tutorSource;
     public GameControllerScript gc;
 }

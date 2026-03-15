@@ -5,7 +5,7 @@ public class ITM_NukaQuantum : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,drink);
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         
@@ -34,5 +34,5 @@ public class ITM_NukaQuantum : BaseItem
     [SerializeField] private float duration = 60f, energy,SpeedModDefault;
     [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private Sprite Spritee;
-    [SerializeField] private AudioClip audioa;
+    [SerializeField] private AudioObjectyeah drink;
 }

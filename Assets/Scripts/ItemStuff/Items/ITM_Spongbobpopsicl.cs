@@ -5,7 +5,7 @@ public class Spongbobpopsicl : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,crunc);
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         
         freez(Random.Range(0,3));
@@ -13,10 +13,7 @@ public class Spongbobpopsicl : BaseItem
     }
     private void freez(int what = 0)
     {
-        if (what == 2)
-        {
-            StartCoroutine(freeze(FreezeDuration));
-        }
+        if (what == 2) StartCoroutine(freeze(FreezeDuration));
     }
     private IEnumerator freeze(float time)
     {
@@ -39,7 +36,7 @@ public class Spongbobpopsicl : BaseItem
     [SerializeField] private float FreezeDuration = 5f, energy;
     [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private Sprite Spritee;
-    [SerializeField] private AudioClip audioa;
+    [SerializeField] private AudioObjectyeah crunc;
 }
 
 

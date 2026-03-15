@@ -9,7 +9,7 @@ public class ITM_SwingDoorLock : BaseItem
             if (Ray.collider.CompareTag("SwingingDoor"))
             {
                 Ray.collider.gameObject.GetComponent<SwingingDoorScript>().LockDoor(DoorLockTime);
-                GameControllerScript.Instance.audioDevice.PlayOneShot(aud_Locked);
+                GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Locked);
                 return true;
             }
         }
@@ -17,5 +17,5 @@ public class ITM_SwingDoorLock : BaseItem
     }
     
     [SerializeField] private int DoorLockTime = 15;
-    [SerializeField] private AudioClip aud_Locked;
+    [SerializeField] private AudioObjectyeah aud_Locked;
 }

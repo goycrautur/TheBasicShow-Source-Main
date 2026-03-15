@@ -44,6 +44,7 @@ public class EffectScript : MonoBehaviour
     #region BSODA Effect Handling
     private void HandleCollision(Collider other)
     {
+        lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
         if (other.CompareTag("BSODA"))
         {
             inProjectile = true;
@@ -55,7 +56,7 @@ public class EffectScript : MonoBehaviour
             if (!notNpcEntirely)
             {
                 npcreal.Stun(npcStunTime);
-                GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+                lbams.PlayClip(lbams.MainSource3,lbams.punchSound);
                 Destroy(other.gameObject, 0f);
             }
         }

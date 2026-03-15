@@ -5,7 +5,7 @@ public class SweepScript : NPC
     #region Initialization and Setup
     public override void OnStart()
     {
-        audioDevice = GetComponent<AudioSource>();
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
         waitTime = Random.Range(10f, 20f);
     }
     #endregion
@@ -14,7 +14,6 @@ public class SweepScript : NPC
     public override void OnUpdate()
     {
         base.OnUpdate();
-
         if (waitTime > 0f)
         {
             waitTime -= Time.deltaTime;
@@ -22,33 +21,22 @@ public class SweepScript : NPC
         }
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         agent.speed = base.agentSpeed;
-        if (base.stun)
-        {
-            agent.speed = 0f;
-        }
-        if (base.StunTime < 0f)
-        {
-            agent.speed = base.agentSpeed;
-        }
+        if (base.stun) agent.speed = 0f;
+        if (base.StunTime < 0f) agent.speed = base.agentSpeed;
 
         if (!active)
         {
             active = true;
             activeTime = Random.Range(30f, 60f);
             Wander();
-            audioDevice.PlayOneShot(aud_Intro);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
+            audioDevice.PlaySingleClip(aud_Intro);
             return;
         }
 
         if (active)
         {
             activeTime -= Time.deltaTime;
-
-            if (activeTime <= 0f)
-            {
-                GoHome();
-            }
+            if (activeTime <= 0f) GoHome();
         }
         waitStuff();
     }
@@ -57,10 +45,7 @@ public class SweepScript : NPC
     #region Movement Handling
     protected override void HandleMovement()
     {
-        if (waitTime <= 0f && active)
-        {
-            base.HandleMovement();
-        }
+        if (waitTime <= 0f && active) base.HandleMovement();
     }
 
     public void waitStuff()
@@ -68,10 +53,7 @@ public class SweepScript : NPC
         if (waitTime > 0f) return;
         if (active && activeTime > 0f)
         {
-            if (agent.remainingDistance <= 1f && !agent.pathPending && coolDown <= 0f)
-            {
-                base.Wander();
-            }
+            if (agent.remainingDistance <= 1f && !agent.pathPending && coolDown <= 0f) base.Wander();
         }
     }
 
@@ -90,12 +72,8 @@ public class SweepScript : NPC
         {
             if (base.IsHitboxValid)
             {
-                audioDevice.PlayOneShot(aud_Sweep);
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
-                if (other.transform.name == "Its a Bully")
-                {
-                    base.Wander();
-                }
+                audioDevice.PlaySingleClip(aud_Sweep);
+                if (other.transform.name == "Its a Bully") base.Wander();
             }
         }
     }
@@ -107,15 +85,14 @@ public class SweepScript : NPC
     [SerializeField] private float waitTime, activeTime;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip aud_Sweep;
-    [SerializeField] private AudioClip aud_Intro;
-    [SerializeField] private subsScriptableObject subsScriptable;
+    [SerializeField] private AudioObjectyeah aud_Sweep;
+    [SerializeField] private AudioObjectyeah aud_Intro;
 
     [Header("State Management")]
     [SerializeField] private bool active;
     #endregion
 
     #region Internal References
-    private AudioSource audioDevice;
+    private AudioManagerLiveReaction audioDevice;
     #endregion
 }

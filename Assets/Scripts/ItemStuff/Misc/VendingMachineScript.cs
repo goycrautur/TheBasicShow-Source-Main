@@ -52,11 +52,7 @@ public class VendingMachineScript : MonoBehaviour
     }
     public void DispenseItem()
     {
-        if (crazyMode)
-        {
-            rollItem();
-        }
-        AudioSource audioDevice = GameControllerScript.Instance.audioDevice;
+        if (crazyMode) rollItem();
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
             if (!ItemManager.Instance.IsInventoryFull())
@@ -64,7 +60,7 @@ public class VendingMachineScript : MonoBehaviour
                 
                 if (AdditionalGameCustomizer.Instance.Cash >= moneyNeeded)
                 {
-                    audioDevice.PlayOneShot(AdditionalGameCustomizer.Instance.aud_Drop);
+                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.quarterDrop);
                     AdditionalGameCustomizer.Instance.Cash = AdditionalGameCustomizer.Instance.Cash - moneyNeeded;
                     ItemManager.Instance.CollectItem(itemID);
                     insertedMoney = 0;
@@ -74,15 +70,9 @@ public class VendingMachineScript : MonoBehaviour
                         return;
                     }
                 }
-                else
-                {
-                    audioDevice.PlayOneShot(GameControllerScript.Instance.LoudIncorecBugger);
-                }
+                else GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.loudIncorrectBuzz);
             }
-            else
-            {
-                Debug.Log("Inventory full. Cannot collect item.");
-            }
+            else  Debug.Log("Inventory full. Cannot collect item.");
         }
         else
         {

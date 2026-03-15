@@ -22,14 +22,11 @@ public class PickupScript : Interactable
     public void Start()
     {
         cachedSprites = new Dictionary<int, Sprite>();
-
-
         if (PresentMode)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
             rollItem();
         }
-
         if (SpawnAtRandom)
         {
             wanderer = FindObjectOfType<AILocationSelectorScript>();
@@ -92,32 +89,20 @@ public class PickupScript : Interactable
     public override void Interact()
     {
         BaseItem holdingitem = ItemManager.Instance.GetSelectedItemObject();
-        GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.aud_ItemCollect);
-       if (SlotStuffs(false))
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.ItemCollect);
+        if (SlotStuffs(false))
         {
             if (holdingitem.Unswapable) return;
             transform.gameObject.SetActive(true);
             mapIconSprite.enabled = true;
         }
-        if (ID == 5)
-        {
-            if (ZerullClassic.Instance.realBossStarted)
-            {
-                ZerullClassic.Instance.objects -= 1;
-            }
-        }
-        if (PresentMode)
-        {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.gambling);
-        }
+        if (ID == 5) if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
+        if (PresentMode) GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.gambling);
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
         {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.monesound);
+            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.MoneyCollect);
             AdditionalGameCustomizer.Instance.Cash += 0.25;
-            if (killafterpickup)
-            {
-                Destroy(gameObject);
-            }
+            if (killafterpickup) Destroy(gameObject);
             if (!killafterpickup)
             {
                 transform.gameObject.SetActive(false);
@@ -129,22 +114,15 @@ public class PickupScript : Interactable
         {
             if (!DroppedItem)
             {
-                if (killafterpickup)
-                {
-                    Destroy(gameObject);
-                }
+                if (killafterpickup) Destroy(gameObject);
                 if (!killafterpickup)
                 {
                     transform.gameObject.SetActive(false);
                     mapIconSprite.enabled = false;
                 }
-                if (ZerullClassic.Instance.realBossStarted)
-                {
-                    ZerullClassic.Instance.objects -= 1;
-                }
+                if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
             }
-            else
-                Destroy(gameObject);
+            else Destroy(gameObject);
 
             ItemManager.Instance.CollectItem(ID, GetHeldInstance());
             return;

@@ -5,7 +5,7 @@ public class SwingingDoorScript : MonoBehaviour
     #region Initialization
     private void Start()
     {
-        myAudio = GetComponent<AudioSource>();
+        myAudio = GetComponent<AudioManagerLiveReaction>();
         bDoorLocked = true;
         SwinDorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
         SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
@@ -50,18 +50,12 @@ public class SwingingDoorScript : MonoBehaviour
 
     private void HandleTimers()
     {
-        if (lockTime.CountdownWithDeltaTime() == 0 & bDoorLocked & requirementMet)
-        {
-            SetLock(false);
-        }
+        if (lockTime.CountdownWithDeltaTime() == 0 & bDoorLocked & requirementMet) SetLock(false);
     }
 
     private void HandleDoorClosing()
     {
-        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen & !bDoorLocked)
-        {
-            SetDoorState(false);
-        }
+        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen & !bDoorLocked) SetDoorState(false);
     }
     #endregion
 
@@ -77,14 +71,8 @@ public class SwingingDoorScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider open)
     {
-        if (open.CompareTag("Player"))
-        {
-            HandlePlayerInteraction();
-        }
-        else if (open.CompareTag("NPC") || open.CompareTag("cork") || open.CompareTag("Projectile"))
-        {
-            HandleNPCInteraction();
-        }
+        if (open.CompareTag("Player")) HandlePlayerInteraction();
+        else if (open.CompareTag("NPC") || open.CompareTag("cork") || open.CompareTag("Projectile")) HandleNPCInteraction();
     }
     #endregion
 
@@ -106,16 +94,12 @@ public class SwingingDoorScript : MonoBehaviour
 
     private void HandleNPCInteraction()
     {
-        if ((!myAudio.isPlaying || !bDoorOpen) && !bDoorLocked)
-        {
-            PlayDoorSound();
-        }
+        if ((!myAudio.audioDevice.isPlaying || !bDoorOpen) && !bDoorLocked) PlayDoorSound();
     }
 
     private void PlayDoorSound()
     {
-        myAudio.PlayOneShot(doorOpen);
-        gc.SubsManager.summonLeSubtitle(gc.subtitlesScriptableObject[4].subtitleOption,gc.subtitlesScriptableObject[4],GetComponent<AudioSource>());
+        myAudio.PlaySingleClip(doorOpen);
     }
     #endregion
 
@@ -159,8 +143,8 @@ public class SwingingDoorScript : MonoBehaviour
     [SerializeField] private float openTime;
 
     [Header("Audio-related variables")]
-    private AudioSource myAudio;
-    [SerializeField] private AudioClip doorOpen;
+    private AudioManagerLiveReaction myAudio;
+    [SerializeField] private AudioObjectyeah doorOpen;
 
     [Header("Flags and conditions")]
     [SerializeField] private bool heardDoor;

@@ -18,7 +18,7 @@ public class pitHole : MonoBehaviour
     {
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         AudioListener.pause = false;
-        Singleton<MusicManager>.Instance.PauseMidi(false);
+        Singleton<MusicManagerMaes>.Instance.PauseMidi(false);
         EndingManager.Instance.black.SetActive(true);
         yield return new WaitForSeconds(0.7f);
         PlayerPrefs.SetString("CurrentMode", "thePit");

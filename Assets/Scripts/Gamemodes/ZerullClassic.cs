@@ -84,7 +84,7 @@ public class ZerullClassic : MonoBehaviour
     public Transform[] StartingBossfightProjectileSpawnLocaltion;
     public bool ableToStart,bossStarted, realBossStarted,switchToBloxyb;
     public Animator yourflashbang;
-    private bool taggedonetime;
+    public bool taggedonetime,oneHPfailsave;
 
     public bool BossStarted
     {
@@ -125,6 +125,7 @@ public class ZerullClassic : MonoBehaviour
         switchToBloxyb = blox;
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         if (Midi) if (zs != null) zs.DrumsMidi = true;
+        oneHPfailsave = true;
     }
     public void OnEnable()
 	{
@@ -237,13 +238,7 @@ public class ZerullClassic : MonoBehaviour
     {
         gc.modeState = "oh no he got last exit what do i do";
         PlayerPrefsExtension.SetBool("WallShakeSwitch", true);
-        foreach (WindowScript w in FindObjectsOfType<WindowScript>())
-		{
-			if (!w.broken)
-			{
-				w.Window(true, false, 0f);
-			}
-		}
+        foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) if (!w.broken) w.SetWindowState(false, 6f, 0f, 0, true, 0);
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
         {
             meepTimerScript.Instance.AddTime(25f, Color.green);
@@ -393,21 +388,20 @@ public class ZerullClassic : MonoBehaviour
             blockages.SetActive(true);
         for (int a = 0; a < tweenOutitems.Length; ++a)
         {
-            tweenOutitems[a].transform.DOMoveX(-700, 3f);
+            tweenOutitems[a].transform.DOMoveX(-3600, 5f);
         }
         float ratioy = (float)Screen.width / 360f;
         tweenitemsAlt[0].transform.DOMoveY(ratioy*175, 3f);
-        tweenitemsAlt[1].transform.DOMoveY(ratioy*45, 3f);
     }
     public void OnHit(float tiem, float hp = 1f) // When player hit null by a projectile
     {
 
-        if (alreadyHit && !realBossStarted || (zs.iframes > 0f))return;
+        if (alreadyHit && !realBossStarted || (zs.iframes > 0f)) return;
 
-        zs.Hit(!realBossStarted, tiem, zs.totemready ? 1 : hp);
+        zs.Hit(!realBossStarted, tiem, (zs.totemready || !realBossStarted) && hp != 1 ? 1 : hp);
         if (health <= maxHealth / 2 && !ok && switchToBloxyb)
         {
-            AdditionalGameCustomizer.Instance.FovAmmount = 80;
+            AdditionalGameCustomizer.Instance.FovAmmount += 20;
             Singleton<MusicManagerMaes>.Instance.StopMidi();
             Singleton<MusicManagerMaes>.Instance.PlayMidi(bloxyLoop2, loop: true);
             Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
@@ -419,17 +413,18 @@ public class ZerullClassic : MonoBehaviour
             yourflashbang.Rebind();
 		    yourflashbang.Play("flashAnim", -1, 0f);
         }
-        if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.015f : 0.025f) * (zs.totemready ? 1 : hp);
-        if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 10f : 5f * hp,Color.green);
+        if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.015f : 0.025f) * (zs.totemready && hp != 1 ? 1 : hp);
+        if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 5f : 5f * hp,Color.green);
         SpawnProjectile(false, false);
         SpawnProjectile(false, false);
-        scoreSystemManager.Instance.AddScore(zs.totemready ? 275 : 275*(int)hp);
+        scoreSystemManager.Instance.AddScore(zs.totemready && hp != 1 ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
-        health -= (zs.totemready && hp !=0) ? 1 : (zs.totemready && hp == 0) ? 1 : hp; // Decreases null health
+        health -= (zs.totemready || !realBossStarted) && hp != 1 ? 1 : hp; // Decreases null health
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
-        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready && hp != 1 ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
         if (health == 1)
         {
+            oneHPfailsave = false;
             spawnCooldown = 5f;
             maxObjects = 5;
             RemoveProjectiles();
@@ -440,6 +435,12 @@ public class ZerullClassic : MonoBehaviour
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
+            if (oneHPfailsave)
+            {
+                health = 1;
+                oneHPfailsave = false;
+                return;
+            }
             if (!zs.totemready)
             {
                 zs.totem();
@@ -484,7 +485,6 @@ public class ZerullClassic : MonoBehaviour
             gc.LapManag.Meeptimar.AddTime(60f, Color.green);
             gc.LapManag.Meeptimar.inEnding = true;
             gc.LapManag.Meeptimar.canTime = false;
-            gc.warmusic.Stop();
         }
         PlayerPrefsExtension.SetBool("BeatedUpZerull", true);
         AllowProjectileSpawn = false;
@@ -497,8 +497,8 @@ public class ZerullClassic : MonoBehaviour
     public void AfterHit()
     {
         debug = false;
-        if (health != 1) Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
-
+        if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
+        else Singleton<MusicManagerMaes>.Instance.HangMidi(stop: true, keepDrums: true);
     }
     private void PlayMusic(AudioSource source, AudioClip clip, bool loop = false)
     {

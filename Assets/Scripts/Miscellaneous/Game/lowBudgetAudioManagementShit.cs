@@ -8,20 +8,23 @@ public class lowBudgetAudioManagementShit : MonoBehaviour
     private void Awake() => Instance = this;
     public static lowBudgetAudioManagementShit Instance;
     #endregion
-    public void PlayAudioClip(AudioClip clip,AudioSource audiosourc, bool loop)
+    public void PlayClip(AudioManagerLiveReaction source, AudioObjectyeah clip, bool loop = false)
     {
-        audiosourc.clip = clip;
-        audiosourc.loop = loop;
-        audiosourc.Play();
-    }
+        source.SetLoop(loop);
+        source.PlaySingleClip(clip);
+    } 
 
-    [Header("Audiosource shit")]
-    public AudioSource HurtSource;
-    public AudioSource DIMCSource;
-
-    public AudioSource FinaleSource;
-    public AudioSource[] FinaleSecretSource,FinaleSecretSourcePainMode;
+    [Header("Audiosource/manager shit")]
+    public AudioManagerLiveReaction HurtSource;
+    public AudioManagerLiveReaction TpSource,SchoolMusic,EscapeMusic,EndingMusic,WarMusic,TimeoutMusic,GameOverSource,ChaosAudioSource,MainSource1,MainSource2,MainSource3,DIMCSource;
     [Header("Audio clip shit")]
-    public AudioClip drivinginmy;
-    public AudioClip[] ThroughTheFireAndFlamesClipIntro,ThroughTheFireAndFlamesClipLoop;
+    public AudioObjectyeah drivinginmy;
+    public AudioObjectyeah quarterDrop,evilLeafTP,TeleporterTp,totem,deltaruneExplud,punchSound,agonyScream,gasterSfx,deadbel,hangAudio,zerullGameover; //part 1
+    public AudioObjectyeah ItemCollect,MoneyCollect,gambling,loudIncorrectBuzz;
+    public AudioObjectyeah[] HurtSounds,LoseSounds;
+    [Header("me when escape music n shit")]
+    public AudioObjectyeah SchoolhouseEscape;
+    public AudioObjectyeah schoolClip,WAR,timeoutMusicAud,meowlLmsCra,shithourIntro,shithourLoop,TaldiEscape;
+    public AudioObjectyeah ChaosStart,ChaosStartLoop,ChaosBuildUp,ChaosFinal;
+    public AudioObjectyeah[] NormalTbsFinale,NormalTbsFinaleIntros,EvapV2Finale,EvapV2FinaleIntros;
 }

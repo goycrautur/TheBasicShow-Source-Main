@@ -40,6 +40,7 @@ public class MathGameScript : MonoBehaviour
     #region Initialization
     private void InitializeGame()
     {
+        lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
         problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
         int problemCapAlt = dific == "easy" ? 9 : dific == "normal" ? 6 : dific == "hard" ? 3 : dific == "expert" || dific == "maniac" ? 0 : 6;
@@ -65,20 +66,11 @@ public class MathGameScript : MonoBehaviour
         tbstransis.Rebind();
         tbstransis.Play("yooo", -1, 0f);
 
-        baldiAudio.ignoreListenerPause = true;
-        lg.learnMusic.ignoreListenerPause = true;
-        if (!gc.spoopMode && gc.mode != "zerullclassic")
-        {
-            gc.schoolMusic.ignoreListenerPause = true;
-        }
-        for (int i = 0; i < questionBlockerSlots.Length; ++i)
-        {
-            questionBlockerSlots[i].SetActive(false);
-        }
-        for (int i = 0; i < problemCapAlt; ++i)
-        {
-            questionBlockerSlots[i].SetActive(true);
-        }
+        baldiAudio.SetIgnoreListenerPause(true);
+        lg.learnMusic.SetIgnoreListenerPause(true);
+        if (!gc.spoopMode && gc.mode != "zerullclassic") lbams.SchoolMusic.SetIgnoreListenerPause(true);
+        for (int i = 0; i < questionBlockerSlots.Length; ++i) questionBlockerSlots[i].SetActive(false);
+        for (int i = 0; i < problemCapAlt; ++i) questionBlockerSlots[i].SetActive(true);
 
         endDelay = gc.spoopMode ? Delay : DelayPreSpoop;
         lg.ActivateLearningGame();
@@ -90,7 +82,7 @@ public class MathGameScript : MonoBehaviour
 
         if (gc.notebooks == 1 && gc.mode != "zerullclassic")
         {
-            QueueAudio(bal_intro);
+            baldiAudio.QueueAudio(bal_intro);
             //QueueAudio(bal_howto);
         }
 
@@ -103,34 +95,22 @@ public class MathGameScript : MonoBehaviour
         }
         if (gc.mode == "zerullclassic")
         {
-            if (gc.notebooks > 2)
-            {
-                allanswerWrongInt = UnityEngine.Random.Range(0,2);
-            }
+            if (gc.notebooks > 2) allanswerWrongInt = UnityEngine.Random.Range(0,2);
             bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
             ProvideHintOrFeedback(allanswerWrongInt);
             Baldtalk.SetActive(false);
             BlackCoverUp.SetActive(false);
-			lg.learnMusic.Stop();
-			baldiAudio.Stop();
+			lg.learnMusic.ClearQueue(true);
+			baldiAudio.ClearQueue(true);
 			playerAnswer.gameObject.SetActive(false);
 			baldiFeedTransform.gameObject.SetActive(false);
 			baldiFeed.enabled = false;
 			StaticBG.SetActive(true);
-            if (!chair)
-            {
-                ZerullFeed.SetActive(true);
-            }
-            if (chair)
-            {
-                ChairFeed.SetActive(true);
-            }
+            if (!chair) ZerullFeed.SetActive(true);
+            if (chair) ChairFeed.SetActive(true);
 		}
 
-        if (gc.mode != "zerullclassic")
-        {
-            NewProblem();
-        }
+        if (gc.mode != "zerullclassic") NewProblem();
         
     }
     #endregion
@@ -156,29 +136,16 @@ public class MathGameScript : MonoBehaviour
     #region Audio Feedback
     private void HandleAudioFeedback()
     {
-        if (baldiAudio.isPlaying)
-        {
-            UpdateAudioFeedback();
-        }
-        else if (audioInQueue > 0 && !gc.spoopMode)
-        {
-            PlayQueue();
-        }
-        else
-        {
-            baldiFeedI.sprite = talkSprites[0];
-        }
+        if (baldiAudio.audioDevice.isPlaying) UpdateAudioFeedback();
+        else baldiFeedI.sprite = talkSprites[0];
     }
 
     private void UpdateAudioFeedback()
     {
-        baldiAudio.GetOutputData(clipSampleData, 0);
+        baldiAudio.audioDevice.GetOutputData(clipSampleData, 0);
         float clipLoudness = 0f;
 
-        foreach (float sample in clipSampleData)
-        {
-            clipLoudness += Mathf.Abs(sample) * baldiAudio.volume;
-        }
+        foreach (float sample in clipSampleData) clipLoudness += Mathf.Abs(sample) * baldiAudio.audioDevice.volume;
 
         int spriteIndex = Mathf.RoundToInt(Mathf.Clamp(clipLoudness * 2f, 0f, 6f));
         baldiFeedI.sprite = talkSprites[spriteIndex];
@@ -190,14 +157,8 @@ public class MathGameScript : MonoBehaviour
     {
         ResetProblemUI();
 
-        if (problem <= problemcap)
-        {
-            GenerateMathProblem();
-        }
-        else
-        {
-            HandleProblemCompletion();
-        }
+        if (problem <= problemcap) GenerateMathProblem();
+        else  HandleProblemCompletion();
     }
 
     private void ResetProblemUI()
@@ -210,19 +171,9 @@ public class MathGameScript : MonoBehaviour
 
     private void GenerateMathProblem()
     {
-        if (!gc.spoopMode || gc.mode != "zerullclassic")
-        {
-            StartCoroutine(PlayClassicMusic());
-        }
-
-        if (gc.notebooks == 2 && problem == problemcap)
-        {
-            QueueAudio(scaryproblem);
-        }
-        if (gc.notebooks <= 2 && problem != problemcap)
-        {
-            QueueAudio(bal_problems[problem - 1]);
-        }
+        if (!gc.spoopMode || gc.mode != "zerullclassic") StartCoroutine(PlayClassicMusic());
+        if (gc.notebooks == 2 && problem == problemcap) baldiAudio.QueueAudio(scaryproblem);
+        if (gc.notebooks <= 2 && problem != problemcap) baldiAudio.QueueAudio(bal_problems[problem - 1]);
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == problemcap && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == problemcap))
         {
@@ -475,11 +426,11 @@ public class MathGameScript : MonoBehaviour
     {
         impossibleMode = true;
         sign = Mathf.RoundToInt(UnityEngine.Random.Range(0, 1));
-        QueueAudio(bal_screech);
+        baldiAudio.QueueAudio(bal_screech);
         //QueueAudio(bal_times);
-        QueueAudio(bal_screech);
+        baldiAudio.QueueAudio(bal_screech);
         //QueueAudio(bal_divided);
-        QueueAudio(bal_screech);
+        baldiAudio.QueueAudio(bal_screech);
         //QueueAudio(bal_equals);
     }
 
@@ -490,14 +441,8 @@ public class MathGameScript : MonoBehaviour
 
         foreach (char c in text)
         {
-            if (UnityEngine.Random.value > 0.8f)
-            {
-                glitchyText.Append(glitchChars[UnityEngine.Random.Range(0, glitchChars.Length)]);
-            }
-            else
-            {
-                glitchyText.Append(c);
-            }
+            if (UnityEngine.Random.value > 0.8f)  glitchyText.Append(glitchChars[UnityEngine.Random.Range(0, glitchChars.Length)]);
+            else glitchyText.Append(c);
         }
 
         return glitchyText.ToString();
@@ -515,14 +460,8 @@ public class MathGameScript : MonoBehaviour
 		{
 			if (problem <= problemcap)
 			{
-				if (IsCorrectAnswer())
-				{
-				    HandleCorrectAnswer();
-				}
-				else
-				{
-					HandleIncorrectAnswer();
-				}
+				if (IsCorrectAnswer()) HandleCorrectAnswer();
+				else HandleIncorrectAnswer();
 			}
 		}
 		else
@@ -564,12 +503,9 @@ public class MathGameScript : MonoBehaviour
     private void HandleCorrectAnswer()
     {
         results[problem - 1].sprite = correct;
-        baldiAudio.Stop();
-        ClearAudioQueue();
-
+        baldiAudio.ClearQueue(true);
         int praiseIndex = UnityEngine.Random.Range(0, bal_praises.Length);
-        QueueAudio(bal_praises[praiseIndex]);
-
+        baldiAudio.QueueAudio(bal_praises[praiseIndex]);
         NewProblem();
         scoreSystemManager.Instance.AddScore(75);
     }
@@ -589,22 +525,15 @@ public class MathGameScript : MonoBehaviour
         }
         scoreSystemManager.Instance.AddScore(275);
         HandleBaldiAnger();
-        ClearAudioQueue();
-        baldiAudio.Stop();
+        baldiAudio.ClearQueue(true);
         if (impossibleQuestionShown) impossibleMode = false;
         NewProblem();
     }
 
     private void HandleBaldiAnger()
     {
-        if (problem == problemcap)
-        {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.2f*lg.angerMult, 0f,false, "all");
-        }
-        else
-        {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.15f*lg.tempAngerMult,true, "all");
-        }
+        if (problem == problemcap) Singleton<OtherMainStuffManager>.Instance.AngerShit(0.2f*lg.angerMult, 0f,false, "all");
+        else  Singleton<OtherMainStuffManager>.Instance.AngerShit(0f, 0.15f*lg.tempAngerMult,true, "all");
     }
 
     private void ResetInputState()
@@ -618,26 +547,18 @@ public class MathGameScript : MonoBehaviour
     #region Game End Handling
     private void HandleProblemCompletion()
     {
-        if (!gc.spoopMode)
-        {
-            questionText.text = "WOW! YOU EXIST!";
-        }
-        else
-        {
-            ProvideHintOrFeedback();
-        }
+        if (!gc.spoopMode) questionText.text = "WOW! YOU EXIST!";
+        else  ProvideHintOrFeedback();
     }
     
     private void ProvideHintOrFeedback(int allanswerWrongInt = 0)
     {
-        if (gc.mode == "endless" && problemsWrong <= 0)
-        {
-            questionText.text = endlessHintText[UnityEngine.Random.Range(0, endlessHintText.Length)];
-        }
+        if (gc.mode == "endless" && problemsWrong <= 0) questionText.text = endlessHintText[UnityEngine.Random.Range(0, endlessHintText.Length)];
         if (problemsWrong >= problemcap)
         {
+            lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
             Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, null, playerPosition, "all", true);
-            gc.audioDevice.PlayClip(gc.deathbell, false, 1f);
+            lbams.PlayClip(lbams.MainSource1, lbams.deadbel);
         }
         if (gc.mode == "zerullclassic" && problemsWrong <= 0)
         {
@@ -645,43 +566,15 @@ public class MathGameScript : MonoBehaviour
             if (!chairr)
             {
                 int index = UnityEngine.Random.Range(0, zerullQuotes.Length);
-                if (gc.notebooks > 2 && allanswerWrongInt != 1)
-                {
-                    questionText.text = zerullQuotes[index];
-                }
-                if (gc.notebooks > 2 && allanswerWrongInt == 1)
-                {
-                    questionText.text = "bro.." + '\n' + "youre so fucking cooked LMFAO";
-                }
-                if (gc.notebooks == 2)
-                {
-                    questionText.text = "Jeezpers, you really want to suffer huh?"+ '\n'+ "fine by me i suppose";
-                }
-                if (gc.notebooks == 1)
-                {
-                    questionText.text = "Huh, why did i got teleported into this dimension?"+ '\n'+ "oh its you again, the fuck do you want";
-                }
+                if (gc.notebooks > 2 && allanswerWrongInt != 1) questionText.text = zerullQuotes[index];
+                if (gc.notebooks > 2 && allanswerWrongInt == 1) questionText.text = "bro.." + '\n' + "youre so fucking cooked LMFAO";
+                if (gc.notebooks == 2) questionText.text = "Jeezpers, you really want to suffer huh?"+ '\n'+ "fine by me i suppose";
+                if (gc.notebooks == 1) questionText.text = "Huh, why did i got teleported into this dimension?"+ '\n'+ "oh its you again, the fuck do you want";
             }
-            if (chairr)
-            {
-                questionText.text = "chair";
-            }
+            if (chairr) questionText.text = "chair";
             questionText2.text = questionText3.text = string.Empty;
-            if (allanswerWrongInt == 1)
-            {
-                for (int i = 0; i < problemcap; ++i)
-                {
-                    results[i].sprite = incorrect;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < problemcap; ++i)
-                {
-                    results[i].sprite = correct;
-                }
-            }
-
+            if (allanswerWrongInt == 1) for (int i = 0; i < problemcap; ++i) results[i].sprite = incorrect;
+            else for (int i = 0; i < problemcap; ++i) results[i].sprite = correct;
 			return;
 		}
             questionText.text = hintText[UnityEngine.Random.Range(0, hintText.Length)];
@@ -696,8 +589,8 @@ public class MathGameScript : MonoBehaviour
             }
             if (gc.failedNotebooks == 1 && gc.notebooks < gc.UnlockAmount)
             {
-                endDelay = jer_SecretAAW.length;
-                baldiAudio.PlayOneShot(jer_SecretAAW);
+                endDelay = jer_SecretAAW.audClip.length;
+                baldiAudio.PlaySingleClip(jer_SecretAAW);
                 if (!padChallengeCode)
                 {
                     if (gc.SlotsAmmount >= 5)
@@ -705,10 +598,7 @@ public class MathGameScript : MonoBehaviour
                         questionText.text = "fuck you, 2 of your slots will be gone";
                         Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(GameControllerScript.Instance.SlotsAmmount-2,true);
                     }
-                    else if (gc.SlotsAmmount <= 5)
-                    {
-                        questionText.text = "fuck you, 2 of your slots will be go- oh wait you have under 5 slots my bad gang";
-                    }
+                    else if (gc.SlotsAmmount <= 5) questionText.text = "fuck you, 2 of your slots will be go- oh wait you have under 5 slots my bad gang";
                 }
                 else if (padChallengeCode)
                 {
@@ -739,8 +629,8 @@ public class MathGameScript : MonoBehaviour
         endDelay -= Time.unscaledDeltaTime;
         if (endDelay <= 0f)
         {
-            lg.learnMusic.ignoreListenerPause = false;
-            lg.learnMusic.Stop();
+            lg.learnMusic.SetIgnoreListenerPause(false);
+            lg.learnMusic.ClearQueue(true);
             GC.Collect();
             ExitGame();
         }
@@ -759,15 +649,6 @@ public class MathGameScript : MonoBehaviour
     #endregion
 
     #region Utility Methods
-    private void ClearAudioQueue()
-    {
-        for (int i = 0; i < audioInQueue; i++)
-        {
-            audioQueue[i] = null;
-        }
-        audioInQueue = 0;
-    }
-
     private IEnumerator CheatText(string text)
     {
         while (true)
@@ -778,57 +659,24 @@ public class MathGameScript : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
-
     public IEnumerator PlayClassicMusic()
     {
         int musicIndex = problem - 1;
-        if (musicIndex < 0 || musicIndex >= learnMusics.Length)
-        {
-            yield break;
-        }
+        if (musicIndex < 0 || musicIndex >= learnMusics.Length) yield break;
 
         if (musicIndex >= 1)
         {
-            lg.learnMusic.loop = false;
-            yield return new WaitWhile(() => lg.learnMusic.isPlaying);
+            lg.learnMusic.SetLoop(false);
+            yield return new WaitWhile(() => lg.learnMusic.audioDevice.isPlaying);
         }
 
         if (!gc.spoopMode)
         {
-            lg.learnMusic.loop = true;
-            lg.learnMusic.clip = learnMusics[musicIndex];
-            lg.learnMusic.Play();
+            lg.learnMusic.ClearQueue(true);
+            lg.learnMusic.QueueAudio(learnMusics[musicIndex]);
+            lg.learnMusic.SetLoop(true);
         }
-        else
-        {
-            lg.learnMusic.Stop();
-        }
-    }
-
-    private void QueueAudio(AudioClip sound)
-    {
-        if (audioInQueue < MaxAudioQueueSize)
-        {
-            audioQueue[audioInQueue++] = sound;
-        }
-    }
-
-    private void PlayQueue()
-    {
-        if (audioInQueue > 0)
-        {
-            baldiAudio.PlayOneShot(audioQueue[0]);
-            UnqueueAudio();
-        }
-    }
-
-    private void UnqueueAudio()
-    {
-        for (int i = 1; i < audioInQueue; i++)
-        {
-            audioQueue[i - 1] = audioQueue[i];
-        }
-        audioInQueue--;
+        else lg.learnMusic.ClearQueue(true);
     }
 
     public void ButtonPress(int value)
@@ -859,6 +707,7 @@ public class MathGameScript : MonoBehaviour
     public GameControllerScript gc;
     public Animator tbstransis,DitherTransis;
     public LearningGameManager lg;
+    public booksInteract nbScri;
     public Vector3 playerPosition;
 
     [Header("UI Elements")]
@@ -878,9 +727,9 @@ public class MathGameScript : MonoBehaviour
     public string[] zerullQuotes;
 
     [Header("Audio Clips")]
-    [SerializeField] private AudioSource baldiAudio;
-    [SerializeField] private AudioClip bal_intro, bal_howto, bal_plus, bal_minus, bal_times, bal_divided, bal_equals, bal_screech,jer_SecretAAW,scaryproblem;
-    [SerializeField] private AudioClip[] bal_numbers, bal_praises, bal_problems, learnMusics;
+    [SerializeField] private AudioManagerLiveReaction baldiAudio;
+    [SerializeField] private AudioObjectyeah bal_intro, bal_howto, bal_plus, bal_minus, bal_times, bal_divided, bal_equals, bal_screech,jer_SecretAAW,scaryproblem;
+    [SerializeField] private AudioObjectyeah[] bal_numbers, bal_praises, bal_problems, learnMusics;
 
     [Header("Sprites")]
     [SerializeField] private Sprite[] talkSprites;
@@ -895,13 +744,11 @@ public class MathGameScript : MonoBehaviour
     public bool questionInProgress, impossibleMode, negative,thepadgotaawed;
 
     [SerializeField] private bool impossibleQuestionShown,padChallengeCode;
-    private const int MaxAudioQueueSize = 20;
     private const int SampleDataLength = 64;
     private string[] hintText = { "I GET ANGRIER FOR EVERY PROBLEM YOU GET WRONG", "I HEAR EVERY DOOR YOU OPEN" }, endlessHintText = { "That's more like it...", "Keep up the good work or see me after class..." };
     private float endDelay;
     private int problem, audioInQueue, problemsWrong, sign,allanswerWrongInt;
     public float DelayPreSpoop = 4f, Delay = 0.5f;
-    private AudioClip[] audioQueue = new AudioClip[MaxAudioQueueSize];
     private float[] clipSampleData = new float[SampleDataLength];
     private Dictionary<string, Action> specialCodes,ChallengeCodes;
     #endregion

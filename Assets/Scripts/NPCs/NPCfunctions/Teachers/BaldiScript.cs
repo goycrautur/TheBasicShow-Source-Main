@@ -7,14 +7,10 @@ public class BaldiScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        baldiAudio = GetComponent<AudioSource>();
+        baldiAudio = GetComponent<AudioManagerLiveReaction>();
         GetAngry(0f);
         Move();
-
-        if (endless)
-        {
-            Endless();
-        }
+        if (endless) Endless();
 
         Wander();
     }
@@ -30,14 +26,8 @@ public class BaldiScript : NPC
 
     public override void OnUpdate()
     {
-        if (antiHearing)
-		{
-			AntiHearingDuratio -= Time.deltaTime;
-		}
-        if (AntiHearingDuratio < 0f)
-		{
-            antiHearing = false;
-        }
+        if (antiHearing) AntiHearingDuratio -= Time.deltaTime;
+        if (AntiHearingDuratio < 0f) antiHearing = false;
         if (base.stun)
         {
             stopMoving = true;
@@ -51,14 +41,8 @@ public class BaldiScript : NPC
         }
         base.OnUpdate();
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        if (baldiTempAnger > 0f)
-        {
-            baldiTempAnger -= 0.05f * Time.deltaTime;
-        }
-        else
-        {
-            baldiTempAnger = 0f;
-        }
+        if (baldiTempAnger > 0f) baldiTempAnger -= 0.05f * Time.deltaTime;
+        else baldiTempAnger = 0f;
     }
 
     public override void OnFixedUpdate()
@@ -70,10 +54,7 @@ public class BaldiScript : NPC
             {
                 if (hitVape.transform.gameObject.layer == 11) return;
             }
-            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
-            {
-                TargetPlayer();
-            }
+            if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk) TargetPlayer();
         }
     }
     #endregion
@@ -97,14 +78,9 @@ public class BaldiScript : NPC
         if (this.isActiveAndEnabled)
         {
             agent.speed = base.agentSpeed;
-            gc.SubsManager.summonLeSubtitle(slapSound.subtitleOption, slapSound, baldiAudio);
-            baldiAudio.PlayOneShot(slap);
+            baldiAudio.PlaySingleClip(slap);
             baldiAnimator.SetTrigger("slap");
-
-            if (!stopMoving)
-            {
-                Invoke(nameof(OnMoveDone), timeToMove);
-            }
+            if (!stopMoving)  Invoke(nameof(OnMoveDone), timeToMove);
             resetWaitTime();
         }
     }
@@ -118,15 +94,9 @@ public class BaldiScript : NPC
     {
         agent.speed = 0;
 
-        if (agent.remainingDistance <= 0.1f)
-        {
-            Wander();
-        }
+        if (agent.remainingDistance <= 0.1f) Wander();
 
-        if (!stopMoving)
-        {
-            Invoke(nameof(Move), baldiWait);
-        }
+        if (!stopMoving) Invoke(nameof(Move), baldiWait);
     }
     #endregion
     private void OnTriggerStay(Collider play)
@@ -146,10 +116,7 @@ public class BaldiScript : NPC
     {
         baldiAnger += value;
 
-        if (baldiAnger < 0.5f)
-        {
-            baldiAnger = 0.5f;
-        }
+        if (baldiAnger < 0.5f) baldiAnger = 0.5f;
     }
 
     public void GetTempAngry(float value) => baldiTempAnger += value;
@@ -190,8 +157,8 @@ public class BaldiScript : NPC
             {
                 if (!antiHearing || !inNoSqueeArea)
                 {
-                baldicator.Rebind();
-                baldicator.Play("Indicator_Heared", -1, 0f);
+                    baldicator.Rebind();
+                    baldicator.Play("Indicator_Heared", -1, 0f);
                 }
             }
         }
@@ -201,8 +168,8 @@ public class BaldiScript : NPC
             {
                 if (!antiHearing || !inNoSqueeArea)
                 {
-                baldicator.Rebind();
-                baldicator.Play("Indicator_Confused", -1, 0f);
+                    baldicator.Rebind();
+                    baldicator.Play("Indicator_Confused", -1, 0f);
                 }
             }
         }
@@ -230,12 +197,12 @@ public class BaldiScript : NPC
     public bool endless;
 
     [Header("Audio and Animation")]
-    [SerializeField] private AudioClip slap;
+    [SerializeField] private AudioObjectyeah slap;
     [SerializeField] private Animator baldicator, baldiAnimator;
     [SerializeField] private GameObject sprite;
 
     private float currentPriority;
-    private AudioSource baldiAudio;
+    private AudioManagerLiveReaction baldiAudio;
     [SerializeField] private subsScriptableObject slapSound;
     #endregion
 }

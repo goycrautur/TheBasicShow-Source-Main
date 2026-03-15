@@ -6,7 +6,7 @@ public class CraftersScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        audioDevice = GetComponent<AudioSource>();
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
         normalSprite = spriteImage.sprite;
     }
     #endregion
@@ -14,67 +14,35 @@ public class CraftersScript : NPC
     #region Update & State Logic
     public override void OnUpdate()
     {
-        if (forceShowTime > 0f)
-        {
-            forceShowTime -= Time.deltaTime;
-        }
-        if (chillBro > 0f)
-        {
-            chillBro -= Time.deltaTime;
-        }
+        if (forceShowTime > 0f) forceShowTime -= Time.deltaTime;
+        if (chillBro > 0f) chillBro -= Time.deltaTime;
         if (AngryMeter == 5 & !angry)
         {
             angry = true;
-            audioDevice.PlayOneShot(aud_Intro);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
+            audioDevice.ClearQueue(true);
+            audioDevice.SetLoop(true);
+            audioDevice.QueueAudio(aud_Loop);
+            audioDevice.QueueAudio(aud_Intro);
             spriteImage.sprite = angrySprite;
             AngryMeter = 0;
         }
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        if (base.stun)
-        {
-            agent.speed = 0f;
-        }
-        if (base.StunTime < 0f)
-        {
-            agent.speed = base.agentSpeed;
-        }
+        if (base.stun) agent.speed = 0f;
+        if (base.StunTime < 0f) agent.speed = base.agentSpeed;
         speedAlt1 = defspeedAlt1 * base.agentSpeedScale;
         speedAlt2 = defspeedAlt2 * base.agentSpeedScale;
 
         if (!angry)
         {
-            if (((transform.position - agent.destination).magnitude <= 20f &
-                (transform.position - player.position).magnitude >= 60f) || forceShowTime > 0f)
-            {
-                spriteImage.sprite = normalSprite;
-            }
-            else
-            {
-                spriteImage.sprite = invisibleSprite;
-            }
+            if (((transform.position - agent.destination).magnitude <= 20f & (transform.position - player.position).magnitude >= 60f) || forceShowTime > 0f)  spriteImage.sprite = normalSprite;
+            else  spriteImage.sprite = invisibleSprite;
         }
         else
         {
-            if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.SkipCraftersAttack)
-            {
-                agent.speed += speedAlt2 * Time.deltaTime;
-            }
-            else
-            {
-                if (agent.speed < 180f)
-                {
-                    agent.speed += speedAlt1 * Time.deltaTime;
-                }
-            }
-
+            if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.SkipCraftersAttack) agent.speed += speedAlt2 * Time.deltaTime;
+            else if (agent.speed < 180f) agent.speed += speedAlt1 * Time.deltaTime;
             TargetPlayer();
 
-            if (!audioDevice.isPlaying)
-            {
-                audioDevice.PlayOneShot(aud_Loop);
-                GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, audioDevice);
-            }
         }
     }
     #endregion
@@ -99,11 +67,7 @@ public class CraftersScript : NPC
                 {
                     stopUpdate = true;
                     AngryMeter += 1;
-                    if (AngryMeter < 5)
-                    {
-                    audioDevice.PlayOneShot(angrySound);
-                    GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptableang.subtitleOption, subsScriptableang, audioDevice);
-                    }
+                    if (AngryMeter < 5) audioDevice.PlaySingleClip(angrySound);
                 }
             }
             else
@@ -158,15 +122,12 @@ public class CraftersScript : NPC
     public void GiveConsequence(bool tp = true)
     {
         cc.enabled = true;
-        if (tp)
-        {
-            gc.CraftersTeleport();
-        }
+        if (tp)  gc.CraftersTeleport();
         chillBro = 20f;
         angry = false;
         agent.speed = base.agentSpeed;
         spriteImage.sprite = normalSprite;
-        audioDevice.Stop();
+        audioDevice.ClearQueue(true);
     }
     #endregion
 
@@ -179,11 +140,10 @@ public class CraftersScript : NPC
     [SerializeField] private CharacterController cc;
     [SerializeField] private Renderer craftersRenderer;
     [SerializeField] private SpriteRenderer spriteImage;
-    [SerializeField] private subsScriptableObject subsScriptable,subsScriptableang;
 
     [Header("Audio & Visuals")]
-    [SerializeField] private AudioClip aud_Intro;
-    [SerializeField] private AudioClip aud_Loop,angrySound;
+    [SerializeField] private AudioObjectyeah aud_Intro;
+    [SerializeField] private AudioObjectyeah aud_Loop,angrySound;
     [SerializeField] private Sprite angrySprite, normalSprite, invisibleSprite;
 
     [Header("Movement & Speed")]
@@ -197,6 +157,6 @@ public class CraftersScript : NPC
 
     #region Internal State
     public float forceShowTime;
-    private AudioSource audioDevice;
+    private AudioManagerLiveReaction audioDevice;
     #endregion
 }

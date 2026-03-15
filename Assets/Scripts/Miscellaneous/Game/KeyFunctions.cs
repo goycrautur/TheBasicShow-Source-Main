@@ -37,46 +37,26 @@ public class KeyFunctions : MonoBehaviour
     private void PauseAndExit()
     {
         if (gc.Math.learningActive || gc.player.gameOver || gc.youCantPause) return;
-
-        if (Singleton<InputManager>.Instance.GetActionKey(InputAction.PauseOrCancel) && !gc.progress.GetResults)
-        {
-            ToggleGamePause(!gamePaused);
-        }
-
+        if (Singleton<InputManager>.Instance.GetActionKey(InputAction.PauseOrCancel) && !gc.progress.GetResults) ToggleGamePause(!gamePaused);
         if (gamePaused)
         {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                ExitGame();
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ResetGame();
-            }
-            else if (Input.GetKeyDown(KeyCode.N))
-            {
-                ToggleGamePause(false);
-            }
+            if (Input.GetKeyDown(KeyCode.Y)) ExitGame();
+            if (Input.GetKeyDown(KeyCode.R))  ResetGame();
+            else if (Input.GetKeyDown(KeyCode.N)) ToggleGamePause(false);
         }
     }
 
     public void ToggleGamePause(bool isPaused)
     {
         Time.timeScale = isPaused ? 0f : 1f;
-        Singleton<MusicManagerMaes>.Instance.PauseMidi(isPaused ? true : false);
-        audballs.ignoreListenerPause = isPaused;
+        Singleton<MusicManagerMaes>.Instance.PauseMidi(isPaused);
+        audballs.SetIgnoreListenerPause(isPaused);
         AudioListener.pause = isPaused;
         gamePaused = isPaused;
         pauseMenu.SetActive(isPaused);
 
-        if (isPaused)
-        {
-            UnlockMouse();
-        }
-        else
-        {
-            LockMouse();
-        }
+        if (isPaused) UnlockMouse();
+        else LockMouse();
     }
 
     public void ExitGame()
@@ -84,14 +64,14 @@ public class KeyFunctions : MonoBehaviour
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         AudioListener.pause = false;
         SceneManager.LoadSceneAsync("MainMenu");
-        Singleton<MusicManager>.Instance.PauseMidi(false);
+        Singleton<MusicManagerMaes>.Instance.PauseMidi(false);
     }
     public void ResetGame()
     {
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
         AudioListener.pause = false;
         SceneManager.LoadSceneAsync("GameArea");
-        Singleton<MusicManager>.Instance.PauseMidi(false);
+        Singleton<MusicManagerMaes>.Instance.PauseMidi(false);
     }
     #endregion
 
@@ -104,10 +84,7 @@ public class KeyFunctions : MonoBehaviour
         {
             if (Sych.ScreenCenterRaycast(out RaycastHit hit,PlayerClickablesLayer.value) && hit.transform.IsWithinDistance(gc.player.LocalRange))
             {
-                if (hit.collider.TryGetComponent(out Interactable interactable))
-                {
-                    interactable.Interact();
-                }
+                if (hit.collider.TryGetComponent(out Interactable interactable)) interactable.Interact();
             }
         }
     }
@@ -136,7 +113,7 @@ public class KeyFunctions : MonoBehaviour
     [SerializeField] private GameObject pauseMenu, reticle,Minimap;
     [SerializeField] private GameControllerScript gc;
     [SerializeField] private CursorControllerScript cursorController;
-    [SerializeField] private AudioSource audballs;
+    [SerializeField] private AudioManagerLiveReaction audballs;
     public LayerMask PlayerClickablesLayer;
     #endregion
 

@@ -24,14 +24,14 @@ public class corkSparyScript : MonoBehaviour
     {
         if (cork.name.StartsWith("Wall") || cork.name.StartsWith("Fence") || cork.name.StartsWith("Ceiling") || cork.name.StartsWith("Floor") || cork.name.StartsWith("ElvDoor"))
         {
-            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+            lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.punchSound);
             Destroy(gameObject, 0f);
             return;
         }
-        if (cork.CompareTag("Window") && cork.GetComponent<WindowScript>() != null && !cork.GetComponent<WindowScript>().broken)
+        if (cork.CompareTag("Window") && cork.GetComponent<basicshowWindowScript>() != null && !cork.GetComponent<basicshowWindowScript>().broken)
         {
-            cork.GetComponent<WindowScript>().Window(true, true, 6f);
-            GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+            cork.GetComponent<basicshowWindowScript>().SetWindowState(true, 6f, 0f, 1);
+            lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.punchSound);
             Destroy(gameObject, 0f);
             return;
         }
@@ -47,8 +47,8 @@ public class corkSparyScript : MonoBehaviour
                         yield return null;
                     }
                     stunnedBoss = true;
-                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.length, 0);
-                    GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.punchsoun);
+                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length, 0);
+                    lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.punchSound);
                     Destroy(base.gameObject);
                 }
                 return;

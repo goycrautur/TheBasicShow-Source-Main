@@ -5,8 +5,8 @@ using UnityEngine;
 public class MathMachineScript : MonoBehaviour
 {
     public int num1,sign,num3,correct = -1;
-    public AudioClip gen,pop,err;
-    public AudioSource audioSource;
+    public AudioObjectyeah gen,pop,err;
+    public AudioManagerLiveReaction audioSource;
     public MeshRenderer meshRenderer;
     public Material right,wrong;
     public bool won, hasLost;
@@ -53,10 +53,7 @@ public class MathMachineScript : MonoBehaviour
         Say = ((int)(UnityEngine.Random.Range(1f, 6f)));
         player = GameObject.Find("Player").transform;
         GetNewProblem();
-        while (correct < 0 || correct > 9)
-        {
-            GetNewProblem();
-        }
+        while (correct < 0 || correct > 9) GetNewProblem();
         machineMapIcon.enabled = true;
     }
 
@@ -130,8 +127,7 @@ public class MathMachineScript : MonoBehaviour
         if (!won & !hasLost & cooldown <= 0)
         {
             machineMapIcon.enabled = false;
-            audioSource.PlayOneShot(gen);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[8].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[8], audioSource);
+            audioSource.PlaySingleClip(gen);
             GameControllerScript.Instance.isHoldingBall = false;
             disabled = null;
             won = true;
@@ -143,9 +139,9 @@ public class MathMachineScript : MonoBehaviour
             {
                 if (GameControllerScript.Instance.mode == "story")
                 {
-                    LearningGameManager.Instance.Tutor.tutorSource.Stop();
+                    LearningGameManager.Instance.Tutor.tutorSource.ClearQueue(true);
                     LearningGameManager.Instance.quarter.SetActive(true);
-                    LearningGameManager.Instance.Tutor.tutorSource.PlayClip(LearningGameManager.Instance.aud_Prize, false, 1f);
+                    LearningGameManager.Instance.Tutor.tutorSource.PlaySingleClip(LearningGameManager.Instance.aud_Prize);
                 }
             }
             meshRenderer.material = right;
@@ -188,7 +184,7 @@ public class MathMachineScript : MonoBehaviour
                 {
                     if (GameControllerScript.Instance.mode == "story")
                     {
-                        GameControllerScript.Instance.SubsManager.hideSub(LearningGameManager.Instance.Tutor.TutorSub);
+                        //GameControllerScript.Instance.SubsManager.hideSub(LearningGameManager.Instance.Tutor.TutorSub);
                     }
                 }
                 if (GameControllerScript.Instance.mode == "story")
@@ -207,8 +203,7 @@ public class MathMachineScript : MonoBehaviour
                 ZerullClassic.Instance.maxHealth += 35;
                 ZerullClassic.Instance.health += 35;
             }
-            audioSource.PlayOneShot(err);
-            GameControllerScript.Instance.SubsManager.summonLeSubtitle(GameControllerScript.Instance.subtitlesScriptableObject[9].subtitleOption, GameControllerScript.Instance.subtitlesScriptableObject[9], audioSource);
+            audioSource.PlaySingleClip(err);
             disabled = null;
             won = true;
             meshRenderer.material = wrong;

@@ -31,8 +31,7 @@ public class SausageJerry : NPC
 	}
 	public void fart()
 	{
-		SausageJerAudio.PlayOneShot(farth);
-		GameControllerScript.Instance.SubsManager.summonLeSubtitle(subsScriptable.subtitleOption, subsScriptable, SausageJerAudio);
+		SausageJerAudio.PlaySingleClip(farth);
 		Instantiate(Itemspawn, new Vector3(transform.position.x, 4f, transform.position.z), transform.rotation);
 		Instantiate(FartParticle, transform.position, transform.rotation);
 		fartCooldown = DefaultfartCooldown;
@@ -48,7 +47,6 @@ public class SausageJerry : NPC
 	public float DefaultfartCooldown;
 	public float fartCooldown;
 	public GameObject Itemspawn, FartParticle;
-	public AudioSource SausageJerAudio;
-	public AudioClip farth;
-	[SerializeField] private subsScriptableObject subsScriptable;
+	public AudioManagerLiveReaction SausageJerAudio;
+	public AudioObjectyeah farth;
 }

@@ -5,13 +5,10 @@ public class ITM_MilkCoffee : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.audioDevice.PlayOneShot(audioa);
+        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,drink);
         if (!GameControllerScript.Instance.player.outdoorsfr)
 		{
-			if (GameControllerScript.Instance.player.door.lockTime <= 0f)
-			{
-			GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
-			}
+			if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerAdd;
@@ -29,7 +26,7 @@ public class ITM_MilkCoffee : BaseItem
         {
             if (GameControllerScript.Instance.player.stamina <= (GameControllerScript.Instance.player.maxStamina * 2.25f))
 			{
-			GameControllerScript.Instance.player.stamina += ((GameControllerScript.Instance.player.staminaRise/4)+passivestamina) * Time.deltaTime;
+			    GameControllerScript.Instance.player.stamina += ((GameControllerScript.Instance.player.staminaRise/4)+passivestamina) * Time.deltaTime;
             }
             time -= Time.deltaTime;
             if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
@@ -45,6 +42,6 @@ public class ITM_MilkCoffee : BaseItem
     }
     [SerializeField] private float duration = 60f, energy, passivestamina, walkspeedmultiplerAdd,runspeedmultiplerAdd;
     [SerializeField] private Sprite coffeeSprite;
-    [SerializeField] private AudioClip audioa;
+    [SerializeField] private AudioObjectyeah drink;
     [SerializeField] private bool tue;
 }
