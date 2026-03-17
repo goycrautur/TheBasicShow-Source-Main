@@ -104,7 +104,7 @@ public class FirstPrizeScript : NPC
     #region Audio Responses
     private void PlayFoundAudio()
     {
-        if (!audioDevice.isPlaying)
+        if (!audioDevice.audioDevice.isPlaying)
         {
             int num = (int)Random.Range(0f, aud_Found.Length);
             //audioDevice.PlayOneShot(aud_Found[num]);
@@ -113,7 +113,7 @@ public class FirstPrizeScript : NPC
 
     private void PlayLostAudio()
     {
-        if (!audioDevice.isPlaying)
+        if (!audioDevice.audioDevice.isPlaying)
         {
             int num2 = (int)Random.Range(0f, aud_Lost.Length);
             //audioDevice.PlayOneShot(aud_Lost[num2]);
@@ -123,7 +123,7 @@ public class FirstPrizeScript : NPC
     private void PlayRandomAudio()
     {
         int num = Mathf.RoundToInt(Random.Range(0f, 9f));
-        if (!audioDevice.isPlaying && num == 0 && coolDown <= 0f)
+        if (!audioDevice.audioDevice.isPlaying && num == 0 && coolDown <= 0f)
         {
             int num3 = (int)Random.Range(0f, aud_Random.Length);
             //audioDevice.PlayOneShot(aud_Random[num3]);
@@ -132,7 +132,7 @@ public class FirstPrizeScript : NPC
 
     private void PlayHuggingAudio()
     {
-        if (!audioDevice.isPlaying & !hugAnnounced)
+        if (!audioDevice.audioDevice.isPlaying & !hugAnnounced)
         {
             int num4 = (int)Random.Range(0f, aud_Hug.Length);
             //audioDevice.PlayOneShot(aud_Hug[num4]);
@@ -230,7 +230,7 @@ public class FirstPrizeScript : NPC
         }
     }
 
-    private void UpdateAudioPitch() => motorAudio.pitch = (agent.velocity.magnitude + 1f) * Time.timeScale;
+    private void UpdateAudioPitch() => motorAudio.SetPitch((agent.velocity.magnitude + 1f) * Time.timeScale);
 
     private void DetectSuddenStop()
     {
@@ -239,7 +239,8 @@ public class FirstPrizeScript : NPC
             Stun(2f);
             if (!GameControllerScript.Instance.player.isactuallyusingboots) GameControllerScript.Instance.player.ActivateBoots(2000,false);
             foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>())  if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 10) w.SetWindowState(true, 8f, 0f, 3);
-            audioDevice.PlayOneShot(audBang);
+            audioDevice.ClearQueue(true);
+            audioDevice.PlaySingleClip(audBang);
             Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
         }
         prevSpeed = agent.velocity.magnitude;
@@ -278,9 +279,9 @@ public class FirstPrizeScript : NPC
     [SerializeField] private bool hugAnnounced;
 
     [Header("Audio Settings")]
-    [SerializeField] private AudioClip audBang;
-    [SerializeField] private AudioClip[] aud_Found, aud_Lost, aud_Hug, aud_Random = new AudioClip[2];
-    [SerializeField] private AudioSource audioDevice, motorAudio;
+    [SerializeField] private AudioObjectyeah audBang;
+    [SerializeField] private AudioObjectyeah[] aud_Found, aud_Lost, aud_Hug, aud_Random = new AudioObjectyeah[2];
+    [SerializeField] private AudioManagerLiveReaction audioDevice, motorAudio;
     #endregion
 
     #region Internal State

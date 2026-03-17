@@ -154,7 +154,6 @@ public class ZerullBossScript : MonoBehaviour
     }
 
     [Header("Chase Music")]
-    [SerializeField] private AudioSource audioChase;
     private bool midiDrums,iframedown;
     public float iframes = 0f,stuntiem,stunTimeMult;
     [HideInInspector] public bool hitted,totemready;

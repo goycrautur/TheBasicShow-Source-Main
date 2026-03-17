@@ -6,15 +6,9 @@ public class wegachallenge : MonoBehaviour
 {
     public void Update()
     {
-        curtimesongLenght = wegasource.time;
-        if (wegasource.time >= loop1time && getloop1)
-        {
-            wegasource.time = 0;
-        }
-        if (wegasource.time >= weg1.length-0.5f && getloop2)
-        {
-            wegasource.time = loop2time;
-        }
+        curtimesongLenght = wegasource.audioDevice.time;
+        if (wegasource.audioDevice.time >= loop1time && getloop1) wegasource.SetAudioTime(0);
+        if (wegasource.audioDevice.time >= weg.audClip.length-0.5f && getloop2) wegasource.SetAudioTime(loop2time);
     }
     public void manualUpdate()
     {
@@ -23,25 +17,25 @@ public class wegachallenge : MonoBehaviour
         {
             getloop1 = true;
             WEGA.SetActive(true);
-            wegasource.clip = weg1;
-            wegasource.loop = true;
-            wegasource.Play();
+            wegasource.ClearQueue(true);
+            wegasource.QueueAudio(weg);
+            wegasource.SetLoop(true);
         }
         if (gc.notebooks == 7)
         {
-            wegasource.pitch = 1.25f;
+            wegasource.SetPitch(1.25f);
         }
         if (gc.notebooks == gc.maxNotebooks)
         {
             getloop1 = false;
             getloop2 = true;
-            wegasource.pitch = 1;
-            wegasource.time = loop2time;
+            wegasource.SetPitch(1f);
+            wegasource.SetAudioTime(loop2time);
         }
     }
     public GameObject WEGA,rory,maltigi;
-    public AudioSource wegasource;
-    public AudioClip weg1;
+    public AudioManagerLiveReaction wegasource;
+    public AudioObjectyeah weg;
     public bool getloop1,getloop2;
     public float loop1time,loop2time,curtimesongLenght,globalWegaSpeed;
     public GameControllerScript gc;

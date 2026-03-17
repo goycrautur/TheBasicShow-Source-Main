@@ -21,7 +21,8 @@ public class MenuController : MonoBehaviour
 		if (Input.GetButtonDown("Submit") && main != null)
 		{
 			misscirclscript.Transition();
-			play.Play();
+			play.ClearQueue(true);
+			play.PlaySingleClip(soun);
 		}
 	}
 
@@ -33,6 +34,7 @@ public class MenuController : MonoBehaviour
 	[SerializeField] private GameObject back, main, foward;
 	public bool isTbsTransisFUCK;
 	[SerializeField] private CircleInOutScript misscirclscript;
-	public AudioSource play;
+	public AudioManagerLiveReaction play;
+    public AudioObjectyeah soun;
 	
 }

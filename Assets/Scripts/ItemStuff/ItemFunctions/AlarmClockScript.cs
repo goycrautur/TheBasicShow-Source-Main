@@ -9,19 +9,9 @@ public class AlarmClockScript : MonoBehaviour
     #region Per-Frame Logic
     private void Update()
     {
-        if (timeLeft.CountdownWithDeltaTime() != 0)
-        {
-            UpdateDisplay();
-        }
-        else if (!rang)
-        {
-            TriggerAlarm();
-        }
-
-        if (lifeSpan.CountdownWithDeltaTime() == 0)
-        {
-            Destroy(gameObject);
-        }
+        if (timeLeft.CountdownWithDeltaTime() != 0)UpdateDisplay();
+        else if (!rang) TriggerAlarm();
+        if (lifeSpan.CountdownWithDeltaTime() == 0) Destroy(gameObject);
 
         if (Time.timeScale != 0 && trigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange,KeyFunctions.hi.PlayerClickablesLayer.value) && !rang && (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)))
         {
@@ -36,7 +26,8 @@ public class AlarmClockScript : MonoBehaviour
         currentPreset = (currentPreset + 1) % timePresets.Length;
         timeLeft = timePresets[currentPreset];
         lifeSpan = timePresets[currentPreset] + 5;
-        windAud.Play();
+        windAud.ClearQueue(true);
+        windAud.PlaySingleClip(ring);
     }
 
     private void TriggerAlarm()
@@ -44,7 +35,7 @@ public class AlarmClockScript : MonoBehaviour
         rang = true;
         gameObject.tag = "Untagged";
         Singleton<OtherMainStuffManager>.Instance.HearingShit(12f, this.transform, new Vector3(0f,0f,0f), "all",false);
-        audioDevice.PlayClip(ring, false, 1f);
+        audioDevice.PlaySingleClip(ring);
     }
 
     private void UpdateDisplay()
@@ -60,10 +51,9 @@ public class AlarmClockScript : MonoBehaviour
     public GameControllerScript gc;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip ring;
-    [SerializeField] private AudioSource audioDevice;
-    [SerializeField] private AudioSource windAud;
-
+    [SerializeField] private AudioObjectyeah ring;
+    [SerializeField] private AudioObjectyeah wind;
+    [SerializeField] private AudioManagerLiveReaction audioDevice,windAud;
     [Header("Settings")]
     [SerializeField] private int[] timePresets = { 15, 30, 45, 60 };
     [SerializeField] private float timeLeft;

@@ -12,7 +12,8 @@ public class booksInteract : Interactable
     public Color HighlightColor;
     private MaterialPropertyBlock mpb;
     [Header("Audio stuff")]
-    public AudioObjectyeah cheeseCollect,RespawnSound;
+    public AudioObjectyeah cheeseCollect;
+    public AudioObjectyeah RespawnSound;
     #region Fields
     [Header("Think Pad")]
     private LearningGameManager lgm;

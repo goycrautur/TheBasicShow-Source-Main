@@ -9,25 +9,65 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 236c482ebd8096a48bb93a133aff9474, type: 3}
+  m_Script: {fileID: 11500000, guid: b1fc016379c7c5341a7cfddd093c2e33, type: 3}
   m_Name: muchteleport
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e25266c02a0eb764cb9b047ec8ba4f89, type: 3}
-  volume: 0
   subtitleOption:
     enabled: 1
     headText: mucho_tele
-    textColor: {r: 0.627451, g: 0.1254902, b: 0.9411765, a: 1}
+    isit3d: 1
+    IgnoreTimescale: 0
+    twoDeePosition: {x: 0, y: 0, z: 0}
     duration: 0
+    colorMode: 0
+    textColor: {r: 0.627451, g: 0.1254902, b: 0.9411765, a: 1}
+    textGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    gradientAnimate: 0
+    gradientAnimationMode: 0
+    gradientSpeed: 1
+    rainbowSpeed: 1
     undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.005
     shakey: 0
-    shakeyspeed: 3000
-    shakeyradius: 3
+    shakeyspeed: 1
+    shakeyradius: 0.3
     fonts: 0
     useLocalization: 1
     unreadable: 0
     upsideDown: 0
     textReverse: 0
+    _FixedMode: 0
+    _GradientMode: 1
+    _RainbowMode: 2
   isTheSubtitlesTimed: 0
   SubtitleTimingKey: []

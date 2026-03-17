@@ -73,7 +73,6 @@ public class BaldTVyea : MonoBehaviour
     [SerializeField] private GameObject Static, Baldi, WarningMarks, famished, teacherJer;
     [SerializeField] private AudioManagerLiveReaction TelevisionDevice, BaldiDevice,famAudDevice, teacherJerAudDevice;
     [SerializeField] private AudioObjectyeah mus_Alert, aud_TimesOutBell;
-    [SerializeField] private subsScriptableObject belltimeou;
     [Header("Extras")]
     public bool Markings;
     public bool baldingit, famishingit,TeacherJerryingIt;

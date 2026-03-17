@@ -8,11 +8,7 @@ public class JumpRopeScript : MonoBehaviour
 	public void jumpRopTime(PlaytimeScript playtimething)
 	{
 		playtime = playtimething;
-		if (AdditionalGameCustomizer.Instance.RandomizeJumps)
-		{
-			maxJumps = Random.Range(1, 10);
-		}
-
+		if (AdditionalGameCustomizer.Instance.RandomizeJumps)maxJumps = Random.Range(1, 10);
 		startPos = playtime.transform.position;
 		initialized = true;
 		jumpDelay = 1f;
@@ -20,7 +16,6 @@ public class JumpRopeScript : MonoBehaviour
 		jumps = 0;
 		GameControllerScript.Instance.player.pModManag.movementModifiers.Add(jumpropeMoveModifier);
 		jumpropeMoveModifier.movementMultiplier = 0f;
-
 		KeyCode jumpKey = Singleton<InputManager>.Instance.KeyboardMapping[InputAction.Jump];
 		string jumpkeyFR = $"{jumpKey}";
 		string jumpkeyFRthe2nd = jumpkeyFR == "Mouse0" ? "Left Mouse Button" : jumpkeyFR == "Mouse1" ? "Right Mouse Button" : jumpkeyFR;
@@ -68,15 +63,8 @@ public class JumpRopeScript : MonoBehaviour
 		if (initialized)
 		{
 			startPos = playtime.transform.position;
-        	if (Singleton<InputManager>.Instance.GetActionKeyDown(InputAction.Jump) && jumpHeight <= 0f)
-			{
-        	    StartCoroutine(Jump());
-			}
-
-        	if ((GameControllerScript.Instance.player.transform.position - startPos).magnitude >= 35f)
-			{
-            	End(false);
-			}
+        	if (Singleton<InputManager>.Instance.GetActionKeyDown(InputAction.Jump) && jumpHeight <= 0f) StartCoroutine(Jump());
+        	if ((GameControllerScript.Instance.player.transform.position - startPos).magnitude >= 35f)End(false);
 		}
     }
 
@@ -109,8 +97,8 @@ public class JumpRopeScript : MonoBehaviour
 
 	private void Success()
 	{
-		playtime.audioDevice.Stop();
-		playtime.audioDevice.PlayOneShot(playtime.aud_Numbers[jumps].audios);
+		playtime.audioDevice.ClearQueue(true);
+        playtime.audioDevice.QueueAudio(playtime.aud_Numbers[jumps]);
 		jumps++;
 		jumpCount.text = $"{jumps}/{maxJumps}";
 	}
@@ -119,8 +107,8 @@ public class JumpRopeScript : MonoBehaviour
 	{
 		jumps = 0;
 		jumpCount.text = $"{jumps}/{maxJumps}";
-		playtime.audioDevice.Stop();
-		playtime.audioDevice.PlayOneShot(playtime.aud_Oops);
+		playtime.audioDevice.ClearQueue(true);
+        playtime.audioDevice.QueueAudio(playtime.aud_Oops);
 	}
 	public void End(bool success)
 	{
@@ -129,7 +117,8 @@ public class JumpRopeScript : MonoBehaviour
 			playtime.canTargetPlayer = true;
             playtime.jumpRopeStarted = false;
             playtime.PlayCool = 15f;
-            playtime.audioDevice.PlayOneShot(playtime.aud_Congrats);
+			playtime.audioDevice.ClearQueue(true);
+        	playtime.audioDevice.QueueAudio(playtime.aud_Congrats);
 		}
 		else
 		{

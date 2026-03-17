@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15072ea04a484024cb75b0f35e4b0592, type: 3}
+  m_Name: teacherJer_hi
+  m_EditorClassIdentifier: 
+  audClip: {fileID: 8300000, guid: df5a8e0906085ee4eba8e80906a7b0ec, type: 3}
+  volume: 1
+  SoundTypeWahh: 2
+  HasSubtitle: 1
+  ForcedSetAudiomixer: {fileID: 0}
+  subti: {fileID: 11400000, guid: 5932a3d9e2d1b544fbbfb7be860d4ff3, type: 2}

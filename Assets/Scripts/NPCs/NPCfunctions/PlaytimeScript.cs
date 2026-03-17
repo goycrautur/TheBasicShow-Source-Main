@@ -11,7 +11,7 @@ public class PlaytimeScript : NPC
         base.OnStart();
         runnin = true;
         canTargetPlayer = true;
-        audioDevice = GetComponent<AudioSource>();
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
         Wander();
     }
     private IEnumerator PlayCoolFunctionality()
@@ -34,14 +34,8 @@ public class PlaytimeScript : NPC
     {
         base.OnUpdate();
 
-        if (!runnin)
-        {
-            base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        }
-        if (runnin)
-        {
-            base.agentSpeed = DefaultRunSpeed * base.agentSpeedScale;
-        }
+        if (!runnin) base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        else base.agentSpeed = DefaultRunSpeed * base.agentSpeedScale;
         agent.speed = base.agentSpeed;
         if (base.stun)
         {
@@ -49,16 +43,10 @@ public class PlaytimeScript : NPC
             playerSeen = false;
             if (thosewhojumprope != null) thosewhojumprope.End(false);
         }
-        if (base.StunTime < 0f)
-        {
-            agent.speed = base.agentSpeed;
-        }
+        if (base.StunTime < 0f) agent.speed = base.agentSpeed;
         if (!jumpRopeStarted)
         {
-            if (!playerSeen && agent.velocity.magnitude <= 1f && coolDown <= 0f)
-            {
-                Wander();
-            }
+            if (!playerSeen && agent.velocity.magnitude <= 1f && coolDown <= 0f) Wander();
             jumpRopeStarted = false;
         }
         else jumpropeRaycastCheck();
@@ -72,13 +60,7 @@ public class PlaytimeScript : NPC
         {
             bool playerInRange = (transform.position - player.position).magnitude <= 50f;
 
-            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 50f, QueryTriggerInteraction.UseGlobal))
-            {
-                if (hitVape.transform.gameObject.layer == 11) 
-                {
-                    return;
-                }
-            }
+            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 50f, QueryTriggerInteraction.UseGlobal)) if (hitVape.transform.gameObject.layer == 11)  return;
             if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !ps.invisi && !ps.invisichalk)
             {
                 playerSeen = true;
@@ -111,10 +93,7 @@ public class PlaytimeScript : NPC
             if (raycastHit.transform.CompareTag("Player") && playerInRange && !gc.player.invisi && !gc.player.invisichalk)
             {
             }
-            else 
-            {
-                if (thosewhojumprope != null) thosewhojumprope.End(false);
-            }
+            else if (thosewhojumprope != null) thosewhojumprope.End(false);
         }
     }
 
@@ -133,9 +112,10 @@ public class PlaytimeScript : NPC
         if (!playerSpotted)
         {
             playerSpotted = true;
-            if (!audioDevice.isPlaying)
+            if (!audioDevice.audioDevice.isPlaying)
             {
-                audioDevice.PlayOneShot(aud_LetsPlay);
+                audioDevice.ClearQueue(true);
+                audioDevice.QueueAudio(aud_LetsPlay);
                 //UIPopupTextManagerWithMovement.Show("MemeBoiLines_1", Color.red, base.transform, aud_LetsPlay.length, 0f);
             }
         }
@@ -144,10 +124,7 @@ public class PlaytimeScript : NPC
     private void Opposition()
     {
         Vector3 directionAway = transform.position - (player.position - transform.position).normalized * 500f;
-        if (NavMesh.SamplePosition(directionAway, out NavMeshHit navMeshHit, 5f, NavMesh.AllAreas))
-        {
-            agent.SetDestination(navMeshHit.position);
-        }
+        if (NavMesh.SamplePosition(directionAway, out NavMeshHit navMeshHit, 5f, NavMesh.AllAreas)) agent.SetDestination(navMeshHit.position);
     }
     #endregion
 
@@ -165,9 +142,10 @@ public class PlaytimeScript : NPC
         playerSpotted = false;
 
         int audVal = UnityEngine.Random.Range(0, aud_Random.Length);
-        if (!audioDevice.isPlaying)
+        if (!audioDevice.audioDevice.isPlaying)
         {
-            audioDevice.PlayOneShot(aud_Random[audVal].audios);
+            audioDevice.ClearQueue(true);
+            audioDevice.QueueAudio(aud_Random[audVal]);
             //UIPopupTextManagerWithMovement.Show(aud_Random[audVal].captionsTextDatarea, aud_Random[audVal].holor, base.transform, aud_Random[audVal].audios.length, 0f);
         }
 
@@ -182,18 +160,11 @@ public class PlaytimeScript : NPC
         canTargetPlayer = false;
         disablingWandering = true;
         runnin = false;
-        
-
         Vector3 moveBackPosition = transform.position - transform.forward * 10f;
         agent.SetDestination(moveBackPosition);
         agent.speed = 16;
-
-        while (Vector3.Distance(transform.position, moveBackPosition) > 1f)
-        {
-            yield return null;
-        }
+        while (Vector3.Distance(transform.position, moveBackPosition) > 1f) yield return null;
         agent.speed = 0f;
-        
         yield break;
     }
     private void OnTriggerEnter(Collider other)
@@ -202,16 +173,14 @@ public class PlaytimeScript : NPC
         {
             if (!ps.invisi && !ps.invisichalk || !ps.invisichalk && !ps.invisi)
 			{
-                audioDevice.PlayOneShot(aud_ReadyGo);
+                audioDevice.ClearQueue(true);
+                audioDevice.QueueAudio(aud_ReadyGo);
                 jumpRopeStarted = true;
                 JumpRopeScript jumprope = Instantiate(jumpRopeGame);
                 jumprope.jumpRopTime(this);
                 thosewhojumprope = jumprope;
                 ps.jumpropes.Add(jumprope);
-                if (playingRoutine != null)
-                {
-                    StopCoroutine(playingRoutine);
-                }   
+                if (playingRoutine != null) StopCoroutine(playingRoutine);
                 playingRoutine = StartCoroutine(StartPlaying());
             }
         }
@@ -239,8 +208,8 @@ public class PlaytimeScript : NPC
 			jumpRopeStarted = false;
 			playCool = 15f;
             StartCoroutine(PlayCoolFunctionality());
-			audioDevice.Stop();
-			audioDevice.PlayOneShot(aud_Sad);
+            audioDevice.ClearQueue(true);
+            audioDevice.QueueAudio(aud_Sad);
         }
     }
     #endregion
@@ -262,10 +231,7 @@ public class PlaytimeScript : NPC
 
         set
         {
-            if (playCool != value)
-            {
-                StartCoroutine(PlayCoolFunctionality());
-            }
+            if (playCool != value) StartCoroutine(PlayCoolFunctionality());
             playCool = value;
         }
     }
@@ -281,25 +247,15 @@ public class PlaytimeScript : NPC
 
     [Header("Audio and Animations")]
     [SerializeField] private Animator animator;
-    public AudioSource audioDevice;
-    [SerializeField] private audiofunny[] aud_Random;
-    public audiofunny[] aud_Numbers;
-    [SerializeField] private AudioClip aud_LetsPlay, aud_Sad;
-    public AudioClip aud_Congrats, aud_ReadyGo, aud_Oops;
+    public AudioManagerLiveReaction audioDevice;
+    [SerializeField] private AudioObjectyeah[] aud_Random;
+    public AudioObjectyeah[] aud_Numbers;
+    [SerializeField] private AudioObjectyeah aud_LetsPlay, aud_Sad;
+    public AudioObjectyeah aud_Congrats, aud_ReadyGo, aud_Oops;
     private bool playerSeen, playerSpotted;
     public bool dontUpdateTheSpeedYOUFUCKINGBITCH,disablingWandering;
     private Coroutine playingRoutine;
     [HideInInspector] public bool jumpRopeStarted;
     [HideInInspector] public JumpRopeScript thosewhojumprope;
     #endregion
-    [Serializable]
-    public class audiofunny
-    {
-        [SerializeField]
-        public AudioClip audios;
-        [SerializeField]
-        public string captionsTextDatarea;
-        [SerializeField]
-        public Color holor;
-    }
 }

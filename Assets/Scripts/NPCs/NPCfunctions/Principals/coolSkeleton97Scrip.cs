@@ -326,7 +326,6 @@ public class coolSkeleton97Scrip : NPC
     public int detentions;
     public float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
     [SerializeField] private int[] lockTime = { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 99 };
-    public AudioSource AudioDevice;
     public bool summon, seesRuleBreak, bullySeen, inOffice,brogotcalled;
     public RaycastHit hit;
     public Vector3 aim;

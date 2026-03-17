@@ -8,20 +8,12 @@ public class zerullscript : NPC
     public override void OnStart()
     {
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        if (chair)
-        {
-            normalSprite.sprite = ChairSprite;
-        }
+        if (chair) normalSprite.sprite = ChairSprite;
         base.OnStart();
-        zeraudio = GetComponent<AudioSource>();
+        zeraudio = GetComponent<AudioManagerLiveReaction>();
         GetAngry(0f);
         Move();
-
-        if (endless)
-        {
-            Endless();
-        }
-
+        if (endless) Endless();
         Wander();
     }
     public override void OnEnable()
@@ -96,19 +88,9 @@ public class zerullscript : NPC
     {
         if (isActiveAndEnabled)
         {
-            if (Wait < 30f)
-            {
-                agent.speed = base.agentSpeed;
-            }
-            if (Wait > 30f)
-            {
-                agent.speed = base.agentSpeed * (Wait/30);
-            }
-
-            if (!stopMoving)
-            {
-                Invoke(nameof(OnMoveDone), timeToMove);
-            }
+            if (Wait < 30f) agent.speed = base.agentSpeed;
+            if (Wait > 30f) agent.speed = base.agentSpeed * (Wait/30);
+            if (!stopMoving) Invoke(nameof(OnMoveDone), timeToMove);
             resetWaitTime();
         }
     }
@@ -120,16 +102,8 @@ public class zerullscript : NPC
     private void OnMoveDone()
     {
         agent.speed = 0;
-
-        if (agent.remainingDistance <= 0.1f)
-        {
-            Wander();
-        }
-
-        if (!stopMoving)
-        {
-            Invoke(nameof(Move), Wait);
-        }
+        if (agent.remainingDistance <= 0.1f) Wander();
+        if (!stopMoving) Invoke(nameof(Move), Wait);
     }
     #endregion
     private void OnTriggerStay(Collider play)
@@ -149,10 +123,7 @@ public class zerullscript : NPC
     {
         Anger += value;
 
-        if (Anger < 0.5f)
-        {
-            Anger = 0.5f;
-        }
+        if (Anger < 0.5f) Anger = 0.5f;
     }
 
     public void GetTempAngry(float value) => TempAnger += value;
@@ -193,8 +164,8 @@ public class zerullscript : NPC
             {
                 if (!inNoSqueeArea)
                 {
-                baldicator.Rebind();
-                baldicator.Play("Indicator_Heared", -1, 0f);
+                    erucato.Rebind();
+                    erucato.Play("Indicator_Heared", -1, 0f);
                 }
             }
         }
@@ -204,8 +175,8 @@ public class zerullscript : NPC
             {
                 if (!inNoSqueeArea)
                 {
-                baldicator.Rebind();
-                baldicator.Play("Indicator_Confused", -1, 0f);
+                    erucato.Rebind();
+                    erucato.Play("Indicator_Confused", -1, 0f);
                 }
             }
         }
@@ -233,10 +204,10 @@ public class zerullscript : NPC
     public bool endless;
 
     [Header("Audio and Animation")]
-    [SerializeField] private Animator baldicator;
+    [SerializeField] private Animator erucato;
 
     private float currentPriority;
-    private AudioSource zeraudio;
+    private AudioManagerLiveReaction zeraudio;
     [SerializeField] private SpriteRenderer normalSprite;
     [SerializeField] private Sprite ChairSprite;
     #endregion

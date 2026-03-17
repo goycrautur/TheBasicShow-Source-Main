@@ -2,13 +2,14 @@
 
 public class NeedMoreScript : MonoBehaviour
 {
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider other) 
 	{
-		if (gc.notebooks < gc.UnlockAmount & other.CompareTag("Player"))
+		if (gc.notebooks < gc.UnlockAmount & other.CompareTag("Player")) 
 		{
-			if (!audioDevice.isPlaying)
+			if (!audioDevice.audioDevice.isPlaying) 
 			{
-                audioDevice.PlayOneShot(baldiDoor, 1f);
+				audioDevice.ClearQueue(true);
+				audioDevice.PlaySingleClip(baldiDoor);
 			}
 		}
 	}
@@ -17,6 +18,6 @@ public class NeedMoreScript : MonoBehaviour
 	[SerializeField] private GameControllerScript gc;
 
 	[Header("Audio")]
-	[SerializeField] private AudioSource audioDevice;
-    [SerializeField] private AudioClip baldiDoor;
+	[SerializeField] private AudioManagerLiveReaction audioDevice;
+    [SerializeField] private AudioObjectyeah baldiDoor;
 }

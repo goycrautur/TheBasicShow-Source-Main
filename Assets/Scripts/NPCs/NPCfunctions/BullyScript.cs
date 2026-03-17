@@ -7,7 +7,7 @@ public class BullyScript : MonoBehaviour
     #region Unity Lifecycle
     private void Start()
     {
-        audioDevice = GetComponent<AudioSource>();
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
         StartCoroutine(WaitAndActivate());
     }
     public void OnEnable()
@@ -28,39 +28,21 @@ public class BullyScript : MonoBehaviour
             if (activeTime >= 180f)
             {
                 Reset();
-                if (!audioDevice.isPlaying)
+                if (!audioDevice.audioDevice.isPlaying) 
                 {
-                    audioDevice.PlayOneShot(aud_Bored);
+                    audioDevice.ClearQueue(true);
+                    audioDevice.PlaySingleClip(aud_Bored);
                 }
             }
         }
 
         guilt = Mathf.Max(guilt - Time.deltaTime, 0f);
-        foreach (PrincipalScript prin in GameControllerScript.Instance.prinScr)
-        {
-            if (prin.isActiveAndEnabled)
-            {
-                prinvec3 = prin.transform.position;
-            }
-        }
-        foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr)
-        {
-            if (maxi.isActiveAndEnabled)
-            {
-                maxvec3 = maxi.transform.position;
-            }
-        }
-        foreach (coolSkeleton97Scrip cs97 in GameControllerScript.Instance.cs97Scr)
-        {
-            if (cs97.isActiveAndEnabled)
-            {
-                cs97vec3 = cs97.transform.position;
-            }
-        }
+        foreach (PrincipalScript prin in GameControllerScript.Instance.prinScr) if (prin.isActiveAndEnabled) prinvec3 = prin.transform.position;
+        foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxvec3 = maxi.transform.position;
+        foreach (coolSkeleton97Scrip cs97 in GameControllerScript.Instance.cs97Scr) if (cs97.isActiveAndEnabled) cs97vec3 = cs97.transform.position;
         Vector3 totalVectorShit = prinvec3 + maxvec3 + cs97vec3;
         float distance = Vector3.Distance(totalVectorShit, Obstacle.transform.position);
         Obstacle.enabled = distance >= ignoreDistance;
-
         extraStuff();
     }
 
@@ -79,7 +61,9 @@ public class BullyScript : MonoBehaviour
                 if (!spoken)
                 {
                     int num = Random.Range(0, aud_Taunts.Length);
-                    audioDevice.PlayOneShot(aud_Taunts[num]);
+                    audioDevice.ClearQueue(true);
+                    audioDevice.PlaySingleClip(aud_Taunts[num]);
+                    
                     spoken = true;
                 }
             }
@@ -95,23 +79,14 @@ public class BullyScript : MonoBehaviour
         {
             waitTime = Random.Range(10f,2f);
             yield return new WaitForSeconds(waitTime);
-
-            if (!active)
-            {
-                Activate();
-            }
+            if (!active) Activate();
         }
     }
 
     private void Activate()
     {
         transform.position = wanderer.SetNewTargetForAgent(null, "hall") + Vector3.up * 5f;
-
-        while ((transform.position - player.position).magnitude < 20f)
-        {
-            transform.position = wanderer.SetNewTargetForAgent(null, "hall") + Vector3.up * 5f;
-        }
-
+        while ((transform.position - player.position).magnitude < 20f) transform.position = wanderer.SetNewTargetForAgent(null, "hall") + Vector3.up * 5f;
         active = true;
     }
 
@@ -136,10 +111,7 @@ public class BullyScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if ((other.transform.GetComponent<PrincipalScript>() != null && guilt > 0f) || (other.transform.GetComponent<MaxcipalScript>() != null && guilt > 0f))
-        {
-            Reset();
-        }
+        if ((other.transform.GetComponent<PrincipalScript>() != null && guilt > 0f) || (other.transform.GetComponent<MaxcipalScript>() != null && guilt > 0f)) Reset();
     }
 
     private void HandlePlayerPush(Collider playerCollider)
@@ -160,11 +132,11 @@ public class BullyScript : MonoBehaviour
 
         if (!hasItems)
         {
-            if (!audioDevice.isPlaying)
+            if (!audioDevice.audioDevice.isPlaying) 
             {
-                audioDevice.PlayOneShot(aud_Denied);
+                audioDevice.ClearQueue(true);
+                audioDevice.PlaySingleClip(aud_Denied);
             }
-
             Vector3 pushDirection = (playerCollider.transform.position - transform.position).normalized;
             pushCoroutine = StartCoroutine(SmoothPushBack(playerCollider.transform, pushDirection, 16f, 16f / 32f));
         }
@@ -172,22 +144,13 @@ public class BullyScript : MonoBehaviour
         {
             int num = Mathf.RoundToInt(Random.Range(0, ItemManager.Instance.Inventory.Length));
 
-            while (ItemManager.Instance.Inventory[num].ItemID == 0)
-            {
-                num = Mathf.RoundToInt(Random.Range(0, ItemManager.Instance.Inventory.Length));
-            }
-
-            if (ItemManager.Instance.Inventory[num].ItemInstance != null && !ItemManager.Instance.Inventory[num].ItemInstance.unableToGetStealed)
-            {
-                Destroy(ItemManager.Instance.Inventory[num].ItemInstance.gameObject);
-            }
-
+            while (ItemManager.Instance.Inventory[num].ItemID == 0) num = Mathf.RoundToInt(Random.Range(0, ItemManager.Instance.Inventory.Length));
+            if (ItemManager.Instance.Inventory[num].ItemInstance != null && !ItemManager.Instance.Inventory[num].ItemInstance.unableToGetStealed) Destroy(ItemManager.Instance.Inventory[num].ItemInstance.gameObject);
             ItemManager.Instance.ClearItem(num,false);
             ItemManager.Instance.UpdateItemUI();
-
             int num2 = Random.Range(0, aud_Thanks.Length);
-            audioDevice.PlayOneShot(aud_Thanks[num2]);
-
+            audioDevice.ClearQueue(true);
+            audioDevice.PlaySingleClip(aud_Thanks[num2]);
             Reset();
         }
     }
@@ -210,10 +173,7 @@ public class BullyScript : MonoBehaviour
         Vector3 targetPosition = startPosition + pushDirection * pushDistance;
         float elapsedTime = 0f;
 
-        if (Physics.Raycast(startPosition, pushDirection, out RaycastHit hit, pushDistance))
-        {
-            targetPosition = hit.point - pushDirection * 0.1f;
-        }
+        if (Physics.Raycast(startPosition, pushDirection, out RaycastHit hit, pushDistance)) targetPosition = hit.point - pushDirection * 0.1f;
 
         while (elapsedTime < duration)
         {
@@ -247,11 +207,11 @@ public class BullyScript : MonoBehaviour
     public float guilt;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip[] aud_Taunts = new AudioClip[2];
-    [SerializeField] private AudioClip[] aud_Thanks = new AudioClip[2];
-    [SerializeField] private AudioClip aud_Denied, aud_Bored;
+    [SerializeField] private AudioObjectyeah[] aud_Taunts = new AudioObjectyeah[2];
+    [SerializeField] private AudioObjectyeah[] aud_Thanks = new AudioObjectyeah[2];
+    [SerializeField] private AudioObjectyeah aud_Denied, aud_Bored;
 
-    private AudioSource audioDevice;
+    private AudioManagerLiveReaction audioDevice;
     private Coroutine pushCoroutine;
     #endregion
 }

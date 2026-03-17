@@ -25,16 +25,12 @@ public class CircleInOutScript : MonoBehaviour
     {
         DiscordRPC_stuff.current.UpdateStatus("transistioning,.,.,.", "mwah", largimag, largtext);
         Cursor.LockCursor();
-        if (!fastTransistion)
-        {
-            yield return new WaitForSecondsRealtime(0.7f);
-        }
         from.GetComponent<Animator>().SetTrigger("nooo");
         if (changeMusik)
         {
-            menumusi.clip = theme;
-            menumusi.loop = true;
-            menumusi.Play();
+            menumusi.ClearQueue(true);
+            menumusi.QueueAudio(theme);
+            menumusi.SetLoop(true);
         }
         yield return new WaitForSecondsRealtime(1.55f);
         to.transform.parent.gameObject.SetActive(true);
@@ -49,8 +45,8 @@ public class CircleInOutScript : MonoBehaviour
     public GameObject from;
     public GameObject to;
     public bool changeMusik;
-    public AudioSource menumusi;
-    public AudioClip theme;
+    public AudioManagerLiveReaction menumusi;
+    public AudioObjectyeah theme;
     [SerializeField] private CursorControllerScript Cursor;
     public bool fastTransistion;
 }

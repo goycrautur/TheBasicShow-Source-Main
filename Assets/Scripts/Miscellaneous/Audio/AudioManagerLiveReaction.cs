@@ -5,10 +5,7 @@ using System.Collections.Generic;
 
 public class AudioManagerLiveReaction : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        InitialiUhh();
-    }
+    private void OnEnable() => InitialiUhh();
     private void OnDestroy()
     {
         SubtitlesManagerAkaSubtitleSpawnOkSDIYBT.SubtitleTotalId = totalIds - 1;
@@ -19,12 +16,6 @@ public class AudioManagerLiveReaction : MonoBehaviour
         SubtitlesManagerAkaSubtitleSpawnOkSDIYBT.SubtitleTotalId = totalIds - 1;
         Array.Resize(ref SubtitlesManagerAkaSubtitleSpawnOkSDIYBT.Instance.subsObjectIdSon, totalIds - 1);
     }
-    #region Initialization
-    private void Awake()
-    {
-        InitialiUhh();
-    }
-    #endregion
 
     #region PlaybackControl
     public void InitialiUhh()
@@ -37,7 +28,6 @@ public class AudioManagerLiveReaction : MonoBehaviour
             Array.Resize(ref SubtitlesManagerAkaSubtitleSpawnOkSDIYBT.Instance.subsObjectIdSon, totalIds + 1);
         }
         if (audioDevice == null) audioDevice = GetComponent<AudioSource>();
-
         if (PlayAtAwake && thoseWhoObject != null) PlaySingleClip(thoseWhoObject);
         SetLoop(StartingLoop);
     }
@@ -104,10 +94,7 @@ public class AudioManagerLiveReaction : MonoBehaviour
     #endregion
 
     #region uhh
-    public void makesub(subsScriptableObject sub, Vector2 hi)
-    {
-        Singleton<SubtitlesManagerAkaSubtitleSpawnOkSDIYBT>.Instance.summonLeSubtitle(sub.subtitleOption, sourceId, sub, audioDevice, hi);
-    }
+    public void makesub(subsScriptableObject sub, Vector2 hi) => Singleton<SubtitlesManagerAkaSubtitleSpawnOkSDIYBT>.Instance.summonLeSubtitle(sub.subtitleOption, sourceId, sub, audioDevice, hi);
     #endregion
 
     #region AudioEffects
@@ -131,18 +118,10 @@ public class AudioManagerLiveReaction : MonoBehaviour
         audioDevice.volume = vol;
         yield break;
     }
-    public void SetIgnoreListenerPause(bool toggle)
-    {
-        audioDevice.ignoreListenerPause = toggle;
-    }
-    public void SetMute(bool toggle)
-    {
-        audioDevice.mute = toggle;
-    }
-    public void SetPitch(float pitch)
-    {
-        audioDevice.pitch = pitch;
-    }
+    public void SetAudioTime(float time) => audioDevice.time = time;
+    public void SetIgnoreListenerPause(bool toggle) => audioDevice.ignoreListenerPause = toggle;
+    public void SetMute(bool toggle) => audioDevice.mute = toggle;
+    public void SetPitch(float pitch) =>  audioDevice.pitch = pitch;
 
     public void SetLoop(bool toggle)
     {

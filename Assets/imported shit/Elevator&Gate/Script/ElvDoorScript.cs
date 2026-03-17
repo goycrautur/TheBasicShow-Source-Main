@@ -18,11 +18,11 @@ public class ElvDoorScript : MonoBehaviour
 
     [SerializeField] private MeshCollider elvOutCollider;
     [SerializeField] private Animator elvDoorInAnimator,elvDoorOutAnimator;
-    [SerializeField] private AudioClip doorOpenClip,doorCloseClip;
+    [SerializeField] private AudioObjectyeah doorOpenClip,doorCloseClip;
     [SerializeField] private GateScript currentGate;
 
     private GameControllerScript gc;
-    private AudioSource audioSource;
+    private AudioManagerLiveReaction audioSource;
     private float openTimer;
 
     #region Unity Methods
@@ -30,7 +30,7 @@ public class ElvDoorScript : MonoBehaviour
     private void Start()
     {
         gc = FindObjectOfType<GameControllerScript>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioManagerLiveReaction>();
 
         if (entranceElevator)
         {
@@ -70,15 +70,8 @@ public class ElvDoorScript : MonoBehaviour
 
     private void HandleOpenTimer()
     {
-        if (canOpen && openTimer > 0f)
-        {
-            openTimer -= Time.deltaTime;
-        }
-
-        if (canOpen && openTimer <= 0f && !opening)
-        {
-            OpenDoors();
-        }
+        if (canOpen && openTimer > 0f) openTimer -= Time.deltaTime;
+        if (canOpen && openTimer <= 0f && !opening) OpenDoors();
     }
 
     private void OpenDoors()
@@ -86,8 +79,8 @@ public class ElvDoorScript : MonoBehaviour
         MapSideIcon.SetActive(false);
         opening = true;
         openTimer = -5f; // prevents repeated opening
-
-        audioSource.PlayOneShot(doorOpenClip);
+        audioSource.ClearQueue(true);
+        audioSource.PlaySingleClip(doorOpenClip);
         elvDoorInAnimator.SetTrigger("Open");
         elvDoorOutAnimator.SetTrigger("Open");
     }
@@ -110,20 +103,16 @@ public class ElvDoorScript : MonoBehaviour
     public void Close()
     {
         if (!canOpen || !opening) return;
-
-        if (gc.finaleMode || gc.mode == "LappingOfAsylum" && gc.LapManag.allowClosElev)
-        {
-            currentGate?.Down();
-        }
+        if (gc.finaleMode || gc.mode == "LappingOfAsylum" && gc.LapManag.allowClosElev) currentGate?.Down();
         Opendor = false;
         opening = false;
         openTimer = 99f;
         canOpen = false;
         MapSideIcon.SetActive(true);
-        audioSource.PlayOneShot(doorCloseClip);
+        audioSource.ClearQueue(true);
+        audioSource.PlaySingleClip(doorCloseClip);
         elvDoorInAnimator.SetTrigger("Close");
         elvDoorOutAnimator.SetTrigger("Close");
-
         if (triggered)
         {
             finaleActivated = true;

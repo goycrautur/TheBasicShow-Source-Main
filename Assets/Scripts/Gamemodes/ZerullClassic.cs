@@ -52,8 +52,8 @@ public class ZerullClassic : MonoBehaviour
     [Tooltip("If it's set to null, game will use optimized version")] public Slider healthSlider;
 
     [Header("Audio"), SerializeField, Tooltip("Boss Music (Boss Clips located at NullScript object)")]
-    private AudioClip[] Boss_Music;
-    [SerializeField, Tooltip("Music")] private AudioSource musicAudio, musicLoop;
+    private AudioObjectyeah[] Boss_Music;
+    [SerializeField, Tooltip("Music")] private AudioManagerLiveReaction musicAudio, musicLoop;
 
     [Header("the fucking midi tempo"), Tooltip("do i have to elaborate about what this does")] public float midiTempo = 1f;
 
@@ -157,10 +157,7 @@ public class ZerullClassic : MonoBehaviour
     }
     private void MidiEvent(MPTKEvent midiEvent)
 	{
-		if (ableToStart && midiEvent.Command == MPTKCommand.MetaEvent && midiEvent.Meta == MPTKMeta.TextEvent)
-		{
-			Singleton<VertexGlitchManager>.Instance.Glitch();
-		}
+		if (ableToStart && midiEvent.Command == MPTKCommand.MetaEvent && midiEvent.Meta == MPTKMeta.TextEvent)Singleton<VertexGlitchManager>.Instance.Glitch();
 	}
 
     private void Update()
@@ -183,13 +180,7 @@ public class ZerullClassic : MonoBehaviour
         if (ShowHealthSlider)
         {
             healthSlider.maxValue = maxHealth - 1f;
-            if (healthSlider != null)
-            {
-                if (healthSlider.value != curHealthValueForLerping)
-                {
-                    healthSlider.value = curHealthValueForLerping;
-                }
-            }
+            if (healthSlider != null) if (healthSlider.value != curHealthValueForLerping) healthSlider.value = curHealthValueForLerping;
         }
         if (realBossStarted)
         {
@@ -197,17 +188,11 @@ public class ZerullClassic : MonoBehaviour
         }
         if (AllowProjectileSpawn)
         {
-            if (objects > maxObjects)
-            {
-                objects = maxObjects;
-            }
-            if (spawnCooldown > 0f)spawnCooldown -= Time.deltaTime;
+            if (objects > maxObjects) objects = maxObjects;
+            if (spawnCooldown > 0f) spawnCooldown -= Time.deltaTime;
             if (spawnCooldown <= 0f)
             {
-                if (objects < maxObjects)
-                {
-                    SpawnProjectile(false, false);
-                }
+                if (objects < maxObjects) SpawnProjectile(false, false);
                 spawnCooldown = 25f;
             }
             if (!projectilesDoNotExist && objects == 0)
@@ -222,10 +207,7 @@ public class ZerullClassic : MonoBehaviour
     {
         scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
         Prepare();
-        if (debugMode)
-        {
-            Debug.Log("Bossfight");
-        }
+        if (debugMode) Debug.Log("Bossfight");
         zs.sprite.gameObject.SetActive(true);
         debug = true; // Makes that null doesn't able to kill player
         zs.Agent.speed = 140f; // Make null very fast for time
@@ -263,7 +245,9 @@ public class ZerullClassic : MonoBehaviour
         GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultRunSpeed;
         if (!StartSongsIsMidi)
         {
-            PlayMusic(musicAudio, Boss_Music[0], true);
+            musicAudio.ClearQueue(true);
+            musicAudio.QueueAudio(Boss_Music[0]);
+            musicAudio.SetLoop(true);
         }
         else
         {
@@ -299,11 +283,12 @@ public class ZerullClassic : MonoBehaviour
 
         RemoveProjectiles(); // Remove projectiles
 
-        Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = musicLoop; // Make vertex shake sync to music
+        Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = musicLoop.audioDevice; // Make vertex shake sync to music
 
         if (!StartSongsIsMidi)
         {
-            PlayMusic(musicAudio, Boss_Music[1], false);
+            musicAudio.ClearQueue(true);
+            musicAudio.QueueAudio(Boss_Music[0]);
         }
         else
         {
@@ -324,7 +309,7 @@ public class ZerullClassic : MonoBehaviour
         gc.modeState = "he pissed";
         if (!StartSongsIsMidi) 
         {
-            yield return new WaitForSeconds(Boss_Music[1].length); // Wait until the music will end
+            yield return new WaitForSeconds(Boss_Music[1].audClip.length); // Wait until the music will end
             BossBegin(); // Start boss
         }
     }
@@ -340,40 +325,31 @@ public class ZerullClassic : MonoBehaviour
             meepTimerScript.Instance.canTime = true;
         }
         isbroyapping = false;
-        if (debugMode)
-        {
-            Debug.Log("Boss Loop");
-        }
-
+        if (debugMode) Debug.Log("Boss Loop");
         debug = false; // Disable debug to make null able to kill player
-
-
         spawnCooldown = 1f; // Set spawn cooldown to 1
-
         GameControllerScript.Instance.player.walkSpeed = PlayerSpeed;
         GameControllerScript.Instance.player.runSpeed = PlayerSpeed;
-
         zs.Agent.speed = BossSpeed; // Set Null speed to BossSpeed (20)
         zs.Agent.isStopped = false; // Unstop Null agent
         zs.Target = GameControllerScript.Instance.player.transform; // Set Null target to Player
-
         if (VertexShake) // If VertexShake bool enabled, start Vertex Shaking (wall shake)
         {
             Singleton<VertexGlitchManager>.Instance.BossStartShake(); // Start null angry vertex shake
             Singleton<VertexGlitchManager>.Instance.mustGlitch = true; // Make walls to shake
         }
-
         realBossStarted = true; // Real Boss Started
-
-        musicAudio.Stop(); // Stop Intro/Hit music
+        musicAudio.ClearQueue(true); // Stop Intro/Hit music
 
         if (!Midi) // If Midi bool is not enabled
         {
-            PlayMusic(musicLoop, Boss_Music[2], true); // Play normal music
+            musicAudio.ClearQueue(true);
+            musicAudio.QueueAudio(Boss_Music[2]);
+            musicAudio.SetLoop(true); // Play normal music
         }
         else // If Midi bool is enabled
         {
-            if (musicLoop != null) musicLoop.Stop();
+            if (musicLoop != null) musicLoop.ClearQueue(true);
         }
         ShowCustomThings();
     }
@@ -464,8 +440,8 @@ public class ZerullClassic : MonoBehaviour
         zs.gameObject.SetActive(false);
         gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
 
-        musicAudio.Stop();
-        musicLoop.Stop();
+        musicAudio.ClearQueue(true);
+        musicLoop.ClearQueue(true);
 
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
         Shader.SetGlobalFloat("_VertexGlitchIntensity", 0f);
@@ -499,12 +475,6 @@ public class ZerullClassic : MonoBehaviour
         debug = false;
         if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
         else Singleton<MusicManagerMaes>.Instance.HangMidi(stop: true, keepDrums: true);
-    }
-    private void PlayMusic(AudioSource source, AudioClip clip, bool loop = false)
-    {
-        source.clip = clip;
-        source.loop = loop;
-        source.Play();
     }
     public GameObject SpawnProjectile(Transform transform, bool noRandom = false, int projectileVal = 0) => Instantiate<GameObject>(projectileprefabs[noRandom ? projectileVal : Random.Range(0, projectileprefabs.Length)], transform.position, Quaternion.identity);
 

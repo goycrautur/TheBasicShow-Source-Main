@@ -131,10 +131,7 @@ public class MathMachineScript : MonoBehaviour
             GameControllerScript.Instance.isHoldingBall = false;
             disabled = null;
             won = true;
-            if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
-            {
-                meepTimerScript.Instance.AddTime(35f,Color.green);
-            }
+            if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(35f,Color.green);
             if (!GameControllerScript.Instance.spoopMode & GameControllerScript.Instance.notebooks == 1) // If this is the players first notebook and they didn't get any questions wrong, reward them with a quarter
             {
                 if (GameControllerScript.Instance.mode == "story")

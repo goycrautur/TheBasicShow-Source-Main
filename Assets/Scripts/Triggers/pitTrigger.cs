@@ -6,15 +6,12 @@ public class pitTrigger : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-			if (!huh)
-			{
-				pitHole.Instance.switchmodeStuff();
-			}
+			if (!huh) pitHole.Instance.switchmodeStuff();
 			else
             {
-				pitManager.Instance.PitAudSourc.clip = pitManager.Instance.Pitpeaksound;
-				pitManager.Instance.PitAudSourc.loop = true;
-                pitManager.Instance.PitAudSourc.Play();
+				pitManager.Instance.PitAudSourc.ClearQueue(true);
+				pitManager.Instance.PitAudSourc.QueueAudio(pitManager.Instance.Pitpeaksound);
+				pitManager.Instance.PitAudSourc.SetLoop(true);
             }
 		}
 	}

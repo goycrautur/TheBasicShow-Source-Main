@@ -68,11 +68,7 @@ public class GateScript : MonoBehaviour
             audioSource.audioDevice.Pause();
             return;
         }
-
-        if (!audioSource.audioDevice.isPlaying && activated)
-        {
-            audioSource.audioDevice.UnPause();
-        }
+        if (!audioSource.audioDevice.isPlaying && activated) audioSource.audioDevice.UnPause();
     }
     public void Down(bool hi = true)
     {

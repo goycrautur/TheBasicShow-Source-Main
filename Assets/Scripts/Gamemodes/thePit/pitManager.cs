@@ -17,16 +17,13 @@ public class pitManager : MonoBehaviour
         string mode = PlayerPrefs.GetString("CurrentMode");
         if (mode == "thePit")
         {
-            for (int i = 0; i < HudElementToHide.Length; ++i)
-            {
-                HudElementToHide[i].SetActive(false);
-            }
+            for (int i = 0; i < HudElementToHide.Length; ++i) HudElementToHide[i].SetActive(false);
             GameControllerScript.Instance.player.transform.position = TpPoint.transform.position;
         }
 
     }
     public GameObject[] HudElementToHide;
     public GameObject TpPoint;
-    public AudioSource PitAudSourc;
-    public AudioClip Pitpeaksound;
+    public AudioManagerLiveReaction PitAudSourc;
+    public AudioObjectyeah Pitpeaksound;
 }

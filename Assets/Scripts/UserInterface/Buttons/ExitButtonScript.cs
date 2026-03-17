@@ -5,10 +5,10 @@ public class ExitButtonScript : MonoBehaviour
 {
 	public void ExitGame()
 	{
-		BaldiSource.Stop();
-		BaldiSource.PlayOneShot(aud_Thanks);
+		BaldiSource.ClearQueue();
+		BaldiSource.PlaySingleClip(aud_Thanks);
 		Cursor.LockCursor();
-		StartCoroutine(WaitForAudio(aud_Thanks.length));
+		StartCoroutine(WaitForAudio(aud_Thanks.audClip.length));
 	}
 
 	private IEnumerator WaitForAudio(float time)
@@ -24,6 +24,6 @@ public class ExitButtonScript : MonoBehaviour
 
 	[Header("References")]
 	[SerializeField] private CursorControllerScript Cursor;
-    [SerializeField] private AudioSource BaldiSource;
-	[SerializeField] private AudioClip aud_Thanks;
+    [SerializeField] private AudioManagerLiveReaction BaldiSource;
+	[SerializeField] private AudioObjectyeah aud_Thanks;
 }
