@@ -324,9 +324,7 @@ public class GameControllerScript : MonoBehaviour
             audOverVal = (int)UnityEngine.Random.Range(0f, lbams.LoseSounds.Length);
             lbams.PlayClip(lbams.GameOverSource,lbams.LoseSounds[audOverVal]);
         }
-
         if (mode == "endless" && notebooks > PlayerPrefs.GetInt("HighBooks") && !highScoreText.activeSelf) highScoreText.SetActive(true);
-
         if (gameOverDelay <= 0f)
         {
             if (mode == "endless")
@@ -384,13 +382,13 @@ public class GameControllerScript : MonoBehaviour
     {
         if (mode == "story")
         {
-            Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
+            //Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
             lbams.PlayClip(lbams.EscapeMusic,lbams.shithourIntro);
-            MusicGO = true;
+            //MusicGO = true;
             yield return new WaitForSeconds(lbams.shithourIntro.audClip.length);
             lbams.EscapeMusic.ClearQueue(true);
             lbams.PlayClip(lbams.EscapeMusic,lbams.shithourLoop,true);
-            Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = lbams.EscapeMusic.audioDevice;
+            //Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = lbams.EscapeMusic.audioDevice;
         }
     }
     public IEnumerator basicShowMusicShit()

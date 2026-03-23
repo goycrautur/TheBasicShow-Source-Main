@@ -65,12 +65,11 @@ public class AudioManagerLiveReaction : MonoBehaviour
         queuedSubtitles.Clear();
         if (EndCurrent)
         {
-            
             audioDevice.volume = 1;
             if (audioDevice.loop) audioDevice.loop = false;
             if (audioDevice.mute) audioDevice.mute = false;
             if (audioDevice.pitch != 1) audioDevice.pitch = 1;
-            Singleton<SubtitlesManagerAkaSubtitleSpawnOkSDIYBT>.Instance.endSubtitle(sourceId);
+            SubtitlesManagerAkaSubtitleSpawnOkSDIYBT.Instance.endSubtitle(sourceId);
             audioDevice.Stop();
         }
     }
@@ -94,34 +93,15 @@ public class AudioManagerLiveReaction : MonoBehaviour
     #endregion
 
     #region uhh
-    public void makesub(subsScriptableObject sub, Vector2 hi) => Singleton<SubtitlesManagerAkaSubtitleSpawnOkSDIYBT>.Instance.summonLeSubtitle(sub.subtitleOption, sourceId, sub, audioDevice, hi);
+    public void makesub(subsScriptableObject sub, Vector2 hi) => SubtitlesManagerAkaSubtitleSpawnOkSDIYBT.Instance.summonLeSubtitle(sub.subtitleOption, sourceId, sub, audioDevice, hi);
     #endregion
 
     #region AudioEffects
-    public IEnumerator FadeOut(float duration)
-    {
-        float startVolume = audioDevice.volume;
-        while (audioDevice.volume > 0)
-        {
-            audioDevice.volume -= startVolume * Time.unscaledDeltaTime / duration;
-            yield return null;
-        }
-        yield break;
-    }
-    public IEnumerator FadeIn(float duration, float vol)
-    {
-        while (audioDevice.volume < vol)
-        {
-            audioDevice.volume += Time.unscaledDeltaTime / duration;
-            yield return null;
-        }
-        audioDevice.volume = vol;
-        yield break;
-    }
     public void SetAudioTime(float time) => audioDevice.time = time;
     public void SetIgnoreListenerPause(bool toggle) => audioDevice.ignoreListenerPause = toggle;
     public void SetMute(bool toggle) => audioDevice.mute = toggle;
     public void SetPitch(float pitch) =>  audioDevice.pitch = pitch;
+    public void SetVolume(float vol) =>  audioDevice.volume = vol;
 
     public void SetLoop(bool toggle)
     {

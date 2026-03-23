@@ -16,7 +16,7 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
     public GameObject windoIcon1;
     public GameObject windoIcon2;
     [Header("\nmisc setting\n")]
-    public bool UseCustomBoxCollider = true;
+    public bool UseCustomBoxCollider = false;
     [Header("\nmain stuff\n")]
     public WindowData WinData;
     public void Start()
@@ -122,12 +122,12 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             if (enableOffMeshScript)
             {
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
+                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
             }
             else
             {
                 this.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 0.1f);
+                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
             }
             this.gameObject.layer = LayerMask.NameToLayer("Default");
         }

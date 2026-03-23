@@ -15,6 +15,6 @@ MonoBehaviour:
   audClip: {fileID: 8300000, guid: 5337c84e928fa254ba796ca012f3b1e1, type: 3}
   volume: 1
   SoundTypeWahh: 1
-  HasSubtitle: 0
+  HasSubtitle: 1
   ForcedSetAudiomixer: {fileID: 0}
-  subti: {fileID: 0}
+  subti: {fileID: 11400000, guid: a3f6673cc7150e84c8eeb10420005e9b, type: 2}

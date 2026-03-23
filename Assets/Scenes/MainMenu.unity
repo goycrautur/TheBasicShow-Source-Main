@@ -2396,6 +2396,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 0
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!114 &565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2737,6 +2738,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!114 &751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2757,6 +2759,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 0
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!114 &752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,6 +2852,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!114 &813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3047,6 +3051,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 0
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!114 &841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3189,6 +3194,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 0
   misscirclscript: {fileID: 1903869033}
   play: {fileID: 962613037}
+  soun: {fileID: 0}
 --- !u!114 &883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5392,6 +5398,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 0
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!224 &141214481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28908,6 +28915,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!1 &1465953495
 GameObject:
   m_ObjectHideFlags: 0
@@ -42149,6 +42157,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!224 &1941619692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44331,6 +44340,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 0
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!1 &2009377594
 GameObject:
   m_ObjectHideFlags: 0
@@ -47636,6 +47646,7 @@ MonoBehaviour:
   isTbsTransisFUCK: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
+  soun: {fileID: 0}
 --- !u!1 &2146343172
 GameObject:
   m_ObjectHideFlags: 0

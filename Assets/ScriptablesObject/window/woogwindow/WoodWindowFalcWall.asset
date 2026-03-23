@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4752ae747094a4187c18c5083912a8, type: 3}
+  m_Name: WoodWindowFalcWall
+  m_EditorClassIdentifier: 
+  durability: 1
+  CreateParticles: 0
+  uniqueCrackSound: 0
+  particlPrefab:
+  - {fileID: 2364439708341662873, guid: dcdfa3443b806e64a82aec2664ef4d7a, type: 3}
+  - {fileID: 1248687123021525828, guid: a8a4e83937d571b4ab0e22d4e250a200, type: 3}
+  normalWinMats:
+  - {fileID: 2100000, guid: de4a12ba113ce4042990f976fe13955b, type: 2}
+  - {fileID: 2100000, guid: de4a12ba113ce4042990f976fe13955b, type: 2}
+  - {fileID: 2100000, guid: 89968fb59c585924a9abc8b708a7d40e, type: 2}
+  - {fileID: 2100000, guid: 89968fb59c585924a9abc8b708a7d40e, type: 2}
+  sounds:
+  - {fileID: 11400000, guid: a45ce7bb42cec9d459976aae7f388c89, type: 2}
+  - {fileID: 11400000, guid: 4e6232d61e2861d4cb99e19c02e32695, type: 2}
+  crackParticlPrefab: {fileID: 0}
+  crackParticlPrefabArra: []
+  cracWindowMatsSide1: []
+  cracWindowMatsSide2: []
+  CrackedWindowSounds: {fileID: 0}
+  CrackedWindowSoundsButItsAnArray: []

@@ -5,8 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 //namespace quangg.YuriArchive.subtitlesYaoiYuri
 //{
-public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : Singleton<SubtitlesManagerAkaSubtitleSpawnOkSDIYBT> //atp this is just yuri script with semi decent ammount of modification kms
+public class SubtitlesManagerAkaSubtitleSpawnOkSDIYBT : MonoBehaviour //atp this is just yuri script with semi decent ammount of modification kms
 	{
+        #region SingletonSetup
+        private void Awake() => Instance = this;
+        public static SubtitlesManagerAkaSubtitleSpawnOkSDIYBT Instance;
+        #endregion
 		public void summonLeSubtitle(subtitlingIt subtitle, int id, subsScriptableObject subscriptobj, AudioSource audiSourc, Vector3 SubPos)
 		{
             if (subsObjectIdSon[id] != null) Destroy(subsObjectIdSon[id]);

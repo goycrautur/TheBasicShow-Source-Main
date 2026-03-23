@@ -585,7 +585,9 @@ MonoBehaviour:
   audioDevice: {fileID: 14}
   fnfgaemovrdevice: {fileID: 29}
   fnfgaemov: {fileID: 8300000, guid: c9943010b00bd5e4f89cdc9f53ce6060, type: 3}
+  songloop: {fileID: 0}
   acceptfate: {fileID: 8300000, guid: c3b30d661b4c2a94cbf550f600bee45e, type: 3}
+  ninetinine: {fileID: 0}
   image: {fileID: 376956955}
   thingtext: {fileID: 53507645}
   chance: 0

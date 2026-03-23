@@ -69,6 +69,5 @@ public class ITM_oversizedMegaphone : BaseItem
     [SerializeField] private float InhaleDelay,FovMinus,FovMin,FovMax,windoBreakRadius,stunRadius,stuntime;
     [SerializeField] private AudioObjectyeah inhal,screa;
     [SerializeField] private AudioManagerLiveReaction itemSoundSource;
-    [SerializeField] private subsScriptableObject InhaleSub,ScreaSub;
     [SerializeField] private bool used;
 }

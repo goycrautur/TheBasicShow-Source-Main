@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15072ea04a484024cb75b0f35e4b0592, type: 3}
+  m_Name: collectmon
+  m_EditorClassIdentifier: 
+  audClip: {fileID: 8300000, guid: 826c84cbcef367a4993fbfa339efb1af, type: 3}
+  volume: 1
+  SoundTypeWahh: 1
+  HasSubtitle: 0
+  ForcedSetAudiomixer: {fileID: 0}
+  subti: {fileID: 0}

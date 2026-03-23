@@ -13,26 +13,22 @@ MonoBehaviour:
   m_Name: WoodWindowFalcNormalWall
   m_EditorClassIdentifier: 
   durability: 1
+  CreateParticles: 0
   uniqueCrackSound: 0
   particlPrefab:
   - {fileID: 2364439708341662873, guid: dcdfa3443b806e64a82aec2664ef4d7a, type: 3}
   - {fileID: 1248687123021525828, guid: a8a4e83937d571b4ab0e22d4e250a200, type: 3}
-  crackParticlPrefab: {fileID: 0}
-  crackParticlPrefabArra: []
   normalWinMats:
   - {fileID: 2100000, guid: de4a12ba113ce4042990f976fe13955b, type: 2}
   - {fileID: 2100000, guid: 178f988607b0b9341ab9de1f895e9b87, type: 2}
   - {fileID: 2100000, guid: 89968fb59c585924a9abc8b708a7d40e, type: 2}
   - {fileID: 2100000, guid: dce317c7b7a12c6499ed76ef56952319, type: 2}
+  sounds:
+  - {fileID: 11400000, guid: a45ce7bb42cec9d459976aae7f388c89, type: 2}
+  - {fileID: 11400000, guid: 4e6232d61e2861d4cb99e19c02e32695, type: 2}
+  crackParticlPrefab: {fileID: 0}
+  crackParticlPrefabArra: []
   cracWindowMatsSide1: []
   cracWindowMatsSide2: []
-  subtitlesObject:
-  - {fileID: 11400000, guid: 1207b72fac060204bb92b1c0dbb4868b, type: 2}
-  - {fileID: 11400000, guid: 419627147ef59e24e95acb2144678eed, type: 2}
-  CrackWindSubtitlesObject: {fileID: 0}
-  CrackWindSubtitlesObjectArrayified: []
-  sounds:
-  - {fileID: 8300000, guid: 3fc70047cfa07dc4ab4d1db6d7147389, type: 3}
-  - {fileID: 8300000, guid: a2705569c6d593f4388a1c546d100e1c, type: 3}
   CrackedWindowSounds: {fileID: 0}
   CrackedWindowSoundsButItsAnArray: []
