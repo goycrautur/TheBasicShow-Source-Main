@@ -19,7 +19,6 @@ TagManager:
   - TapePlayer
   - Wall
   - Window
-  - WindowIgnoreRay
   - OutsideTriggers
   - Unaffected
   - fatmachine
@@ -37,6 +36,8 @@ TagManager:
   - idi3
   - idi1
   - floor
+  - DoorTrigger1
+  - DoorTrigger2
   layers:
   - Default
   - TransparentFX
@@ -53,7 +54,7 @@ TagManager:
   - ccInteractionLayer
   - npcLayer
   - npcXrayLayer
-  - 
+  - npcInteractionLayer
   - 
   - 
   - 

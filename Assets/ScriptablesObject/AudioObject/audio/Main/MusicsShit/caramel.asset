@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15072ea04a484024cb75b0f35e4b0592, type: 3}
   m_Name: caramel
   m_EditorClassIdentifier: 
-  audClip: {fileID: 8300000, guid: c88f86f7670c3fb43a7cf3e06fc08ab2, type: 3}
+  audClip: {fileID: 8300000, guid: 1c0795507cddbf047829acc5a5ef48e4, type: 3}
   volume: 1
   SoundTypeWahh: 3
   HasSubtitle: 1

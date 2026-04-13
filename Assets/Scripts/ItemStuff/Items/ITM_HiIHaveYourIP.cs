@@ -8,7 +8,7 @@ public class ITM_HiIHaveYourIP : BaseItem
     {
         if (used) return false;
         GameControllerScript.Instance.player.PlayerDmgResistance += DefendAdd;
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,Used);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(Used);
         used = true;
         StartCoroutine(amwaitin(duration));
         return true;

@@ -12,8 +12,6 @@ public class ItemImageSlide : MonoBehaviour
         restPos = rect.anchoredPosition;
         baseColor = mainImage != null ? mainImage.color : Color.white;
         //slideDistance = 0;
-        upDistance = 50;
-        downDistance = -50;
     }
 
     public void ForceClear()
@@ -133,7 +131,7 @@ public class ItemImageSlide : MonoBehaviour
         while (Vector2.Distance(r.anchoredPosition, target) > 1f)
         {
             spinVal += spinSpeed * Time.unscaledDeltaTime;
-            r.rotation = Quaternion.Euler(0f, 0f, spinVal);
+            r.rotation = Quaternion.Euler(0f, spinVal, 0f);
             r.anchoredPosition = Vector2.MoveTowards(r.anchoredPosition, target, speed * Time.unscaledDeltaTime);
             yield return null;
         }
@@ -143,8 +141,9 @@ public class ItemImageSlide : MonoBehaviour
     }
 
     [Header("Slide Settings")]
-    [SerializeField] private float speed = 567f,spinSpeed=100;
-    [SerializeField] private float slideDistance = 123f,upDistance,downDistance;
+    public float speed = 567f;
+    public float spinSpeed=100,slideDistance = 123f,upDistance,downDistance;
+    public int tsId;
 
     private Vector2 restPos;
     private RawImage mainImage;

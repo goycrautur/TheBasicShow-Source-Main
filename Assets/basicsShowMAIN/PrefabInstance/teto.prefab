@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3321268725996879784}
   - component: {fileID: 5665195659224762080}
-  - component: {fileID: 550599744099410290}
   m_Layer: 0
   m_Name: teto
   m_TagString: Untagged
@@ -46,139 +45,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34f7cf95cecd0e4c9dd3c2895a7c904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDevice111: {fileID: 550599744099410290}
-  subsAudioDevice: {fileID: 5669727722991425385}
+  audioDeviceMain: {fileID: 9105655204483827826}
   lifeSpan: 12.5
   gc: {fileID: 0}
   blockTypes:
   - mat: {fileID: 2100000, guid: cc4fa83476ce95d4d84033ab5fe95c42, type: 2}
-    audio: {fileID: 8300000, guid: c6b119a830553c346846ba16bd6404ce, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 0c65d117fd27a784abb2b9d27087b23e,
-      type: 2}
+    audio: {fileID: 11400000, guid: 97391cf34217bd74cbf690f8d266a1e8, type: 2}
   - mat: {fileID: 2100000, guid: 92a073284e3921446b0d573a502b9c77, type: 2}
-    audio: {fileID: 8300000, guid: 9b5ca18d0726f7a47bb0c203672a748b, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 2c830466ddc4e324d9abbfcf0929ca81,
-      type: 2}
+    audio: {fileID: 11400000, guid: 9014435744018e54f84d92847b224f9d, type: 2}
   - mat: {fileID: 2100000, guid: 291543983b7a5b94e94c8539468d8755, type: 2}
-    audio: {fileID: 8300000, guid: 6dbbf0d5ced814f499f9484c32a56204, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 80c134ea4600d3647943203580100db2,
-      type: 2}
+    audio: {fileID: 11400000, guid: a479d8ac9a2f7a042bf9d8e13b9a9ad0, type: 2}
   - mat: {fileID: 2100000, guid: 8ad37f515c6e1be4b905c5f5c2854c59, type: 2}
-    audio: {fileID: 8300000, guid: 0cc91b221c6715c44a0961bbc4835596, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 5c98e01c177c5484fb40694059005e93,
-      type: 2}
+    audio: {fileID: 11400000, guid: 5c4a4e1a2970cf24b811503ab405ef82, type: 2}
   - mat: {fileID: 2100000, guid: 84c193a657bbb3c4da12484460a618b8, type: 2}
-    audio: {fileID: 8300000, guid: 3e9596596d21dbf46af57e2f706a756a, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 004fe8902b8eced408a860d0a7efc114,
-      type: 2}
+    audio: {fileID: 11400000, guid: e4c5da9d3521430498b5836c3bc5ca76, type: 2}
   - mat: {fileID: 2100000, guid: 8e61d1f9e48714f4cae14843cb5c230f, type: 2}
-    audio: {fileID: 8300000, guid: cc949b53daaa3a54b845f58170dc8be4, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 75cf147bfe754bb488189d72191dcdb4,
-      type: 2}
+    audio: {fileID: 11400000, guid: 5bba8f12caf06bb4c8f5fcc6a3996326, type: 2}
   - mat: {fileID: 2100000, guid: 02cf4567ce656e44cbc169c6fba3f86f, type: 2}
-    audio: {fileID: 8300000, guid: 79e74b022c3575849a186e94275220fc, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: 6a77f0abf7c2425498b45c300504c10c,
-      type: 2}
+    audio: {fileID: 11400000, guid: cb83662e66751264a9f2c3dc9b1f1184, type: 2}
   - mat: {fileID: 2100000, guid: 436510f6681605a48b49c33933d941a5, type: 2}
-    audio: {fileID: 8300000, guid: cd14568e3ed7fad46b8ed3242a1d1480, type: 3}
-    subtitleObjectStuff: {fileID: 11400000, guid: c3930e7cec7573e4e83a2def71b082c9,
-      type: 2}
---- !u!82 &550599744099410290
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5771095061154735477}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 0
-  MinDistance: 50
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+    audio: {fileID: 11400000, guid: ad8cd4bc461d8694aaa211b9f1114e7c, type: 2}
 --- !u!1 &5815282746406995894
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +77,7 @@ GameObject:
   - component: {fileID: 6134415096861322723}
   - component: {fileID: 3754654768677657702}
   - component: {fileID: 5669727722991425385}
+  - component: {fileID: 9105655204483827826}
   m_Layer: 0
   m_Name: tetoblock
   m_TagString: Untagged
@@ -347,6 +234,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9105655204483827826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815282746406995894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &8194905151635895962
 GameObject:
   m_ObjectHideFlags: 0

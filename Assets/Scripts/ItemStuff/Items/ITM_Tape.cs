@@ -11,7 +11,7 @@ public class ITM_Tape : BaseItem
                 if (!Ray.collider.gameObject.GetComponent<TapePlayerScript>().TapeCDEnable)
                 {
                     Ray.collider.gameObject.GetComponent<TapePlayerScript>().Play(holyshitTapeTypes == TapeTypes.BaldiLeastFavouriteTape ? "normal" : holyshitTapeTypes == TapeTypes.JerryEarPiercingDvdDisk ? "JEPDVDD" : holyshitTapeTypes == TapeTypes.JerryAbsoloutelyFuckingBangerDvdDisk ? "jerrypeakassDisc" :holyshitTapeTypes == TapeTypes.JerryAbsoloutelyFuckingBangerDvdDiskExpertMode ? "jerrypeakassDiscExpert" :"");
-                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Insert);
+                    GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Insert);
                     return true;
                 }
             }

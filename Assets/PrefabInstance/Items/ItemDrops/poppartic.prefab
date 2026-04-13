@@ -9772,10 +9772,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1248687123021525828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080043fe53af85c42be68f9e346e815a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballsack: {fileID: 2901081282087490970}
+  PlayAtAwake: 1
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 11400000, guid: 59c345fbc3da8eb4e84e1fe216e1efcb, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &2515622626030616619
 GameObject:
   m_ObjectHideFlags: 0

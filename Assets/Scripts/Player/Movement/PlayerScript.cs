@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
 		TotemAnimator.Rebind();
 		TotemAnimator.Play("toteOfUndyused", -1, 0f);
 		totemParticl.SetActive(true);
-		GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.totem);
+		GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.totem);
 		SetHP(HealthChangeMode.Set, maxHealth, 10f, true, false, false);
 		if (consumetotem)
 		{
@@ -182,7 +182,9 @@ public class PlayerScript : MonoBehaviour
 		CargaugeReal = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.dimcraab, maxcarfuel); //jro
 		thosewhoSpeed = movmen;
 		pModManag.movementModifiers.Add(thosewhoSpeed);
-		lbams.PlayClip(lbams.DIMCSource,lbams.drivinginmy,true);
+		lbams.DIMCSource.ClearQueue(true);
+		lbams.DIMCSource.SetLoop(true);
+		lbams.DIMCSource.QueueAudio(lbams.drivinginmy);
 		oncar = true;
 	}
 	private void uhhwha()
@@ -198,8 +200,8 @@ public class PlayerScript : MonoBehaviour
 			if (FowardValue >= FowardMaxValue) 
 			{
 				FowardValue = 0.5f;
-				GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.agonyScream);
-				GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.punchSound);
+				GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.agonyScream);
+				GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.punchSound);
 				CameraScript.Instance.TempShakeAmount += 0.5f;
 			}
 			if (!isMoving) FowardValue -= fowardVeloDowning * Time.deltaTime;
@@ -211,7 +213,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			if (CargaugeReal != null) CargaugeReal.Hide();
 			pModManag.movementModifiers.Remove(thosewhoSpeed);
-			lowBudgetAudioManagementShit.Instance.DIMCSource.ClearQueue(true);
+			GameControllerScript.Instance.lbams.DIMCSource.ClearQueue(true);
 			oncar = false;
 		}
 		if (thosewhoSpeed != null)thosewhoSpeed.movementMultiplier = FowardValue;

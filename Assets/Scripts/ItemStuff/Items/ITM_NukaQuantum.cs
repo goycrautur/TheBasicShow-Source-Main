@@ -5,10 +5,9 @@ public class ITM_NukaQuantum : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,drink);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(drink);
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
-        
         StartCoroutine(amwaitin(duration));
         return true;
     }

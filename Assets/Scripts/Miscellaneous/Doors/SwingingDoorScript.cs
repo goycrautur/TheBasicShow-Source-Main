@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class SwingingDoorScript : MonoBehaviour
 {
     #region Initialization
     private void Start()
     {
+        gc = GameControllerScript.Instance;
         myAudio = GetComponent<AudioManagerLiveReaction>();
-        bDoorLocked = true;
+        SetLock(true);
         SwinDorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
         SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
     }
@@ -115,8 +117,9 @@ public class SwingingDoorScript : MonoBehaviour
 
     private void SetLock(bool lockState)
     {
-        barrier.enabled = lockState;
         obstacle.SetActive(lockState);
+        insidecol.enabled = lockState;
+        outsidecol.enabled = !lockState;
         bDoorLocked = lockState;
         SwinDorMapSprite1.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
         SwinDorMapSprite2.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
@@ -127,19 +130,18 @@ public class SwingingDoorScript : MonoBehaviour
     #endregion
 
     #region SerializedFields
-    [Header("References")]
-    [SerializeField] private GameControllerScript gc;
+    private GameControllerScript gc;
 
     [Header("Door Mechanics and Materials")]
-    [SerializeField] private MeshCollider barrier;
     [SerializeField] private GameObject obstacle;
+    [SerializeField] private MeshCollider insidecol, outsidecol;
     [SerializeField] private MeshRenderer inside, outside;
     [SerializeField] private Material normal1, lockedIn, normal2, lockedOut;
     [SerializeField] private SpriteRenderer SwinDorMapSprite1,SwinDorMapSprite2;
 
     [Header("Door state and timing")]
     [SerializeField] private bool bDoorOpen;
-    [SerializeField] private bool bDoorLocked;
+    public bool bDoorLocked;
     [SerializeField] private float openTime;
 
     [Header("Audio-related variables")]

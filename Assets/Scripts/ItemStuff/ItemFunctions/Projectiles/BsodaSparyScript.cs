@@ -14,7 +14,7 @@ public class BsodaSparyScript : MonoBehaviour
         }
 
         cc = GetComponent<CharacterController>();
-        ccDirection = GameControllerScript.Instance.cameraTransform.TransformDirection(Vector3.forward) * speed/200;
+        ccDirection = GameControllerScript.Instance.cameraTransform.TransformDirection(Vector3.forward) * speed/100;
         //rb = GetComponent<Rigidbody>();
         //rb.velocity = transform.forward * speed;
     }

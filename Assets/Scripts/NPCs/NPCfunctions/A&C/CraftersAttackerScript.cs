@@ -14,18 +14,22 @@ public class CraftersAttackerScript : MonoBehaviour
     
 	public IEnumerator AttackPlayer()
 	{
+		
 		float speed = 350f;
-		float acceleration = 25f;
-		float spinDistance = 10f;
+		float acceleration = 50f;
+		float spinDistance = 20f;
 		Vector3 currentAngle = playerTransform.forward;
+		float TotalTime = 10f;
 		float time = 0f;
         float echoDistance = 0f;
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(waneisangry, TotalTime);
         Transform[] array = echos;
 		for (int i = 0; i < array.Length; i++)
 		{
 			array[i].gameObject.SetActive(true);
 		}
-		while (time < 15f)
+		time = TotalTime;
+		while (time > 0f)
 		{
 			currentAngle = Quaternion.AngleAxis(speed * Time.deltaTime, Vector3.up) * currentAngle;
 			transform.position = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z) + currentAngle * spinDistance;
@@ -36,10 +40,15 @@ public class CraftersAttackerScript : MonoBehaviour
 			}
 			speed += acceleration * Time.deltaTime;
             echoDistance += 300f * Time.deltaTime;
-			time += Time.deltaTime;
+			time -= Time.deltaTime;
+			if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
+            {
+                newGauge.Set(TotalTime, time);
+            }
 			yield return null;
 		}
 		crafters.SetActive(true);
+		newGauge.Hide();
         craftersScript.GiveConsequence(Teleport);
 		Destroy(gameObject);
 		yield break;
@@ -49,7 +58,9 @@ public class CraftersAttackerScript : MonoBehaviour
     public Transform playerTransform;
     public GameObject crafters;
     public CraftersScript craftersScript;
+	[SerializeField] private Sprite waneisangry;
 	public bool Teleport;
+
 
     [Header("Echoes & Positioning")]
 	[SerializeField] private Transform[] echos;

@@ -56,7 +56,7 @@ public class EffectScript : MonoBehaviour
             if (!notNpcEntirely)
             {
                 npcreal.Stun(npcStunTime);
-                lbams.PlayClip(lbams.MainSource3,lbams.punchSound);
+                lbams.MainSource3.PlaySingleClip(lbams.punchSound);
                 Destroy(other.gameObject, 0f);
             }
         }

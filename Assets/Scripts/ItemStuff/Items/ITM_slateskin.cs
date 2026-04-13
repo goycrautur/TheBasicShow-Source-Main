@@ -5,7 +5,7 @@ public class ITM_slateskin : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,drink);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(drink);
         if (!GameControllerScript.Instance.player.outdoorsfr)
 		{
 			if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("drink", 1f);

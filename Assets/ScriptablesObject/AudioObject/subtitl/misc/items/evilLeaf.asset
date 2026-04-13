@@ -18,7 +18,7 @@ MonoBehaviour:
     headText: itemSubtitles_evilFuckingLeafy
     isit3d: 0
     IgnoreTimescale: 0
-    twoDeePosition: {x: 0, y: -170.5, z: 0}
+    twoDeePosition: {x: 0, y: -175, z: 0}
     duration: 0.25
     colorMode: 0
     textColor: {r: 1, g: 0, b: 0, a: 1}

@@ -112,7 +112,7 @@ public class booksInteract : Interactable
             {
                 lgm.quarter.SetActive(true);
                 lgm.Tutor.tutorSource.ClearQueue(true);
-                lgm.Tutor.tutorSource.QueueAudio(lgm.aud_Prize);
+                lgm.Tutor.tutorSource.QueueAudio(lgm.Tutor.aud_Prize);
             }
         }
         if (gc.notebooks == 2)
@@ -182,14 +182,18 @@ public class booksInteract : Interactable
                         {
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                                 lbams.EscapeMusic.ClearQueue(true);
-                                lbams.PlayClip(lbams.EscapeMusic,lbams.SchoolhouseEscape,true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.SchoolhouseEscape);
+                                
                                 gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 gc.finaleMode = true;
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.Taldi:
                                 lbams.EscapeMusic.ClearQueue(true);
-                                lbams.PlayClip(lbams.EscapeMusic,lbams.TaldiEscape,true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.TaldiEscape);
+                                
                                 gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 gc.finaleMode = true;

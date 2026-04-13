@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 300
   disabledAudioSources: []
+  disabledAudioManagers: []
 --- !u!65 &5518571319684483041
 BoxCollider:
   m_ObjectHideFlags: 0

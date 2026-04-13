@@ -16,7 +16,7 @@ MonoBehaviour:
   subtitleOption:
     enabled: 1
     headText: '*Totem Breaking Sound*'
-    isit3d: 0
+    isit3d: 1
     IgnoreTimescale: 0
     twoDeePosition: {x: 0, y: 0, z: 0}
     duration: 0

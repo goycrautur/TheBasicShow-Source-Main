@@ -31,8 +31,8 @@ public class GameOverScript : MonoBehaviour
 		float ratioy = (float)Screen.width / 360f;
 		text.transform.DOMoveY(ratioy * 35, 3f);
 		fnfgaemovrdevice.ClearQueue(true);
-		fnfgaemovrdevice.QueueAudio(songloop);
 		fnfgaemovrdevice.SetLoop(true);
+		fnfgaemovrdevice.QueueAudio(songloop);
 		loopy = true;
 		return;
 	}

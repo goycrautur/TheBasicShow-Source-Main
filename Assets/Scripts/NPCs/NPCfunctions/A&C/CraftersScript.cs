@@ -6,7 +6,6 @@ public class CraftersScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        audioDevice = GetComponent<AudioManagerLiveReaction>();
         normalSprite = spriteImage.sprite;
     }
     #endregion
@@ -70,10 +69,7 @@ public class CraftersScript : NPC
                     if (AngryMeter < 5) audioDevice.PlaySingleClip(angrySound);
                 }
             }
-            else
-            {
-                stopUpdate = false;
-            }
+            else stopUpdate = false;
         }
     }
     #endregion
@@ -88,10 +84,7 @@ public class CraftersScript : NPC
         if (!angry && agent.isActiveAndEnabled)
         {
             agent.SetDestination(location);
-            if (flee)
-            {
-                forceShowTime = 3f;
-            }
+            if (flee) forceShowTime = 3f;
         }
     }
     #endregion
@@ -101,10 +94,7 @@ public class CraftersScript : NPC
     {
         if (other.CompareTag("Player") & angry)
         {
-            if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.SkipCraftersAttack)
-            {
-                GiveConsequence();
-            }
+            if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.SkipCraftersAttack)GiveConsequence();
             else
             {
                 GameObject attacker = Instantiate(attackingCrafters);
@@ -157,6 +147,6 @@ public class CraftersScript : NPC
 
     #region Internal State
     public float forceShowTime;
-    private AudioManagerLiveReaction audioDevice;
+    [SerializeField] private AudioManagerLiveReaction audioDevice;
     #endregion
 }

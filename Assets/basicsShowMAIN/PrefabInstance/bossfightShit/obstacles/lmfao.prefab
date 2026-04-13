@@ -162,14 +162,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4565268054291569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audisourc: {fileID: 2459527844884179387}
-  sub: {fileID: 11400000, guid: 8f2178a94d1f4b747999ece77c86fe74, type: 2}
-  type: 3d
-  DelaySpawning: 0
-  spawnDelay: 0
+  PlayAtAwake: 1
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 11400000, guid: 7e70f1a364c77f84ea391841e87a4d2a, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &3659684099224240735
 GameObject:
   m_ObjectHideFlags: 0

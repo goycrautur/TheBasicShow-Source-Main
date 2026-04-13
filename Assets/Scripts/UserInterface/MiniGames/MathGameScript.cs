@@ -16,7 +16,11 @@ public class MathGameScript : MonoBehaviour
     {
         HandleAudioFeedback();
         HandleInput();
-
+        if (hideSubSpam)
+        {
+            foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
+            Subtit.hidesub = true;
+        }
         if (problem > problemcap)
         {
             HandleGameEnd();
@@ -40,6 +44,8 @@ public class MathGameScript : MonoBehaviour
     #region Initialization
     private void InitializeGame()
     {
+        foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
+        Subtit.hidesub = true;
         lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
         problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
@@ -80,12 +86,9 @@ public class MathGameScript : MonoBehaviour
         ZerullFeed.SetActive(false);
         ChairFeed.SetActive(false);
 
-        if (gc.notebooks == 1 && gc.mode != "zerullclassic")
-        {
-            baldiAudio.QueueAudio(bal_intro);
-            //QueueAudio(bal_howto);
-        }
-
+        if (gc.notebooks == 1 && gc.mode != "zerullclassic") baldiAudio.QueueAudio(bal_intro);
+        //QueueAudio(bal_howto);
+        if (gc.notebooks == 2 && gc.mode != "zerullclassic") baldiAudio.QueueAudio(bal_problems[0]);
         if (gc.spoopMode && gc.mode != "zerullclassic")
         {
             BlackCoverUp.SetActive(true);
@@ -173,7 +176,6 @@ public class MathGameScript : MonoBehaviour
     {
         if (!gc.spoopMode || gc.mode != "zerullclassic") StartCoroutine(PlayClassicMusic());
         if (gc.notebooks == 2 && problem == problemcap) baldiAudio.QueueAudio(scaryproblem);
-        if (gc.notebooks <= 2 && problem != problemcap) baldiAudio.QueueAudio(bal_problems[problem - 1]);
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == problemcap && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == problemcap))
         {
@@ -506,6 +508,7 @@ public class MathGameScript : MonoBehaviour
         baldiAudio.ClearQueue(true);
         int praiseIndex = UnityEngine.Random.Range(0, bal_praises.Length);
         baldiAudio.QueueAudio(bal_praises[praiseIndex]);
+        if ((gc.notebooks < 2 && !gc.spoopMode && problem != problemcap) || (gc.notebooks == 2 && !gc.spoopMode && problem != problemcap-1)) baldiAudio.QueueAudio(bal_problems[problem - 1]);
         NewProblem();
         scoreSystemManager.Instance.AddScore(75);
     }
@@ -527,6 +530,7 @@ public class MathGameScript : MonoBehaviour
         HandleBaldiAnger();
         baldiAudio.ClearQueue(true);
         if (impossibleQuestionShown) impossibleMode = false;
+        hideSubSpam = true;
         NewProblem();
     }
 
@@ -558,7 +562,7 @@ public class MathGameScript : MonoBehaviour
         {
             lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
             Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, null, playerPosition, "all", true);
-            lbams.PlayClip(lbams.MainSource1, lbams.deadbel);
+            lbams.MainSource1.PlaySingleClip(lbams.deadbel);
         }
         if (gc.mode == "zerullclassic" && problemsWrong <= 0)
         {
@@ -631,6 +635,7 @@ public class MathGameScript : MonoBehaviour
         {
             lg.learnMusic.SetIgnoreListenerPause(false);
             lg.learnMusic.ClearQueue(true);
+            hideSubSpam = false;
             GC.Collect();
             ExitGame();
         }
@@ -643,7 +648,8 @@ public class MathGameScript : MonoBehaviour
             gc.baldiScrpt.GetAngry(-1f);
             gc.famishScrpt.GetAngry(-1f);
         }
-
+        foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
+        Subtit.hidesub = false;
         lg.DeactivateLearningGame(gameObject);
     }
     #endregion
@@ -673,8 +679,9 @@ public class MathGameScript : MonoBehaviour
         if (!gc.spoopMode)
         {
             lg.learnMusic.ClearQueue(true);
-            lg.learnMusic.QueueAudio(learnMusics[musicIndex]);
             lg.learnMusic.SetLoop(true);
+            lg.learnMusic.QueueAudio(learnMusics[musicIndex]);
+            
         }
         else lg.learnMusic.ClearQueue(true);
     }
@@ -750,6 +757,7 @@ public class MathGameScript : MonoBehaviour
     private int problem, audioInQueue, problemsWrong, sign,allanswerWrongInt;
     public float DelayPreSpoop = 4f, Delay = 0.5f;
     private float[] clipSampleData = new float[SampleDataLength];
+    private bool hideSubSpam;
     private Dictionary<string, Action> specialCodes,ChallengeCodes;
     #endregion
 }

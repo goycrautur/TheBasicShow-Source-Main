@@ -6,7 +6,11 @@ public class DoorScript : MonoBehaviour
     #region Initialization
     private void Start()
     {
+        CurTrigger = MainTrigger;
         myAudio = GetComponent<AudioManagerLiveReaction>();
+        AltTrigger.enabled = false;
+        outside.material.SetTextureScale("_SecondTex", new Vector2(-1, 1));
+        outside.material.SetTextureScale("_SecondaryDiffrent", new Vector2(-1, 1));
     }
     #endregion
 
@@ -41,9 +45,9 @@ public class DoorScript : MonoBehaviour
 
     private void HandleDoorInteraction()
     {
-        if ((Input.GetMouseButtonDown(0) | Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)) && trigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange,KeyFunctions.hi.PlayerClickablesLayer.value) && Time.timeScale != 0f)
+        if ((Input.GetMouseButtonDown(0) | Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)) && CurTrigger.ScreenRaycastMatchesCollider(out _, GameControllerScript.Instance.player.LocalRange,KeyFunctions.hi.PlayerClickablesLayer.value) && Time.timeScale != 0f)
         {
-            if (bDoorLocked) myAudio.PlaySingleClip(Rattle);
+            if (bDoorLocked && SoundData != null) myAudio.PlaySingleClip(SoundData.Rattle);
             else
             {
                 if (!bDoorOpen) Singleton<OtherMainStuffManager>.Instance.HearingShit(1f, this.transform, new Vector3(0f,0f,0f), "all",false);
@@ -56,38 +60,37 @@ public class DoorScript : MonoBehaviour
     #region DoorStateManagement
     public void OpenDoor(float time)
     {
-        if (!bDoorOpen) myAudio.PlaySingleClip(doorOpen);
+        if (!bDoorOpen && SoundData != null) myAudio.PlaySingleClip(SoundData.doorOpen);
         SetDoorState(true, time);
     }
 
     private void CloseDoor()
     {
         SetDoorState(false);
-        myAudio.PlaySingleClip(doorClose);
+        if (SoundData != null) myAudio.PlaySingleClip(SoundData.doorClose);
     }
 
     private void SetDoorState(bool open, float time = 3)
     {
-        barrier.enabled = !open;
-        invisibleBarrier.enabled = !open;
-        secondBarrier.enabled = !open;
+        MainDoorBarrier.enabled = !open;
+        CurTrigger = !open ? MainTrigger : AltTrigger;
+        AltTrigger.enabled = open;
+        MainTrigGmbObj.layer = !open ? LayerMask.NameToLayer(DefaultLayerString) : LayerMask.NameToLayer(MainTriggerLayerString);
         bDoorOpen = open;
+
 
         int shift = open ? 1 : 0;
         inside.material.SetInt("_Swap", shift);
         outside.material.SetInt("_Swap", shift);
 
-        if (time != 0)
-        {
-            openTime = time;
-        }
+        if (time != 0) openTime = time;
     }
     #endregion
 
     #region LockingMechanics
     public void LockDoor(float time)
     {
-        myAudio.PlaySingleClip(Click);
+        if (SoundData != null) myAudio.PlaySingleClip(SoundData.Click);
         bDoorLocked = true;
         DorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
         DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
@@ -99,36 +102,12 @@ public class DoorScript : MonoBehaviour
         bDoorLocked = false;
         DorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
         DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
-        myAudio.PlaySingleClip(Unlocked);
+        if (SoundData != null) myAudio.PlaySingleClip(SoundData.Unlocked);
     }
 
     public bool DoorLocked => bDoorLocked;
-    #endregion
 
-    #region CollisionHandlers
-    private void OnTriggerStay(Collider OPEN)
-    {
-        if (!bDoorLocked & OPEN.CompareTag("NPC") & !Check || !bDoorLocked & OPEN.CompareTag("cork") & !Check || !bDoorLocked & OPEN.CompareTag("Projectile") & !Check)
-        {
-            OpenDoor(3);
-        }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (!(GameControllerScript.Instance.principal.angry || other.transform.name != "Principal of the Thing") || !(GameControllerScript.Instance.maxplayGames.angry || other.transform.name != "maxplay games if he was principal"))
-        {
-            HandlePrincipalInteraction();
-        }
-
-        if (bDoorLocked && other.transform.name == "Baldi" || bDoorLocked && other.transform.name == "Jerry" || bDoorLocked && other.transform.name == "Mucho" || bDoorLocked && other.CompareTag("cork"))
-        {
-            UnlockDoor();
-            OpenDoor(3);
-        }
-    }
-
-    private void HandlePrincipalInteraction()
+    public void HandlePrincipalInteraction()
     {
         if (Faculty)
         {
@@ -141,15 +120,12 @@ public class DoorScript : MonoBehaviour
             }
         }
 
-        if (bDoorLocked)
-        {
-            OpenDoor(0.33f);
-        }
+        if (bDoorLocked) OpenDoor(0.33f);
     }
 
     public IEnumerator FacultyDoor()
     {
-        myAudio.PlaySingleClip(KnockKnock);
+        if (SoundData != null) myAudio.PlaySingleClip(SoundData.KnockKnock);
         Check = true;
         if (GameControllerScript.Instance.principal.isActiveAndEnabled) StartCoroutine(GameControllerScript.Instance.principal.CheckTheDoor());
         if (GameControllerScript.Instance.maxplayGames.isActiveAndEnabled) StartCoroutine(GameControllerScript.Instance.maxplayGames.CheckTheDoor());
@@ -161,11 +137,13 @@ public class DoorScript : MonoBehaviour
     #region SerializedConfig
     [Header("Audio Settings")]
     private AudioManagerLiveReaction myAudio;
-    [SerializeField] private AudioObjectyeah doorOpen,doorClose, KnockKnock, Click,Rattle,Unlocked;
+    [SerializeField] private NormalDoorSoundData SoundData;
     
-    [Header("Barrier Settings")]
-    [SerializeField] private MeshCollider barrier;
-    [SerializeField] private MeshCollider secondBarrier, trigger, invisibleBarrier;
+    [Header("Barrier Stuff Settings")]
+    [SerializeField] private BoxCollider MainDoorBarrier;
+    [SerializeField] private MeshCollider CurTrigger,MainTrigger,AltTrigger;
+    [SerializeField] private GameObject MainTrigGmbObj;
+    [SerializeField] private string DefaultLayerString,MainTriggerLayerString;
 
     [Header("Renderer Settings")]
     [SerializeField] private MeshRenderer inside;
@@ -173,7 +151,8 @@ public class DoorScript : MonoBehaviour
 
     [Header("Door Behavior Settings")]
     [SerializeField] private bool Faculty;
-    [SerializeField] private bool FacultyTimesTwo, Check;
+    [SerializeField] private bool FacultyTimesTwo;
+    public bool Check;
     [SerializeField] private SpriteRenderer DorMapSprite1,DorMapSprite2;
    
 
@@ -183,6 +162,6 @@ public class DoorScript : MonoBehaviour
     #endregion
 
     #region RuntimeState
-    private bool bDoorOpen, bDoorLocked;
+    [HideInInspector] public bool bDoorOpen, bDoorLocked;
     #endregion
 }

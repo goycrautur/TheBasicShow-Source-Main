@@ -6,7 +6,7 @@ public class ITM_Quarter : BaseItem
     {
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
-            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.MoneyCollect);
+            GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.MoneyCollect);
             AdditionalGameCustomizer.Instance.Cash += 0.25;
             return true;
         }
@@ -17,7 +17,7 @@ public class ITM_Quarter : BaseItem
                 VendingMachineScript vendingMachine = Ray.collider.GetComponent<VendingMachineScript>();
                 if (vendingMachine != null)
                 {
-                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Drop);
+                    GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Drop);
                     vendingMachine.insertedMoney++;
                     vendingMachine.DispenseItem();
                 }
@@ -29,7 +29,7 @@ public class ITM_Quarter : BaseItem
                 if (tapePlayer != null && !tapePlayer.TapeCDEnable)
                 {
                     tapePlayer.Play();
-                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Drop);
+                    GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Drop);
                     return true;
                 }
             }

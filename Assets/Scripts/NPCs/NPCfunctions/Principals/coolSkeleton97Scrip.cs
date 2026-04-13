@@ -58,10 +58,7 @@ public class coolSkeleton97Scrip : NPC
         }
         else HandlePlayerTargeting();
 
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            if (!angry && !seesRuleBreak && !inOffice && !brogotcalled)  Wander();
-        }
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) if (!angry && !seesRuleBreak && !inOffice && !brogotcalled) Wander();
     }
     #endregion
 

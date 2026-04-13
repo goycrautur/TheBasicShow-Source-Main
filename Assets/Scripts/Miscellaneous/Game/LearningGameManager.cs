@@ -16,6 +16,7 @@ public class LearningGameManager : MonoBehaviour
         tempAngerMult = dific == "easy" ? 0.4f : dific == "normal" ? 0.8f : dific == "hard" ? 1.2f : dific == "expert" ? 1.6f : dific == "maniac" ? 2 : 0.8f;
         gc = GetComponent<GameControllerScript>();
         audioQueue = GetComponent<AudioManagerLiveReaction>();
+        Tutor = gc.tutorobj.GetComponent<TutorScript>();
     }
     #endregion
 
@@ -26,13 +27,14 @@ public class LearningGameManager : MonoBehaviour
         AudioListener.pause = true;
         learningActive = true;
         KF.UnlockMouse();
-        Tutor.tutorSource.ClearQueue(true);
+        if (Tutor.isActiveAndEnabled)Tutor.tutorSource.ClearQueue(true);
 
         if (!gc.spoopMode)
         {
             gc.lbams.SchoolMusic.ClearQueue(true);
+            learnMusic.ClearQueue(true);
             learnMusic.QueueAudio(LearnAudio);
-            learnMusic.SetLoop(true);
+            
         }
     }
     public IEnumerator timeounaleshit(AudioObjectyeah clipped)
@@ -60,7 +62,7 @@ public class LearningGameManager : MonoBehaviour
         if (!gc.spoopMode && gc.mode == "story") 
         {
             lbams.SchoolMusic.QueueAudio(lbams.schoolClip);
-            learnMusic.SetLoop(true);
+            
         }
         scoreSystemManager.Instance.AddScore(gc.mode == "zerullclassic" ? 1375 : 1000, true,true);
         gc.lbams.SchoolMusic.SetIgnoreListenerPause(false);
@@ -69,7 +71,7 @@ public class LearningGameManager : MonoBehaviour
         gc.PlayerCamera.cullingMask = gc.cullingMask;
         learningActive = false;
         KF.LockMouse();
-        lbams.PlayClip(lbams.MainSource2,subject.GetComponent<MathGameScript>().nbScri.cheeseCollect,true);
+        lbams.MainSource2.PlaySingleClip(subject.GetComponent<MathGameScript>().nbScri.cheeseCollect);
         gc.Icon.Rebind();
         gc.Icon.Play("IconSpin", -1, 0f);
         StartCoroutine(transiskill(subject));
@@ -81,7 +83,7 @@ public class LearningGameManager : MonoBehaviour
         {
             Tutor.tutorSource.ClearQueue(true);
             quarter.SetActive(true);
-            Tutor.tutorSource.PlaySingleClip(aud_Prize);
+            Tutor.tutorSource.PlaySingleClip(Tutor.aud_Prize);
         }
         if (gc.notebooks == 2) gc.ActivateSpoopMode();
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*angerMult, 0f,false, "all");
@@ -121,15 +123,19 @@ public class LearningGameManager : MonoBehaviour
                             switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
                             {
                                 case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                                    gc.lbams.EscapeMusic.ClearQueue(true);
-                                    gc.lbams.PlayClip(gc.lbams.EscapeMusic,gc.lbams.SchoolhouseEscape,true);
+                                    lbams.EscapeMusic.ClearQueue(true);
+                                    lbams.EscapeMusic.SetLoop(true);
+                                    lbams.EscapeMusic.QueueAudio(gc.lbams.SchoolhouseEscape);
+                                    
                                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                     gc.Gatesrea.ForEach(g => g.Down(false));
                                     gc.finaleMode = true;
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.Taldi:
-                                    gc.lbams.EscapeMusic.ClearQueue(true);
-                                    gc.lbams.PlayClip(gc.lbams.EscapeMusic,gc.lbams.TaldiEscape,true);
+                                    lbams.EscapeMusic.ClearQueue(true);
+                                    lbams.EscapeMusic.SetLoop(true);
+                                    lbams.EscapeMusic.QueueAudio(gc.lbams.TaldiEscape);
+                                    
                                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                     gc.Gatesrea.ForEach(g => g.Down(false));
                                     gc.finaleMode = true;
@@ -168,7 +174,7 @@ public class LearningGameManager : MonoBehaviour
     public float angerMult;
     public float tempAngerMult,ScoreDifMult;
     public AudioManagerLiveReaction learnMusic;
-    public AudioObjectyeah LearnAudio,aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout, aud_Prize;
+    public AudioObjectyeah LearnAudio,aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout;
     public GameObject quarter;
 
 

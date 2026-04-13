@@ -14,7 +14,7 @@ public class ITM_Scissors : BaseItem
         if (GameControllerScript.Instance.player.jumpropes.Count > 0)
         {
             GameControllerScript.Instance.player.jumpropes[0].End(false);
-            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Snip);
+            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Snip);
             return true;
         }
 
@@ -23,7 +23,7 @@ public class ITM_Scissors : BaseItem
             if (Ray.collider.name == "1st Prize" || Ray.collider.name == "washingmachine")
             {
                 GameControllerScript.Instance.firstPrizeScript.GoCrazy();
-                GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Snip);
+                GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Snip);
                 return true;
             }
         }

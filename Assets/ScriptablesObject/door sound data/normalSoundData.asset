@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9ffc4fcb02470479b5d1e14863a20f, type: 3}
+  m_Name: normalSoundData
+  m_EditorClassIdentifier: 
+  doorOpen: {fileID: 11400000, guid: 5e224f661d6a596478c6c2c323945bec, type: 2}
+  doorClose: {fileID: 11400000, guid: b336a5d910876814aad78c0e68f3067f, type: 2}
+  KnockKnock: {fileID: 11400000, guid: 7976fed9402157c45b682a27792e8df8, type: 2}
+  Click: {fileID: 11400000, guid: 56dddcaf5669c44468b228df89a63e1f, type: 2}
+  Rattle: {fileID: 11400000, guid: bee8bfa98b3f20847bab0418d823f0a0, type: 2}
+  Unlocked: {fileID: 11400000, guid: 8415aaf8ed0dff948b493b1ad34d86e8, type: 2}

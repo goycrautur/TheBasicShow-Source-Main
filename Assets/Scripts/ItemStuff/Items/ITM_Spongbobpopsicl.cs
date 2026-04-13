@@ -5,7 +5,7 @@ public class Spongbobpopsicl : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,crunc);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(crunc);
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         
         freez(Random.Range(0,3));

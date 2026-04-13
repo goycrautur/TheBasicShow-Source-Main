@@ -55,7 +55,7 @@ public class FamishedModeController : MonoBehaviour
                 {
                     onetime = true;
                     TimethatUhhh = puppyplay.audClip.length;
-                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.deadbel);
+                    GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.deadbel);
                     StartCoroutine(evenmorepeak());
                     
                 }
@@ -224,7 +224,7 @@ public class FamishedModeController : MonoBehaviour
     }
     public IEnumerator peak()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,windCras);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(windCras);
         yield return new WaitForSeconds(windCras.audClip.length-1);
         foreach (FamishedScript fam in gc.famishscr)  if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
         yield return new WaitForSeconds(getbackhere.audClip.length);
@@ -258,7 +258,7 @@ public class FamishedModeController : MonoBehaviour
     }
     public IEnumerator ERMMMMMM()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,windCras);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(windCras);
         yield return new WaitForSeconds(windCras.audClip.length-1);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(getbackhere);
         yield return new WaitForSeconds(getbackhere.audClip.length+0.25f);
@@ -266,7 +266,7 @@ public class FamishedModeController : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.uhh(whuh);
         yield return new WaitForSeconds(whuh.audClip.length);
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.zerullGameover);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.zerullGameover);
         Singleton<VertexGlitchManager>.Instance.ShakeGlitch();
         Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
         StartCoroutine(peakalt(2f));
@@ -329,9 +329,9 @@ public class FamishedModeController : MonoBehaviour
                 RenderSettings.ambientLight = new Color(0.05f, 0.05f, 0.05f, 0f);
                 StartCoroutine(easing(new Color(0.35f, 0.35f, 0.35f, 1f), 0, 1, 1));
                 funnyaudiotuff.ClearQueue(true);
+                funnyaudiotuff.SetLoop(true);
                 funnyaudiotuff.QueueAudio(despairIntro2);
                 funnyaudiotuff.QueueAudio(despairloop2);
-                funnyaudiotuff.SetLoop(true);
                 angerMultipler = 1.65f;
                 gc.famishScrpt.activatewindowbreak = true;
             }
@@ -346,8 +346,9 @@ public class FamishedModeController : MonoBehaviour
                 angerMultipler = 1.35f;
                 corspesspawn = true;
                 funnyaudiotuff.ClearQueue(true);
-                funnyaudiotuff.QueueAudio(despairloopfinale1);
                 funnyaudiotuff.SetLoop(true);
+                funnyaudiotuff.QueueAudio(despairloopfinale1);
+                
             }
         }
         if (gc.exitsReached == 1)
@@ -355,8 +356,9 @@ public class FamishedModeController : MonoBehaviour
             if (!specialLmsToggle)
             {
                 funnyaudiotuff.ClearQueue(true);
-                funnyaudiotuff.QueueAudio(despairloopfinale2);
                 funnyaudiotuff.SetLoop(true);
+                funnyaudiotuff.QueueAudio(despairloopfinale2);
+                
                 StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 1));
             }
         }
@@ -365,9 +367,10 @@ public class FamishedModeController : MonoBehaviour
             if (!specialLmsToggle)
             {
                 funnyaudiotuff.ClearQueue(true);
+                funnyaudiotuff.SetLoop(true);
                 funnyaudiotuff.QueueAudio(despairSuddenstop);
                 funnyaudiotuff.QueueAudio(despairloopfinale3);
-                funnyaudiotuff.SetLoop(true);
+                
                 StartCoroutine(easing(new Color(0.15f, 0.15f, 0.15f, 1f), 0, 1, 1));
             }
         }
@@ -375,9 +378,10 @@ public class FamishedModeController : MonoBehaviour
         {
             angerMultipler = 0.1f;
             funnyaudiotuff.ClearQueue(true);
+            funnyaudiotuff.SetLoop(true);
             funnyaudiotuff.QueueAudio(despairSuddenstop2);
             funnyaudiotuff.QueueAudio(despairloopfinale4);
-            funnyaudiotuff.SetLoop(true);
+            
             StartCoroutine(easing(new Color(0.65f, 0.65f, 0.65f, 1f), 0, 1, 1));
 
             gc.modeState = gc.exitsReached + "/" + gc.maxExits + " Exits" + " | its over..?";
@@ -401,8 +405,9 @@ public class FamishedModeController : MonoBehaviour
         angerMultipler = 1.25f;
         StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 0));
         funnyaudiotuff.ClearQueue(true);
-        funnyaudiotuff.PlaySingleClip(specialLmsLoop);
         funnyaudiotuff.SetLoop(true);
+        funnyaudiotuff.PlaySingleClip(specialLmsLoop);
+        
     }
     public IEnumerator zoomtiem()
     {

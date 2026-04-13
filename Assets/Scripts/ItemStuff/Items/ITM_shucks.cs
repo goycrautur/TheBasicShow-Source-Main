@@ -13,7 +13,7 @@ public class ITM_shucks : BaseItem
     public override bool OnUse()
     {
         if (used) return false;
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,shucy);
+        GameControllerScript.Instance.lbams.ShuckSource.PlaySingleClip(shucy);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Set, (int)GameControllerScript.Instance.player.maxHealth/2f, 6f, true, true, false);
         GameControllerScript.Instance.player.maxHealth += 50f;
         used = true;

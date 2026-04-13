@@ -60,7 +60,8 @@ public class VendingMachineScript : MonoBehaviour
                 
                 if (AdditionalGameCustomizer.Instance.Cash >= moneyNeeded)
                 {
-                    GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.quarterDrop);
+                    GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.quarterDrop);
+                    
                     AdditionalGameCustomizer.Instance.Cash = AdditionalGameCustomizer.Instance.Cash - moneyNeeded;
                     ItemManager.Instance.CollectItem(itemID);
                     insertedMoney = 0;
@@ -70,7 +71,7 @@ public class VendingMachineScript : MonoBehaviour
                         return;
                     }
                 }
-                else GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource2,GameControllerScript.Instance.lbams.loudIncorrectBuzz);
+                else GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.loudIncorrectBuzz);
             }
             else  Debug.Log("Inventory full. Cannot collect item.");
         }

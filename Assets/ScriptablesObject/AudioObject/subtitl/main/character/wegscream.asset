@@ -59,8 +59,8 @@ MonoBehaviour:
     undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
     shakey: 1
-    shakeyspeed: 1
-    shakeyradius: 1000
+    shakeyspeed: 1000
+    shakeyradius: 2
     fonts: 3
     useLocalization: 0
     unreadable: 0

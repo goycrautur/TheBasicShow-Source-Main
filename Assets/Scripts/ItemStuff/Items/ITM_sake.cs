@@ -8,7 +8,7 @@ public class ITM_sake : BaseItem
         Instantiate(sakeSpray, Contoller.player.transform.position, Contoller.cameraTransform.rotation);
         if (blastcork) Instantiate(cork, Contoller.player.transform.position, Contoller.cameraTransform.rotation);
         if (!Contoller.player.outdoorsfr) if (Contoller.player.door.lockTime <= 0f)Contoller.player.ResetGuilt("drink", 1f);
-        Contoller.lbams.PlayClip(Contoller.lbams.MainSource3,sake);
+        Contoller.lbams.MainSource3.PlaySingleClip(sake);
         return true;
     }
 

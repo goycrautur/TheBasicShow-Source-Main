@@ -89,7 +89,7 @@ public class PickupScript : Interactable
     public override void Interact()
     {
         BaseItem holdingitem = ItemManager.Instance.GetSelectedItemObject();
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.ItemCollect);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.ItemCollect);
         if (SlotStuffs(false))
         {
             if (holdingitem.Unswapable) return;
@@ -97,10 +97,10 @@ public class PickupScript : Interactable
             mapIconSprite.enabled = true;
         }
         if (ID == 5) if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
-        if (PresentMode) GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.gambling);
+        if (PresentMode) GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.gambling);
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
         {
-            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.MoneyCollect);
+            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.MoneyCollect);
             AdditionalGameCustomizer.Instance.Cash += 0.25;
             if (killafterpickup) Destroy(gameObject);
             if (!killafterpickup)

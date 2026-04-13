@@ -21,8 +21,8 @@ public class ITM_ShapeKeys : BaseItem
         }
         if (!canteat)
         {
-            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,aud_Crunch);
-            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,firintheho);
+            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Crunch);
+            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(firintheho);
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, stamina);
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, health, 0f, true, false);
             return true;

@@ -5,7 +5,7 @@ public class ITM_AllTheModiumEdibles : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,eat);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(eat);
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
         GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerAdd;
         GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultiplerAdd;

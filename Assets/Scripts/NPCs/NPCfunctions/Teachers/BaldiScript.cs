@@ -199,10 +199,8 @@ public class BaldiScript : NPC
     [Header("Audio and Animation")]
     [SerializeField] private AudioObjectyeah slap;
     [SerializeField] private Animator baldicator, baldiAnimator;
-    [SerializeField] private GameObject sprite;
 
     private float currentPriority;
     private AudioManagerLiveReaction baldiAudio;
-    [SerializeField] private subsScriptableObject slapSound;
     #endregion
 }

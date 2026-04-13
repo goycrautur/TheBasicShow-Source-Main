@@ -6,7 +6,7 @@ public class ITM_crac : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,Used);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(Used);
         StartCoroutine(amwaitin(duration));
         return true;
     }

@@ -27,18 +27,18 @@ public class LifetimeScript : MonoBehaviour
     #region Trigger Handlers
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<AudioSource>() != null) 
+        if (other.GetComponent<AudioManagerLiveReaction>() != null) 
         {
             ToggleAudioSourceManager(other.GetComponent<AudioManagerLiveReaction>(), true);
-            ToggleAudioSource(other.GetComponent<AudioSource>(), true);
+            //ToggleAudioSourceManager(other.GetComponentInChildren<AudioManagerLiveReaction>(), true);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<AudioSource>() != null)
+        if (other.GetComponent<AudioManagerLiveReaction>() != null)
         {
             ToggleAudioSourceManager(other.GetComponent<AudioManagerLiveReaction>(), false);
-            ToggleAudioSource(other.GetComponent<AudioSource>(), false);
+            //ToggleAudioSourceManager(other.GetComponentInChildren<AudioManagerLiveReaction>(), false);
         }
     }
     #endregion
@@ -51,21 +51,10 @@ public class LifetimeScript : MonoBehaviour
         foreach (var collider in colliders) 
         {
             ToggleAudioSourceManager(collider.GetComponent<AudioManagerLiveReaction>(), mute);
-            ToggleAudioSource(collider.GetComponent<AudioSource>(), mute);
+            //ToggleAudioSourceManager(collider.GetComponentInChildren<AudioManagerLiveReaction>(), mute);
         }
     }
 
-    private void ToggleAudioSource(AudioSource source, bool mute)
-    {
-        if (source == null) return;
-        bool isCurrentlyMuted = disabledAudioSources.Contains(source);
-        if (isCurrentlyMuted != mute)
-        {
-            source.mute = mute;
-            if (mute) disabledAudioSources.Add(source);
-            else disabledAudioSources.Remove(source);
-        }
-    }
     private void ToggleAudioSourceManager(AudioManagerLiveReaction source, bool mute)
     {
         if (source == null) return;

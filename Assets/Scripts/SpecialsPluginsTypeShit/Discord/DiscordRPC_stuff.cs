@@ -62,7 +62,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 			currentActivity.Details = StateDetails;
 			currentActivity.State = StateStatus;
 			currentActivity.Assets.LargeImage = StateIMGLarge;
-			currentActivity.Assets.LargeText = StateIMGSmall;
+			currentActivity.Assets.LargeText = LargeIMGText;
         	var activityManager = discord.GetActivityManager();
         	activityManager.UpdateActivity(currentActivity, result =>
         	{
@@ -76,12 +76,12 @@ public class DiscordRPC_stuff : MonoBehaviour
 		StateDetails = details;
         StateStatus = state;
 		StateIMGLarge = largeImage;
-		StateIMGSmall = largeText;
+		LargeIMGText = largeText;
 	}
 	public static DiscordRPC_stuff current;
 	public Discord.Discord discord;
 	public long applicationID;
 	public bool Refresh,Dont;
-	public string StateDetails,StateStatus,StateIMGLarge,StateIMGSmall;
+	public string StateDetails,StateStatus,StateIMGLarge,LargeIMGText;
 	private Activity currentActivity; 
 }

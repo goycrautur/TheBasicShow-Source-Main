@@ -307,10 +307,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     {
         for (int i = 0; i < GameControllerScript.Instance.SlotsAmmount; ++i)
         {
-            if (ItemManager.Instance.Inventory[i].ItemInstance != null)
-            {
-                ItemManager.Instance.DropItem(i);
-            }
+            if (ItemManager.Instance.Inventory[i].ItemInstance != null) ItemManager.Instance.DropItem(i);
         }
     }
     public void UpdateInventoryLength(bool setSlotNum = false, int SlotNumber = 1,int maxSlotsAmmount = 1,bool setMaxSlotAmmount = false)
@@ -402,7 +399,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     }
     #endregion
     public float MuchoStunDura,FamStunDura,ZerStunDura,BalStunDura;
-    public HeldItem[] AltInventory;
+    public HeldItem[] AltInventory = new HeldItem[ItemManager.Instance.Inventory.Length]; //son :sob::sob:
     public bool MuchoStunCount,FamStunCount,ZerStunCount,BalStunCount;
     public int SlotsAmmou,MaxSlotsAmmou,realMaxSlotsAmmou;
 }

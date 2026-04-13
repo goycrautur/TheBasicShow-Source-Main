@@ -7,28 +7,27 @@ public class TutorScript : MonoBehaviour
 {
     private void Start()
     {
-        tutorAnimation.enabled = false;
-        tutorSource.ClearQueue(true);
         agent = GetComponent<NavMeshAgent>();
+        tutorSource = GetComponent<AudioManagerLiveReaction>();
+        tutorSource.ClearQueue(true);
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerTransform = playerObject.transform;
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        tutorSource = GetComponent<AudioManagerLiveReaction>();
-        gc = FindObjectOfType<GameControllerScript>();
+        if (IsLolbit) StartCoroutine(sillyRiseLols());
     }
 
     private void Update()
     {
-        if (tiemer > 0f) tiemer -= Time.deltaTime;
-        if (agent.enabled && gameObject.activeSelf) agent.SetDestination(target.position);
-        if (tiemer < 0f && !gottothepositio)
+        if (tiemer > 0f && !IsLolbit) tiemer -= Time.deltaTime;
+        if (agent.enabled && gameObject.activeSelf && !IsLolbit) agent.SetDestination(target.position);
+        if (tiemer < 0f && !gottothepositio && !IsLolbit)
         {
             gottothepositio = true;
             //agent.speed = 1f;
             intro();
         }
-        if (Input.GetKeyDown(KeyCode.P) && !triggeredCounting && gottothepositio)
+        if (Input.GetKeyDown(KeyCode.P) && !triggeredCounting && gottothepositio && !IsLolbit)
         {
             tutorAnimation.Rebind();
             tutorAnimation.Play("BaldiWave", -1, 0f);
@@ -46,12 +45,18 @@ public class TutorScript : MonoBehaviour
             }
         }
     }
+    private IEnumerator sillyRiseLols()
+    {
+        bitRiseAnim.Rebind();
+        bitRiseAnim.Play("rise", -1, 0f);
+        tutorSource.ClearQueue(true);
+        tutorSource.QueueAudio(concret);
+        yield return new WaitForSeconds(5.2f);
+        intro();
+    }
     public void intro()
     {
         gc.musi();
-        tutorAnimation.enabled = true;
-        tutorAnimation.Rebind();
-        tutorAnimation.Play("BaldiWave", -1, 0f);
         tutorSource.ClearQueue(true);
         tutorSource.QueueAudio(aud_Hi);
     }
@@ -93,10 +98,15 @@ public class TutorScript : MonoBehaviour
         else spriteRenderer.sprite = closedSprite;
         yield return new WaitForSeconds(delayClips);
     }
+    [Header("Lolbit Settings")]
+    [SerializeField] private bool IsLolbit;
+    [SerializeField] private Animator bitRiseAnim;
+    public AudioObjectyeah concret;
+    [SerializeField] private float riseIntroDelay = 3f;
 
     [Header("Basic")]
     [SerializeField] private Animator tutorAnimation;
-    [SerializeField] private AudioObjectyeah aud_Hi, ReadyOrNot;
+    public AudioObjectyeah aud_Hi,aud_Prize, ReadyOrNot;
     [SerializeField] private List<AudioObjectyeah> countdownClips;
     [SerializeField] private bool Countdown;
 

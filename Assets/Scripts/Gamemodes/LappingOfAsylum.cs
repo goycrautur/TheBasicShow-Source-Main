@@ -101,8 +101,9 @@ public class LappingOfAsylumController : MonoBehaviour
             if (mode != "LappingOfAsylum") LapPortals.ForEach(lap => Destroy(lap));
             var audLapVal = (int)UnityEngine.Random.Range(0f, RandomizedPrelapMusic.Length);
             LapSound.ClearQueue(true);
-            LapSound.QueueAudio(RandomizedPrelapMusic[audLapVal]);
             LapSound.SetLoop(true);
+            LapSound.QueueAudio(RandomizedPrelapMusic[audLapVal]);
+            
             if (gc.warrealest) gc.LapManag.MeepTimer.SetActive(true);
         }
         if (stuff == "exitstuff")
@@ -227,9 +228,9 @@ public class LappingOfAsylumController : MonoBehaviour
         yield return new WaitForSeconds(zawarudo.audClip.length / 2);
         UnityEngine.Debug.Log(LapSound.audioDevice.timeSamples);
         LapSound.ClearQueue(true);
+        LapSound.SetLoop(true);
         if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
         if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
-        LapSound.SetLoop(true);
         gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
         CurrentLap++;
         gc.player.walkSpeedMultipler += 0.2f;
@@ -311,6 +312,8 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void LapSpecificsStuff()
     {
+        LapSound2.ClearQueue(true);
+        LapSound.ClearQueue(true);
         LapRouletteTagThing++;
         vanishScore = true;
         if (CurrentLap == 2)
@@ -349,10 +352,10 @@ public class LappingOfAsylumController : MonoBehaviour
 
         if (LapRouletteTagThing == 2)
         {
-            StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 1.5f , HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+            StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2.5f , HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
             LapRouletteTagThing = 0;
         }
-        else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 1.5f , HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+        else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2.5f , HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
 
         if (lappingHi[CurrentLap].usesFlag) StartCoroutine(flagmove());
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr) if (muc.isActiveAndEnabled) muc.MuchoSpeedScale += 0.1f;

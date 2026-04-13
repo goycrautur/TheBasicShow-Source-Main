@@ -148,9 +148,10 @@ public class ZerullBossScript : MonoBehaviour
     public void StartBossIntro()
     {
         audioDevice.ClearQueue(true);
+        //audioDevice.SetLoop(true);
         audioDevice.QueueAudio(bossIntro);
         audioDevice.QueueAudio(bossIntro_Loop);
-        //audioDevice.SetLoop(true);
+        
     }
 
     [Header("Chase Music")]

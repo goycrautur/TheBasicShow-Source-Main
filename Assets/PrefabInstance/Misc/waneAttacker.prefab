@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3410186579798894337}
   - component: {fileID: 855498964625110569}
   - component: {fileID: 2342936570634169563}
-  - component: {fileID: 8949864604324381203}
-  m_Layer: 0
+  - component: {fileID: 6762914267827823993}
+  m_Layer: 13
   m_Name: Attacker Echo
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,19 +103,29 @@ MonoBehaviour:
   shaking: 0
   billboardX: 0
   applyRandomZRotation: 0
---- !u!114 &8949864604324381203
-MonoBehaviour:
+--- !u!136 &6762914267827823993
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858879467860900101}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprRen: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
+  m_Height: 10.24
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1228841565602580729
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,8 +136,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6222054660490484770}
   - component: {fileID: 1130122228884073697}
-  - component: {fileID: 7693154383437146640}
-  m_Layer: 0
+  - component: {fileID: 2179621963459614770}
+  m_Layer: 13
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +255,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7693154383437146640
+--- !u!114 &2179621963459614770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,14 +264,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1228841565602580729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audisourc: {fileID: 1130122228884073697}
-  sub: {fileID: 11400000, guid: c3ce5bfd9da71a04da1c595b0c8c3ad2, type: 2}
-  type: 3d
-  DelaySpawning: 0
-  spawnDelay: 0
+  PlayAtAwake: 1
+  StartingLoop: 1
+  thoseWhoObject: {fileID: 11400000, guid: 30525c1d1b349ff4496f2e3aca6135ac, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &1517057051091894417
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +288,7 @@ GameObject:
   - component: {fileID: 8553786710803164473}
   - component: {fileID: 8488731968158650271}
   - component: {fileID: 3228648767456681655}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: StunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +390,7 @@ GameObject:
   - component: {fileID: 8569237487631203366}
   - component: {fileID: 5394218390191537746}
   - component: {fileID: 6531591060631838408}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: StunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,8 +491,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5604972809886452761}
   - component: {fileID: 3877010957492802820}
-  - component: {fileID: 2597642055766920371}
-  m_Layer: 0
+  - component: {fileID: 2421837822430839677}
+  m_Layer: 13
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +610,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2597642055766920371
+--- !u!114 &2421837822430839677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -604,14 +619,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1692209877506333594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audisourc: {fileID: 3877010957492802820}
-  sub: {fileID: 11400000, guid: c3ce5bfd9da71a04da1c595b0c8c3ad2, type: 2}
-  type: 3d
-  DelaySpawning: 0
-  spawnDelay: 0
+  PlayAtAwake: 1
+  StartingLoop: 1
+  thoseWhoObject: {fileID: 11400000, guid: 30525c1d1b349ff4496f2e3aca6135ac, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &2076493152900755942
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +643,7 @@ GameObject:
   - component: {fileID: 1185793382982925750}
   - component: {fileID: 904102032502793588}
   - component: {fileID: 2165450841101200747}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,14 +770,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2076493152900755942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audisourc: {fileID: 904102032502793588}
-  sub: {fileID: 11400000, guid: c3ce5bfd9da71a04da1c595b0c8c3ad2, type: 2}
-  type: 3d
-  DelaySpawning: 0
-  spawnDelay: 0
+  PlayAtAwake: 1
+  StartingLoop: 1
+  thoseWhoObject: {fileID: 11400000, guid: 30525c1d1b349ff4496f2e3aca6135ac, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &3300136734667319153
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,8 +793,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5419724706976178832}
   - component: {fileID: 4448438740288967710}
-  - component: {fileID: 6205382475649836938}
-  m_Layer: 0
+  - component: {fileID: 675710299543334746}
+  m_Layer: 13
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +912,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6205382475649836938
+--- !u!114 &675710299543334746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -896,14 +921,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3300136734667319153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audisourc: {fileID: 4448438740288967710}
-  sub: {fileID: 11400000, guid: c3ce5bfd9da71a04da1c595b0c8c3ad2, type: 2}
-  type: 3d
-  DelaySpawning: 0
-  spawnDelay: 0
+  PlayAtAwake: 1
+  StartingLoop: 1
+  thoseWhoObject: {fileID: 11400000, guid: 30525c1d1b349ff4496f2e3aca6135ac, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &3925998162621401759
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,10 +945,10 @@ GameObject:
   - component: {fileID: 1233053802669085738}
   - component: {fileID: 6921786638846847146}
   - component: {fileID: 3392652681087346223}
-  - component: {fileID: 7999238786960663606}
-  m_Layer: 0
+  - component: {fileID: 2364479555001854196}
+  m_Layer: 13
   m_Name: Attacker Echo
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1007,19 +1037,29 @@ MonoBehaviour:
   shaking: 0
   billboardX: 0
   applyRandomZRotation: 0
---- !u!114 &7999238786960663606
-MonoBehaviour:
+--- !u!136 &2364479555001854196
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3925998162621401759}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprRen: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
+  m_Height: 10.24
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4193354736793476413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,10 +1071,10 @@ GameObject:
   - component: {fileID: 7259609936147579440}
   - component: {fileID: 3437344087978932674}
   - component: {fileID: 7557795250309810450}
-  - component: {fileID: 8189072183937481263}
-  m_Layer: 0
+  - component: {fileID: 6580022449833335504}
+  m_Layer: 13
   m_Name: Attacker Echo
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1123,19 +1163,29 @@ MonoBehaviour:
   shaking: 0
   billboardX: 0
   applyRandomZRotation: 0
---- !u!114 &8189072183937481263
-MonoBehaviour:
+--- !u!136 &6580022449833335504
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4193354736793476413}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprRen: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
+  m_Height: 10.24
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6580127116775009268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,9 +1199,9 @@ GameObject:
   - component: {fileID: 1543868453800326058}
   - component: {fileID: 2220537406130395772}
   - component: {fileID: 4890297436187157228}
-  - component: {fileID: 4186981260030500062}
   - component: {fileID: 8890540931179707798}
-  m_Layer: 0
+  - component: {fileID: 7118802204368662717}
+  m_Layer: 13
   m_Name: waneAttacker
   m_TagString: NPC
   m_Icon: {fileID: 0}
@@ -1166,7 +1216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6580127116775009268}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.17192063, z: 0, w: -0.9851108}
+  m_LocalRotation: {x: 0, y: 0.57030356, z: 0, w: -0.821434}
   m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1260,6 +1310,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   crafters: {fileID: 0}
   craftersScript: {fileID: 0}
+  waneisangry: {fileID: 1153910855, guid: 83c5d0556a2360b469e533c1f5801423, type: 3}
   Teleport: 0
   echos:
   - {fileID: 7259609936147579440}
@@ -1367,19 +1418,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &4186981260030500062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6580127116775009268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprRen: {fileID: 0}
 --- !u!114 &8890540931179707798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,14 +1427,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 6580127116775009268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e633cf5e314fa3c4388ff5fc94b15bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audisourc: {fileID: 4890297436187157228}
-  sub: {fileID: 11400000, guid: 5184bd46ff3c8784f9055b314839e236, type: 2}
-  type: 3d
-  DelaySpawning: 0
-  spawnDelay: 0
+  PlayAtAwake: 1
+  StartingLoop: 1
+  thoseWhoObject: {fileID: 11400000, guid: 1d9e63b7be66f0e4a9586ab4a19529ad, type: 2}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
+--- !u!136 &7118802204368662717
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580127116775009268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.56
+  m_Height: 10.24
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6618340292181818430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,7 +1474,7 @@ GameObject:
   - component: {fileID: 6700881858520662279}
   - component: {fileID: 4159909159542471506}
   - component: {fileID: 448236685294010074}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: StunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1510,7 +1576,7 @@ GameObject:
   - component: {fileID: 509553117459163123}
   - component: {fileID: 8965549307790677203}
   - component: {fileID: 2181205427154807235}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: StunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1612,10 +1678,10 @@ GameObject:
   - component: {fileID: 2140516657325543232}
   - component: {fileID: 741431400075537610}
   - component: {fileID: 2520577368690602195}
-  - component: {fileID: 1020376376120698023}
-  m_Layer: 0
+  - component: {fileID: 6421187572969983218}
+  m_Layer: 13
   m_Name: Attacker Echo
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1704,16 +1770,26 @@ MonoBehaviour:
   shaking: 0
   billboardX: 0
   applyRandomZRotation: 0
---- !u!114 &1020376376120698023
-MonoBehaviour:
+--- !u!136 &6421187572969983218
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8826038923196029647}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprRen: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
+  m_Height: 10.24
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -246,8 +246,8 @@ public class ZerullClassic : MonoBehaviour
         if (!StartSongsIsMidi)
         {
             musicAudio.ClearQueue(true);
-            musicAudio.QueueAudio(Boss_Music[0]);
             musicAudio.SetLoop(true);
+            musicAudio.QueueAudio(Boss_Music[0]);
         }
         else
         {
@@ -344,8 +344,9 @@ public class ZerullClassic : MonoBehaviour
         if (!Midi) // If Midi bool is not enabled
         {
             musicAudio.ClearQueue(true);
+            musicAudio.SetLoop(true);
             musicAudio.QueueAudio(Boss_Music[2]);
-            musicAudio.SetLoop(true); // Play normal music
+             // Play normal music
         }
         else // If Midi bool is enabled
         {

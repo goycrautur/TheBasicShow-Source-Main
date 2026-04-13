@@ -9,7 +9,7 @@ public class NeedMoreScript : MonoBehaviour
 			if (!audioDevice.audioDevice.isPlaying) 
 			{
 				audioDevice.ClearQueue(true);
-				audioDevice.PlaySingleClip(baldiDoor);
+				if (baldiDoor !=null) audioDevice.PlaySingleClip(baldiDoor);
 			}
 		}
 	}

@@ -178,7 +178,9 @@ public class GameControllerScript : MonoBehaviour
             if (!warrealest)
             {
                 //midishit1.Play();
-                lbams.PlayClip(lbams.SchoolMusic,lbams.schoolClip,true);
+                lbams.SchoolMusic.ClearQueue(true);
+                lbams.SchoolMusic.SetLoop(true);
+                lbams.SchoolMusic.QueueAudio(lbams.schoolClip);
             }
         }
     }
@@ -262,7 +264,9 @@ public class GameControllerScript : MonoBehaviour
             {
                 yield return new WaitForSeconds(1);
                 LapManag.MeepTimer.SetActive(true);
-                lbams.PlayClip(lbams.WarMusic,lbams.WAR,true);
+                lbams.WarMusic.ClearQueue(true);
+                lbams.WarMusic.SetLoop(true);
+                lbams.WarMusic.QueueAudio(lbams.WAR);
             }
         }
     }
@@ -283,7 +287,7 @@ public class GameControllerScript : MonoBehaviour
         if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic") Gatesrea.ForEach(g => g.Down());
 
         //midishit1.Stop();
-        lowBudgetAudioManagementShit.Instance.SchoolMusic.ClearQueue(true);
+        lbams.SchoolMusic.ClearQueue(true);
         Math.learnMusic.ClearQueue(true);
 
         if (AdditionalGameCustomizer.Instance != null && !AdditionalGameCustomizer.Instance.NoYCTP && mode == "story")Math.learnMusic.PlaySingleClip(lowBudgetAudioManagementShit.Instance.hangAudio);
@@ -306,7 +310,7 @@ public class GameControllerScript : MonoBehaviour
                 onetimeupdate = true;
             }
             if (ZerullClassic.Instance.realBossStarted) Singleton<MusicManagerMaes>.Instance.HangMidi(true);
-            if (!lbams.GameOverSource.audioDevice.isPlaying) lbams.PlayClip(lbams.GameOverSource,lbams.zerullGameover);
+            if (!lbams.GameOverSource.audioDevice.isPlaying) lbams.GameOverSource.PlaySingleClip(lbams.zerullGameover);
             AdditionalGameCustomizer.Instance.FovAmmount = 120;
         }
         if (player.jumpropes.Count > 0) player.jumpropes[0].End(false);
@@ -322,7 +326,7 @@ public class GameControllerScript : MonoBehaviour
         if (!lbams.GameOverSource.audioDevice.isPlaying && !player.killedbyhim)
         {
             audOverVal = (int)UnityEngine.Random.Range(0f, lbams.LoseSounds.Length);
-            lbams.PlayClip(lbams.GameOverSource,lbams.LoseSounds[audOverVal]);
+            lbams.GameOverSource.PlaySingleClip(lbams.LoseSounds[audOverVal]);
         }
         if (mode == "endless" && notebooks > PlayerPrefs.GetInt("HighBooks") && !highScoreText.activeSelf) highScoreText.SetActive(true);
         if (gameOverDelay <= 0f)
@@ -383,11 +387,14 @@ public class GameControllerScript : MonoBehaviour
         if (mode == "story")
         {
             //Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
-            lbams.PlayClip(lbams.EscapeMusic,lbams.shithourIntro);
+            lbams.EscapeMusic.ClearQueue(true);
+            lbams.EscapeMusic.QueueAudio(lbams.shithourIntro);
             //MusicGO = true;
             yield return new WaitForSeconds(lbams.shithourIntro.audClip.length);
             lbams.EscapeMusic.ClearQueue(true);
-            lbams.PlayClip(lbams.EscapeMusic,lbams.shithourLoop,true);
+            lbams.EscapeMusic.SetLoop(true);
+            lbams.EscapeMusic.QueueAudio(lbams.shithourLoop);
+            
             //Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = lbams.EscapeMusic.audioDevice;
         }
     }
@@ -395,12 +402,14 @@ public class GameControllerScript : MonoBehaviour
     {
         if (mode == "story")
         {
-		    lbams.PlayClip(lbams.EscapeMusic,lbams.NormalTbsFinale[0],false);
+            lbams.EscapeMusic.ClearQueue(true);
+            lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[0]);
             yield return new WaitForSeconds(lbams.NormalTbsFinale[0].audClip.length);
             ElevdorRea.ForEach(ed => ed.Opendor = true);
             Gatesrea.ForEach(g => g.Down(false));
             lbams.EscapeMusic.ClearQueue(true);
-            lbams.PlayClip(lbams.EscapeMusic,lbams.NormalTbsFinale[1],true);
+            lbams.EscapeMusic.SetLoop(true);
+            lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[1]);
             yield return new WaitForSeconds(0.1f);
             finaleMode = true;
         }
@@ -410,7 +419,9 @@ public class GameControllerScript : MonoBehaviour
         yield return new WaitForSeconds(LearningGameManager.Instance.Television.Markings ? 3f : 0.75f);
         StartCoroutine(easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5));
         Singleton<TimeOutManagerFUCKYEA>.Instance.spamupdatethese =true;
-        lbams.PlayClip(lbams.TimeoutMusic,lbams.timeoutMusicAud,true);
+        lbams.TimeoutMusic.ClearQueue(true);
+        lbams.TimeoutMusic.SetLoop(true);
+        lbams.TimeoutMusic.QueueAudio(lbams.timeoutMusicAud);
     }
     private void isvidfinished(VideoPlayer vp)
 	{
@@ -423,7 +434,10 @@ public class GameControllerScript : MonoBehaviour
         SubtitlesHudFade.Play("hudFadeInsubs", -1, 0f);
         ZerullClassic.Instance.yourflashbang.Rebind();
         ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
-		lbams.PlayClip(lbams.EscapeMusic,lbams.NormalTbsFinale[4],true);
+        lbams.EscapeMusic.ClearQueue(true);
+        lbams.EscapeMusic.SetLoop(true);
+        lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[4]);
+        
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
         youCantPause = false;
@@ -444,10 +458,15 @@ public class GameControllerScript : MonoBehaviour
                     switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
                     {
                         case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                            lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStartLoop,true);
+                            lbams.ChaosAudioSource.ClearQueue(true);
+                            lbams.ChaosAudioSource.SetLoop(true);
+                            lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
+                            
                             break;
                         case AdditionalGameCustomizer.EscapeFunsies.TBS:
-                            lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStartLoop,true);
+                            lbams.ChaosAudioSource.ClearQueue(true);
+                            lbams.ChaosAudioSource.SetLoop(true);
+                            lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
                             break;
                     }
                 }
@@ -459,10 +478,14 @@ public class GameControllerScript : MonoBehaviour
                     switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
                     {
                         case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                            lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosFinal,true);
+                            lbams.ChaosAudioSource.ClearQueue(true);
+                            lbams.ChaosAudioSource.SetLoop(true);
+                            lbams.ChaosAudioSource.QueueAudio(lbams.ChaosFinal);
                             break;
                         case AdditionalGameCustomizer.EscapeFunsies.TBS:
-                            lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStartLoop,true);
+                            lbams.ChaosAudioSource.ClearQueue(true);
+                            lbams.ChaosAudioSource.SetLoop(true);
+                            lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
                             break;
                     }
                 }
@@ -535,9 +558,9 @@ public class GameControllerScript : MonoBehaviour
                 if (FinaleSecret)
                 {
                     lbams.EscapeMusic.ClearQueue(true);
+                    lbams.EscapeMusic.SetLoop(true);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[1]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[1]);
-                    lbams.EscapeMusic.SetLoop(true);
                 }
             }
         }
@@ -553,12 +576,18 @@ public class GameControllerScript : MonoBehaviour
                         {
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                                 lbams.EscapeMusic.SetPitch(0.75f);
-                                lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStart,true);
+                                lbams.ChaosAudioSource.ClearQueue(true);
+                                lbams.ChaosAudioSource.SetLoop(true);
+                                lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStart);
+                                
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 lbams.EscapeMusic.ClearQueue(true);
-                                lbams.PlayClip(lbams.EscapeMusic,lbams.NormalTbsFinale[2],true);
-                                lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStart,true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[2]);
+                                lbams.ChaosAudioSource.ClearQueue(true);
+                                lbams.ChaosAudioSource.SetLoop(true);
+                                lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStart);
                                 break;
                         }
                     }
@@ -566,9 +595,9 @@ public class GameControllerScript : MonoBehaviour
                 if (FinaleSecret)
                 {
                     lbams.EscapeMusic.ClearQueue(true);
+                    lbams.EscapeMusic.SetLoop(true);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[2]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[2]);
-                    lbams.EscapeMusic.SetLoop(true);
                 }
             }
         }
@@ -584,7 +613,9 @@ public class GameControllerScript : MonoBehaviour
                         switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
                         {
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                                lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStartLoop,true);
+                                lbams.ChaosAudioSource.ClearQueue(true);
+                                lbams.ChaosAudioSource.SetLoop(true);
+                                lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
                                 lbams.EscapeMusic.SetPitch(0.6f);
                                 StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
                                 break;
@@ -604,7 +635,9 @@ public class GameControllerScript : MonoBehaviour
                                 vidplay.Play();
                                 vidplay.loopPointReached += isvidfinished;
                                 Time.timeScale = 0;
-                                lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosStartLoop,true);
+                                lbams.ChaosAudioSource.ClearQueue(true);
+                                lbams.ChaosAudioSource.SetLoop(true);
+                                lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
                                 StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
                                 break;
                         }
@@ -613,7 +646,8 @@ public class GameControllerScript : MonoBehaviour
                 if (FinaleSecret)
                 {
                     lbams.EscapeMusic.ClearQueue(true);
-                    lbams.PlayClip(lbams.EscapeMusic,lbams.EvapV2Finale[3],true);
+                    lbams.EscapeMusic.SetLoop(true);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[3]);
                     AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.darkencanva;
                 }
             }
@@ -631,11 +665,15 @@ public class GameControllerScript : MonoBehaviour
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                                 lbams.EscapeMusic.SetPitch(0.45f);
                                 StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
-                                lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosBuildUp,true);
+                                lbams.ChaosAudioSource.ClearQueue(true);
+                                lbams.ChaosAudioSource.SetLoop(true);
+                                lbams.ChaosAudioSource.QueueAudio(lbams.ChaosBuildUp);
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
-                                lbams.PlayClip(lbams.ChaosAudioSource,lbams.ChaosBuildUp,true);
+                                lbams.ChaosAudioSource.ClearQueue(true);
+                                lbams.ChaosAudioSource.SetLoop(true);
+                                lbams.ChaosAudioSource.QueueAudio(lbams.ChaosBuildUp);
                                 break;
                         }
                     }
@@ -643,9 +681,9 @@ public class GameControllerScript : MonoBehaviour
                 if (FinaleSecret)
                 {
                     lbams.EscapeMusic.ClearQueue(true);
+                    lbams.EscapeMusic.SetLoop(true);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[4]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[3]);
-                    lbams.EscapeMusic.SetLoop(true);
                     AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
                 }
             }
@@ -817,7 +855,6 @@ public class GameControllerScript : MonoBehaviour
 
     [Header("Player & Camera References")]
     public PlayerScript player;
-    public SubtitlesManagerAkaSubtitleSpawnOkSDIYBT SubsManager;
     public Transform cameraTransform;
     public Camera PlayerCamera;
     public Collider playerCollider;
@@ -829,7 +866,6 @@ public class GameControllerScript : MonoBehaviour
     public zerullscript zerulscrpt;
     public FamishedScript famishScrpt;
     public MuchoScript muchoing;
-    public TutorScript baldtutor;
     public CraftersScript sockCript;
     public PlaytimeScript playtimeScript;
     public FirstPrizeScript firstPrizeScript;

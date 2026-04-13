@@ -10,8 +10,8 @@ public class pitTrigger : MonoBehaviour
 			else
             {
 				pitManager.Instance.PitAudSourc.ClearQueue(true);
-				pitManager.Instance.PitAudSourc.QueueAudio(pitManager.Instance.Pitpeaksound);
 				pitManager.Instance.PitAudSourc.SetLoop(true);
+				pitManager.Instance.PitAudSourc.QueueAudio(pitManager.Instance.Pitpeaksound);
             }
 		}
 	}

@@ -247,7 +247,8 @@ public class MuchoScript : NPC
     public bool endless;
 
     [Header("Audio and Animation")]
-    [SerializeField] private AudioObjectyeah slam,snadtp;
+    [SerializeField] private AudioObjectyeah slam;
+    [SerializeField] private AudioObjectyeah snadtp;
     [SerializeField] private Animator Muchocator, MuchoAnimator;
 
     private float currentPriority;

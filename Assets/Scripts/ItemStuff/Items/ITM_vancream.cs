@@ -5,7 +5,7 @@ public class ITM_vancream : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,splat);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(splat);
         StartCoroutine(amwaitin(duration));
         return true;
     }

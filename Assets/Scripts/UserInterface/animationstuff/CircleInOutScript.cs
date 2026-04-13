@@ -29,8 +29,9 @@ public class CircleInOutScript : MonoBehaviour
         if (changeMusik)
         {
             menumusi.ClearQueue(true);
-            menumusi.QueueAudio(theme);
             menumusi.SetLoop(true);
+            menumusi.QueueAudio(theme);
+            
         }
         yield return new WaitForSecondsRealtime(1.55f);
         to.transform.parent.gameObject.SetActive(true);

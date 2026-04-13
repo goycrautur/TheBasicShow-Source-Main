@@ -6,7 +6,7 @@ public class ITM_extendogripNetherstar : BaseItem
 {
     public override bool OnUse()
     {
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,gloveUsed);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(gloveUsed);
         StartCoroutine(amwaitin(duration));
         return true;
     }

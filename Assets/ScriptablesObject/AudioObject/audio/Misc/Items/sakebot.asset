@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15072ea04a484024cb75b0f35e4b0592, type: 3}
   m_Name: sakebot
   m_EditorClassIdentifier: 
-  audClip: {fileID: 8300000, guid: c5b1ba7ad1d313641b88b3038d115bcf, type: 3}
+  audClip: {fileID: 8300000, guid: e8d5472519e4cf144851524fef1a0178, type: 3}
   volume: 1
   SoundTypeWahh: 1
   HasSubtitle: 0

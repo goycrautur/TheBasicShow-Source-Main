@@ -1,48 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-
+using TMPro;
+using System;
 public class Gauge : CircleSlider
 {
     private void Update()
     {
         if (!shows)
         {
-            time -= Time.deltaTime;
+            time -= 1f * Time.deltaTime;
         }
         else
         {
             value = Mathf.Max(value - 1f * Time.deltaTime, Mathf.Min(value + 1f * Time.deltaTime, specialValue));
-            base.UpdateSliderValue(value);
+            //base.UpdateSliderValue(value);
         }
     }
 
     public void Show(Sprite iconSprite, float showTime)
     {
         shows = true;
-        gaugeAnimator.Play(animationNames[0]);
-        specialValue = Mathf.Clamp(showTime / showTime, 0f, 1f);
-        time = showTime;
+        Set(showTime,showTime);
         icon.sprite = iconSprite;
     }
 
     public void Hide()
     {
         shows = false;
-        gaugeAnimator.Play(animationNames[1]);
-        IEnumerator Animation()
-        {
-            yield return new WaitForSeconds(1.2f);
-            GaugeManager.Instance.gauges.Remove(this);
-            Destroy(gameObject);
-        }
-        StartCoroutine(Animation());
     }
 
     public void Set(float total, float remain)
     {
         specialValue = Mathf.Clamp(remain / total, 0f, 1f);
         time = remain;
+        textShit.text = $"{Math.Round(time, 2)}";
     }
     public void SetColor(Color color)
 	{
@@ -51,11 +42,15 @@ public class Gauge : CircleSlider
 		{
 			array[i].color = color;
 		}
+        textShit.color = color;
 	}
 
     private float specialValue;
     private float value;
+
+	public int screenRank;
     [HideInInspector] public float time;
+    public Vector3 position;
     private bool shows;
     [SerializeField] private Image[] toDarkenImage;
 
@@ -67,9 +62,6 @@ public class Gauge : CircleSlider
         }
     }
 
-    [Header("Icon"), SerializeField, Tooltip("The Icon image")] private Image icon;
-
-    [Header("Animation"), SerializeField, Tooltip("Animation of the gauge")] private Animator gaugeAnimator;
-
-    [SerializeField, Tooltip("Animation Names")] private string[] animationNames = { "GaugeActivate", "GaugeDeactivate" };
+    public Image icon;
+    public TMP_Text textShit;
 }

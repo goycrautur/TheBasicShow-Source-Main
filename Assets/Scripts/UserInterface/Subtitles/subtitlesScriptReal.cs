@@ -20,6 +20,13 @@ public class subtitlesScriptReal : MonoBehaviour
         IgnoreTimescale = subtitlys.IgnoreTimescale;
         tmpTxt.text = "";
         tmpTxt.color = subtitlys.textColor;
+        if (is3d) bg.anchoredPosition = new Vector3(0f, -1266.66f / aspectRatio, 0f);
+        else
+        {
+            fixesPosition = subtitlys.twoDeePosition;
+            bg.localScale = new Vector3(1f, 1f, 1f);
+            bg.anchoredPosition = fixesPosition;
+        }
         
         checkStuff();
     }
@@ -192,6 +199,7 @@ public class subtitlesScriptReal : MonoBehaviour
     }
     private void Update()
     {   // subtitle will commit kys if the audio source is not found or not active in hierarchy
+        
         if (hidesub) // are we deadass
         {
             imagbg.enabled = false;
@@ -202,16 +210,8 @@ public class subtitlesScriptReal : MonoBehaviour
             imagbg.enabled = true;
             tmpTxt.enabled = true;
         }
-        if (producerAud == null)
-        {
-            Destroy(base.gameObject);
-            return;
-        }
-        if (!producerAud.gameObject.activeInHierarchy)
-        {
-            Destroy(base.gameObject);
-            return;
-        }
+        if (producerAud == null) Destroy(base.gameObject);
+        if (!producerAud.gameObject.activeInHierarchy) Destroy(base.gameObject);
         updateSubPostion();
         ColorUpdatingBullshit();
         if (shake) // shake the tmp text yummy
@@ -295,9 +295,10 @@ public class subtitlesScriptReal : MonoBehaviour
             textReversing = thoseWhoSubtitles.textReverse;
             FuckTheText = thoseWhoSubtitles.unreadable;
             upsideDownReal = thoseWhoSubtitles.upsideDown;
-            bg.anchoredPosition = thoseWhoSubtitles.twoDeePosition;
+            if (!is3d) bg.anchoredPosition = thoseWhoSubtitles.twoDeePosition;
             IgnoreTimescale = thoseWhoSubtitles.IgnoreTimescale;
             tmpTxt.text = "";
+            
             if (thoseWhoSubtitles.colorMode == subtitlingIt.ColorMode.Default) // Apply fixed color
             {
                 tmpTxt.color = thoseWhoSubtitles.textColor;

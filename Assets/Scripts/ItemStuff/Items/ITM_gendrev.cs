@@ -10,7 +10,9 @@ public class ITM_gendrev : BaseItem
         AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
         AdditionalGameCustomizer.Instance.rainbowTime = true;
         used = true;
-        GenderRevealSource1.PlaySingleClip(peak);
+        GenderRevealSource1.ClearQueue(true);
+        GenderRevealSource1.SetLoop(true);
+        GenderRevealSource1.QueueAudio(peak);
         StartCoroutine(amwaitin(duration));
         return true;
     }

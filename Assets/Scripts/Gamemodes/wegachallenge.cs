@@ -18,8 +18,8 @@ public class wegachallenge : MonoBehaviour
             getloop1 = true;
             WEGA.SetActive(true);
             wegasource.ClearQueue(true);
-            wegasource.QueueAudio(weg);
             wegasource.SetLoop(true);
+            wegasource.QueueAudio(weg);
         }
         if (gc.notebooks == 7)
         {

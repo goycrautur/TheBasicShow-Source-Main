@@ -8,15 +8,9 @@ public class lowBudgetAudioManagementShit : MonoBehaviour
     private void Awake() => Instance = this;
     public static lowBudgetAudioManagementShit Instance;
     #endregion
-    public void PlayClip(AudioManagerLiveReaction source, AudioObjectyeah clip, bool loop = false)
-    {
-        source.SetLoop(loop);
-        source.PlaySingleClip(clip);
-    } 
-
     [Header("Audiosource/manager shit")]
     public AudioManagerLiveReaction HurtSource;
-    public AudioManagerLiveReaction TpSource,SchoolMusic,EscapeMusic,EndingMusic,WarMusic,TimeoutMusic,GameOverSource,ChaosAudioSource,MainSource1,MainSource2,MainSource3,DIMCSource;
+    public AudioManagerLiveReaction TpSource,SchoolMusic,EscapeMusic,EndingMusic,WarMusic,TimeoutMusic,GameOverSource,ChaosAudioSource,MainSource1,MainSource2,MainSource3,DIMCSource,ShuckSource;
     [Header("Audio clip shit")]
     public AudioObjectyeah drivinginmy;
     public AudioObjectyeah quarterDrop,evilLeafTP,TeleporterTp,totem,deltaruneExplud,punchSound,agonyScream,gasterSfx,deadbel,hangAudio,zerullGameover; //part 1

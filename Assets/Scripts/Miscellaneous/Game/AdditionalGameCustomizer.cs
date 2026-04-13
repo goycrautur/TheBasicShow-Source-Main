@@ -225,7 +225,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
                         if (tapePlayer != null)
                         {
                             Cash = Cash - 0.25;
-                            GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,GameControllerScript.Instance.lbams.quarterDrop);
+                            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.quarterDrop);
                             tapePlayer.Play();
                         }
                     }

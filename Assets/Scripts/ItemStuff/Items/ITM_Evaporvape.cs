@@ -10,7 +10,7 @@ public class ITM_Evaporvape : BaseItem
         Vector3 playerPosition = GameControllerScript.Instance.player.transform.position;
         Vector3 snappedPosition = SnapToGrid(playerPosition);
         GameObject gameObject = Instantiate(vapeclouds, snappedPosition, Quaternion.identity);
-        GameControllerScript.Instance.lbams.PlayClip(GameControllerScript.Instance.lbams.MainSource3,yummyvape);
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(yummyvape);
         return true;
     }
     private Vector3 SnapToGrid(Vector3 position)

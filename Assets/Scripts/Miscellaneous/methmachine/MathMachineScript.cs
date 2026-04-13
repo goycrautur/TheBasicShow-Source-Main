@@ -138,7 +138,7 @@ public class MathMachineScript : MonoBehaviour
                 {
                     LearningGameManager.Instance.Tutor.tutorSource.ClearQueue(true);
                     LearningGameManager.Instance.quarter.SetActive(true);
-                    LearningGameManager.Instance.Tutor.tutorSource.PlaySingleClip(LearningGameManager.Instance.aud_Prize);
+                    LearningGameManager.Instance.Tutor.tutorSource.PlaySingleClip(LearningGameManager.Instance.Tutor.aud_Prize);
                 }
             }
             meshRenderer.material = right;
@@ -167,27 +167,11 @@ public class MathMachineScript : MonoBehaviour
         if (!won & cooldown <= 0)
         {
             machineMapIcon.enabled = false;
-            if (!GameControllerScript.Instance.spoopMode)
-            {
-                GameControllerScript.Instance.ActivateSpoopMode();
-            }
-            if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
-            {
-                meepTimerScript.Instance.AddTime(-5f,Color.red);
-            }
+            if (!GameControllerScript.Instance.spoopMode) GameControllerScript.Instance.ActivateSpoopMode();
+            if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(-5f,Color.red);
             else
             {
-                if (!GameControllerScript.Instance.spoopMode & GameControllerScript.Instance.notebooks == 1)
-                {
-                    if (GameControllerScript.Instance.mode == "story")
-                    {
-                        //GameControllerScript.Instance.SubsManager.hideSub(LearningGameManager.Instance.Tutor.TutorSub);
-                    }
-                }
-                if (GameControllerScript.Instance.mode == "story")
-                {
-                    scoreSystemManager.Instance.PointsMultiplier += 1f;
-                }
+                if (GameControllerScript.Instance.mode == "story") scoreSystemManager.Instance.PointsMultiplier += 1f;
                 if (GameControllerScript.Instance.notebooks == 2 && GameControllerScript.Instance.mode == "famished")
                 {
                     FamishedModeController.Instance.specialLmsToggle=true;

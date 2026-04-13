@@ -64,6 +64,8 @@ Shader "Legacy Shaders/Simplified/BaseMaterial"
         struct Input
         {
             float2 uv_MainTex;
+            float2 uv_SecondTex;
+            float2 uv_SecondaryDiffrent;
             float2 uv_LightMap : TEXCOORD1;
             float3 worldNormal;
         };
@@ -133,11 +135,11 @@ Shader "Legacy Shaders/Simplified/BaseMaterial"
                 {
                     if (_Swap > 0.5)
                     {
-                        door = tex2D(_SecondaryDiffrent, IN.uv_MainTex) * _Color1;
+                        door = tex2D(_SecondaryDiffrent, IN.uv_SecondaryDiffrent) * _Color1;
                     }
                     else
                     {
-                        door = tex2D(_SecondTex, IN.uv_MainTex) * _Color1;
+                        door = tex2D(_SecondTex, IN.uv_SecondTex) * _Color1;
                     }
 
                     if (_UseGlitch > 0.5)
@@ -211,6 +213,8 @@ Shader "Legacy Shaders/Simplified/BaseMaterial"
         struct Input
         {
             float2 uv_MainTex;
+            float2 uv_SecondTex;
+            float2 uv_SecondaryDiffrent;
             float2 uv_LightMap : TEXCOORD1;
             float3 worldNormal;
         };
@@ -279,11 +283,11 @@ Shader "Legacy Shaders/Simplified/BaseMaterial"
                 {
                     if (_Swap > 0.5)
                     {
-                        door = tex2D(_SecondaryDiffrent, IN.uv_MainTex) * _Color1;
+                        door = tex2D(_SecondaryDiffrent, IN.uv_SecondaryDiffrent) * _Color1;
                     }
                     else
                     {
-                        door = tex2D(_SecondTex, IN.uv_MainTex) * _Color1;
+                        door = tex2D(_SecondTex, IN.uv_SecondTex) * _Color1;
                     }
 
                     if (_UseGlitch > 0.5)

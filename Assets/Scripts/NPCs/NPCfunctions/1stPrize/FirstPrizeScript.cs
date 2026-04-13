@@ -106,7 +106,7 @@ public class FirstPrizeScript : NPC
     {
         if (!audioDevice.audioDevice.isPlaying)
         {
-            int num = (int)Random.Range(0f, aud_Found.Length);
+            //int num = (int)Random.Range(0f, aud_Found.Length);
             //audioDevice.PlayOneShot(aud_Found[num]);
         }
     }
@@ -115,7 +115,7 @@ public class FirstPrizeScript : NPC
     {
         if (!audioDevice.audioDevice.isPlaying)
         {
-            int num2 = (int)Random.Range(0f, aud_Lost.Length);
+            //int num2 = (int)Random.Range(0f, aud_Lost.Length);
             //audioDevice.PlayOneShot(aud_Lost[num2]);
         }
     }
@@ -125,7 +125,7 @@ public class FirstPrizeScript : NPC
         int num = Mathf.RoundToInt(Random.Range(0f, 9f));
         if (!audioDevice.audioDevice.isPlaying && num == 0 && coolDown <= 0f)
         {
-            int num3 = (int)Random.Range(0f, aud_Random.Length);
+            //int num3 = (int)Random.Range(0f, aud_Random.Length);
             //audioDevice.PlayOneShot(aud_Random[num3]);
         }
     }
@@ -134,7 +134,7 @@ public class FirstPrizeScript : NPC
     {
         if (!audioDevice.audioDevice.isPlaying & !hugAnnounced)
         {
-            int num4 = (int)Random.Range(0f, aud_Hug.Length);
+            //int num4 = (int)Random.Range(0f, aud_Hug.Length);
             //audioDevice.PlayOneShot(aud_Hug[num4]);
             hugAnnounced = true;
         }
@@ -280,7 +280,7 @@ public class FirstPrizeScript : NPC
 
     [Header("Audio Settings")]
     [SerializeField] private AudioObjectyeah audBang;
-    [SerializeField] private AudioObjectyeah[] aud_Found, aud_Lost, aud_Hug, aud_Random = new AudioObjectyeah[2];
+    //[SerializeField] private AudioObjectyeah[] aud_Found, aud_Lost, aud_Hug, aud_Random = new AudioObjectyeah[2];
     [SerializeField] private AudioManagerLiveReaction audioDevice, motorAudio;
     #endregion
 

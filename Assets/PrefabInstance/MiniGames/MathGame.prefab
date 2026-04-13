@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 82212521532976993}
   - component: {fileID: 114038860502339572}
   - component: {fileID: 2703212752884092574}
+  - component: {fileID: 3563248587795364532}
   m_Layer: 5
   m_Name: MathGame
   m_TagString: Untagged
@@ -581,6 +582,7 @@ MonoBehaviour:
   tbstransis: {fileID: 7555982342711728627}
   DitherTransis: {fileID: 216720733891515011}
   lg: {fileID: 0}
+  nbScri: {fileID: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   results:
   - {fileID: 6769326044434766996}
@@ -641,8 +643,8 @@ MonoBehaviour:
     YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK
     YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK YOU FUCK
     YOU
-  baldiAudio: {fileID: 82212521532976993}
-  bal_intro: {fileID: 8300000, guid: 5a6e3fee9b3fb2c4f8d4ec74449da9c1, type: 3}
+  baldiAudio: {fileID: 3563248587795364532}
+  bal_intro: {fileID: 11400000, guid: 4f315d407723c774484fb5177d076a2f, type: 2}
   bal_howto: {fileID: 8300000, guid: f4b92ba06ae550e48a0ce9b0d7befbca, type: 3}
   bal_plus: {fileID: 8300000, guid: 4256e9014ca457544a8d4add81035c04, type: 3}
   bal_minus: {fileID: 8300000, guid: 3c304cda423f45742a6ba62a95559660, type: 3}
@@ -650,8 +652,8 @@ MonoBehaviour:
   bal_divided: {fileID: 8300000, guid: bc97c92d72daa9e488108d4f2082b511, type: 3}
   bal_equals: {fileID: 8300000, guid: b31ebb0fc77ac05448b9e76637d4bbcb, type: 3}
   bal_screech: {fileID: 8300000, guid: 2d117da98869cc542acd871859c5827c, type: 3}
-  jer_SecretAAW: {fileID: 8300000, guid: 10c6265552d34d74480f7667c681402d, type: 3}
-  scaryproblem: {fileID: 8300000, guid: de29318c2de3301458668b70a6cdd9cb, type: 3}
+  jer_SecretAAW: {fileID: 11400000, guid: 67cf06c4e16399040ad0fffe1a6881a0, type: 2}
+  scaryproblem: {fileID: 11400000, guid: 49ac979cf25500240b9be927b3f99602, type: 2}
   bal_numbers:
   - {fileID: 8300000, guid: b2887fc8f9f2aa847b7637b116893ee7, type: 3}
   - {fileID: 8300000, guid: 8dcbcee5b8898364c8a8db27ce0e8151, type: 3}
@@ -664,29 +666,29 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d0b4eafa2e1b8364882495e84041533b, type: 3}
   - {fileID: 8300000, guid: 47b05c7fefad8d243b01c717fb0cf3b6, type: 3}
   bal_praises:
-  - {fileID: 8300000, guid: 56315e2a7d7ac634d875c3cbf1c44d2c, type: 3}
-  - {fileID: 8300000, guid: 907fa56f48fd5cd468304a9d99f6514c, type: 3}
-  - {fileID: 8300000, guid: 60fa07ea5a9137d4ea975d60f07003cd, type: 3}
-  - {fileID: 8300000, guid: 7afb0e4ecf12c594d9ff9b78fb7c83fe, type: 3}
-  - {fileID: 8300000, guid: 3418506e59751384a9f1ffb9d78d8eb1, type: 3}
-  - {fileID: 8300000, guid: 0d4c6fb309449304ab8e35ba0f7cfed4, type: 3}
+  - {fileID: 11400000, guid: 6be933273f6d8034ebb7d1a181343f4d, type: 2}
+  - {fileID: 11400000, guid: 463780ca5a734e4449b2168bd9840a5e, type: 2}
+  - {fileID: 11400000, guid: fec93520d2bc37444bf688fdaa2784e1, type: 2}
+  - {fileID: 11400000, guid: 13ac90080894a2e40b4eb62390b5f575, type: 2}
+  - {fileID: 11400000, guid: 72e7dd03c42b3c049a3ba50616069b85, type: 2}
+  - {fileID: 11400000, guid: e47127f5fb6f6c64398d47ca08236fad, type: 2}
   bal_problems:
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
-  - {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
+  - {fileID: 11400000, guid: 5ed10bb654b116d43835ad1c196ef02a, type: 2}
   learnMusics:
-  - {fileID: 8300000, guid: a1d417675e5baf94ba0d9f72df2373c0, type: 3}
-  - {fileID: 8300000, guid: 3689025ee59e0be48a16aa06cd8b3ba7, type: 3}
-  - {fileID: 8300000, guid: 28a93fcbe5dd26a4cb3d8aa29c620c1f, type: 3}
+  - {fileID: 11400000, guid: 0b630f4d97e67aa4fb7d3595532ac239, type: 2}
+  - {fileID: 11400000, guid: 5e1b58ee58d10a44fb757f0bd7a36780, type: 2}
+  - {fileID: 11400000, guid: 169c4db8cbb531e4782fea83ab1d3f95, type: 2}
   talkSprites:
   - {fileID: 3857111977307764134, guid: dd94a49209fbf3b45a1ece75fa2f6015, type: 3}
   - {fileID: -5754312967276168980, guid: dd94a49209fbf3b45a1ece75fa2f6015, type: 3}
@@ -706,6 +708,8 @@ MonoBehaviour:
   impossibleMode: 0
   negative: 0
   thepadgotaawed: 0
+  impossibleQuestionShown: 0
+  padChallengeCode: 0
   DelayPreSpoop: 4
   Delay: 0.5
 --- !u!82 &82212521532976993
@@ -835,6 +839,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1cf7b0345ae694f9736c18c217f0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3563248587795364532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621128418378796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  PlayAtAwakeQueue: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
 --- !u!1 &1763067245961790
 GameObject:
   m_ObjectHideFlags: 0

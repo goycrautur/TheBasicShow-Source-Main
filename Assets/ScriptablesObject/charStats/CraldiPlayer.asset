@@ -21,7 +21,7 @@ MonoBehaviour:
   MaxHpStats: 100
   DefendMultiplierStats: 1
   ReachDistanceStats: 20
-  SlotsAmmount: 10
+  SlotsAmmount: 9
   SlotsSkin:
   - {fileID: 8839654916173188765, guid: bc74219c672ba204f87e43dd143f774c, type: 3}
   - {fileID: -1033735670183444960, guid: bc74219c672ba204f87e43dd143f774c, type: 3}

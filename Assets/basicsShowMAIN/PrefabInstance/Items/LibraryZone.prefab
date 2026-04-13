@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1444289877009419627}
   - component: {fileID: 1444289877009419629}
   - component: {fileID: 5518571319684483041}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: LibraryZone
   m_TagString: NoSquee Area
   m_Icon: {fileID: 0}
@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 45
   disabledAudioSources: []
+  disabledAudioManagers: []
 --- !u!65 &5518571319684483041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89,7 +90,7 @@ GameObject:
   - component: {fileID: 3815692564370455084}
   - component: {fileID: 7017408479054358935}
   - component: {fileID: 1981272181388424679}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,20 +4,15 @@ public class MouseAppearingScript : MonoBehaviour
 {
     private void Update()
     {
-        MouseCursor.SetActive(false);
-        killwindow.SetActive(false);
-        baloo.SetActive(false);
-        lockin.SetActive(false);
-        coin.SetActive(false);
-        firInThe.SetActive(false);
-        if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+        DisablesnShit();
+        if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
         {
             Transform hitTransform = hit.transform;
             float maxDistance = 0f;
             basicshowWindowScript w = hit.collider.GetComponent<basicshowWindowScript>();
             VendingMachineScript vent = hit.collider.GetComponent<VendingMachineScript>();
-
-            if (hitTransform.CompareTag("Door") | hitTransform.CompareTag("TapePlayer") | hitTransform.CompareTag("Item") | hitTransform.CompareTag("Notebook") | hitTransform.CompareTag("Phone"))
+            DoorScriptExtender dor = hit.collider.GetComponentInChildren<DoorScriptExtender>();
+            if (hitTransform.CompareTag("TapePlayer") | hitTransform.CompareTag("Item") | hitTransform.CompareTag("Notebook") | hitTransform.CompareTag("Phone"))
             {
                 maxDistance = gc.player.LocalRange;
                 MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
@@ -63,13 +58,17 @@ public class MouseAppearingScript : MonoBehaviour
             }
             if (hitTransform.CompareTag("SwingingDoor"))
             {
-                for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+                SwingingDoorScript swing = hitTransform.GetComponent<Collider>().gameObject.GetComponent<SwingingDoorScript>();
+                if (!swing.bDoorLocked)
                 {
-                    if (ItemManager.Instance.Inventory[i].ItemID == 2)
+                    for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
                     {
-                        maxDistance = gc.player.LocalRange;
-                        lockin.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
-                        MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+                        if (ItemManager.Instance.Inventory[i].ItemID == 2)
+                        {
+                            maxDistance = gc.player.LocalRange;
+                            lockin.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+                            MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+                        }
                     }
                 }
             }
@@ -85,8 +84,29 @@ public class MouseAppearingScript : MonoBehaviour
                     }
                 }
             }
+            
+            if (hitTransform.CompareTag("DoorTrigger1") && !dor.DoorScripts.bDoorOpen)
+            {
+                maxDistance = gc.player.LocalRange;
+                MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+            }
+            if (hitTransform.CompareTag("DoorTrigger2") && dor.DoorScripts.bDoorOpen)
+            {
+                maxDistance = gc.player.LocalRange;
+                MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+            }
         }
     }
+    private void DisablesnShit()
+    {
+        MouseCursor.SetActive(false);
+        killwindow.SetActive(false);
+        baloo.SetActive(false);
+        lockin.SetActive(false);
+        coin.SetActive(false);
+        firInThe.SetActive(false);
+    }
+
 
     [Header("References")]
     [SerializeField] private GameObject MouseCursor;
@@ -95,3 +115,4 @@ public class MouseAppearingScript : MonoBehaviour
     [SerializeField] private Transform playerTransform;
 
 }
+

@@ -69,7 +69,7 @@ MonoBehaviour:
     _FixedMode: 0
     _GradientMode: 1
     _RainbowMode: 2
-  isTheSubtitlesTimed: 0
+  isTheSubtitlesTimed: 1
   SubtitleTimingKey:
   - enabled: 1
     headText: Maxcipal_scold_longWhistle_1

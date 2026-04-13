@@ -7,12 +7,14 @@ public class zerullscript : NPC
     #region Unity Lifecycle
     public override void OnStart()
     {
-        bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        if (chair) normalSprite.sprite = ChairSprite;
+        bool chairr = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+        chair = chairr;
+        MainSprite.SetActive(!chair);
+        Chairs.SetActive(chair);
         base.OnStart();
         zeraudio = GetComponent<AudioManagerLiveReaction>();
         GetAngry(0f);
-        Move();
+        if (!chair) Move();
         if (endless) Endless();
         Wander();
     }
@@ -20,7 +22,7 @@ public class zerullscript : NPC
     {
         base.OnEnable();
         gc.zerscr.Add(this);
-        Move();
+        if (!chair) Move();
     }
     public override void OnDisable()
     {
@@ -37,16 +39,33 @@ public class zerullscript : NPC
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (TempAnger > 0f) TempAnger -= 0.02f * Time.deltaTime;
         else TempAnger = 0f;
+        if (chair && !base.stun) agent.speed = (base.agentSpeed/4 * (Wait / 20)) + (Anger * (TempAnger+0.9f)/2);
         if (base.stun)
         {
-            stopMoving = true;
-            agent.speed = 0;
+            if (!chair) 
+            {
+                stopMoving = true;
+                agent.speed = 0;
+            }
+            else 
+            {
+                slidesource.SetActive(false);
+                agent.speed = 0;
+            }
         }
         if (base.StunTime < 0f)
         {
-            stopMoving = false;
-            resetWaitTime();
-            Move();
+            if (!chair) 
+            {
+                stopMoving = false;
+                resetWaitTime();
+                Move();
+            }
+            else 
+            {
+                agent.speed = (base.agentSpeed/4 * (Wait / 20)) + (Anger * (TempAnger+0.9f)/2);
+                slidesource.SetActive(true);
+            }
         }
         foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) 
         {
@@ -196,7 +215,7 @@ public class zerullscript : NPC
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;
-    public bool stopMoving, antiHearing;
+    public bool stopMoving, antiHearing,chair;
 
     [Header("Anger Management")]
     [SerializeField] private float angerRate;
@@ -208,7 +227,6 @@ public class zerullscript : NPC
 
     private float currentPriority;
     private AudioManagerLiveReaction zeraudio;
-    [SerializeField] private SpriteRenderer normalSprite;
-    [SerializeField] private Sprite ChairSprite;
+    [SerializeField] private GameObject MainSprite,Chairs,slidesource;
     #endregion
 }
