@@ -593,8 +593,9 @@ public class MathGameScript : MonoBehaviour
             }
             if (gc.failedNotebooks == 1 && gc.notebooks < gc.UnlockAmount)
             {
+                hideSubSpam = false;
                 endDelay = jer_SecretAAW.audClip.length;
-                baldiAudio.PlaySingleClip(jer_SecretAAW);
+                baldiAudio.QueueAudio(jer_SecretAAW);
                 if (!padChallengeCode)
                 {
                     if (gc.SlotsAmmount >= 5)
