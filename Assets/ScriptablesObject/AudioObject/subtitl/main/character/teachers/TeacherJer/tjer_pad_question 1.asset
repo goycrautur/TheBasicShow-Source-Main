@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fc016379c7c5341a7cfddd093c2e33, type: 3}
   m_Name: tjer_pad_question 1
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 0ac4254ed6c614b45af618fcff690a0b, type: 3}
+  audioClip: {fileID: 8300000, guid: 5a6e3fee9b3fb2c4f8d4ec74449da9c1, type: 3}
   subtitleOption:
     enabled: 1
-    headText: Allright!, Question
+    headText: placeholder the placeholder
     isit3d: 0
     IgnoreTimescale: 1
     twoDeePosition: {x: 0, y: -175, z: 0}

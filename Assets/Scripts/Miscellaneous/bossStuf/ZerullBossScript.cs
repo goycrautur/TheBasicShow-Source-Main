@@ -104,7 +104,7 @@ public class ZerullBossScript : MonoBehaviour
         
         bool chairh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         if (!chairh) audioDevice.QueueAudio(hit);
-        if (chairh) audioDevice.QueueAudio(ChairHit);
+        else audioDevice.QueueAudio(ChairHit);
         if (!ZerullClassic.Instance.RealBossStarted)audioDevice.QueueAudio(bossStart);
         agent.speed += 0.75f * hp;
         GameControllerScript.Instance.player.DefaultWalkSpeed += 0.7f * hp;
@@ -147,10 +147,14 @@ public class ZerullBossScript : MonoBehaviour
 
     public void StartBossIntro()
     {
+        bool chairhh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         audioDevice.ClearQueue(true);
         //audioDevice.SetLoop(true);
-        audioDevice.QueueAudio(bossIntro);
-        audioDevice.QueueAudio(bossIntro_Loop);
+        if (!chairhh)
+        {
+            audioDevice.QueueAudio(bossIntro);
+            audioDevice.QueueAudio(bossIntro_Loop);
+        }
         
     }
 
