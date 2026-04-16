@@ -16,11 +16,6 @@ public class MathGameScript : MonoBehaviour
     {
         HandleAudioFeedback();
         HandleInput();
-        if (hideSubSpam)
-        {
-            foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
-            Subtit.hidesub = true;
-        }
         if (problem > problemcap)
         {
             HandleGameEnd();
@@ -88,7 +83,7 @@ public class MathGameScript : MonoBehaviour
 
         if (gc.notebooks == 1 && gc.mode != "zerullclassic") baldiAudio.QueueAudio(bal_intro);
         //QueueAudio(bal_howto);
-        if (gc.notebooks == 2 && gc.mode != "zerullclassic") baldiAudio.QueueAudio(bal_problems[0]);
+        if (gc.mode != "zerullclassic" && !gc.spoopMode) baldiAudio.QueueAudio(bal_problems[0]);
         if (gc.spoopMode && gc.mode != "zerullclassic")
         {
             BlackCoverUp.SetActive(true);
@@ -170,12 +165,17 @@ public class MathGameScript : MonoBehaviour
         problem++;
         playerAnswer.ActivateInputField();
         questionInProgress = true;
+        if (gc.spoopMode)
+        {
+            foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
+            Subtit.hidesub = true;
+        }
     }
 
     private void GenerateMathProblem()
     {
         if (!gc.spoopMode || gc.mode != "zerullclassic") StartCoroutine(PlayClassicMusic());
-        if (gc.notebooks == 2 && problem == problemcap) baldiAudio.QueueAudio(scaryproblem);
+        if (gc.notebooks == 2 && problem == problemcap && !gc.spoopMode) baldiAudio.QueueAudio(scaryproblem);
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == problemcap && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == problemcap))
         {
@@ -428,11 +428,11 @@ public class MathGameScript : MonoBehaviour
     {
         impossibleMode = true;
         sign = Mathf.RoundToInt(UnityEngine.Random.Range(0, 1));
-        baldiAudio.QueueAudio(bal_screech);
+        //baldiAudio.QueueAudio(bal_screech);
         //QueueAudio(bal_times);
-        baldiAudio.QueueAudio(bal_screech);
+        //baldiAudio.QueueAudio(bal_screech);
         //QueueAudio(bal_divided);
-        baldiAudio.QueueAudio(bal_screech);
+        //baldiAudio.QueueAudio(bal_screech);
         //QueueAudio(bal_equals);
     }
 
@@ -507,8 +507,8 @@ public class MathGameScript : MonoBehaviour
         results[problem - 1].sprite = correct;
         baldiAudio.ClearQueue(true);
         int praiseIndex = UnityEngine.Random.Range(0, bal_praises.Length);
-        baldiAudio.QueueAudio(bal_praises[praiseIndex]);
-        if ((gc.notebooks < 2 && !gc.spoopMode && problem != problemcap) || (gc.notebooks == 2 && !gc.spoopMode && problem != problemcap-1)) baldiAudio.QueueAudio(bal_problems[problem - 1]);
+        if (!gc.spoopMode) baldiAudio.QueueAudio(bal_praises[praiseIndex]);
+        if (gc.notebooks <= 2 && !gc.spoopMode && problem != problemcap) baldiAudio.QueueAudio(bal_problems[problem - 1]);
         NewProblem();
         scoreSystemManager.Instance.AddScore(75);
     }
@@ -524,13 +524,12 @@ public class MathGameScript : MonoBehaviour
             //baldiFeedI.enabled = false;
             //baldiFeed.enabled = true;
             //baldiFeed.SetTrigger("angry");
-            gc.ActivateSpoopMode();
+            gc.ActivateSpoopMode(true);
         }
         scoreSystemManager.Instance.AddScore(275);
         HandleBaldiAnger();
         baldiAudio.ClearQueue(true);
         if (impossibleQuestionShown) impossibleMode = false;
-        hideSubSpam = true;
         NewProblem();
     }
 
@@ -593,7 +592,6 @@ public class MathGameScript : MonoBehaviour
             }
             if (gc.failedNotebooks == 1 && gc.notebooks < gc.UnlockAmount)
             {
-                hideSubSpam = false;
                 endDelay = jer_SecretAAW.audClip.length;
                 baldiAudio.QueueAudio(jer_SecretAAW);
                 if (!padChallengeCode)
@@ -636,7 +634,6 @@ public class MathGameScript : MonoBehaviour
         {
             lg.learnMusic.SetIgnoreListenerPause(false);
             lg.learnMusic.ClearQueue(true);
-            hideSubSpam = false;
             GC.Collect();
             ExitGame();
         }
@@ -758,7 +755,6 @@ public class MathGameScript : MonoBehaviour
     private int problem, audioInQueue, problemsWrong, sign,allanswerWrongInt;
     public float DelayPreSpoop = 4f, Delay = 0.5f;
     private float[] clipSampleData = new float[SampleDataLength];
-    private bool hideSubSpam;
     private Dictionary<string, Action> specialCodes,ChallengeCodes;
     #endregion
 }

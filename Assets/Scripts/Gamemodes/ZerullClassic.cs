@@ -375,7 +375,7 @@ public class ZerullClassic : MonoBehaviour
 
         if (alreadyHit && !realBossStarted || (zs.iframes > 0f)) return;
 
-        zs.Hit(!realBossStarted, tiem, (zs.totemready || !realBossStarted) && hp != 1 ? 1 : hp);
+        zs.Hit(!realBossStarted, tiem, (zs.totemready || !realBossStarted) && hp != 0 && hp != 1 ? 1 : hp);
         if (health <= maxHealth / 2 && !ok && switchToBloxyb)
         {
             AdditionalGameCustomizer.Instance.FovAmmount += 20;
@@ -394,11 +394,11 @@ public class ZerullClassic : MonoBehaviour
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 5f : 5f * hp,Color.green);
         SpawnProjectile(false, false);
         SpawnProjectile(false, false);
-        scoreSystemManager.Instance.AddScore(zs.totemready && hp != 1 ? 275 : 275*(int)hp);
+        scoreSystemManager.Instance.AddScore(zs.totemready && hp != 0 && hp != 1 ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
-        health -= (zs.totemready || !realBossStarted) && hp != 1 ? 1 : hp; // Decreases null health
+        health -= (zs.totemready || !realBossStarted) && hp != 0 && hp != 1 ? 1 : hp; // Decreases null health
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
-        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready && hp != 1 ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
+        Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready && hp != 0 && hp != 1 ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
         if (health == 1)
         {
             oneHPfailsave = false;
@@ -475,7 +475,11 @@ public class ZerullClassic : MonoBehaviour
     {
         debug = false;
         if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
-        else Singleton<MusicManagerMaes>.Instance.HangMidi(stop: true, keepDrums: true);
+        else 
+        {
+            Singleton<MusicManagerMaes>.Instance.HangMidi(stop: true, keepDrums: true);
+            Singleton<MusicManagerMaes>.Instance.SetLoop(val: true);
+        }
     }
     public GameObject SpawnProjectile(Transform transform, bool noRandom = false, int projectileVal = 0) => Instantiate<GameObject>(projectileprefabs[noRandom ? projectileVal : Random.Range(0, projectileprefabs.Length)], transform.position, Quaternion.identity);
 
@@ -517,10 +521,7 @@ public class ZerullClassic : MonoBehaviour
                 gc.notebookCount.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
                 ItemManager.Instance.ItemNameText.color = Color.Lerp(Color.white, new Color(0.55f, 0.55f, 0.55f, 1f), 1 - Mathf.Repeat(1f, 0.2f));
             //}
-            if (gc.warrealest)
-            {
-                gc.LapManag.MeepTimer.SetActive(true);
-            }
+            if (gc.warrealest) gc.LapManag.MeepTimer.SetActive(true);
         }
     }
     public void jusUpdatebr()

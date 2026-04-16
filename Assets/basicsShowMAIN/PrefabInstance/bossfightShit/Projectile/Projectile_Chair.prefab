@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 5885894844889399425}
   - component: {fileID: -2452637138297308520}
   - component: {fileID: -1834268348731111015}
+  - component: {fileID: -3633896416500178632}
   m_Layer: 0
   m_Name: Projectile_Chair
   m_TagString: Projectile
@@ -243,11 +244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01852a817bc55874bbda8c99f4f1f43a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDevice: {fileID: 7581270106364978491}
-  throwSound: {fileID: 8300000, guid: 6b6ab457c37b0374b8d7d57059e6cfc4, type: 3}
+  pickedUp: 0
+  boshit: 0
+  thrown: 0
+  auDevice: {fileID: -3633896416500178632}
+  throwSound: {fileID: 0}
   theSpriteREND: {fileID: 0}
-  subtitlesScriptableObjectREAL: {fileID: 11400000, guid: b2b60dbbc7c180a479bc9458fe2c9266,
-    type: 2}
   rotateOffset: 0
   projectileDamage: 1
   ProjectileSpeed: 110
@@ -285,3 +287,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &-3633896416500178632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575783199051342329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  PlayAtAwakeQueue: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []

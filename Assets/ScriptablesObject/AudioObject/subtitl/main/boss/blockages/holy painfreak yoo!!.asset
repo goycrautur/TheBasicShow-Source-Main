@@ -280,7 +280,7 @@ MonoBehaviour:
     rainbowSpeed: 0
     undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.025
-    shakey: 1
+    shakey: 0
     shakeyspeed: 1000
     shakeyradius: 10
     fonts: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
     rainbowSpeed: 0
     undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.025
-    shakey: 1
+    shakey: 0
     shakeyspeed: 1000
     shakeyradius: 10
     fonts: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
     rainbowSpeed: 0
     undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.025
-    shakey: 1
+    shakey: 0
     shakeyspeed: 1000
     shakeyradius: 10
     fonts: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
     rainbowSpeed: 0
     undertaleStyleTextAppearing: 1
     TextAppearSpeed: 0.05
-    shakey: 1
+    shakey: 0
     shakeyspeed: 1000
     shakeyradius: 10
     fonts: 0

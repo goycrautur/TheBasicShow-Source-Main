@@ -72,11 +72,14 @@ public class EndingManager : MonoBehaviour
         Game.lbams.MainSource1.ClearQueue(true);
         Game.lbams.MainSource2.ClearQueue(true);
         Game.lbams.MainSource3.ClearQueue(true);
+
         Game.lbams.EscapeMusic.ClearQueue(true);
+        Game.lbams.ChaosAudioSource.ClearQueue(true);
         GameControllerScript.Instance.MainHudFade.Rebind();
         GameControllerScript.Instance.MainHudFade.Play("hudFadeOutNearly", -1, 0f);
         GameControllerScript.Instance.RainbowHudFade.Rebind();
         GameControllerScript.Instance.RainbowHudFade.Play("hudFadeOutRainb", -1, 0f);
+        StartCoroutine(Game.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 2));
         
         if (!secret) 
         {

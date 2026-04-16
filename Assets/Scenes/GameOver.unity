@@ -986,7 +986,7 @@ MonoBehaviour:
   StateDetails: Game Over Screen
   StateStatus: bro died sobpray
   StateIMGLarge: 
-  StateIMGSmall: 
+  LargeIMGText: 
 --- !u!4 &449831183
 Transform:
   m_ObjectHideFlags: 0

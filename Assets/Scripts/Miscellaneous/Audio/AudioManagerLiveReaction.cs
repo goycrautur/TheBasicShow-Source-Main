@@ -2,33 +2,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 using GrayCreature.YuriArchive.subtitlesYaoiYuriLiveReaction;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioManagerLiveReaction : MonoBehaviour
 {
     private void OnEnable() => InitialiUhh();
-    private void OnDestroy()
-    {
-        disabled();
-    }
-    private void OnDisable()
-    {
-        disabled();
-    }
+    private void OnDestroy() => disabled();
+    private void OnDisable()=> disabled();
     private void disabled()
     {
-        if (totalIds >= TBSSubMan.SubtitleTotalId) Array.Resize(ref TBSSubMan.Instance.subsObjectIdSon, TBSSubMan.SubtitleTotalId + (totalIds - 1));
+        if (!AudioManStandalone)
+        {
+            if (totalIds >= TBSSubMan.SubtitleTotalId) Array.Resize(ref TBSSubMan.Instance.subsObjectIdSon, TBSSubMan.SubtitleTotalId + (totalIds - 1));
+        }
     }
 
     #region PlaybackControl
     public void InitialiUhh()
     {
-        totalIds++;
-        sourceId = totalIds;
-		
-		if (totalIds >= TBSSubMan.SubtitleTotalId)
+        if (!AudioManStandalone)
         {
-            Array.Resize(ref TBSSubMan.Instance.subsObjectIdSon, TBSSubMan.SubtitleTotalId + (totalIds + 1));
+            totalIds++;
+            sourceId = totalIds;
+            if (totalIds >= TBSSubMan.SubtitleTotalId) Array.Resize(ref TBSSubMan.Instance.subsObjectIdSon, TBSSubMan.SubtitleTotalId + (totalIds + 1));
         }
         if (audioDevice == null) audioDevice = GetComponent<AudioSource>();
         ClearQueue(true);
@@ -46,10 +44,11 @@ public class AudioManagerLiveReaction : MonoBehaviour
         if (obje != null)  
         {
             if (obje.ForcedSetAudiomixer != null) audioDevice.outputAudioMixerGroup = obje.ForcedSetAudiomixer;
-            else audioDevice.outputAudioMixerGroup = GameControllerScript.Instance.MixerOverrideGlobalson[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
+            else if (!AudioManStandalone) audioDevice.outputAudioMixerGroup = GameControllerScript.Instance.MixerOverrideGlobalson[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
+            else if (AudioManStandalone) audioDevice.outputAudioMixerGroup = MixerOverrides[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
             audioDevice.volume = obje.volume;
             audioDevice.PlayOneShot(obje.audClip);
-            if (obje.subti != null && obje.HasSubtitle) makesub(obje.subti,ForceSubPos ?SubPosForced : obje.subti.subtitleOption.twoDeePosition);
+            if (obje.subti != null && obje.HasSubtitle && !AudioManStandalone) makesub(obje.subti,ForceSubPos ?SubPosForced : obje.subti.subtitleOption.twoDeePosition);
         }   
     }
     private void Update()
@@ -61,9 +60,10 @@ public class AudioManagerLiveReaction : MonoBehaviour
         if (obje != null)  
         {
             if (obje.ForcedSetAudiomixer != null) audioDevice.outputAudioMixerGroup = obje.ForcedSetAudiomixer;
-            else audioDevice.outputAudioMixerGroup = GameControllerScript.Instance.MixerOverrideGlobalson[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
+            else if (!AudioManStandalone) audioDevice.outputAudioMixerGroup = GameControllerScript.Instance.MixerOverrideGlobalson[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
+            else if (AudioManStandalone) audioDevice.outputAudioMixerGroup = MixerOverrides[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
             queuedAudios.Add(obje);
-            if (obje.subti != null && obje.HasSubtitle) queuedSubtitles.Add(obje.subti);
+            if (obje.subti != null && obje.HasSubtitle && !AudioManStandalone) queuedSubtitles.Add(obje.subti);
         }
     }
 
@@ -78,7 +78,7 @@ public class AudioManagerLiveReaction : MonoBehaviour
             audioDevice.loop = false;
             audioDevice.mute = false;
             audioDevice.pitch = 1;
-            TBSSubMan.Instance.endSubtitle(sourceId);
+            if (!AudioManStandalone)TBSSubMan.Instance.endSubtitle(sourceId);
             audioDevice.Stop();
         }
     }
@@ -136,5 +136,8 @@ public class AudioManagerLiveReaction : MonoBehaviour
     public AudioSource audioDevice;
     public List<AudioObjectyeah> queuedAudios = new List<AudioObjectyeah>();
     public List<subsScriptableObject> queuedSubtitles = new List<subsScriptableObject>();
+    [Header("Standalones stuff")]
+    public bool AudioManStandalone;
+    public AudioMixerGroup[] MixerOverrides;
     #endregion
 }

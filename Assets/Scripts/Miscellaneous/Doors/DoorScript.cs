@@ -7,7 +7,6 @@ public class DoorScript : MonoBehaviour
     private void Start()
     {
         CurTrigger = MainTrigger;
-        myAudio = GetComponent<AudioManagerLiveReaction>();
         AltTrigger.enabled = false;
         outside.material.SetTextureScale("_SecondTex", new Vector2(-1, 1));
         outside.material.SetTextureScale("_SecondaryDiffrent", new Vector2(-1, 1));
@@ -136,7 +135,7 @@ public class DoorScript : MonoBehaviour
 
     #region SerializedConfig
     [Header("Audio Settings")]
-    private AudioManagerLiveReaction myAudio;
+    [SerializeField] private AudioManagerLiveReaction myAudio;
     [SerializeField] private NormalDoorSoundData SoundData;
     
     [Header("Barrier Stuff Settings")]

@@ -270,7 +270,7 @@ public class GameControllerScript : MonoBehaviour
             }
         }
     }
-    public void ActivateSpoopMode()
+    public void ActivateSpoopMode(bool frompad = false)
     {
         spoopMode = true;
         if (mode == "story")
@@ -292,6 +292,11 @@ public class GameControllerScript : MonoBehaviour
 
         if (AdditionalGameCustomizer.Instance != null && !AdditionalGameCustomizer.Instance.NoYCTP && mode == "story")Math.learnMusic.PlaySingleClip(lowBudgetAudioManagementShit.Instance.hangAudio);
         else lbams.SchoolMusic.ClearQueue(true);
+        if (frompad)
+        {
+            foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
+            Subtit.hidesub = true;
+        }
     }
     #endregion
     bool onetimeupdate = false;
@@ -727,15 +732,15 @@ public class GameControllerScript : MonoBehaviour
 
     public IEnumerator easingExit(Color kolor, float a, float b, float duration)
     {
-        Color start = voxLight.ambientLight;
+        Color start = RenderSettings.ambientLight;
 
         for (float t = a; t < b; t += Time.deltaTime / duration)
         {
-            voxLight.ambientLight = Color.Lerp(start, kolor, Mathf.SmoothStep(0, 1, t));
+            RenderSettings.ambientLight = Color.Lerp(start, kolor, Mathf.SmoothStep(0, 1, t));
             yield return null;
         }
 
-        voxLight.ambientLight = kolor;
+        RenderSettings.ambientLight = kolor;
     }
     public IEnumerator tweeniconSolo(Color kolor, float a, float b, float duration,int icon)
     {

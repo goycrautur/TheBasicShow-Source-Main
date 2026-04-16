@@ -165,7 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayAtAwake: 0
+  PlayAtAwake: 1
+  PlayAtAwakeQueue: 0
   StartingLoop: 0
   thoseWhoObject: {fileID: 11400000, guid: 50e94ecbc237440459d4df40e7e93cdd, type: 2}
   ForceSubPos: 0

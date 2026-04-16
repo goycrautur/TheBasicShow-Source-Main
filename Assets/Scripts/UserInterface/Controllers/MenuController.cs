@@ -33,7 +33,7 @@ public class MenuController : MonoBehaviour
 	[SerializeField] private Selectable firstButton;
 	[SerializeField] private GameObject back, main, foward;
 	public bool isTbsTransisFUCK;
-	[SerializeField] private CircleInOutScript misscirclscript;
+	[SerializeField] private TransistionManager misscirclscript;
 	public AudioManagerLiveReaction play;
     public AudioObjectyeah soun;
 	

@@ -57,10 +57,10 @@ MonoBehaviour:
     gradientSpeed: 1
     rainbowSpeed: 1
     undertaleStyleTextAppearing: 1
-    TextAppearSpeed: 0.05
+    TextAppearSpeed: 0.005
     shakey: 1
     shakeyspeed: 4000
-    shakeyradius: 4
+    shakeyradius: 5
     fonts: 0
     useLocalization: 1
     unreadable: 0

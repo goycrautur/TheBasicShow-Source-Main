@@ -141,7 +141,7 @@ public class MaxcipalScript : NPC
         if (agent.isStopped) agent.isStopped = false;
         if (bullySeen) bullySeen = false;
         ResetCooldown();
-        if (Random.Range(0f, 10f) <= 1f) audioQueue.PlaySingleClip(aud_Whistle);
+        if (Random.Range(0f, 10f) <= 1f && !inOffice) audioQueue.PlaySingleClip(aud_Whistle);
     }
 
     private void WanderWithAnger()

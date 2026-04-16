@@ -23,7 +23,7 @@ public class MouseAppearingScript : MonoBehaviour
                 MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
                 baloo.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
             }
-            if (hitTransform.CompareTag("Window") && !w.broken || hitTransform.GetComponent<ZerullBossScript>() != null)
+            if (hitTransform.CompareTag("Window") && !w.broken)
             {
                 for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
                 {
@@ -94,6 +94,24 @@ public class MouseAppearingScript : MonoBehaviour
             {
                 maxDistance = gc.player.LocalRange;
                 MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+            }
+        }
+        if (Sych.ScreenCenterRaycast(out RaycastHit miscRay))
+        {
+            Transform mischitTransform = miscRay.transform;
+            float maxDist = 0f;
+            if (mischitTransform.GetComponent<ZerullBossScript>() != null)
+            {
+                
+                for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+                {
+                    if (ItemManager.Instance.Inventory[i].ItemID == 13)
+                    {
+                        maxDist = gc.player.LocalRange;
+                        killwindow.SetActive(maxDist > 0 && mischitTransform.IsWithinDistanceFrom(playerTransform, maxDist));
+                        MouseCursor.SetActive(maxDist > 0 && mischitTransform.IsWithinDistanceFrom(playerTransform, maxDist));
+                    }
+                }
             }
         }
     }

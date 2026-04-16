@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class IntroScreenManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     private void Start()
     {
-        hhhhhh.GetComponent<Animator>().SetTrigger("yooo");
+        hhhhhh.SetTrigger("open");
         DiscordRPC_stuff.current.UpdateStatus("Opening menu", "peak", "van", "the crx");
     }
 
-    // Update is called once per frame
 
-    public GameObject hhhhhh;
+    public Animator hhhhhh;
 }

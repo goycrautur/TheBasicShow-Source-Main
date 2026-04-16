@@ -15,6 +15,7 @@ public class MuchoScript : NPC
     public void OnEnable()
     {
         gc.muchscr.Add(this);
+        CancelInvoke();
         Move();
     }
     public void OnDisable()

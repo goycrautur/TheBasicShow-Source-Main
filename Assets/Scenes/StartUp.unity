@@ -653,7 +653,7 @@ MonoBehaviour:
   StateDetails: 
   StateStatus: 
   StateIMGLarge: 
-  StateIMGSmall: 
+  LargeIMGText: 
 --- !u!1 &505678922
 GameObject:
   m_ObjectHideFlags: 0

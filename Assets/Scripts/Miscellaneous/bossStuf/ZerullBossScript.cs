@@ -100,7 +100,7 @@ public class ZerullBossScript : MonoBehaviour
     {
         stuntiem = time;
         hitted = true;
-        audioDevice.ClearQueue();
+        audioDevice.ClearQueue(true);
         
         bool chairh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         if (!chairh) audioDevice.QueueAudio(hit);
