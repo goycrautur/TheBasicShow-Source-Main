@@ -242,30 +242,23 @@ public class ItemManager : MonoBehaviour
         CreateItemInstance(index);
 
         ExecuteItem(Inventory[index].ItemID, ExecutionType.Pickup);
-        if (ItemSelection == index)
-        {
-            ExecuteItem(Inventory[index].ItemID, ExecutionType.Select);
-        }
-        if (wasFull)
-        {
-            AnimateSwap(index);
-        }
-        else
-        {
-            AnimateSlotIfChanged(index);
-        }
+        if (ItemSelection == index)ExecuteItem(Inventory[index].ItemID, ExecutionType.Select);
+        if (wasFull) AnimateSwap(index);
+        else AnimateSlotIfChanged(index);
     }
     #endregion
 
 
     #region UI Management
+    public void ClearAllItems()
+    {
+        for (int i = 0; i < Inventory.Length; i++) ClearItem(i);
+        UpdateItemUI();
+    }
     public void UpdateItemUI()
     {
         BaseItem SelectedItem = GetSelectedItemObject();
-        for (int i = 0; i < Inventory.Length; i++)
-        {
-            Inventory[i].ItemImageBGs.color = Color.white;
-        }
+        for (int i = 0; i < Inventory.Length; i++) Inventory[i].ItemImageBGs.color = Color.white;
         ItemNameText.text = $"{SelectedItem.Name}";
         ItemInfoText.text = $"{SelectedItem.ItmInfoText}";
 
@@ -282,14 +275,8 @@ public class ItemManager : MonoBehaviour
     public void ItemNameIdCheck()
     {
         BaseItem SelectedItem = GetSelectedItemObject();
-        if (SelectedItem.ItemID == 15)
-        {
-            GameControllerScript.Instance.TETOOOOO.SetActive(true);
-        }
-        else
-        {
-            GameControllerScript.Instance.TETOOOOO.SetActive(false);
-        }
+        if (SelectedItem.ItemID == 15) GameControllerScript.Instance.TETOOOOO.SetActive(true);
+        else GameControllerScript.Instance.TETOOOOO.SetActive(false);
     }
     #endregion
 

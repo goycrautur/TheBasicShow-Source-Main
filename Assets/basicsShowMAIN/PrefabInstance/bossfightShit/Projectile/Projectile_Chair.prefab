@@ -156,7 +156,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 1
+  MinDistance: 25
   MaxDistance: 200
   Pan2D: 0
   rolloffMode: 1
@@ -248,7 +248,7 @@ MonoBehaviour:
   boshit: 0
   thrown: 0
   auDevice: {fileID: -3633896416500178632}
-  throwSound: {fileID: 0}
+  throwSound: {fileID: 11400000, guid: 9eaaf9af8ce624842931035951496074, type: 2}
   theSpriteREND: {fileID: 0}
   rotateOffset: 0
   projectileDamage: 1
@@ -307,6 +307,8 @@ MonoBehaviour:
   loop: 0
   SubPosForced: {x: 0, y: 0, z: 0}
   sourceId: 0
-  audioDevice: {fileID: 0}
+  audioDevice: {fileID: 7581270106364978491}
   queuedAudios: []
   queuedSubtitles: []
+  AudioManStandalone: 0
+  MixerOverrides: []

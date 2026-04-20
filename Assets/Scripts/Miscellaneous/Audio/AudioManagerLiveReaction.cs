@@ -78,7 +78,7 @@ public class AudioManagerLiveReaction : MonoBehaviour
             audioDevice.loop = false;
             audioDevice.mute = false;
             audioDevice.pitch = 1;
-            if (!AudioManStandalone)TBSSubMan.Instance.endSubtitle(sourceId);
+            if (!AudioManStandalone && TBSSubMan.Instance != null) TBSSubMan.Instance.endSubtitle(sourceId);
             audioDevice.Stop();
         }
     }

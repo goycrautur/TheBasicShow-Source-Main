@@ -62,7 +62,7 @@ public class EffectScript : MonoBehaviour
         }
         if (other.CompareTag("Projectile"))
         {
-            if (other.GetComponent<ProjectileScript>().thrown)
+            if (other.GetComponent<ProjectileScript>() != null && other.GetComponent<ProjectileScript>().thrown)
             {
                 if (!notNpcEntirely)
                 {

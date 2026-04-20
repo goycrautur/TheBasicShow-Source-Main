@@ -69,18 +69,12 @@ public class PickupScript : Interactable
     #endregion
     public void OnEnable()
     {
-        if (mapIconSprite != null)
-        {
-            mapIconSprite.enabled = true;
-        }
+        if (mapIconSprite != null)mapIconSprite.enabled = true;
         hiding = false;
     }
     public void OnDisable()
     {
-        if (mapIconSprite != null)
-        {
-            mapIconSprite.enabled = false;
-        }
+        if (mapIconSprite != null) mapIconSprite.enabled = false;
         hiding = true;
     }
 

@@ -507,6 +507,7 @@ public class MathGameScript : MonoBehaviour
         results[problem - 1].sprite = correct;
         baldiAudio.ClearQueue(true);
         int praiseIndex = UnityEngine.Random.Range(0, bal_praises.Length);
+        if (!gc.spoopMode) baldiAudio.QueueAudio(bal_praises[praiseIndex]);
         if (gc.notebooks <= 2 && !gc.spoopMode && problem != problemcap-1) baldiAudio.QueueAudio(bal_problems[problem - 1]);
         NewProblem();
         scoreSystemManager.Instance.AddScore(75);

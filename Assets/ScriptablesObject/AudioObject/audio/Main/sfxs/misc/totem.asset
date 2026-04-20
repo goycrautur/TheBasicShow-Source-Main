@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: totem
   m_EditorClassIdentifier: 
   audClip: {fileID: 8300000, guid: 8f948a23c3e55b849b76ac1347a99256, type: 3}
-  volume: 1
+  volume: 0.5
   SoundTypeWahh: 1
   HasSubtitle: 1
   ForcedSetAudiomixer: {fileID: 0}

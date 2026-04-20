@@ -475,11 +475,7 @@ public class ZerullClassic : MonoBehaviour
     {
         debug = false;
         if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
-        else 
-        {
-            Singleton<MusicManagerMaes>.Instance.HangMidi(stop: true, keepDrums: true);
-            Singleton<MusicManagerMaes>.Instance.SetLoop(val: true);
-        }
+        else Singleton<MusicManagerMaes>.Instance.HangMidi(stop: true, keepDrums: true);
     }
     public GameObject SpawnProjectile(Transform transform, bool noRandom = false, int projectileVal = 0) => Instantiate<GameObject>(projectileprefabs[noRandom ? projectileVal : Random.Range(0, projectileprefabs.Length)], transform.position, Quaternion.identity);
 

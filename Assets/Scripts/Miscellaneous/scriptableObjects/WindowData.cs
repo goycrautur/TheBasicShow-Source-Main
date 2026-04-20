@@ -15,6 +15,7 @@ public class WindowData : ScriptableObject
     [Header("sound stuff\n")]
     [Tooltip("array 0 and 1 respectively is for broken and repair sound of the window")] public AudioObjectyeah[] sounds;
     [Header("-----Cracked Windows Stuff-----\nparticles prefab\n")]
+    [Tooltip("cracked enabler")] public bool crackWinEnable;
     [Tooltip("cracked window particle prefab")] public GameObject crackParticlPrefab;
     [Tooltip("again, but its an array")] public GameObject[] crackParticlPrefabArra;
 

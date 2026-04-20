@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cheeseRespawnBlehh
   m_EditorClassIdentifier: 
   audClip: {fileID: 8300000, guid: a2705569c6d593f4388a1c546d100e1c, type: 3}
-  volume: 1
+  volume: 0.36
   SoundTypeWahh: 1
   HasSubtitle: 1
   ForcedSetAudiomixer: {fileID: 0}

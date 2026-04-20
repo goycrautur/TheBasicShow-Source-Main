@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 5885894844889399425}
   - component: {fileID: -2452637138297308520}
   - component: {fileID: 5681811132365182976}
+  - component: {fileID: 5400515093591329876}
   m_Layer: 0
   m_Name: Projectile_jurki
   m_TagString: Projectile
@@ -274,11 +275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01852a817bc55874bbda8c99f4f1f43a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDevice: {fileID: 7581270106364978491}
-  throwSound: {fileID: 8300000, guid: 5ec4d41b3df494e4a8373ee31fea786b, type: 3}
+  pickedUp: 0
+  boshit: 0
+  thrown: 0
+  auDevice: {fileID: 5400515093591329876}
+  throwSound: {fileID: 11400000, guid: 118e9685bf30f7a43b0991f64c1700ad, type: 2}
   theSpriteREND: {fileID: 7487137391670823497}
-  subtitlesScriptableObjectREAL: {fileID: 11400000, guid: cf1ae4e5dc026d84ba02ff2f37b04e51,
-    type: 2}
   rotateOffset: 90
   projectileDamage: 3
   ProjectileSpeed: 20
@@ -316,3 +318,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &5400515093591329876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575783199051342329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  PlayAtAwakeQueue: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 7581270106364978491}
+  queuedAudios: []
+  queuedSubtitles: []
+  AudioManStandalone: 0
+  MixerOverrides: []

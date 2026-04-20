@@ -38,14 +38,8 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
             timeoutTVDurationStuffIncaseReachingFinaleLmfao = LearningGameManager.Instance.aud_Timeout.audClip.length + (LearningGameManager.Instance.Television.Markings ? 3.1f : 0.85f);
             LearningGameManager.Instance.Television.baldingit = true;
             StartCoroutine(LearningGameManager.Instance.Television.StartTVSequence(LearningGameManager.Instance.aud_Timeout));
-            if (GameControllerScript.Instance.mode == "story")
-            {
-            StartCoroutine(GameControllerScript.Instance.tiemoutStu());
-            }
-            if (GameControllerScript.Instance.mode != "story")
-            {
-            StartCoroutine(GameControllerScript.Instance.easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5));
-            }
+            if (GameControllerScript.Instance.mode == "story")StartCoroutine(GameControllerScript.Instance.tiemoutStu());
+            if (GameControllerScript.Instance.mode != "story")GameControllerScript.Instance.easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5);
             GameControllerScript.Instance.timeout = true;
             spamupdatethese =true;
             return;

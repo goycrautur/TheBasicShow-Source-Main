@@ -197,7 +197,7 @@ MonoBehaviour:
   speedalt: 150
   lifeSpan: 10
   shouldRotate: 0
-  DamageAmmount: 1
+  DamageAmmount: 2
   projectileTypes: 0
   projectileColor: 
   colorShit:

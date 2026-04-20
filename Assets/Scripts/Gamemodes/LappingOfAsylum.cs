@@ -15,11 +15,13 @@ public class LappingOfAsylumController : MonoBehaviour
     public static LappingOfAsylumController LapInstance;
     #endregion
     //thanks oppo your code will be in good hands
-    private IEnumerator Crossfade(AudioManagerLiveReaction fromSource, AudioManagerLiveReaction toSource, AudioObjectyeah toClip, float duration,bool QueueLoop = false, AudioObjectyeah LoopClip = null) 
+    private IEnumerator Crossfade(AudioManagerLiveReaction fromSource, AudioManagerLiveReaction toSource, AudioObjectyeah toClip, float duration,bool setLoop,bool QueueLoop = false, AudioObjectyeah LoopClip = null) 
 	{
+        isCrossfading = true;
 		toSource.QueueAudio(toClip);
         if (QueueLoop) toSource.QueueAudio(LoopClip);
 		toSource.SetVolume(0f);
+        toSource.SetLoop(setLoop);
 		float elapsed = 0f;
         float dura = duration;
         Debug.Log($"duration: {duration}");
@@ -35,32 +37,55 @@ public class LappingOfAsylumController : MonoBehaviour
 		}
         fromSource.ClearQueue(true);
 		fromSource.SetVolume(toClip.volume);  //volumen
+        isCrossfading = false;
         yield break;
+
 	}
     public void Update()
     {
+        string mode = PlayerPrefs.GetString("CurrentMode");
+        if (randomPrelapQueue && mode == "LappingOfAsylum") PlayPreLaps();
         if (vanishScore) scoreDecreaseTimer -= Time.deltaTime;
         if (scoreDecreaseTimer < 0f)
 		{
             scoreSystemManager.Instance.AddScore(-15*CurrentLap);
             scoreDecreaseTimer = 1f/CurrentLap;
         }
+        if (Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk <= Lap1OutroTimer && Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown && !lap1NearEndThingActive && !NinetyNineToggle)
+        {
+            StartCoroutine(Crossfade(LapSound, LapSound2, LapMusikOutro, 2f,false));
+            LapRouletteTagThing++;
+            lap1NearEndThingActive = true;
+        }
+        gc.wegchal.globalWegaSpeed = gc.player.walkSpeed/1.8f;
+        if (CurrentLap == 99)
+        {
+            cd += Time.deltaTime;
+            if (cd >= 0.25f) 
+            {
+                Singleton<VertexGlitchManager>.Instance.Glitch(0.25f,0.25f,0.25f,128);
+                cd = 0f;
+            }
+        }
     }
     private void PlayPreLaps()
     {
-        var audLapVal = (int)UnityEngine.Random.Range(0f, RandomizedPrelapMusic.Length);
-        LapSound.QueueAudio(RandomizedPrelapMusic[audLapVal]);
-        /*if (LapSound.queuedAudios.Count > 0 && !LapSound.audioDevice.isPlaying) 
+        if (CurAudioMan.audioDevice.time <= 1f && !isCrossfading) 
         {
-            
-            StartCoroutine(Crossfade(LapSound, LapSound2, RandomizedPrelapMusic[audLapVal], 3.5f));
-            if (LapRouletteTagThingtest == 2)
+            LapRouletteTagThingQueue++;
+            var audLapVal = (int)UnityEngine.Random.Range(0f, RandomizedPrelapQueueOkBro.Length);
+            if (LapRouletteTagThingQueue == 2)
             {
-                StartCoroutine(Crossfade(LapSound2, LapSound, prelaptest1, 3.5f));
-                LapRouletteTagThingtest = 0;
+                StartCoroutine(Crossfade(PrelapQueue2, PrelapQueue1, RandomizedPrelapQueueOkBro[audLapVal], 1.5f,true));
+                CurAudioMan = PrelapQueue1;
+                LapRouletteTagThingQueue = 0;
             }
-            else StartCoroutine(Crossfade(LapSound, LapSound2, prelaptest2, 3.5f));
-        }*/
+            else 
+            {
+                StartCoroutine(Crossfade(PrelapQueue1, PrelapQueue2, RandomizedPrelapQueueOkBro[audLapVal], 1.5f,true));
+                CurAudioMan = PrelapQueue2;
+            }
+        }
     }
     private void SetCustomLapMusic()
     {
@@ -98,11 +123,11 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     private void Start()
     {
-        if (randomPrelapMus) PlayPreLaps();
+        CurAudioMan = PrelapQueue2;
+        Lap1OutroTimer = LapMusikOutro.audClip.length;
         realCurrentMaxNoteboo = gc.maxNotebooks;
         CurrentMaxNotebooks = gc.maxNotebooks;
         LapPortals.ForEach(lap => lap.SetActive(false));
-        randomPrelapMus = true;
         SetCustomLapMusic();
     }
             
@@ -115,12 +140,8 @@ public class LappingOfAsylumController : MonoBehaviour
             gc.Math.quarter.SetActive(true);
             string mode = PlayerPrefs.GetString("CurrentMode");
             if (mode != "LappingOfAsylum") LapPortals.ForEach(lap => Destroy(lap));
-            var audLapVal = (int)UnityEngine.Random.Range(0f, RandomizedPrelapMusic.Length);
-            LapSound.ClearQueue(true);
-            LapSound.SetLoop(true);
-            LapSound.QueueAudio(RandomizedPrelapMusic[audLapVal]);
-            
             if (gc.warrealest) gc.LapManag.MeepTimer.SetActive(true);
+            
         }
         if (stuff == "exitstuff")
         {
@@ -221,8 +242,20 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public IEnumerator zawadro()
     {
-        randomPrelapMus = false;
-        gc.lbams.MainSource2.PlaySingleClip(zawarudo);
+        randomPrelapQueue = false;
+        PrelapQueue1.ClearQueue(true);
+        PrelapQueue2.ClearQueue(true);
+        
+        if (!NinetyNineToggle)
+        {
+            gc.lbams.MainSource2.PlaySingleClip(zawarudo);
+            AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
+        }
+        if (NinetyNineToggle) 
+        {
+            gc.lbams.MainSource2.PlaySingleClip(lightsoutohfuck);
+            AdditionalGameCustomizer.Instance.donthaveanamelmfao = new Color(0f,0f,0f,1f);
+        }
         vanishScore = false;
         LapSound.ClearQueue(true);
         gc.player.DisableCamMove = true;
@@ -230,47 +263,91 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.titlecard = true;
         gc.playerCollider.enabled = false;
         gc.npcCloneList.ForEach(o => o.SetActive(false));
-        AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
-        yield return new WaitForSeconds(zawarudo.audClip.length);
-        gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
+        gc.player.transform.DOMove(EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height, zawarudo.audClip.length/1.5f);
+        gc.player.forceLookSpeed = 50f;
+        gc.player.targetToForcelyLookAt = EndingManager.Instance.SecretWarpPoint.transform;
+        gc.player.isForcedToLook = true;
+        if (!NinetyNineToggle)yield return new WaitForSeconds(zawarudo.audClip.length);
+        //gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
         lowBudgetAudioManagementShit.Instance.TpSource.PlaySingleClip(lowBudgetAudioManagementShit.Instance.evilLeafTP);
         yield return new WaitForSeconds(0.1f);
-        gc.player.maxHealth += 25;
+        
+        
+        if (NinetyNineToggle)
+        {
+            gc.maxNotebooks += realCurrentMaxNoteboo * 99;
+            CurrentMaxNotebooks += realCurrentMaxNoteboo * 99;
+            gc.player.maxHealth = 999;
+        }
+        else
+        {
+            gc.maxNotebooks += realCurrentMaxNoteboo;
+            CurrentMaxNotebooks += realCurrentMaxNoteboo;
+            gc.player.maxHealth += 25;
+        }
         gc.player.totemshit(false);
-        gc.maxNotebooks += realCurrentMaxNoteboo;
-        CurrentMaxNotebooks += realCurrentMaxNoteboo;
         for (int i = 0; i < noteboos.Length; ++i) if (noteboos[i].hidden) noteboos[i].Respawn();
         gc.UpdateNotebookCount();
-        yield return new WaitForSeconds(zawarudo.audClip.length / 2);
-        UnityEngine.Debug.Log(LapSound.audioDevice.timeSamples);
+        if (!NinetyNineToggle) yield return new WaitForSeconds(zawarudo.audClip.length / 2);
+        else yield return new WaitForSeconds(9f);
         LapSound.ClearQueue(true);
         LapSound.SetLoop(true);
-        if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
-        if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
+        if (NinetyNineToggle)
+        {
+            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+            gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
+            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
+            if (NinetynineIntro != null) LapSound.QueueAudio(NinetynineIntro);
+            if (NinetynineLoop != null) LapSound.QueueAudio(NinetynineLoop);
+            CurrentLap = 99;
+            MaxLap = 99;
+            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(0f);
+            for (int i = 0; i < noteboos.Length; ++i)
+            {
+                noteboos[i].MultiCollect = true;
+                noteboos[i].MultiCollectTime = 99;
+            }
+            if (LapFlaninety != null) StartCoroutine(flagmove(LapFlaninety,5f));
+            gc.fmc.butch.SetActive(true);
+            gc.zerull.zer.SetActive(true);
+            gc.wegchal.WEGA.SetActive(true);
+            gc.player.walkSpeedMultipler += 3f;
+            gc.player.runSpeedMultipler += 3f;
+            ItemManager.Instance.ClearAllItems();
+            foreach (PickupScript pickmygames in FindObjectsOfType<PickupScript>()) if (pickmygames.DroppedItem) Destroy(pickmygames.transform.parent.gameObject);
+            foreach (BaseItem itemem in FindObjectsOfType<BaseItem>()) itemem.Uses = itemem.Uses * 5;
+        }
+        else
+        {
+            if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
+            if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
+            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(300f);
+            CurrentLap++;
+            vanishScore = true;
+            gc.player.walkSpeedMultipler += 0.1f;
+            gc.player.runSpeedMultipler += 0.1f;
+        }
         gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
-        CurrentLap++;
-        gc.player.walkSpeedMultipler += 0.1f;
-        gc.player.runSpeedMultipler += 0.1f;
+        
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
         gc.player.DisableCamMove = false;
         gc.npcCloneList.ForEach(o => o.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
-        vanishScore = true;
-        Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(600f);
+        
         bool shrinky = PlayerPrefsExtension.GetBool("shrink");
         if (shrinky) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(Singleton<OtherMainStuffManager>.Instance.realMaxSlotsAmmou);
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr) if (muc.isActiveAndEnabled) muc.MuchoSpeedScale += 0.1f;
         yield return null;
         yield break;
     }
-    public IEnumerator flagmove()
+    public IEnumerator flagmove(Sprite sprit,float duration = 3f)
     {
-        lapFlagImages.sprite = lappingHi[CurrentLap].LapFlag;
+        lapFlagImages.sprite = sprit;
         float ratioy = (float)Screen.width / 360f;
         LapFlag.transform.DOMoveY(ratioy * 160, 1f);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(duration);
         LapFlag.transform.DOMoveY(ratioy * 300, 1f);
         yield break;
     }
@@ -366,27 +443,27 @@ public class LappingOfAsylumController : MonoBehaviour
 
         if (LapRouletteTagThing == 2)
         {
-            StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2f , HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+            StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
             LapRouletteTagThing = 0;
         }
-        else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f , HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+        else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
 
-        if (lappingHi[CurrentLap].usesFlag) StartCoroutine(flagmove());
+        if (lappingHi[CurrentLap].usesFlag) StartCoroutine(flagmove(lappingHi[CurrentLap].LapFlag));
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr) if (muc.isActiveAndEnabled) muc.MuchoSpeedScale += 0.1f;
     }
 
     [SerializeField] private GameControllerScript gc;
     public List<GameObject> LapPortals, elevatorTriggers = new List<GameObject>();
-    public AudioObjectyeah[] RandomizedPrelapMusic;
+    public AudioObjectyeah[] RandomizedPrelapQueueOkBro;
     public GameObject LapFlag, mucho, MeepTimer;
     public meepTimerScript Meeptimar;
     public Image lapFlagImages;
     public booksInteract[] noteboos;
-    public AudioManagerLiveReaction LapSound,LapSound2;
+    public AudioManagerLiveReaction LapSound,LapSound2,PrelapQueue1,PrelapQueue2;
     public AudioObjectyeah BellSoundLapping,PortalEnteringSound,PortalExitingSound,zawarudo;
-    public int CurrentLap, MaxLap,LapRouletteTagThing, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount,ChaosCheeseCount,Chaos3CheeseCount;
-    public float scoreDecreaseTimer,Lap1SongTimer;
-    public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff, vanishScore,lap1TimerReach1Min,lap1NearEndThing,randomPrelapMus;
+    public int CurrentLap, MaxLap,LapRouletteTagThing,LapRouletteTagThingQueue, CurrentMaxNotebooks, realCurrentMaxNoteboo,FamishCheeseCount,Lap5CheeseCount,ChaosCheeseCount,Chaos3CheeseCount;
+    public float scoreDecreaseTimer,Lap1OutroTimer;
+    public bool inportalALREADY, h, allowClosElev, LapFamishShit, Lap5TimingStuff, vanishScore,lap1NearEndThingActive,randomPrelapQueue,isCrossfading,canActuallyPlayPrelap;
     public string[] stupidTextIntro,stupidTextLoop;
     public string stupidTextOutro;
     public lapVariablesStuff[] lappingHi;
@@ -398,4 +475,10 @@ public class LappingOfAsylumController : MonoBehaviour
 		public Sprite LapFlag;
 	}
     public AudioObjectyeah LapMusikOutro;
+    [Header("LAP 99")]
+    public Sprite LapFlaninety;
+    public AudioObjectyeah NinetynineIntro,NinetynineLoop,lightsoutohfuck;
+    public bool NinetyNineToggle;
+    private float cd;
+    private AudioManagerLiveReaction CurAudioMan;
 }

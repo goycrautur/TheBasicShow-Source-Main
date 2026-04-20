@@ -10,7 +10,7 @@ public class lowBudgetAudioManagementShit : MonoBehaviour
     #endregion
     [Header("Audiosource/manager shit")]
     public AudioManagerLiveReaction HurtSource;
-    public AudioManagerLiveReaction TpSource,SchoolMusic,EscapeMusic,EndingMusic,WarMusic,TimeoutMusic,GameOverSource,ChaosAudioSource,MainSource1,MainSource2,MainSource3,DIMCSource,ShuckSource;
+    public AudioManagerLiveReaction TpSource,SchoolMusic,EscapeMusic,EndingMusic,WarMusic,TimeoutMusic,GameOverSource,ChaosAudioSource,MainSource1,MainSource2,MainSource3,MainSource4,DIMCSource,ShuckSource;
     [Header("Audio clip shit")]
     public AudioObjectyeah drivinginmy;
     public AudioObjectyeah quarterDrop,evilLeafTP,TeleporterTp,totem,deltaruneExplud,punchSound,agonyScream,gasterSfx,deadbel,hangAudio,zerullGameover; //part 1

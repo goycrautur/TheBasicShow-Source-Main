@@ -10,6 +10,9 @@ public class DoorScript : MonoBehaviour
         AltTrigger.enabled = false;
         outside.material.SetTextureScale("_SecondTex", new Vector2(-1, 1));
         outside.material.SetTextureScale("_SecondaryDiffrent", new Vector2(-1, 1));
+        myAudio.audioDevice.spatialBlend = 1;
+        myAudio.audioDevice.minDistance = 35;
+        myAudio.audioDevice.maxDistance = 125;
     }
     #endregion
 

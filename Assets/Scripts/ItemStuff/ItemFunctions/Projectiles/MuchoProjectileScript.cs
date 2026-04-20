@@ -46,7 +46,7 @@ public class MuchoProjectileScript : MonoBehaviour
                     switch (projectileTypes)
                     {
                         case ProjectileTypesREAL.IgnoreIFrames:
-                            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageAmmount / GameControllerScript.Instance.player.PlayerDmgResistance, 0, false, true, false);
+                            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageAmmount / GameControllerScript.Instance.player.PlayerDmgResistance, 0.025f, false, true, false);
                             break;
                         case ProjectileTypesREAL.hammer:
                             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageAmmount / GameControllerScript.Instance.player.PlayerDmgResistance, 0, false, true, false);
@@ -61,7 +61,7 @@ public class MuchoProjectileScript : MonoBehaviour
 			            switch (projectileTypes)
                         {
                             case ProjectileTypesREAL.IgnoreIFrames:
-                                GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageAmmount / GameControllerScript.Instance.player.PlayerDmgResistance, 0, false, true, false);
+                                GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageAmmount / GameControllerScript.Instance.player.PlayerDmgResistance, 0.025f, false, true, false);
                                 break;
                             case ProjectileTypesREAL.hammer:
                                 GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageAmmount / GameControllerScript.Instance.player.PlayerDmgResistance, 0, false, true, false);

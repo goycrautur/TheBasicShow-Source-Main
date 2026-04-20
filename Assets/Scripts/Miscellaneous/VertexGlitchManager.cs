@@ -78,7 +78,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
         }
         else randomSeedVal = RandomCurId;
     }
-	public void Glitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1f,float desiredval = 1f)
+	public void Glitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1f,float desiredval = 1f,int randomGlitchVal = 32)
 	{
 		if (isShakeGlitchUpdating)
 		{
@@ -86,7 +86,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
 		}
 		if (glitchVal <= 0f)
 		{
-			StartCoroutine(UnGlitch(vertexseedRandomRangeMin,vertexseedRandomRangeMax));
+			StartCoroutine(UnGlitch(vertexseedRandomRangeMin,vertexseedRandomRangeMax,randomGlitchVal));
 		}
         Randomizer();
 		glitchVal = desiredval;
@@ -95,25 +95,26 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
         global_VertexGlitchIntensity = glitchVal/4;
         global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
         global_VertexGlitchSeed = randomSeedVal;
-        global_glitchColorRvalue = UnityEngine.Random.Range(0, 32);
-        global_glitchColorGvalue = UnityEngine.Random.Range(0, 32);
-        global_glitchColorBvalue = UnityEngine.Random.Range(0, 32);
+        global_glitchColorRvalue = UnityEngine.Random.Range(0, randomGlitchVal);
+        global_glitchColorGvalue = UnityEngine.Random.Range(0, randomGlitchVal);
+        global_glitchColorBvalue = UnityEngine.Random.Range(0, randomGlitchVal);
 	}
 	
-	private IEnumerator UnGlitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1.1f)
+	private IEnumerator UnGlitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1.1f, int randomGlitchVal = 32)
 	{
 		yield return null;
 		while (glitchVal > 0f)
 		{
-			glitchVal -= Time.deltaTime * 2f*(ZerullClassic.Instance.midiTempo*1.5f);
+            float multnumb = ZerullClassic.Instance.realBossStarted ? ZerullClassic.Instance.midiTempo*1.5f : 1.55f;
+			glitchVal -= Time.deltaTime * 2f*multnumb;
             
 			Shader.SetGlobalFloat("_VertexGlitchIntensity", glitchVal/2);
             global_VertexGlitchIntensity = glitchVal/4;
             global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
             global_VertexGlitchSeed = randomSeedVal;
-            global_glitchColorRvalue = UnityEngine.Random.Range(0, 16);
-            global_glitchColorGvalue = UnityEngine.Random.Range(0, 16);
-            global_glitchColorBvalue = UnityEngine.Random.Range(0, 16);
+            global_glitchColorRvalue = UnityEngine.Random.Range(0, randomGlitchVal);
+            global_glitchColorGvalue = UnityEngine.Random.Range(0, randomGlitchVal);
+            global_glitchColorBvalue = UnityEngine.Random.Range(0, randomGlitchVal);
 			yield return null;
 		}
 		glitchVal = 0f;
@@ -162,9 +163,9 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
         return Mathf.Clamp01(rmsValue * 10f);
     }
 
-    private IEnumerator ShakeMidi(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 100f)
+    private IEnumerator ShakeMidi(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 100f,int randomGlitchVal = 32)
     {
-        Glitch(vertexseedRandomRangeMin,vertexseedRandomRangeMax);
+        Glitch(vertexseedRandomRangeMin,vertexseedRandomRangeMax,randomGlitchVal);
         float random = 128f / UnityEngine.Random.Range(1f, 1.3f);
         yield return new WaitForSeconds(random / MidiBTM);
         glitchingAlready = false;

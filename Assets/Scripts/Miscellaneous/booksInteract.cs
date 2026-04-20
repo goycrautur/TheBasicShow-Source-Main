@@ -10,6 +10,8 @@ public class booksInteract : Interactable
     private SpriteRenderer notebooSprite;
     public GameObject CheeseMapIcon;
     public Color HighlightColor;
+    public bool MultiCollect;
+    public int MultiCollectTime,BaseMultiCollectTime=0;
     private MaterialPropertyBlock mpb;
     [Header("Audio stuff")]
     public AudioObjectyeah cheeseCollect;
@@ -78,7 +80,12 @@ public class booksInteract : Interactable
     public override void Interact()
     {
         if (hidden)return;
-        Hide(true);
+        if (BaseMultiCollectTime < MultiCollectTime-1 && MultiCollect)BaseMultiCollectTime++;
+        else 
+        {
+            BaseMultiCollectTime = 0;
+            Hide(true);
+        }
         respawnTime = 120f;
         gc.CollectNotebook(1);
         if (gc.mode == "LappingOfAsylum") gc.LapManag.UpdateManually();
@@ -104,7 +111,8 @@ public class booksInteract : Interactable
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
         int problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
         scoreSystemManager.Instance.AddScore(1000+(75*problemcap), true,true);
-        lowBudgetAudioManagementShit.Instance.MainSource2.PlaySingleClip(cheeseCollect);
+        lowBudgetAudioManagementShit.Instance.MainSource4.ClearQueue(true);
+        lowBudgetAudioManagementShit.Instance.MainSource4.PlaySingleClip(cheeseCollect);
         if (gc.player.stamina < 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
         if (gc.notebooks == 1 && !gc.spoopMode)
         {
@@ -123,9 +131,13 @@ public class booksInteract : Interactable
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum") TriggerFinalSequence();
         if (gc.spoopMode)
         {
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "all");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
-            Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f*LearningGameManager.Instance.angerMult, 0f,false, "zerull");
+            if (MultiCollect) Singleton<OtherMainStuffManager>.Instance.AngerShit(0.15f, 0f,false, "all");
+            else
+            {
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "all");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f*LearningGameManager.Instance.angerMult, 0f,false, "zerull");
+            }
         }
     }
     #region Learning Game Launch

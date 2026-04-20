@@ -78,6 +78,7 @@ public class subtitlesScriptReal : MonoBehaviour
     {
         if (is3d)
         {
+            if (producerAud == null) return;
             Vector3 position = cameraTransf.position;
             Vector3 position2 = producerAud.transform.position;
             float num = Vector3.Distance(position2, position);
@@ -199,6 +200,7 @@ public class subtitlesScriptReal : MonoBehaviour
     }
     private void Update()
     {   // subtitle will commit kys if the audio source is not found or not active in hierarchy
+        destroyyoubitch();
         
         if (hidesub) // are we deadass
         {
@@ -210,8 +212,6 @@ public class subtitlesScriptReal : MonoBehaviour
             imagbg.enabled = true;
             tmpTxt.enabled = true;
         }
-        if (producerAud == null) Destroy(base.gameObject);
-        if (!producerAud.gameObject.activeInHierarchy) Destroy(base.gameObject);
         updateSubPostion();
         ColorUpdatingBullshit();
         if (shake) // shake the tmp text yummy
@@ -224,6 +224,12 @@ public class subtitlesScriptReal : MonoBehaviour
         {
             if (tmpTxt.transform.localPosition != Vector3.zero) tmpTxt.transform.localPosition = Vector3.zero;
         }
+        
+    }
+    private void destroyyoubitch()
+    {
+        if (producerAud == null) Destroy(base.gameObject);
+        if (producerAud != null && !producerAud.gameObject.activeInHierarchy) Destroy(base.gameObject);
     }
 
     private void LateUpdate()

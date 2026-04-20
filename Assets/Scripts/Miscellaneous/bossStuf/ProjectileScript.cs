@@ -32,7 +32,7 @@ public class ProjectileScript : MonoBehaviour
     private void Update()
     {
         
-        if (pickedUp && ZerullClassic.Instance.currentProjectile != null)
+        if (pickedUp)
         {
             transform.localEulerAngles = cameraTransform.localEulerAngles + rotateOffset * Vector3.up;
             if (Input.GetMouseButton(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact))
@@ -101,7 +101,7 @@ public class ProjectileScript : MonoBehaviour
         ZerullClassic.Instance.objects -= 1;
         transform.position = cameraTransform.position;
         transform.rotation = cameraTransform.rotation;
-        ZerullClassic.Instance.currentProjectile = null;
+        if (ZerullClassic.Instance.currentProjectile != null) ZerullClassic.Instance.currentProjectile = null;
         return;
     }
 

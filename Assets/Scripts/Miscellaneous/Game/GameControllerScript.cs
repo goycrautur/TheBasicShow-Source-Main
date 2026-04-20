@@ -53,7 +53,14 @@ public class GameControllerScript : MonoBehaviour
         foreach (GameObject dox in xrayObjectList) if (dox != null) dox.layer = !ipleak ? LayerMask.NameToLayer("npcLayer") : LayerMask.NameToLayer("npcXrayLayer");
         lbams.EscapeMusic.SetMute(!SecretEndingGot ? timeout : warrealest ? true : true);
         lbams.WarMusic.SetMute(!SecretEndingGot ? timeout : warrealest ? true : true);
-        
+        if (SpriteRendererMain != null)
+        {
+            SpriteRendererMain.SetInt("_GlitchValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
+            SpriteRendererMain.SetInt("_GlitchValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
+            SpriteRendererMain.SetInt("_GlitchValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
+            
+        }
+        if (failedNotebooks == maxNotebooks) FinaleSecret = true;
         DiscordRPC_stuff.current.UpdateStatus(modeDetails, modeState, largeImagething, largeImageText);
     }
     public void muchofinaleStuff()
@@ -112,56 +119,48 @@ public class GameControllerScript : MonoBehaviour
     {
         if (StateUpdateType != "youwo")
         {
-            bool ChaosMode = PlayerPrefsExtension.GetBool("Chaos");
-            string chaosString = !ChaosMode ? "" : " - your local suffering enabled (Chaos Mode)";
-            if (StateUpdateType == "chees")
-            {
-                modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
-            }
-            if (StateUpdateType == "exit")
-            {
-                modeState = exitsReached + "/" + maxExits + " Exits | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
-            }
+            string DifficulityString = PlayerPrefs.GetString("CurDifficulity");
+            string CharacterString = PlayerPrefs.GetString("CurrentCharacter");
+            if (StateUpdateType == "chees") modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks | " + "Playing As: " + CharacterString;
+            if (StateUpdateType == "exit")modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
             if (mode == "endless")
             {
-                modeDetails = "Endless Mode" + chaosString;
+                modeDetails = "Endless Mode" + " | " + DifficulityString + " Difficulity";;
                 largeImagething = "teacherjerproto";
                 largeImageText = "hi i am teachr jery and im gonna smac you";
             }
             if (mode == "story")
             {
-                modeDetails = "Story Mode" + chaosString;
+                modeDetails = "Story Mode" + " | " + DifficulityString + " Difficulity";;
                 largeImagething = "teacherjerproto";
                 largeImageText = "hi i am teachr jery and im gonna smac you";
             }
             if (mode == "famished")
             {
-                modeDetails = "???????" + chaosString;
+                modeDetails = "???????" + " | " + DifficulityString + " Difficulity";;
                 largeImagething = "creepydarkmf";
                 largeImageText = "*hungry ass noise intenstify*";
-                if (exitsReached == 5)
-                {
-                    modeState = exitsReached + "/" + maxExits + " Exits" + " | its over..? | " + "Score: " + scoreSystemManager.Instance.scorevalue +" | " + "Ranks: " + scoreSystemManager.Instance.CurRank;
-                }
+                if (exitsReached == 5) modeState = exitsReached + "/" + maxExits + " Exits" + " | its over..?";
             }
             if (mode == "wegaChallenge")
             {
-                modeDetails = "holy shits its wega challenge" + chaosString;
+                modeDetails = "holy shits its wega challenge" + " | " + DifficulityString + " Difficulity";;
                 largeImagething = "van";
                 largeImageText = "WEGA CHALLENGEEE";
             }
             if (mode == "zerullclassic")
             {
                 bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-                modeDetails = chair ? "c  h  a  i  r" + chaosString: "???????" + chaosString;
+                modeDetails = chair ? "c  h  a  i  r" + " | " + DifficulityString + " Difficulity": "???????" + " | " + DifficulityString + " Difficulity";
                 largeImagething = "van";
                 largeImageText = chair ? "c  h  a  i  r" : "*CLASSIFIED INFO*";
             }
             if (mode == "LappingOfAsylum")
             {
-                modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " |"+ chaosString;
+                modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " | " + DifficulityString + " Difficulity";
                 largeImagething = "teacherjerproto";
                 largeImageText = "the lapping grindset begin";
+                if (LapManag.CurrentLap == 99) modeDetails = "lapping mode - lap UNDEFINDED,YOU ARE SO FUCKED" + " | " + DifficulityString + " Difficulity";
             }
         }
         else
@@ -280,7 +279,7 @@ public class GameControllerScript : MonoBehaviour
             ObjectsToEnable.ForEach(o => o.SetActive(true));
             if (warrealest)
             {
-                StartCoroutine(easingExit(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 5));
+                easingExit(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 5);
                 StartCoroutine(meeptimerwai());
             }
         }
@@ -359,6 +358,7 @@ public class GameControllerScript : MonoBehaviour
         
         if (mode == "story")
         {
+
             if (AdditionalGameCustomizer.Instance != null)
             {
                 switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
@@ -422,7 +422,7 @@ public class GameControllerScript : MonoBehaviour
     public IEnumerator tiemoutStu()
     {
         yield return new WaitForSeconds(LearningGameManager.Instance.Television.Markings ? 3f : 0.75f);
-        StartCoroutine(easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5));
+        easingExit(new Color(0.575f, 0.575f, 0.575f, 1f), 0, 2, 5);
         Singleton<TimeOutManagerFUCKYEA>.Instance.spamupdatethese =true;
         lbams.TimeoutMusic.ClearQueue(true);
         lbams.TimeoutMusic.SetLoop(true);
@@ -512,16 +512,15 @@ public class GameControllerScript : MonoBehaviour
         {
             if (!FinaleSecret)
             {
-                if (exitEasingCoroutine != null) StopCoroutine(exitEasingCoroutine);
                 if (AdditionalGameCustomizer.Instance != null)
                 {
                     switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
                     {
                         case AdditionalGameCustomizer.EscapeFunsies.BBCR:
-                            exitEasingCoroutine = StartCoroutine(easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                            easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                             break;
                         case AdditionalGameCustomizer.EscapeFunsies.TBS:
-                            exitEasingCoroutine = StartCoroutine(easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                            easingExit(new Color(1f, 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                             break;
                     }
                 }
@@ -622,7 +621,7 @@ public class GameControllerScript : MonoBehaviour
                                 lbams.ChaosAudioSource.SetLoop(true);
                                 lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
                                 lbams.EscapeMusic.SetPitch(0.6f);
-                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 VideoFade.Rebind();
@@ -643,7 +642,7 @@ public class GameControllerScript : MonoBehaviour
                                 lbams.ChaosAudioSource.ClearQueue(true);
                                 lbams.ChaosAudioSource.SetLoop(true);
                                 lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
-                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 break;
                         }
                     }
@@ -669,13 +668,13 @@ public class GameControllerScript : MonoBehaviour
                         {
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                                 lbams.EscapeMusic.SetPitch(0.45f);
-                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 lbams.ChaosAudioSource.ClearQueue(true);
                                 lbams.ChaosAudioSource.SetLoop(true);
                                 lbams.ChaosAudioSource.QueueAudio(lbams.ChaosBuildUp);
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
-                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                easingExit(new Color(1f / (exitsReached / 1.5f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 lbams.ChaosAudioSource.ClearQueue(true);
                                 lbams.ChaosAudioSource.SetLoop(true);
                                 lbams.ChaosAudioSource.QueueAudio(lbams.ChaosBuildUp);
@@ -705,7 +704,7 @@ public class GameControllerScript : MonoBehaviour
                         {
                             case AdditionalGameCustomizer.EscapeFunsies.BBCR:
                                 lbams.EscapeMusic.SetPitch(0.3f);
-                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 lbams.EscapeMusic.ClearQueue(true);
@@ -713,7 +712,7 @@ public class GameControllerScript : MonoBehaviour
                                 lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinaleIntros[0]);
                                 lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[5]);
                                 lbams.EscapeMusic.SetLoop(true);
-                                StartCoroutine(easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5));
+                                easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 break;
                         }
                     }
@@ -729,8 +728,17 @@ public class GameControllerScript : MonoBehaviour
         }
         discordupdate("exit");
     }
+    public void easingExit(Color kolor, float a, float b, float duration)
+    {
+        if (exitEasingCoroutine != null) 
+        {
+            StopCoroutine(exitEasingCoroutine);
+            exitEasingCoroutine = null;
+        }
+        exitEasingCoroutine = StartCoroutine(easingkolo(kolor,a,b,duration));
+    }
 
-    public IEnumerator easingExit(Color kolor, float a, float b, float duration)
+    public IEnumerator easingkolo(Color kolor, float a, float b, float duration)
     {
         Color start = RenderSettings.ambientLight;
 
@@ -897,7 +905,7 @@ public class GameControllerScript : MonoBehaviour
     public List<VendingMachineScript> MachinesToRestock = new List<VendingMachineScript>();
     public List<NPC> GlobalNpcList = new List<NPC>();
     public Animator Icon,CirclAnimator;
-    public Material SpriteRenderer;
+    public Material SpriteRenderer,SpriteRendererMain;
     public Sprite Present;
     public modifiersName[] Modifiers;
 

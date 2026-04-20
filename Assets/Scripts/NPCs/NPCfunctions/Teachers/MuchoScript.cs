@@ -15,7 +15,6 @@ public class MuchoScript : NPC
     public void OnEnable()
     {
         gc.muchscr.Add(this);
-        CancelInvoke();
         Move();
     }
     public void OnDisable()
@@ -156,7 +155,7 @@ public class MuchoScript : NPC
         {
             if (base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 2f / gc.player.PlayerDmgResistance, 0.025f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 4f / gc.player.PlayerDmgResistance, 0.05f, false, true, false);
 				gc.player.killedbybaldi = true;
 			}
         }

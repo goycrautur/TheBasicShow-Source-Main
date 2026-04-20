@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 5885894844889399425}
   - component: {fileID: -2452637138297308520}
   - component: {fileID: 253027084512351240}
+  - component: {fileID: -3525772884384959804}
   m_Layer: 0
   m_Name: Projectile_kms
   m_TagString: Projectile
@@ -186,7 +187,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 1
+  MinDistance: 25
   MaxDistance: 200
   Pan2D: 0
   rolloffMode: 1
@@ -277,11 +278,9 @@ MonoBehaviour:
   pickedUp: 0
   boshit: 0
   thrown: 0
-  audioDevice: {fileID: 7581270106364978491}
-  throwSound: {fileID: 8300000, guid: d8913fdfb590c88498fe0314cc9a5f07, type: 3}
+  auDevice: {fileID: -3525772884384959804}
+  throwSound: {fileID: 11400000, guid: bbfa3dc87630c4044a7757ff9f989511, type: 2}
   theSpriteREND: {fileID: 7487137391670823497}
-  subtitlesScriptableObjectREAL: {fileID: 11400000, guid: 6cf8869d8bd83d44eb9b6ddc06a1abb5,
-    type: 2}
   rotateOffset: 90
   projectileDamage: 2
   ProjectileSpeed: 60
@@ -319,3 +318,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &-3525772884384959804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575783199051342329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  PlayAtAwakeQueue: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 7581270106364978491}
+  queuedAudios: []
+  queuedSubtitles: []
+  AudioManStandalone: 0
+  MixerOverrides: []

@@ -68,7 +68,7 @@ public class SweepScript : NPC
     #region Collision Interaction
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NPC") || other.CompareTag("Player"))
+        if (other.CompareTag("NPC") && other.transform.GetComponent<NPC>() || other.CompareTag("Player"))
         {
             if (base.IsHitboxValid)
             {

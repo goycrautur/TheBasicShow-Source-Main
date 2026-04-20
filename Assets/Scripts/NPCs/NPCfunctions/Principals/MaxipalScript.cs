@@ -138,7 +138,6 @@ public class MaxcipalScript : NPC
         OGPrinSpeedMult = 1f;
         playerScript.principalBugFixer = 1;
         base.Wander(locationType);
-        if (agent.isStopped) agent.isStopped = false;
         if (bullySeen) bullySeen = false;
         ResetCooldown();
         if (Random.Range(0f, 10f) <= 1f && !inOffice) audioQueue.PlaySingleClip(aud_Whistle);
@@ -239,14 +238,14 @@ public class MaxcipalScript : NPC
         cc.enabled = false;
         Vector3 vector = new Vector3(point.position.x, target.position.y, point.position.z);
         cc.enabled = true;
+        int detent = (int)UnityEngine.Random.Range(0, audDetention.Length -1);
+        int scold = (int)UnityEngine.Random.Range(0, audScolds.Length -1);
         target.transform.position = vector;
         agent.Warp(vector + target.forward * 10f);
         audioQueue.QueueAudio(audTimes[detentions]);
         audioQueue.QueueAudio(audScoldsDetention[detentions]);
-        int num2 = (int)Random.Range(0f, audDetention.Length);
-        audioQueue.QueueAudio(audDetention[num2]);
-        int num = (int)Random.Range(0f, audScolds.Length);
-        audioQueue.QueueAudio(audScolds[num]);
+        if (audScolds[detent] != null) audioQueue.QueueAudio(audDetention[detent]);
+        if (audScolds[scold] != null) audioQueue.QueueAudio(audScolds[scold]);
         officeDoor.LockDoor(lockTime[detentions]);
         maxGaugeLockTime = lockTime[detentions];
         if (gauge == null) gauge = GaugeManager.Instance.CreateGaugeInstance(gaugeDetentionSprite, maxGaugeLockTime);

@@ -81,7 +81,7 @@ public class YouWonScript : MonoBehaviour
                 restartObjec.SetActive(true);
                 quitObjec.SetActive(true);
             }
-            if (secreDelay <= 0f)
+            if (secreDelay <= 0f && secretCount)
             {
                 GameControllerScript.Instance.modeState = "You Won?";
                 audPitch -= Time.deltaTime;

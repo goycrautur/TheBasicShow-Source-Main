@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CrazyMachineBSODA
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 7da3507bd9a815e4ca2eecf49e920087, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -72,6 +72,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 2c1127b19e435ed4194517d2a2f185d5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SecondaryDiffrent:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_AlphaClip: 0
@@ -100,12 +104,25 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Swap: 0
     - _TransitionThreshold: 0.05
     - _UVSec: 0
+    - _UseGlitch: 1
+    - _UseLightmap: 1
+    - _UseMask: 0
+    - _UseSecondTex: 0
     - _UseSmoothTransition: 1
+    - _UseTransparency: 0
+    - _ValueX: 0
+    - _ValueY: 0
+    - _ValueZ: 0
+    - _VertexGlitchIntensity: 0
+    - _VertexGlitchSeed: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2501328799174777397

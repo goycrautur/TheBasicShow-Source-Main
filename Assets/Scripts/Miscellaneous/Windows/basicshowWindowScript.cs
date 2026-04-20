@@ -63,35 +63,43 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
                 foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
-            if (durability == ogDurability)
+            if (WinData.crackWinEnable)
             {
-                if (WinData.sounds[1] != null) audioDevice.PlaySingleClip(WinData.sounds[1]);
-                else Debug.Log($"le sounds data array number 2 (window repair sound object) is null!!!! go assign it dumbass");
-                if (WinData.normalWinMats[0] != null) window_In.material = WinData.normalWinMats[0];
-                else Debug.Log($"le normalwinmats data array 1 (normal window side 1) is null!!!! go assign it dumbass");
-                if (WinData.normalWinMats[1] != null) window_Out.material = WinData.normalWinMats[1];
-                else Debug.Log($"le normalwinmats data array 2 (normal window side 2) is null!!!! go assign it dumbass");
-                if (WinData.particlPrefab[1] != null) Instantiate(WinData.particlPrefab[1], transform.position, Quaternion.identity);
-                else Debug.Log($"le particle Prefab data array 2 (window repair particle prefab) is null!!!! go assign it dumbass");
-            }
-            else if (durability != ogDurability)
-            {
-                if (!WinData.uniqueCrackSound)
+                if (durability == ogDurability)
                 {
-                    if (WinData.CrackedWindowSounds != null) audioDevice.PlaySingleClip(WinData.CrackedWindowSounds);
-                    else Debug.Log($"le cracked window sounds object data is null!!!! go assign it dumbass");
-                    if (WinData.crackParticlPrefab != null) Instantiate(WinData.crackParticlPrefab, transform.position, Quaternion.identity);
-                    else Debug.Log($"le crack Particle Prefab data is null!!!! go assign it dumbass");
+                    if (WinData.sounds[1] != null) audioDevice.PlaySingleClip(WinData.sounds[1]);
+                    else Debug.Log($"le sounds data array number 2 (window repair sound object) is null!!!! go assign it dumbass");
+                    if (WinData.normalWinMats[0] != null) window_In.material = WinData.normalWinMats[0];
+                    else Debug.Log($"le normalwinmats data array 1 (normal window side 1) is null!!!! go assign it dumbass");
+                    if (WinData.normalWinMats[1] != null) window_Out.material = WinData.normalWinMats[1];
+                    else Debug.Log($"le normalwinmats data array 2 (normal window side 2) is null!!!! go assign it dumbass");
+                    if (WinData.particlPrefab[1] != null) Instantiate(WinData.particlPrefab[1], transform.position, Quaternion.identity);
+                    else Debug.Log($"le particle Prefab data array 2 (window repair particle prefab) is null!!!! go assign it dumbass");
                 }
-                else 
+                else if (durability != ogDurability)
                 {
-                    if (WinData.CrackedWindowSoundsButItsAnArray[durability-1] != null) audioDevice.PlaySingleClip(WinData.CrackedWindowSoundsButItsAnArray[durability-1]);
-                    else Debug.Log($"le cracked window sounds object data array {durability} is null!!!! go assign it dumbass");
-                    if (WinData.crackParticlPrefabArra[durability-1] != null) Instantiate(WinData.crackParticlPrefabArra[durability-1], transform.position, Quaternion.identity);
-                    else Debug.Log($"le crack Particle Prefab data array {durability} is null!!!! go assign it dumbass");
+                    if (!WinData.uniqueCrackSound)
+                    {
+                        if (WinData.CrackedWindowSounds != null) audioDevice.PlaySingleClip(WinData.CrackedWindowSounds);
+                        else Debug.Log($"le cracked window sounds object data is null!!!! go assign it dumbass");
+                        if (WinData.crackParticlPrefab != null) Instantiate(WinData.crackParticlPrefab, transform.position, Quaternion.identity);
+                        else Debug.Log($"le crack Particle Prefab data is null!!!! go assign it dumbass");
+                    }
+                    else 
+                    {
+                        if (WinData.CrackedWindowSoundsButItsAnArray[durability-1] != null) audioDevice.PlaySingleClip(WinData.CrackedWindowSoundsButItsAnArray[durability-1]);
+                        else Debug.Log($"le cracked window sounds object data array {durability} is null!!!! go assign it dumbass");
+                        if (WinData.crackParticlPrefabArra[durability-1] != null) Instantiate(WinData.crackParticlPrefabArra[durability-1], transform.position, Quaternion.identity);
+                        else Debug.Log($"le crack Particle Prefab data array {durability} is null!!!! go assign it dumbass");
+                    }
                 }
                 window_In.material = WinData.cracWindowMatsSide1[durability];
                 window_Out.material = WinData.cracWindowMatsSide2[durability];
+            }
+            else
+            {
+                if (WinData.sounds[0] != null) audioDevice.PlaySingleClip(WinData.sounds[0]);
+                else Debug.Log($"le sounds data array number 1 (broken window sound object) is null!!!! go assign it dumbass");
             }
             meshCollider_In.enabled = true;
             meshCollider_Out.enabled = true;

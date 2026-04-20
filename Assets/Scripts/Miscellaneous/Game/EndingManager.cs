@@ -79,7 +79,7 @@ public class EndingManager : MonoBehaviour
         GameControllerScript.Instance.MainHudFade.Play("hudFadeOutNearly", -1, 0f);
         GameControllerScript.Instance.RainbowHudFade.Rebind();
         GameControllerScript.Instance.RainbowHudFade.Play("hudFadeOutRainb", -1, 0f);
-        StartCoroutine(Game.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 2));
+        Game.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 2);
         
         if (!secret) 
         {
@@ -102,10 +102,20 @@ public class EndingManager : MonoBehaviour
             EndingSequenceFlashTime = 8f;
             EndingSequenceHelicopTime = 1f;
         }
+        ExtremeForceLook = true;
+        StartCoroutine(lockcam());
         StartCoroutine(EndingSequence(EndingSequenceWaitTime,EndingSequenceFlashTime,ID,secret));
         StartCoroutine(byebus(EndingSequenceHelicopTime,ID));
     }
     #region PublicMethods
+    public IEnumerator lockcam()
+    {
+        while (ExtremeForceLook)
+        {
+            Game.player.isForcedToLook = true;
+            yield return null;
+        }
+    }
     public IEnumerator byebus(float timetoActuallyMove,int whatWasTheObjectId)
     {
         
@@ -123,7 +133,7 @@ public class EndingManager : MonoBehaviour
     {
         ZerullClassic.Instance.yourflashbang.Rebind();
         ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
-        Game.player.forceLookSpeed = 500f;
+        Game.player.forceLookSpeed = 50f;
         Game.player.targetToForcelyLookAt = EndingForceLook[ForceLookTargetInt];
         Game.player.transform.position = EndingTransformTP[ForceLookTargetInt].transform.position + Vector3.up * Game.player.height;
         Game.player.titlecard = true;
@@ -140,6 +150,7 @@ public class EndingManager : MonoBehaviour
         LoadNormalResults(secretEnd);
         Game.player.isForcedToLook = false;
         Game.player.hud.SetActive(true);
+        ExtremeForceLook = false;
         yield return null;
     }
     public void LoadNormalResults(bool secret = false)
@@ -240,7 +251,7 @@ public class EndingManager : MonoBehaviour
 
     #region SerializedFields
     [Header("Ending References")]
-    [SerializeField] private Transform SecretWallText;
+    public Transform SecretWallText;
     [SerializeField] private Transform[] EndingTransformTP,EndingForceLook;
     [SerializeField] private Billboard[] EndingBillObj;
     [SerializeField] private AudioManagerLiveReaction[] EndingAudiSource;
@@ -252,7 +263,7 @@ public class EndingManager : MonoBehaviour
     #region PublicFields
     [Header("Ending Detection")]
     public bool GetResults;
-    public bool GetSecret,movething;
+    public bool GetSecret,movething,ExtremeForceLook;
     #endregion
 
     #region PrivateFields
