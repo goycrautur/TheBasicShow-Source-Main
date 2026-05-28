@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BaseNetheriteWindPreset
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 9b4752ae747094a4187c18c5083912a8,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: durability
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CreateParticles
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: particlPrefab.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: particlPrefab.Array.data[0]
+    value: 
+    objectReference: {fileID: 2364439708341662873, guid: dcdfa3443b806e64a82aec2664ef4d7a,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: particlPrefab.Array.data[1]
+    value: 
+    objectReference: {fileID: 1248687123021525828, guid: a8a4e83937d571b4ab0e22d4e250a200,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: normalWinMats.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: normalWinMats.Array.data[0]
+    value: 
+    objectReference: {fileID: 2100000, guid: c8174b936002ff64f8c5995d19e2e5e3, type: 2}
+  - target: {fileID: 0}
+    propertyPath: normalWinMats.Array.data[1]
+    value: 
+    objectReference: {fileID: 2100000, guid: c8174b936002ff64f8c5995d19e2e5e3, type: 2}
+  - target: {fileID: 0}
+    propertyPath: normalWinMats.Array.data[2]
+    value: 
+    objectReference: {fileID: 2100000, guid: 779e497acb37b8e4ca4c6f70a7b0e237, type: 2}
+  - target: {fileID: 0}
+    propertyPath: normalWinMats.Array.data[3]
+    value: 
+    objectReference: {fileID: 2100000, guid: 779e497acb37b8e4ca4c6f70a7b0e237, type: 2}
+  - target: {fileID: 0}
+    propertyPath: sounds.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sounds.Array.data[0]
+    value: 
+    objectReference: {fileID: 11400000, guid: 9eaaf9af8ce624842931035951496074, type: 2}
+  - target: {fileID: 0}
+    propertyPath: sounds.Array.data[1]
+    value: 
+    objectReference: {fileID: 11400000, guid: 4e6232d61e2861d4cb99e19c02e32695, type: 2}
+  - target: {fileID: 0}
+    propertyPath: crackWinEnable
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: crackParticlPrefab
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: crackParticlPrefabArra.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.size
+    value: 9
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[0]
+    value: 
+    objectReference: {fileID: 2800000, guid: 21f49d00431009d45a0bc25171e0ed2f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[1]
+    value: 
+    objectReference: {fileID: 2800000, guid: f2a6d51f4d06ebd43b108d22cb7fff43, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[2]
+    value: 
+    objectReference: {fileID: 2800000, guid: 928f868cc53255140af61df2431a0146, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[3]
+    value: 
+    objectReference: {fileID: 2800000, guid: 80d35d1ea3788b747945321020d60455, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[4]
+    value: 
+    objectReference: {fileID: 2800000, guid: a8a226756de20e04296bbd440b180b20, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[5]
+    value: 
+    objectReference: {fileID: 2800000, guid: 179d9431a60a7954c88541eb14dc7344, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[6]
+    value: 
+    objectReference: {fileID: 2800000, guid: 99cd5b0ebbb18374c955a49177473aed, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[7]
+    value: 
+    objectReference: {fileID: 2800000, guid: 4d011abcb2fffb34793733497004b976, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cracWindowTextur.Array.data[8]
+    value: 
+    objectReference: {fileID: 2800000, guid: b570dae761abe67469b2984c490050a9, type: 3}
+  - target: {fileID: 0}
+    propertyPath: uniqueCrackSound
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: CrackedWindowSounds
+    value: 
+    objectReference: {fileID: 11400000, guid: a45ce7bb42cec9d459976aae7f388c89, type: 2}
+  - target: {fileID: 0}
+    propertyPath: CrackedWindowSoundsButItsAnArray.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

@@ -19,13 +19,19 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
     public bool UseCustomBoxCollider = false;
     [Header("\nmain stuff\n")]
     public WindowData WinData;
+    private Texture Window_unbroken,Window_broken;
     public void Start()
     {
         audioDevice = GetComponent<AudioManagerLiveReaction>();
         durability = WinData.durability;
         ogDurability = WinData.durability;
+        Window_unbroken = WinData.normalWinMats[0].GetTexture("_SecondTex");
+        Window_broken = WinData.normalWinMats[2].GetTexture("_SecondTex");
         window_In.material = WinData.normalWinMats[0];
         window_Out.material = WinData.normalWinMats[1];
+        window_In.material.SetInt("_UseGlitch", 1);
+        window_Out.material.SetInt("_UseGlitch", 1);
+        
     }
     public void SetWindowState(bool sound = false, float soundval = 0, float soundvalCracke = 0, int howmanyduraLost = 0, bool setdura = false, int DuraSet = 1)
     {
@@ -34,6 +40,10 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
         if (durability < 0) durability = 0;
         if (durability == 0)
         {
+            meshCollider_In.enabled = false;
+            meshCollider_Out.enabled = false;
+            windoIcon1.SetActive(false);
+            windoIcon2.SetActive(false);
             broken = true;
             if (sound)
             {
@@ -42,41 +52,52 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             }
             if (WinData.sounds[0] != null) audioDevice.PlaySingleClip(WinData.sounds[0]);
             else Debug.Log($"le sounds data array number 1 (broken window sound object) is null!!!! go assign it dumbass");
-            if (WinData.normalWinMats[2] != null) window_In.material = WinData.normalWinMats[2];
+            if (Window_broken != null) 
+            {
+                window_In.material.SetTexture("_SecondTex", Window_broken);
+                window_Out.material.SetTexture("_SecondTex", Window_broken);
+            }
+            else Debug.Log("the broken window texture is NULL, how did this happened wawa...????");
+            /*if (WinData.normalWinMats[2] != null) window_In.material = WinData.normalWinMats[2];
             else Debug.Log($"le normalwinmats data array 3 (broken window side 1) is null!!!! go assign it dumbass");
             if (WinData.normalWinMats[3] != null) window_Out.material = WinData.normalWinMats[3];
-            else Debug.Log($"le normalwinmats data array 4 (broken window side 2) is null!!!! go assign it dumbass");
-            meshCollider_In.enabled = false;
-            meshCollider_Out.enabled = false;
-            windoIcon1.SetActive(false);
-            windoIcon2.SetActive(false);
-            broken = true;
+            else Debug.Log($"le normalwinmats data array 4 (broken window side 2) is null!!!! go assign it dumbass");*/
             if (WinData.particlPrefab[0] != null) Instantiate(WinData.particlPrefab[0], transform.position, Quaternion.identity);
             else Debug.Log($"le particle Prefab data array 1 (broken window particle prefab) is null!!!! go assign it dumbass");
             
         }
-        if (durability >= 1)
+        else if (durability >= 1)
         {
+            meshCollider_In.enabled = true;
+            meshCollider_Out.enabled = true;
+            windoIcon1.SetActive(true);
+            windoIcon2.SetActive(true);
             broken = false;
             if (sound)
             {
                 foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
+            if (durability == ogDurability)
+            {
+                if (WinData.sounds[1] != null) audioDevice.PlaySingleClip(WinData.sounds[1]);
+                else Debug.Log($"le sounds data array number 2 (window repair sound object) is null!!!! go assign it dumbass");
+                /*if (WinData.normalWinMats[0] != null) window_In.material = WinData.normalWinMats[0];
+                else Debug.Log($"le normalwinmats data array 1 (normal window side 1) is null!!!! go assign it dumbass");
+                if (WinData.normalWinMats[1] != null) window_Out.material = WinData.normalWinMats[1];
+                else Debug.Log($"le normalwinmats data array 2 (normal window side 2) is null!!!! go assign it dumbass");*/
+                if (Window_unbroken != null) 
+                {
+                    window_In.material.SetTexture("_SecondTex", Window_unbroken);
+                    window_Out.material.SetTexture("_SecondTex", Window_unbroken);
+                }
+                else Debug.Log("the unbroken window texture is NULL, how did this happened wawa...????");
+                if (WinData.particlPrefab[1] != null) Instantiate(WinData.particlPrefab[1], transform.position, Quaternion.identity);
+                else Debug.Log($"le particle Prefab data array 2 (window repair particle prefab) is null!!!! go assign it dumbass");
+            }
             if (WinData.crackWinEnable)
             {
-                if (durability == ogDurability)
-                {
-                    if (WinData.sounds[1] != null) audioDevice.PlaySingleClip(WinData.sounds[1]);
-                    else Debug.Log($"le sounds data array number 2 (window repair sound object) is null!!!! go assign it dumbass");
-                    if (WinData.normalWinMats[0] != null) window_In.material = WinData.normalWinMats[0];
-                    else Debug.Log($"le normalwinmats data array 1 (normal window side 1) is null!!!! go assign it dumbass");
-                    if (WinData.normalWinMats[1] != null) window_Out.material = WinData.normalWinMats[1];
-                    else Debug.Log($"le normalwinmats data array 2 (normal window side 2) is null!!!! go assign it dumbass");
-                    if (WinData.particlPrefab[1] != null) Instantiate(WinData.particlPrefab[1], transform.position, Quaternion.identity);
-                    else Debug.Log($"le particle Prefab data array 2 (window repair particle prefab) is null!!!! go assign it dumbass");
-                }
-                else if (durability != ogDurability)
+                if (durability != ogDurability)
                 {
                     if (!WinData.uniqueCrackSound)
                     {
@@ -93,22 +114,32 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
                         else Debug.Log($"le crack Particle Prefab data array {durability} is null!!!! go assign it dumbass");
                     }
                 }
-                window_In.material = WinData.cracWindowMatsSide1[durability];
-                window_Out.material = WinData.cracWindowMatsSide2[durability];
+                if (WinData.cracWindowTextur[durability-1] != null) 
+                {
+                    window_In.material.SetTexture("_SecondTex", WinData.cracWindowTextur[durability-1]);
+                    window_Out.material.SetTexture("_SecondTex", WinData.cracWindowTextur[durability-1]);
+                }
+                else Debug.Log($"le cracked window texture data array {durability-1} is null!!!! go assign it dumbass");
             }
             else
             {
                 if (WinData.sounds[0] != null) audioDevice.PlaySingleClip(WinData.sounds[0]);
                 else Debug.Log($"le sounds data array number 1 (broken window sound object) is null!!!! go assign it dumbass");
             }
-            meshCollider_In.enabled = true;
-            meshCollider_Out.enabled = true;
-            windoIcon1.SetActive(true);
-            windoIcon2.SetActive(true);
         }
     }
     public void Update()
     {
+        window_In.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
+        window_In.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        window_In.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
+        window_In.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
+        window_In.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
+        window_Out.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
+        window_Out.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        window_Out.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
+        window_Out.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
+        window_Out.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
         this.gameObject.layer = broken ? LayerMask.NameToLayer("Ignore Raycast") : LayerMask.NameToLayer("Windows");
         if (GameControllerScript.Instance.mode != "famished" && GameControllerScript.Instance.mode != "zerullclassic")
         {
@@ -135,17 +166,19 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             }
             this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
+
+
+        //sonium 
     }
     public void OnTriggerEnter(Collider play)
     {
-        if (broken && play.CompareTag("Player") & !GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)
-        {
-            //DamagPlaye(UnityEngine.Random.Range(0,2));
-        }
+        if (broken && play.CompareTag("Player") & !GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard) DamagPlaye(UnityEngine.Random.Range(0,2));
     }
     public void DamagPlaye(int rando)
     {
-        if (rando == 1) GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, UnityEngine.Random.Range(0,5), 1f, false, true, false);
+        string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
+        int RandomRangeMult = dific == "easy" ? 0 : dific == "normal" ? 1 : dific == "hard" ? 2 : dific == "expert" ? 3 : dific == "maniac" ? 4 : 1;
+        if (rando == 1) GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, (int)UnityEngine.Random.Range(1,5*RandomRangeMult), 1f, false, true, false);
     }
 
     private AudioManagerLiveReaction audioDevice;

@@ -174,6 +174,13 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) Singleton<VertexGlitchManager>.Instance.Glitch();
         if (FlashLight && Input.GetKeyDown(KeyCode.F)) isFlashlightOn = !isFlashlightOn;
         if (Input.GetKeyDown(KeyCode.T)) Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
+        if (Input.GetKeyDown(KeyCode.U)) 
+        {
+            foreach (basicshowWindowScript wind in FindObjectsOfType<basicshowWindowScript>()) 
+            {
+                if (wind.broken) wind.SetWindowState(false,0f,0f,0,true,wind.ogDurability);
+            }
+        }
     }
     #endregion
 

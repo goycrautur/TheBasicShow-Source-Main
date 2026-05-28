@@ -30,19 +30,15 @@ public class PlayerScript : MonoBehaviour
 	#endregion
 	public void randomAssStufV2()
     {
-		titlecardtotem = false;
+		foreach (NPC npcKys in FindObjectsOfType<NPC>()) Physics.IgnoreCollision(cc, npcKys.cecil, ignore: true);
 		AdditionalGameCustomizer.Instance.ReworkedCurrency = false;
-		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
-		{
-			if (ItemManager.Instance.Inventory[i].ItemID == 31)titlecardtotem = true;
-			if (ItemManager.Instance.Inventory[i].ItemID == 34)AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
-		}
 		if (Iframes > 0)Iframes -= Time.deltaTime;
         runSpeed = DefaultRunSpeed * runSpeedMultipler;
 		walkSpeed = DefaultWalkSpeed * walkSpeedMultipler;
 		staminaDrop = DefaultstaminaDrop * staminaDropMultiple;
 		staminaRise = DefaultstaminaRise * staminaRiseMultiple;
 		if (!IgnoreHpLimit)if (health > maxHealth)health = maxHealth;
+		if (health < 0)health = 0;
 		if (invisi || invisichalk)
 		{
 			foreach (JumpRopeScript jumpro in jumpropes)if (jumpro != null)jumpro.End(false);
@@ -52,12 +48,23 @@ public class PlayerScript : MonoBehaviour
 		else HudManager.Instance.colorVarSetter(true);
 		if (breakwindow) breakwind();
 		if (door.lockTime > 0f) ResetGuilt("escape", 1f);
+		if (DeathCountdown) 
+		{
+			timerTillDeath -= Time.deltaTime;
+			movementLocked = true;
+			invisi = true;
+		}
+		if (timerTillDeath <= 0 && DeathCountdown) DeathStuff(); 
+		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+		{
+			//if (ItemManager.Instance.Inventory[i].ItemID == 34 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "wallet_item") 
+			if (ItemManager.Instance.Inventory[i].ItemID == 34) AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
+		}
     }
-	private IEnumerator summonGaug()
+	private IEnumerator summonGaugTotem(Sprite textur)
 	{
 		float time = 10f;
-		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.invincibl, 10f);
-		titlecardtotem = false;
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(textur, 10f);
 		while (time > 0f)
 		{
 			time -= Time.deltaTime;
@@ -71,9 +78,26 @@ public class PlayerScript : MonoBehaviour
 		totemParticl.SetActive(false);
 		yield break;
 	}
+	public IEnumerator summonGauges(Sprite textur,float duration)
+	{
+		float time = duration;
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(textur, 10f);
+		while (time > 0f)
+		{
+			time -= Time.deltaTime;
+			if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
+			{
+				newGauge.Set(10f, time);
+				yield return null;
+			}
+		}
+		newGauge.Hide();
+		yield break;
+	}
+
 	public void totemshit(bool consumetotem = true)
 	{
-		StartCoroutine(summonGaug());
+		StartCoroutine(summonGaugTotem(AdditionalGameCustomizer.Instance.invincibl));
 		TotemAnimator.Rebind();
 		TotemAnimator.Play("toteOfUndyused", -1, 0f);
 		totemParticl.SetActive(true);
@@ -95,6 +119,8 @@ public class PlayerScript : MonoBehaviour
 	#region Initialization
 	private void InitializeSettings()
 	{
+		timerTillDeath = 1f;
+		DeathCountdown = false;
 		sensitivityActive = PlayerPrefs.GetInt("AnalogMove") == 1;
 		height = transform.position.y;
 		stamina = maxStamina;
@@ -136,6 +162,45 @@ public class PlayerScript : MonoBehaviour
 		if (!isForcedToLook) MouseMove();
 		else HandleForcedLook();
 	}
+	public void PushPlayer(Vector3 pushDirection, float pushForce, float duration)
+	{
+		if (pushCoroutine != null)
+        {
+            StopCoroutine(pushCoroutine);
+			pModManag.movementModifiers.Remove(PushSpeedMod);
+            pushCoroutine = null;
+        }
+		pushCoroutine = StartCoroutine(PlayerPushSmooth(pushDirection, pushForce, duration));
+	}
+	public Vector3 GetPlayerPushDirection(Vector3 OtherPosition)
+	{
+		Vector3 pushDirection = (transform.position - OtherPosition).normalized;
+		return pushDirection;
+	}
+	private IEnumerator PlayerPushSmooth(Vector3 pushDirection, float pushForce, float duration)
+    {
+        pushDirection.y = 0f;
+        pushDirection.Normalize();
+
+        float elapsed = 0f;
+        float currentSpeed = pushForce;
+		//Debug.Log($"Push Position: {pushDirection}");
+		//Debug.Log($"Push Force: {pushForce}");
+		
+		pModManag.movementModifiers.Add(PushSpeedMod);
+        while (elapsed < duration)
+        {
+			
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            float speed = Mathf.Lerp(currentSpeed, 0f, t);
+            Vector3 move = pushDirection * speed * Time.deltaTime;
+			PushSpeedMod.movementAddend = move;
+			cc.Move(move);
+            yield return null;
+        }
+		pModManag.movementModifiers.Remove(PushSpeedMod);
+    }
 
 	private void MouseMove()
 	{
@@ -313,19 +378,43 @@ public class PlayerScript : MonoBehaviour
 			_ = 136f + (healthPending - 100f) / 100f * 7f;
 		}
 		healthbar.value = Mathf.MoveTowards(healthbar.value, health / maxHealth * 100f, 50f * Time.deltaTime * 6f);
-		if (health <= 0f)
+		if (health <= 0f && !DeathCountdown) 
 		{
-			if (!titlecardtotem)
-			{
-				gameOver = true;
-				RenderSettings.skybox = blackSky;
-				StartCoroutine(KeepTheHudOff());
-			}
-			if (titlecardtotem)
-			{
-				totemshit();
-			}
+			DeathCountdown = true;
+			timerTillDeath = 5f;
+			CameraScript.Instance.MoveCamRotationY(435f,2f);
+			Iframes = 9999f;
+			for (int i = 0; i < ItemManager.Instance.ItemCanvasGroup.Length; i++) ItemManager.Instance.ItemCanvasGroup[i].alpha = 0.25f;
+			return;
 		}
+		else if (timerTillDeath <= 0f)DeathCountdown = false;
+	}
+	private void DeathStuff()
+	{
+		CameraScript.Instance.ResetCamRotationY();
+		for (int i = 0; i < ItemManager.Instance.ItemCanvasGroup.Length; i++) ItemManager.Instance.ItemCanvasGroup[i].alpha = 1f;
+		Iframes = 0f;
+		bool TotemCheck = false;
+		bool AidsKitCheck = false;
+		DeathCountdown = false;
+		movementLocked = false;
+		invisi = false;
+		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+		{
+			//if (ItemManager.Instance.Inventory[i].ItemID == 31 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "totemOfUndying") TotemCheck = true;
+			if (ItemManager.Instance.Inventory[i].ItemID == 31) TotemCheck = true;
+		}
+		if (!TotemCheck && !AidsKitCheck)
+		{
+			GameoverStuff();
+		}
+		else if (TotemCheck) totemshit();
+	}
+	public void GameoverStuff()
+	{
+		gameOver = true;
+		RenderSettings.skybox = blackSky;
+		StartCoroutine(KeepTheHudOff());
 	}
 
 	private void SliderCustomization()
@@ -416,20 +505,9 @@ public class PlayerScript : MonoBehaviour
 		killedbybaldi = false;
 		killedbyfamished = false;
 		killedbyhim = false;
-		
-		if (Iframes > 0f && !ignoreIframes)
-		{
-			return;
-		}
-		if (!dontResetIframes)
-		{
-			Iframes = invinciframes;
-		}
-
-		if (fashionevalue < 0f)
-			{
-				fashionevalue = 0f;
-			}
+		if (Iframes > 0f && !ignoreIframes || timerTillDeath >= 0f && DeathCountdown)return;
+		if (!dontResetIframes)Iframes = invinciframes;
+		if (fashionevalue < 0f) fashionevalue = 0f;
 		if (playrandomizedPresetSound)
 		{
 
@@ -463,18 +541,9 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.name == "OfficeTrigger")
-		{
-			alsoInOffice = true;
-		}
-		if (other.CompareTag("porta"))
-		{
-			StartCoroutine(GameControllerScript.Instance.funnyportal());
-		}
-		if (other.CompareTag("lapporta"))
-		{
-			StartCoroutine(GameControllerScript.Instance.LapManag.LapPortal());
-		}
+		if (other.transform.name == "OfficeTrigger")alsoInOffice = true;
+		if (other.CompareTag("porta"))StartCoroutine(GameControllerScript.Instance.funnyportal());
+		if (other.CompareTag("lapporta"))StartCoroutine(GameControllerScript.Instance.LapManag.LapPortal());
 	}
 
 	private void OnTriggerStay(Collider other)
@@ -507,26 +576,11 @@ public class PlayerScript : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.transform.name == "Gotta Sweep")
-		{
-			sweeping = false;
-		}
-		if (other.transform.name == "1945 tom")
-		{
-			sweeping = false;
-		}
-		else if (other.transform.name == "1st Prize")
-		{
-			hugging = false;
-		}
-		else if (other.transform.name == "washingmachine")
-		{
-			hugging = false;
-		}
-		if (other.name == "OfficeTrigger")
-		{
-			alsoInOffice = false;
-		}
+		if (other.transform.name == "OfficeTrigger")alsoInOffice = false;
+		if (other.transform.name == "Gotta Sweep")sweeping = false;
+		if (other.transform.name == "1945 tom")sweeping = false;
+		if (other.transform.name == "1st Prize")hugging = false;
+		if (other.transform.name == "washingmachine")hugging = false;
 	}
 
 	public IEnumerator KeepTheHudOff()
@@ -574,7 +628,7 @@ public class PlayerScript : MonoBehaviour
 	public Transform PlayerTransform,targetToForcelyLookAt;
 	public GameObject hud;
 	[SerializeField] private Material blackSky;
-	[SerializeField] private CameraScript CamCam;
+	public CameraScript CamCam;
 	[SerializeField] private float staminaRate;
 	private int audVal;
 
@@ -599,10 +653,10 @@ public class PlayerScript : MonoBehaviour
 
 	[Header("Stamina & Player Settings")]
 	public bool sweeping;
-	public bool breakwindow, train, titlecardtotem,isactuallyusingboots,OverridePlayerSpeed,OverridePlayerRange;
+	public bool breakwindow, train,isactuallyusingboots,OverridePlayerSpeed,OverridePlayerRange,DeathCountdown;
 	public int principalBugFixer;
 	public string guiltType;
-	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f;
+	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f,timerTillDeath;
 	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar;
 	public Vector3 frozenPosition;
 
@@ -618,11 +672,8 @@ public class PlayerScript : MonoBehaviour
 	public float sensitivity, playerSpeed,curgrav = 1f;
 	public Vector3 moveDirection, secondaryMovementVelocity;
 	private GameObject GameSet;
-
-
-
-
-
+	private Coroutine pushCoroutine;
+	private MovementModifier PushSpeedMod = new MovementModifier(default(Vector3), 0f);
 	public float carfuel,maxcarfuel;
 	private Gauge CargaugeReal;
 	private MovementModifier thosewhoSpeed;

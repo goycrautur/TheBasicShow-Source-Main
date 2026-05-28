@@ -391,22 +391,14 @@ public class FamishedModeController : MonoBehaviour
     public IEnumerator WhatHaveYouDone()
     {
         funnyaudiotuff.ClearQueue(true);
-        funnyaudiotuff.PlaySingleClip(wierd);
+        funnyaudiotuff.QueueAudio(wierd);
         angerMultipler = 0.001f;
         yield return new WaitForSeconds(wierd.audClip.length);
-        angerMultipler = 0.5f;
-        funnyaudiotuff.ClearQueue(true);
-        funnyaudiotuff.PlaySingleClip(specialLmsIntro);
-        StartCoroutine(easing(new Color(1f, 0f, 0f, 1f), 0, 1, 0));
-        yield return new WaitForSeconds(specialLmsIntro.audClip.length);
-        CameraScript.Instance.TempShakeAmount += 0.2f;
-        AdditionalGameCustomizer.Instance.FovAmmount -= 125f;
-        AdditionalGameCustomizer.Instance.FovAmmount += 125f;
         angerMultipler = 1.25f;
-        StartCoroutine(easing(new Color(0.2f, 0.2f, 0.2f, 1f), 0, 1, 0));
+        StartCoroutine(easing(new Color(0.25f, 0.25f, 0.25f, 1f), 0, 1, 1));
         funnyaudiotuff.ClearQueue(true);
         funnyaudiotuff.SetLoop(true);
-        funnyaudiotuff.PlaySingleClip(specialLmsLoop);
+        funnyaudiotuff.QueueAudio(specialLmsLoop);
         
     }
     public IEnumerator zoomtiem()
@@ -445,7 +437,7 @@ public class FamishedModeController : MonoBehaviour
     
     [Header("oh boy")]
     public AudioObjectyeah puppyplay;
-    public AudioObjectyeah wierd,whuh,specialLmsIntro,specialLmsLoop;
+    public AudioObjectyeah wierd,whuh,specialLmsLoop;
     public bool specialLmsToggle,specialLmsToggle2,frameCountShit,forceupdatelight,onetime,stopbouncezoom;
     public enum SpecialLMSEventType {wallshake,normal,camfuck,lightingChange};
     public float lmsFrame;

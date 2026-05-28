@@ -7,31 +7,44 @@ public class CameraScript : MonoBehaviour
     {
         Instance = this;
     }
-    private void Start() => offset = transform.position - player.transform.position;
+    private void Start()
+    {
+        offset = transform.position - player.transform.position;
+        CamYVal = 0f;
+        camRotatYSpeed = 3f;
+    }
 
     private void Update()
     {
-        if (!ps.gc.KF.gamePaused)
-        {
-            lookBehind = Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? 180 : 0;
-        }
+        if (!ps.gc.KF.gamePaused) lookBehind = Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? 180 : 0;
         jumpfloatThing = player.transform.position.y;
-        if(TempShakeAmount > 0f)
-        {
-			TempShakeAmount -= Time.deltaTime;
-        }
-		else
-        {
-			TempShakeAmount = 0f;
-        }
+        if(TempShakeAmount > 0f) TempShakeAmount -= Time.deltaTime;
+		else TempShakeAmount = 0f;
+        CamYVal = Mathf.Lerp(CamYVal, CamRotatYVal, camRotatYSpeed * Time.deltaTime);
+        
     }
+    public void MoveCamRotationY(float valu,float speed = 3f)
+    {
+        CamRotatYVal = valu;
+        camRotatYSpeed = speed;
+    }
+    public void ResetCamRotationY()
+    {
+        CamRotatYVal = 0f;
+        camRotatYSpeed = 3f;
+    }
+    
 
     private void LateUpdate()
     {
-        Vector3 shake = new Vector3(Random.Range(-ShakeAmount + -TempShakeAmount, ShakeAmount + TempShakeAmount), Random.Range(-ShakeAmount + -TempShakeAmount, ShakeAmount + TempShakeAmount), Random.Range(-ShakeAmount + -TempShakeAmount, ShakeAmount + TempShakeAmount));
+        float shakeAmmouMin = -ShakeAmount + -TempShakeAmount; 
+        float shakeAmmouMax = ShakeAmount + TempShakeAmount; 
+        Vector3 OneHellOfAnVector3 = new Vector3(player.transform.position.x, jumpfloatThing,player.transform.position.z);
+        Vector3 shake = new Vector3(Random.Range(shakeAmmouMin, shakeAmmouMax), Random.Range(shakeAmmouMin,shakeAmmouMax), Random.Range(shakeAmmouMin,shakeAmmouMax));
         if (!ps.gameOver)
         {
-            transform.SetPositionAndRotation(new Vector3(player.transform.position.x, jumpfloatThing,player.transform.position.z) + offset + shake + Vector3.zero, player.transform.rotation * Quaternion.Euler(0f, lookBehind, 0f));
+            Xraycam.SetPositionAndRotation(OneHellOfAnVector3 + offset + shake + Vector3.zero, player.transform.rotation * Quaternion.Euler(CamYVal, lookBehind, 0f));
+            transform.SetPositionAndRotation(OneHellOfAnVector3 + offset + shake + Vector3.zero, player.transform.rotation * Quaternion.Euler(CamYVal, lookBehind, 0f));
         }
         else
         {
@@ -61,13 +74,11 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private float GameOverOffset;
     public Vector3 offset;
     public Camera MainCamera,XrayCamera;
+    public Transform Xraycam;
 
     [Header("Jump Rope Physics")]
     [SerializeField] private float initVelocity, velocity, gravity;
-    public float jumpfloatThing = 4.88f;
-    public float ShakeAmount;
-	public float TempShakeAmount;
-    
+    public float jumpfloatThing = 4.88f,TempShakeAmount,ShakeAmount,CamYVal,CamRotatYVal,camRotatYSpeed;
 
     [Header("Baldi References")]
     [SerializeField] private Transform baldi;

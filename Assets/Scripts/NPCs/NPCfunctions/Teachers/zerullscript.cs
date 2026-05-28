@@ -133,6 +133,8 @@ public class zerullscript : NPC
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 0.75f, false, true, false);
 				gc.player.killedbyhim = true;
+                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 256f, 1f);
+                PushNpc(GetNPCPushDirection(gc.player.CamCam.transform.forward),32f, 1f);
 			}
         }
     }

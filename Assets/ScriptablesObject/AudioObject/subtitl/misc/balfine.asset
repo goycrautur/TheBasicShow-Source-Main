@@ -18,7 +18,7 @@ MonoBehaviour:
     headText: hi i was too lazy to make this timed ok
     isit3d: 0
     IgnoreTimescale: 0
-    twoDeePosition: {x: 0, y: 0, z: 0}
+    twoDeePosition: {x: 0, y: 50, z: 0}
     duration: 0
     colorMode: 0
     textColor: {r: 0, g: 1, b: 0, a: 1}

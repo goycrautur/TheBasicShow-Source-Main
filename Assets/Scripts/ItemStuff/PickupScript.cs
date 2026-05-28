@@ -95,7 +95,12 @@ public class PickupScript : Interactable
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
         {
             GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.MoneyCollect);
-            AdditionalGameCustomizer.Instance.Cash += 0.25;
+            if (!DroppedItem)AdditionalGameCustomizer.Instance.Cash += 0.25;
+            else
+            {
+                BaseItem orgigItem = GetHeldInstance();
+                AdditionalGameCustomizer.Instance.Cash += (double)0.25f * orgigItem.Uses;
+            }
             if (killafterpickup) Destroy(gameObject);
             if (!killafterpickup)
             {

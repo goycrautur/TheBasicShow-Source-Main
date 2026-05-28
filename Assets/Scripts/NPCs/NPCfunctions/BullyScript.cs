@@ -116,7 +116,7 @@ public class BullyScript : MonoBehaviour
 
     private void HandlePlayerPush(Collider playerCollider)
     {
-        PlayerScript playerScript = playerCollider.GetComponent<PlayerScript>();
+        PlayerScript playerScript = GameControllerScript.Instance.player;
         if (playerScript.bootsActive && ItemManager.Instance.HasNoItems()) return;
 
         bool hasItems = false;
@@ -132,13 +132,9 @@ public class BullyScript : MonoBehaviour
 
         if (!hasItems)
         {
-            if (!audioDevice.audioDevice.isPlaying) 
-            {
-                audioDevice.ClearQueue(true);
-                audioDevice.PlaySingleClip(aud_Denied);
-            }
-            Vector3 pushDirection = (playerCollider.transform.position - transform.position).normalized;
-            pushCoroutine = StartCoroutine(SmoothPushBack(playerCollider.transform, pushDirection, 16f, 16f / 32f));
+            audioDevice.ClearQueue(true);
+            audioDevice.PlaySingleClip(aud_Denied);
+            playerScript.PushPlayer(playerScript.GetPlayerPushDirection(transform.position), 16f, 0.5f);
         }
         else
         {
@@ -153,37 +149,6 @@ public class BullyScript : MonoBehaviour
             audioDevice.PlaySingleClip(aud_Thanks[num2]);
             Reset();
         }
-    }
-
-    public void StopPushingPlayer()
-    {
-        if (pushCoroutine != null)
-        {
-            StopCoroutine(pushCoroutine);
-            pushCoroutine = null;
-        }
-    }
-
-    private IEnumerator SmoothPushBack(Transform playerTransform, Vector3 pushDirection, float pushDistance, float duration)
-    {
-        pushDirection.y = 0f;
-        pushDirection.Normalize();
-
-        Vector3 startPosition = playerTransform.position;
-        Vector3 targetPosition = startPosition + pushDirection * pushDistance;
-        float elapsedTime = 0f;
-
-        if (Physics.Raycast(startPosition, pushDirection, out RaycastHit hit, pushDistance)) targetPosition = hit.point - pushDirection * 0.1f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / duration;
-            playerTransform.position = Vector3.Lerp(startPosition, targetPosition, t);
-            yield return null;
-        }
-
-        playerTransform.position = targetPosition;
     }
     #endregion
 
@@ -212,6 +177,5 @@ public class BullyScript : MonoBehaviour
     [SerializeField] private AudioObjectyeah aud_Denied, aud_Bored;
 
     private AudioManagerLiveReaction audioDevice;
-    private Coroutine pushCoroutine;
     #endregion
 }

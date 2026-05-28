@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cabbit
   m_EditorClassIdentifier: 
   audClip: {fileID: 8300000, guid: cc595373b367fd744bbaa1d20773add3, type: 3}
-  volume: 1
+  volume: 0.6
   SoundTypeWahh: 6
   HasSubtitle: 0
   ForcedSetAudiomixer: {fileID: 0}

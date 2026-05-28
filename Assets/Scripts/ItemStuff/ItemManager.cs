@@ -3,8 +3,10 @@ using System;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.Events;
 public class ItemManager : MonoBehaviour
 {
     #region Singleton & Initialization
@@ -14,20 +16,63 @@ public class ItemManager : MonoBehaviour
         IndexItems();
     }
     #endregion
+    public IEnumerator ButterfingersEffect(float duration)
+	{
+        for (int i = 0; i < ItemCanvasGroup.Length; i++)
+        {
+            while (ItemCanvasGroup[i].alpha > 0.5f)
+            {
+                ItemCanvasGroup[i].alpha -= Time.deltaTime;
+            }
+        }
+		float time = duration;
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(buttfingStatus, 10f);
+		while (duration > 0f)
+		{
+            ButterFingered = true;
+			duration -= Time.deltaTime;
+			if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
+			{
+				newGauge.Set(10f, time);
+				yield return null;
+			}
+		}
+        ButterFingered = false;
+		newGauge.Hide();
+        for (int i = 0; i < ItemCanvasGroup.Length; i++)
+        {
+            while (ItemCanvasGroup[i].alpha < 1f)
+            {
+                ItemCanvasGroup[i].alpha += Time.deltaTime;
+                yield return null;
+            }
+            ItemCanvasGroup[i].alpha = 1f;
+        }
+		yield break;
+	}
+    public void Butterfingers(float duration)
+    {
+        StartCoroutine(ButterfingersEffect(duration));
+    }
 
     #region Input Handling
     private void Update()
     {
         if (Time.timeScale == 0) return;
-        bool hisquidward= false;
-        if (GameControllerScript.Instance.SlotsAmmount == 0)
+        for (int i = 0; i < Inventory.Length; i++) 
         {
-            hisquidward = true;
+            if (Inventory[i].ItemInstance != null && Inventory[i].ItemInstance.MultiUseMaxUsesCap > 1) 
+            {
+                Inventory[i].ItemStacksText.text = $"{Inventory[i].ItemInstance.Uses}/{Inventory[i].ItemInstance.MultiUseMaxUsesCap}";
+            }
+            else Inventory[i].ItemStacksText.text = "";
         }
-        ItemNameText.enabled = !hisquidward;
-        ItemInfoText.enabled = !hisquidward;
-        theRestOfTheItemInfo.SetActive(!hisquidward);
-        if (hisquidward) return;
+        bool hisquidward= false;
+        if (GameControllerScript.Instance.SlotsAmmount == 0) hisquidward = true;
+        ItemNameText.enabled = !hisquidward || GameControllerScript.Instance.player.DeathCountdown;
+        ItemInfoText.enabled = !hisquidward || GameControllerScript.Instance.player.DeathCountdown;
+        theRestOfTheItemInfo.SetActive(!hisquidward || GameControllerScript.Instance.player.DeathCountdown);
+        if (hisquidward || GameControllerScript.Instance.player.DeathCountdown) return;
 
         for (int i = 0; i < KeyIndex.Length; i++)
         {
@@ -44,6 +89,11 @@ public class ItemManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) || Singleton<InputManager>.Instance.GetActionKey(InputAction.UseItem))
         {
+            if (ButterFingered)
+            {
+                if (ButterFingersUnityEvent !=null) ButterFingersUnityEvent.Invoke();
+                return;
+            }
             int CurrItem = GetSelectedItem();
             bool ShouldDestroy = ExecuteItem(CurrItem);
             BaseItem SelectedItemObject = GetSelectedItemObject();
@@ -258,16 +308,12 @@ public class ItemManager : MonoBehaviour
     public void UpdateItemUI()
     {
         BaseItem SelectedItem = GetSelectedItemObject();
-        for (int i = 0; i < Inventory.Length; i++) Inventory[i].ItemImageBGs.color = Color.white;
+        for (int i = 0; i < Inventory.Length; i++) Inventory[i].ItemImageBGs.color = new Color(0.7f, 0.7f, 0.7f, 1f);
         ItemNameText.text = $"{SelectedItem.Name}";
         ItemInfoText.text = $"{SelectedItem.ItmInfoText}";
-
-        if (SelectedItem.Uses > 1)
-        {
-            ItemNameText.text += $" ({SelectedItem.Uses})";
-        }
+        
         ItemNameIdCheck();
-
+        
         Inventory[ItemSelection].ItemImageBGs.color = SelectionColor;
         Singleton<OtherMainStuffManager>.Instance.UpdateAltInventory();
         //ItemHoldImage.texture = SelectedItem.SmallSprite;
@@ -398,8 +444,7 @@ public class ItemManager : MonoBehaviour
             Inventory[index].ItemInstance = NewInstance.GetComponent<BaseItem>();
         }
     }
-
-    public void CollectItem(int ItemID, BaseItem instance = null)
+    public void SimplifiedItemCollect(int ItemID, BaseItem instance = null)
     {
         if (GetSelectedItem() == 0)
         {
@@ -420,6 +465,46 @@ public class ItemManager : MonoBehaviour
 
         SetItem(ItemSelection, ItemID, instance);
         UpdateItemUI();
+    }
+
+    public void CollectItem(int ItemID, BaseItem instance = null)
+    {
+        
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            if (Inventory[i].ItemInstance != null && instance != null && Inventory[i].ItemInstance.ItemID == ItemID && Inventory[i].ItemInstance.Uses < Inventory[i].ItemInstance.MultiUseMaxUsesCap)
+            {
+                if (Inventory[i].ItemInstance.OgUsesAmmount >= 2 &&Inventory[i].ItemInstance.Uses > (Inventory[i].ItemInstance.MultiUseMaxUsesCap- Inventory[i].ItemInstance.MaxUsesCap))
+                {
+                    Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT. FUCK");
+                    continue;
+                }
+                else
+                {
+                    Inventory[i].ItemInstance.Uses += instance.Uses;
+                    Debug.Log($"item uses : {Inventory[i].ItemInstance.Uses} at slot {i}");
+                    UpdateItemUI();
+                    return;
+                }
+            }
+            if (Inventory[i].ItemInstance != null && instance == null && Inventory[i].ItemInstance.ItemID == ItemID && Inventory[i].ItemInstance.Uses < Inventory[i].ItemInstance.MultiUseMaxUsesCap)
+            {
+                BaseItem itemobj = GetItem(ItemID);
+                if (Inventory[i].ItemInstance.OgUsesAmmount >= 2 &&Inventory[i].ItemInstance.Uses > (Inventory[i].ItemInstance.MultiUseMaxUsesCap- Inventory[i].ItemInstance.MaxUsesCap))
+                {
+                    Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT. FUCK");
+                    continue;
+                }
+                else
+                {
+                    Inventory[i].ItemInstance.Uses += itemobj.Uses;
+                    Debug.Log($"item uses : {Inventory[i].ItemInstance.Uses} at slot {i}");
+                    UpdateItemUI();
+                    return;
+                }
+            }
+        }
+        SimplifiedItemCollect(ItemID,instance);
     }
 
     public void ReplaceCurrentItem(int ItemID)
@@ -523,12 +608,18 @@ public class ItemManager : MonoBehaviour
 
     [Header("UI References")]
     public Sprite[] ItemSlotsSprites = new Sprite[3];
-    [SerializeField] public TextMeshProUGUI ItemNameText, ItemInfoText;
+    public TextMeshProUGUI ItemNameText, ItemInfoText;
     public GameObject theRestOfTheItemInfo;
     [SerializeField] private Color SelectionColor = Color.red;
     [SerializeField] private RawImage ItemHoldImage;
     public static ItemManager Instance;
     public bool[] SlotOccupied;
+    
+    public CanvasGroup[] ItemCanvasGroup;
+    public bool ButterFingered;
+    public Sprite buttfingStatus;
+    public UnityEvent ButterFingersUnityEvent;
+    public CanvasGroup FlashingTextCanvasGroup;
     
     #endregion 
 }

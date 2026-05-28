@@ -123,40 +123,35 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
         {
             foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
             {
-                if (zes.isActiveAndEnabled)
-                {
-                    zes.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-                }
+                if (zes.isActiveAndEnabled) zes.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
             }
         }
         if (teacher == "all" || teacher == "All" || teacher == "famished")
         {
             foreach (FamishedScript fam in  GameControllerScript.Instance.famishscr)
             {
-                if (fam.isActiveAndEnabled)
-                {
-                    fam.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-                }
+                if (fam.isActiveAndEnabled) fam.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
             }
         }
         if (teacher == "all" || teacher == "All" || teacher == "mucho")
         {
             foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
             {
-                if (muc.isActiveAndEnabled)
-                {
-                    muc.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-                }
+                if (muc.isActiveAndEnabled) muc.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
             }
         }
         if (teacher == "all" || teacher == "All" || teacher == "baldi")
         {
             foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
             {
-                if (bal.isActiveAndEnabled)
-                {
-                    bal.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
-                }
+                if (bal.isActiveAndEnabled) bal.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "LappingTim")
+        {
+            foreach (LappingTimScript timmers in GameControllerScript.Instance.laptimscr)
+            {
+                if (timmers.isActiveAndEnabled) timmers.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
             }
         }
     }
@@ -166,40 +161,35 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
         {
             foreach (zerullscript zes in GameControllerScript.Instance.zerscr)
             {
-                if (zes.isActiveAndEnabled)
-                {
-                    zes.ActivateAntiHearing(AntiHearingDuration);
-                }
+                if (zes.isActiveAndEnabled) zes.ActivateAntiHearing(AntiHearingDuration);
             }
         }
         if (teacher == "all" || teacher == "All" || teacher == "famished")
         {
             foreach (FamishedScript fam in GameControllerScript.Instance.famishscr)
             {
-                if (fam.isActiveAndEnabled)
-                {
-                    fam.ActivateAntiHearing(AntiHearingDuration);
-                }
+                if (fam.isActiveAndEnabled) fam.ActivateAntiHearing(AntiHearingDuration);
             }
         }
         if (teacher == "all" || teacher == "All" || teacher == "mucho")
         {
             foreach (MuchoScript muc in GameControllerScript.Instance.muchscr)
             {
-                if (muc.isActiveAndEnabled)
-                {
-                    muc.ActivateAntiHearing(AntiHearingDuration);
-                }
+                if (muc.isActiveAndEnabled) muc.ActivateAntiHearing(AntiHearingDuration);
             }
         }
         if (teacher == "all" || teacher == "All" || teacher == "baldi")
         {
             foreach (BaldiScript bal in GameControllerScript.Instance.balscr)
             {
-                if (bal.isActiveAndEnabled)
-                {
-                    bal.ActivateAntiHearing(AntiHearingDuration);
-                }
+                if (bal.isActiveAndEnabled) bal.ActivateAntiHearing(AntiHearingDuration);
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "LappingTim")
+        {
+            foreach (LappingTimScript timmers in GameControllerScript.Instance.laptimscr)
+            {
+                if (timmers.isActiveAndEnabled) timmers.ActivateAntiHearing(AntiHearingDuration);
             }
         }
     }
@@ -234,14 +224,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             {
                 if (zes.isActiveAndEnabled)
                 {
-                    if (!tempAnger)
-                    {
-                        zes.GetAngry(angerAmmount);
-                    }
-                    else
-                    {
-                        zes.GetTempAngry(tempAngerAmmount);
-                    }
+                    if (!tempAnger)zes.GetAngry(angerAmmount);
+                    else zes.GetTempAngry(tempAngerAmmount);
                 }
             }
         }
@@ -251,14 +235,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             {
                 if (fam.isActiveAndEnabled)
                 {
-                    if (!tempAnger)
-                    {
-                        fam.GetAngry(angerAmmount);
-                    }
-                    else
-                    {
-                        fam.GetTempAngry(tempAngerAmmount);
-                    }
+                    if (!tempAnger) fam.GetAngry(angerAmmount);
+                    else fam.GetTempAngry(tempAngerAmmount);
                 }
             }
         }
@@ -268,14 +246,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             {
                 if (muc.isActiveAndEnabled)
                 {
-                    if (!tempAnger)
-                    {
-                        muc.GetAngry(angerAmmount);
-                    }
-                    else
-                    {
-                        muc.GetTempAngry(tempAngerAmmount);
-                    }
+                    if (!tempAnger) muc.GetAngry(angerAmmount);
+                    else muc.GetTempAngry(tempAngerAmmount);
                 }
             }
         }
@@ -285,14 +257,19 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             {
                 if (bal.isActiveAndEnabled)
                 {
-                    if (!tempAnger)
-                    {
-                        bal.GetAngry(angerAmmount);
-                    }
-                    else
-                    {
-                        bal.GetTempAngry(tempAngerAmmount);
-                    }
+                    if (!tempAnger) bal.GetAngry(angerAmmount);
+                    else bal.GetTempAngry(tempAngerAmmount);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "LappingTim")
+        {
+            foreach (LappingTimScript timmers in GameControllerScript.Instance.laptimscr)
+            {
+                if (timmers.isActiveAndEnabled)
+                {
+                    if (!tempAnger) timmers.GetAngry(angerAmmount);
+                    else timmers.GetTempAngry(tempAngerAmmount);
                 }
             }
         }
@@ -328,6 +305,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     public void ResizeAltInventory() // bru
     {
         Array.Resize(ref AltInventory, MaxSlotsAmmou);
+        for (int i = 0; i < AltInventory.Length; ++i) AltInventory[i].ItemStacksText.text = "";
     }
     public void UpdateAltInventory()
     {
@@ -343,6 +321,8 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             AltInventory[i].ItemImages = ItemManager.Instance.Inventory[i].ItemImages;
             AltInventory[i].ItemImageBGs = ItemManager.Instance.Inventory[i].ItemImageBGs;
             AltInventory[i].ItemImageSlots = ItemManager.Instance.Inventory[i].ItemImageSlots;
+            AltInventory[i].ItemStacksText = ItemManager.Instance.Inventory[i].ItemStacksText;
+            
             AltInventory[i].SlotID = ItemManager.Instance.Inventory[i].SlotID;
         }
     }
@@ -390,6 +370,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             ItemManager.Instance.Inventory[i].ItemImages = AltInventory[i].ItemImages;
             ItemManager.Instance.Inventory[i].ItemImageBGs = AltInventory[i].ItemImageBGs;
             ItemManager.Instance.Inventory[i].ItemImageSlots = AltInventory[i].ItemImageSlots;
+            ItemManager.Instance.Inventory[i].ItemStacksText = AltInventory[i].ItemStacksText;
             ItemManager.Instance.Inventory[i].SlotID = AltInventory[i].SlotID;
         }
         ItemManager.Instance.Inventory[SlotsAmmou-1].ItemImageSlots.sprite = ItemManager.Instance.ItemSlotsSprites[2];

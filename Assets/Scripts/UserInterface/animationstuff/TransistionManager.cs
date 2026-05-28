@@ -20,7 +20,7 @@ public class TransistionManager : MonoBehaviour
 
     public IEnumerator TransitionEnumerator()
     {
-        DiscordRPC_stuff.current.UpdateStatus("transistioning,.,.,.", "mwah", largimag, largtext);
+        //DiscordRPC_stuff.current.UpdateStatus("transistioning,.,.,.", "mwah", largimag, largtext);
         Cursor.LockCursor();
         if (transistype == TransistionType.CircleInOut)
         {

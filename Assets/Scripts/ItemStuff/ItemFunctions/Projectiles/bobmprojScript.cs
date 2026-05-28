@@ -29,7 +29,7 @@ public class bobmprojScript : MonoBehaviour
         }
         if (cork.CompareTag("floor"))
         {
-            boom(false, 30f);
+            boom(false, BounceVelocity);
             return;
         }
         if (cork.CompareTag("Window") && cork.GetComponent<basicshowWindowScript>() != null && !cork.GetComponent<basicshowWindowScript>().broken)
@@ -41,7 +41,9 @@ public class bobmprojScript : MonoBehaviour
         }
         if (cork.GetComponent<NPC>() != null)
         {
-            cork.GetComponent<NPC>().Stun(10f);
+            NPC enpe = cork.GetComponent<NPC>();
+            enpe.Stun(NpcStuntime);
+            enpe.PushNpc(enpe.GetNPCPushDirection(transform.forward),NpcPushVal, 1f);
             boom(true);
             return;
         }
@@ -69,12 +71,11 @@ public class bobmprojScript : MonoBehaviour
         if (iframe > 0f && !KillReal) return;
         if (bouncetime == 0 || KillReal)
         {
+            Instantiate(prefa, transform.position, transform.rotation);
             Destroy(gameObject, 0f);
         }
         iframe += 0.25f;
         fallvelocity += fallvelo;
-        Instantiate(prefa, transform.position, transform.rotation);
-        Debug.Log($"bouncetime left : {bouncetime}");
         bouncetime--;
     }
 
@@ -98,6 +99,7 @@ public class bobmprojScript : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float fallvelocity,iframe,VerticalGrav,HorizontalGrav;
     [SerializeField] private int bouncetime;
+    [SerializeField] private float NpcStuntime,NpcPushVal,BounceVelocity;
 
     [Header("Lifespan Settings")]
     [SerializeField] private float lifeSpan;

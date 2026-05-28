@@ -7,8 +7,21 @@ public class BaseItem : MonoBehaviour
         SmallSprite = smolsprites;
     }
     #region Virtual Hooks
+    public void Awake()
+    {
+        if (Uses >= 2) MultiUseMaxUsesCap = Uses * MaxUsesCap;
+        else MultiUseMaxUsesCap = MaxUsesCap;
+        OgUsesAmmount = Uses;
+    }
     public virtual bool OnUse() => true;
-    public virtual void OnSelect() { }
+    public virtual void OnSelect()
+    {
+        if (PlaySoundWhenHold && HoldSound != null) 
+        {
+            GameControllerScript.Instance.lbams.ItemHoldingSoundSource.ClearQueue(true);
+            GameControllerScript.Instance.lbams.ItemHoldingSoundSource.PlaySingleClip(HoldSound);
+        }
+    }
     public virtual void OnDeselect() { }
     public virtual void OnPickup() { }
 
@@ -36,6 +49,11 @@ public class BaseItem : MonoBehaviour
     #endregion
 
     #region Serialized Data
+    [Header("Sillyz Settings")]
+    [Tooltip("Enables if you select teh item it plays sound /silly")] public bool PlaySoundWhenHold;
+    [Tooltip("The audio for PlaySoundWhenHold to work lel mrrp")] public AudioObjectyeah HoldSound;
+
+    [Header("Main Settings")]
     [Tooltip("The name of the item")] public string Name;
     [Tooltip("The item info")] public string ItmInfoText;
 
@@ -51,6 +69,8 @@ public class BaseItem : MonoBehaviour
     [Header("Settings")]
     [Tooltip("How many uses the item has")] public int Uses = 1;
     [Tooltip("How many Stack the item can have")] public int MaxUsesCap = 1;
+    [HideInInspector] public int OgUsesAmmount,MultiUseMaxUsesCap;
+
     [Tooltip("erm")] public int TexturePPUThing = 100;
     [Tooltip("Should the item get specified to be an starred item on the minimap")] public bool SpecialItemIcon;
     [Tooltip("Disable it from getting dropped fear")] public bool undropable;

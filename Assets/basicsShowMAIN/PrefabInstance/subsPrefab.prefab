@@ -120,9 +120,9 @@ MonoBehaviour:
   hidesub: 0
   IgnoreTimescale: 0
   producerAud: {fileID: 0}
-  tmpTxt: {fileID: 1999978097911484835}
-  imagbg: {fileID: 2275162819050771114}
-  bg: {fileID: 1331557361286788211}
+  tmpTxt: {fileID: 4191722541808506652}
+  imagbg: {fileID: 1402386798357514778}
+  bg: {fileID: 1490916293299746599}
   fixesPosition: {x: 0, y: 0, z: 0}
   aspectRatio: 0
 --- !u!1 &1644985916241767443
@@ -410,7 +410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1490916293299746599
 RectTransform:
   m_ObjectHideFlags: 0
@@ -486,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1331557361286788211
 RectTransform:
   m_ObjectHideFlags: 0

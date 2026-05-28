@@ -13,28 +13,36 @@ public class ZerullBossScript : MonoBehaviour
     private Transform target;
 
     [SerializeField] private SpriteRenderer normalSprite;
+    [SerializeField] private GameObject chairar;
     [SerializeField] private PlayerScript pscript;
-    [SerializeField] private Sprite ChairSprite;
+    [SerializeField] private GameObject ChairAudio;
 
     private MaterialPropertyBlock spriteProperties;
+    private bool isChair;
 
     private void Start()
     {
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        if (chair)
+        isChair = chair;
+        if (isChair)
         {
-            normalSprite.sprite = ChairSprite;
+            normalSprite.enabled = false;
             hit = ChairHit;
             bossStart = ChairStart;
+            chairar.SetActive(true);
         }
-        spriteProperties = new MaterialPropertyBlock();
-        normalSprite.GetPropertyBlock(spriteProperties);
-        spriteProperties.SetFloat("_Seed", 0f);
-        spriteProperties.SetFloat("_Percent", 0f);
+        else
+        {
+            spriteProperties = new MaterialPropertyBlock();
+            normalSprite.GetPropertyBlock(spriteProperties);
+            spriteProperties.SetFloat("_Seed", 0f);
+            spriteProperties.SetFloat("_Percent", 0f);
+        }
     }
 
     private void Update()
     {
+        ChairAudio.SetActive(!agent.isStopped);
         if (iframedown)iframes -= Time.deltaTime;
         if (iframes < 0f) iframedown = false;
         foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) 
@@ -125,9 +133,12 @@ public class ZerullBossScript : MonoBehaviour
             agent.isStopped = true;
             ZerullClassic.Instance.debug = true;
             stunTimeMult = 1f;
-            spriteProperties.SetFloat("_Percent", 0.9f);
-            spriteProperties.SetFloat("_Seed", Random.Range(0f, 4096f));
-            normalSprite.SetPropertyBlock(spriteProperties);
+            if (!isChair)
+            {
+                spriteProperties.SetFloat("_Percent", 0.9f);
+                spriteProperties.SetFloat("_Seed", Random.Range(0f, 4096f));
+                normalSprite.SetPropertyBlock(spriteProperties);
+            }
             yield return null;
         }
         gng(hp,firstHit);
@@ -135,9 +146,12 @@ public class ZerullBossScript : MonoBehaviour
     public void gng(float hp, bool firsthit)
     {
         stunTimeMult = 0f;
-        spriteProperties.SetFloat("_Percent", 0f);
-        spriteProperties.SetFloat("_Seed", 0f);
-        normalSprite.SetPropertyBlock(spriteProperties);
+        if (!isChair)
+        {
+            spriteProperties.SetFloat("_Percent", 0f);
+            spriteProperties.SetFloat("_Seed", 0f);
+            normalSprite.SetPropertyBlock(spriteProperties);
+        }
         ZerullClassic.Instance.debug = firsthit;
         agent.isStopped = firsthit;
         

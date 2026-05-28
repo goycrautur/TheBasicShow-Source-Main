@@ -6,8 +6,8 @@ public class FirstPrizeScript : NPC
     public override void OnStart()
     {
         base.OnStart();
-        coolDown = 1f;
         Wander();
+        base.Wander("default");
     }
     #endregion
 

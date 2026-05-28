@@ -156,8 +156,8 @@ public class LearningGameManager : MonoBehaviour
                     if (gc.FinaleSecret)
                     {
                         gc.lbams.EscapeMusic.ClearQueue(true);
-                        gc.lbams.EscapeMusic.QueueAudio(gc.lbams.EvapV2Finale[0]);
                         gc.lbams.EscapeMusic.QueueAudio(gc.lbams.EvapV2FinaleIntros[0]);
+                        gc.lbams.EscapeMusic.QueueAudio(gc.lbams.EvapV2Finale[0]);
                         gc.lbams.EscapeMusic.SetLoop(true);
                         gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                         gc.Gatesrea.ForEach(g => g.Down(false));

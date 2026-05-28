@@ -227,8 +227,8 @@ public class booksInteract : Interactable
                 if (gc.FinaleSecret)
                 {
                     lbams.EscapeMusic.ClearQueue(true);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[0]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[0]);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[0]);
                     lbams.EscapeMusic.SetLoop(true);
                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                     gc.Gatesrea.ForEach(g => g.Down(false));

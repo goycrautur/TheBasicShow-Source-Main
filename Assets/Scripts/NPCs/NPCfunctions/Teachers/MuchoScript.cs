@@ -10,7 +10,6 @@ public class MuchoScript : NPC
         GetAngry(0f);
         if (endless) Endless();
         Wander();
-        Move();
     }
     public void OnEnable()
     {

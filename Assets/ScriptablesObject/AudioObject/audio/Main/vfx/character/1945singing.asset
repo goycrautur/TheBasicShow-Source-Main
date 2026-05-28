@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1945singing
   m_EditorClassIdentifier: 
   audClip: {fileID: 8300000, guid: 6e5538b311a1bf546bdf64dc1b98051d, type: 3}
-  volume: 1
+  volume: 0.3
   SoundTypeWahh: 2
   HasSubtitle: 1
   ForcedSetAudiomixer: {fileID: 0}

@@ -46,7 +46,7 @@ public class GameControllerScript : MonoBehaviour
     {
         foreach (NPC enpeecee in GlobalNpcList)
         {
-            enpeecee.agentSpeedScale = metalpipeStun ? 0f : 1f;
+            enpeecee.IsMetalPiped = metalpipeStun ? true : false;
             enpeecee.SetToXrayLayer(ipleak);
         }
         foreach (GameObject npcmapicon in NpcMinimapIcon) npcmapicon.SetActive(ipleak ? true : false);
@@ -226,7 +226,7 @@ public class GameControllerScript : MonoBehaviour
                 {
                     GameObject clone = Instantiate(fmc.butch, fmc.butch.transform.position, fmc.butch.transform.rotation);
                     clone.name = fmc.butch.name;
-                    clone.GetComponent<FamishedScript>().famishedSpd = 0.5f;
+                    clone.GetComponent<FamishedScript>().famishedSpd -= 1f;
                     clone.SetActive(true);
                 }
             }
@@ -563,8 +563,8 @@ public class GameControllerScript : MonoBehaviour
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[1]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[1]);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[1]);
                 }
             }
         }
@@ -600,8 +600,9 @@ public class GameControllerScript : MonoBehaviour
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[2]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[2]);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[2]);
+                    
                 }
             }
         }
@@ -686,8 +687,9 @@ public class GameControllerScript : MonoBehaviour
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[4]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[3]);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[4]);
+                    
                     AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
                 }
             }
@@ -720,8 +722,9 @@ public class GameControllerScript : MonoBehaviour
                 if (FinaleSecret)
                 {
                     lbams.EscapeMusic.ClearQueue(true);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[5]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[4]);
+                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[5]);
+                    
                     lbams.EscapeMusic.SetLoop(true);
                 }
             }
@@ -966,4 +969,5 @@ public class GameControllerScript : MonoBehaviour
     public List<zerullscript> zerscr = new List<zerullscript>();
     public List<MuchoScript> muchscr = new List<MuchoScript>();
     public List<FamishedScript> famishscr = new List<FamishedScript>();
+    public List<LappingTimScript> laptimscr = new List<LappingTimScript>();
 }

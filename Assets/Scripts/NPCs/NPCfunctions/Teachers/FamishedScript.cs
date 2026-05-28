@@ -64,9 +64,9 @@ public class FamishedScript : NPC
         }
         if (this.isActiveAndEnabled)
         {
-            agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
+            agent.speed = base.agentSpeed * (famishedSpd / 2 * ((famishedtempSpd /10)+1)) * gc.fmc.angerMultipler;
             if (base.stun) agent.speed = 0;
-            if (base.StunTime < 0f) agent.speed = base.agentSpeed * (famishedSpd / 2) * gc.fmc.angerMultipler;
+            if (base.StunTime < 0f) agent.speed = base.agentSpeed * (famishedSpd / 2 * ((famishedtempSpd /10)+1)) * gc.fmc.angerMultipler;
         }
     }
     public void MOOOVEYOUBITCH()
@@ -104,7 +104,9 @@ public class FamishedScript : NPC
         {
             if (base.IsHitboxValid && !gc.fmc.dontKillBru)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 0.5f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 5 * agent.speed/20 / gc.player.PlayerDmgResistance, 0.5f, false, true, false);
+                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 16f * agent.speed/10, 1f);
+                base.Stun(3f);
 				gc.player.killedbyfamished = true;
 			}
         }

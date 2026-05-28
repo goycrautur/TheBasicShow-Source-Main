@@ -7,7 +7,7 @@ public class WindowData : ScriptableObject
 {
     public int durability = 1;
     [Tooltip("allow for uhh yknow the particle prefab to get instaniate")] public bool CreateParticles;
-    [Tooltip(":eyes:")] public bool uniqueCrackSound;
+    
     [Header("particles prefab\n")]
     [Tooltip("array 0 and 1 is for broken window particl and repair prefab")] public GameObject[] particlPrefab;
     [Header("materials stuff\n")]
@@ -19,11 +19,11 @@ public class WindowData : ScriptableObject
     [Tooltip("cracked window particle prefab")] public GameObject crackParticlPrefab;
     [Tooltip("again, but its an array")] public GameObject[] crackParticlPrefabArra;
 
-    [Header("materials stuff\n")]
-    [Tooltip("used for mostly cracked window sprite")] public Material[] cracWindowMatsSide1;
-    [Tooltip("same up there but for the other window side")] public Material[] cracWindowMatsSide2;
+    [Header("texture stuff\n")]
+    [Tooltip("used for mostly cracked window sprite")] public Texture[] cracWindowTextur;
 
     [Header("sound stuff\n")]
+    [Tooltip(":eyes:")] public bool uniqueCrackSound;
     [Tooltip("cracked window sound audio cli")] public AudioObjectyeah CrackedWindowSounds;
     [Tooltip("cracked window sound audio cli but its an array")] public AudioObjectyeah[] CrackedWindowSoundsButItsAnArray;
 }

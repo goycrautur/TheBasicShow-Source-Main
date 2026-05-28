@@ -10,7 +10,7 @@ public class ITM_BSODA : BaseItem
 		{
 			if (Contoller.player.door.lockTime <= 0f)
 			{
-			Contoller.player.ResetGuilt("drink", 1f);
+			    if (BreakRule)Contoller.player.ResetGuilt("drink", 1f);
 			}
 		}
         lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(aud_Soda);
@@ -19,4 +19,5 @@ public class ITM_BSODA : BaseItem
     
     [SerializeField] private GameObject bsodaSpray;
     [SerializeField] private AudioObjectyeah aud_Soda;
+    [SerializeField] private bool BreakRule;
 }

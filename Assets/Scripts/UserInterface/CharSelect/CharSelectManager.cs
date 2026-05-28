@@ -25,7 +25,7 @@ public class CharSelectManager : MonoBehaviour
                 case Requirements.NeedTypes.Bool:
                     string tempboolstring = characterThing[CharacVal].whatsTheRequirements.ReqBoolPPrefsName;
                     bool tempbool = PlayerPrefsExtension.GetBool(tempboolstring);
-                    if (tempbool = true) characterThing[CharacVal].unlocked = true; // tue is 1 sob
+                    if (tempbool == true) characterThing[CharacVal].unlocked = true; // tue is 1 sob
                     else characterThing[CharacVal].unlocked = false;
                     break;
                 case Requirements.NeedTypes.Int:

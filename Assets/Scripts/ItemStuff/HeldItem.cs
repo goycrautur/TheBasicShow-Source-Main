@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [Serializable]
 public struct HeldItem
@@ -9,8 +10,9 @@ public struct HeldItem
     [HideInInspector]public int SlotID;
 
     public BaseItem ItemInstance;
-    [Header("Item Images Stuff")]
+    [Header("Item Slots Stuff")]
     public Image ItemImageBGs;
     public RawImage ItemImages;
     public Image ItemImageSlots;
+    public TextMeshProUGUI ItemStacksText;
 }

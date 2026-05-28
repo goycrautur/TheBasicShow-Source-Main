@@ -213,6 +213,9 @@ MonoBehaviour:
   VerticalGrav: 30
   HorizontalGrav: 5
   bouncetime: 1
+  NpcStuntime: 6.5
+  NpcPushVal: 32
+  BounceVelocity: 30
   lifeSpan: 15
   shouldRotate: 0
   prefa: {fileID: 4420397870312688832, guid: 2ee1abc2823de734d98ab94726a142c8, type: 3}

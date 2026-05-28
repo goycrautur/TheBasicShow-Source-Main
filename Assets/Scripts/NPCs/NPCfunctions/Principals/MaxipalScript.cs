@@ -140,7 +140,7 @@ public class MaxcipalScript : NPC
         base.Wander(locationType);
         if (bullySeen) bullySeen = false;
         ResetCooldown();
-        if (Random.Range(0f, 10f) <= 1f && !inOffice) audioQueue.PlaySingleClip(aud_Whistle);
+        if (Random.Range(0f, 10f) <= 1f && audioQueue.queuedAudios.Count == 0) audioQueue.PlaySingleClip(aud_Whistle);
     }
 
     private void WanderWithAnger()

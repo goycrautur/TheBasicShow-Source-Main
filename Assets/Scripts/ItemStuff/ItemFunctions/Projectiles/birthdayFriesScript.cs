@@ -22,6 +22,12 @@ public class birthdayFriesScript : MonoBehaviour
     #endregion
     private void OnTriggerStay(Collider cork)
     {
+        if (cork.CompareTag("floor") && cork.name.StartsWith("Wall") || cork.name.StartsWith("Fence") || cork.name.StartsWith("Ceiling") || cork.name.StartsWith("Floor") || cork.name.StartsWith("ElvDoor"))
+        {
+            Instantiate(GameControllerScript.Instance.ConfettiEffect, transform.position, transform.rotation);
+            Destroy(base.gameObject);
+            return;
+        }
         if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.health != 1)
         {
             if (cork.GetComponent<ZerullBossScript>() != null && !stunnedBoss)
@@ -46,8 +52,11 @@ public class birthdayFriesScript : MonoBehaviour
     #region Per-Frame Logic
     private void Update()
     {
-        rb.velocity = transform.forward * speed;
+        rb.velocity = new Vector3(rb.velocity.x, fallvelocity, rb.velocity.z);
         lifeSpan -= Time.deltaTime;
+        fallvelocity -= VerticalGrav * Time.deltaTime;
+        if (iframe > 0f) iframe -= Time.deltaTime;
+        if (speed <= 5f) speed -= HorizontalGrav * Time.deltaTime;
         if (lifeSpan < 0f)
         {
             Destroy(gameObject, 0f);
@@ -58,6 +67,7 @@ public class birthdayFriesScript : MonoBehaviour
     #region Serialized Configuration
     [Header("Movement Settings")]
     [SerializeField] private float speed;
+    [SerializeField] private float fallvelocity,iframe,VerticalGrav,HorizontalGrav;
 
     [Header("Lifespan Settings")]
     [SerializeField] private float lifeSpan;

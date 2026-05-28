@@ -8,38 +8,33 @@ using UnityEngine.AI;
 using UnityEditor;
 #endif
 
+
+[RequireComponent(typeof(CharacterController))]
 public class NPC : MonoBehaviour
 {
     #region Unity Lifecycle
     protected virtual void Start()
     {
+        mainAgentSpeedScale = agentSpeedScale;
         if (!dosentUseNavmesh) agent = GetComponent<NavMeshAgent>();
         if (!dosentUseNavmesh) gc.GlobalNpcList.Add(this);
         OgLayerName = "npcLayer";
         XrayLayerName = "npcXrayLayer";
         OnStart();
     }
-     protected virtual void OnDestroy()
+    protected virtual void OnDestroy()
     {
         if (!dosentUseNavmesh) gc.GlobalNpcList.Remove(this);
     }
 
     protected virtual void Update()
     {
-        if (canTargetPlayer)
-        {
-            CheckForPlayer();
-        }
-
-        if (!isInteracting)
-        {
-            if (!dosentUseNavmesh) HandleMovement();
-        }
+        if (IsMetalPiped) MetalPipedEffect();
+        else NonMetalPipedEffect();
+        if (canTargetPlayer)CheckForPlayer();
+        if (!isInteracting && !dosentUseNavmesh) HandleMovement();
         confusionEffect.SetActive(stun);
-        if (!stun|| stopOverridingStun)
-		{
-        IsHitboxValid = !squished;
-        }
+        if (!stun || stopOverridingStun)IsHitboxValid = !squished;
         if (StunTime < 0f)
 		{
             stun = false;
@@ -50,7 +45,6 @@ public class NPC : MonoBehaviour
 		{
 			StunTime -= Time.deltaTime; 
             IsHitboxValid = false;
-            
 		}
 
         OnUpdate();
@@ -60,6 +54,7 @@ public class NPC : MonoBehaviour
         OnFixedUpdate();
     }
     #endregion
+
 
     #region AI Behavior
     protected virtual void CheckForPlayer()
@@ -83,12 +78,20 @@ public class NPC : MonoBehaviour
 
     protected virtual void HandleMovement()
     {
-        if (!agent.IsReadyToMove() || coolDown.CountdownWithDeltaTime() != 0) return;
+        if ((agent.isActiveAndEnabled && !agent.IsReadyToMove())|| coolDown.CountdownWithDeltaTime() != 0) return;
 
         if (!canTargetPlayer || !isInteracting)
         {
             Wander();
         }
+    }
+    public virtual void MetalPipedEffect()
+    {
+        agentSpeedScale = 0f;
+    }
+    public virtual void NonMetalPipedEffect()
+    {
+        agentSpeedScale = 1f;
     }
     public virtual void Stun(float Duration)
     {
@@ -97,7 +100,11 @@ public class NPC : MonoBehaviour
     }
     public virtual void SetToXrayLayer(bool xray = true)
     {
-        for (int i = 0; i < ObjectToGetXrayed.Length; ++i) if (ObjectToGetXrayed[i] != null) ObjectToGetXrayed[i].layer = !xray ? LayerMask.NameToLayer(OgLayerName) : LayerMask.NameToLayer(XrayLayerName);
+        for (int i = 0; i < ObjectToGetXrayed.Length; ++i) 
+        {
+            if (ObjectToGetXrayed[i] != null) 
+            ObjectToGetXrayed[i].layer = !xray ? LayerMask.NameToLayer(OgLayerName) : LayerMask.NameToLayer(XrayLayerName);
+        }
     }
 
 
@@ -109,7 +116,7 @@ public class NPC : MonoBehaviour
 
     protected virtual void TargetPlayer()
     {
-        if (!dosentUseNavmesh) agent.SetDestination(player.position);
+        if (!dosentUseNavmesh && agent.isActiveAndEnabled) agent.SetDestination(player.position);
         ResetCooldown();
     }
     #endregion
@@ -145,31 +152,52 @@ public class NPC : MonoBehaviour
     }
 #endif
     #endregion
-    public IEnumerator SmoothPush(Transform transform, Vector3 pushDirection, float pushDistance, float duration)
+    #region Npc Push Stuff
+    public void PushNpc(Vector3 pushDirection, float pushForce, float duration)
+	{
+		if (NpcPushCorou != null)
+        {
+            StopCoroutine(NpcPushCorou);
+			AfterPushStuff();
+            NpcPushCorou = null;
+        }
+		NpcPushCorou = StartCoroutine(NpcSmoothPush(pushDirection, pushForce, duration));
+	}
+	public Vector3 GetNPCPushDirection(Vector3 OtherPosition)
+	{
+		Vector3 pushDirection = (OtherPosition).normalized;
+		return pushDirection;
+	}
+    private IEnumerator NpcSmoothPush(Vector3 pushDirection, float pushForce, float duration)
     {
         pushDirection.y = 0f;
         pushDirection.Normalize();
 
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + pushDirection * pushDistance;
-        float elapsedTime = 0f;
+        float elapsed = 0f;
+        float currentSpeed = pushForce;
 
-        if (Physics.Raycast(startPosition, pushDirection, out RaycastHit hit, pushDistance))
+        if (!dosentUseNavmesh) agent.enabled = false;
+        while (elapsed < duration)
         {
-            targetPosition = hit.point - pushDirection * 0.1f;
-        }
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / duration;
-            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            float speed = Mathf.Lerp(currentSpeed, 0f, t);
+            Vector3 move = pushDirection * speed * Time.deltaTime;
+            cecil.Move(move);
             yield return null;
         }
-
-        transform.position = targetPosition;
+        AfterPushStuff();
     }
-
+    private void AfterPushStuff()
+    {
+        Vector3 PushTransform = transform.position;
+        if (!dosentUseNavmesh) 
+        {
+            agent.enabled = true;
+            agent.Warp(PushTransform);
+        }
+    }
+    #endregion
     #region Serialized Fields
     [Header("NPC Functions")]
     [SerializeField] protected Transform player;
@@ -177,7 +205,7 @@ public class NPC : MonoBehaviour
     [SerializeField] protected AILocationSelectorScript wanderer;
     public GameObject[] ObjectToGetXrayed;
     public string OgLayerName,XrayLayerName;
-    public bool isInteracting, canTargetPlayer, IsHitboxValid = true;
+    public bool isInteracting, canTargetPlayer, IsHitboxValid = true, IsMetalPiped;
 
     [Header("Gizmo Settings")]
     [SerializeField] private bool showPath = true;
@@ -190,9 +218,13 @@ public class NPC : MonoBehaviour
     public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;
     public bool squished,stun,stopOverridingStun;
     public NavMeshAgent agent;
+    public CharacterController cecil;
     public GameObject confusionEffect,StunSprite;
-    #endregion
     public int hp, maxhp = 100;
     public bool fuckingdead,UsesStunSprite;
     public bool dosentUseNavmesh;
+    public Coroutine NpcPushCorou;
+    [HideInInspector] public float mainAgentSpeedScale;
+    #endregion
+    
 }

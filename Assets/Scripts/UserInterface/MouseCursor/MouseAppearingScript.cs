@@ -12,6 +12,12 @@ public class MouseAppearingScript : MonoBehaviour
             basicshowWindowScript w = hit.collider.GetComponent<basicshowWindowScript>();
             VendingMachineScript vent = hit.collider.GetComponent<VendingMachineScript>();
             DoorScriptExtender dor = hit.collider.GetComponentInChildren<DoorScriptExtender>();
+            mostSillyTrigger silly = hit.collider.GetComponent<mostSillyTrigger>();
+            if (silly != null && silly.Cooldown < 0f && silly.ItemGivingLimit > 0)
+            {
+                maxDistance = gc.player.LocalRange;
+                nowayquestionmark.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
+            }
             if (hitTransform.CompareTag("TapePlayer") | hitTransform.CompareTag("Item") | hitTransform.CompareTag("Notebook") | hitTransform.CompareTag("Phone"))
             {
                 maxDistance = gc.player.LocalRange;
@@ -100,7 +106,7 @@ public class MouseAppearingScript : MonoBehaviour
         {
             Transform mischitTransform = miscRay.transform;
             float maxDist = 0f;
-            if (mischitTransform.GetComponent<ZerullBossScript>() != null)
+            if (mischitTransform.GetComponent<ZerullBossScript>() != null || mischitTransform.GetComponent<NPC>() != null)
             {
                 
                 for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -123,12 +129,13 @@ public class MouseAppearingScript : MonoBehaviour
         lockin.SetActive(false);
         coin.SetActive(false);
         firInThe.SetActive(false);
+        nowayquestionmark.SetActive(false);
     }
 
 
     [Header("References")]
     [SerializeField] private GameObject MouseCursor;
-    [SerializeField] private GameObject killwindow, lockin,baloo, coin, firInThe;
+    [SerializeField] private GameObject killwindow, lockin,baloo, coin, firInThe,nowayquestionmark;
     [SerializeField] private GameControllerScript gc;
     [SerializeField] private Transform playerTransform;
 
