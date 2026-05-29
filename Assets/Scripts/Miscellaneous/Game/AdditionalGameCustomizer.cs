@@ -215,9 +215,9 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (ReworkedCurrency)
         {
             Counter.SetActive(true);
-            currencyCounter.text = "$" + Cash.ToString("F2");
+            currencyCounter.text = ": " + Cash.ToString();
 
-            if (Cash >= 0.25)
+            if (Cash >= 1)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -231,7 +231,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
                         var tapePlayer = hit.collider.GetComponent<TapePlayerScript>();
                         if (tapePlayer != null)
                         {
-                            Cash = Cash - 0.25;
+                            Cash = Cash - 1;
                             GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.quarterDrop);
                             tapePlayer.Play();
                         }
@@ -325,7 +325,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     private bool isFlashlightOn = false;
     public static AdditionalGameCustomizer Instance;
     [HideInInspector] public SkyboxStyle currentSkybox;
-    public double Cash = 0.00;
+    public int Cash = 0;
     #endregion
 
     #region Enums

@@ -89,6 +89,7 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     private void SetCustomLapMusic()
     {
+        return;
         for (int i = 0; i < lappingHi.Length; i++)
         {
             stupidTextIntro[i] = PlayerPrefs.GetString($"Lap {i+1} Music Intros", "Default");

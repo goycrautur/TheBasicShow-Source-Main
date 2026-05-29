@@ -77,37 +77,37 @@ public class PickupScript : Interactable
         if (mapIconSprite != null) mapIconSprite.enabled = false;
         hiding = true;
     }
-
+    public void moneCollectStuff()
+    {
+        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.MoneyCollect);
+        if (!DroppedItem)AdditionalGameCustomizer.Instance.Cash += 1;
+        else
+        {
+            BaseItem orgigItem = GetHeldInstance();
+            AdditionalGameCustomizer.Instance.Cash += 1 * orgigItem.Uses;
+        }
+        if (killafterpickup) Destroy(gameObject);
+        else
+        {
+            transform.gameObject.SetActive(false);
+            mapIconSprite.enabled = false;
+        }
+    }
 
     #region Player Interaction
     public override void Interact()
     {
         BaseItem holdingitem = ItemManager.Instance.GetSelectedItemObject();
         GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.ItemCollect);
-        if (SlotStuffs(false))
-        {
-            if (holdingitem.Unswapable) return;
-            transform.gameObject.SetActive(true);
-            mapIconSprite.enabled = true;
-        }
-        if (ID == 5) if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
         if (PresentMode) GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.gambling);
-        if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
+        if (ID == 5)
         {
-            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.MoneyCollect);
-            if (!DroppedItem)AdditionalGameCustomizer.Instance.Cash += 0.25;
-            else
+            if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
+            if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
             {
-                BaseItem orgigItem = GetHeldInstance();
-                AdditionalGameCustomizer.Instance.Cash += (double)0.25f * orgigItem.Uses;
+                moneCollectStuff();
+                return;
             }
-            if (killafterpickup) Destroy(gameObject);
-            if (!killafterpickup)
-            {
-                transform.gameObject.SetActive(false);
-                mapIconSprite.enabled = false;
-            }
-            return;
         }
         if (SlotStuffs(true))
         {
@@ -126,6 +126,13 @@ public class PickupScript : Interactable
             ItemManager.Instance.CollectItem(ID, GetHeldInstance());
             return;
         }
+        else if (SlotStuffs(false))
+        {
+            if (holdingitem.Unswapable) return;
+            transform.gameObject.SetActive(true);
+            mapIconSprite.enabled = true;
+        }
+        ItemManager.Instance.DropItem(ItemManager.Instance.ItemSelection);
         int orgID = ID;
         BaseItem orgItem = GetHeldInstance();
         
@@ -159,8 +166,7 @@ public class PickupScript : Interactable
     {
         for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
         {
-            if (ItemManager.Instance.Inventory[i].ItemID == 0)
-                return trueOrNot;
+            if (ItemManager.Instance.Inventory[i].ItemID == 0) return trueOrNot;
         }
         return !trueOrNot;
     }

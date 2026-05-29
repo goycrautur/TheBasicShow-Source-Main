@@ -26,14 +26,14 @@ public class ItemManager : MonoBehaviour
             }
         }
 		float time = duration;
-		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(buttfingStatus, 10f);
-		while (duration > 0f)
+		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(buttfingStatus, duration);
+		while (time > 0f)
 		{
             ButterFingered = true;
-			duration -= Time.deltaTime;
+			time -= Time.deltaTime;
 			if (newGauge != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))
 			{
-				newGauge.Set(10f, time);
+				newGauge.Set(duration, time);
 				yield return null;
 			}
 		}
@@ -58,6 +58,7 @@ public class ItemManager : MonoBehaviour
     #region Input Handling
     private void Update()
     {
+        FlashingTextCanvasGroup.alpha = Mathf.Lerp(FlashingTextCanvasGroup.alpha,0, 2.5f*Time.deltaTime);
         if (Time.timeScale == 0) return;
         for (int i = 0; i < Inventory.Length; i++) 
         {
@@ -201,9 +202,12 @@ public class ItemManager : MonoBehaviour
     {
         BaseItem[] FoundItemObjects = GetComponentsInChildren<BaseItem>();
         Items.Clear();
-        for (int i = 0; i < FoundItemObjects.Length; i++)
+        Array.Resize(ref RegisteredItemsList, FoundItemObjects.Length);
+        for (int i = 0; i < FoundItemObjects.Length; i++) 
         {
             Items.Add(FoundItemObjects[i].Name, FoundItemObjects[i]);
+            RegisteredItemsList[i].name = FoundItemObjects[i].Name;
+            RegisteredItemsList[i].items = FoundItemObjects[i];
         }
         Debug.Log($"{Items.Count} items total bitch real");
         Array.Resize(ref KeyIndex, Inventory.Length);
@@ -365,6 +369,23 @@ public class ItemManager : MonoBehaviour
     }
 
     public void RemoveItem(BaseItem item) => RemoveItem(item.name);
+    public void RemoveItemUses(int slotId,int usesRemoveVal)
+    {
+        if (Inventory[slotId].ItemInstance == null)
+        {
+            UpdateItemUI();
+            return;
+        }
+        BaseItem ItemObjectSon = Inventory[slotId].ItemInstance;
+        if (!ItemObjectSon.InfiniteUses) ItemObjectSon.Uses -= usesRemoveVal;
+        if (ItemObjectSon.Uses <= 0)
+        {
+            ExecuteItem(ItemObjectSon.ItemID, ExecutionType.Deselect);
+            if (ItemObjectSon != null) Destroy(ItemObjectSon.gameObject);
+            ClearItem(slotId);
+        }
+        UpdateItemUI();
+    }
 
      public int GetSelectedItem() => Inventory[ItemSelection].ItemID;
 
@@ -490,7 +511,7 @@ public class ItemManager : MonoBehaviour
             if (Inventory[i].ItemInstance != null && instance == null && Inventory[i].ItemInstance.ItemID == ItemID && Inventory[i].ItemInstance.Uses < Inventory[i].ItemInstance.MultiUseMaxUsesCap)
             {
                 BaseItem itemobj = GetItem(ItemID);
-                if (Inventory[i].ItemInstance.OgUsesAmmount >= 2 &&Inventory[i].ItemInstance.Uses > (Inventory[i].ItemInstance.MultiUseMaxUsesCap- Inventory[i].ItemInstance.MaxUsesCap))
+                if (Inventory[i].ItemInstance.OgUsesAmmount >= 2 &&Inventory[i].ItemInstance.Uses > (Inventory[i].ItemInstance.MultiUseMaxUsesCap - (Inventory[i].ItemInstance.MaxUsesCap-1)))
                 {
                     Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT. FUCK");
                     continue;
@@ -507,14 +528,14 @@ public class ItemManager : MonoBehaviour
         SimplifiedItemCollect(ItemID,instance);
     }
 
-    public void ReplaceCurrentItem(int ItemID)
+    public void ReplaceCurrentItem(int ItemID, BaseItem ReplaceWithOtherCurrentItem = null)
     {
         if (Inventory[ItemSelection].ItemInstance != null)
         {
             Destroy(Inventory[ItemSelection].ItemInstance.gameObject);
         }
 
-        SetItem(ItemSelection, ItemID);
+        SetItem(ItemSelection, ItemID,ReplaceWithOtherCurrentItem);
         UpdateItemUI();
     }
 
@@ -602,6 +623,12 @@ public class ItemManager : MonoBehaviour
 
     #region Fields & Serialized
     public Dictionary<string, BaseItem> Items = new Dictionary<string, BaseItem>();
+    [Serializable]
+    public struct ItemsListShit {
+        public string name;
+        public BaseItem items;
+    }
+    public ItemsListShit[] RegisteredItemsList;
     public HeldItem[] Inventory;
     public int ItemSelection = 0;
     private KeyCode[] KeyIndex = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0 };

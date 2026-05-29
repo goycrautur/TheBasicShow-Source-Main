@@ -24,11 +24,11 @@ public class VendingMachineScript : MonoBehaviour
     #endregion
     public void Update()
     {
-        moneyNeeded = ItemCostRaldMoneyType-(0.25*(insertedMoney));
+        moneyNeeded = itemCostNormal-(1*insertedMoney);
         if (MoneyNeededText != null) 
         {
             MoneyNeededTextGmbObj.SetActive(showsHowManyMoneyNeeded); 
-            MoneyNeededText.text = !AdditionalGameCustomizer.Instance.ReworkedCurrency && itemCostNormal != 1 ? $"{insertedMoney}/{itemCostNormal}" + '\n' + "Money Inserted" : !AdditionalGameCustomizer.Instance.ReworkedCurrency && itemCostNormal == 1 ? "" :"Money Needed" + '\n' + moneyNeeded+"$";
+            MoneyNeededText.text = !AdditionalGameCustomizer.Instance.ReworkedCurrency && itemCostNormal != 1 ? $"{insertedMoney}/{itemCostNormal}" + '\n' + "Money Inserted" : !AdditionalGameCustomizer.Instance.ReworkedCurrency && itemCostNormal == 1 ? "" :"Money Needed" + '\n' + moneyNeeded;
         }
         if (ItemLeftText != null) 
         {
@@ -135,7 +135,6 @@ public class VendingMachineScript : MonoBehaviour
 
     [Header("Item Settings")]
     [SerializeField] private int itemID = 1;
-    public int itemCostNormal = 1,insertedMoney,whenToOutOfGoods=1,ogOutOfGoodsValue;
-    public double ItemCostRaldMoneyType = 0.25,moneyNeeded;
+    public int itemCostNormal = 1,insertedMoney,whenToOutOfGoods=1,ogOutOfGoodsValue,moneyNeeded;
     #endregion
 }

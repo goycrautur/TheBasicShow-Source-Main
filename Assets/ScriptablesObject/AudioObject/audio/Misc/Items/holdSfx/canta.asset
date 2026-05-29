@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: canta
   m_EditorClassIdentifier: 
   audClip: {fileID: 8300000, guid: 72a57e2ed95e91544b75c116751354a2, type: 3}
-  volume: 0.8
+  volume: 0.5
   SoundTypeWahh: 1
   HasSubtitle: 0
   ForcedSetAudiomixer: {fileID: 0}

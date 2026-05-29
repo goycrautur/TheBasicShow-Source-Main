@@ -113,10 +113,10 @@ public class LappingTimScript : NPC
         {
             if (base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 20 / gc.player.PlayerDmgResistance, 1f, false, true, false);
-                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 32f, 1f);
-                base.Stun(2f);
-                PushNpc(GetNPCPushDirection(gc.player.CamCam.transform.forward),32f, 1f);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 25 / gc.player.PlayerDmgResistance, 1f, false, true, false);
+                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 64f, 1f);
+                base.Stun(4f);
+                PushNpc(GetNPCPushDirection(-transform.position),64f, 1f);
 			}
         }
     }

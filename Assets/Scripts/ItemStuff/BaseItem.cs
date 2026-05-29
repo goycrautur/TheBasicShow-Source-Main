@@ -24,6 +24,7 @@ public class BaseItem : MonoBehaviour
     }
     public virtual void OnDeselect() { }
     public virtual void OnPickup() { }
+    public virtual void CustomSpecialFunction() { }
 
     public virtual BaseItem CreateInstance() => Instantiate(this);
     #endregion

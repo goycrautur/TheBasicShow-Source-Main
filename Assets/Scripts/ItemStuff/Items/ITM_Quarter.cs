@@ -7,7 +7,7 @@ public class ITM_Quarter : BaseItem
         if (AdditionalGameCustomizer.Instance.ReworkedCurrency)
         {
             GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.MoneyCollect);
-            AdditionalGameCustomizer.Instance.Cash += 0.25;
+            AdditionalGameCustomizer.Instance.Cash += 1;
             return true;
         }
         if (SendRay("", out RaycastHit Ray, GameControllerScript.Instance.player.LocalRange))
