@@ -131,12 +131,12 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
     public void Update()
     {
         window_In.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
-        window_In.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        window_In.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensitySpecialCare);
         window_In.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
         window_In.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
         window_In.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
         window_Out.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
-        window_Out.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        window_Out.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensitySpecialCare);
         window_Out.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
         window_Out.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
         window_Out.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
@@ -151,20 +151,16 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             windo.layer = LayerMask.NameToLayer("Ignore Raycast");
             windo2.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
-        if (broken) this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
+        if (broken) gameObject.GetComponent<NavMeshObstacle>().enabled = false;
         else
         {
-            if (enableOffMeshScript)
+            if (!UseCustomBoxCollider) gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
+            if (enableOffMeshScript)gameObject.GetComponent<NavMeshObstacle>().enabled = false;
+            else 
             {
-                this.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
+                gameObject.GetComponent<NavMeshObstacle>().enabled = true;
             }
-            else
-            {
-                this.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-                if (!UseCustomBoxCollider) this.gameObject.GetComponent<BoxCollider>().size = new Vector3(10f, 10f, 1f);
-            }
-            this.gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
 

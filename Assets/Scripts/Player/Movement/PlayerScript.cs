@@ -416,7 +416,7 @@ public class PlayerScript : MonoBehaviour
 				if (ItemManager.Instance.Inventory[i].ItemID == 56)
 				{
 					ItemManager.Instance.Inventory[i].ItemInstance.CustomSpecialFunction();
-					ItemManager.Instance.RemoveItemUses(i,ItemManager.Instance.Inventory[i].ItemInstance.Uses);
+					ItemManager.Instance.RemoveItemUses(i,ItemManager.Instance.Inventory[i].ItemInstance.OgUsesAmmount);
 					return;
 				}
 			}
@@ -668,7 +668,7 @@ public class PlayerScript : MonoBehaviour
 	[Header("Stamina & Player Settings")]
 	public bool sweeping;
 	public bool breakwindow, train,isactuallyusingboots,OverridePlayerSpeed,OverridePlayerRange,DeathCountdown;
-	public int principalBugFixer,KitPenalty;
+	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f,timerTillDeath;
 	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar;

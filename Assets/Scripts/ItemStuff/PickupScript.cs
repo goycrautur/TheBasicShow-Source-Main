@@ -132,10 +132,16 @@ public class PickupScript : Interactable
             transform.gameObject.SetActive(true);
             mapIconSprite.enabled = true;
         }
-        ItemManager.Instance.DropItem(ItemManager.Instance.ItemSelection);
+        ItemSwapLogic();
+    }
+    public void NonFullItemstackDetection()
+    {
+        
+    }
+    public void ItemSwapLogic()
+    {
         int orgID = ID;
         BaseItem orgItem = GetHeldInstance();
-        
 
         ID = ItemManager.Instance.GetSelectedItem();
 

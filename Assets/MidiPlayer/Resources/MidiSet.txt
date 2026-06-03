@@ -44,8 +44,11 @@
       <SF2Path>C:/Users/Admin/AppData/LocalLow/quagteamtrust/The Basics Show\SoundFont\gm.sf2</SF2Path>
     </SoundFontInfo>
   </SoundFonts>
-  <IndexSelectedSF>0</IndexSelectedSF>
+  <IndexSelectedSF>1</IndexSelectedSF>
   <MidiFiles>
+    <string>bbcmboss before loop</string>
+    <string>bbcmboss loop</string>
+    <string>bbcmboss Start</string>
     <string>bossLoop</string>
     <string>bossStart</string>
     <string>bossTransition</string>
