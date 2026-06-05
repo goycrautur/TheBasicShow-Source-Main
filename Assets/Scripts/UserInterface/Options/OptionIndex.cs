@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public enum OptionType
 {
     Toggle,
@@ -93,7 +92,7 @@ public class OptionIndex : MonoBehaviour
         PlayerPrefs.SetInt(OptionName, index);
         PlayerPrefs.Save();
     }
-
+    
     [SerializeField] private string OptionName;
     private OptionType OptionType;
 }

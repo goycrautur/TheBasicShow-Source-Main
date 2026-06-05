@@ -178,10 +178,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32412ad967028d3458a2f665da9c59d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 32
+  ID: 24
   PresentMode: 0
   killafterpickup: 1
   SpawnAtRandom: 0
+  instahide: 0
   mapIconSprite: {fileID: 5051587764740504221}
   DroppedItem: 0
 --- !u!114 &628915688759870803
@@ -225,8 +226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4065861123621722769}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.41183823, z: -0, w: 0.91125697}
-  m_LocalPosition: {x: 0, y: 1.4873358, z: 0}
+  m_LocalRotation: {x: -0, y: 0.33000565, z: -0, w: 0.94397897}
+  m_LocalPosition: {x: 0, y: 1.1030668, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []

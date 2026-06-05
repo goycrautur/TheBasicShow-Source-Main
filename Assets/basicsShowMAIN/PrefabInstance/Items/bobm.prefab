@@ -213,6 +213,7 @@ MonoBehaviour:
   VerticalGrav: 30
   HorizontalGrav: 5
   bouncetime: 1
+  DamageToNpc: 30
   NpcStuntime: 6.5
   NpcPushVal: 32
   BounceVelocity: 30

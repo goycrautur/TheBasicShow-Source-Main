@@ -67,6 +67,7 @@ public class EffectScript : MonoBehaviour
                 if (!notNpcEntirely)
                 {
                     npcreal.Stun(npcStunTime);
+                    npcreal.DrainHp(10);
                     Destroy(other.gameObject, 0f);
                 }
             }
@@ -76,6 +77,7 @@ public class EffectScript : MonoBehaviour
             if (!notNpcEntirely)
             {
                 npcreal.Stun(npcStunTime);
+                npcreal.DrainHp(5);
                 Instantiate(GameControllerScript.Instance.ConfettiEffect, other.transform.position, other.transform.rotation);
                 Destroy(other.gameObject, 0f);
             }

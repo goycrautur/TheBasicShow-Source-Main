@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class ITM_MetalPipe : BaseItem
 {
-    [SerializeField] private float duration = 60f,invinciDuration, cantuseduration, energy, walkspeedmultAdd,runspeedmultAdd,staminaDropmultAdd,staminaRisemultAdd;
+    [SerializeField] private float duration = 60f,invinciDuration, cantuseduration, energy,staminaDropmultAdd,staminaRisemultAdd;
+    [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private Sprite pipeSprite,UnuseablepipeSprite,invicible;
     [SerializeField] private AudioObjectyeah audiopip, fail;
     [SerializeField] private bool piped, CantUse;
@@ -64,9 +65,7 @@ public class ITM_MetalPipe : BaseItem
     private IEnumerator Waitin()
     {
         GameControllerScript.Instance.metalpipeStun = true;
-        
-        GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultAdd;
-        GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultAdd;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         GameControllerScript.Instance.player.staminaDropMultiple += staminaDropmultAdd;
         GameControllerScript.Instance.player.staminaRiseMultiple += staminaRisemultAdd;
         StartCoroutine(cantuse(cantuseduration));
@@ -85,8 +84,7 @@ public class ITM_MetalPipe : BaseItem
         }
         newGauge.Hide();
         piped = false;
-        GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultAdd;
-        GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultAdd;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SpeedModifier);
         GameControllerScript.Instance.player.staminaDropMultiple -= staminaDropmultAdd;
         GameControllerScript.Instance.player.staminaRiseMultiple -= staminaRisemultAdd;
         GameControllerScript.Instance.metalpipeStun = false;

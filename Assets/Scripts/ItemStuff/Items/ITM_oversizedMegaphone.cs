@@ -50,6 +50,7 @@ public class ITM_oversizedMegaphone : BaseItem
 				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, ennPeeCee.transform.position) <= stunRadius)
 				{
 					ennPeeCee.Stun(stuntime);
+                    ennPeeCee.DrainHp(20);
 				}
 			}
 		}

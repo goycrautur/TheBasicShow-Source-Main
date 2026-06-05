@@ -58,7 +58,7 @@ public class PlayerScript : MonoBehaviour
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
 			//if (ItemManager.Instance.Inventory[i].ItemID == 34 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "wallet_item") 
-			if (ItemManager.Instance.Inventory[i].ItemID == 34) AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
+			if (ItemManager.Instance.Inventory[i].ItemID == 26) AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
 		}
     }
 	private IEnumerator summonGaugTotem(Sprite textur)
@@ -126,13 +126,13 @@ public class PlayerScript : MonoBehaviour
 		stamina = maxStamina;
 		health = maxHealth;
 		playerRotation = transform.rotation;
-		mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 5);
 		principalBugFixer = 1;
 		gravity = 2763f;
 	}
 
 	private void InitializeMiscellaneous()
 	{
+		mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 5);
 		if (!gc.KF.gamePaused && cc.velocity.magnitude > 0f) gc.KF.LockMouse();
 		if (sweepingFailsave > 0f )sweepingFailsave -= Time.deltaTime;
 		else
@@ -256,7 +256,7 @@ public class PlayerScript : MonoBehaviour
 	{
 		if (carfuel > 0f)
 		{
-			if (isMoving) 
+			if (isMoving && !DeathCountdown) 
 			{
 				if (FowardValue >= FowardMinValue)FowardValue += (fowardVeloAccelerate + fowardVeloAccelerate/5) * Time.deltaTime;
 				carfuel -= Time.deltaTime;
@@ -269,7 +269,7 @@ public class PlayerScript : MonoBehaviour
 				GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.punchSound);
 				CameraScript.Instance.TempShakeAmount += 0.5f;
 			}
-			if (!isMoving) FowardValue -= fowardVeloDowning * Time.deltaTime;
+			if (!isMoving && !DeathCountdown) FowardValue -= fowardVeloDowning * Time.deltaTime;
 			if (FowardValue <= FowardMinValue) FowardValue = 0;
 			if (FowardValue >= 2.5f) breakwind(true,5f);
 			
@@ -402,8 +402,8 @@ public class PlayerScript : MonoBehaviour
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
 			//if (ItemManager.Instance.Inventory[i].ItemID == 31 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "totemOfUndying") TotemCheck = true;
-			if (ItemManager.Instance.Inventory[i].ItemID == 31) TotemCheck = true;
-			if (ItemManager.Instance.Inventory[i].ItemID == 56) AidsKitCheck = true;
+			if (ItemManager.Instance.Inventory[i].ItemID == 23) TotemCheck = true;
+			if (ItemManager.Instance.Inventory[i].ItemID == 48) AidsKitCheck = true;
 		}
 		if (!TotemCheck && !AidsKitCheck)
 		{
@@ -413,7 +413,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 			{
-				if (ItemManager.Instance.Inventory[i].ItemID == 56)
+				if (ItemManager.Instance.Inventory[i].ItemID == 48)
 				{
 					ItemManager.Instance.Inventory[i].ItemInstance.CustomSpecialFunction();
 					ItemManager.Instance.RemoveItemUses(i,ItemManager.Instance.Inventory[i].ItemInstance.OgUsesAmmount);
@@ -515,11 +515,11 @@ public class PlayerScript : MonoBehaviour
 	}
 	public void SetHP(HealthChangeMode mode, float fashionevalue, float invinciframes, bool ignoreIframes = false, bool playrandomizedPresetSound = false, bool dontResetIframes = true)
 	{
-
+		if (DeathCountdown) return;
 		killedbybaldi = false;
 		killedbyfamished = false;
 		killedbyhim = false;
-		if (Iframes > 0f && !ignoreIframes || timerTillDeath >= 0f && DeathCountdown)return;
+		if (Iframes > 0f && !ignoreIframes)return;
 		if (!dontResetIframes)Iframes = invinciframes;
 		if (fashionevalue < 0f) fashionevalue = 0f;
 		if (playrandomizedPresetSound)
@@ -555,6 +555,17 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
+		if (oncar && isMoving)
+		{
+			if (other.GetComponent<NPC>() != null)
+			{
+				NPC enpe = other.GetComponent<NPC>();
+				enpe.Stun(2f);
+				enpe.DrainHp(25);
+				enpe.PushNpc(enpe.GetNPCPushDirection(transform.forward),32, 1f);
+				return;
+			}
+		}
 		if (other.transform.name == "OfficeTrigger")alsoInOffice = true;
 		if (other.CompareTag("porta"))StartCoroutine(GameControllerScript.Instance.funnyportal());
 		if (other.CompareTag("lapporta"))StartCoroutine(GameControllerScript.Instance.LapManag.LapPortal());
@@ -562,6 +573,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
+		
 		if (other.transform.name == "Wanderer" & !gc.debugMode & !titlecard)
 		{
 			SetHP(HealthChangeMode.Remove, 40 / PlayerDmgResistance, 1f, false, true, false);

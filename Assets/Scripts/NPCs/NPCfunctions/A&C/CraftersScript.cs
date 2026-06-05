@@ -26,7 +26,17 @@ public class CraftersScript : NPC
             AngryMeter = 0;
         }
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
-        if (base.stun) agent.speed = 0f;
+        if (base.stun) 
+        {
+            if (angry)
+            {
+                audioDevice.ClearQueue(true);
+                agent.speed = base.agentSpeed;
+                spriteImage.sprite = normalSprite;
+                angry = false;
+            }
+            agent.speed = 0f;
+        }
         if (base.StunTime < 0f) agent.speed = base.agentSpeed;
         speedAlt1 = defspeedAlt1 * base.agentSpeedScale;
         speedAlt2 = defspeedAlt2 * base.agentSpeedScale;
@@ -65,8 +75,12 @@ public class CraftersScript : NPC
                 if (!stopUpdate)
                 {
                     stopUpdate = true;
-                    AngryMeter += 1;
-                    if (AngryMeter < 5) audioDevice.PlaySingleClip(angrySound);
+                    if (base.stun) return;
+                    else
+                    {
+                        AngryMeter += 1;
+                        if (AngryMeter < 5) audioDevice.PlaySingleClip(angrySound);
+                    }
                 }
             }
             else stopUpdate = false;

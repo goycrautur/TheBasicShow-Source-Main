@@ -51,7 +51,11 @@ public class AdditionalGameCustomizer : MonoBehaviour
             NoYCTP = false;
             modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3";
         }
-        if (GameControllerScript.Instance.mode == "LappingOfAsylum") modesText.text = "Lapping Of Asylum";
+        if (GameControllerScript.Instance.mode == "LappingOfAsylum") 
+        {
+            NoYCTP = true;
+            modesText.text = "Lapping Of Asylum";
+        }
     }
 
     private void Update()

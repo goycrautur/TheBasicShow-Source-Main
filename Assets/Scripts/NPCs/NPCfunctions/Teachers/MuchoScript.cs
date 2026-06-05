@@ -39,6 +39,16 @@ public class MuchoScript : NPC
             resetWaitTime();
             Move();
         }
+        if (base.fuckingdead)
+        {
+            stopMoving = true;
+        }
+        if (base.DeathRespawnTime < 0f)
+        {
+            stopMoving = false;
+            resetWaitTime();
+            Move();
+        }
         if (MuchoTempAnger > 0f) MuchoTempAnger -= 0.05f * Time.deltaTime;
         else MuchoTempAnger = 0f;
     }

@@ -41,7 +41,8 @@ public class ITM_SharpRock : BaseItem
             if (ennPeeCee != null)
             {
                 lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
-                ennPeeCee.Stun(2.5f);
+                ennPeeCee.Stun(3f);
+                ennPeeCee.DrainHp(15);
                 return true;
             }
         }

@@ -132,11 +132,47 @@ public class PickupScript : Interactable
             transform.gameObject.SetActive(true);
             mapIconSprite.enabled = true;
         }
+        //same shits copied from item manager dawg :sob:
+        for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+        {
+            if (ItemManager.Instance.Inventory[i].ItemInstance != null && GetHeldInstance() != null && ItemManager.Instance.Inventory[i].ItemInstance.ItemID == ID && ItemManager.Instance.Inventory[i].ItemInstance.Uses < ItemManager.Instance.Inventory[i].ItemInstance.MultiUseMaxUsesCap)
+            {
+                if (ItemManager.Instance.StackablesLimitDetection(i,true))
+                {
+                    Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT WHILE PICKING UP. FUCK");
+                    continue;
+                }
+                else
+                {
+                    ItemManager.Instance.Inventory[i].ItemInstance.Uses += GetHeldInstance().Uses;
+                    Debug.Log($"item uses : {ItemManager.Instance.Inventory[i].ItemInstance.Uses} at slot {i} after picking up when inven full");
+                    transform.gameObject.SetActive(false);
+                    mapIconSprite.enabled = false;
+                    ItemManager.Instance.UpdateItemUI();
+                    return;
+                }
+            }
+            if (ItemManager.Instance.Inventory[i].ItemInstance != null && GetHeldInstance() == null && ItemManager.Instance.Inventory[i].ItemInstance.ItemID == ID && ItemManager.Instance.Inventory[i].ItemInstance.Uses < ItemManager.Instance.Inventory[i].ItemInstance.MultiUseMaxUsesCap)
+            {
+                BaseItem itemobj = ItemManager.Instance.GetItem(ID);
+                if (ItemManager.Instance.StackablesLimitDetection(i,true))
+                {
+                    Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT WHILE PICKING UP. FUCK");
+                    continue;
+                }
+                else
+                {
+                    ItemManager.Instance.Inventory[i].ItemInstance.Uses += itemobj.Uses;
+                    Debug.Log($"item uses : {ItemManager.Instance.Inventory[i].ItemInstance.Uses} at slot {i} after picking up when inven full");
+                    transform.gameObject.SetActive(false);
+                    mapIconSprite.enabled = false;
+                    ItemManager.Instance.UpdateItemUI();
+                    return;
+                }
+            }
+
+        }
         ItemSwapLogic();
-    }
-    public void NonFullItemstackDetection()
-    {
-        
     }
     public void ItemSwapLogic()
     {
@@ -145,13 +181,13 @@ public class PickupScript : Interactable
 
         ID = ItemManager.Instance.GetSelectedItem();
 
-        BaseItem newItem = ItemManager.Instance.GetSelectedItemObject();
-        newItem.transform.parent = transform;
+        ItemSwapBaseitem = ItemManager.Instance.GetSelectedItemObject();
+        ItemSwapBaseitem.transform.parent = transform;
 
         if (!cachedSprites.ContainsKey(ID))
         {
             Texture itemTexture = ItemManager.Instance.GetItem(ID).BigSprite;
-            Sprite itemSprite = Sprite.Create((Texture2D)itemTexture, new Rect(0, 0, itemTexture.width, itemTexture.height), new Vector2(0.5f, 0.5f), newItem.TexturePPUThing);
+            Sprite itemSprite = Sprite.Create((Texture2D)itemTexture, new Rect(0, 0, itemTexture.width, itemTexture.height), new Vector2(0.5f, 0.5f), ItemSwapBaseitem.TexturePPUThing);
             cachedSprites.Add(ID, itemSprite);
         }
 
@@ -165,7 +201,8 @@ public class PickupScript : Interactable
     #region Utility Methods
     private BaseItem GetHeldInstance()
     {
-        return GetComponentInChildren<BaseItem>();
+        if (ItemSwapBaseitem != null) return ItemSwapBaseitem;
+        else return GetComponentInChildren<BaseItem>();
     }
 
     public bool SlotStuffs(bool trueOrNot)
@@ -226,6 +263,7 @@ public class PickupScript : Interactable
     private Sprite OriginalSprite;
     private MaterialPropertyBlock mpb;
     private bool hiding;
+    private BaseItem ItemSwapBaseitem;
     
     #endregion
 }

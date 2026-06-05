@@ -190,7 +190,7 @@ public class MathGameScript : MonoBehaviour
     }
     private void CreateQuestion(string Difficulity = "easy") // what the actual fuck
     {
-        int randomRangeInt = Difficulity == "easy" ? 10 : Difficulity == "normal" ? 50 : Difficulity == "hard" ? 100 : Difficulity == "expert" ? 250 : Difficulity == "maniac" ? 1000 : 10;
+        int randomRangeInt = Difficulity == "easy" ? 10 : Difficulity == "normal" ? 11 : Difficulity == "hard" ? 50 : Difficulity == "expert" ? 100 : Difficulity == "maniac" ? 500 : 10;
         int MultiplicationDifficulity = Difficulity == "easy" ? 0 : Difficulity == "normal" ? 1 : Difficulity == "hard" ? 2 : Difficulity == "expert" ? 3 : Difficulity == "maniac" ? 4 : 1;
         int[] ReduceArray = new int[]
 		{
@@ -401,7 +401,7 @@ public class MathGameScript : MonoBehaviour
             quarttext
         };
         string problemTextThing = "";
-        int[] QuestionTypesInt = Difficulity == "easy" ? new int[] {0,1,4,5,8,9,29,30,31} : Difficulity == "normal" ? new int[] {0,1,2,4,5,6,7,8,29,30,21,31,34} : new int[] {0,1,3,4};
+        int[] QuestionTypesInt = Difficulity == "easy" ? new int[] {0,1,4,5,29} : Difficulity == "normal" ? new int[] {0,1,4,5,8,9,29,30,31} : Difficulity == "hard" ? new int[] {0,1,2,4,5,6,7,8,29,30,21,31,34} : new int[] {0,1,3,4};
         int randomrangeThing = QuestionTypesInt[UnityEngine.Random.Range(0,QuestionTypesInt.Length)];
         solution = MathType[randomrangeThing].ToString();
         problemTextThing = probleTex[randomrangeThing];

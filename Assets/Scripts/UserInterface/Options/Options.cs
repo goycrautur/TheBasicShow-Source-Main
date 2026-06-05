@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Options : Singleton<Options>
 {
@@ -6,6 +7,11 @@ public class Options : Singleton<Options>
     {
         float savedVolume = PlayerPrefs.GetFloat("Volume", 1f);
         SetVolume(savedVolume);
+        for (int i = 0; i < MixerVolumes.Length; ++i)
+        {
+            float savedVol = PlayerPrefs.GetFloat($"Mixer Volume {i}", 1f);
+            SetMixerVolume(savedVol,i);
+        }
 
         int vSyncSetting = PlayerPrefs.GetInt("VSync", 0);
         SetVSync(vSyncSetting);
@@ -26,6 +32,17 @@ public class Options : Singleton<Options>
         volume = Mathf.Clamp01(newVolume);
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.Save();
+    }
+    public void SetMixerVolume(float newVolume,int volumenumb,string audMixExposedVarib = "",AudioMixerGroup audMix = null)
+    {
+        MixerVolumes[volumenumb] = Mathf.Clamp01(newVolume);
+        if (audMix != null)
+        {
+            if (newVolume != 0f) audMix.audioMixer.SetFloat(audMixExposedVarib, Mathf.Log10(Mathf.Pow(PlayerPrefs.GetFloat($"Mixer Volume {volumenumb}", 1f), 2f)) * 20f);
+            else audMix.audioMixer.SetFloat(audMixExposedVarib, -80f);
+        }
+        PlayerPrefs.SetFloat($"Mixer Volume {volumenumb}", MixerVolumes[volumenumb]);
         PlayerPrefs.Save();
     }
 
@@ -85,4 +102,5 @@ public class Options : Singleton<Options>
 
     private float volume = 1f;
     private Resolution[] resolutions;
+    private float[] MixerVolumes = new float[10];
 }

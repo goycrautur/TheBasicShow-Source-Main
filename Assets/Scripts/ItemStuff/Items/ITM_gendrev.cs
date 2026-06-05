@@ -21,6 +21,16 @@ public class ITM_gendrev : BaseItem
         float time = downDuration;
         GenderRevealSource1.ClearQueue(true);
         GenderRevealSource2.PlaySingleClip(boowoo);
+        foreach (NPC ennPeeCee in FindObjectsOfType<NPC>())
+		{
+			if (ennPeeCee != null)
+			{
+				if (Vector3.Distance(GameControllerScript.Instance.player.transform.position, ennPeeCee.transform.position) <= windobreakradius/1.5f)
+				{
+                    ennPeeCee.DrainHp(50);
+				}
+			}
+		}
         lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.deltaruneExplud);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, howManyHpToRemove, 0f, true,false);
         GameControllerScript.Instance.player.walkSpeedMultipler -= speedMultAlt;

@@ -2,12 +2,8 @@
 
 public class BaseItem : MonoBehaviour
 {
-    public void ChangeReferencesTexture(Texture smolsprites)
-    {
-        SmallSprite = smolsprites;
-    }
     #region Virtual Hooks
-    public void Awake()
+    public virtual void Awake()
     {
         if (Uses >= 2) MultiUseMaxUsesCap = Uses * MaxUsesCap;
         else MultiUseMaxUsesCap = MaxUsesCap;
@@ -25,6 +21,7 @@ public class BaseItem : MonoBehaviour
     public virtual void OnDeselect() { }
     public virtual void OnPickup() { }
     public virtual void CustomSpecialFunction() { }
+    public virtual void AfterUse() { }
 
     public virtual BaseItem CreateInstance() => Instantiate(this);
     #endregion

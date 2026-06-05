@@ -20,6 +20,7 @@ public class TransistionManager : MonoBehaviour
 
     public IEnumerator TransitionEnumerator()
     {
+        if (AfterTransisStartEvent != null) AfterTransisStartEvent.Invoke();
         //DiscordRPC_stuff.current.UpdateStatus("transistioning,.,.,.", "mwah", largimag, largtext);
         Cursor.LockCursor();
         if (transistype == TransistionType.CircleInOut)
@@ -29,6 +30,7 @@ public class TransistionManager : MonoBehaviour
             if (changeMusik) menumusi.SmoothlyPlayUHHHH(theme,smoothFadeDuration);
             yield return new WaitForSecondsRealtime(1.55f);
             to.transform.parent.gameObject.SetActive(true);
+            if (AfterTransisInTheMiddleOfCircleInOutEvent != null) AfterTransisInTheMiddleOfCircleInOutEvent.Invoke();
             circleIOTo.SetTrigger("yooo");
             yield return new WaitForSecondsRealtime(0.2f);
             yield return new WaitForSecondsRealtime(0.8f);
@@ -58,7 +60,7 @@ public class TransistionManager : MonoBehaviour
     [SerializeField] private CursorControllerScript Cursor;
     public bool fastTransistion;
     public TransistionType transistype = TransistionType.CircleInOut;
-    public UnityEvent AfterTransisCompleteEvent;
+    public UnityEvent AfterTransisStartEvent,AfterTransisInTheMiddleOfCircleInOutEvent,AfterTransisCompleteEvent;
     public enum TransistionType
     {
         Dither,

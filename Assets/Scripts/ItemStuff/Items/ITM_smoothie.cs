@@ -11,8 +11,6 @@ public class ITM_smoothie : BaseItem
 			if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
-        GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerAdd;
-        GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultiplerAdd;
         GameControllerScript.Instance.player.maxHealth += maxHealthAdd;
         
         StartCoroutine(amwaitin(duration));
@@ -20,6 +18,7 @@ public class ITM_smoothie : BaseItem
     }
     private IEnumerator amwaitin(float time)
     {
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Sprite, duration);
         time = duration;
         yield return null;
@@ -34,12 +33,12 @@ public class ITM_smoothie : BaseItem
             yield return null;
         }
         newGauge.Hide();
-        GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultiplerAdd;
-        GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultiplerAdd;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SpeedModifier);
         GameControllerScript.Instance.player.maxHealth -= maxHealthAdd;
         yield break;
     }
-    [SerializeField] private float duration = 60f, energy, passiveHealthRegen, walkspeedmultiplerAdd,runspeedmultiplerAdd,maxHealthAdd;
+    [SerializeField] private float duration = 60f, energy, passiveHealthRegen, maxHealthAdd;
+    [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private Sprite Sprite;
     [SerializeField] private AudioObjectyeah drink;
     [SerializeField] private bool tue;

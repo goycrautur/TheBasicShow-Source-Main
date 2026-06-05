@@ -108,6 +108,7 @@ public class ItemManager : MonoBehaviour
                 }
 
                 if (!SelectedItemObject.InfiniteUses) SelectedItemObject.Uses--;
+                if (SelectedItemObject.Uses >= 1) SelectedItemObject.AfterUse();
                 if (SelectedItemObject.Uses <= 0)
                 {
                     ExecuteItem(GetSelectedItem(), ExecutionType.Deselect);
@@ -131,7 +132,7 @@ public class ItemManager : MonoBehaviour
     }
     #endregion
     #region Animation Logic
-    private void AnimateSlotIfChanged(int slot)
+    public void AnimateSlotIfChanged(int slot)
     {
         bool hasItem = Inventory[slot].ItemID != 0;
         RawImage slotImage = Inventory[slot].ItemImages;
@@ -161,12 +162,12 @@ public class ItemManager : MonoBehaviour
         }
     } 
 
-    private void AnimateSwap(int slot)
+    public void AnimateSwap(int slot,Texture newtex = null)
     {
         
         RawImage slotImage = Inventory[slot].ItemImages;
         ItemImageSlide slider = slotImage.GetComponent<ItemImageSlide>();
-        Texture newTex = GetItemTexture(Inventory[slot].ItemID);
+        Texture newTex = newtex == null ? GetItemTexture(Inventory[slot].ItemID) : newtex;
 
         if (slider != null)
         {
@@ -487,6 +488,29 @@ public class ItemManager : MonoBehaviour
         SetItem(ItemSelection, ItemID, instance);
         UpdateItemUI();
     }
+    public bool StackablesLimitDetection(int whatslot,bool trueOrNot)
+    {
+        if (Inventory[whatslot].ItemInstance.MaxUsesCap >= 2)
+        {
+            if (Inventory[whatslot].ItemInstance.OgUsesAmmount >= 2 && (Inventory[whatslot].ItemInstance.Uses > (Inventory[whatslot].ItemInstance.MultiUseMaxUsesCap- (Inventory[whatslot].ItemInstance.MaxUsesCap-1))))
+            {
+                Debug.Log($"slot {whatslot} has item it cant stack");
+                return trueOrNot;
+            }
+        }
+        if (Inventory[whatslot].ItemInstance.MaxUsesCap == 1)
+        {
+            if (Inventory[whatslot].ItemInstance.OgUsesAmmount >= 2)
+            {
+                
+                Debug.Log($"slot {whatslot} has item it cant stack");
+                return trueOrNot;
+            }
+        }
+        Debug.Log($"slot {whatslot} has item it can stack");
+        return !trueOrNot;
+    }
+    
 
     public void CollectItem(int ItemID, BaseItem instance = null)
     {
@@ -495,7 +519,7 @@ public class ItemManager : MonoBehaviour
         {
             if (Inventory[i].ItemInstance != null && instance != null && Inventory[i].ItemInstance.ItemID == ItemID && Inventory[i].ItemInstance.Uses < Inventory[i].ItemInstance.MultiUseMaxUsesCap)
             {
-                if (Inventory[i].ItemInstance.OgUsesAmmount >= 2 &&Inventory[i].ItemInstance.Uses > (Inventory[i].ItemInstance.MultiUseMaxUsesCap- Inventory[i].ItemInstance.MaxUsesCap))
+                if (StackablesLimitDetection(i,true))
                 {
                     Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT. FUCK");
                     continue;
@@ -511,7 +535,7 @@ public class ItemManager : MonoBehaviour
             if (Inventory[i].ItemInstance != null && instance == null && Inventory[i].ItemInstance.ItemID == ItemID && Inventory[i].ItemInstance.Uses < Inventory[i].ItemInstance.MultiUseMaxUsesCap)
             {
                 BaseItem itemobj = GetItem(ItemID);
-                if (Inventory[i].ItemInstance.OgUsesAmmount >= 2 &&Inventory[i].ItemInstance.Uses > (Inventory[i].ItemInstance.MultiUseMaxUsesCap - (Inventory[i].ItemInstance.MaxUsesCap-1)))
+                if (StackablesLimitDetection(i,true))
                 {
                     Debug.Log($"SLOT {i} REACHED ITEM STACK LIMIT. FUCK");
                     continue;
@@ -624,7 +648,8 @@ public class ItemManager : MonoBehaviour
     #region Fields & Serialized
     public Dictionary<string, BaseItem> Items = new Dictionary<string, BaseItem>();
     [Serializable]
-    public struct ItemsListShit {
+    public struct ItemsListShit 
+    {
         public string name;
         public BaseItem items;
     }

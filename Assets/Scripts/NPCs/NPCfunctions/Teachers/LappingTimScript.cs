@@ -31,7 +31,7 @@ public class LappingTimScript : NPC
         else TimTempSpd = 0f;
         if (this.isActiveAndEnabled)
         {
-            agent.speed = base.agentSpeed * (TimCurSpd / 4) * (TimTempSpd + 1f);
+            agent.speed = base.agentSpeed * (TimCurSpd / 6) * (TimTempSpd + 1f);
             if (base.stun) 
             {
                 agent.speed = 0;
@@ -40,7 +40,7 @@ public class LappingTimScript : NPC
                 timObjectOkBro[2].SetActive(false);
                 TimAnimator.Play("tim_Stun");
             }
-            if (base.StunTime < 0f) agent.speed = base.agentSpeed * (TimCurSpd / 4)* (TimTempSpd + 1f);
+            if (base.StunTime < 0f) agent.speed = base.agentSpeed * (TimCurSpd / 6)* (TimTempSpd + 1f);
         }
         StateUpdateStuffOkBr();
     }

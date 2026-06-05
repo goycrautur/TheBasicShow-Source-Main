@@ -20,6 +20,7 @@ public class NPC : MonoBehaviour
         if (!dosentUseNavmesh) gc.GlobalNpcList.Add(this);
         OgLayerName = "npcLayer";
         XrayLayerName = "npcXrayLayer";
+        hp = maxhp;
         OnStart();
     }
     protected virtual void OnDestroy()
@@ -29,12 +30,15 @@ public class NPC : MonoBehaviour
 
     protected virtual void Update()
     {
+        confusionEffect.SetActive(stun);
+        DeadSprite.SetActive(fuckingdead);
+        if (NpcIsNotSpriteRenderer) NpcGameObj.SetActive(!fuckingdead);
         if (IsMetalPiped) MetalPipedEffect();
         else NonMetalPipedEffect();
         if (canTargetPlayer)CheckForPlayer();
         if (!isInteracting && !dosentUseNavmesh) HandleMovement();
-        confusionEffect.SetActive(stun);
-        if (!stun || stopOverridingStun)IsHitboxValid = !squished;
+        
+        if (!fuckingdead && (!stun || stopOverridingStun))IsHitboxValid = !squished;
         if (StunTime < 0f)
 		{
             stun = false;
@@ -46,6 +50,30 @@ public class NPC : MonoBehaviour
 			StunTime -= Time.deltaTime; 
             IsHitboxValid = false;
 		}
+        if (hp <= 0 && !fuckingdead)
+        {
+            StunTime = -1f;
+            stun = false;
+            DeathRespawnTime = DeathRespawnTimeSet;
+            fuckingdead = true;
+            
+        }
+        if (DeathRespawnTime < 0f)
+        {
+            hp = maxhp;
+            fuckingdead = false;
+            IsHitboxValid = true;
+            DeathRespawnTime = 1f;
+            agentSpeedScale = 1f;
+            if (!NpcIsNotSpriteRenderer) NpcSprites.color = new Color(NpcSprites.color.r,NpcSprites.color.g,NpcSprites.color.b,1f);
+        }
+        if (fuckingdead)
+        {
+            if (RespawnAfterDeath) DeathRespawnTime -= Time.deltaTime;
+            IsHitboxValid = false;
+            agentSpeedScale = 0f;
+            if (!NpcIsNotSpriteRenderer) NpcSprites.color = new Color(NpcSprites.color.r,NpcSprites.color.g,NpcSprites.color.b,0f);
+        }
 
         OnUpdate();
     }
@@ -93,8 +121,13 @@ public class NPC : MonoBehaviour
     {
         agentSpeedScale = 1f;
     }
+    public virtual void DrainHp(int Value)
+    {
+        hp -= Value;
+    }
     public virtual void Stun(float Duration)
     {
+        if (fuckingdead) return;
         StunTime = Duration;
         stun = true;
     }
@@ -155,6 +188,7 @@ public class NPC : MonoBehaviour
     #region Npc Push Stuff
     public void PushNpc(Vector3 pushDirection, float pushForce, float duration)
 	{
+        if (fuckingdead) return;
 		if (NpcPushCorou != null)
         {
             StopCoroutine(NpcPushCorou);
@@ -215,14 +249,17 @@ public class NPC : MonoBehaviour
     [Header("Misc Stuffs")]
     #region Internal State
     public float coolDown;
-    public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime;
+    public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime,DeathRespawnTime,DeathRespawnTimeSet;
     public bool squished,stun,stopOverridingStun;
     public NavMeshAgent agent;
     public CharacterController cecil;
-    public GameObject confusionEffect,StunSprite;
+    public GameObject confusionEffect,StunSprite,DeadSprite;
+    public SpriteRenderer NpcSprites;
+    public bool NpcIsNotSpriteRenderer;
+    public GameObject NpcGameObj;
     public int hp, maxhp = 100;
-    public bool fuckingdead,UsesStunSprite;
-    public bool dosentUseNavmesh;
+    public bool fuckingdead,RespawnAfterDeath,UsesStunSprite,dosentUseNavmesh;
+    
     public Coroutine NpcPushCorou;
     [HideInInspector] public float mainAgentSpeedScale;
     #endregion

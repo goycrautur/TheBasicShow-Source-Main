@@ -43,6 +43,7 @@ public class bobmprojScript : MonoBehaviour
         {
             NPC enpe = cork.GetComponent<NPC>();
             enpe.Stun(NpcStuntime);
+            enpe.DrainHp(DamageToNpc);
             enpe.PushNpc(enpe.GetNPCPushDirection(transform.forward),NpcPushVal, 1f);
             boom(true);
             return;
@@ -98,7 +99,7 @@ public class bobmprojScript : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float speed;
     [SerializeField] private float fallvelocity,iframe,VerticalGrav,HorizontalGrav;
-    [SerializeField] private int bouncetime;
+    [SerializeField] private int bouncetime,DamageToNpc;
     [SerializeField] private float NpcStuntime,NpcPushVal,BounceVelocity;
 
     [Header("Lifespan Settings")]

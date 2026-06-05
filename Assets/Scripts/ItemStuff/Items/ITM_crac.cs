@@ -13,8 +13,7 @@ public class ITM_crac : BaseItem
     private IEnumerator amwaitin(float time)
     {
         AdditionalGameCustomizer.Instance.FovAmmount += FovAmmount;
-        GameControllerScript.Instance.player.walkSpeedMultipler += speedMult;
-        GameControllerScript.Instance.player.runSpeedMultipler += speedMult;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Sprite, duration);
         time = duration;
         yield return null;
@@ -28,12 +27,12 @@ public class ITM_crac : BaseItem
             yield return null;
         }
         newGauge.Hide();
-        GameControllerScript.Instance.player.walkSpeedMultipler -= speedMult;
-        GameControllerScript.Instance.player.runSpeedMultipler -= speedMult;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SpeedModifier);
         AdditionalGameCustomizer.Instance.FovAmmount -= FovAmmount;
         yield break;
     }
-    [SerializeField] private float duration = 60f, speedMult,FovAmmount;
+    [SerializeField] private float duration = 60f,FovAmmount;
+    [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private AudioObjectyeah Used;
     [SerializeField] private Sprite Sprite;
 }
