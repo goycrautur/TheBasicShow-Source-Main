@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 0
   WalkSpeedStats: 14
-  RunSpeedStats: 22
+  RunSpeedStats: 26
   MaxStamina: 100
   StaminaDrainRateStats: 10
   StaminaHealsRateStats: 20

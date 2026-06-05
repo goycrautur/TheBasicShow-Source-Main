@@ -107,7 +107,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 			{
-				if (ItemManager.Instance.Inventory[i].ItemID == 31)
+				if (ItemManager.Instance.Inventory[i].ItemID == 23)
 				{
 					ItemManager.Instance.RemoveItemUses(i,1);
 					return;
