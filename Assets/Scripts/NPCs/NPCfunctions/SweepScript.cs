@@ -5,6 +5,7 @@ public class SweepScript : NPC
     #region Initialization and Setup
     public override void OnStart()
     {
+        Physics.IgnoreCollision(base.cecil, GetComponent<CapsuleCollider>(), ignore: true);
         audioDevice = GetComponent<AudioManagerLiveReaction>();
         waitTime = Random.Range(10f, 20f);
     }

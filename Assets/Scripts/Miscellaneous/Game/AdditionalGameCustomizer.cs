@@ -21,12 +21,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public bool unloc, iteinfo,captio;
     private void InitializeGameTuff()
     {
-        iteinfo = PlayerPrefsExtension.GetBool("ItemInfo");
-        captio = PlayerPrefsExtension.GetBool("Captions");
-        ItemInfoShit = iteinfo;
-        Subtitles = captio;
-        ItemInfostuffahah.SetActive(ItemInfoShit);
-        subtitlesCanvas.SetActive(Subtitles);
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         bool unloc = PlayerPrefsExtension.GetBool("thonkPad");
         NoYCTP = unloc;
@@ -67,6 +61,12 @@ public class AdditionalGameCustomizer : MonoBehaviour
         KeyFunctions();
         CurrencySystem();
         PercentageSystemShit();
+        iteinfo = PlayerPrefsExtension.GetBool("ItemInfo");
+        captio = PlayerPrefsExtension.GetBool("Captions");
+        ItemInfoShit = iteinfo;
+        Subtitles = captio;
+        ItemInfostuffahah.SetActive(ItemInfoShit);
+        subtitlesCanvas.SetActive(Subtitles);
         
         speedtextmf.text = Math.Round(GameControllerScript.Instance.player.playerSpeed,2).ToString();
         spee.sprite = Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && GameControllerScript.Instance.player.stamina > 0f ? run2 : run1;

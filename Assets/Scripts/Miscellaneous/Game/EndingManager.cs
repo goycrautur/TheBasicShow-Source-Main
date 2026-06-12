@@ -95,13 +95,6 @@ public class EndingManager : MonoBehaviour
             EndingSequenceFlashTime = 10.323f;
             EndingSequenceHelicopTime = 5.2f;
         }
-        else if (secret && Game.ExclusiveRoute == "ClassicPlayerSecretEndChal") 
-        {
-            Game.lbams.EndingMusic.PlaySingleClip(ExclusivFinaleSecretEndClassicPlayer);
-            EndingSequenceWaitTime = ExclusivFinaleSecretEndClassicPlayer.audClip.length;
-            EndingSequenceFlashTime = 8f;
-            EndingSequenceHelicopTime = 1f;
-        }
         ExtremeForceLook = true;
         StartCoroutine(lockcam());
         StartCoroutine(EndingSequence(EndingSequenceWaitTime,EndingSequenceFlashTime,ID,secret));
@@ -190,7 +183,7 @@ public class EndingManager : MonoBehaviour
         GameControllerScript.Instance.RainbowHudFade.Play("hudFadeInRainb", -1, 0f);
         GameControllerScript.Instance.SubtitlesHudFade.Rebind();
         GameControllerScript.Instance.SubtitlesHudFade.Play("hudFadeInsubs", -1, 0f);
-        if (rankcheck == "J") pitHole.Instance.hiIgotChanged();
+        if (rankcheck == "T") pitHole.Instance.hiIgotChanged();
         Game.modeState = "???????????????????";
         StartCoroutine(BlackFlash());
 

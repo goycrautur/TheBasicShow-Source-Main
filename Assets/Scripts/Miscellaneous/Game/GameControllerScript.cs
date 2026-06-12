@@ -16,6 +16,7 @@ public class GameControllerScript : MonoBehaviour
     private void Awake() => Instance = this;
     public static GameControllerScript Instance;
     #endregion
+    
 
     #region UnityCallbacks
     private void Start()
@@ -40,6 +41,11 @@ public class GameControllerScript : MonoBehaviour
         GameOverFunction();
         muchofinaleStuff();
         randomASSstuff();
+        SkipChecker();
+    }
+    private void SkipChecker() 
+    {
+        if (vidplay.isPlaying && (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))) vidFinishEvent();
     }
     #endregion
     public void randomASSstuff()
@@ -403,21 +409,17 @@ public class GameControllerScript : MonoBehaviour
             //Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = lbams.EscapeMusic.audioDevice;
         }
     }
-    public IEnumerator basicShowMusicShit()
+    public IEnumerator FinaleDelayer(float waitSecs)
     {
-        if (mode == "story")
-        {
-            lbams.EscapeMusic.ClearQueue(true);
-            lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[0]);
-            yield return new WaitForSeconds(lbams.NormalTbsFinale[0].audClip.length);
-            ElevdorRea.ForEach(ed => ed.Opendor = true);
-            Gatesrea.ForEach(g => g.Down(false));
-            lbams.EscapeMusic.ClearQueue(true);
-            lbams.EscapeMusic.SetLoop(true);
-            lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[1]);
-            yield return new WaitForSeconds(0.1f);
-            finaleMode = true;
-        }
+        yield return new WaitForSeconds(waitSecs);
+        finaleMode = true;
+    }
+    public void ManualRaiseExit(bool FinaleDelay = false, float wait = 0f)
+    {
+        ElevdorRea.ForEach(ed => ed.Opendor = true);
+        Gatesrea.ForEach(g => g.Down(false));
+        if (!FinaleDelay) finaleMode = true;
+        else StartCoroutine(FinaleDelayer(wait));
     }
     public IEnumerator tiemoutStu()
     {
@@ -428,9 +430,13 @@ public class GameControllerScript : MonoBehaviour
         lbams.TimeoutMusic.SetLoop(true);
         lbams.TimeoutMusic.QueueAudio(lbams.timeoutMusicAud);
     }
-    private void isvidfinished(VideoPlayer vp)
+    private void isvidfinished(VideoPlayer vp) => vidFinishEvent();
+    private void vidFinishEvent()
 	{
+
         Time.timeScale = 1;
+        vidplay.Pause();
+        vidplay.Stop();
         MainHudFade.Rebind();
         MainHudFade.Play("hudFadeIn", -1, 0f);
         RainbowHudFade.Rebind();
@@ -441,7 +447,7 @@ public class GameControllerScript : MonoBehaviour
         ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
         lbams.EscapeMusic.ClearQueue(true);
         lbams.EscapeMusic.SetLoop(true);
-        lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[4]);
+        lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[2]);
         
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
@@ -508,10 +514,16 @@ public class GameControllerScript : MonoBehaviour
         StopCoroutine(tweeniconSolo(Color.white, 0, 1, 0.5f, eIds));
         StartCoroutine(tweeniconSolo(Color.white, 0, 1, 0.5f, eIds));
 
+
         if (mode == "story")
         {
             if (!FinaleSecret)
             {
+                if (warrealest)
+                {
+                    discordupdate("exit");
+                    return;
+                }
                 if (AdditionalGameCustomizer.Instance != null)
                 {
                     switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
@@ -532,6 +544,11 @@ public class GameControllerScript : MonoBehaviour
         {
             if (mode == "story")
             {
+                if (warrealest)
+                {
+                    discordupdate("exit");
+                    return;
+                }
                 if (!FinaleSecret)
                 {
                     if (AdditionalGameCustomizer.Instance != null)
@@ -572,6 +589,11 @@ public class GameControllerScript : MonoBehaviour
         {
             if (mode == "story")
             {
+                if (warrealest)
+                {
+                    discordupdate("exit");
+                    return;
+                }
                 if (!FinaleSecret)
                 {
                     if (AdditionalGameCustomizer.Instance != null)
@@ -588,7 +610,7 @@ public class GameControllerScript : MonoBehaviour
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 lbams.EscapeMusic.ClearQueue(true);
                                 lbams.EscapeMusic.SetLoop(true);
-                                lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[2]);
+                                lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[1]);
                                 lbams.ChaosAudioSource.ClearQueue(true);
                                 lbams.ChaosAudioSource.SetLoop(true);
                                 lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStart);
@@ -610,7 +632,11 @@ public class GameControllerScript : MonoBehaviour
         {
             if (mode == "story")
             {
-                
+                if (warrealest)
+                {
+                    discordupdate("exit");
+                    return;
+                }
                 if (!FinaleSecret)
                 {
                     if (AdditionalGameCustomizer.Instance != null)
@@ -661,6 +687,11 @@ public class GameControllerScript : MonoBehaviour
         {
             if (mode == "story")
             {
+                if (warrealest)
+                {
+                    discordupdate("exit");
+                    return;
+                }
                 if (!FinaleSecret)
                 {
                     if (AdditionalGameCustomizer.Instance != null)
@@ -698,6 +729,11 @@ public class GameControllerScript : MonoBehaviour
         {
             if (mode == "story")
             {
+                if (warrealest)
+                {
+                    discordupdate("exit");
+                    return;
+                }
                 if (!FinaleSecret)
                 {
                     if (AdditionalGameCustomizer.Instance != null)
@@ -712,7 +748,7 @@ public class GameControllerScript : MonoBehaviour
                                 lbams.EscapeMusic.ClearQueue(true);
                                 
                                 lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinaleIntros[0]);
-                                lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[5]);
+                                lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[3]);
                                 lbams.EscapeMusic.SetLoop(true);
                                 easingExit(new Color(1f / (exitsReached / 1.25f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 break;
@@ -724,7 +760,6 @@ public class GameControllerScript : MonoBehaviour
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[4]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[5]);
-                    
                     lbams.EscapeMusic.SetLoop(true);
                 }
             }
@@ -858,6 +893,7 @@ public class GameControllerScript : MonoBehaviour
         public string name;
     }
     #region SerializedFields
+    [Header("son")]
     public VideoPlayer vidplay;
     public RawImage thatRawImageThatIHate;
     public AudioMixerGroup[] MixerOverrideGlobalson;

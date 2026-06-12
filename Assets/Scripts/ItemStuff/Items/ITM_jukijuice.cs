@@ -20,6 +20,12 @@ public class ITM_jukijuice : BaseItem
 		{
 			if (GameControllerScript.Instance.player.door.lockTime <= 0f)GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
+        BaseItem ite = this;
+        if (ite.Uses == 1)
+        {
+            GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, JukiJuiceStatsistic[0].Stamina);
+            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, JukiJuiceStatsistic[0].helth, 0f, true,false);
+        }
         return true;
     }
     public override void AfterUse()

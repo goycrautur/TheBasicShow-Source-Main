@@ -31,7 +31,7 @@ public class WarningScreenScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.5f);
         Cursor.UnlockCursor();
-        SceneManager.LoadScene(BootUp);
+        LoadingManagerThing.Instance.LoadSceneAsyncUHHH(BootUp);
     }
 
     private void Update()

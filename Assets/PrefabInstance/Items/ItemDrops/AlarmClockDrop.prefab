@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3651919329860932091}
   - component: {fileID: 82990200698204521}
   - component: {fileID: 3233387412828669102}
+  - component: {fileID: 6387560154999987177}
   m_Layer: 0
   m_Name: AlarmClockDrop
   m_TagString: Door
@@ -74,8 +75,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gc: {fileID: 0}
   ring: {fileID: 8300000, guid: 55318553eafae5f46a2e77631c226d27, type: 3}
-  audioDevice: {fileID: 82990200698204521}
-  windAud: {fileID: 5364421069070367088}
+  wind: {fileID: 0}
+  audioDevice: {fileID: 6387560154999987177}
+  windAud: {fileID: 5080463590801606754}
   timePresets: 0f0000001e0000002d0000003c000000
   timeLeft: 15
   lifeSpan: 15
@@ -157,7 +159,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 50
-  MaxDistance: 500
+  MaxDistance: 175
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -248,6 +250,31 @@ MonoBehaviour:
   npcStunTime: 0
   notNpcEntirely: 1
   notNpcUseNavmesh: 1
+--- !u!114 &6387560154999987177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865257239569151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  PlayAtAwakeQueue: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
+  AudioManStandalone: 0
+  MixerOverrides: []
 --- !u!1 &1580657998132333942
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3124382781043763122}
   - component: {fileID: 5364421069070367088}
+  - component: {fileID: 5080463590801606754}
   m_Layer: 0
   m_Name: WindSource
   m_TagString: Untagged
@@ -417,7 +445,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 50
-  MaxDistance: 500
+  MaxDistance: 175
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -492,3 +520,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5080463590801606754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164610551852298340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayAtAwake: 0
+  PlayAtAwakeQueue: 0
+  StartingLoop: 0
+  thoseWhoObject: {fileID: 0}
+  ForceSubPos: 0
+  loop: 0
+  SubPosForced: {x: 0, y: 0, z: 0}
+  sourceId: 0
+  audioDevice: {fileID: 0}
+  queuedAudios: []
+  queuedSubtitles: []
+  AudioManStandalone: 0
+  MixerOverrides: []

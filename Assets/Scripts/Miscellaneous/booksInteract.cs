@@ -162,7 +162,24 @@ public class booksInteract : Interactable
                 //lgm.Television.baldingit = true;
                 //StartCoroutine(lgm.timeounaleshit(lgm.aud_AllNotebooks,lgm.balSubs));
                 lgm.Television.TeacherJerryingIt = true;
-                if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                if (!gc.FinaleSecret && AdditionalGameCustomizer.Instance != null)
+                {
+                    switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                    {
+                        case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese,true));
+                            break;
+                    }
+                }
             }
             if (gc.mode == "famished")
             {
@@ -218,7 +235,7 @@ public class booksInteract : Interactable
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                 gc.Gatesrea.ForEach(g => g.Down());
-                                StartCoroutine(gc.basicShowMusicShit());
+                                KeyFunctions.hi.PlaceholdCutscene(gc.lbams.NormalTbsFinale[0].audClip.length,true,lgm.TbsFinaleEventNormal1, lgm.TbsFinaleEventNormal2);
                                 break;
                         }
                     }

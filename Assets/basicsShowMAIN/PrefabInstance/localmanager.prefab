@@ -48,22 +48,21 @@ MonoBehaviour:
   - language: EN
     pairs:
     - key: warnMenu_Warning
-      value: Hi, Quangg/Gray creatur here!
+      value: hi hello hawwo hello
     - key: warnMenu_Disclaimer
-      value: this build was made specifically for maxplay livestream,its abit rushed
-        i know,(like main mf chasing you in story is mucho mouse etc-)
+      value: Finnally new warning text lol
     - key: warnMenu_dontleak
-      value: 'there will be way more content in here instead of the demo so the stream
-        dosent end early :jerrytroll:,and dont leak this!!!
+      value: 'if you somehow got your hands on this build (for non playtester) this
+        mod is in a phase of me wana overhaul shit realrealrealreal
 
-        Trigger warning:
-        loud noises, flashing lights, etc'
+        for
+        playtester play yum'
     - key: warnMenu_playmf
       value: Have fun and <color=red>PROCEED
     - key: Menu_play
       value: <#E5B67E>press on this text or press enter
     - key: Menu_VersionText
-      value: <#808080>idkwhateverbuildok
+      value: <#808080>overhaul_0.2
     - key: Menu_Back
       value: Back
     - key: Menu_PlayReal
@@ -73,9 +72,19 @@ MonoBehaviour:
     - key: Options_sensitiv
       value: Sensitivity Bar
     - key: Options_controlsconfigu
-      value: Controls
+      value: Controls Mapper
+    - key: Options_gameplaysetti
+      value: Gameplay Settings
     - key: Options_volum
-      value: Volume
+      value: ---Volume Management---
+    - key: Options_Volum_Musi
+      value: Music volumes
+    - key: Options_Volum_Sfx
+      value: Sound effect volumes
+    - key: Options_Volum_Vfx
+      value: Character voices volumes
+    - key: Options_Volum_OtherMusics
+      value: Other music volumes
     - key: Options_reso
       value: Resolution
     - key: Options_anaismovemen
@@ -94,6 +103,8 @@ MonoBehaviour:
       value: Subtitles
     - key: Options_walshak
       value: Wall Shakes
+    - key: Options_skipwarning
+      value: Skip the warning menu entirely
     - key: Options_Back
       value: Back
     - key: CMapper_Back
@@ -161,8 +172,7 @@ MonoBehaviour:
     - key: HoverInfoText_Options_controlsconfigu
       value: GO [CONFIGURE] YOURSELF
     - key: HoverInfoText_Options_volum
-      value: probally will not fully work im not sure,just use the windows volume
-        shit lol
+      value: voluem stuffz
     - key: HoverInfoText_Options_reso
       value: having a decompile allowing ppl to change resolution is so peak oml
     - key: HoverInfoText_Options_anaismovemen
@@ -183,6 +193,8 @@ MonoBehaviour:
     - key: HoverInfoText_Options_zershake
       value: Enables/Disables wall shake in zerull/chair bossfight (for those who
         had low focus)
+    - key: HoverInfoText_Options_nowarnballs
+      value: 'erm yea its in the name :cold_face:'
     - key: HoverInfoText_Options_goback
       value: goin back already?.,.,,.,.,.,.,
     - key: HoverInfoText_Modifiers_syfm
@@ -200,6 +212,9 @@ MonoBehaviour:
     - key: HoverInfoText_Modifiers_bloxyzerull
       value: just switch out the music for your lapping problem trust- (Only compatible
         with Zerull Mode)
+    - key: HoverInfoText_Modifiers_shrinkinginventory
+      value: shrinks your inventory everytime you successfully use an item (dosent
+        count when you drop it,yes i recreated a bb+ challenges pray)
     - key: ModeSelectMen_Back
       value: Back
     - key: ModeSelectMen_locked
@@ -237,7 +252,9 @@ MonoBehaviour:
     - key: Playmenu_Modifier_ChaosMode
       value: Chaos.. Mode!
     - key: Playmenu_Modifier_bloxyzerull
-      value: Bloxifyed
+      value: Bloxifyed (one mode only)
+    - key: Playmenu_Modifier_ShrinkingInven
+      value: Shrinking Inventory
     - key: Playmenu_Modifier_muchomous_Locked
       value: LOCKED
     - key: Playmenu_Modifier_EvapPad_Locked
@@ -247,6 +264,8 @@ MonoBehaviour:
     - key: Playmenu_Modifier_ChaosMode_Locked
       value: LOCKED
     - key: Playmenu_Modifier_bloxyzerull_Locked
+      value: LOCKED
+    - key: Playmenu_Modifier_ShrinkingInven_Locked
       value: LOCKED
     - key: global_stunned
       value: '*Stunned*'
@@ -450,4 +469,4 @@ MonoBehaviour:
     - key: loadaText
       value: Loading
   currentLang: EN
-  currentJsonVersion: 19
+  currentJsonVersion: 25

@@ -66,7 +66,7 @@ public class GameOverScript : MonoBehaviour
 			delay -= 1f * Time.deltaTime;
 			if (delay <= 0f)
 			{
-				if (chance < 98f) SceneManager.LoadScene(OverScene);
+				if (chance < 98f) LoadingManagerThing.Instance.LoadSceneAsyncUHHH(OverScene);
 				else
 				{
 					image.transform.localScale = new Vector3(5f, 5f, 1f);
@@ -78,6 +78,8 @@ public class GameOverScript : MonoBehaviour
 					}
 					if (delay <= -5f) Application.Quit();
 				}
+				okitaccepte = false;
+				return;
 			}
 		}
 	}

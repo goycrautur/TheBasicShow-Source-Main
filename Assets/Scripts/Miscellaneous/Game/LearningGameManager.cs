@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class LearningGameManager : MonoBehaviour
 {
@@ -37,10 +38,11 @@ public class LearningGameManager : MonoBehaviour
             
         }
     }
-    public IEnumerator timeounaleshit(AudioObjectyeah clipped)
+    public IEnumerator timeounaleshit(AudioObjectyeah clipped,bool BypassTimepause = false)
 	{
-		yield return new WaitForSeconds(Singleton<TimeOutManagerFUCKYEA>.Instance.timeoutTVDurationStuffIncaseReachingFinaleLmfao);
-        StartCoroutine(Television.StartTVSequence(clipped));
+		if (!BypassTimepause) yield return new WaitForSeconds(0f);
+        else yield return new WaitForSecondsRealtime(0f);
+        Television.TvSequencer(clipped,BypassTimepause);
     }
     public IEnumerator transiskill(GameObject subject)
 	{
@@ -105,7 +107,24 @@ public class LearningGameManager : MonoBehaviour
                     //Television.baldingit = true;
                     //StartCoroutine(timeounaleshit(aud_AllNotebooks,balSubs));
                     Television.TeacherJerryingIt = true;
-                    if (!gc.FinaleSecret) StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese));
+                    if (!gc.FinaleSecret && AdditionalGameCustomizer.Instance != null)
+                    {
+                        switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                        {
+                            case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                                if (!gc.FinaleSecret) StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese));
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                                if (!gc.FinaleSecret) StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese));
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                                if (!gc.FinaleSecret) StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese));
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                if (!gc.FinaleSecret) StartCoroutine(timeounaleshit(aud_TeacherJerryAllCheese,true));
+                                break;
+                        }
+                    }
                 }
                 else lbams.MainSource3.PlaySingleClip(aud_AllNotebooks);
                 if (gc.warrealest || gc.timeout)
@@ -148,20 +167,15 @@ public class LearningGameManager : MonoBehaviour
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.TBS:
                                     gc.Gatesrea.ForEach(g => g.Down());
-                                    StartCoroutine(gc.basicShowMusicShit());
+                                    //StartCoroutine(gc.basicShowMusicShit());
+                                    KeyFunctions.hi.PlaceholdCutscene(gc.lbams.NormalTbsFinale[0].audClip.length,true,TbsFinaleEventNormal1, TbsFinaleEventNormal2);
                                     break;
                             }
                         }
                     }
                     if (gc.FinaleSecret)
                     {
-                        gc.lbams.EscapeMusic.ClearQueue(true);
-                        gc.lbams.EscapeMusic.QueueAudio(gc.lbams.EvapV2FinaleIntros[0]);
-                        gc.lbams.EscapeMusic.QueueAudio(gc.lbams.EvapV2Finale[0]);
-                        gc.lbams.EscapeMusic.SetLoop(true);
-                        gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
-                        gc.Gatesrea.ForEach(g => g.Down(false));
-                        gc.finaleMode = true;
+                        KeyFunctions.hi.PlaceholdCutscene(gc.lbams.EvapV2FinaleIntros[0].audClip.length,true,TbsSecretFinaleEvent1, TbsSecretFinaleEvent2);
                     }
                 }
             }
@@ -176,6 +190,7 @@ public class LearningGameManager : MonoBehaviour
     public AudioManagerLiveReaction learnMusic;
     public AudioObjectyeah LearnAudio,aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout;
     public GameObject quarter;
+    public UltEvents.UltEvent TbsFinaleEventNormal1,TbsFinaleEventNormal2,TbsSecretFinaleEvent1,TbsSecretFinaleEvent2;
 
 
     [Header("Scripts")]

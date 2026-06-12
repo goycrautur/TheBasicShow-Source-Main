@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayButtonScri : MonoBehaviour
 {
@@ -8,7 +7,8 @@ public class PlayButtonScri : MonoBehaviour
 		PlayerPrefs.SetString("CurrentMode", Mode);
 		PlayerPrefs.SetString("CurDifficulity", Difficulity);
         PlayerPrefs.Save();
-        SceneManager.LoadSceneAsync(LoadScene);
+        //SceneManager.LoadSceneAsync(LoadScene);
+		LoadingManagerThing.Instance.LoadSceneAsyncUHHH(LoadScene,0,false);
 	}
 
     public void SetMode(string i) => Mode = i;

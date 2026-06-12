@@ -11,9 +11,16 @@ public class VideoIntro : MonoBehaviour
 		Singleton<Options>.Instance.GetVolume();
         Singleton<Options>.Instance.GetVSync();
 		bool skip = PlayerPrefsExtension.GetBool("warnskip");
-		if (skip) SceneManager.LoadScene(scenenaem);
-		videoPlayer.Play();
-		videoPlayer.loopPointReached += OnVideoFinished;
+		if (skip) 
+		{
+			LoadingManagerThing.Instance.LoadSceneAsyncUHHH(scenenaem,2f);
+			return;
+		}
+		else
+		{
+			videoPlayer.Play();
+			videoPlayer.loopPointReached += OnVideoFinished;
+		}
 	}
 
 	private void OnVideoFinished(VideoPlayer vp)
