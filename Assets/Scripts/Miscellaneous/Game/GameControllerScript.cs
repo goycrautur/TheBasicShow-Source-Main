@@ -97,6 +97,13 @@ public class GameControllerScript : MonoBehaviour
         war = PlayerPrefsExtension.GetBool("warreal");
         warrealest = war;
         Singleton<Options>.Instance.GetVolume();
+        for (int i = 0; i < MixerOverrideGlobalson.Length; ++i)
+        {
+            float num = PlayerPrefs.GetFloat($"Mixer Volume {i}", 1f);
+            Debug.Log($"mixer volum at num {i} is {num}");
+            if (num != 0f) MixerOverrideGlobalson[i].audioMixer.SetFloat(MixerOverrideGlobalVaribName[i], Mathf.Log10(Mathf.Pow(num, 2f)) * 20f);
+            else MixerOverrideGlobalson[i].audioMixer.SetFloat(MixerOverrideGlobalVaribName[i], -80f);
+        }
         Singleton<Options>.Instance.GetVSync();
 
         Time.timeScale = 1f;
@@ -437,6 +444,7 @@ public class GameControllerScript : MonoBehaviour
         Time.timeScale = 1;
         vidplay.Pause();
         vidplay.Stop();
+        VideoFade.Rebind();
         MainHudFade.Rebind();
         MainHudFade.Play("hudFadeIn", -1, 0f);
         RainbowHudFade.Rebind();
@@ -448,7 +456,6 @@ public class GameControllerScript : MonoBehaviour
         lbams.EscapeMusic.ClearQueue(true);
         lbams.EscapeMusic.SetLoop(true);
         lbams.EscapeMusic.QueueAudio(lbams.NormalTbsFinale[2]);
-        
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
         youCantPause = false;
@@ -897,6 +904,7 @@ public class GameControllerScript : MonoBehaviour
     public VideoPlayer vidplay;
     public RawImage thatRawImageThatIHate;
     public AudioMixerGroup[] MixerOverrideGlobalson;
+    public string[] MixerOverrideGlobalVaribName;
     [Header("Target Materials")]
     public List<Material> targetMaterials = new List<Material>();
     public List<Material> MaterialsThatNeedSpecialCare = new List<Material>();

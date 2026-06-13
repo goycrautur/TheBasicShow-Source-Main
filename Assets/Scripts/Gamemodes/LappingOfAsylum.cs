@@ -458,8 +458,8 @@ public class LappingOfAsylumController : MonoBehaviour
         if (CurrentLap == 4)
         {
             gc.notebooks = 0;
-            gc.maxNotebooks = 14;
-            CurrentMaxNotebooks = 14;
+            gc.maxNotebooks = realCurrentMaxNoteboo;
+            CurrentMaxNotebooks = realCurrentMaxNoteboo;
             gc.player.walkSpeedMultipler = 1.25f;
             gc.player.runSpeedMultipler = 1.25f;
             gc.zerull.zer.SetActive(true);
@@ -469,6 +469,18 @@ public class LappingOfAsylumController : MonoBehaviour
             mucho.SetActive(true);
             Lap5TimingStuff = true;
             
+        }
+        if (CurrentLap == 5)
+        {
+            gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
+            gc.notebooks += realCurrentMaxNoteboo * 4;
+            gc.maxNotebooks += realCurrentMaxNoteboo * 5;
+            CurrentMaxNotebooks += realCurrentMaxNoteboo * 5;
+            for (int i = 0; i < noteboos.Length; ++i)
+            {
+                noteboos[i].MultiCollect = true;
+                noteboos[i].MultiCollectTime = 2;
+            }
         }
         //if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
         //if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);

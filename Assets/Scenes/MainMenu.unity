@@ -12614,7 +12614,7 @@ MonoBehaviour:
   AudioMixerBase: {fileID: -8779453450408900625, guid: 6d34f31830afb97449fb8f4bc08ad03b,
     type: 2}
   AudioMixerParameter: musicVol
-  MixerVolumeNumber: 0
+  MixerVolumeNumber: 2
 --- !u!1 &538529161
 GameObject:
   m_ObjectHideFlags: 0
@@ -14861,7 +14861,7 @@ MonoBehaviour:
   AudioMixerBase: {fileID: -5767477068591934068, guid: 6d34f31830afb97449fb8f4bc08ad03b,
     type: 2}
   AudioMixerParameter: musicVol2
-  MixerVolumeNumber: 3
+  MixerVolumeNumber: 5
 --- !u!114 &631513455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20588,7 +20588,7 @@ MonoBehaviour:
   AudioMixerBase: {fileID: -1527755568976000494, guid: 6d34f31830afb97449fb8f4bc08ad03b,
     type: 2}
   AudioMixerParameter: voicesVol
-  MixerVolumeNumber: 2
+  MixerVolumeNumber: 1
 --- !u!1 &951457877
 GameObject:
   m_ObjectHideFlags: 0
@@ -28068,7 +28068,7 @@ MonoBehaviour:
   AudioMixerBase: {fileID: -1200352840547242810, guid: 6d34f31830afb97449fb8f4bc08ad03b,
     type: 2}
   AudioMixerParameter: effectsVol
-  MixerVolumeNumber: 1
+  MixerVolumeNumber: 0
 --- !u!1 &1246906525
 GameObject:
   m_ObjectHideFlags: 0
@@ -41877,14 +41877,13 @@ GameObject:
   - component: {fileID: 1747447576}
   - component: {fileID: 1747447580}
   - component: {fileID: 1747447579}
-  - component: {fileID: 1747447578}
   m_Layer: 5
   m_Name: Text (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1747447576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41904,19 +41903,6 @@ RectTransform:
   m_AnchoredPosition: {x: 150, y: -1115}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1747447578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747447575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5ad28a4f1e6f24c8c7a4db21e62640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1747447579}
 --- !u!114 &1747447579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41937,7 +41923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'ill work on the actual option menu eventually please :sob:'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1f104ab5c06b6f34ab0816f086069b5b, type: 2}
   m_sharedMaterial: {fileID: 824898514370142616, guid: 1f104ab5c06b6f34ab0816f086069b5b,
@@ -52424,10 +52410,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 338200319}
-  - {fileID: 2146343176}
   - {fileID: 408636152}
   - {fileID: 1287559345}
   - {fileID: 307548230}
+  - {fileID: 2146343176}
   m_Father: {fileID: 2043666976}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15072ea04a484024cb75b0f35e4b0592, type: 3}
   m_Name: lapbase-Loop 2
   m_EditorClassIdentifier: 
-  audClip: {fileID: 8300000, guid: d83a2994cd1d7b642a2468e24035070a, type: 3}
+  audClip: {fileID: 8300000, guid: eb6e3113c5c424c47b367d68dd8e1a5d, type: 3}
   volume: 1
   SoundTypeWahh: 3
   HasSubtitle: 0

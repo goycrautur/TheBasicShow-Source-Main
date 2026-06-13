@@ -47,6 +47,7 @@ public class Options : Singleton<Options>
     }
 
     public float GetVolume() => volume;
+    public float GetMixerVolume(int Val) => MixerVolumes[Val];
 
     public void SetVSync(int value)
     {
