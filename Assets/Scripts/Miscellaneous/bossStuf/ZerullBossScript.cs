@@ -123,6 +123,8 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void totem()
     {
+        audioDevice.ClearQueue(true);
+        audioDevice.QueueAudio(totemSound);
         iframes = 9999f;
         iframedown = true;
         StartCoroutine(totemStun());
@@ -141,7 +143,7 @@ public class ZerullBossScript : MonoBehaviour
     public void totemAfterStun()
     {
         iframes = 1f;
-        audioDevice.QueueAudio(totemSound);
+        
         ZerullClassic.Instance.debug = false;
         agent.isStopped = false;
     }
