@@ -21,17 +21,30 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField]
     private float rotateOffset, projectileDamage = 1f, ProjectileSpeed = 30f;
 
-    private float lifeSpan = 10f;
+    public float lifeSpan = 10f,ExistedDuration = 10f;
+    private string OgLayerName,XrayLayerName;
+    public GameObject Gameobj;
 
     private void Start()
     {
         initSpawnPoint = base.transform.position;
         cameraTransform = GameControllerScript.Instance.PlayerCamera.transform;
+        OgLayerName = "npcLayer";
+        XrayLayerName = "npcXrayLayer";
     }
 
     private void Update()
     {
-        
+        if (ExistedDuration >= 0f)
+        {
+            ExistedDuration -= Time.deltaTime;
+            SetToXrayLayer(false);
+        }
+        if (ExistedDuration <= 0f)
+        {
+            SetToXrayLayer(true);
+        }
+
         if (pickedUp)
         {
             transform.localEulerAngles = cameraTransform.localEulerAngles + rotateOffset * Vector3.up;
@@ -50,6 +63,10 @@ public class ProjectileScript : MonoBehaviour
             if (lifeSpan <= 0f) Respawn();
             foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 4) w.SetWindowState(true, 6f, 0f, 0, true, 0);
         }
+    }
+    public virtual void SetToXrayLayer(bool xray = true)
+    {
+        Gameobj.layer = !xray ? LayerMask.NameToLayer(OgLayerName) : LayerMask.NameToLayer(XrayLayerName);
     }
 
     private void OnTriggerStay(Collider other)
@@ -113,6 +130,7 @@ public class ProjectileScript : MonoBehaviour
         lifeSpan = 10f;
         transform.rotation = Quaternion.identity;
         transform.position = initSpawnPoint;
+        ExistedDuration = 10f;
         if (wasBillboard)
         {
             GetComponent<Billboard>().enabled = true;

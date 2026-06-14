@@ -59,7 +59,7 @@ public class MathGameScript : MonoBehaviour
             { "92.28.211.234", () => 
                 { 
                     gc.ExclusiveRoute = "SecretEndChal";
-                    questionText.text = ".......did you really tryna dox me bro?";
+                    questionText.text = ".......did you really tryna dox me bro?, good fake ip joke by the way";
                     padChallengeCode = true;
                 }
             }

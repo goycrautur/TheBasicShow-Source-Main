@@ -18,7 +18,7 @@ public class lowBudgetAudioManagementShit : MonoBehaviour
     public AudioObjectyeah[] HurtSounds,LoseSounds;
     [Header("me when escape music n shit")]
     public AudioObjectyeah SchoolhouseEscape;
-    public AudioObjectyeah schoolClip,WAR,timeoutMusicAud,meowlLmsCra,shithourIntro,shithourLoop,TaldiEscape;
+    public AudioObjectyeah schoolClip,WAR,timeoutMusicAud,meowlLmsCra,meowlLmsLoop,meowlLmsOutro,shithourIntro,shithourLoop,TaldiEscape;
     public AudioObjectyeah ChaosStart,ChaosStartLoop,ChaosBuildUp,ChaosFinal;
     public AudioObjectyeah[] NormalTbsFinale,NormalTbsFinaleIntros,EvapV2Finale,EvapV2FinaleIntros;
 }

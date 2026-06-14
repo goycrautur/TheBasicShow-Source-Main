@@ -230,6 +230,7 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 		HangMidi(stop: false);
 		SetSpeed(1f);
 		SetTranspose(0);
+
 		midiPlayer.transpose = 0;
 		midiPlayer.MPTK_MidiName = song;
 		midiPlayer.MPTK_RePlay();

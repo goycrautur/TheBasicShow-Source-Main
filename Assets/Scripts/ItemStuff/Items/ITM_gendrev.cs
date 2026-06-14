@@ -21,6 +21,10 @@ public class ITM_gendrev : BaseItem
         float time = downDuration;
         GenderRevealSource1.ClearQueue(true);
         GenderRevealSource2.PlaySingleClip(boowoo);
+        lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.deltaruneExplud);
+        GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, howManyHpToRemove, 0f, true,false);
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SlowSpeedMod);
+        AdditionalGameCustomizer.Instance.FovAmmount -= AltFovAmmount;
         foreach (NPC ennPeeCee in FindObjectsOfType<NPC>())
 		{
 			if (ennPeeCee != null)
@@ -31,11 +35,6 @@ public class ITM_gendrev : BaseItem
 				}
 			}
 		}
-        lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.deltaruneExplud);
-        GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, howManyHpToRemove, 0f, true,false);
-        GameControllerScript.Instance.player.walkSpeedMultipler -= speedMultAlt;
-        GameControllerScript.Instance.player.runSpeedMultipler -= speedMultAlt;
-        AdditionalGameCustomizer.Instance.FovAmmount -= AltFovAmmount;
         Gauge newGauge3 = GaugeManager.Instance.CreateGaugeInstance(sadbob, downDuration);
         while (time > 0f)
         {
@@ -47,8 +46,7 @@ public class ITM_gendrev : BaseItem
             yield return null;
         }
         newGauge3.Hide();
-        GameControllerScript.Instance.player.walkSpeedMultipler += speedMultAlt;
-        GameControllerScript.Instance.player.runSpeedMultipler += speedMultAlt;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SlowSpeedMod);
         AdditionalGameCustomizer.Instance.FovAmmount += AltFovAmmount;
         used = false;
         yield break;
@@ -56,8 +54,7 @@ public class ITM_gendrev : BaseItem
     private IEnumerator amwaitin(float time)
     {
         GameControllerScript.Instance.player.breakwind(true,windobreakradius+20f);
-        GameControllerScript.Instance.player.walkSpeedMultipler += speedMult;
-        GameControllerScript.Instance.player.runSpeedMultipler += speedMult;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(Sprite, duration);
         time = duration;
         yield return null;
@@ -71,15 +68,15 @@ public class ITM_gendrev : BaseItem
             yield return null;
         }
         newGauge.Hide();
-        GameControllerScript.Instance.player.walkSpeedMultipler -= speedMult;
-        GameControllerScript.Instance.player.runSpeedMultipler -= speedMult;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SpeedModifier);
         AdditionalGameCustomizer.Instance.rainbowTime = false;
         AdditionalGameCustomizer.Instance.FovAmmount -= FovAmmount;
         StartCoroutine(boowo(downDuration));
         yield break;
     }
-    [SerializeField] private float duration = 60f,downDuration,howManyHpToRemove, speedMult,speedMultAlt,FovAmmount,AltFovAmmount,windobreakradius;
+    [SerializeField] private float duration = 60f,downDuration,howManyHpToRemove,FovAmmount,AltFovAmmount,windobreakradius;
     [SerializeField] private AudioManagerLiveReaction GenderRevealSource1,GenderRevealSource2;
+    [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f),SlowSpeedMod = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private AudioObjectyeah peak,boowoo;
     [SerializeField] private Sprite Sprite,sadbob;
     [SerializeField] private bool used;

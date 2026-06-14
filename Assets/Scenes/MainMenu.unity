@@ -2393,6 +2393,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 0
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -2736,6 +2737,7 @@ MonoBehaviour:
   main: {fileID: 119}
   foward: {fileID: 0}
   isTbsTransisFUCK: 1
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -2753,10 +2755,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uc: {fileID: 841}
   firstButton: {fileID: 1557799095}
-  back: {fileID: 119}
+  back: {fileID: 0}
   main: {fileID: 0}
   foward: {fileID: 0}
-  isTbsTransisFUCK: 0
+  isTbsTransisFUCK: 1
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -2931,6 +2934,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 1
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -3132,6 +3136,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 0
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -3303,6 +3308,7 @@ MonoBehaviour:
   main: {fileID: 192}
   foward: {fileID: 119}
   isTbsTransisFUCK: 0
+  useless: 0
   misscirclscript: {fileID: 1903869033}
   play: {fileID: 962613039}
   soun: {fileID: 11400000, guid: de858d659ca039b4bada699c18f5726e, type: 2}
@@ -6015,6 +6021,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 0
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -33821,6 +33828,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 1
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -46454,6 +46462,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 1
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -48927,6 +48936,7 @@ MonoBehaviour:
   main: {fileID: 0}
   foward: {fileID: 0}
   isTbsTransisFUCK: 0
+  useless: 1
   misscirclscript: {fileID: 0}
   play: {fileID: 0}
   soun: {fileID: 0}
@@ -52614,7 +52624,8 @@ MonoBehaviour:
   main: {fileID: 2130317362}
   foward: {fileID: 0}
   isTbsTransisFUCK: 1
-  misscirclscript: {fileID: 0}
+  useless: 1
+  misscirclscript: {fileID: 327218286}
   play: {fileID: 0}
   soun: {fileID: 0}
 --- !u!1 &2135093655

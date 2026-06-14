@@ -884,7 +884,7 @@ public class GameControllerScript : MonoBehaviour
         SceneManager.LoadSceneAsync("GameArea");
     }
 
-    private void PlayerTeleport(string type)
+    public void PlayerTeleport(string type)
     {
         player.transform.position = AILocationSelector.SetNewTargetForAgent(null, "default") + Vector3.up * player.height;
         AudioObjectyeah soundaaa = type == "normal" ? lowBudgetAudioManagementShit.Instance.TeleporterTp : type == "evilleaf" ? lowBudgetAudioManagementShit.Instance.evilLeafTP : lowBudgetAudioManagementShit.Instance.TeleporterTp;

@@ -253,6 +253,9 @@ MonoBehaviour:
   rotateOffset: 0
   projectileDamage: 1
   ProjectileSpeed: 110
+  lifeSpan: 10
+  ExistedDuration: 10
+  Gameobj: {fileID: 1932417759486796683}
 --- !u!114 &-2452637138297308520
 MonoBehaviour:
   m_ObjectHideFlags: 0

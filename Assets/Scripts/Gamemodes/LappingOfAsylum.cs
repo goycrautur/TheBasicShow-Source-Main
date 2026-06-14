@@ -179,7 +179,7 @@ public class LappingOfAsylumController : MonoBehaviour
             }
             ChaosCheeseCount = 0;
         }
-        if (Meeptimar.isActiveAndEnabled && Lap5CheeseCount != 7) meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 18/(CurrentLap+1) : 10f, Color.green);
+        if (Meeptimar.isActiveAndEnabled && CurrentLap <= 5) meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 18/(CurrentLap+1) : 10f, Color.green);
         if (LapFamishShit) FamishCheeseCount++;
         if (Lap5TimingStuff) Lap5CheeseCount++;
         if (Lap5CheeseCount == 14)
@@ -238,6 +238,11 @@ public class LappingOfAsylumController : MonoBehaviour
                 }
                 Chaos3CheeseCount = 0;
             }
+        }
+        if (CurrentLap == 6) 
+        {
+            gc.PlayerTeleport("evilleaf");
+            meepTimerScript.Instance.AddTime(4f, Color.green);
         }
         if (gc.notebooks == CurrentMaxNotebooks)
         {
@@ -472,14 +477,19 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (CurrentLap == 5)
         {
+            gc.player.walkSpeedMultipler += 1.3f;
+            gc.player.runSpeedMultipler += 1.3f;
+            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+            gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
+            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
             gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
             gc.notebooks += realCurrentMaxNoteboo * 4;
-            gc.maxNotebooks += realCurrentMaxNoteboo * 5;
-            CurrentMaxNotebooks += realCurrentMaxNoteboo * 5;
+            gc.maxNotebooks += realCurrentMaxNoteboo * 6;
+            CurrentMaxNotebooks += realCurrentMaxNoteboo * 6;
             for (int i = 0; i < noteboos.Length; ++i)
             {
                 noteboos[i].MultiCollect = true;
-                noteboos[i].MultiCollectTime = 2;
+                noteboos[i].MultiCollectTime = 3;
             }
         }
         //if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);

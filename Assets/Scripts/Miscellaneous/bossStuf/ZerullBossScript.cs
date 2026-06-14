@@ -9,13 +9,13 @@ public class ZerullBossScript : MonoBehaviour
 
     [SerializeField] public AudioObjectyeah hit, bossIntro, bossIntro_Loop,totemSound, bossStart,ChairHit,ChairStart;
     [Header("References"), SerializeField]
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private Transform target;
 
     [SerializeField] private SpriteRenderer normalSprite;
     [SerializeField] private GameObject chairar;
     [SerializeField] private PlayerScript pscript;
-    [SerializeField] private GameObject ChairAudio;
+    [SerializeField] public GameObject ChairAudio,ExplodePrefab;
 
     private MaterialPropertyBlock spriteProperties;
     private bool isChair;
@@ -64,6 +64,8 @@ public class ZerullBossScript : MonoBehaviour
         {
             if (!GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
+            ZerullClassic.Instance.OnHit(1.5f,0,false);
+            GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 256f, 0.5f);
             GameControllerScript.Instance.player.killedbyhim = true;
             return;
         }
@@ -121,10 +123,27 @@ public class ZerullBossScript : MonoBehaviour
     }
     public void totem()
     {
-        audioDevice.ClearQueue(true);
-        audioDevice.QueueAudio(totemSound);
-        iframes = 10f;
+        iframes = 9999f;
         iframedown = true;
+        StartCoroutine(totemStun());
+    }
+    private IEnumerator totemStun()
+    {
+        stuntiem = 2f;
+        while (stuntiem > 0f)
+        {
+            agent.isStopped = true;
+            ZerullClassic.Instance.debug = true;
+            yield return null;
+        }
+        ZerullClassic.Instance.PlaySomeMidi();
+    }
+    public void totemAfterStun()
+    {
+        iframes = 1f;
+        audioDevice.QueueAudio(totemSound);
+        ZerullClassic.Instance.debug = false;
+        agent.isStopped = false;
     }
     private IEnumerator Stun(float hp, bool firstHit)
     {

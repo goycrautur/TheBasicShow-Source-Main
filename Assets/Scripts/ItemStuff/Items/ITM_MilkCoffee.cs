@@ -11,8 +11,7 @@ public class ITM_MilkCoffee : BaseItem
 			if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
-        GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerAdd;
-        GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultiplerAdd;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         
         StartCoroutine(amwaitin(duration));
         return true;
@@ -36,12 +35,12 @@ public class ITM_MilkCoffee : BaseItem
             yield return null;
         }
         newGauge.Hide();
-        GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultiplerAdd;
-        GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultiplerAdd;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SpeedModifier);
         yield break;
     }
-    [SerializeField] private float duration = 60f, energy, passivestamina, walkspeedmultiplerAdd,runspeedmultiplerAdd;
+    [SerializeField] private float duration = 60f, energy, passivestamina;
     [SerializeField] private Sprite coffeeSprite;
     [SerializeField] private AudioObjectyeah drink;
+    [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private bool tue;
 }

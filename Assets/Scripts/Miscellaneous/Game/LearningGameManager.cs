@@ -175,6 +175,11 @@ public class LearningGameManager : MonoBehaviour
                     }
                     if (gc.FinaleSecret)
                     {
+                        if (gc.ExclusiveRoute == "ClassicPlayerSecretEndChal")
+                        {
+                            KeyFunctions.hi.PlaceholdCutscene(gc.lbams.meowlLmsCra.audClip.length,true,ClassicPlayerAAWSecretEvent1, ClassicPlayerAAWSecretEvent2);
+                            return;
+                        }
                         KeyFunctions.hi.PlaceholdCutscene(gc.lbams.EvapV2FinaleIntros[0].audClip.length,true,TbsSecretFinaleEvent1, TbsSecretFinaleEvent2);
                     }
                 }
@@ -190,7 +195,7 @@ public class LearningGameManager : MonoBehaviour
     public AudioManagerLiveReaction learnMusic;
     public AudioObjectyeah LearnAudio,aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout;
     public GameObject quarter;
-    public UltEvents.UltEvent TbsFinaleEventNormal1,TbsFinaleEventNormal2,TbsSecretFinaleEvent1,TbsSecretFinaleEvent2;
+    public UltEvents.UltEvent TbsFinaleEventNormal1,TbsFinaleEventNormal2,TbsSecretFinaleEvent1,TbsSecretFinaleEvent2,ClassicPlayerAAWSecretEvent1,ClassicPlayerAAWSecretEvent2;
 
 
     [Header("Scripts")]

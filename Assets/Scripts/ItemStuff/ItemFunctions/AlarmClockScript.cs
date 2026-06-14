@@ -3,7 +3,11 @@
 public class AlarmClockScript : MonoBehaviour
 {
     #region Initialization
-    private void Start() => ClockRender = GetComponentInChildren<SpriteRenderer>();
+    private void Start() 
+    {
+        gc = GameControllerScript.Instance;
+        ClockRender = GetComponentInChildren<SpriteRenderer>();
+    }
     #endregion
 
     #region Per-Frame Logic
@@ -27,7 +31,7 @@ public class AlarmClockScript : MonoBehaviour
         timeLeft = timePresets[currentPreset];
         lifeSpan = timePresets[currentPreset] + 5;
         windAud.ClearQueue(true);
-        windAud.PlaySingleClip(ring);
+        windAud.PlaySingleClip(wind);
     }
 
     private void TriggerAlarm()
@@ -35,6 +39,7 @@ public class AlarmClockScript : MonoBehaviour
         rang = true;
         gameObject.tag = "Untagged";
         Singleton<OtherMainStuffManager>.Instance.HearingShit(12f, this.transform, new Vector3(0f,0f,0f), "all",false);
+        audioDevice.ClearQueue(true);
         audioDevice.PlaySingleClip(ring);
     }
 

@@ -555,7 +555,7 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
-		if (oncar && isMoving)
+		if (oncar && isMoving && FowardValue >= 2f)
 		{
 			if (other.GetComponent<NPC>() != null)
 			{

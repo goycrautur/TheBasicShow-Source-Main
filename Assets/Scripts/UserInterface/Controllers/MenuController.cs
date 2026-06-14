@@ -13,6 +13,7 @@ public class MenuController : MonoBehaviour
 
 	private void Update()//submit live reaction
 	{
+		if (useless) return;
 		if (Input.GetButtonDown("Cancel") && back != null && !isTbsTransisFUCK)
 		{
 			back.SetActive(true);
@@ -32,7 +33,7 @@ public class MenuController : MonoBehaviour
 	[Header("Buttons")]
 	[SerializeField] private Selectable firstButton;
 	[SerializeField] private GameObject back, main, foward;
-	public bool isTbsTransisFUCK;
+	public bool isTbsTransisFUCK, useless;
 	[SerializeField] private TransistionManager misscirclscript;
 	public AudioManagerLiveReaction play;
     public AudioObjectyeah soun;

@@ -184,7 +184,7 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted)
         {
-            Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_ChannelVolumeSet(9, Mathf.Clamp(1f - (Vector3.Distance(zs.transform.position, GameControllerScript.Instance.player.transform.position) - 75f) / 150f, 0f, 1f));
+            Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_ChannelVolumeSet(9, Mathf.Clamp(1f - (Vector3.Distance(zs.transform.position, GameControllerScript.Instance.player.transform.position) - 75f) / 75f, 0f, 1f));
         }
         if (AllowProjectileSpawn)
         {
@@ -303,6 +303,22 @@ public class ZerullClassic : MonoBehaviour
 
         StartCoroutine(BeforeBossBegin());
     }
+    public void PlaySomeMidi()
+    {
+        zs.agent.isStopped = true;
+        debug = true;
+        Singleton<MusicManagerMaes>.Instance.PlayMidi("bbcmboss End", false);
+        StartCoroutine(BeforeBossAfterTotem());
+        
+    }
+    private IEnumerator BeforeBossAfterTotem()
+    {
+        Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true);
+        yield return new WaitForSeconds(12f); // Wait until the music will end
+        health = 10;
+        Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+        zs.totemAfterStun();
+    }
 
     private IEnumerator BeforeBossBegin()
     {
@@ -370,7 +386,7 @@ public class ZerullClassic : MonoBehaviour
         float ratioy = (float)Screen.width / 360f;
         tweenitemsAlt[0].transform.DOMoveY(ratioy*175, 3f);
     }
-    public void OnHit(float tiem, float hp = 1f) // When player hit null by a projectile
+    public void OnHit(float tiem, float hp = 1f, bool spawnExtraProjectile = true) // When player hit null by a projectile
     {
 
         if (alreadyHit && !realBossStarted || (zs.iframes > 0f)) return;
@@ -392,8 +408,8 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.015f : 0.025f) * (zs.totemready && hp != 1 ? 1 : hp);
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 5f : 5f * hp,Color.green);
-        SpawnProjectile(false, false);
-        SpawnProjectile(false, false);
+        if (spawnExtraProjectile) SpawnProjectile(false, false);
+        Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         scoreSystemManager.Instance.AddScore(zs.totemready && hp != 0 && hp != 1 ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= (zs.totemready || !realBossStarted) && hp != 0 && hp != 1 ? 1 : hp; // Decreases null health
@@ -406,9 +422,9 @@ public class ZerullClassic : MonoBehaviour
             maxObjects = 5;
             RemoveProjectiles();
             RemoveItems();
+            SpawnProjectile(false, false);
         }
         Singleton<MusicManagerMaes>.Instance.HangMidi(true,true);
-        Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
@@ -416,14 +432,20 @@ public class ZerullClassic : MonoBehaviour
             {
                 health = 1;
                 oneHPfailsave = false;
+                spawnCooldown = 5f;
+                maxObjects = 5;
+                RemoveProjectiles();
+                RemoveItems();
+                SpawnProjectile(false, false);
                 return;
             }
             if (!zs.totemready)
             {
                 zs.totem();
-                health = 10;
                 zs.totemready = true;
+                Singleton<MusicManagerMaes>.Instance.KillMidi();
                 gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp || oh no he used totem of undying";
+                return;
             }
             else
             BossEnd();
@@ -435,9 +457,12 @@ public class ZerullClassic : MonoBehaviour
         }
         return;
     }
+    
     private void BossEnd()
     {
         gc.modeState = "you did it";
+        
+        Instantiate(zs.ExplodePrefab, zs.transform.position, zs.transform.rotation);
         zs.gameObject.SetActive(false);
         gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
 
@@ -471,10 +496,14 @@ public class ZerullClassic : MonoBehaviour
         tweenitemsAlt[0].transform.DOMoveY(ratioy*425, 3f);
 
     }
+    public void ReviveHim()
+    {
+        PlayerPrefsExtension.SetBool("BeatedUpZerull", false);
+    }
     public void AfterHit()
     {
         debug = false;
-        if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false,true);
+        if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false);
         else 
         {
             //Singleton<MusicManagerMaes>.Instance.StopMidi();

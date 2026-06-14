@@ -64,7 +64,7 @@ public class SwingingDoorScript : MonoBehaviour
     #region TriggerDetection
     private void OnTriggerStay(Collider opened)
     {
-        if ((opened.CompareTag("Player") || (opened.CompareTag("NPC") & opened.isTrigger) && !bDoorLocked || (opened.CompareTag("cork") & opened.isTrigger)) && !bDoorLocked)
+        if ((opened.CompareTag("Player") || (opened.CompareTag("NPC") & opened.isTrigger) && !bDoorLocked || (opened.CompareTag("cork") & opened.isTrigger)|| (opened.CompareTag("Projectile") & opened.isTrigger)) && !bDoorLocked)
         {
             SetDoorState(true);
             openTime = 2f;

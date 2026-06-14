@@ -47,6 +47,7 @@
   <IndexSelectedSF>1</IndexSelectedSF>
   <MidiFiles>
     <string>bbcmboss before loop</string>
+    <string>bbcmboss End</string>
     <string>bbcmboss loop</string>
     <string>bbcmboss Start</string>
     <string>bossLoop</string>

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6387560154999987177}
   m_Layer: 0
   m_Name: AlarmClockDrop
-  m_TagString: Door
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gc: {fileID: 0}
-  ring: {fileID: 8300000, guid: 55318553eafae5f46a2e77631c226d27, type: 3}
-  wind: {fileID: 0}
+  ring: {fileID: 11400000, guid: edc87f63edc319341b46f2ac4964cc2c, type: 2}
+  wind: {fileID: 11400000, guid: dea4936ef9ee57b4e915e952e5cab703, type: 2}
   audioDevice: {fileID: 6387560154999987177}
   windAud: {fileID: 5080463590801606754}
   timePresets: 0f0000001e0000002d0000003c000000
@@ -262,15 +262,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4a0c0c5bbd7374ca88ade157226cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayAtAwake: 0
-  PlayAtAwakeQueue: 0
-  StartingLoop: 0
-  thoseWhoObject: {fileID: 0}
+  PlayAtAwake: 1
+  PlayAtAwakeQueue: 1
+  StartingLoop: 1
+  thoseWhoObject: {fileID: 11400000, guid: 8bd84743dd8d50647b2740ada83f8610, type: 2}
   ForceSubPos: 0
   loop: 0
   SubPosForced: {x: 0, y: 0, z: 0}
   sourceId: 0
-  audioDevice: {fileID: 0}
+  audioDevice: {fileID: 82990200698204521}
   queuedAudios: []
   queuedSubtitles: []
   AudioManStandalone: 0

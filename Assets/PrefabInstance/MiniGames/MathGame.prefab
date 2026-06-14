@@ -524,7 +524,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 13
   m_TargetDisplay: 0
 --- !u!114 &114279739694728664
 MonoBehaviour:
@@ -862,6 +862,8 @@ MonoBehaviour:
   audioDevice: {fileID: 0}
   queuedAudios: []
   queuedSubtitles: []
+  AudioManStandalone: 0
+  MixerOverrides: []
 --- !u!1 &1763067245961790
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,7 @@ public class ITM_slateskin : BaseItem
 			if (GameControllerScript.Instance.player.door.lockTime <= 0f) GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
-        GameControllerScript.Instance.player.walkSpeedMultipler -= walkspeedmultiplerminus;
-        GameControllerScript.Instance.player.runSpeedMultipler -= runspeedmultiplerminus;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Add(SpeedModifier);
         GameControllerScript.Instance.player.PlayerDmgResistance += shieldadd;
         StartCoroutine(amwaitin(duration));
         return true;
@@ -32,12 +31,12 @@ public class ITM_slateskin : BaseItem
             yield return null;
         }
         newGauge.Hide();
-        GameControllerScript.Instance.player.walkSpeedMultipler += walkspeedmultiplerminus;
-        GameControllerScript.Instance.player.runSpeedMultipler += runspeedmultiplerminus;
+        GameControllerScript.Instance.player.pModManag.movementModifiers.Remove(SpeedModifier);
         GameControllerScript.Instance.player.PlayerDmgResistance -= shieldadd;
         yield break;
     }
-    [SerializeField] private float duration = 60f, energy, shieldadd, walkspeedmultiplerminus,runspeedmultiplerminus;
+    [SerializeField] private float duration = 60f, energy, shieldadd;
+    [SerializeField] private MovementModifier SpeedModifier = new MovementModifier(default(Vector3), 0f);
     [SerializeField] private Sprite slatespr;
     [SerializeField] private AudioObjectyeah drink;
 }
