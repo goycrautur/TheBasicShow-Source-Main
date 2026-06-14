@@ -57,7 +57,7 @@ public class ZerullClassic : MonoBehaviour
 
     [Header("the fucking midi tempo"), Tooltip("do i have to elaborate about what this does")] public float midiTempo = 1f;
 
-    [HideInInspector] public bool debug;
+    [HideInInspector] public bool debug, AlreadyCleared = false;
     [Header("Bonus")]
     [SerializeField, Tooltip("Does the walls must shake during the bossfight.")] private bool VertexShake = true;
     [SerializeField, Tooltip("Does the game will show a health slider")] private bool ShowHealthSlider = false;
@@ -423,6 +423,7 @@ public class ZerullClassic : MonoBehaviour
             RemoveProjectiles();
             RemoveItems();
             SpawnProjectile(false, false);
+            AlreadyCleared = true;
         }
         Singleton<MusicManagerMaes>.Instance.HangMidi(true,true);
             
@@ -437,6 +438,7 @@ public class ZerullClassic : MonoBehaviour
                 RemoveProjectiles();
                 RemoveItems();
                 SpawnProjectile(false, false);
+                AlreadyCleared = true;
                 return;
             }
             if (!zs.totemready)
