@@ -130,7 +130,7 @@ public class MuchoScript : NPC
                         return;
                     }
                 }
-                if (raycastHit.transform.CompareTag("Player"))
+                if (raycastHit.transform.CompareTag("Player") && !gc.player.invisi && !gc.player.invisichalk)
                 {
                     transform.LookAt(this.player.position);
                     Vector3 direction = this.player.position - base.transform.position;
@@ -164,8 +164,11 @@ public class MuchoScript : NPC
         {
             if (base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 4f / gc.player.PlayerDmgResistance, 0.05f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 25f / gc.player.PlayerDmgResistance, 0.05f, false, true, false);
 				gc.player.killedbybaldi = true;
+                gc.player.killedbybaldi = true;
+                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 64f, 0.5f);
+                PushNpc(GetNPCPushDirection(-transform.position),32f, 1f);
 			}
         }
     }

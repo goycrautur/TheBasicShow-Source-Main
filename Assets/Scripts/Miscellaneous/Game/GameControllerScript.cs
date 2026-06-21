@@ -135,7 +135,14 @@ public class GameControllerScript : MonoBehaviour
             string DifficulityString = PlayerPrefs.GetString("CurDifficulity");
             string CharacterString = PlayerPrefs.GetString("CurrentCharacter");
             if (StateUpdateType == "chees") modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks | " + "Playing As: " + CharacterString;
-            if (StateUpdateType == "exit")modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
+            if (StateUpdateType == "exit")
+            {
+                if (mode == "LappingOfAsylum")
+                {
+                    if (LapManag.CurrentLap == 0)modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
+                }
+                else modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
+            }
             if (mode == "endless")
             {
                 modeDetails = "Endless Mode" + " | " + DifficulityString + " Difficulity";;
@@ -157,9 +164,16 @@ public class GameControllerScript : MonoBehaviour
             }
             if (mode == "wegaChallenge")
             {
-                modeDetails = "holy shits its wega challenge" + " | " + DifficulityString + " Difficulity";;
+                modeDetails = "holy shits its wega challenge" + " | " + DifficulityString + " Difficulity";
                 largeImagething = "van";
                 largeImageText = "WEGA CHALLENGEEE";
+            }
+            if (mode == "minusb")
+            {
+                modeDetails = "who is this" + " | " + DifficulityString + " Difficulity";
+                if (notebooks >= 2)modeDetails = "MINUS B WHY ARE YOU IN BASIC SHOW" + " | " + DifficulityString + " Difficulity";
+                largeImagething = "van";
+                largeImageText = "-b";
             }
             if (mode == "zerullclassic")
             {
@@ -173,6 +187,8 @@ public class GameControllerScript : MonoBehaviour
                 modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " | " + DifficulityString + " Difficulity";
                 largeImagething = "teacherjerproto";
                 largeImageText = "the lapping grindset begin";
+                if (LapManag.CurrentLap == 0) modeDetails = "lapping mode - Prelap" + " | " + DifficulityString + " Difficulity";
+                if (LapManag.CurrentLap == 1) modeDetails = "lapping mode - larpingtiem" + " | " + DifficulityString + " Difficulity";
                 if (LapManag.CurrentLap == 99) modeDetails = "lapping mode - lap UNDEFINDED,YOU ARE SO FUCKED" + " | " + DifficulityString + " Difficulity";
             }
         }
@@ -185,7 +201,7 @@ public class GameControllerScript : MonoBehaviour
     }
     public void musi()
     {
-        if (mode == "story")
+        if (mode == "story" || mode == "minusb")
         {
             if (!warrealest)
             {
@@ -518,7 +534,8 @@ public class GameControllerScript : MonoBehaviour
         exitsReached++;
         if (mode == "famished") fmc.manualUpdate();
         if (mode == "zerullclassic") zerull.jusUpdatebr();
-        StopCoroutine(tweeniconSolo(Color.white, 0, 1, 0.5f, eIds));
+        if (mode == "LappingOfAsylum") LapManag.UpdateManually();
+        //StopCoroutine(tweeniconSolo(Color.white, 0, 1, 0.5f, eIds));
         StartCoroutine(tweeniconSolo(Color.white, 0, 1, 0.5f, eIds));
 
 
@@ -986,6 +1003,7 @@ public class GameControllerScript : MonoBehaviour
     public ZerullClassic zerull;
     public LappingOfAsylumController LapManag;
     public wegachallenge wegchal;
+    public minusBGamemode minubee;
     #endregion
     [Header("silly stuff")]
     public GameObject TETOOOOO;
@@ -1014,4 +1032,5 @@ public class GameControllerScript : MonoBehaviour
     public List<MuchoScript> muchscr = new List<MuchoScript>();
     public List<FamishedScript> famishscr = new List<FamishedScript>();
     public List<LappingTimScript> laptimscr = new List<LappingTimScript>();
+    public List<minusbScript> minusbee = new List<minusbScript>();
 }

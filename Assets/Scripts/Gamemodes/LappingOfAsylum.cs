@@ -48,7 +48,7 @@ public class LappingOfAsylumController : MonoBehaviour
         if (vanishScore) scoreDecreaseTimer -= Time.deltaTime;
         if (scoreDecreaseTimer < 0f)
 		{
-            scoreSystemManager.Instance.AddScore(-15*CurrentLap);
+            scoreSystemManager.Instance.AddScore(-10*CurrentLap);
             scoreDecreaseTimer = 1f/CurrentLap;
         }
         if (Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk <= Lap1OutroTimer && Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown && !lap1NearEndThingActive && !NinetyNineToggle && CurrentLap <= 1)
@@ -57,7 +57,7 @@ public class LappingOfAsylumController : MonoBehaviour
             LapRouletteTagThing++;
             lap1NearEndThingActive = true;
         }
-        gc.wegchal.globalWegaSpeed = gc.player.walkSpeed/1.3f;
+        gc.wegchal.globalWegaSpeed = gc.player.walkSpeed/1.1f;
         if (CurrentLap == 99)
         {
             cd += Time.deltaTime;
@@ -179,7 +179,7 @@ public class LappingOfAsylumController : MonoBehaviour
             }
             ChaosCheeseCount = 0;
         }
-        if (Meeptimar.isActiveAndEnabled && CurrentLap <= 5) meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 18/(CurrentLap+1) : 10f, Color.green);
+        if (Meeptimar.isActiveAndEnabled && CurrentLap <= 5 && gc.notebooks <= CurrentMaxNotebooks) meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 18/(CurrentLap+1) : 10f, Color.green);
         if (LapFamishShit) FamishCheeseCount++;
         if (Lap5TimingStuff) Lap5CheeseCount++;
         if (Lap5CheeseCount == 14)
@@ -246,8 +246,69 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         if (gc.notebooks == CurrentMaxNotebooks)
         {
-            if (CurrentLap == 0) StartCoroutine(zawadro());
-            else doShit("exitstuff");
+            if (CurrentLap == 0)
+            {
+                if (!allowClosElev)
+                {
+                    randomPrelapQueue = false;
+                    PrelapQueue1.ClearQueue(true);
+                    PrelapQueue2.ClearQueue(true);
+                    gc.lbams.EscapeMusic.ClearQueue(true);
+                    
+                    gc.lbams.EscapeMusic.QueueAudio(gc.lbams.SchoolhouseEscape);
+                    gc.lbams.EscapeMusic.SetLoop(true);
+                    
+                    doShit("exitstuff");
+                    LapPortals.ForEach(lap => lap.SetActive(false));
+                }
+                else;
+            }
+            else if (!allowClosElev) doShit("exitstuff");
+        }
+        if (CurrentLap == 0)
+        {
+            if (gc.exitsReached == 1)
+            {
+                gc.lbams.EscapeMusic.SetPitch(0.9f);
+                gc.easingExit(new Color(1f, 0.7f / gc.exitsReached, 0.7f / gc.exitsReached, 1f), 0, 2, 5);
+            }
+            if (gc.exitsReached == 2)
+            {
+                gc.lbams.EscapeMusic.SetPitch(0.75f);
+                gc.lbams.ChaosAudioSource.ClearQueue(true);
+                gc.lbams.ChaosAudioSource.SetLoop(true);
+                gc.lbams.ChaosAudioSource.QueueAudio(gc.lbams.ChaosStart);
+                gc.easingExit(new Color(1f, 0.7f / gc.exitsReached, 0.7f / gc.exitsReached, 1f), 0, 2, 5);
+            }
+            if (gc.exitsReached == 3)
+            {
+                gc.lbams.ChaosAudioSource.ClearQueue(true);
+                gc.lbams.ChaosAudioSource.SetLoop(true);
+                gc.lbams.ChaosAudioSource.QueueAudio(gc.lbams.ChaosStartLoop);
+                gc.lbams.EscapeMusic.SetPitch(0.6f);
+                gc.easingExit(new Color(1f / (gc.exitsReached / 1.75f), 0.7f / gc.exitsReached, 0.7f / gc.exitsReached, 1f), 0, 2, 5);
+            }
+            if (gc.exitsReached == 4)
+            {
+                gc.lbams.EscapeMusic.SetPitch(0.45f);
+                gc.easingExit(new Color(1f / (gc.exitsReached / 1.5f), 0.7f / gc.exitsReached, 0.7f / gc.exitsReached, 1f), 0, 2, 5);
+                gc.lbams.ChaosAudioSource.ClearQueue(true);
+                gc.lbams.ChaosAudioSource.SetLoop(true);
+                gc.lbams.ChaosAudioSource.QueueAudio(gc.lbams.ChaosBuildUp);
+            }
+            if (gc.exitsReached == 5)
+            {
+                gc.lbams.EscapeMusic.SetPitch(0.3f);
+                gc.easingExit(new Color(1f / (gc.exitsReached / 1.25f), 0.7f / gc.exitsReached, 0.7f / gc.exitsReached, 1f), 0, 2, 5);
+                gc.maxExits += 1;
+            }
+            if (gc.exitsReached == 6)
+            {
+                StartCoroutine(zawadro());
+                gc.lbams.ChaosAudioSource.ClearQueue(true);
+                gc.lbams.EscapeMusic.ClearQueue(true);
+                gc.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 5);
+            }
         }
     }
     public IEnumerator zawadro()
@@ -256,7 +317,6 @@ public class LappingOfAsylumController : MonoBehaviour
         // some lap 99 stuff dont mind it being there smth
         if (!NinetyNineToggle)yield return new WaitForSeconds(zawarudo.audClip.length);
         //gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
-        lowBudgetAudioManagementShit.Instance.TpSource.PlaySingleClip(lowBudgetAudioManagementShit.Instance.evilLeafTP);
         yield return new WaitForSeconds(0.1f);
         zawuardoMiddleTransistionStuff();
         //well yeah again
@@ -268,10 +328,6 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void zawuardoStartTransistionStuff()
     {
-        randomPrelapQueue = false;
-        PrelapQueue1.ClearQueue(true);
-        PrelapQueue2.ClearQueue(true);
-        
         if (!NinetyNineToggle)
         {
             gc.lbams.MainSource2.PlaySingleClip(zawarudo);
@@ -282,6 +338,7 @@ public class LappingOfAsylumController : MonoBehaviour
             gc.lbams.MainSource2.PlaySingleClip(lightsoutohfuck);
             AdditionalGameCustomizer.Instance.donthaveanamelmfao = new Color(0f,0f,0f,1f);
         }
+        if (gc.player.stamina < 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
         vanishScore = false;
         LapSound.ClearQueue(true);
         gc.player.DisableCamMove = true;
@@ -310,10 +367,18 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         gc.player.totemshit(false);
         for (int i = 0; i < noteboos.Length; ++i) if (noteboos[i].hidden) noteboos[i].Respawn();
+        for (int e = 0; e < AdditionalGameCustomizer.Instance.ExitImages.Length; ++e) StartCoroutine(gc.tweeniconSolo(new Color(0, 0, 0, 0), 0, 1, 1f, e));
         gc.UpdateNotebookCount();
     }
     public void zawuardoEndTransistionStuff()
     {
+        allowClosElev = false;
+        gc.exitsReached = 0;
+        if (CurrentLap > MaxLap - 1) LapPortals.ForEach(lap => lap.SetActive(false));
+        gc.ElevdorRea.ForEach(ed => ed.Close());
+        gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
+        gc.Gatesrea.ForEach(g => g.Down(false));
+        LapPortals.ForEach(lap => lap.SetActive(false));
         LapSound.ClearQueue(true);
         LapSound.SetLoop(true);
         if (NinetyNineToggle)
@@ -352,7 +417,7 @@ public class LappingOfAsylumController : MonoBehaviour
             gc.player.runSpeedMultipler += 0.1f;
         }
         gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
-        
+        gc.maxExits -= 1;
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
@@ -391,13 +456,13 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void LapPortalEntering()
     {
-       vanishScore = false;
-       scoreSystemManager.Instance.AddScore(5500*CurrentLap);
+        if (gc.player.stamina < 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
+        vanishScore = false;
+        scoreSystemManager.Instance.AddScore(5500*CurrentLap);
         if (Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(55f,Color.green);
         gc.player.maxHealth += 25;
         gc.player.totemshit(false);
-        gc.ElevdorRea.ForEach(ed => ed.Close());
-        gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
+        
         for (int e = 0; e < AdditionalGameCustomizer.Instance.ExitImages.Length; ++e) StartCoroutine(gc.tweeniconSolo(new Color(0, 0, 0, 0), 0, 1, 1f, e));
         for (int i = 0; i < noteboos.Length; ++i) if (noteboos[i].hidden) noteboos[i].Respawn();
         gc.exitsReached = 0;
@@ -414,25 +479,27 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void LapPortalExiting()
     {
-       gc.player.titlecard = false;
-       gc.player.movementLocked = false;
-       gc.playerCollider.enabled = true;
-       gc.lbams.MainSource2.PlaySingleClip(PortalExitingSound);
-       gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
-       gc.CirclAnimator.SetTrigger("yooo");
+        gc.player.titlecard = false;
+        gc.player.movementLocked = false;
+        gc.playerCollider.enabled = true;
+        gc.lbams.MainSource2.PlaySingleClip(PortalExitingSound);
+        gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
+        
+        gc.ElevdorRea.ForEach(ed => ed.Close());
+        gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
+        gc.Gatesrea.ForEach(g => g.Down(false));
+        LapPortals.ForEach(lap => lap.SetActive(false));
+        gc.CirclAnimator.SetTrigger("yooo");
     }
     public void LapPortalAfterExiting()
     {
-       LapSpecificsStuff();
-       gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
-       gc.player.walkSpeedMultipler += 0.1f;
-       gc.player.runSpeedMultipler += 0.1f;
-       CurrentLap++;
-       gc.UpdateNotebookCount();
-        if (CurrentLap > MaxLap - 1) LapPortals.ForEach(lap => lap.SetActive(false));
+        LapSpecificsStuff();
+        gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
+        gc.player.walkSpeedMultipler += 0.1f;
+        gc.player.runSpeedMultipler += 0.1f;
+        CurrentLap++;
+        gc.UpdateNotebookCount();
         inportalALREADY = false;
-        gc.Gatesrea.ForEach(g => g.Down(false));
-        LapPortals.ForEach(lap => lap.SetActive(false));
         bool shrinky = PlayerPrefsExtension.GetBool("shrink");
         if (shrinky) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(Singleton<OtherMainStuffManager>.Instance.realMaxSlotsAmmou);
     }

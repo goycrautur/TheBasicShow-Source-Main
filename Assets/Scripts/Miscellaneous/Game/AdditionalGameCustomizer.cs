@@ -50,6 +50,11 @@ public class AdditionalGameCustomizer : MonoBehaviour
             NoYCTP = true;
             modesText.text = "Lapping Of Asylum";
         }
+        if (GameControllerScript.Instance.mode == "minusb") 
+        {
+            NoYCTP = true;
+            modesText.text = "why the fuck is minus b in basic show";
+        }
     }
 
     private void Update()

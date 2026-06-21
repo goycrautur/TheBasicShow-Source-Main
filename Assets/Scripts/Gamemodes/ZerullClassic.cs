@@ -308,6 +308,7 @@ public class ZerullClassic : MonoBehaviour
         zs.agent.isStopped = true;
         debug = true;
         Singleton<MusicManagerMaes>.Instance.PlayMidi("bbcmboss End", false);
+        
         StartCoroutine(BeforeBossAfterTotem());
         
     }
@@ -317,6 +318,7 @@ public class ZerullClassic : MonoBehaviour
         yield return new WaitForSeconds(12f); // Wait until the music will end
         health = 10;
         Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+        if (spawnBlockagesDuringTheBossfight) blockages.SetActive(true);
         zs.totemAfterStun();
     }
 
@@ -386,7 +388,7 @@ public class ZerullClassic : MonoBehaviour
         float ratioy = (float)Screen.width / 360f;
         tweenitemsAlt[0].transform.DOMoveY(ratioy*175, 3f);
     }
-    public void OnHit(float tiem, float hp = 1f, bool spawnExtraProjectile = true) // When player hit null by a projectile
+    public void OnHit(float tiem, float hp = 1f, bool spawnExtraProjectile = true, bool DontClear = false) // When player hit null by a projectile
     {
 
         if (alreadyHit && !realBossStarted || (zs.iframes > 0f)) return;
@@ -420,10 +422,12 @@ public class ZerullClassic : MonoBehaviour
             oneHPfailsave = false;
             spawnCooldown = 5f;
             maxObjects = 5;
-            RemoveProjectiles();
-            RemoveItems();
-            SpawnProjectile(false, false);
-            AlreadyCleared = true;
+            if (!DontClear)
+            {
+                RemoveProjectiles();
+                RemoveItems();
+                SpawnProjectile(false, false);
+            }
         }
         Singleton<MusicManagerMaes>.Instance.HangMidi(true,true);
             
@@ -435,10 +439,12 @@ public class ZerullClassic : MonoBehaviour
                 oneHPfailsave = false;
                 spawnCooldown = 5f;
                 maxObjects = 5;
-                RemoveProjectiles();
-                RemoveItems();
-                SpawnProjectile(false, false);
-                AlreadyCleared = true;
+                if (!DontClear)
+                {
+                    RemoveProjectiles();
+                    RemoveItems();
+                    SpawnProjectile(false, false);
+                }
                 return;
             }
             if (!zs.totemready)
@@ -446,7 +452,10 @@ public class ZerullClassic : MonoBehaviour
                 zs.totem();
                 zs.totemready = true;
                 Singleton<MusicManagerMaes>.Instance.KillMidi();
+                GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
+                GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed - GameControllerScript.Instance.player.DefaultRunSpeed;
                 gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp || oh no he used totem of undying";
+                blockages.SetActive(false);
                 return;
             }
             else
@@ -475,8 +484,7 @@ public class ZerullClassic : MonoBehaviour
         Shader.SetGlobalFloat("_VertexGlitchIntensity", 0f);
         Shader.SetGlobalFloat("_VertexGlitchSeed", 0f);
 
-        if (spawnBlockagesDuringTheBossfight)
-            blockages.SetActive(false);
+        blockages.SetActive(false);
 
         if (Midi) Singleton<MusicManagerMaes>.Instance.KillMidi();
         Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
@@ -492,6 +500,8 @@ public class ZerullClassic : MonoBehaviour
         }
         PlayerPrefsExtension.SetBool("BeatedUpZerull", true);
         AllowProjectileSpawn = false;
+        RemoveProjectiles();
+        RemoveItems();
         GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
         GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed - GameControllerScript.Instance.player.DefaultRunSpeed;
         float ratioy = (float)Screen.width / 360f;

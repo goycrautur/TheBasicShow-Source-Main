@@ -19,6 +19,7 @@ public class ZerullBossScript : MonoBehaviour
 
     private MaterialPropertyBlock spriteProperties;
     private bool isChair;
+    private float SavedSpeed;
 
     private void Start()
     {
@@ -60,11 +61,11 @@ public class ZerullBossScript : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.BossStarted && other.CompareTag("Player"))
+        if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.BossStarted && other.CompareTag("Player") && !iframedown)
         {
             if (!GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
-            ZerullClassic.Instance.OnHit(1.5f,0,false);
+            ZerullClassic.Instance.OnHit(1.5f,0,false,true);
             GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 256f, 0.5f);
             GameControllerScript.Instance.player.killedbyhim = true;
             return;
@@ -119,6 +120,7 @@ public class ZerullBossScript : MonoBehaviour
         agent.speed += 0.75f * hp;
         GameControllerScript.Instance.player.DefaultWalkSpeed += 0.7f * hp;
         GameControllerScript.Instance.player.DefaultRunSpeed += 0.7f * hp;
+        SavedSpeed += 0.7f * hp;
         StartCoroutine(Stun(hp, firstHit));
     }
     public void totem()
@@ -143,7 +145,8 @@ public class ZerullBossScript : MonoBehaviour
     public void totemAfterStun()
     {
         iframes = 1f;
-        
+        GameControllerScript.Instance.player.DefaultWalkSpeed += SavedSpeed;
+        GameControllerScript.Instance.player.DefaultRunSpeed += SavedSpeed;
         ZerullClassic.Instance.debug = false;
         agent.isStopped = false;
     }

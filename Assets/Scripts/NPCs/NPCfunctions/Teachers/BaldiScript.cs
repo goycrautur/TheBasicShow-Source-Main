@@ -105,7 +105,9 @@ public class BaldiScript : NPC
         {
             if (!base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 30 / gc.player.PlayerDmgResistance, 2f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / gc.player.PlayerDmgResistance, 2f, false, true, false);
+                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 32f, 1f);
+                PushNpc(GetNPCPushDirection(-transform.position),32f, 1.5f);
 				gc.player.killedbybaldi = true;
 			}
         }

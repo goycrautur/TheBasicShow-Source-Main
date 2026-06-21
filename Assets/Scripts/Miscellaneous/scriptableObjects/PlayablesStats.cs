@@ -12,7 +12,7 @@ using UnityEngine;
         public float MaxHpStats;
         public float DefendMultiplierStats;
         public int ReachDistanceStats;
-        public int SlotsAmmount;
+        [Range(1, 10)] public int SlotsAmmount;
         public Sprite[] SlotsSkin;
         public bool specialTypeShit;
     }

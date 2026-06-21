@@ -30,8 +30,6 @@ public class BasementChickenClockScript : MonoBehaviour
 
     private void TriggerAlarm()
     {
-        var index = Mathf.Clamp((int)(timeLeft / 5), 0, 3);
-        currentPreset = index;
         rang = true;
         gameObject.tag = "Untagged";
         Singleton<OtherMainStuffManager>.Instance.HearingShit(12f, this.transform, new Vector3(0f,0f,0f), "all",false);
@@ -54,6 +52,8 @@ public class BasementChickenClockScript : MonoBehaviour
 
     private void UpdateDisplay()
     {
+        var index = Mathf.Clamp((int)(timeLeft / 5), 0, 11);
+        currentPreset = index;
         TimeText.text = $"{Math.Round(timeLeft, 1)}";
     }
     #endregion

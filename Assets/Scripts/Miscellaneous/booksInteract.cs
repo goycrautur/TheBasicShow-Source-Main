@@ -97,6 +97,7 @@ public class booksInteract : Interactable
             Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
         }
         if (gc.mode == "wegaChallenge")  gc.wegchal.manualUpdate();
+        if (gc.mode == "minusb")  gc.minubee.manualUpdate();
         if (AdditionalGameCustomizer.Instance?.NoYCTP == true) NoYCTPMode();
         else
         {

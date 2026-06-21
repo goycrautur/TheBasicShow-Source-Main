@@ -154,6 +154,13 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 if (timmers.isActiveAndEnabled) timmers.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
             }
         }
+        if (teacher == "all" || teacher == "All" || teacher == "MinusB")
+        {
+            foreach (minusbScript minu in GameControllerScript.Instance.minusbee)
+            {
+                if (minu.isActiveAndEnabled) minu.Hear(!UseVector3 ? wherItCameFrom.position : wherItCameFromAlt, soundval);
+            }
+        }
     }
     public void deafshit(float AntiHearingDuration,string teacher = null)
     {
@@ -190,6 +197,13 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             foreach (LappingTimScript timmers in GameControllerScript.Instance.laptimscr)
             {
                 if (timmers.isActiveAndEnabled) timmers.ActivateAntiHearing(AntiHearingDuration);
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "MinusB")
+        {
+            foreach (minusbScript minu in GameControllerScript.Instance.minusbee)
+            {
+                if (minu.isActiveAndEnabled) minu.ActivateAntiHearing(AntiHearingDuration);
             }
         }
     }
@@ -270,6 +284,17 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
                 {
                     if (!tempAnger) timmers.GetAngry(angerAmmount);
                     else timmers.GetTempAngry(tempAngerAmmount);
+                }
+            }
+        }
+        if (teacher == "all" || teacher == "All" || teacher == "MinusB")
+        {
+            foreach (minusbScript minu in GameControllerScript.Instance.minusbee)
+            {
+                if (minu.isActiveAndEnabled)
+                {
+                    if (!tempAnger) minu.GetAngry(angerAmmount);
+                    else minu.GetTempAngry(tempAngerAmmount);
                 }
             }
         }

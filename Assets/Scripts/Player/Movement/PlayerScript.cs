@@ -428,7 +428,7 @@ public class PlayerScript : MonoBehaviour
 	{
 		gameOver = true;
 		RenderSettings.skybox = blackSky;
-		StartCoroutine(KeepTheHudOff());
+		//StartCoroutine(KeepTheHudOff());
 	}
 
 	private void SliderCustomization()
