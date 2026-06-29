@@ -38,6 +38,7 @@ TagManager:
   - floor
   - DoorTrigger1
   - DoorTrigger2
+  - LOEportal
   layers:
   - Default
   - TransparentFX

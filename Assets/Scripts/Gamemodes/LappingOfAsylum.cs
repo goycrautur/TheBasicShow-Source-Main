@@ -44,6 +44,7 @@ public class LappingOfAsylumController : MonoBehaviour
     public void Update()
     {
         string mode = PlayerPrefs.GetString("CurrentMode");
+        if (mode != "LappingOfAsylum") return;
         if (randomPrelapQueue && mode == "LappingOfAsylum") PlayPreLaps();
         if (vanishScore) scoreDecreaseTimer -= Time.deltaTime;
         if (scoreDecreaseTimer < 0f)

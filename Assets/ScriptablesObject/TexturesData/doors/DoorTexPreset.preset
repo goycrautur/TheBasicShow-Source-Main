@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoorTexPreset
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 51be1741cc58daa4dbce29f57cee5faa,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: doorOpenTex
+    value: 
+    objectReference: {fileID: 2800000, guid: 86fd276cf66f24e44ba7c1a8b064d64f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: doorCloseTex
+    value: 
+    objectReference: {fileID: 2800000, guid: 1f87552af3293c846add79b96424d233, type: 3}
+  - target: {fileID: 0}
+    propertyPath: doorMask
+    value: 
+    objectReference: {fileID: 2800000, guid: f97a24e301badb741b884deb0086dd4c, type: 3}
+  m_ExcludedProperties: []

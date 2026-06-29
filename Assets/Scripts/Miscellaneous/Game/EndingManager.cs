@@ -13,7 +13,7 @@ public class EndingManager : MonoBehaviour
     private void Awake() => Instance = this;
     public static EndingManager Instance;
     #endregion
-    public void endingShit(int ID,bool secret = false)
+    public void endingShit(int ID,bool secret = false, bool special = false)
     {
         Game.youCantPause = true;
         DestroyIfExists("JumpRope(Clone)");

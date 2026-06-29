@@ -10,6 +10,18 @@ public class DoorScript : MonoBehaviour
         AltTrigger.enabled = false;
         outside.material.SetTextureScale("_SecondTex", new Vector2(-1, 1));
         outside.material.SetTextureScale("_SecondaryDiffrent", new Vector2(-1, 1));
+        inside.material.SetTexture("_MainTex", GameControllerScript.Instance.GlobalTextures[(int)WalTypSideIn].tex);
+        outside.material.SetTexture("_MainTex", GameControllerScript.Instance.GlobalTextures[(int)WalTypSideOut].tex);
+        if (DoorTextureDatas != null)
+        {
+            outside.material.SetTexture("_SecondTex", DoorTextureDatas.doorOpenTex);
+            outside.material.SetTexture("_SecondaryDiffrent", DoorTextureDatas.doorCloseTex);
+            outside.material.SetTexture("_Mask", DoorTextureDatas.doorMask);
+            inside.material.SetTexture("_SecondTex", DoorTextureDatas.doorOpenTex);
+            inside.material.SetTexture("_SecondaryDiffrent", DoorTextureDatas.doorCloseTex);
+            inside.material.SetTexture("_Mask", DoorTextureDatas.doorMask);
+        }
+        
         myAudio.audioDevice.spatialBlend = 1;
         myAudio.audioDevice.minDistance = 35;
         myAudio.audioDevice.maxDistance = 125;
@@ -137,9 +149,11 @@ public class DoorScript : MonoBehaviour
     #endregion
 
     #region SerializedConfig
-    [Header("Audio Settings")]
+    [Header("Audio Settings and other stuffs")]
     [SerializeField] private AudioManagerLiveReaction myAudio;
     [SerializeField] private NormalDoorSoundData SoundData;
+    [SerializeField] private DoorTextureData DoorTextureDatas;
+    [SerializeField] private WallType WalTypSideIn = WallType.Normal,WalTypSideOut = WallType.Normal;
     
     [Header("Barrier Stuff Settings")]
     [SerializeField] private BoxCollider MainDoorBarrier;

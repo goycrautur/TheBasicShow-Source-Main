@@ -23,6 +23,11 @@ public class MuchoScript : NPC
 
     public override void OnUpdate()
     {
+        if (LOEManager.Instance.activated)
+        {
+            Hear(player.position, 9999, false);
+            MuchoAnger += 0.001f * Time.deltaTime;
+        }
         if (antiHearing) AntiHearingDuratio -= Time.deltaTime;
         if (AntiHearingDuratio < 0f) antiHearing = false;
         targe();
@@ -166,7 +171,6 @@ public class MuchoScript : NPC
 			{
 				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 25f / gc.player.PlayerDmgResistance, 0.05f, false, true, false);
 				gc.player.killedbybaldi = true;
-                gc.player.killedbybaldi = true;
                 gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 64f, 0.5f);
                 PushNpc(GetNPCPushDirection(-transform.position),32f, 1f);
 			}

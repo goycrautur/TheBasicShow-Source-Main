@@ -58,8 +58,6 @@ public class MathGameScript : MonoBehaviour
         {
             { "92.28.211.234", () => 
                 { 
-                    gc.ExclusiveRoute = "SecretEndChal";
-                    questionText.text = ".......did you really tryna dox me bro?, good fake ip joke by the way";
                     padChallengeCode = true;
                 }
             }
@@ -608,11 +606,16 @@ public class MathGameScript : MonoBehaviour
                     string CurrentCharName = PlayerPrefs.GetString("CurrentCharacter", "");
                     if (CurrentCharName == "ClassicPlayer") 
                     {
-                        gc.ExclusiveRoute = "ClassicPlayerSecretEndChal";
+                        gc.ExclusiveRoute = "ClassicPlayerSecretEndLOE";
                         questionText.text = ".......did you really tryna dox me bro?.... wait no way youre trying it as that weak ass playables character, yknow what? lets gave you the suffering you wanted";
-                        Singleton<OtherMainStuffManager>.Instance.HighSchoolDropOut();
-                        gc.SlotsAmmount = 1;
-                        Singleton<OtherMainStuffManager>.Instance.slot();
+                        Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(1,true);
+                    }
+                    else
+                    {
+                        gc.ExclusiveRoute = "NormalLOE";
+                        questionText.text = ".......did you really tryna dox me bro?, good fake ip joke by the way";
+                        if (gc.SlotsAmmount >= 5) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(GameControllerScript.Instance.SlotsAmmount-3,true);
+                        else Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(GameControllerScript.Instance.SlotsAmmount-2,true);
                     }
                 }
                 questionText2.text = questionText3.text = string.Empty;

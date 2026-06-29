@@ -80,7 +80,7 @@ public class ElvDoorScript : MonoBehaviour
         opening = true;
         openTimer = -5f; // prevents repeated opening
         audioSource.ClearQueue(true);
-        audioSource.PlaySingleClip(doorOpenClip);
+        //audioSource.PlaySingleClip(doorOpenClip);
         elvDoorInAnimator.SetTrigger("Open");
         elvDoorOutAnimator.SetTrigger("Open");
     }
@@ -110,7 +110,7 @@ public class ElvDoorScript : MonoBehaviour
         canOpen = false;
         MapSideIcon.SetActive(true);
         audioSource.ClearQueue(true);
-        audioSource.PlaySingleClip(doorCloseClip);
+        //audioSource.PlaySingleClip(doorCloseClip);
         elvDoorInAnimator.SetTrigger("Close");
         elvDoorOutAnimator.SetTrigger("Close");
         if (triggered)

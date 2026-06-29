@@ -77,6 +77,7 @@ public class GameControllerScript : MonoBehaviour
     #region Initialization
     private void InitializeGameSettings()
     {
+        ExclusiveRoute = "";
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
         ItemManager.Instance.enabled = true;
@@ -137,21 +138,23 @@ public class GameControllerScript : MonoBehaviour
             if (StateUpdateType == "chees") modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks | " + "Playing As: " + CharacterString;
             if (StateUpdateType == "exit")
             {
-                if (mode == "LappingOfAsylum")
+                if (mode == "LappingOfAsylum" && LapManag.CurrentLap == 0) modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
+                if (mode == "story") 
                 {
-                    if (LapManag.CurrentLap == 0)modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
+                    if (FinaleSecret && ExclusiveRoute != "") modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
+                    else if (LOEManager.Instance.countdou == false) modeState = "Its over";
                 }
                 else modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
             }
             if (mode == "endless")
             {
-                modeDetails = "Endless Mode" + " | " + DifficulityString + " Difficulity";;
+                modeDetails = "Endless Mode" + " | " + DifficulityString + " Difficulity";
                 largeImagething = "teacherjerproto";
                 largeImageText = "hi i am teachr jery and im gonna smac you";
             }
             if (mode == "story")
             {
-                modeDetails = "Story Mode" + " | " + DifficulityString + " Difficulity";;
+                modeDetails = "Story Mode" + " | " + DifficulityString + " Difficulity";
                 largeImagething = "teacherjerproto";
                 largeImageText = "hi i am teachr jery and im gonna smac you";
             }
@@ -383,7 +386,10 @@ public class GameControllerScript : MonoBehaviour
     #region FinaleModeManagement
     private void ActivateFinaleMode()
     {
-        for (int i = 0; i < AdditionalGameCustomizer.Instance.ExitImages.Length; ++i) StartCoroutine(tweeniconSolo(Color.black, 0, 1, 1f, i));
+        if (ExclusiveRoute == "") 
+        {
+            for (int i = 0; i < AdditionalGameCustomizer.Instance.ExitImages.Length; ++i) StartCoroutine(tweeniconSolo(Color.black, 0, 1, 1f, i));
+        }
         
         if (mode == "story")
         {
@@ -485,7 +491,7 @@ public class GameControllerScript : MonoBehaviour
         {
             if (!finaleMode || lbams.ChaosAudioSource.audioDevice.isPlaying) return;
 
-            if (exitsReached == 3)
+            if (exitsReached == 3 && !FinaleSecret)
             {
                 if (AdditionalGameCustomizer.Instance != null)
                 {
@@ -505,7 +511,7 @@ public class GameControllerScript : MonoBehaviour
                     }
                 }
             }
-            else if (exitsReached == 5 && !progress.GetSecret & !progress.GetResults)
+            else if (exitsReached == 5 && !FinaleSecret && !progress.GetSecret & !progress.GetResults)
             {
                 if (AdditionalGameCustomizer.Instance != null)
                 {
@@ -600,7 +606,7 @@ public class GameControllerScript : MonoBehaviour
                         }
                     }
                 }
-                if (FinaleSecret)
+                if (FinaleSecret && ExclusiveRoute == "")
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
@@ -642,7 +648,7 @@ public class GameControllerScript : MonoBehaviour
                         }
                     }
                 }
-                if (FinaleSecret)
+                if (FinaleSecret && ExclusiveRoute == "")
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
@@ -698,7 +704,7 @@ public class GameControllerScript : MonoBehaviour
                         }
                     }
                 }
-                if (FinaleSecret)
+                if (FinaleSecret && ExclusiveRoute == "")
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
@@ -738,7 +744,7 @@ public class GameControllerScript : MonoBehaviour
                         }
                     }
                 }
-                if (FinaleSecret)
+                if (FinaleSecret && ExclusiveRoute == "")
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.SetLoop(true);
@@ -779,12 +785,22 @@ public class GameControllerScript : MonoBehaviour
                         }
                     }
                 }
-                if (FinaleSecret)
+                if (FinaleSecret && ExclusiveRoute == "")
                 {
                     lbams.EscapeMusic.ClearQueue(true);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[4]);
                     lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[5]);
                     lbams.EscapeMusic.SetLoop(true);
+                }
+            }
+        }
+        if (exitsReached == 6)
+        {
+            if (mode == "story")
+            {
+                if (LOEManager.Instance.countdou == true && FinaleSecret && ExclusiveRoute != "")
+                {
+                    LOEManager.Instance.EscapePortalActive();
                 }
             }
         }
@@ -911,10 +927,15 @@ public class GameControllerScript : MonoBehaviour
     [Serializable]
     public class modifiersName
     {
-        [SerializeField]
-        public bool enabled;
-        [SerializeField]
-        public string name;
+        [SerializeField] public bool enabled;
+        [SerializeField] public string name;
+    }
+    [Serializable]
+    public class TextureData
+    {
+        [SerializeField] public Texture tex;
+        [SerializeField] public string name; //for me to renemb yes heh
+        [SerializeField] public int ID;
     }
     #region SerializedFields
     [Header("son")]
@@ -929,6 +950,8 @@ public class GameControllerScript : MonoBehaviour
     [Header("Prefab Instances")]
     public GameObject learnpadmuehehe;
     public GameObject popparti,ConfettiEffect;
+    [Header("Global Texture Overriding")]
+    public TextureData[] GlobalTextures;
 
     [Header("Player & Camera References")]
     public PlayerScript player;

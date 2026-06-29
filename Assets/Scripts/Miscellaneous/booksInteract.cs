@@ -244,12 +244,19 @@ public class booksInteract : Interactable
                 
                 if (gc.FinaleSecret)
                 {
-                    lbams.EscapeMusic.ClearQueue(true);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2FinaleIntros[0]);
-                    lbams.EscapeMusic.QueueAudio(lbams.EvapV2Finale[0]);
-                    lbams.EscapeMusic.SetLoop(true);
-                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
-                    gc.Gatesrea.ForEach(g => g.Down(false));
+                    if (gc.ExclusiveRoute == "ClassicPlayerSecretEndLOE")
+                    {
+                        KeyFunctions.hi.PlaceholdCutscene(lbams.meowlLmsCra.audClip.length,true,lgm.ClassicPlayerAAWSecretEvent1, lgm.ClassicPlayerAAWSecretEvent2);
+                        return;
+                    }
+                    else if (gc.ExclusiveRoute == "NormalLOE")
+                    {
+                        lbams.EscapeMusic.ClearQueue(true);
+                        lbams.EscapeMusic.QueueAudio(lbams.MainLms);
+                        LOEManager.Instance.Activate(lbams.MainLms.audClip.length);
+                        return;
+                    }
+                    KeyFunctions.hi.PlaceholdCutscene(lbams.EvapV2FinaleIntros[0].audClip.length,true,lgm.TbsSecretFinaleEvent1, lgm.TbsSecretFinaleEvent2);
                 }
             }
         }

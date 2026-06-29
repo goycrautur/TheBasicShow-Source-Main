@@ -175,12 +175,19 @@ public class LearningGameManager : MonoBehaviour
                     }
                     if (gc.FinaleSecret)
                     {
-                        if (gc.ExclusiveRoute == "ClassicPlayerSecretEndChal")
+                        if (gc.ExclusiveRoute == "ClassicPlayerSecretEndLOE")
                         {
-                            KeyFunctions.hi.PlaceholdCutscene(gc.lbams.meowlLmsCra.audClip.length,true,ClassicPlayerAAWSecretEvent1, ClassicPlayerAAWSecretEvent2);
+                            KeyFunctions.hi.PlaceholdCutscene(lbams.meowlLmsCra.audClip.length,true,ClassicPlayerAAWSecretEvent1, ClassicPlayerAAWSecretEvent2);
                             return;
                         }
-                        KeyFunctions.hi.PlaceholdCutscene(gc.lbams.EvapV2FinaleIntros[0].audClip.length,true,TbsSecretFinaleEvent1, TbsSecretFinaleEvent2);
+                        else if (gc.ExclusiveRoute == "NormalLOE")
+                        {
+                            lbams.EscapeMusic.ClearQueue(true);
+                            lbams.EscapeMusic.QueueAudio(lbams.MainLms);
+                            LOEManager.Instance.Activate(lbams.MainLms.audClip.length);
+                            return;
+                        }
+                        KeyFunctions.hi.PlaceholdCutscene(lbams.EvapV2FinaleIntros[0].audClip.length,true,TbsSecretFinaleEvent1, TbsSecretFinaleEvent2);
                     }
                 }
             }

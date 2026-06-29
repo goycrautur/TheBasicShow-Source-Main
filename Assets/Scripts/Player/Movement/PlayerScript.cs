@@ -242,6 +242,7 @@ public class PlayerScript : MonoBehaviour
 	public void asgor(MovementModifier movmen,float fuel = 1f)
 	{
 		lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
+		FowardValue = 0.75f;
 		carfuel = fuel;
 		maxcarfuel = fuel;
 		CargaugeReal = GaugeManager.Instance.CreateGaugeInstance(AdditionalGameCustomizer.Instance.dimcraab, maxcarfuel); //jro
@@ -569,6 +570,7 @@ public class PlayerScript : MonoBehaviour
 		if (other.transform.name == "OfficeTrigger")alsoInOffice = true;
 		if (other.CompareTag("porta"))StartCoroutine(GameControllerScript.Instance.funnyportal());
 		if (other.CompareTag("lapporta"))StartCoroutine(GameControllerScript.Instance.LapManag.LapPortal());
+		if (other.CompareTag("LOEportal"))LOEManager.Instance.PortalEntering();
 	}
 
 	private void OnTriggerStay(Collider other)
