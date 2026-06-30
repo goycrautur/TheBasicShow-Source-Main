@@ -190,8 +190,9 @@ public class GameControllerScript : MonoBehaviour
                 modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " | " + DifficulityString + " Difficulity";
                 largeImagething = "teacherjerproto";
                 largeImageText = "the lapping grindset begin";
-                if (LapManag.CurrentLap == 0) modeDetails = "lapping mode - Prelap" + " | " + DifficulityString + " Difficulity";
-                if (LapManag.CurrentLap == 1) modeDetails = "lapping mode - larpingtiem" + " | " + DifficulityString + " Difficulity";
+                string ExtraTexty = LapManag.GoodMode == false ? "g o o d  lapping" : "lapping mode";
+                if (LapManag.CurrentLap == 0) modeDetails = ExtraTexty + " - Prelap" + " | " + DifficulityString + " Difficulity";
+                if (LapManag.CurrentLap == 1) modeDetails = ExtraTexty + " - larpingtiem" + " | " + DifficulityString + " Difficulity";
                 if (LapManag.CurrentLap == 99) modeDetails = "lapping mode - lap UNDEFINDED,YOU ARE SO FUCKED" + " | " + DifficulityString + " Difficulity";
             }
         }

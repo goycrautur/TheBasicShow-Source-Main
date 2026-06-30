@@ -125,6 +125,12 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     private void Start()
     {
+        if (NinetyNineToggle && GoodMode)
+        {
+            NinetyNineToggle = false;
+            GoodMode = false;
+            Debug.Log("cant have both good mode and lap 99 lmfaooo");
+        }
         PrelapQueue1.SetVolume(0f);
 		PrelapQueue2.SetVolume(0f);
         CurAudioMan = PrelapQueue2;
@@ -317,11 +323,13 @@ public class LappingOfAsylumController : MonoBehaviour
         zawuardoStartTransistionStuff();
         // some lap 99 stuff dont mind it being there smth
         if (!NinetyNineToggle)yield return new WaitForSeconds(zawarudo.audClip.length);
+        else if (GoodMode) yield return new WaitForSeconds(0.005f);
         //gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
         yield return new WaitForSeconds(0.1f);
         zawuardoMiddleTransistionStuff();
         //well yeah again
         if (!NinetyNineToggle) yield return new WaitForSeconds(zawarudo.audClip.length / 2);
+        else if (GoodMode) yield return new WaitForSeconds(0.005f);
         else yield return new WaitForSeconds(9f);
         zawuardoEndTransistionStuff();
         yield return null;
@@ -329,12 +337,12 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void zawuardoStartTransistionStuff()
     {
-        if (!NinetyNineToggle)
+        if (!NinetyNineToggle && !GoodMode)
         {
             gc.lbams.MainSource2.PlaySingleClip(zawarudo);
             AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.zaColor;
         }
-        if (NinetyNineToggle) 
+        if (NinetyNineToggle && !GoodMode) 
         {
             gc.lbams.MainSource2.PlaySingleClip(lightsoutohfuck);
             AdditionalGameCustomizer.Instance.donthaveanamelmfao = new Color(0f,0f,0f,1f);
@@ -347,10 +355,14 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.titlecard = true;
         gc.playerCollider.enabled = false;
         gc.npcCloneList.ForEach(o => o.SetActive(false));
-        gc.player.transform.DOMove(EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height, zawarudo.audClip.length/1.5f);
-        gc.player.forceLookSpeed = 50f;
-        gc.player.targetToForcelyLookAt = EndingManager.Instance.SecretWarpPoint.transform;
-        gc.player.isForcedToLook = true;
+        if (GoodMode) gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * Game.player.height;
+        else
+        {
+            gc.player.transform.DOMove(EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height, zawarudo.audClip.length/1.5f);
+            gc.player.forceLookSpeed = 50f;
+            gc.player.targetToForcelyLookAt = EndingManager.Instance.SecretWarpPoint.transform;
+            gc.player.isForcedToLook = true;
+        }
     }
     public void zawuardoMiddleTransistionStuff()
     {
@@ -409,13 +421,26 @@ public class LappingOfAsylumController : MonoBehaviour
         }
         else
         {
-            if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
-            if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
-            Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(300f);
+            if (GoodMode)
+            {
+                ZerullClassic.Instance.yourflashbang.Rebind();
+                ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
+                gc.lbams.MainSource2.PlaySingleClip(gc.lbams.TeleporterTp);
+                gc.player.walkSpeedMultipler += 0.25f;
+                gc.player.runSpeedMultipler += 0.25f;
+            }
+            else
+            {
+                if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
+                if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
+                Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(300f);
+                gc.player.walkSpeedMultipler += 0.1f;
+                gc.player.runSpeedMultipler += 0.1f;
+            }
+            
             CurrentLap++;
             vanishScore = true;
-            gc.player.walkSpeedMultipler += 0.1f;
-            gc.player.runSpeedMultipler += 0.1f;
+            
         }
         gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
         gc.maxExits -= 1;
@@ -506,73 +531,78 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void LapSpecificsStuff()
     {
-        LapRouletteTagThing++;
+        
         vanishScore = true;
 
-        if (CurrentLap >= 1)gc.npcCloneList.ForEach(o => o.SetActive(true));
-        if (CurrentLap == 1) tim.SetActive(true);
-        if (CurrentLap == 2)
+        if (!GoodMode)
         {
-            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
-            gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
-            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
-            Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
-            gc.fmc.butch.SetActive(true);
-            //
-            LapFamishShit = true;
-        }
-        if (CurrentLap == 3)
-        {
-            gc.player.walkSpeedMultipler = 1f;
-            gc.player.runSpeedMultipler = 1f;
-            gc.fmc.angerMultipler = 0.45f;
-            MeepTimer.SetActive(true);
-        }
-        if (CurrentLap == 4)
-        {
-            gc.notebooks = 0;
-            gc.maxNotebooks = realCurrentMaxNoteboo;
-            CurrentMaxNotebooks = realCurrentMaxNoteboo;
-            gc.player.walkSpeedMultipler = 1.25f;
-            gc.player.runSpeedMultipler = 1.25f;
-            gc.zerull.zer.SetActive(true);
-            ZerullClassic.Instance.health = 20;
-            if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight) ZerullClassic.Instance.blockages.SetActive(true);
-            gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
-            mucho.SetActive(true);
-            Lap5TimingStuff = true;
+            LapRouletteTagThing++;
+            if (CurrentLap >= 1 && CurrentLap <= 4) gc.npcCloneList.ForEach(o => o.SetActive(true));
+            if (CurrentLap == 1) tim.SetActive(true);
+            if (CurrentLap == 2)
+            {
+                gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+                gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
+                gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
+                Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
+                gc.fmc.butch.SetActive(true);
+                //
+                LapFamishShit = true;
+            }
+            if (CurrentLap == 3)
+            {
+                gc.player.walkSpeedMultipler = 1f;
+                gc.player.runSpeedMultipler = 1f;
+                gc.fmc.angerMultipler = 0.45f;
+                MeepTimer.SetActive(true);
+            }
+            if (CurrentLap == 4)
+            {
+                gc.notebooks = 0;
+                gc.maxNotebooks = realCurrentMaxNoteboo;
+                CurrentMaxNotebooks = realCurrentMaxNoteboo;
+                gc.player.walkSpeedMultipler = 1.25f;
+                gc.player.runSpeedMultipler = 1.25f;
+                gc.zerull.zer.SetActive(true);
+                ZerullClassic.Instance.health = 20;
+                if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight) ZerullClassic.Instance.blockages.SetActive(true);
+                gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
+                mucho.SetActive(true);
+                Lap5TimingStuff = true;
+                
+            }
+            if (CurrentLap == 5)
+            {
+                gc.player.walkSpeedMultipler += 1.3f;
+                gc.player.runSpeedMultipler += 1.3f;
+                gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
+                gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
+                gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
+                gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
+                gc.notebooks += realCurrentMaxNoteboo * 4;
+                gc.maxNotebooks += realCurrentMaxNoteboo * 6;
+                CurrentMaxNotebooks += realCurrentMaxNoteboo * 6;
+                for (int i = 0; i < noteboos.Length; ++i)
+                {
+                    noteboos[i].MultiCollect = true;
+                    noteboos[i].MultiCollectTime = 3;
+                }
+            }
+            //if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
+            //if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
+            bool HasLapMusicIntro = lappingHi[CurrentLap].LapMusikIntro != null;
+            bool HasLapMusicLoop = lappingHi[CurrentLap].LapMusikLoop != null;
+            AudioObjectyeah clip1 = HasLapMusicIntro ? lappingHi[CurrentLap].LapMusikIntro : lappingHi[CurrentLap].LapMusikLoop;
+
+            if (LapRouletteTagThing == 2)
+            {
+                StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+                LapRouletteTagThing = 0;
+            }
+            else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+
             
         }
-        if (CurrentLap == 5)
-        {
-            gc.player.walkSpeedMultipler += 1.3f;
-            gc.player.runSpeedMultipler += 1.3f;
-            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
-            gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
-            gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
-            gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
-            gc.notebooks += realCurrentMaxNoteboo * 4;
-            gc.maxNotebooks += realCurrentMaxNoteboo * 6;
-            CurrentMaxNotebooks += realCurrentMaxNoteboo * 6;
-            for (int i = 0; i < noteboos.Length; ++i)
-            {
-                noteboos[i].MultiCollect = true;
-                noteboos[i].MultiCollectTime = 3;
-            }
-        }
-        //if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
-        //if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
-        bool HasLapMusicIntro = lappingHi[CurrentLap].LapMusikIntro != null;
-        bool HasLapMusicLoop = lappingHi[CurrentLap].LapMusikLoop != null;
-        AudioObjectyeah clip1 = HasLapMusicIntro ? lappingHi[CurrentLap].LapMusikIntro : lappingHi[CurrentLap].LapMusikLoop;
-
-        if (LapRouletteTagThing == 2)
-        {
-            StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
-            LapRouletteTagThing = 0;
-        }
-        else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
-
         if (lappingHi[CurrentLap].usesFlag) StartCoroutine(flagmove(lappingHi[CurrentLap].LapFlag));
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr) if (muc.isActiveAndEnabled) muc.MuchoSpeedScale += 0.1f;
     }
@@ -606,4 +636,6 @@ public class LappingOfAsylumController : MonoBehaviour
     public bool NinetyNineToggle;
     private float cd;
     private AudioManagerLiveReaction CurAudioMan;
+    [Header("goog mode")]
+    public bool GoodMode;
 }
