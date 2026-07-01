@@ -52,7 +52,7 @@ public class LappingOfAsylumController : MonoBehaviour
             scoreSystemManager.Instance.AddScore(-10*CurrentLap);
             scoreDecreaseTimer = 1f/CurrentLap;
         }
-        if (Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk <= Lap1OutroTimer && Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown && !lap1NearEndThingActive && !NinetyNineToggle && CurrentLap <= 1)
+        if (Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk <= Lap1OutroTimer && Singleton<TimeOutManagerFUCKYEA>.Instance.countItDown && !lap1NearEndThingActive && !NinetyNineToggle && !GoodMode && CurrentLap <= 1)
         {
             StartCoroutine(Crossfade(LapSound, LapSound2, LapMusikOutro, 2f,false));
             LapRouletteTagThing++;
@@ -131,6 +131,7 @@ public class LappingOfAsylumController : MonoBehaviour
             GoodMode = false;
             Debug.Log("cant have both good mode and lap 99 lmfaooo");
         }
+        if (GoodMode) MaxLap = 2;
         PrelapQueue1.SetVolume(0f);
 		PrelapQueue2.SetVolume(0f);
         CurAudioMan = PrelapQueue2;
@@ -314,7 +315,7 @@ public class LappingOfAsylumController : MonoBehaviour
                 StartCoroutine(zawadro());
                 gc.lbams.ChaosAudioSource.ClearQueue(true);
                 gc.lbams.EscapeMusic.ClearQueue(true);
-                gc.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 5);
+                gc.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 0.5f);
             }
         }
     }
@@ -355,7 +356,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.titlecard = true;
         gc.playerCollider.enabled = false;
         gc.npcCloneList.ForEach(o => o.SetActive(false));
-        if (GoodMode) gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * Game.player.height;
+        if (GoodMode) gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
         else
         {
             gc.player.transform.DOMove(EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height, zawarudo.audClip.length/1.5f);
@@ -426,6 +427,9 @@ public class LappingOfAsylumController : MonoBehaviour
                 ZerullClassic.Instance.yourflashbang.Rebind();
                 ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
                 gc.lbams.MainSource2.PlaySingleClip(gc.lbams.TeleporterTp);
+                LapSound.SetLoop(false);
+                if (GoodModeMusic != null) LapSound.QueueAudio(GoodModeMusic);
+                Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(137.8f);
                 gc.player.walkSpeedMultipler += 0.25f;
                 gc.player.runSpeedMultipler += 0.25f;
             }
@@ -434,6 +438,7 @@ public class LappingOfAsylumController : MonoBehaviour
                 if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
                 if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
                 Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(300f);
+                gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
                 gc.player.walkSpeedMultipler += 0.1f;
                 gc.player.runSpeedMultipler += 0.1f;
             }
@@ -442,7 +447,7 @@ public class LappingOfAsylumController : MonoBehaviour
             vanishScore = true;
             
         }
-        gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
+        
         gc.maxExits -= 1;
         gc.player.movementLocked = false;
         gc.player.titlecard = false;
@@ -537,7 +542,7 @@ public class LappingOfAsylumController : MonoBehaviour
         if (!GoodMode)
         {
             LapRouletteTagThing++;
-            if (CurrentLap >= 1 && CurrentLap <= 4) gc.npcCloneList.ForEach(o => o.SetActive(true));
+            if (CurrentLap >= 1 && CurrentLap <= 3) gc.npcCloneList.ForEach(o => o.SetActive(true));
             if (CurrentLap == 1) tim.SetActive(true);
             if (CurrentLap == 2)
             {
@@ -566,15 +571,14 @@ public class LappingOfAsylumController : MonoBehaviour
                 gc.zerull.zer.SetActive(true);
                 ZerullClassic.Instance.health = 20;
                 if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight) ZerullClassic.Instance.blockages.SetActive(true);
-                gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
                 mucho.SetActive(true);
                 Lap5TimingStuff = true;
                 
             }
             if (CurrentLap == 5)
             {
-                gc.player.walkSpeedMultipler += 1.3f;
-                gc.player.runSpeedMultipler += 1.3f;
+                gc.player.walkSpeedMultipler += 0.3f;
+                gc.player.runSpeedMultipler += 0.3f;
                 gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
                 gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
                 gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
@@ -602,6 +606,15 @@ public class LappingOfAsylumController : MonoBehaviour
             else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
 
             
+        }
+        else
+        {
+            if (CurrentLap == 1) 
+            {
+                tim.SetActive(true);
+                gc.player.walkSpeedMultipler += 0.35f;
+                gc.player.runSpeedMultipler += 0.35f;
+            }
         }
         if (lappingHi[CurrentLap].usesFlag) StartCoroutine(flagmove(lappingHi[CurrentLap].LapFlag));
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr) if (muc.isActiveAndEnabled) muc.MuchoSpeedScale += 0.1f;
@@ -638,4 +651,5 @@ public class LappingOfAsylumController : MonoBehaviour
     private AudioManagerLiveReaction CurAudioMan;
     [Header("goog mode")]
     public bool GoodMode;
+    public AudioObjectyeah GoodModeMusic;
 }

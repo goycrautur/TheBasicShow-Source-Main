@@ -77,6 +77,7 @@ public class GameControllerScript : MonoBehaviour
     #region Initialization
     private void InitializeGameSettings()
     {
+        for (int i = 0; i < GlobalTextures.Length; ++i) if (GlobalTextures[i].MatToModify != null && GlobalTextures[i].tex != null) GlobalTextures[i].MatToModify.SetTexture("_MainTex", GlobalTextures[i].tex);
         ExclusiveRoute = "";
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
@@ -937,6 +938,7 @@ public class GameControllerScript : MonoBehaviour
         [SerializeField] public Texture tex;
         [SerializeField] public string name; //for me to renemb yes heh
         [SerializeField] public int ID;
+        [SerializeField] public Material MatToModify;
     }
     #region SerializedFields
     [Header("son")]

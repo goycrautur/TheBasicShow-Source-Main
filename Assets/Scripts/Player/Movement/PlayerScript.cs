@@ -30,6 +30,8 @@ public class PlayerScript : MonoBehaviour
 	#endregion
 	public void randomAssStufV2()
     {
+		HiddenSpeedMod.movementMultiplier = RunningSpeedMult;
+		if (RunningSpeedMult < 1f) RunningSpeedMult = 1f;
 		foreach (NPC npcKys in FindObjectsOfType<NPC>()) Physics.IgnoreCollision(cc, npcKys.cecil, ignore: true);
 		AdditionalGameCustomizer.Instance.ReworkedCurrency = false;
 		if (Iframes > 0)Iframes -= Time.deltaTime;
@@ -119,6 +121,7 @@ public class PlayerScript : MonoBehaviour
 	#region Initialization
 	private void InitializeSettings()
 	{
+		pModManag.movementModifiers.Add(HiddenSpeedMod);
 		timerTillDeath = 1f;
 		DeathCountdown = false;
 		sensitivityActive = PlayerPrefs.GetInt("AnalogMove") == 1;
@@ -196,6 +199,7 @@ public class PlayerScript : MonoBehaviour
             float speed = Mathf.Lerp(currentSpeed, 0f, t);
             Vector3 move = pushDirection * speed * Time.deltaTime;
 			PushSpeedMod.movementAddend = move;
+			RunningSpeedMult = 1f;
 			cc.Move(move);
             yield return null;
         }
@@ -328,7 +332,9 @@ public class PlayerScript : MonoBehaviour
 		if (isRunning && secondaryMovementVelocity.magnitude > 0.1f && !hugging && !sweeping)
 		{
 			if (!outdoorsfr && door.lockTime <= 0f) ResetGuilt("running", 0.1f);
+			if (RunningSpeedMult <= 2.25f) RunningSpeedMult += 0.25f * Time.deltaTime;
 		}
+		else if (RunningSpeedMult > 1f) RunningSpeedMult -= 1f * Time.deltaTime;;
 	}
 
 	private void HandleSpecialMovement()
@@ -352,7 +358,8 @@ public class PlayerScript : MonoBehaviour
 
 		if (!sweeping && Singleton<InputManager>.Instance.GetActionKey(InputAction.Run) && stamina > 0f && cc.velocity.magnitude > 0.1f)
 		{
-			stamina -= staminaDrop * Time.fixedDeltaTime;
+			stamina -= (staminaDrop *RunningSpeedMult) * Time.fixedDeltaTime;
+			
 		}
 		else if (stamina < maxStamina && cc.velocity.magnitude < 0.1f)
 		{
@@ -567,6 +574,17 @@ public class PlayerScript : MonoBehaviour
 				return;
 			}
 		}
+		if (other.GetComponent<basicshowWindowScript>() != null && playerSpeed >= 50f)
+		{
+			basicshowWindowScript Wind = other.GetComponent<basicshowWindowScript>();
+			if (Wind.broken) return;
+			else
+			{
+				PushPlayer(GetPlayerPushDirection(transform.position + Wind.transform.position), 24f * (1+(playerSpeed/50)), 0.75f);
+				Wind.SetWindowState(true, 6f, 0f, (int)(playerSpeed/50));
+			}
+			return;
+		}
 		if (other.transform.name == "OfficeTrigger")alsoInOffice = true;
 		if (other.CompareTag("porta"))StartCoroutine(GameControllerScript.Instance.funnyportal());
 		if (other.CompareTag("lapporta"))StartCoroutine(GameControllerScript.Instance.LapManag.LapPortal());
@@ -697,11 +715,11 @@ public class PlayerScript : MonoBehaviour
 	#region Internal State
 	private Quaternion playerRotation;
 	private bool sensitivityActive;
-	public float sensitivity, playerSpeed,curgrav = 1f;
+	public float sensitivity, playerSpeed,curgrav = 1f,RunningSpeedMult = 1f;
 	public Vector3 moveDirection, secondaryMovementVelocity;
 	private GameObject GameSet;
 	private Coroutine pushCoroutine;
-	private MovementModifier PushSpeedMod = new MovementModifier(default(Vector3), 0f);
+	private MovementModifier PushSpeedMod = new MovementModifier(default(Vector3), 0f),HiddenSpeedMod = new MovementModifier(default(Vector3), 0f);
 	public float carfuel,maxcarfuel;
 	private Gauge CargaugeReal;
 	private MovementModifier thosewhoSpeed;

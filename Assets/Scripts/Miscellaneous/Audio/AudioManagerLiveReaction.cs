@@ -53,7 +53,7 @@ public class AudioManagerLiveReaction : MonoBehaviour
     }
     private void Update()
     {
-        if (queuedAudios.Count > 0 && (!AudioListener.pause || audioDevice.ignoreListenerPause) && !audioDevice.isPlaying) PlayNext();
+        if (queuedAudios.Count > 0 && (!AudioListener.pause || audioDevice.ignoreListenerPause) && (!audioDevice.isPlaying && !ForcePauseQueue)) PlayNext();
     }
     public void QueueAudio(AudioObjectyeah obje)
     {
@@ -116,6 +116,12 @@ public class AudioManagerLiveReaction : MonoBehaviour
     public void SetMute(bool toggle) => audioDevice.mute = toggle;
     public void SetPitch(float pitch) => audioDevice.pitch = pitch;
     public void SetVolume(float vol) => audioDevice.volume = vol;
+    public void SetForcePausing(bool wha)
+    {
+        if (wha) audioDevice.Pause();
+        else audioDevice.UnPause();
+        ForcePauseQueue = wha;
+    }
 
     public void SetLoop(bool toggle)
     {
@@ -139,5 +145,6 @@ public class AudioManagerLiveReaction : MonoBehaviour
     [Header("Standalones stuff")]
     public bool AudioManStandalone;
     public AudioMixerGroup[] MixerOverrides;
+    private bool ForcePauseQueue;
     #endregion
 }

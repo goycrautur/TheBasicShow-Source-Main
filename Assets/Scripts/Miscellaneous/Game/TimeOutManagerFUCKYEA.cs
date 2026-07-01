@@ -10,6 +10,10 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
     {
         TimeDuratiOk = 9999f;
     }
+    public void AddTime(float Dur)
+    {
+        TimeDuratiOk += Dur;
+    }
     public void Update()
     {
 
