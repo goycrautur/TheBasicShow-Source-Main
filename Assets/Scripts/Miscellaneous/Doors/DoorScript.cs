@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+/*#if UNITY_EDITOR
+[ExecuteInEditMode]
+#endif*/
 
 public class DoorScript : MonoBehaviour
 {
     #region Initialization
-    private void Start()
+    /*#if UNITY_EDITOR
+    private void OnGUI() 
     {
-        CurTrigger = MainTrigger;
-        AltTrigger.enabled = false;
+        UpdateShaderVariableStuff();
+        InitializeShaderVariableStuff();
+    }
+    #endif*/
+    private void InitializeShaderVariableStuff()
+    {
         outside.material.SetTextureScale("_SecondTex", new Vector2(-1, 1));
         outside.material.SetTextureScale("_SecondaryDiffrent", new Vector2(-1, 1));
         inside.material.SetTexture("_MainTex", GameControllerScript.Instance.GlobalTextures[(int)WalTypSideIn].tex);
@@ -21,10 +29,15 @@ public class DoorScript : MonoBehaviour
             inside.material.SetTexture("_SecondaryDiffrent", DoorTextureDatas.doorCloseTex);
             inside.material.SetTexture("_Mask", DoorTextureDatas.doorMask);
         }
-        
+    }
+    private void Start()
+    {
+        CurTrigger = MainTrigger;
+        AltTrigger.enabled = false;
         myAudio.audioDevice.spatialBlend = 1;
         myAudio.audioDevice.minDistance = 35;
         myAudio.audioDevice.maxDistance = 125;
+        InitializeShaderVariableStuff();
     }
     #endregion
 
@@ -34,6 +47,12 @@ public class DoorScript : MonoBehaviour
         HandleLockTimer();
         HandleOpenTimer();
         HandleDoorInteraction();
+        UpdateShaderVariableStuff();
+        
+        
+    }
+    private void UpdateShaderVariableStuff()
+    {
         //end myself
         inside.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
         inside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);

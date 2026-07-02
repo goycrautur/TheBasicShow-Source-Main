@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseGamemodeManager : MonoBehaviour
+public abstract class BaseGamemodeManager : MonoBehaviour
 {
     protected void Start()
 	{
