@@ -101,7 +101,7 @@ public class PickupScript : Interactable
         {
             if (!DroppedItem)
             {
-                if (killafterpickup) Destroy(gameObject);
+                if (killafterpickup) HideShitsLogic(false,false,true);
                 if (!killafterpickup)
                 {
                     HideShitsLogic(false);
