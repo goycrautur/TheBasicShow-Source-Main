@@ -45,8 +45,13 @@ public class TimeOutManagerFUCKYEA : Singleton<TimeOutManagerFUCKYEA>
             StartCoroutine(LearningGameManager.Instance.Television.StartTVSequence(LearningGameManager.Instance.aud_Timeout));
             if (GameControllerScript.Instance.mode == "story")StartCoroutine(GameControllerScript.Instance.tiemoutStu());
             if (GameControllerScript.Instance.mode != "story")GameControllerScript.Instance.easingExit(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 5);
-            if (GameControllerScript.Instance.mode == "LappingOfAsylum") GameControllerScript.Instance.wegchal.WEGA.SetActive(true);
+            if (GameControllerScript.Instance.mode == "LappingOfAsylum") 
+            {
+                GameControllerScript.Instance.wegchal.WEGA.SetActive(true);
+                GameControllerScript.Instance.LapManag.LappingObjectsEnabler.Add(GameControllerScript.Instance.wegchal.WEGA);
+            }
             GameControllerScript.Instance.timeout = true;
+
             spamupdatethese =true;
             return;
         }

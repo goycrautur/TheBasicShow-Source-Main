@@ -54,6 +54,10 @@
     <string>bossStart</string>
     <string>bossTransition</string>
     <string>dess revenge loop</string>
+    <string>exhausted trouble</string>
+    <string>exhausted trouble intro</string>
+    <string>exhausted trouble loop</string>
+    <string>exhausted trouble on hit</string>
     <string>kicking_your_bucket_loop</string>
     <string>kicking_your_bucket_posthit</string>
     <string>kicking_your_bucket_preboss</string>

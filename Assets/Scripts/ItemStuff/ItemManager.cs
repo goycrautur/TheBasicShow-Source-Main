@@ -582,6 +582,25 @@ public class ItemManager : MonoBehaviour
         };
 
         var pickup = droppedItem.AddComponent<PickupScript>();
+
+        GameObject MapSpriteObject = new GameObject("mapSprite")
+        {
+            transform = { parent = droppedItem.transform, localPosition = new Vector3(0, spawnPosition.y + 45, 0), localScale = new Vector3(31.25f, 31.25f, 20f) },
+            layer = 10
+        };
+
+        SpriteRenderer spriteRanderer = MapSpriteObject.AddComponent<SpriteRenderer>();
+        if (AdditionalGameCustomizer.Instance.itemMapSprite != null && !item.ItemInstance.SpecialItemIcon)
+        {
+            spriteRanderer.sprite = Sprite.Create(AdditionalGameCustomizer.Instance.itemMapSprite, new Rect(0, 0, AdditionalGameCustomizer.Instance.itemMapSprite.width, AdditionalGameCustomizer.Instance.itemMapSprite.height), new Vector2(0.5f, 0.5f), 100);
+        }
+        if (AdditionalGameCustomizer.Instance.SpecialItemMapSprite != null && item.ItemInstance.SpecialItemIcon)
+        {
+            spriteRanderer.sprite = Sprite.Create(AdditionalGameCustomizer.Instance.SpecialItemMapSprite, new Rect(0, 0, AdditionalGameCustomizer.Instance.SpecialItemMapSprite.width, AdditionalGameCustomizer.Instance.SpecialItemMapSprite.height), new Vector2(0.5f, 0.5f), 100);
+        }
+
+        pickup.mapIconSprite = spriteRanderer;
+
         pickup.enabled = true;
         pickup.DroppedItem = true;
         pickup.ID = Inventory[index].ItemID;
@@ -593,30 +612,29 @@ public class ItemManager : MonoBehaviour
         collider.radius = 1.5f;
         collider.height = 2f;
 
+        GameObject spriteControllerObject = new GameObject("Item")
+        {
+            transform = { 
+            parent = droppedItem.transform, localPosition = new Vector3(0f,1f,0f), localScale = new Vector3(2f, 2f, 2f) 
+            }
+        };
+
         GameObject spriteObject = new GameObject("Sprite")
         {
-            transform = { parent = droppedItem.transform, localPosition = Vector3.zero, localScale = new Vector3(2f, 2f, 2f) }
-        };
-        GameObject MapSpriteObject = new GameObject("mapSprite")
-        {
-            transform = { parent = droppedItem.transform, localPosition = new Vector3(0, spawnPosition.y + 45, 0), localScale = new Vector3(31.25f, 31.25f, 20f) },
-            layer = 10
+            transform = { 
+            parent = spriteControllerObject.transform, localPosition = Vector3.zero, localScale = new Vector3(1f, 1f, 1f) 
+            }
         };
         
-        SpriteRenderer spriteRanderer = MapSpriteObject.AddComponent<SpriteRenderer>();
-        if (AdditionalGameCustomizer.Instance.itemMapSprite != null && !item.ItemInstance.SpecialItemIcon)
-        {
-            spriteRanderer.sprite = Sprite.Create(AdditionalGameCustomizer.Instance.itemMapSprite, new Rect(0, 0, AdditionalGameCustomizer.Instance.itemMapSprite.width, AdditionalGameCustomizer.Instance.itemMapSprite.height), new Vector2(0.5f, 0.5f), 100);
-        }
-        if (AdditionalGameCustomizer.Instance.SpecialItemMapSprite != null && item.ItemInstance.SpecialItemIcon)
-        {
-            spriteRanderer.sprite = Sprite.Create(AdditionalGameCustomizer.Instance.SpecialItemMapSprite, new Rect(0, 0, AdditionalGameCustomizer.Instance.SpecialItemMapSprite.width, AdditionalGameCustomizer.Instance.SpecialItemMapSprite.height), new Vector2(0.5f, 0.5f), 100);
-        }
         SpriteRenderer spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
-        pickup.mapIconSprite = spriteRanderer;
+
+        var spriteController = spriteControllerObject.AddComponent<SpriteController>();
+        spriteController.mainTex = itemToDrop.BigSprite;
+        spriteController.useBobbing = true;
         if (itemToDrop.BigSprite is Texture2D texture)
         {
             spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), itemToDrop.TexturePPUThing);
+            
         }
         else
         {
@@ -624,12 +642,12 @@ public class ItemManager : MonoBehaviour
         }
 
         spriteRenderer.material = GameControllerScript.Instance.SpriteRenderer;
+
         var iconmap = MapSpriteObject.AddComponent<rotateToPlayerMinimapIcon>();
         iconmap.rotati = 90;
-        spriteObject.AddComponent<Billboard>().doNotOptimize = true;
-        spriteObject.AddComponent<PickupAnimationScript>();
-        spriteObject.AddComponent<AddToLightingWhitelist>();
-        pickup.InstantiateReal();
+
+        
+
 
         itemToDrop.transform.SetParent(droppedItem.transform);
         itemToDrop.gameObject.SetActive(true);

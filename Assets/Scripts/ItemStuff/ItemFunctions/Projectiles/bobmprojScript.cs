@@ -20,11 +20,12 @@ public class bobmprojScript : MonoBehaviour
         rb.velocity = transform.forward * speed;
     }
     #endregion
-    private void OnTriggerStay(Collider cork)
+    private void OnTriggerEnter(Collider cork)
     {
         if (cork.name.StartsWith("Wall") || cork.name.StartsWith("Fence") || cork.name.StartsWith("Ceiling") || cork.name.StartsWith("Floor") || cork.name.StartsWith("ElvDoor"))
         {
-            boom(true);
+            if (GoThoughWalls) boom(false);
+            else boom(true, 0f);
             return;
         }
         if (cork.CompareTag("floor"))
@@ -32,6 +33,9 @@ public class bobmprojScript : MonoBehaviour
             boom(false, BounceVelocity);
             return;
         }
+    }
+    private void OnTriggerStay(Collider cork)
+    {
         if (cork.CompareTag("Window") && cork.GetComponent<basicshowWindowScript>() != null && !cork.GetComponent<basicshowWindowScript>().broken)
         {
             
@@ -39,7 +43,14 @@ public class bobmprojScript : MonoBehaviour
             boom(true);
             return;
         }
-        if (cork.GetComponent<NPC>() != null)
+        if (cork.CompareTag("Player") & !GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard && IsEnemy)
+        {
+            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageToNpc / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
+            GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 32f*(bouncetime+1), 0.5f);
+            boom(true);
+            return;
+        }
+        if (cork.GetComponent<NPC>() != null && !IsEnemy)
         {
             NPC enpe = cork.GetComponent<NPC>();
             enpe.Stun(NpcStuntime);
@@ -48,7 +59,7 @@ public class bobmprojScript : MonoBehaviour
             boom(true);
             return;
         }
-        if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.health != 1)
+        if (ZerullClassic.Instance.realBossStarted && ZerullClassic.Instance.health != 1 && !IsEnemy)
         {
             if (cork.GetComponent<ZerullBossScript>() != null && !stunnedBoss)
             {
@@ -74,6 +85,7 @@ public class bobmprojScript : MonoBehaviour
         {
             Instantiate(prefa, transform.position, transform.rotation);
             Destroy(gameObject, 0f);
+            return;
         }
         iframe += 0.25f;
         fallvelocity += fallvelo;
@@ -88,22 +100,20 @@ public class bobmprojScript : MonoBehaviour
         fallvelocity -= VerticalGrav * Time.deltaTime;
         if (iframe > 0f) iframe -= Time.deltaTime;
         if (speed <= 5f) speed -= HorizontalGrav * Time.deltaTime;
-        if (lifeSpan < 0f)
-        {
-            Destroy(gameObject, 0f);
-        }
+        if (lifeSpan < 0f) boom(true);
     }
     #endregion
 
     #region Serialized Configuration
+    public bool IsEnemy,GoThoughWalls;
     [Header("Movement Settings")]
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private float fallvelocity,iframe,VerticalGrav,HorizontalGrav;
     [SerializeField] private int bouncetime,DamageToNpc;
     [SerializeField] private float NpcStuntime,NpcPushVal,BounceVelocity;
 
     [Header("Lifespan Settings")]
-    [SerializeField] private float lifeSpan;
+    public float lifeSpan;
 
     [Header("Rotation Settings")]
     [SerializeField] private bool shouldRotate;

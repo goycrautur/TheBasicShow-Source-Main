@@ -51,6 +51,7 @@ public class minusBGamemode : MonoBehaviour
         }
         if (gc.notebooks == 2)
         {
+            Sych.SetGameWindowTitle("The Basic Show - Numberslops, the peak one (minus b)");
             gc.player.walkSpeedMultipler += 1.5f;
             gc.player.runSpeedMultipler += 1.5f;
             minusB.SetActive(true);

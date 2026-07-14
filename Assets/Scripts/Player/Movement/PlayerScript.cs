@@ -332,7 +332,7 @@ public class PlayerScript : MonoBehaviour
 		if (isRunning && secondaryMovementVelocity.magnitude > 0.1f && !hugging && !sweeping)
 		{
 			if (!outdoorsfr && door.lockTime <= 0f) ResetGuilt("running", 0.1f);
-			if (RunningSpeedMult <= 2.25f) RunningSpeedMult += 0.25f * Time.deltaTime;
+			if (RunningSpeedMult <= 2.25f) RunningSpeedMult += 0.125f * Time.deltaTime;
 		}
 		else if (RunningSpeedMult > 1f) RunningSpeedMult -= 1f * Time.deltaTime;;
 	}

@@ -28,31 +28,37 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (GameControllerScript.Instance.mode == "story")
         {
             modesText.text = "Story Mode";
+            Sych.SetGameWindowTitle("The Basic Show - Story Mode");
             ModifierText.text = "Modifier used: mucho";
         }
         if (GameControllerScript.Instance.mode == "famished")
         {
             NoYCTP = true;
+            Sych.SetGameWindowTitle("The Basic Show - ?????");
             modesText.text = "Famished Butch Takeover";
         }
         if (GameControllerScript.Instance.mode == "wegaChallenge")
         {
             NoYCTP = true;
+            Sych.SetGameWindowTitle("how did you get here");
             modesText.text = "WEGA CHALLENGE";
         }
         if (GameControllerScript.Instance.mode == "zerullclassic")
         {
             NoYCTP = false;
             modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3";
+            Sych.SetGameWindowTitle(chair ? "c  h  a  i  r" : "His domain");
         }
         if (GameControllerScript.Instance.mode == "LappingOfAsylum") 
         {
             NoYCTP = true;
+            Sych.SetGameWindowTitle("The Basic Show - asylum of the larper");
             modesText.text = "Lapping Of Asylum";
         }
         if (GameControllerScript.Instance.mode == "minusb") 
         {
             NoYCTP = true;
+            Sych.SetGameWindowTitle("The Basic Show - ?????");
             modesText.text = "why the fuck is minus b in basic show";
         }
     }

@@ -61,9 +61,9 @@ public class GameControllerScript : MonoBehaviour
         lbams.WarMusic.SetMute(!SecretEndingGot ? timeout : warrealest ? true : true);
         if (SpriteRendererMain != null)
         {
-            SpriteRendererMain.SetInt("_GlitchValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
-            SpriteRendererMain.SetInt("_GlitchValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
-            SpriteRendererMain.SetInt("_GlitchValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
+            SpriteRendererMain.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
+            SpriteRendererMain.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
+            SpriteRendererMain.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
             
         }
         if (failedNotebooks == maxNotebooks) FinaleSecret = true;
@@ -95,6 +95,7 @@ public class GameControllerScript : MonoBehaviour
                 pick.mapIconSprite.enabled = false;
             }
         }
+        foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>()) if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
         foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>()) if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
         war = PlayerPrefsExtension.GetBool("warreal");
         warrealest = war;
@@ -191,7 +192,7 @@ public class GameControllerScript : MonoBehaviour
                 modeDetails = "lapping mode - lap " + LapManag.CurrentLap + " | " + DifficulityString + " Difficulity";
                 largeImagething = "teacherjerproto";
                 largeImageText = "the lapping grindset begin";
-                string ExtraTexty = LapManag.GoodMode == false ? "g o o d  lapping" : "lapping mode";
+                string ExtraTexty = LapManag.GoodMode ? "g o o d  lapping" : "lapping mode";
                 if (LapManag.CurrentLap == 0) modeDetails = ExtraTexty + " - Prelap" + " | " + DifficulityString + " Difficulity";
                 if (LapManag.CurrentLap == 1) modeDetails = ExtraTexty + " - larpingtiem" + " | " + DifficulityString + " Difficulity";
                 if (LapManag.CurrentLap == 99) modeDetails = "lapping mode - lap UNDEFINDED,YOU ARE SO FUCKED" + " | " + DifficulityString + " Difficulity";
@@ -223,7 +224,7 @@ public class GameControllerScript : MonoBehaviour
     #region NotebookManagement
     public void UpdateNotebookCount()
     {
-        notebookCount.text = mode != "endless" ? $"{notebooks}/{maxNotebooks}" : $"{notebooks}";
+        notebookCount.text = mode != "endless" ? $"{notebooks}/{maxNotebooks} <sprite name=cheeseSprites> " : $"{notebooks}  <sprite name=cheeseSprites> ";
         discordupdate("chees");
 
         if (mode == "endless" && notebooks / maxNotebooks > lastRespawnCount)
@@ -376,6 +377,15 @@ public class GameControllerScript : MonoBehaviour
             }
             if (player.killedbyhim)
             {
+                bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
+                string[] MessageQuoteHeh = new string[]
+                {
+                    "fumbled hard, now doin that all over again probally is annoying eh?",
+                    "told ya, regretting right now is kinda too late tho",
+                    "*SIGHHHH* FINNALY. for fuck sakes",
+                    "'Teacher Jerry's greatest challenger'. quite the bold title coming from him"
+                };
+                Sych.ShowWindowsMessageBox(chair ? "*chair glitching sound*" : MessageQuoteHeh[UnityEngine.Random.Range(0,MessageQuoteHeh.Length)], chair ? "c4Air##@%@%$#$@" : "Him");
                 Singleton<VertexGlitchManager>.Instance.mustGlitch = false;
                 Application.Quit();
             }

@@ -102,7 +102,7 @@ public class minusbScript : NPC
     public void OnMoveDone()
     {
         agent.speed = 0;
-        if (agent.remainingDistance <= 0.1f) Wander();
+        if (agent.remainingDistance <= 0.01f) Wander();
         if (!stopMoving) Invoke(nameof(Move), Wait);
     }
     #endregion

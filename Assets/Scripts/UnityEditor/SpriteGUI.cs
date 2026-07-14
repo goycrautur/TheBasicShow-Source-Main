@@ -8,10 +8,17 @@ public class SpriteGUI : ShaderGUI
         MaterialProperty color = FindProperty("_Color", props);
         MaterialProperty mainTex = FindProperty("_MainTex", props);
 
+        MaterialProperty billboardMode = FindProperty("_BillboardMode", props);
+
         MaterialProperty lightMap = FindProperty("_LightMap", props);
         MaterialProperty useLightmap = FindProperty("_UseLightmap", props);
         MaterialProperty useSmoothTransition = FindProperty("_UseSmoothTransition", props);
         MaterialProperty transitionThreshold = FindProperty("_TransitionThreshold", props);
+
+        MaterialProperty useColorMask = FindProperty("_UseColorMask", props);
+        MaterialProperty maskColor = FindProperty("_MaskColor", props);
+        MaterialProperty maskBrightness = FindProperty("_MaskBrightness", props);
+        MaterialProperty colorMask = FindProperty("_ColorMask", props);
 
         MaterialProperty useOverlay = FindProperty("_UseOverlay", props);
         MaterialProperty blendFactor = FindProperty("_BlendFactor", props);
@@ -20,13 +27,21 @@ public class SpriteGUI : ShaderGUI
         MaterialProperty bobAmount = FindProperty("_BobAmount", props);
         MaterialProperty bobSpeed = FindProperty("_BobSpeed", props);
 
-        MaterialProperty useGlitch = FindProperty("_UseGlitch", props);
-        MaterialProperty glitchX = FindProperty("_GlitchValueX", props);
-        MaterialProperty glitchY = FindProperty("_GlitchValueY", props);
-        MaterialProperty glitchZ = FindProperty("_GlitchValueZ", props);
+        MaterialProperty startShaking = FindProperty("_UseShaking", props);
+        MaterialProperty shakeAmount = FindProperty("_ShakeAmount", props);
+        MaterialProperty shakeRotationAmount = FindProperty("_ShakeRotationAmount", props);
+        MaterialProperty shakeSpeed = FindProperty("_ShakeSpeed", props);
+
+        MaterialProperty useRandomZrotation = FindProperty("_UseRandomZRotation", props);
+        MaterialProperty zRotationAmount = FindProperty("_RandomZRotationAmount", props);
 
         materialEditor.ShaderProperty(color, color.displayName);
         materialEditor.ShaderProperty(mainTex, mainTex.displayName);
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Billboard Settings", EditorStyles.boldLabel);
+        materialEditor.ShaderProperty(billboardMode, billboardMode.displayName);
 
         EditorGUILayout.Space(10);
 
@@ -37,6 +52,17 @@ public class SpriteGUI : ShaderGUI
             materialEditor.ShaderProperty(lightMap, lightMap.displayName);
             materialEditor.ShaderProperty(useSmoothTransition, useSmoothTransition.displayName);
             materialEditor.ShaderProperty(transitionThreshold, transitionThreshold.displayName);
+        }
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Color Mask Settings", EditorStyles.boldLabel);
+        materialEditor.ShaderProperty(useColorMask, useColorMask.displayName);
+        if (useColorMask.floatValue > 0.5f)
+        {
+            materialEditor.ShaderProperty(maskColor, maskColor.displayName);
+            materialEditor.ShaderProperty(maskBrightness, maskBrightness.displayName);
+            materialEditor.ShaderProperty(colorMask, colorMask.displayName);
         }
 
         EditorGUILayout.Space(10);
@@ -60,13 +86,21 @@ public class SpriteGUI : ShaderGUI
 
         EditorGUILayout.Space(10);
 
-        EditorGUILayout.LabelField("Glitch Settings", EditorStyles.boldLabel);
-        materialEditor.ShaderProperty(useGlitch, useGlitch.displayName);
-        if (useGlitch.floatValue > 0.5f)
+        EditorGUILayout.LabelField("Raldi Settings", EditorStyles.boldLabel);
+        materialEditor.ShaderProperty(startShaking, startShaking.displayName);
+        if (startShaking.floatValue > 0.5f)
         {
-            materialEditor.ShaderProperty(glitchX, glitchX.displayName);
-            materialEditor.ShaderProperty(glitchY, glitchY.displayName);
-            materialEditor.ShaderProperty(glitchZ, glitchZ.displayName);
+            materialEditor.ShaderProperty(shakeAmount, shakeAmount.displayName);
+            materialEditor.ShaderProperty(shakeRotationAmount, shakeRotationAmount.displayName);
+            materialEditor.ShaderProperty(shakeSpeed, shakeSpeed.displayName);
+        }
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Random Z Rotation", EditorStyles.boldLabel);
+        materialEditor.ShaderProperty(useRandomZrotation, useRandomZrotation.displayName);
+        if (useRandomZrotation.floatValue > 0.5f)
+        {
+            materialEditor.ShaderProperty(zRotationAmount, zRotationAmount.displayName);
         }
     }
 }

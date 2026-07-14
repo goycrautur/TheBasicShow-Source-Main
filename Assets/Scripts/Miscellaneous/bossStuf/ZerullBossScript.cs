@@ -61,13 +61,15 @@ public class ZerullBossScript : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.BossStarted && other.CompareTag("Player") && !iframedown)
+        if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.RealBossStarted && other.CompareTag("Player") && !iframedown)
         {
             if (!GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)
-            GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
-            ZerullClassic.Instance.OnHit(1.5f,0,false,true);
-            GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 256f, 0.5f);
-            GameControllerScript.Instance.player.killedbyhim = true;
+            {
+                GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, 50 / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
+                ZerullClassic.Instance.OnHit(1.5f,0,false,true);
+                GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 256f, 0.5f);
+                GameControllerScript.Instance.player.killedbyhim = true;
+            }
             return;
         }
     }
@@ -122,6 +124,39 @@ public class ZerullBossScript : MonoBehaviour
         GameControllerScript.Instance.player.DefaultRunSpeed += 0.7f * hp;
         SavedSpeed += 0.7f * hp;
         StartCoroutine(Stun(hp, firstHit));
+    }
+    public void ThrowProjectileFromBoss(int ammount,float delay) => StartCoroutine(ThrowTimeCorou(ammount,delay));
+    public IEnumerator ThrowTimeCorou(int howmanytime,float er)
+    {
+        int valalal = howmanytime;
+        float delay = er;
+         Debug.Log($"throwing {valalal} times with {delay} delay");
+
+        for (int i = 0; i < valalal; i++)
+        {
+            yield return new WaitForSeconds(delay);
+            ThrowProjectile();
+        }
+    }
+    public void ThrowProjectile()
+    {
+        transform.LookAt(GameControllerScript.Instance.player.transform.position);
+        Vector3 direction = GameControllerScript.Instance.player.transform.position - base.transform.position;
+        Vector3 vector = new Vector3(base.transform.position.x, 5f, base.transform.position.z);
+        Vector3 upithink = new Vector3(base.transform.position.x, base.transform.position.y + 2f, base.transform.position.z);
+        int RandomProjectileRange = Random.Range(0,projectilePrefabs.Length);
+        if (projectilePrefabs[RandomProjectileRange].GetComponent<bobmprojScript>())
+        {
+            GameObject enemiProjectile = Instantiate<GameObject>(projectilePrefabs[RandomProjectileRange], upithink, Quaternion.LookRotation(GameControllerScript.Instance.player.transform.position - vector));
+            enemiProjectile.transform.localScale = new Vector3(2f, 2f, 2f);
+            bobmprojScript projcomponent = enemiProjectile.GetComponent<bobmprojScript>();
+            projcomponent.IsEnemy = true;
+            projcomponent.speed *= 1.5f;
+            projcomponent.GoThoughWalls = true;
+            projcomponent.lifeSpan = 4f;
+        }
+        else Instantiate(projectilePrefabs[RandomProjectileRange], upithink, Quaternion.LookRotation(GameControllerScript.Instance.player.transform.position - vector));
+        Debug.Log($"Shoot direction: {Quaternion.LookRotation(GameControllerScript.Instance.player.transform.position - vector)}");
     }
     public void totem()
     {
@@ -199,5 +234,6 @@ public class ZerullBossScript : MonoBehaviour
     [Header("Chase Music")]
     private bool midiDrums,iframedown;
     public float iframes = 0f,stuntiem,stunTimeMult;
+    [SerializeField] private GameObject[] projectilePrefabs;
     [HideInInspector] public bool hitted,totemready;
 }

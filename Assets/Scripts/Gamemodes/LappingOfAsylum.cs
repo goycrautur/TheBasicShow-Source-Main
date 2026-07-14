@@ -146,7 +146,9 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         if (stuff == "beginning")
         {
+            LappingObjectsEnabler.Clear();
             gc.UnlockAmount = 0;
+            gc.ObjectsToEnable.ForEach(o => LappingObjectsEnabler.Add(o));
             gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
             gc.Math.quarter.SetActive(true);
             string mode = PlayerPrefs.GetString("CurrentMode");
@@ -194,7 +196,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             gc.maxNotebooks += realCurrentMaxNoteboo;
             CurrentMaxNotebooks += realCurrentMaxNoteboo;
-            gc.player.maxHealth += 25;
+            //gc.player.maxHealth += 25;
             gc.player.totemshit(false);
             for (int i = 0; i < noteboos.Length; ++i) if (noteboos[i].hidden) noteboos[i].Respawn();
             gc.UpdateNotebookCount();
@@ -224,23 +226,17 @@ public class LappingOfAsylumController : MonoBehaviour
                     {
                         if (gc.fmc.butch != null)
                         {
-                            GameObject clone = Instantiate(gc.fmc.butch, gc.fmc.butch.transform.position, gc.fmc.butch.transform.rotation);
-                            clone.name = gc.fmc.butch.name;
-                            clone.GetComponent<FamishedScript>().famishedSpd = 0.5f;
-                            clone.SetActive(true);
+                            GameObject clonez = CloneNpc(gc.fmc.butch);
+                            clonez.GetComponent<FamishedScript>().famishedSpd = 0.5f;
                         }
                         /*if (gc.zerull.zer != null)
                         {
-                            GameObject clone = Instantiate(gc.zerull.zer, gc.zerull.zer.transform.position, gc.zerull.zer.transform.rotation);
-                            clone.name = gc.zerull.zer.name;
-                            clone.GetComponent<zerullscript>().Anger = 0.5f;
-                            clone.SetActive(true);
+                            GameObject clonez = CloneNpc(gc.zerull.zer);
+                            clonez.GetComponent<zerullscript>().Anger = 0.5f;
                         }*/
                         if (gc.wegchal.WEGA != null)
                         {
-                            GameObject clone = Instantiate(gc.wegchal.WEGA, gc.wegchal.WEGA.transform.position, gc.wegchal.WEGA.transform.rotation);
-                            clone.name = gc.wegchal.WEGA.name;
-                            clone.SetActive(true);
+                            CloneNpc(gc.wegchal.WEGA);
                         }
                     }
                 }
@@ -318,6 +314,13 @@ public class LappingOfAsylumController : MonoBehaviour
                 gc.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 0.5f);
             }
         }
+    }
+    private GameObject CloneNpc(GameObject WhoToClone)
+    {
+        GameObject clone = Instantiate(WhoToClone, WhoToClone.transform.position, WhoToClone.transform.rotation);
+        clone.name = WhoToClone.name;
+        clone.SetActive(true);
+        return clone;
     }
     public IEnumerator zawadro()
     {
@@ -491,7 +494,7 @@ public class LappingOfAsylumController : MonoBehaviour
         vanishScore = false;
         scoreSystemManager.Instance.AddScore(5500*CurrentLap);
         if (Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(55f,Color.green);
-        gc.player.maxHealth += 25;
+        //gc.player.maxHealth += 10;
         gc.player.totemshit(false);
         
         for (int e = 0; e < AdditionalGameCustomizer.Instance.ExitImages.Length; ++e) StartCoroutine(gc.tweeniconSolo(new Color(0, 0, 0, 0), 0, 1, 1f, e));
@@ -524,11 +527,12 @@ public class LappingOfAsylumController : MonoBehaviour
     }
     public void LapPortalAfterExiting()
     {
-        LapSpecificsStuff();
+        
         gc.lbams.MainSource2.PlaySingleClip(BellSoundLapping);
         gc.player.walkSpeedMultipler += 0.1f;
         gc.player.runSpeedMultipler += 0.1f;
         CurrentLap++;
+        LapSpecificsStuff();
         gc.UpdateNotebookCount();
         inportalALREADY = false;
         bool shrinky = PlayerPrefsExtension.GetBool("shrink");
@@ -542,41 +546,55 @@ public class LappingOfAsylumController : MonoBehaviour
         if (!GoodMode)
         {
             LapRouletteTagThing++;
-            if (CurrentLap >= 1 && CurrentLap <= 3) gc.npcCloneList.ForEach(o => o.SetActive(true));
-            if (CurrentLap == 1) tim.SetActive(true);
-            if (CurrentLap == 2)
+            if (CurrentLap == 2) 
+            {
+                //tim.SetActive(true);
+                LappingObjectsEnabler.Add(tim);
+            }
+            if (CurrentLap == 3)
             {
                 gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
                 gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
                 gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
                 Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
-                gc.fmc.butch.SetActive(true);
-                //
+                //gc.fmc.butch.SetActive(true);
+                LappingObjectsEnabler.Add(gc.fmc.butch);
                 LapFamishShit = true;
             }
-            if (CurrentLap == 3)
+            if (CurrentLap == 4)
             {
                 gc.player.walkSpeedMultipler = 1f;
                 gc.player.runSpeedMultipler = 1f;
                 gc.fmc.angerMultipler = 0.45f;
                 MeepTimer.SetActive(true);
             }
-            if (CurrentLap == 4)
+            if (CurrentLap == 5)
             {
+                gc.ObjectsToEnable.ForEach(o => LappingObjectsEnabler.Remove(o));
+                LappingObjectsEnabler.Add(mucho);
+                LappingObjectsEnabler.Add(gc.zerull.zer);
                 gc.notebooks = 0;
                 gc.maxNotebooks = realCurrentMaxNoteboo;
                 CurrentMaxNotebooks = realCurrentMaxNoteboo;
                 gc.player.walkSpeedMultipler = 1.25f;
                 gc.player.runSpeedMultipler = 1.25f;
-                gc.zerull.zer.SetActive(true);
+                //gc.zerull.zer.SetActive(true);
                 ZerullClassic.Instance.health = 20;
                 if (ZerullClassic.Instance.spawnBlockagesDuringTheBossfight) ZerullClassic.Instance.blockages.SetActive(true);
-                mucho.SetActive(true);
+                //mucho.SetActive(true);
                 Lap5TimingStuff = true;
                 
             }
-            if (CurrentLap == 5)
+            if (CurrentLap == 6)
             {
+                LappingObjectsEnabler.Remove(mucho);
+                GameObject ButchClone = CloneNpc(gc.fmc.butch);
+                ButchClone.GetComponent<FamishedScript>().famishedSpd -= 2f;
+                GameObject ZerullClone = CloneNpc(gc.zerull.zer);
+                ZerullClone.GetComponent<zerullscript>().Anger += 1f;
+                LappingObjectsEnabler.Add(ZerullClone);
+                LappingObjectsEnabler.Add(CloneNpc(tim));
+                LappingObjectsEnabler.Add(ButchClone);
                 gc.player.walkSpeedMultipler += 0.3f;
                 gc.player.runSpeedMultipler += 0.3f;
                 gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
@@ -592,36 +610,38 @@ public class LappingOfAsylumController : MonoBehaviour
                     noteboos[i].MultiCollectTime = 3;
                 }
             }
+
             //if (lappingHi[CurrentLap].LapMusikIntro != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikIntro);
             //if (lappingHi[CurrentLap].LapMusikLoop != null) LapSound.QueueAudio(lappingHi[CurrentLap].LapMusikLoop);
-            bool HasLapMusicIntro = lappingHi[CurrentLap].LapMusikIntro != null;
-            bool HasLapMusicLoop = lappingHi[CurrentLap].LapMusikLoop != null;
-            AudioObjectyeah clip1 = HasLapMusicIntro ? lappingHi[CurrentLap].LapMusikIntro : lappingHi[CurrentLap].LapMusikLoop;
+            bool HasLapMusicIntro = lappingHi[CurrentLap-1].LapMusikIntro != null;
+            bool HasLapMusicLoop = lappingHi[CurrentLap-1].LapMusikLoop != null;
+            AudioObjectyeah clip1 = HasLapMusicIntro ? lappingHi[CurrentLap-1].LapMusikIntro : lappingHi[CurrentLap-1].LapMusikLoop;
 
             if (LapRouletteTagThing == 2)
             {
-                StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+                StartCoroutine(Crossfade(LapSound2, LapSound, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap-1].LapMusikLoop));
                 LapRouletteTagThing = 0;
             }
-            else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap].LapMusikLoop));
+            else StartCoroutine(Crossfade(LapSound, LapSound2, clip1, 2f,true, HasLapMusicLoop ? true : false, lappingHi[CurrentLap-1].LapMusikLoop));
 
             
         }
         else
         {
-            if (CurrentLap == 1) 
+            if (CurrentLap == 2) 
             {
-                tim.SetActive(true);
+                LappingObjectsEnabler.Add(tim);
                 gc.player.walkSpeedMultipler += 0.35f;
                 gc.player.runSpeedMultipler += 0.35f;
             }
         }
-        if (lappingHi[CurrentLap].usesFlag) StartCoroutine(flagmove(lappingHi[CurrentLap].LapFlag));
+        LappingObjectsEnabler.ForEach(l => l.SetActive(true));
+        if (lappingHi[CurrentLap-1].usesFlag) StartCoroutine(flagmove(lappingHi[CurrentLap-1].LapFlag));
         foreach (MuchoScript muc in GameControllerScript.Instance.muchscr) if (muc.isActiveAndEnabled) muc.MuchoSpeedScale += 0.1f;
     }
 
     [SerializeField] private GameControllerScript gc;
-    public List<GameObject> LapPortals, elevatorTriggers = new List<GameObject>();
+    public List<GameObject> LapPortals, elevatorTriggers, LappingObjectsEnabler = new List<GameObject>();
     public AudioObjectyeah[] RandomizedPrelapQueueOkBro;
     public GameObject LapFlag, mucho,tim, MeepTimer;
     public meepTimerScript Meeptimar;

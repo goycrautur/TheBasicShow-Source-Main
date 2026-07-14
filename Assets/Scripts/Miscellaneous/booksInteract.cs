@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class booksInteract : Interactable
 {
@@ -19,18 +20,21 @@ public class booksInteract : Interactable
     #region Fields
     [Header("Think Pad")]
     private LearningGameManager lgm;
+    public float floatery;
+    public bool InRange;
+    [HideInInspector] public Coroutine HideCoroutin;
+    public SpriteController sprite;
     #endregion
 
     private void Start()
     {
-        mpb = new MaterialPropertyBlock();
+        sprite = GetComponentInChildren<SpriteController>();
         notebooSprite = GetComponentInChildren<SpriteRenderer>();
         respawnTime = 120f;
         audioDevice = GetComponent<AudioManagerLiveReaction>();
         gc = GameControllerScript.Instance;
         lgm = LearningGameManager.Instance;
         player = GameControllerScript.Instance.player.transform;
-
         if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.RandomizeBookColor)
         {
             notebooSprite.sprite = AdditionalGameCustomizer.Instance.BookColors[Random.Range(0, AdditionalGameCustomizer.Instance.BookColors.Length)];
@@ -41,32 +45,58 @@ public class booksInteract : Interactable
     {
         if (!hidden)
         {
-            GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-		    mpb.SetFloat("_OutlineSize", 0);
-            mpb.SetColor("_OutlineColor", Color.clear);
-		    GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
             if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
             {
                 Transform hitTransform = hit.transform;
                 float maxDistance = 0f;
                 if (hitTransform.GetComponent<Collider>().gameObject == this.gameObject)
                 {
+                    InRange = true;
+                    if (floatery <= 0.5) floatery += 0.5f* Time.deltaTime;
                     maxDistance = GameControllerScript.Instance.player.LocalRange;
                     if (hitTransform.IsWithinDistanceFrom(GameControllerScript.Instance.player.transform, maxDistance))
                     {
-                        GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-                        mpb.SetFloat("_OutlineSize", 2);
-                        mpb.SetColor("_OutlineColor", HighlightColor);
-                        GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+                        if (sprite != null)
+                        {
+                            sprite.useOverlay = true;
+                            sprite.blendFactor = floatery;
+                            sprite.OverlayColor = HighlightColor;
+                        }
                     }
+                    else InRange = false;
                 }
+                else InRange = false;
+            }
+            if (InRange) return;
+            if (floatery > 0) 
+            {
+                floatery -= 2f * Time.deltaTime;
+                if (sprite != null)
+                {
+                    sprite.useOverlay = true;
+                    sprite.blendFactor = floatery;
+                    sprite.OverlayColor = HighlightColor;
+                }
+            }
+            else if (floatery < 0)
+            {
+                floatery = 0;
+                if (sprite != null)
+                {
+                    sprite.useOverlay = false;
+                    sprite.blendFactor = 0;
+                    sprite.OverlayColor = Color.clear;
+                }
+                
             }
         }
 
-        if (gc.mode != "endless") return;
+        if (gc.mode == "endless") 
+        {
 
-        if (hidden && respawnTime > 0f) respawnTime -= Time.deltaTime;
-        else if (!transform.IsWithinDistanceFrom(player, gc.player.LocalRange) && respawnTime <= 0f && hidden) Respawn();
+            if (hidden && respawnTime > 0f) respawnTime -= Time.deltaTime;
+            else if (!transform.IsWithinDistanceFrom(player, gc.player.LocalRange) && respawnTime <= 0f && hidden) Respawn();
+        }
     }
 
     public void Respawn()
@@ -264,8 +294,49 @@ public class booksInteract : Interactable
     private void Hide(bool hide)
     {
         hidden = hide;
-        transform.GetChild(0).gameObject.SetActive(!hide);
         CheeseMapIcon.SetActive(!hide);
         gameObject.tag = hide ? "Untagged" : "Notebook";
+        SpriteDitherOkayBye(hide);
+    }
+    public void SpriteDitherOkayBye(bool Hide)
+    {
+        if (HideCoroutin != null) 
+        {
+            StopCoroutine(HideCoroutin);
+            HideCoroutin = null;
+        }
+        HideCoroutin = StartCoroutine(byeByeCheeseDihther(Hide));
+    }
+    private IEnumerator byeByeCheeseDihther(bool Hide)
+    {
+        floatery = 0;
+        
+        if (sprite != null)
+        {
+            sprite.useOverlay = false;
+            sprite.blendFactor = 0;
+            sprite.OverlayColor = Color.clear;
+            sprite.useTransparency = true;
+            if (Hide)
+            {
+                while (sprite.cutoffOffset < 1f)
+                {
+                    sprite.cutoffOffset += 1.5f * Time.deltaTime;
+                    yield return null;
+                }
+                sprite.cutoffOffset = 1;
+                transform.GetChild(0).gameObject.SetActive(!Hide);
+            }
+            else
+            {
+                while (sprite.cutoffOffset > 0f)
+                {
+                    sprite.cutoffOffset -= 1.5f  * Time.deltaTime;
+                    yield return null;
+                }
+                sprite.cutoffOffset = 0;
+                transform.GetChild(0).gameObject.SetActive(!Hide);
+            }
+        }
     }
 }

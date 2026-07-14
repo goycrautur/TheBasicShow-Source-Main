@@ -8,12 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SpritesOutline
-  m_Shader: {fileID: 4800000, guid: b2004d65390404488b611c4356b68ab0, type: 3}
+  m_Shader: {fileID: 4800000, guid: c75729382781ef4469c6cd60dc1b921d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - ETC1_EXTERNAL_ALPHA
+  m_ValidKeywords: []
   m_InvalidKeywords:
+  - ETC1_EXTERNAL_ALPHA
+  - _USEBOBBING_ON
+  - _USECOLORMASK_ON
+  - _USEGLITCH_ON
   - _USESMOOTHTRANSITION_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -26,6 +29,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -68,8 +75,10 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
+    - _BillboardMode: 0
     - _BlendFactor: 0
     - _BumpScale: 1
+    - _Contrast: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -79,27 +88,41 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _MaskBrightness: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Outline: 0
     - _OutlineSize: 0
     - _Parallax: 0.02
+    - _RandomZRotationAmount: 0.3
+    - _ShakeAmount: 0.5
+    - _ShakeRotationAmount: 0.5
+    - _ShakeSpeed: 24
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TransitionThreshold: 0.646
     - _UVSec: 0
-    - _UseBobbing: 0
-    - _UseGlitch: 0
+    - _UseBobbing: 1
+    - _UseColorMask: 1
+    - _UseGlitch: 1
     - _UseLightmap: 0
     - _UseOverlay: 0
+    - _UseRandomZRotation: 0
+    - _UseShaking: 0
     - _UseSmoothTransition: 1
+    - _UseTransparency: 0
+    - _ValueX: 1
+    - _ValueY: 1
+    - _ValueZ: 1
     - _ZWrite: 1
     m_Colors:
     - _BobAmount: {r: 0, g: 0, b: 0, a: 1}
     - _BobSpeed: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MaskColor: {r: 1, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

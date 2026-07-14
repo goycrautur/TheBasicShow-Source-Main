@@ -689,7 +689,7 @@ public class MathGameScript : MonoBehaviour
 
     public void ButtonPress(int value)
     {
-        if (value >= 0 && value <= problemcap)
+        if (value >= 0 && value <= 9)
         {
             context += value;
             playerAnswer.text = context;

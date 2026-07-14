@@ -170,6 +170,7 @@ public class FamishedModeController : MonoBehaviour
         colortext = "white";
         if (!specialLmsToggle)
         {
+            Sych.SetGameWindowTitle("The Basic Show - his final words");
             pitchdown = true;
             funnyaudiotuff.ClearQueue(true);
             funnyaudiotuff.PlaySingleClip(OneBounceEnd);
@@ -202,6 +203,7 @@ public class FamishedModeController : MonoBehaviour
         {
             scoreSystemManager.Instance.stopUpdatingTSDiscord = true;
             gc.modeState = "OH GOD NO WHAT";
+            Sych.SetGameWindowTitle("The Basic Show - HIS LAST STAND");
             colortext = "red";
             gc.player.DefaultWalkSpeed += 40;
             gc.player.DefaultRunSpeed += 50;
@@ -213,6 +215,7 @@ public class FamishedModeController : MonoBehaviour
         }
         else
         {
+            Sych.SetGameWindowTitle("The Basic Show");
             gc.modeState = "fear";
             if (Singleton<VertexGlitchManager>.Instance.Midi) Singleton<VertexGlitchManager>.Instance.Midi = false;
             Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
@@ -278,6 +281,7 @@ public class FamishedModeController : MonoBehaviour
         dontKillBru = true;
         yield return new WaitForSeconds(delay);
         isAbleToMove = false;
+        Sych.SetGameWindowTitle("The Basic Show - this universe, free from his influence.");
         foreach (FamishedScript fam in gc.famishscr) if (fam.isActiveAndEnabled) fam.explode();
         yield return new WaitForSeconds(GameControllerScript.Instance.lbams.deltaruneExplud.audClip.length +1f);
         foreach (GameObject chaosclon in gc.npcCloneList) chaosclon.SetActive(false);
@@ -306,6 +310,7 @@ public class FamishedModeController : MonoBehaviour
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
         if (gc.notebooks == 2)
         {
+            Sych.SetGameWindowTitle("The Basic Show - here resides the scientist that succumb to his intended instict. the tragedy of those who tried to stop him");
             RenderSettings.ambientLight = Color.black;
             StartCoroutine(easing(new Color(0.45f, 0.45f, 0.45f, 1f), 0, 2, 2));
             angerMultipler = 2.5f;
@@ -326,6 +331,7 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!specialLmsToggle)
             {
+                Sych.SetGameWindowTitle("The Basic Show - the 'creature' anger filling even more");
                 RenderSettings.ambientLight = new Color(0.05f, 0.05f, 0.05f, 0f);
                 StartCoroutine(easing(new Color(0.35f, 0.35f, 0.35f, 1f), 0, 1, 1));
                 funnyaudiotuff.ClearQueue(true);
@@ -341,6 +347,7 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!specialLmsToggle)
             {
+                Sych.SetGameWindowTitle("The Basic Show - His effort");
                 RenderSettings.ambientLight = new Color(1f, 0f, 0f, 1f);
                 StartCoroutine(easing(new Color(0.25f, 0.25f, 0.25f, 1f), 0, 1, 1));
                 angerMultipler = 1.35f;
@@ -366,6 +373,7 @@ public class FamishedModeController : MonoBehaviour
         {
             if (!specialLmsToggle)
             {
+                Sych.SetGameWindowTitle("The Basic Show - The growing desperation");
                 funnyaudiotuff.ClearQueue(true);
                 funnyaudiotuff.SetLoop(true);
                 funnyaudiotuff.QueueAudio(despairSuddenstop);
@@ -376,6 +384,7 @@ public class FamishedModeController : MonoBehaviour
         }
         if (gc.exitsReached == 5)
         {
+            Sych.SetGameWindowTitle("The Basic Show - Huh. he chilled out?");
             angerMultipler = 0.1f;
             funnyaudiotuff.ClearQueue(true);
             funnyaudiotuff.SetLoop(true);
@@ -390,6 +399,7 @@ public class FamishedModeController : MonoBehaviour
     }
     public IEnumerator WhatHaveYouDone()
     {
+        Sych.SetGameWindowTitle("The Basic Show - WHY DID YOU FEED HIM CRACK, WE ARE SO FUCKED");
         funnyaudiotuff.ClearQueue(true);
         funnyaudiotuff.QueueAudio(wierd);
         angerMultipler = 0.001f;
@@ -399,6 +409,7 @@ public class FamishedModeController : MonoBehaviour
         funnyaudiotuff.ClearQueue(true);
         funnyaudiotuff.SetLoop(true);
         funnyaudiotuff.QueueAudio(specialLmsLoop);
+        Sych.SetGameWindowTitle("The Basic Show - Your personal hell");
         
     }
     public IEnumerator zoomtiem()

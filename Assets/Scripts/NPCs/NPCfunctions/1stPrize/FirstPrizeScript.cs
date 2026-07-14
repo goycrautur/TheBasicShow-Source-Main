@@ -6,8 +6,9 @@ public class FirstPrizeScript : NPC
     public override void OnStart()
     {
         base.OnStart();
+        coolDown = 1f;
+        autoBrakeCool = 1f;
         Wander();
-        base.Wander("default");
     }
     #endregion
 
@@ -24,26 +25,16 @@ public class FirstPrizeScript : NPC
             runSpeed = 0f;
             HandleLostPlayer();
         }
-        if (base.StunTime < 0f)
-        {
-            runSpeed = DefaultRunspeed * base.agentSpeedScale;
-        }
+        if (base.StunTime < 0f) runSpeed = DefaultRunspeed * base.agentSpeedScale;
         UpdateAutoBrakeCooldown();
         UpdateRotationAndSpeed();
         HandleCrazyMode();
         UpdateAudioPitch();
         DetectSuddenStop();
 
-        if (coolDown > 0f)
-        {
-            coolDown -= Time.deltaTime;
-        }
+        if (coolDown > 0f) coolDown -= Time.deltaTime;
         CheckForPlayer();
-
-        if (!playerSeen)
-        {
-            HandleWandering();
-        }
+        if (!playerSeen) HandleWandering();
     }
     #endregion
     public override void Stun(float duration)
@@ -236,7 +227,7 @@ public class FirstPrizeScript : NPC
     {
         if (prevSpeed - agent.velocity.magnitude > 25f)
         {
-            Stun(2f);
+            Stun(3f);
             if (!GameControllerScript.Instance.player.isactuallyusingboots) GameControllerScript.Instance.player.ActivateBoots(2000,false);
             foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>())  if (!w.broken) if (Vector3.Distance(this.transform.position, w.transform.position) <= 10) w.SetWindowState(true, 8f, 0f, 3);
             audioDevice.ClearQueue(true);

@@ -13,7 +13,7 @@ public class VideoIntro : MonoBehaviour
 		bool skip = PlayerPrefsExtension.GetBool("warnskip");
 		if (skip) 
 		{
-			LoadingManagerThing.Instance.LoadSceneAsyncUHHH(scenenaem,2f);
+			LoadingManagerThing.Instance.LoadSceneAsyncUHHH(scenenaem,2f,true,"The Basic Show - le menus");
 			return;
 		}
 		else

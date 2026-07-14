@@ -39,6 +39,7 @@ public class zerullscript : NPC
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (TempAnger > 0f) TempAnger -= 0.02f * Time.deltaTime;
         else TempAnger = 0f;
+        if (chair && agent.remainingDistance <= 0.01f) Wander();
         if (chair && !base.stun) agent.speed = (base.agentSpeed/4 * (Wait / 20)) + (Anger * (TempAnger+0.9f)/2);
         if (base.stun)
         {
@@ -109,7 +110,7 @@ public class zerullscript : NPC
         {
             if (Wait < 30f) agent.speed = base.agentSpeed;
             if (Wait > 30f) agent.speed = base.agentSpeed * (Wait/30);
-            if (!stopMoving) Invoke(nameof(OnMoveDone), timeToMove);
+            if (!stopMoving && !chair) Invoke(nameof(OnMoveDone), timeToMove);
             resetWaitTime();
         }
     }
@@ -121,7 +122,7 @@ public class zerullscript : NPC
     private void OnMoveDone()
     {
         agent.speed = 0;
-        if (agent.remainingDistance <= 0.1f) Wander();
+        if (agent.remainingDistance <= 0.01f) Wander();
         if (!stopMoving) Invoke(nameof(Move), Wait);
     }
     #endregion

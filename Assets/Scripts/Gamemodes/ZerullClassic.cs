@@ -19,7 +19,7 @@ public class ZerullClassic : MonoBehaviour
     [Header("Health"), SerializeField]
     public float maxHealth = 10f;
 
-    public float health = 10f;
+    public float health = 10f,ExhaustedJerMaxHp = 15f;
 
     public float Health => health;
 
@@ -49,7 +49,10 @@ public class ZerullClassic : MonoBehaviour
     public GameObject blockages;
     public GameObject[] RandomBlockages;
     [Tooltip("Boss variant of null"), SerializeField] public ZerullBossScript zs;
-    [Tooltip("If it's set to null, game will use optimized version")] public Slider healthSlider;
+    public Slider healthSlider;
+    public RectTransform ZerullIcon;
+    private Vector3 ogZerullIconSize;
+    private Vector2 ogZerullIconPivot;
 
     [Header("Audio"), SerializeField, Tooltip("Boss Music (Boss Clips located at NullScript object)")]
     private AudioObjectyeah[] Boss_Music;
@@ -77,6 +80,11 @@ public class ZerullClassic : MonoBehaviour
     [Tooltip("Boss Start MIDI Name String")] public string midiStart;
 
     [Tooltip("Boss Loop MIDI Name String")] public string midiLoop;
+    [Tooltip("Exhausted boss MIDI intro Name String")] public string exhamidiIntro;
+
+    [Tooltip("Exhausted boss MIDI hit Name String")] public string exhamidiStart;
+
+    [Tooltip("Exhausted boss MIDI loop Name String")] public string exhamidiLoop;
     [Tooltip("Boss Loop MIDI the bloxyver Name String")] public string bloxyLoop1,bloxyLoop2;
 
     [Tooltip("Length of Start MIDI")] public float midiStartLength = 7f;
@@ -84,7 +92,7 @@ public class ZerullClassic : MonoBehaviour
     public Transform[] StartingBossfightProjectileSpawnLocaltion;
     public bool ableToStart,bossStarted, realBossStarted,switchToBloxyb;
     public Animator yourflashbang;
-    public bool taggedonetime,oneHPfailsave;
+    public bool taggedonetime,oneHPfailsave,ExhaustedJerBoss;
 
     public bool BossStarted
     {
@@ -113,6 +121,9 @@ public class ZerullClassic : MonoBehaviour
     }
     private void Start()
     {
+        ogZerullIconSize = ZerullIcon.localScale;
+        ogZerullIconPivot = ZerullIcon.pivot;
+        if (ExhaustedJerBoss) maxHealth = ExhaustedJerMaxHp;
         string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
         int extraHealth = dific == "easy" ? 5 : dific == "normal" ? 12 : dific == "hard" ? 18 : dific == "expert" ? 25 : dific == "maniac" ? 30 : 5;
         maxHealth += extraHealth;
@@ -157,12 +168,20 @@ public class ZerullClassic : MonoBehaviour
     }
     private void MidiEvent(MPTKEvent midiEvent)
 	{
-		if (ableToStart && midiEvent.Command == MPTKCommand.MetaEvent && midiEvent.Meta == MPTKMeta.TextEvent)Singleton<VertexGlitchManager>.Instance.Glitch();
+		if (ableToStart && midiEvent.Command == MPTKCommand.MetaEvent && midiEvent.Meta == MPTKMeta.TextEvent)
+        {
+            ZerullIcon.localScale = ogZerullIconSize * 1.25f;
+            ZerullIcon.pivot = new Vector2(0.75f,0.25f);
+            Singleton<VertexGlitchManager>.Instance.Glitch();
+        }
 	}
 
     private void Update()
     {
+        
         curHealthValueForLerping = Mathf.Lerp(curHealthValueForLerping,health, 5*Time.deltaTime);
+        ZerullIcon.localScale = Vector3.Lerp(ZerullIcon.localScale,ogZerullIconSize, 20*Time.deltaTime);
+        ZerullIcon.pivot = Vector2.Lerp(ZerullIcon.pivot,ogZerullIconPivot, 20*Time.deltaTime);
         if (thrownDelay > 0f)thrownDelay -= Time.deltaTime;
         if (!taggedonetime) tryTOStartBoss();
         if (replaceALLSAKES)
@@ -218,6 +237,7 @@ public class ZerullClassic : MonoBehaviour
     }
     public void Encounter()
     {
+        Sych.SetGameWindowTitle("The Basic Show - Confrontation");
         gc.modeState = "oh no he got last exit what do i do";
         PlayerPrefsExtension.SetBool("WallShakeSwitch", true);
         foreach (basicshowWindowScript w in FindObjectsOfType<basicshowWindowScript>()) if (!w.broken) w.SetWindowState(false, 6f, 0f, 0, true, 0);
@@ -251,7 +271,7 @@ public class ZerullClassic : MonoBehaviour
         }
         else
         {
-            Singleton<MusicManagerMaes>.Instance.PlayMidi(midiIntro, loop: true);
+            Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiIntro : midiIntro, loop: true);
             Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         }
         zs.StartBossIntro();
@@ -275,6 +295,7 @@ public class ZerullClassic : MonoBehaviour
     public bool alreadyHit,isbroyapping; // why not
     private void StartHit()
     {
+        Sych.SetGameWindowTitle("@!@!!@#M#%%^^*****^($%)^))^)");
         gc.modeState = "!!?!?!@?!?@!?@?!??!@!?@!?@!?@? HE GOT HURT";
         if (debugMode)
             Debug.Log("Boss Pissed");
@@ -293,8 +314,8 @@ public class ZerullClassic : MonoBehaviour
         else
         {
             Singleton<MusicManagerMaes>.Instance.StopMidi();
-            Singleton<MusicManagerMaes>.Instance.PlayMidi(midiStart, loop: true);
-            if (StartSongsIsMidi) Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true);
+            Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiStart : midiStart, loop: true);
+            if (StartSongsIsMidi) Singleton<MusicManagerMaes>.Instance.QueueMidi(ExhaustedJerBoss ? exhamidiLoop : (switchToBloxyb ? bloxyLoop1 : midiLoop), true);
             Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         }
 
@@ -314,9 +335,10 @@ public class ZerullClassic : MonoBehaviour
     }
     private IEnumerator BeforeBossAfterTotem()
     {
-        Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb ? bloxyLoop1 : midiLoop, true);
+        Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb && !ExhaustedJerBoss ? bloxyLoop1 : midiLoop, true);
         yield return new WaitForSeconds(12f); // Wait until the music will end
         health = 10;
+        Sych.SetGameWindowTitle("The fight Continues. yeah");
         Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         if (spawnBlockagesDuringTheBossfight) blockages.SetActive(true);
         zs.totemAfterStun();
@@ -324,6 +346,7 @@ public class ZerullClassic : MonoBehaviour
 
     private IEnumerator BeforeBossBegin()
     {
+        Sych.SetGameWindowTitle("The Basic Show - isnt it obvious hes charging his ult");
         gc.modeState = "he pissed";
         if (!StartSongsIsMidi) 
         {
@@ -334,6 +357,7 @@ public class ZerullClassic : MonoBehaviour
 
     private void BossBegin()
     {
+        Sych.SetGameWindowTitle("The fight begins. preferably now");
         AllowProjectileSpawn = true;
         SpawnProjectile(false, false);
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
@@ -417,11 +441,14 @@ public class ZerullClassic : MonoBehaviour
         health -= (zs.totemready || !realBossStarted) && hp != 0 && hp != 1 ? 1 : hp; // Decreases null health
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready && hp != 0 && hp != 1 ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
+        if (realBossStarted && health > 1) zs.ThrowProjectileFromBoss(!zs.totemready ? 3*((int)hp) : 5*(int)hp, !zs.totemready ? 0.5f/hp : 0.25f/hp);
         if (health == 1)
         {
             oneHPfailsave = false;
             spawnCooldown = 5f;
             maxObjects = 5;
+            zs.ThrowProjectileFromBoss(10,0.125f);
+            Sych.SetGameWindowTitle(!zs.totemready ? "Last. Hit.  ?" : "His final chance");
             if (!DontClear)
             {
                 RemoveProjectiles();
@@ -439,6 +466,8 @@ public class ZerullClassic : MonoBehaviour
                 oneHPfailsave = false;
                 spawnCooldown = 5f;
                 maxObjects = 5;
+                zs.ThrowProjectileFromBoss(25,0.125f);
+                Sych.SetGameWindowTitle(!zs.totemready ? "Last. Hit.  ?" : "His final chance");
                 if (!DontClear)
                 {
                     RemoveProjectiles();
@@ -449,6 +478,7 @@ public class ZerullClassic : MonoBehaviour
             }
             if (!zs.totemready)
             {
+                Sych.SetGameWindowTitle("oh shit");
                 zs.totem();
                 zs.totemready = true;
                 Singleton<MusicManagerMaes>.Instance.KillMidi();
@@ -471,6 +501,7 @@ public class ZerullClassic : MonoBehaviour
     
     private void BossEnd()
     {
+        Sych.SetGameWindowTitle("found dead in 2763 thing");
         gc.modeState = "you did it";
         
         Instantiate(zs.ExplodePrefab, zs.transform.position, zs.transform.rotation);
@@ -571,7 +602,12 @@ public class ZerullClassic : MonoBehaviour
     {
         if (gc.notebooks == 1)
         {
+            Sych.SetGameWindowTitle("Locked in his zone");
             gc.Gatesrea.ForEach(g => g.Down());
+        }
+        if (gc.notebooks == 2)
+        {
+            Sych.SetGameWindowTitle("Sych.MessageFromHim(true) >= Welcome to your personal hell, i guess");
         }
         if (gc.exitsReached == 3)
         {
@@ -579,11 +615,13 @@ public class ZerullClassic : MonoBehaviour
         }
         if (gc.exitsReached == 5)
         {
+            Sych.SetGameWindowTitle("You won............................. maybe?");
             replaceALLSAKES = false;
             for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
             {
-                zer.SetActive(false);
+                
             }
+            zer.SetActive(false);
         }
     }
     public IEnumerator easingeee(Color kolor, float a, float b, float duration)

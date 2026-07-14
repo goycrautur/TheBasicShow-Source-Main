@@ -22,6 +22,7 @@ public class LappingTimScript : NPC
     public override void OnUpdate()
     {
         base.OnUpdate();
+        TimVelocMagnitu = agent.velocity.magnitude;
         if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
         if (AntiHearingDuratio < 0f) antiHearing = false;
         MOOOVEYOUBITCH();
@@ -191,6 +192,7 @@ public class LappingTimScript : NPC
     [Header("tim's Stats")]
     public float TimCurSpd;
     public float TimTempSpd;
+    public float TimVelocMagnitu;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;

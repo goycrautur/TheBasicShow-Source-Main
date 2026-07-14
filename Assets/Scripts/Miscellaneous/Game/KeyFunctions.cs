@@ -72,13 +72,13 @@ public class KeyFunctions : MonoBehaviour
     public void ExitGame()
     {
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
-        LoadingManagerThing.Instance.LoadSceneAsyncUHHH("MainMenu");
+        LoadingManagerThing.Instance.LoadSceneAsyncUHHH("MainMenu",0,true,"The Basic Show - le menus");
         Singleton<MusicManagerMaes>.Instance.PauseMidi(false);
     }
     public void ResetGame()
     {
         Singleton<TimeOutManagerFUCKYEA>.Instance.ResetTimeoutStuff();
-        LoadingManagerThing.Instance.LoadSceneAsyncUHHH("GameArea",0,false);
+        LoadingManagerThing.Instance.LoadSceneAsyncUHHH("GameArea",0,false,"The Basic Show - le menus");
         Singleton<MusicManagerMaes>.Instance.PauseMidi(false);
     }
     #endregion
@@ -88,7 +88,8 @@ public class KeyFunctions : MonoBehaviour
     {
         if (Time.timeScale == 0f) return;
 
-        if (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact))
+        //if (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact))
+        if (Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKeyDown(InputAction.Interact)) 
         {
             if (Sych.ScreenCenterRaycast(out RaycastHit hit,PlayerClickablesLayer.value) && hit.transform.IsWithinDistance(gc.player.LocalRange))
             {

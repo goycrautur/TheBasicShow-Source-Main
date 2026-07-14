@@ -1,30 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class PickupScript : Interactable
 {
     #region Initialization Logic
-    public void Awake()
-    {
-       InstantiateReal();
-    }
-    public void InstantiateReal()
-    {
-        mpb = new MaterialPropertyBlock();
-        if (GetComponentInChildren<SpriteRenderer>()!=null) 
-        {
-            GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-            mpb.SetFloat("_OutlineSize", 1);
-            mpb.SetColor("_OutlineColor", Color.clear);
-            GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
-        }
-    }
     public void Start()
     {
         cachedSprites = new Dictionary<int, Sprite>();
+        spritContro = GetComponentInChildren<SpriteController>();
         if (PresentMode)
         {
-            GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
+            spritContro.targetRenderer.sprite = GameControllerScript.Instance.Present;
             rollItem();
         }
         if (SpawnAtRandom)
@@ -37,12 +24,14 @@ public class PickupScript : Interactable
             location.position = wanderer.SetNewTargetForAgent(null, "present");
             transform.position = location.position + Vector3.up * 4f;
         }
-        OriginalSprite = GetComponentInChildren<SpriteRenderer>().sprite;
+        
+        OriginalSprite = spritContro.targetRenderer.sprite;
         originalId = ID;
     }
     public void ItemRespawning()
     {
-        GetComponentInChildren<SpriteRenderer>().sprite = OriginalSprite;
+        spritContro.targetRenderer.sprite = OriginalSprite;
+        HideShitsLogic(true,true);
         ID = originalId;
     }
     public void rollItem()
@@ -61,7 +50,7 @@ public class PickupScript : Interactable
     {
         if (!PresentMode && !resetIDONLY) 
         {
-            GetComponentInChildren<SpriteRenderer>().sprite = GameControllerScript.Instance.Present;
+            spritContro.targetRenderer.sprite = GameControllerScript.Instance.Present;
             PresentMode = true;
         }
         rollItem();
@@ -69,8 +58,7 @@ public class PickupScript : Interactable
     #endregion
     public void OnEnable()
     {
-        if (mapIconSprite != null)mapIconSprite.enabled = true;
-        hiding = false;
+        HideShitsLogic(true);
     }
     public void OnDisable()
     {
@@ -89,14 +77,14 @@ public class PickupScript : Interactable
         if (killafterpickup) Destroy(gameObject);
         else
         {
-            transform.gameObject.SetActive(false);
-            mapIconSprite.enabled = false;
+            HideShitsLogic(false);
         }
     }
 
     #region Player Interaction
     public override void Interact()
     {
+        if (hiding) return;
         BaseItem holdingitem = ItemManager.Instance.GetSelectedItemObject();
         GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.ItemCollect);
         if (PresentMode) GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(GameControllerScript.Instance.lbams.gambling);
@@ -116,12 +104,11 @@ public class PickupScript : Interactable
                 if (killafterpickup) Destroy(gameObject);
                 if (!killafterpickup)
                 {
-                    transform.gameObject.SetActive(false);
-                    mapIconSprite.enabled = false;
+                    HideShitsLogic(false);
                 }
                 if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
             }
-            else Destroy(gameObject);
+            else HideShitsLogic(false,false,true);
 
             ItemManager.Instance.CollectItem(ID, GetHeldInstance());
             return;
@@ -129,8 +116,7 @@ public class PickupScript : Interactable
         else if (SlotStuffs(false))
         {
             if (holdingitem.Unswapable) return;
-            transform.gameObject.SetActive(true);
-            mapIconSprite.enabled = true;
+            HideShitsLogic(true);
         }
         //same shits copied from item manager dawg :sob:
         for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -146,8 +132,7 @@ public class PickupScript : Interactable
                 {
                     ItemManager.Instance.Inventory[i].ItemInstance.Uses += GetHeldInstance().Uses;
                     Debug.Log($"item uses : {ItemManager.Instance.Inventory[i].ItemInstance.Uses} at slot {i} after picking up when inven full");
-                    transform.gameObject.SetActive(false);
-                    mapIconSprite.enabled = false;
+                    HideShitsLogic(false);
                     ItemManager.Instance.UpdateItemUI();
                     return;
                 }
@@ -164,8 +149,7 @@ public class PickupScript : Interactable
                 {
                     ItemManager.Instance.Inventory[i].ItemInstance.Uses += itemobj.Uses;
                     Debug.Log($"item uses : {ItemManager.Instance.Inventory[i].ItemInstance.Uses} at slot {i} after picking up when inven full");
-                    transform.gameObject.SetActive(false);
-                    mapIconSprite.enabled = false;
+                    HideShitsLogic(false);
                     ItemManager.Instance.UpdateItemUI();
                     return;
                 }
@@ -191,10 +175,60 @@ public class PickupScript : Interactable
             cachedSprites.Add(ID, itemSprite);
         }
 
-        GetComponentInChildren<SpriteRenderer>().sprite = cachedSprites[ID];
+        spritContro.targetRenderer.sprite = cachedSprites[ID];
         gameObject.name = $"Pickup_{ItemManager.Instance.GetItem(ID).Name}";
 
         ItemManager.Instance.CollectItem(orgID, orgItem);
+    }
+    public void HideShitsLogic(bool wuh,bool fadein = false,bool DestroyMainObject = false)
+    {
+        if (mapIconSprite != null) mapIconSprite.enabled = wuh;
+        hiding = !wuh;
+        gameObject.layer = !wuh ? LayerMask.NameToLayer("Ignore Raycast") : LayerMask.NameToLayer("Default");
+        gameObject.tag = !wuh ? "Untagged" : "Item";
+        SpriteDitherOkayBye(!wuh,fadein,DestroyMainObject);
+    }
+    public void SpriteDitherOkayBye(bool Hide,bool fadein,bool DestroyMainObject)
+    {
+        if (HideCoroutin != null) 
+        {
+            StopCoroutine(HideCoroutin);
+            HideCoroutin = null;
+        }
+        HideCoroutin = StartCoroutine(byeByeDihther(Hide,fadein,DestroyMainObject));
+    }
+    private IEnumerator byeByeDihther(bool Hide,bool fadein,bool DestroyMainObject)
+    {
+        floatery = 0;
+        
+        if (spritContro != null)
+        {
+            spritContro.useOverlay = false;
+            spritContro.blendFactor = 0;
+            spritContro.OverlayColor = Color.clear;
+            spritContro.useTransparency = true;
+            if (fadein) spritContro.cutoffOffset = 1;
+            if (Hide)
+            {
+                while (spritContro.cutoffOffset < 1f)
+                {
+                    spritContro.cutoffOffset += 2.5f * Time.deltaTime;
+                    yield return null;
+                }
+                spritContro.cutoffOffset = 1;
+                if (DestroyMainObject) Destroy(gameObject);
+            }
+            else
+            {
+                while (spritContro.cutoffOffset > 0f)
+                {
+                    spritContro.cutoffOffset -= 2.5f  * Time.deltaTime;
+                    yield return null;
+                }
+                spritContro.cutoffOffset = 0;
+                if (DestroyMainObject) Destroy(gameObject);
+            }
+        }
     }
     #endregion
 
@@ -211,6 +245,7 @@ public class PickupScript : Interactable
         {
             if (ItemManager.Instance.Inventory[i].ItemID == 0) return trueOrNot;
         }
+        Debug.Log($"is le slot full?: {!trueOrNot}");
         return !trueOrNot;
     }
     #endregion
@@ -218,32 +253,52 @@ public class PickupScript : Interactable
     {
         if (!hiding)
         {
-            if (GetComponentInChildren<SpriteRenderer>()!=null) 
-            {
-                GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-                mpb.SetFloat("_OutlineSize", 1);
-                mpb.SetColor("_OutlineColor", Color.clear);
-                GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
-            }
+            
             if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
             {
                 Transform hitTransform = hit.transform;
                 float maxDistance = 0f;
                 if (hitTransform.GetComponent<Collider>().gameObject == this.gameObject)
                 {
+                    InRange = true;
+                    if (floatery <= 0.5) floatery += 1f* Time.deltaTime;
                     maxDistance = GameControllerScript.Instance.player.LocalRange;
                     if (hitTransform.IsWithinDistanceFrom(GameControllerScript.Instance.player.transform, maxDistance))
                     {
-                        if (GetComponentInChildren<SpriteRenderer>()!=null) 
+                        if (spritContro != null)
                         {
-                        GetComponentInChildren<SpriteRenderer>().GetPropertyBlock(mpb);
-                        mpb.SetFloat("_OutlineSize", 2);
-                        mpb.SetColor("_OutlineColor", Color.white);
-                        GetComponentInChildren<SpriteRenderer>().SetPropertyBlock(mpb);
+                            spritContro.useOverlay = true;
+                            spritContro.blendFactor = floatery;
+                            spritContro.OverlayColor = Color.white;
                         }
                     }
+                    else InRange = false;
+                }
+                else InRange = false;
+            }
+            if (InRange) return;
+            if (floatery > 0) 
+            {
+                floatery -= 3f * Time.deltaTime;
+                if (spritContro != null)
+                {
+                    spritContro.useOverlay = true;
+                    spritContro.blendFactor = floatery;
+                    spritContro.OverlayColor = Color.white;
                 }
             }
+            else if (floatery < 0)
+            {
+                floatery = 0;
+                if (spritContro != null)
+                {
+                    spritContro.useOverlay = false;
+                    spritContro.blendFactor = 0;
+                    spritContro.OverlayColor = Color.clear;
+                }
+                
+            }
+            
         }
     }
 
@@ -259,11 +314,15 @@ public class PickupScript : Interactable
 
     private AILocationSelectorScript wanderer;
     private Transform location;
+    private SpriteController spritContro;
     private int originalId;
     private Sprite OriginalSprite;
     private MaterialPropertyBlock mpb;
     private bool hiding;
     private BaseItem ItemSwapBaseitem;
+    private float floatery;
+    private bool InRange;
+    [HideInInspector] public Coroutine HideCoroutin;
     
     #endregion
 }

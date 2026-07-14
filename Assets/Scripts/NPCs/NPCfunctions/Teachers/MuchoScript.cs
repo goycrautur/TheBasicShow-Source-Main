@@ -23,6 +23,7 @@ public class MuchoScript : NPC
 
     public override void OnUpdate()
     {
+        RemainingDistance = agent.remainingDistance;
         if (LOEManager.Instance.activated)
         {
             Hear(player.position, 9999, false);
@@ -123,7 +124,7 @@ public class MuchoScript : NPC
     }
     public void ThrowProjectile(int val = 0)
     {
-        if (val == 2)
+        if (val != 2)
         {
             if ((transform.position + Vector3.up * 2f).RaycastFromPosition(player.position - transform.position, out RaycastHit raycastHit))
             {
@@ -142,6 +143,8 @@ public class MuchoScript : NPC
                     Vector3 vector = new Vector3(base.transform.position.x, 5f, base.transform.position.z);
                     Vector3 upithink = new Vector3(base.transform.position.x, base.transform.position.y + 2f, base.transform.position.z);
                     Instantiate(projectilePrefabs[Random.Range(0,projectilePrefabs.Length)], upithink, Quaternion.LookRotation(this.player.position - vector));
+
+                    Debug.Log($"Shoot direction: {Quaternion.LookRotation(this.player.position - vector)}");
                 }
             }
         }
@@ -150,12 +153,12 @@ public class MuchoScript : NPC
     private void OnMoveDone()
     {
         agent.speed = 0;
-        if (agent.remainingDistance <= 0.1f) Wander();
+        if (agent.remainingDistance <= 0.01f) Wander();
         if (!stopMoving) Invoke(nameof(Move), MuchoWait);
     }
     private void Teleport()
     {
-        if (agent.remainingDistance <= 0.1f) Wander();
+        if (agent.remainingDistance <= 0.01f) Wander();
         MuchoAudio.PlaySingleClip(snadtp);
         Invoke(nameof(Move), teleportCD);
         Vector3 tpTransform = base.wanderer.SetNewTargetForAgent(null, "default") + Vector3.up * this.transform.position.y;
@@ -266,6 +269,7 @@ public class MuchoScript : NPC
     [SerializeField] private AudioObjectyeah slam;
     [SerializeField] private AudioObjectyeah snadtp;
     [SerializeField] private Animator Muchocator, MuchoAnimator;
+    public float RemainingDistance;
 
     private float currentPriority;
     [SerializeField] private AudioManagerLiveReaction MuchoAudio;

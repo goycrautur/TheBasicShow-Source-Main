@@ -47,6 +47,7 @@ public class FamishedScript : NPC
     }
     public override void OnUpdate()
     {
+        if (agent.remainingDistance <= 0.01f) Wander();
         if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
         if (AntiHearingDuratio < 0f) antiHearing = false;
         MOOOVEYOUBITCH();
