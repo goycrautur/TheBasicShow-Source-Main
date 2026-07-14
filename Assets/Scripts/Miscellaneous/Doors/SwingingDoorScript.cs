@@ -9,10 +9,17 @@ public class SwingingDoorScript : MonoBehaviour
         gc = GameControllerScript.Instance;
         myAudio = GetComponent<AudioManagerLiveReaction>();
         SetLock(true);
+        InitializeShaderVariableStuff();
         SwinDorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
         SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
     }
     #endregion
+
+    private void InitializeShaderVariableStuff()
+    {
+        inside.material.SetTexture("_MainTex", GameControllerScript.Instance.GlobalTextures[(int)WalTypSideIn].tex);
+        outside.material.SetTexture("_MainTex", GameControllerScript.Instance.GlobalTextures[(int)WalTypSideOut].tex);
+    }
 
     #region UpdateLoopHandlers
     private void Update()
@@ -124,19 +131,21 @@ public class SwingingDoorScript : MonoBehaviour
         SwinDorMapSprite1.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
         SwinDorMapSprite2.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
 
-        inside.material = lockState ? lockedIn : normal1;
-        outside.material = lockState ? lockedOut : normal2;
+        inside.material = lockState ? locked : normal;
+        outside.material = lockState ? locked : normal;
+        InitializeShaderVariableStuff();
     }
     #endregion
 
     #region SerializedFields
     private GameControllerScript gc;
+    [SerializeField] private WallType WalTypSideIn = WallType.Normal,WalTypSideOut = WallType.Normal;
 
     [Header("Door Mechanics and Materials")]
     [SerializeField] private GameObject obstacle;
     [SerializeField] private MeshCollider insidecol, outsidecol;
     [SerializeField] private MeshRenderer inside, outside;
-    [SerializeField] private Material normal1, lockedIn, normal2, lockedOut;
+    [SerializeField] private Material normal, locked;
     [SerializeField] private SpriteRenderer SwinDorMapSprite1,SwinDorMapSprite2;
 
     [Header("Door state and timing")]

@@ -9,6 +9,10 @@ using System;
 using UnityEngine.Video;
 using UnityEngine.Audio;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class GameControllerScript : MonoBehaviour
 {
     
@@ -73,11 +77,37 @@ public class GameControllerScript : MonoBehaviour
     {
         for (int i = 0; i < nuzzlesframeshit.Length; ++i) if (nuzzlframes == nuzzlesframeshit[i]) Singleton<VertexGlitchManager>.Instance.Glitch();
     }
+    #if UNITY_EDITOR
+    private void OnEnable() => EditorApplication.playModeStateChanged += OnPlayModeChanged;
+
+    private void OnDisable() => EditorApplication.playModeStateChanged -= OnPlayModeChanged;
+
+    private void OnPlayModeChanged(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingPlayMode || state == PlayModeStateChange.EnteredEditMode)
+        {
+            for (int i = 0; i < GlobalTextures.Length; ++i) 
+            {
+                if (GlobalTextures[i].MatToModify != null) 
+                {
+                    GlobalTextures[i].MatToModify.SetTexture("_MainTex", DefaultTextureHolder[i]);
+                }
+            }
+        }
+    }
+    #endif
 
     #region Initialization
     private void InitializeGameSettings()
     {
-        for (int i = 0; i < GlobalTextures.Length; ++i) if (GlobalTextures[i].MatToModify != null && GlobalTextures[i].tex != null) GlobalTextures[i].MatToModify.SetTexture("_MainTex", GlobalTextures[i].tex);
+        for (int i = 0; i < GlobalTextures.Length; ++i) 
+        {
+            if (GlobalTextures[i].MatToModify != null && GlobalTextures[i].tex != null) 
+            {
+                DefaultTextureHolder.Add(GlobalTextures[i].MatToModify.GetTexture("_MainTex"));
+                GlobalTextures[i].MatToModify.SetTexture("_MainTex", GlobalTextures[i].tex);
+            }
+        }
         ExclusiveRoute = "";
         vidplay.enabled = false;
         thatRawImageThatIHate.enabled = false;
@@ -951,6 +981,7 @@ public class GameControllerScript : MonoBehaviour
         [SerializeField] public Material MatToModify;
     }
     #region SerializedFields
+    private List<Texture> DefaultTextureHolder = new List<Texture>();
     [Header("son")]
     public VideoPlayer vidplay;
     public RawImage thatRawImageThatIHate;
@@ -1020,7 +1051,7 @@ public class GameControllerScript : MonoBehaviour
     */
     #endregion
 
-    #region PrivateFields
+    #region NotPrivateFields
     public AudioManagerLiveReaction audioQueue;
     private int audOverVal;
     [HideInInspector] public lowBudgetAudioManagementShit lbams;
