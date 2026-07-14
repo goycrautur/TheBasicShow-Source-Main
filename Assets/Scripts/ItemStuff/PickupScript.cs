@@ -7,6 +7,7 @@ public class PickupScript : Interactable
     #region Initialization Logic
     public void Start()
     {
+        if (killafterpickup) DroppedItem = true;
         cachedSprites = new Dictionary<int, Sprite>();
         spritContro = GetComponentInChildren<SpriteController>();
         if (PresentMode)
@@ -101,11 +102,7 @@ public class PickupScript : Interactable
         {
             if (!DroppedItem)
             {
-                if (killafterpickup) HideShitsLogic(false,false,true);
-                if (!killafterpickup)
-                {
-                    HideShitsLogic(false);
-                }
+                HideShitsLogic(false);
                 if (ZerullClassic.Instance.realBossStarted) ZerullClassic.Instance.objects -= 1;
             }
             else HideShitsLogic(false,false,true);
@@ -212,7 +209,7 @@ public class PickupScript : Interactable
             {
                 while (spritContro.cutoffOffset < 1f)
                 {
-                    spritContro.cutoffOffset += 2.5f * Time.deltaTime;
+                    spritContro.cutoffOffset += 3f * Time.deltaTime;
                     yield return null;
                 }
                 spritContro.cutoffOffset = 1;
@@ -222,7 +219,7 @@ public class PickupScript : Interactable
             {
                 while (spritContro.cutoffOffset > 0f)
                 {
-                    spritContro.cutoffOffset -= 2.5f  * Time.deltaTime;
+                    spritContro.cutoffOffset -= 3f  * Time.deltaTime;
                     yield return null;
                 }
                 spritContro.cutoffOffset = 0;
