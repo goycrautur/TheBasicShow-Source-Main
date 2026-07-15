@@ -34,11 +34,11 @@ public class LoadingManagerThing : MonoBehaviour
         if (close) circl.SetTrigger("nooo");
         else circl.SetTrigger("yooo");
     }
-    public void LoadSceneAsyncUHHH(string sceneName,float Delay = 0f,bool CursorVisible = true,string AfterloadWindowChange = "")
+    public void LoadSceneAsyncUHHH(string sceneName,float Delay = 0f,bool CursorVisible = true,string AfterloadWindowChange = "",bool MainMenuSkipSavefileSelect = false)
     {
-        StartCoroutine(loadingyummers(sceneName,Delay,CursorVisible,AfterloadWindowChange));
+        StartCoroutine(loadingyummers(sceneName,Delay,CursorVisible,AfterloadWindowChange,MainMenuSkipSavefileSelect));
     }
-    private IEnumerator loadingyummers(string sceneName,float delaySec,bool CursorVisible,string AfterloadWindowChange)
+    private IEnumerator loadingyummers(string sceneName,float delaySec,bool CursorVisible,string AfterloadWindowChange,bool MainMenuSkipSavefileSelect)
     {
         Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
@@ -57,10 +57,12 @@ public class LoadingManagerThing : MonoBehaviour
             yield return null;
         }
         PercentText.text = "done!";
+        if (!MainMenuSkipSavefileSelect && sceneName == "MainMenu") IntroScreenManager.Instance.doTheThing(false);
         if (AfterloadWindowChange != "") Sych.SetGameWindowTitle(AfterloadWindowChange);
         yield return new WaitForSecondsRealtime(0.5f);
         CircleTransistionStuff(true);
         yield return new WaitForSecondsRealtime(1.2f);
+        if (MainMenuSkipSavefileSelect && sceneName == "MainMenu") IntroScreenManager.Instance.doTheThing(true);
         SetLoadingAlphaValue(0);
         Time.timeScale = 1f;
         IsInLoadTransistion = false;

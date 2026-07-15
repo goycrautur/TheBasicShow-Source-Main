@@ -19,7 +19,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
 
     }
     public bool unloc, iteinfo,captio;
-    private void InitializeGameTuff()
+    public void InitializeGameTuff()
     {
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         bool unloc = PlayerPrefsExtension.GetBool("thonkPad");

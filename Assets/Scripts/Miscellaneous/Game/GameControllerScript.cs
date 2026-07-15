@@ -126,7 +126,6 @@ public class GameControllerScript : MonoBehaviour
             }
         }
         foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>()) if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
-        foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>()) if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
         war = PlayerPrefsExtension.GetBool("warreal");
         warrealest = war;
         Singleton<Options>.Instance.GetVolume();
@@ -159,6 +158,7 @@ public class GameControllerScript : MonoBehaviour
         discordupdate();
         CirclAnimator.Rebind();
         CirclAnimator.SetTrigger("yooo");
+        AdditionalGameCustomizer.Instance.InitializeGameTuff();
         
     }
     public void discordupdate(string StateUpdateType = "chees")

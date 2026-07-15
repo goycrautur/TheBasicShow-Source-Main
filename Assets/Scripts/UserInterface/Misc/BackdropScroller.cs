@@ -1,0 +1,14 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(RawImage))]
+public class BackdropScroller : MonoBehaviour
+{
+    public float speed; //Speed Of Scroll
+    public Vector2 direction; //Normalized Direction Of Scrol
+    public RawImage img;
+    private void Update()
+    {
+        img.uvRect = new Rect(img.uvRect.position + direction * Time.deltaTime * speed,img.uvRect.size);
+    }
+}

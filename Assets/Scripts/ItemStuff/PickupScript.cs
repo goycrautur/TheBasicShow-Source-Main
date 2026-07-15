@@ -74,11 +74,7 @@ public class PickupScript : Interactable
         {
             BaseItem orgigItem = GetHeldInstance();
             AdditionalGameCustomizer.Instance.Cash += 1 * orgigItem.Uses;
-        }
-        if (killafterpickup) Destroy(gameObject);
-        else
-        {
-            HideShitsLogic(false);
+            HideShitsLogic(false,false,true);
         }
     }
 
@@ -95,6 +91,7 @@ public class PickupScript : Interactable
             if (AdditionalGameCustomizer.Instance.ReworkedCurrency & ID == 5)
             {
                 moneCollectStuff();
+                HideShitsLogic(false);
                 return;
             }
         }
