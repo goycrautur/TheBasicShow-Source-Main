@@ -769,6 +769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 449831183}
   - component: {fileID: 449831182}
+  - component: {fileID: 449831184}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -795,6 +796,29 @@ MonoBehaviour:
   StateStatus: bro died sobpray
   StateIMGLarge: 
   LargeIMGText: 
+  presence:
+    details: Playing a game
+    state: In Game
+    startTime:
+      timestamp: 0
+    endTime:
+      timestamp: 0
+    smallAsset:
+      image: 
+      tooltip: 
+      snowflake: 0
+    largeAsset:
+      image: 
+      tooltip: 
+      snowflake: 0
+    buttons: []
+    party:
+      identifer: 
+      size: 0
+      maxSize: 0
+    secrets:
+      joinSecret: 
+      spectateSecret: 
 --- !u!4 &449831183
 Transform:
   m_ObjectHideFlags: 0
@@ -810,6 +834,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449831184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449831181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c0662f7bb58e7439856b9fa8414d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applicationID: 1361672938826498276
+  steamID: 
+  targetPipe: -1
+  logLevel: 256
+  logFile: discord.log
+  registerUriScheme: 0
+  active: 1
+  _currentUser:
+    e_foldout: 0
+  _currentSubscription: 0
+  _currentPresence:
+    details: Playing a game
+    state: In Game
+    startTime:
+      timestamp: 0
+    endTime:
+      timestamp: 0
+    smallAsset:
+      image: 
+      tooltip: 
+      snowflake: 0
+    largeAsset:
+      image: 
+      tooltip: 
+      snowflake: 0
+    buttons: []
+    party:
+      identifer: 
+      size: 0
+      maxSize: 0
+    secrets:
+      joinSecret: 
+      spectateSecret: 
+  OnReady:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClose:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPresence:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJoin:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSubscribe:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnsubscribe:
+    m_PersistentCalls:
+      m_Calls: []
+  OnError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSpectate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJoinRequest:
+    m_PersistentCalls:
+      m_Calls: []
+  OnConnectionEstablished:
+    m_PersistentCalls:
+      m_Calls: []
+  OnConnectionFailed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &615403138
 GameObject:
   m_ObjectHideFlags: 0

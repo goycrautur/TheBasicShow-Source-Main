@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 8371041277950904620}
   - component: {fileID: 5738541306556404015}
   - component: {fileID: 2413471663186534042}
-  - component: {fileID: 8649030706761292435}
   m_Layer: 10
   m_Name: itemIcon
   m_TagString: Untagged
@@ -183,19 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotati: 90
---- !u!114 &8649030706761292435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794127687488584008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82321279c3915b444aa8d8170b66e6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprRen: {fileID: 0}
 --- !u!1 &4829145339035255900
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,3 +347,4 @@ MonoBehaviour:
   instahide: 0
   mapIconSprite: {fileID: 5738541306556404015}
   DroppedItem: 0
+  InRange: 0

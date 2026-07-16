@@ -1,0 +1,80 @@
+﻿using UnityEngine;
+
+public class BaseItem : MonoBehaviour
+{
+    #region Virtual Hooks
+    public virtual void Awake()
+    {
+        if (Uses >= 2) MultiUseMaxUsesCap = Uses * MaxUsesCap;
+        else MultiUseMaxUsesCap = MaxUsesCap;
+        OgUsesAmmount = Uses;
+    }
+    public virtual bool OnUse() => true;
+    public virtual void OnSelect()
+    {
+        if (PlaySoundWhenHold && HoldSound != null) 
+        {
+            GameControllerScript.Instance.lbams.ItemHoldingSoundSource.ClearQueue(true);
+            GameControllerScript.Instance.lbams.ItemHoldingSoundSource.PlaySingleClip(HoldSound);
+        }
+    }
+    public virtual void OnDeselect() { }
+    public virtual void OnPickup() { }
+    public virtual void CustomSpecialFunction() { }
+    public virtual void AfterUse() { }
+
+    public virtual BaseItem CreateInstance() => Instantiate(this);
+    #endregion
+
+    #region Helpers
+    protected bool SendRay(string tag, out RaycastHit rayHit, float range = 10f)
+    {
+        rayHit = default;
+
+        if (Sych.ScreenCenterRaycast(out RaycastHit hit))
+        {
+            bool withinRange = hit.transform.IsWithinDistance(range);
+            bool tagMatch = string.IsNullOrEmpty(tag) || hit.collider.CompareTag(tag);
+
+            if (withinRange && tagMatch)
+            {
+                rayHit = hit;
+                return true;
+            }
+        }
+        return false;
+    }
+    #endregion
+
+    #region Serialized Data
+    [Header("Sillyz Settings")]
+    [Tooltip("Enables if you select teh item it plays sound /silly")] public bool PlaySoundWhenHold;
+    [Tooltip("The audio for PlaySoundWhenHold to work lel mrrp")] public AudioObjectyeah HoldSound;
+
+    [Header("Main Settings")]
+    [Tooltip("The name of the item")] public string Name;
+    [Tooltip("The item info")] public string ItmInfoText;
+
+    [Tooltip("The color of the item name")] public Color NameColor = Color.black;
+
+    [Header("Sprite"), Tooltip("Sprite of the item used for pickups")] public Texture BigSprite;
+
+    public Texture SmallSprite;
+    [Header("ID stuff")]
+    [Tooltip("ID of the item.")] public int ItemID;
+    [Tooltip("Name ID of the item.")] public string NameID;
+    
+    [Header("Settings")]
+    [Tooltip("How many uses the item has")] public int Uses = 1;
+    [Tooltip("How many Stack the item can have")] public int MaxUsesCap = 1;
+    [HideInInspector] public int OgUsesAmmount,MultiUseMaxUsesCap;
+
+    [Tooltip("erm")] public int TexturePPUThing = 100;
+    [Tooltip("Should the item get specified to be an starred item on the minimap")] public bool SpecialItemIcon;
+    [Tooltip("Disable it from getting dropped fear")] public bool undropable;
+    [Tooltip("litearlly infinite uses yea")] public bool InfiniteUses;
+    [Tooltip("its in the name")] public bool unableToGetStealed;
+    [Tooltip("prevents swapping the item when ur inventory full")] public bool Unswapable;
+    [Tooltip("yea exactly what it said")] public bool blacklistFromGamblingVending;
+    #endregion
+}

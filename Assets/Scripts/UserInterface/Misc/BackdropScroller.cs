@@ -7,8 +7,10 @@ public class BackdropScroller : MonoBehaviour
     public float speed; //Speed Of Scroll
     public Vector2 direction; //Normalized Direction Of Scrol
     public RawImage img;
+    public bool UnscaledTime;
     private void Update()
     {
-        img.uvRect = new Rect(img.uvRect.position + direction * Time.deltaTime * speed,img.uvRect.size);
+        float timeval = UnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+        img.uvRect = new Rect(img.uvRect.position + direction * timeval * speed,img.uvRect.size);
     }
 }

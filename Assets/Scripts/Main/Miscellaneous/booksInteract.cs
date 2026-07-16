@@ -1,0 +1,342 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class booksInteract : Interactable
+{
+    public bool hidden = false;
+    private float respawnTime = 120f;
+    private GameControllerScript gc;
+    private Transform player;
+    private AudioManagerLiveReaction audioDevice;
+    private SpriteRenderer notebooSprite;
+    public GameObject CheeseMapIcon;
+    public Color HighlightColor;
+    public bool MultiCollect;
+    public int MultiCollectTime,BaseMultiCollectTime=0;
+    private MaterialPropertyBlock mpb;
+    [Header("Audio stuff")]
+    public AudioObjectyeah cheeseCollect;
+    public AudioObjectyeah RespawnSound;
+    #region Fields
+    [Header("Think Pad")]
+    private LearningGameManager lgm;
+    public float floatery;
+    public bool InRange;
+    [HideInInspector] public Coroutine HideCoroutin;
+    public SpriteController sprite;
+    #endregion
+
+    private void Start()
+    {
+        sprite = GetComponentInChildren<SpriteController>();
+        notebooSprite = GetComponentInChildren<SpriteRenderer>();
+        respawnTime = 120f;
+        audioDevice = GetComponent<AudioManagerLiveReaction>();
+        gc = GameControllerScript.Instance;
+        lgm = LearningGameManager.Instance;
+        player = GameControllerScript.Instance.player.transform;
+        if (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.RandomizeBookColor)
+        {
+            notebooSprite.sprite = AdditionalGameCustomizer.Instance.BookColors[Random.Range(0, AdditionalGameCustomizer.Instance.BookColors.Length)];
+        }
+    }
+
+    private void Update()
+    {
+        if (!hidden)
+        {
+            InRange = false;
+            if (Sych.ScreenCenterRaycast(out RaycastHit hit,KeyFunctions.hi.PlayerClickablesLayer.value))
+            {
+                Transform hitTransform = hit.transform;
+                float maxDistance = 0f;
+                maxDistance = GameControllerScript.Instance.player.LocalRange;
+                if (hitTransform.GetComponent<Collider>().gameObject == this.gameObject)
+                {
+                    
+                    if (hitTransform.IsWithinDistanceFrom(GameControllerScript.Instance.player.transform, maxDistance))
+                    {
+                        if (floatery <= 0.5) floatery += 0.5f* Time.deltaTime;
+                        InRange = true;
+                        if (sprite != null)
+                        {
+                            sprite.useOverlay = true;
+                            sprite.blendFactor = floatery;
+                            sprite.OverlayColor = HighlightColor;
+                        }
+                    }
+                }
+            }
+            if (InRange) return;
+            if (floatery > 0) 
+            {
+                floatery -= 2f * Time.deltaTime;
+                if (sprite != null)
+                {
+                    sprite.useOverlay = true;
+                    sprite.blendFactor = floatery;
+                    sprite.OverlayColor = HighlightColor;
+                }
+            }
+            else if (floatery < 0)
+            {
+                floatery = 0;
+                if (sprite != null)
+                {
+                    sprite.useOverlay = false;
+                    sprite.blendFactor = 0;
+                    sprite.OverlayColor = Color.clear;
+                }
+                
+            }
+        }
+
+        if (gc.mode == "endless") 
+        {
+
+            if (hidden && respawnTime > 0f) respawnTime -= Time.deltaTime;
+            else if (!transform.IsWithinDistanceFrom(player, gc.player.LocalRange) && respawnTime <= 0f && hidden) Respawn();
+        }
+    }
+
+    public void Respawn()
+    {
+        Hide(false);
+        hidden = false;
+        audioDevice.PlaySingleClip(RespawnSound);
+        respawnTime = 120f;
+    }
+
+    public override void Interact()
+    {
+        if (hidden)return;
+        if (BaseMultiCollectTime < MultiCollectTime-1 && MultiCollect)BaseMultiCollectTime++;
+        else 
+        {
+            BaseMultiCollectTime = 0;
+            Hide(true);
+        }
+        respawnTime = 120f;
+        gc.CollectNotebook(1);
+        if (gc.mode == "LappingOfAsylum") gc.LapManag.UpdateManually();
+
+        if (gc.mode == "famished") gc.fmc.manualUpdate();
+        if (gc.mode == "zerullclassic")
+        {
+            gc.zerull.jusUpdatebr();
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "zerull",false);
+        }
+        if (gc.mode == "wegaChallenge")  gc.wegchal.manualUpdate();
+        if (gc.mode == "minusb")  gc.minubee.manualUpdate();
+        if (AdditionalGameCustomizer.Instance?.NoYCTP == true) NoYCTPMode();
+        else
+        {
+            StartLearningGame();
+            return;
+        }
+    }
+    private void NoYCTPMode()
+    {
+        gc.Icon.Rebind();
+        gc.Icon.Play("IconSpinMain", -1, 0f);
+        string dific = PlayerPrefs.GetString("CurDifficulity", "normal");
+        int problemcap = dific == "easy" ? 3 : dific == "normal" ? 6 : dific == "hard" ? 9 : dific == "expert" || dific == "maniac" ? 12 : 3;
+        scoreSystemManager.Instance.AddScore(1000+(75*problemcap), true,true);
+        lowBudgetAudioManagementShit.Instance.MainSource4.ClearQueue(true);
+        lowBudgetAudioManagementShit.Instance.MainSource4.PlaySingleClip(cheeseCollect);
+        if (gc.player.stamina < 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
+        if (gc.notebooks == 1 && !gc.spoopMode)
+        {
+            if (gc.mode == "story")
+            {
+                lgm.quarter.SetActive(true);
+                lgm.Tutor.tutorSource.ClearQueue(true);
+                lgm.Tutor.tutorSource.QueueAudio(lgm.Tutor.aud_Prize);
+            }
+        }
+        if (gc.notebooks == 2)
+        {
+            if (gc.mode == "story") lgm.Tutor.tutorSource.ClearQueue(true);
+            gc.ActivateSpoopMode();
+        }
+        if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum") TriggerFinalSequence();
+        if (gc.spoopMode)
+        {
+            if (MultiCollect) Singleton<OtherMainStuffManager>.Instance.AngerShit(0.15f, 0f,false, "all");
+            else
+            {
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*LearningGameManager.Instance.angerMult, 0f,false, "all");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f*LearningGameManager.Instance.angerMult, 0f,false, "famished");
+                Singleton<OtherMainStuffManager>.Instance.AngerShit(0.4f*LearningGameManager.Instance.angerMult, 0f,false, "zerull");
+            }
+        }
+    }
+    #region Learning Game Launch
+    private void StartLearningGame()
+    {
+        GameObject game = Instantiate(gc.learnpadmuehehe);
+        var mathGame = game.GetComponent<MathGameScript>();
+        mathGame.gc = gc;
+        mathGame.lg = lgm;
+        mathGame.playerPosition = player.position;
+        mathGame.nbScri = this;
+    }
+    #endregion
+    private void TriggerFinalSequence()
+    {
+        lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
+        if (gc.mode != "story") gc.Gatesrea.ForEach(g => g.Down(false));
+        if (AdditionalGameCustomizer.Instance?.FinalModeTV == true)
+        {
+            if (gc.mode == "story")
+            {
+                //lgm.Television.baldingit = true;
+                //StartCoroutine(lgm.timeounaleshit(lgm.aud_AllNotebooks,lgm.balSubs));
+                lgm.Television.TeacherJerryingIt = true;
+                if (!gc.FinaleSecret && AdditionalGameCustomizer.Instance != null)
+                {
+                    switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                    {
+                        case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese));
+                            break;
+                        case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                            if (!gc.FinaleSecret) StartCoroutine(lgm.timeounaleshit(lgm.aud_TeacherJerryAllCheese,true));
+                            break;
+                    }
+                }
+            }
+            if (gc.mode == "famished")
+            {
+                lgm.Television.famishingit = true;
+                StartCoroutine(lgm.timeounaleshit(lbams.deadbel));
+            }
+        }
+        else
+        {
+            if (gc.mode == "story") lbams.MainSource3.PlaySingleClip(lgm.aud_AllNotebooks);
+            if (gc.mode == "famished") lbams.MainSource3.PlaySingleClip(lbams.deadbel);
+        }
+
+        if (gc.mode == "story")
+        {
+            if (gc.warrealest || gc.timeout)
+            {
+                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                gc.Gatesrea.ForEach(g => g.Down(false));
+                gc.finaleMode = true;
+            }
+            if (!gc.warrealest)
+            {
+                if (!gc.FinaleSecret && !gc.timeout)
+                {
+                    if (AdditionalGameCustomizer.Instance != null)
+                    {
+                        switch (AdditionalGameCustomizer.Instance.EscapeMusicFunsies)
+                        {
+                            case AdditionalGameCustomizer.EscapeFunsies.BBCR:
+                                lbams.EscapeMusic.ClearQueue(true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.SchoolhouseEscape);
+                                
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.Taldi:
+                                lbams.EscapeMusic.ClearQueue(true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.TaldiEscape);
+                                
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                                StartCoroutine(gc.ambatudaldi());
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.TBS:
+                                gc.Gatesrea.ForEach(g => g.Down());
+                                KeyFunctions.hi.PlaceholdCutscene(gc.lbams.NormalTbsFinale[0].audClip.length,true,lgm.TbsFinaleEventNormal1, lgm.TbsFinaleEventNormal2);
+                                break;
+                        }
+                    }
+                }
+                
+                if (gc.FinaleSecret)
+                {
+                    if (gc.ExclusiveRoute == "ClassicPlayerSecretEndLOE")
+                    {
+                        KeyFunctions.hi.PlaceholdCutscene(lbams.meowlLmsCra.audClip.length,true,lgm.ClassicPlayerAAWSecretEvent1, lgm.ClassicPlayerAAWSecretEvent2);
+                        return;
+                    }
+                    else if (gc.ExclusiveRoute == "NormalLOE")
+                    {
+                        lbams.EscapeMusic.ClearQueue(true);
+                        lbams.EscapeMusic.QueueAudio(lbams.MainLms);
+                        LOEManager.Instance.Activate(lbams.MainLms.audClip.length);
+                        return;
+                    }
+                    KeyFunctions.hi.PlaceholdCutscene(lbams.EvapV2FinaleIntros[0].audClip.length,true,lgm.TbsSecretFinaleEvent1, lgm.TbsSecretFinaleEvent2);
+                }
+            }
+        }
+    }
+    private void Hide(bool hide)
+    {
+        hidden = hide;
+        CheeseMapIcon.SetActive(!hide);
+        gameObject.tag = hide ? "Untagged" : "Notebook";
+        SpriteDitherOkayBye(hide);
+    }
+    public void SpriteDitherOkayBye(bool Hide)
+    {
+        if (HideCoroutin != null) 
+        {
+            StopCoroutine(HideCoroutin);
+            HideCoroutin = null;
+        }
+        HideCoroutin = StartCoroutine(byeByeCheeseDihther(Hide));
+    }
+    private IEnumerator byeByeCheeseDihther(bool Hide)
+    {
+        floatery = 0;
+        
+        if (sprite != null)
+        {
+            sprite.useOverlay = false;
+            sprite.blendFactor = 0;
+            sprite.OverlayColor = Color.clear;
+            sprite.useTransparency = true;
+            if (Hide)
+            {
+                while (sprite.cutoffOffset < 1f)
+                {
+                    sprite.cutoffOffset += 1.5f * Time.deltaTime;
+                    yield return null;
+                }
+                sprite.cutoffOffset = 1;
+                transform.GetChild(0).gameObject.SetActive(!Hide);
+            }
+            else
+            {
+                while (sprite.cutoffOffset > 0f)
+                {
+                    sprite.cutoffOffset -= 1.5f  * Time.deltaTime;
+                    yield return null;
+                }
+                sprite.cutoffOffset = 0;
+                transform.GetChild(0).gameObject.SetActive(!Hide);
+            }
+        }
+    }
+}

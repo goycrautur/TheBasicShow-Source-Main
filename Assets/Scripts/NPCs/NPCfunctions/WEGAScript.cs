@@ -12,7 +12,7 @@ public class WEGAScript : NPC
 	{
 		base.SetToXrayLayer();
 		CurWegaSpeed = gc.wegchal.globalWegaSpeed;
-		WegaAudio.SetActive(base.stun || base.fuckingdead);
+		WegaAudio.SetActive(!base.stun || !base.fuckingdead);
 		if (base.stun || base.fuckingdead)
         {
             WegaSpeed = 0f;

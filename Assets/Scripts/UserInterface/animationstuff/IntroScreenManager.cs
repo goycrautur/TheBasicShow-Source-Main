@@ -38,7 +38,7 @@ public class IntroScreenManager : MonoBehaviour
             MenuObjec.SetActive(!SavefileSelect);
             dihtherMainMenu.speed = 0.5f;
             dihtherSaveSelect.SetTrigger("open");
-            DiscordRPC_stuff.current.UpdateStatus("Main Menu", "yoooooo", "van", "the crx");
+            DiscordRPC_stuff.current.UpdateStatus("Opening menu", "peak", "van", "the crx");
             audMan.ClearQueue(true);
             audMan.SetLoop(true);
             audMan.QueueAudio(musicMainMenu);

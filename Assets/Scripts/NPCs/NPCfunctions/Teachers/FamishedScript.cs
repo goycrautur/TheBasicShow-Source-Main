@@ -99,13 +99,18 @@ public class FamishedScript : NPC
         Hear(player.position, 9999, false);
     }
     #endregion
+    private float DamageValueStuff(float val)
+    {
+        if (val < 25f) return 25f;
+        else return val;
+    }
     private void OnTriggerStay(Collider play)
     {
         if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
             if (base.IsHitboxValid && !gc.fmc.dontKillBru)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 5 * agent.speed/20 / gc.player.PlayerDmgResistance, 0.5f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageValueStuff(5 * agent.speed/20 / gc.player.PlayerDmgResistance), 0.5f, false, true, false);
                 gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 16f * agent.speed/10, 1f);
                 base.Stun(3f);
 				gc.player.killedbyfamished = true;
