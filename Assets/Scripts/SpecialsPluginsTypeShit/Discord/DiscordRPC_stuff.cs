@@ -20,7 +20,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 
 	private void Start()
 	{
-		DiscordManager.current.applicationID = applicationID.ToString();
+		// residue from reworking the script... dont worry much
 		DiscordManager.current.OnPresence.AddListener((message) =>
 		{
 			Debug.Log("Received a new presence! Current App: " + message.applicationID + ", " + message.name);
@@ -53,6 +53,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 	}
 	private void OnDisable()
     {
+		// residue from reworking the script... dont worry much (1)
 		//if (discord != null) discord.Dispose();
 		/*if (client != null) 
 		{
@@ -62,6 +63,7 @@ public class DiscordRPC_stuff : MonoBehaviour
     }
 	private void OnApplicationQuit()
     {
+		// residue from reworking the script... dont worry much (2)
         /*if (client != null)
         {
             client.ClearPresence();
@@ -75,6 +77,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 		{
 			try
 			{
+				//// residue from reworking the script... dont worry much (3), and this is for detecting if you dont have discord on it dosent shit itsef
 				//discord.RunCallbacks();
 				//if (client != null) client.Invoke();
 				
@@ -92,20 +95,20 @@ public class DiscordRPC_stuff : MonoBehaviour
 		if (!Refresh)
 		{
 			if (presence == null) return;
-			presence.state = StateStatus;
-			presence.details = StateDetails;
+			presence.state = StateStatus; //state status
+			presence.details = StateDetails; //state details
 
 			presence.largeAsset = new Asset()
 			{
-				image = StateIMGLarge,
-				tooltip = LargeIMGText
+				image = StateIMGLarge, //image name, you must set the name exact same like how you put it in the rich presence/art assets
+				tooltip = LargeIMGText //text when u hover over the big image
 			};
 			/*presence.smallAsset = new Asset()
 			{
-				image = inputSmallKey.text,
-				tooltip = inputSmallTooltip.text
+				image = StateIMGSmall, //image name, you must set the name exact same like how you put it in the rich presence/art assets
+				tooltip = SmallIMGText //text when u hover over the small image
 			};*/
-			presence.buttons = new Button[]
+			presence.buttons = new Button[] //rich presence button, you can have max 2 of them, they are forced to have url or else it broke btw
 			{
 				new Button()
 				{
@@ -114,8 +117,11 @@ public class DiscordRPC_stuff : MonoBehaviour
 				},
 			};
 			DiscordManager.current.SetPresence(presence);
-			//Debug.Log("invoked");
 			Invoke(nameof(changeActivity), 0.25f);
+
+
+
+			// residue from reworking the script... dont worry much (4)
 			/*if (client == null || !client.IsInitialized) return;
 			client.SetPresence(new RichPresence()
 			{
@@ -146,20 +152,22 @@ public class DiscordRPC_stuff : MonoBehaviour
         	});*/
 		}
     }
-    public void UpdateStatus(string details = "", string state = "", string largeImage = "", string largeText = "")
+    public void UpdateStatus(string details = "", string state = "", string largeImage = "", string largeImageText = "", string smallImage = "", string smallImageText = "")
 	{
 		StateDetails = details;
         StateStatus = state;
 		StateIMGLarge = largeImage;
-		LargeIMGText = largeText;
+		LargeIMGText = largeImageText;
+		StateIMGSmall = smallImage;
+		SmallIMGText = smallImageText;
 	}
 	public static DiscordRPC_stuff current;
-	//public Discord.Discord discord;
-	public long applicationID;
+	
 	public bool Refresh,Dont;
-	public string StateDetails,StateStatus,StateIMGLarge,LargeIMGText;
+	public string StateDetails,StateStatus,StateIMGLarge,LargeIMGText,StateIMGSmall,SmallIMGText;
+	// residue from reworking the script... dont worry much (5)
 	//private Activity currentActivity; 
-
+	//public Discord.Discord discord;
 	//private DiscordRpcClient client;
 	public Presence presence;
 }
