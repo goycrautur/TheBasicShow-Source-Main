@@ -68,12 +68,13 @@ public class ItemManager : MonoBehaviour
             }
             else Inventory[i].ItemStacksText.text = "";
         }
-        bool hisquidward= false;
+        bool hisquidward = false;
         if (GameControllerScript.Instance.SlotsAmmount == 0) hisquidward = true;
-        ItemNameText.enabled = !hisquidward || GameControllerScript.Instance.player.DeathCountdown;
-        ItemInfoText.enabled = !hisquidward || GameControllerScript.Instance.player.DeathCountdown;
-        theRestOfTheItemInfo.SetActive(!hisquidward || GameControllerScript.Instance.player.DeathCountdown);
-        if (hisquidward || GameControllerScript.Instance.player.DeathCountdown) return;
+        CanInteractWithSmth = !hisquidward || GameControllerScript.Instance.player.DeathCountdown;
+        ItemNameText.enabled = CanInteractWithSmth;
+        ItemInfoText.enabled = CanInteractWithSmth;
+        theRestOfTheItemInfo.SetActive(CanInteractWithSmth);
+        if (!CanInteractWithSmth) return;
 
         for (int i = 0; i < KeyIndex.Length; i++)
         {
@@ -203,22 +204,21 @@ public class ItemManager : MonoBehaviour
     {
         BaseItem[] FoundItemObjects = GetComponentsInChildren<BaseItem>();
         Items.Clear();
-        Array.Resize(ref RegisteredItemsList, FoundItemObjects.Length);
         for (int i = 0; i < FoundItemObjects.Length; i++) 
         {
             Items.Add(FoundItemObjects[i].Name, FoundItemObjects[i]);
-            RegisteredItemsList[i].name = FoundItemObjects[i].Name;
-            RegisteredItemsList[i].items = FoundItemObjects[i];
+            ItemsListShit fuckMan;
+            fuckMan.name = $"{FoundItemObjects[i].Name} - With id: {FoundItemObjects[i].ItemID}";
+            fuckMan.items = FoundItemObjects[i];
+            RegisteredItemsList.Add(fuckMan);
         }
         Debug.Log($"{Items.Count} items total bitch real");
         Array.Resize(ref KeyIndex, Inventory.Length);
 
         SlotOccupied = new bool[Inventory.Length];
-        for (int i = 0; i < Inventory.Length; i++) Inventory[i].SlotID = i;
-        
-
         for (int i = 0; i < Inventory.Length; i++)
         {
+            Inventory[i].SlotID = i;
             var slider = Inventory[i].ItemImages.GetComponent<ItemImageSlide>();
             if (slider != null) 
             {
@@ -454,17 +454,8 @@ public class ItemManager : MonoBehaviour
     private void CreateItemInstance(int? at = null)
     {
         int index = at ?? ItemSelection;
-        if (Inventory[index].ItemID == 0)
-        {
-            return;
-        }
-        if (Inventory[index].ItemInstance == null)
-        {
-            BaseItem itemobj = GetItem(Inventory[index].ItemID);
-            GameObject NewInstance = Instantiate(itemobj.gameObject, transform);
-            NewInstance.name = itemobj.gameObject.name;
-            Inventory[index].ItemInstance = NewInstance.GetComponent<BaseItem>();
-        }
+        if (Inventory[index].ItemID == 0)  return;
+        if (Inventory[index].ItemInstance == null) Inventory[index].ItemInstance = TrulyMakeNewInstance(Inventory[index].ItemID);
     }
     public void SimplifiedItemCollect(int ItemID, BaseItem instance = null)
     {
@@ -562,24 +553,35 @@ public class ItemManager : MonoBehaviour
         SetItem(ItemSelection, ItemID,ReplaceWithOtherCurrentItem);
         UpdateItemUI();
     }
-
-    public void DropItem(int index)
+    private BaseItem TrulyMakeNewInstance(int id)
     {
-        var item = Inventory[index];
-        if (item.ItemID == 0 || item.ItemInstance == null)
-        {
-            return;
-        }
+        BaseItem newItemIguessBro = GetItem(id);
+        GameObject NewInstance = Instantiate(newItemIguessBro.gameObject, transform);
+        NewInstance.name = newItemIguessBro.name;
+        return NewInstance.GetComponent<BaseItem>();
+    }
+    public void CreateDroppedItem(int IdIndex, Vector3 position,bool RandomSpawn = false,bool random = false)
+    {
+        BaseItem itemIGuess = GetItem(IdIndex);
+        ActuallyCreatingTheDroppedItem(itemIGuess,position,true,RandomSpawn,random);
+    }
 
-        BaseItem itemToDrop = item.ItemInstance;
-        Vector3 spawnPosition = GameControllerScript.Instance.player.dropItemPos.position;
-        spawnPosition.y = 4;
+    private void ActuallyCreatingTheDroppedItem(BaseItem baseitemz, Vector3 position, bool RawCreated = false,bool RandomlySpawn = false,bool RandomizedItem = false)
+    {
+        BaseItem item = baseitemz;
+        //Vector3 spawnPosition = GameControllerScript.Instance.player.dropItemPos.position;
+        //spawnPosition.y = 4;
+        
 
-        GameObject droppedItem = new GameObject($"Pickup_{itemToDrop.Name}")
+        Vector3 spawnPosition = position;
+
+        GameObject droppedItem = new GameObject($"Pickup_{item.Name}")
         {
             transform = { position = spawnPosition },
             tag = "Item"
         };
+
+        if (RandomlySpawn) droppedItem.AddComponent<randomSpawnScript>();
 
         var pickup = droppedItem.AddComponent<PickupScript>();
 
@@ -590,11 +592,11 @@ public class ItemManager : MonoBehaviour
         };
 
         SpriteRenderer spriteRanderer = MapSpriteObject.AddComponent<SpriteRenderer>();
-        if (AdditionalGameCustomizer.Instance.itemMapSprite != null && !item.ItemInstance.SpecialItemIcon)
+        if (AdditionalGameCustomizer.Instance.itemMapSprite != null && !item.SpecialItemIcon)
         {
             spriteRanderer.sprite = Sprite.Create(AdditionalGameCustomizer.Instance.itemMapSprite, new Rect(0, 0, AdditionalGameCustomizer.Instance.itemMapSprite.width, AdditionalGameCustomizer.Instance.itemMapSprite.height), new Vector2(0.5f, 0.5f), 100);
         }
-        if (AdditionalGameCustomizer.Instance.SpecialItemMapSprite != null && item.ItemInstance.SpecialItemIcon)
+        if (AdditionalGameCustomizer.Instance.SpecialItemMapSprite != null && item.SpecialItemIcon)
         {
             spriteRanderer.sprite = Sprite.Create(AdditionalGameCustomizer.Instance.SpecialItemMapSprite, new Rect(0, 0, AdditionalGameCustomizer.Instance.SpecialItemMapSprite.width, AdditionalGameCustomizer.Instance.SpecialItemMapSprite.height), new Vector2(0.5f, 0.5f), 100);
         }
@@ -603,8 +605,8 @@ public class ItemManager : MonoBehaviour
 
         pickup.enabled = true;
         pickup.DroppedItem = true;
-        pickup.ID = Inventory[index].ItemID;
-        pickup.GetType().GetField("PresentMode", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(pickup, false);
+        pickup.ID = item.ItemID;
+        pickup.GetType().GetField("PresentMode", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(pickup, RandomizedItem);
 
         var collider = droppedItem.AddComponent<CapsuleCollider>();
         collider.isTrigger = true;
@@ -629,34 +631,39 @@ public class ItemManager : MonoBehaviour
         SpriteRenderer spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
 
         var spriteController = spriteControllerObject.AddComponent<SpriteController>();
-        spriteController.mainTex = itemToDrop.BigSprite;
+        spriteController.mainTex = item.BigSprite;
         spriteController.useBobbing = true;
-        if (itemToDrop.BigSprite is Texture2D texture)
+        if (item.BigSprite is Texture2D texture)
         {
-            spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), itemToDrop.TexturePPUThing);
+            spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), item.TexturePPUThing);
             
         }
-        else
-        {
-            Debug.LogWarning("BigSprite is not a Texture2D, cannot create Sprite.");
-        }
+        else  Debug.LogWarning("BigSprite is not a Texture2D, cannot create Sprite.");
 
         spriteRenderer.material = GameControllerScript.Instance.SpriteRenderer;
-
         var iconmap = MapSpriteObject.AddComponent<rotateToPlayerMinimapIcon>();
         iconmap.rotati = 90;
+        if (!RawCreated)
+        {
+            item.transform.SetParent(droppedItem.transform);
+            item.gameObject.SetActive(true);
+        }
+    }
 
-        
-
-
-        itemToDrop.transform.SetParent(droppedItem.transform);
-        itemToDrop.gameObject.SetActive(true);
-        
-
+    public void DropItem(int index)
+    {
+        if (Inventory[index].ItemInstance.ItemID == 0 || Inventory[index].ItemInstance == null) return;
+        var item = Inventory[index];
+        BaseItem itemToDrop = item.ItemInstance;
+        Vector3 DropPosition = GameControllerScript.Instance.player.dropItemPos.position;
+        DropPosition.y = 4;
+        ActuallyCreatingTheDroppedItem(itemToDrop,DropPosition);
         ClearItem(index, false);
         UpdateItemUI();
     }
     #endregion
+
+    public bool CanInteractWithSmth;
 
     #region Nested Types
     [Serializable]
@@ -671,7 +678,7 @@ public class ItemManager : MonoBehaviour
         public string name;
         public BaseItem items;
     }
-    public ItemsListShit[] RegisteredItemsList;
+    public List<ItemsListShit> RegisteredItemsList = new List<ItemsListShit>();
     public HeldItem[] Inventory;
     public int ItemSelection = 0;
     private KeyCode[] KeyIndex = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0 };
@@ -690,6 +697,7 @@ public class ItemManager : MonoBehaviour
     public Sprite buttfingStatus;
     public UnityEvent ButterFingersUnityEvent;
     public CanvasGroup FlashingTextCanvasGroup;
+
     
     #endregion 
 }

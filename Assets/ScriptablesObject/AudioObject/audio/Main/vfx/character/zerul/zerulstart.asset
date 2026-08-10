@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: zerulstart
   m_EditorClassIdentifier: 
   audClip: {fileID: 8300000, guid: 8ca7997a0372183498236fb2d4b73272, type: 3}
-  volume: 1
+  volume: 0.8
   SoundTypeWahh: 2
   HasSubtitle: 1
   ForcedSetAudiomixer: {fileID: 0}

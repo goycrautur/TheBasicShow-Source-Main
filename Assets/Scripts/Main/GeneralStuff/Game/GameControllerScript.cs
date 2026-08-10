@@ -125,6 +125,8 @@ public class GameControllerScript : MonoBehaviour
                 pick.mapIconSprite.enabled = false;
             }
         }
+        AdditionalGameCustomizer.Instance.ScrambleItems();
+        AdditionalGameCustomizer.Instance.InitializeGameTuff();
         foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>()) if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
         war = PlayerPrefsExtension.GetBool("warreal");
         warrealest = war;
@@ -137,18 +139,13 @@ public class GameControllerScript : MonoBehaviour
             else MixerOverrideGlobalson[i].audioMixer.SetFloat(MixerOverrideGlobalVaribName[i], -80f);
         }
         Singleton<Options>.Instance.GetVSync();
-
         Time.timeScale = 1f;
         AudioListener.pause = false;
         cullingMask = PlayerCamera.cullingMask;
-
         audioQueue = GetComponent<AudioManagerLiveReaction>();
         Math = GetComponent<LearningGameManager>();
         progress = GetComponent<EndingManager>();
-
-        mode = PlayerPrefs.GetString("CurrentMode");
         if (mode == "LappingOfAsylum") LapManag.doShit();
-        
         gameOverDelay = 0.5f;
         if (mode == "endless")
         {
@@ -158,7 +155,7 @@ public class GameControllerScript : MonoBehaviour
         discordupdate();
         CirclAnimator.Rebind();
         CirclAnimator.SetTrigger("yooo");
-        AdditionalGameCustomizer.Instance.InitializeGameTuff();
+        
         
     }
     public void discordupdate(string StateUpdateType = "chees")
@@ -173,8 +170,12 @@ public class GameControllerScript : MonoBehaviour
                 if (mode == "LappingOfAsylum" && LapManag.CurrentLap == 0) modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
                 if (mode == "story") 
                 {
-                    if (FinaleSecret && ExclusiveRoute != "") modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
-                    else if (FinaleSecret && ExclusiveRoute != "" && LOEManager.Instance.countdou == false) modeState = "Its over";
+                    if (FinaleSecret && ExclusiveRoute != "")
+                    {
+                        if (LOEManager.Instance.countdou == false) modeState = "Its over";
+                        else modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
+                    }
+                    else modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
                 }
                 else modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
             }
@@ -336,32 +337,58 @@ public class GameControllerScript : MonoBehaviour
     }
     public void ActivateSpoopMode(bool frompad = false)
     {
-        spoopMode = true;
+        
         if (mode == "story")
         {
+            LapManag.mucho.transform.position = LearningGameManager.Instance.Tutor.GetCurPosition();
+            StoryPreSpoop = true;
+            StartCoroutine(FadeAudio(lbams.SchoolMusic,4));
+            return;
             //Singleton<TimeOutManagerFUCKYEA>.Instance.InitializeTimeoutStuff(600f);
-            ObjectsToDisable.ForEach(o => o.SetActive(false));
-            ObjectsToEnable.ForEach(o => o.SetActive(true));
-            if (warrealest)
+        }
+        else 
+        {
+            spoopMode = true;
+            if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic") Gatesrea.ForEach(g => g.Down());
+
+            //midishit1.Stop();
+            
+            if (frompad)
             {
-                easingExit(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 5);
-                StartCoroutine(meeptimerwai());
+                foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
+                Subtit.hidesub = true;
             }
         }
-        if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic") Gatesrea.ForEach(g => g.Down());
-
-        //midishit1.Stop();
-        lbams.SchoolMusic.ClearQueue(true);
-        Math.learnMusic.ClearQueue(true);
-
-        if (AdditionalGameCustomizer.Instance != null && !AdditionalGameCustomizer.Instance.NoYCTP && mode == "story")Math.learnMusic.PlaySingleClip(lowBudgetAudioManagementShit.Instance.hangAudio);
-        else lbams.SchoolMusic.ClearQueue(true);
-        if (frompad)
+    }
+    public void StorySpoop()
+    {
+        spoopMode = true;
+        ObjectsToDisable.ForEach(o => o.SetActive(false));
+        ObjectsToEnable.ForEach(o => o.SetActive(true));
+        if (warrealest)
         {
-            foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
-            Subtit.hidesub = true;
+            easingExit(new Color(0.9803922f, 0.5019608f, 0.4470589f, 1f), 0, 2, 5);
+            StartCoroutine(meeptimerwai());
         }
     }
+    public IEnumerator FadeAudio(AudioManagerLiveReaction FadeSource,float duration,bool UnscaledDeltatime = false) 
+	{
+		float elapsed = 0f;
+        float dura = duration;
+		while (elapsed < dura)
+		{
+			elapsed += !UnscaledDeltatime ? Time.deltaTime :Time.unscaledDeltaTime;
+			float t = elapsed / dura;
+			FadeSource.SetVolume(Mathf.Lerp(1, 0f, t));
+            FadeSource.SetPitch(Mathf.Lerp(1, 0f, t));
+			yield return null;
+		}
+        FadeSource.ClearQueue(true);
+		FadeSource.SetVolume(1);  //volumen
+        FadeSource.SetPitch(1);
+        yield break;
+
+	}
     #endregion
     bool onetimeupdate = false;
 
@@ -1023,7 +1050,7 @@ public class GameControllerScript : MonoBehaviour
     public string mode;
     public string ExclusiveRoute;
     public int notebooks, maxNotebooks, maxExits, UnlockAmount, SlotsAmmount, CharacterIntVal;
-    public bool debugMode, isHiding, MusicGO,youCantPause,metalpipeStun,ipleak;
+    public bool debugMode, isHiding, MusicGO,youCantPause,metalpipeStun,ipleak,StoryPreSpoop;
     [SerializeField] private string gameoverScene;
 
     [Header("Serialized References")]

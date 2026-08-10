@@ -26,6 +26,7 @@ public class DiscordRPC_stuff : MonoBehaviour
 			Debug.Log("Received a new presence! Current App: " + message.applicationID + ", " + message.name);
 			this.presence = presence;
 		});
+		changeActivity();
 		Invoke(nameof(changeActivity), 0.25f);
 		presence.startTime = DateTime.UtcNow;
 
@@ -103,11 +104,11 @@ public class DiscordRPC_stuff : MonoBehaviour
 				image = StateIMGLarge, //image name, you must set the name exact same like how you put it in the rich presence/art assets
 				tooltip = LargeIMGText //text when u hover over the big image
 			};
-			/*presence.smallAsset = new Asset()
+			presence.smallAsset = new Asset()
 			{
 				image = StateIMGSmall, //image name, you must set the name exact same like how you put it in the rich presence/art assets
 				tooltip = SmallIMGText //text when u hover over the small image
-			};*/
+			};
 			presence.buttons = new Button[] //rich presence button, you can have max 2 of them, they are forced to have url or else it broke btw
 			{
 				new Button()

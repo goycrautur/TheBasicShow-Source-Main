@@ -648,13 +648,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cf4dcad170b664aa79a781bbd6ed1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applicationID: 1361672938826498276
   Refresh: 0
   Dont: 0
   StateDetails: 
   StateStatus: 
   StateIMGLarge: 
   LargeIMGText: 
+  StateIMGSmall: 
+  SmallIMGText: 
   presence:
     details: Playing a game
     state: In Game

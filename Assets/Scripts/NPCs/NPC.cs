@@ -106,7 +106,7 @@ public class NPC : MonoBehaviour
 
     protected virtual void HandleMovement()
     {
-        if ((agent.isActiveAndEnabled && !agent.IsReadyToMove())|| coolDown.CountdownWithDeltaTime() != 0) return;
+        if ((agent.isActiveAndEnabled && !agent.IsReadyToMove() && !navmeshNpcPushing)|| coolDown.CountdownWithDeltaTime() != 0) return;
 
         if (!canTargetPlayer || !isInteracting)
         {
@@ -143,13 +143,14 @@ public class NPC : MonoBehaviour
 
     protected virtual void Wander(string locationType = "default")
     {
-        if (!dosentUseNavmesh) wanderer?.SetNewTargetForAgent(agent, locationType);
+        if (!dosentUseNavmesh && agent.isActiveAndEnabled && !navmeshNpcPushing) wanderer?.SetNewTargetForAgent(agent, locationType);
         ResetCooldown();
     }
 
     protected virtual void TargetPlayer()
     {
-        if (!dosentUseNavmesh && agent.isActiveAndEnabled) agent.SetDestination(player.position);
+        if (!dosentUseNavmesh && agent.isActiveAndEnabled && !navmeshNpcPushing) agent.SetDestination(player.position);
+        else if (!dosentUseNavmesh  && navmeshNpcPushing) PushedTargetPos = player.position;
         ResetCooldown();
     }
     #endregion
@@ -186,7 +187,7 @@ public class NPC : MonoBehaviour
 #endif
     #endregion
     #region Npc Push Stuff
-    public void PushNpc(Vector3 pushDirection, float pushForce, float duration)
+    public virtual void PushNpc(Vector3 pushDirection, float pushForce, float duration)
 	{
         if (fuckingdead) return;
 		if (NpcPushCorou != null)
@@ -210,9 +211,13 @@ public class NPC : MonoBehaviour
         float elapsed = 0f;
         float currentSpeed = pushForce;
 
-        if (!dosentUseNavmesh) agent.enabled = false;
         while (elapsed < duration)
         {
+            if (!dosentUseNavmesh) 
+            {
+                navmeshNpcPushing = true;
+                agent.enabled = false;
+            }
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
             float speed = Mathf.Lerp(currentSpeed, 0f, t);
@@ -222,19 +227,27 @@ public class NPC : MonoBehaviour
         }
         AfterPushStuff();
     }
-    private void AfterPushStuff()
+    public virtual void AfterPushStuff()
     {
         Vector3 PushTransform = transform.position;
         if (!dosentUseNavmesh) 
         {
+            navmeshNpcPushing = false;
             agent.enabled = true;
             agent.Warp(PushTransform);
+            if (PushedTargetPos != null)
+            {
+                agent.SetDestination(PushedTargetPos);
+                PushedTargetPos = Vector3.zero;
+            }
+            else Wander();
         }
     }
     #endregion
     #region Serialized Fields
     [Header("NPC Functions")]
     [SerializeField] protected Transform player;
+    [SerializeField] protected Vector3 PushedTargetPos;
     public GameControllerScript gc;
     [SerializeField] protected AILocationSelectorScript wanderer;
     public GameObject[] ObjectToGetXrayed;
@@ -258,7 +271,7 @@ public class NPC : MonoBehaviour
     public bool NpcIsNotSpriteRenderer;
     public GameObject NpcGameObj;
     public int hp, maxhp = 100;
-    public bool fuckingdead,RespawnAfterDeath,UsesStunSprite,dosentUseNavmesh;
+    public bool fuckingdead,RespawnAfterDeath,UsesStunSprite,dosentUseNavmesh,navmeshNpcPushing;
     
     public Coroutine NpcPushCorou;
     [HideInInspector] public float mainAgentSpeedScale;

@@ -14,13 +14,14 @@ public class AdditionalGameCustomizer : MonoBehaviour
     {
         InitializeCustomAdditions();
         SkyBoxHandling();
-        ScrambleItems();
-        InitializeGameTuff();
+        
+        //InitializeGameTuff();
 
     }
     public bool unloc, iteinfo,captio;
     public void InitializeGameTuff()
     {
+        GameControllerScript.Instance.mode = PlayerPrefs.GetString("CurrentMode");
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         bool unloc = PlayerPrefsExtension.GetBool("thonkPad");
         NoYCTP = unloc;
@@ -46,7 +47,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (GameControllerScript.Instance.mode == "zerullclassic")
         {
             NoYCTP = false;
-            modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3";
+            modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3 | When are you gonna add *The Pit* for this guy brah - someone, def not me(gray)";
             Sych.SetGameWindowTitle(chair ? "c  h  a  i  r" : "His domain");
         }
         if (GameControllerScript.Instance.mode == "LappingOfAsylum") 
@@ -99,14 +100,14 @@ public class AdditionalGameCustomizer : MonoBehaviour
     }
     private void PercentageSystemShit()
     {
-        if (StaminaPercentage && !ZerullClassic.Instance.BossStarted)
+        if (StaminaPercentage)
         {
             what = Mathf.Lerp(what,GameControllerScript.Instance.player.stamina, 5*Time.deltaTime);
             percentageText.text = (int)what + "%";
             if (GameControllerScript.Instance.player.stamina <= 15f) percentageText.color = Color.red;
             else percentageText.color = Color.black;
         }
-        if (ZerullClassic.Instance.BossStarted || ZerullClassic.Instance.RealBossStarted) percentageText.text = "∞%";
+        //if (ZerullClassic.Instance.BossStarted || ZerullClassic.Instance.RealBossStarted) percentageText.text = "∞%";
         if (HealthPercentage)
         {
             healthPercentageText.text = GameControllerScript.Instance.player.health + "/" + GameControllerScript.Instance.player.maxHealth;
@@ -130,8 +131,8 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #region VisualEffects
     private void CameraShaking()
     {
-        CameraScript.Instance.MainCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.MainCamera.fieldOfView, FovAmmount, 5f * Time.deltaTime);
-        CameraScript.Instance.XrayCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.XrayCamera.fieldOfView, FovAmmount, 5f * Time.deltaTime);
+        CameraScript.Instance.MainCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.MainCamera.fieldOfView, FovAmmount + ExtraFovAmmount, 5f * Time.deltaTime);
+        CameraScript.Instance.XrayCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.XrayCamera.fieldOfView, FovAmmount + ExtraFovAmmount, 5f * Time.deltaTime);
     }
 
     private void FlashlightCode()
@@ -278,10 +279,11 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #endregion
 
     #region RandomizedItems
-    private void ScrambleItems()
+    public void ScrambleItems()
     {
         if (RandomizeItems && !ActuallyRandomizeItems)
         {
+
             List<Vector3> list = new List<Vector3>();
 
             foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
@@ -296,13 +298,6 @@ public class AdditionalGameCustomizer : MonoBehaviour
                     pickupScript2.transform.position = list[index];
                     list.RemoveAt(index);
                 }
-            }
-        }
-        if (ActuallyRandomizeItems && !RandomizeItems)
-        {
-            foreach (PickupScript pickupScript in FindObjectsOfType<PickupScript>())
-            {
-                if (pickupScript.ID != 34 && pickupScript.ID != 13) pickupScript.itsPresentTime();
             }
         }
     }
@@ -327,7 +322,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     [Header("Serialized References")]
     public Image[] ExitImages;
     public Image rainboCanv;
-    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount,DefaultFovAmmount,what;
+    public float rainboSpee, huehuehue, saturati, brignes, transparenci, FovAmmount,ExtraFovAmmount,DefaultFovAmmount,what;
     public Sprite[] BookColors;
     public Material NormalSky, NormalRedSky, NightSky, RedNightSky, TwilightSky, RedTwilightSky, DefaultSky;
     [SerializeField] private GameObject warning, Clock, TMP, OldStamina, PreOldStamina, NewStamina, VerticalStamina, CircleStamina, GaugeManager, Counter, staminapercent, healthpercent;
@@ -340,6 +335,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     private bool isFlashlightOn = false;
     public static AdditionalGameCustomizer Instance;
     [HideInInspector] public SkyboxStyle currentSkybox;
+    public List<PickupScript> pickup = new List<PickupScript>();
     public int Cash = 0;
     #endregion
 

@@ -207,14 +207,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b694ebc35b9a5424caf50ed2e0096286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsEnemy: 0
+  GoThoughWalls: 0
   speed: 50
   fallvelocity: 8
   iframe: 0
-  VerticalGrav: 45
+  VerticalGrav: 55
   HorizontalGrav: 5
   bouncetime: 3
   DamageToNpc: 50
-  NpcStuntime: 15
+  NpcStuntime: 7.5
   NpcPushVal: 90
   BounceVelocity: 30
   lifeSpan: 15

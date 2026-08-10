@@ -233,7 +233,7 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 
 		midiPlayer.transpose = 0;
 		midiPlayer.MPTK_MidiName = song;
-		midiPlayer.MPTK_RePlay();
+		
 		midiPlaying = true;
 		midiPaused = false;
 
@@ -249,17 +249,24 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 		{
 			Debug.LogWarning("MusicManager: MIDI player channels are not available yet.");
 		}
+		midiPlayer.MPTK_RePlay();
 
 		SetLoop(loop);
 	}
 
-	public void QueueMidi(string song, bool emptyQueue)
+	public void QueueMidi(string song, bool emptyQueue, bool special = false)
 	{
 		if (emptyQueue)
 		{
 			midiQueue.Clear();
 		}
 		toQueue.Add(song);
+		if (special)
+		{
+			PlayMidi(song,true);
+			/*midiPlayer.MPTK_Stop();
+			midiPlayer.MPTK_MidiAutoRestart = false;*/
+		}
 	}
 	public void StartFileQueue()
 	{

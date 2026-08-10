@@ -2,6 +2,8 @@
 using TMPro;
 using System;
 
+// maybe nerfs this abit and make longer time equals more strenght idk
+
 public class BasementChickenClockScript : MonoBehaviour
 {
     #region Per-Frame Logic

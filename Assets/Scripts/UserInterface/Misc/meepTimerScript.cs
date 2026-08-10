@@ -30,7 +30,7 @@ public class meepTimerScript : MonoBehaviour
 		if (startingTime > 0f) canTime = !inEnding ? true : false;
 		if ((Mathf.FloorToInt(startingTime) != Mathf.FloorToInt(startingTime + Time.deltaTime) & canTime) && tickSound != null)
 		{
-			AudMang.ClearQueue(true);
+			//AudMang.ClearQueue(true);
 			AudMang.PlaySingleClip(tickSound);
 		}
 	}
@@ -47,7 +47,7 @@ public class meepTimerScript : MonoBehaviour
 		countdownText.color = leColor;
 		if (timeAddedSound != null)
 		{
-			AudMang.ClearQueue(true);
+			//AudMang.ClearQueue(true);
 			AudMang.PlaySingleClip(timeAddedSound);
 		}
 		while (elapsedTime < animationDuration)

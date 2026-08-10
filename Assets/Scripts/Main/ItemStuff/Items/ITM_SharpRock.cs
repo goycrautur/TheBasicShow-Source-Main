@@ -71,7 +71,7 @@ public class ITM_SharpRock : BaseItem
                         {
                             yield return null;
                         }
-                        ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length);
+                        ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length,1,false);
                         lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(punc);
                     }
                     return true;

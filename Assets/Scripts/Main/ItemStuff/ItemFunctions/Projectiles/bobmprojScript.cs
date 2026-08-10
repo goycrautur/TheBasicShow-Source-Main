@@ -46,7 +46,7 @@ public class bobmprojScript : MonoBehaviour
         if (cork.CompareTag("Player") & !GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard && IsEnemy)
         {
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageToNpc / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);
-            GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 32f*(bouncetime+1), 0.5f);
+            GameControllerScript.Instance.player.PushPlayer(GameControllerScript.Instance.player.GetPlayerPushDirection(transform.position), 32f*(bouncetime+1), 0.25f);
             boom(true);
             return;
         }

@@ -78,7 +78,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
         }
         else randomSeedVal = RandomCurId;
     }
-	public void Glitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1f,float desiredval = 1f,int randomGlitchVal = 32)
+	public void Glitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1f,float desiredval = 1f,int randomGlitchVal = 1)
 	{
 		if (isShakeGlitchUpdating)
 		{

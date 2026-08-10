@@ -13,11 +13,19 @@ public class PlayerScript : MonoBehaviour
 	private void FixedUpdate()
 	{
 		if (!movementLocked) StaminaCheck();
-		HealthCheck();
+		
 	}
 
 	private void Update()
 	{
+		HealthCheck();
+		if (DeathCountdown) 
+		{
+			timerTillDeath -= Time.deltaTime;
+			movementLocked = true;
+			invisi = true;
+		}
+		if (timerTillDeath <= 0 && DeathCountdown) DeathStuff(); 
 		barcolo.color = gradi.Evaluate(health / maxHealth);
 		ApplyGravity();
 		HandleMouseMovement();
@@ -50,13 +58,6 @@ public class PlayerScript : MonoBehaviour
 		else HudManager.Instance.colorVarSetter(true);
 		if (breakwindow) breakwind();
 		if (door.lockTime > 0f) ResetGuilt("escape", 1f);
-		if (DeathCountdown) 
-		{
-			timerTillDeath -= Time.deltaTime;
-			movementLocked = true;
-			invisi = true;
-		}
-		if (timerTillDeath <= 0 && DeathCountdown) DeathStuff(); 
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
 			//if (ItemManager.Instance.Inventory[i].ItemID == 34 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "wallet_item") 
@@ -332,7 +333,7 @@ public class PlayerScript : MonoBehaviour
 		if (isRunning && secondaryMovementVelocity.magnitude > 0.1f && !hugging && !sweeping)
 		{
 			if (!outdoorsfr && door.lockTime <= 0f) ResetGuilt("running", 0.1f);
-			if (RunningSpeedMult <= 2.25f) RunningSpeedMult += 0.125f * Time.deltaTime;
+			//if (RunningSpeedMult <= 2.25f) RunningSpeedMult += 0.125f * Time.deltaTime;
 		}
 		else if (RunningSpeedMult > 1f) RunningSpeedMult -= 1f * Time.deltaTime;;
 	}
@@ -413,10 +414,7 @@ public class PlayerScript : MonoBehaviour
 			if (ItemManager.Instance.Inventory[i].ItemID == 23) TotemCheck = true;
 			if (ItemManager.Instance.Inventory[i].ItemID == 48) AidsKitCheck = true;
 		}
-		if (!TotemCheck && !AidsKitCheck)
-		{
-			GameoverStuff();
-		}
+		if (!TotemCheck && !AidsKitCheck)GameoverStuff();
 		else if (AidsKitCheck) 
 		{
 			for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
@@ -603,11 +601,11 @@ public class PlayerScript : MonoBehaviour
 			sweeping = true;
 			sweepingFailsave = 1f;
 		}
-		if (other.transform.name == "1945 tom")
+		/*if (other.transform.name == "1945 tom")
 		{
 			sweeping = true;
 			sweepingFailsave = 1f;
-		}
+		}*/
 		else if (other.transform.name == "1st Prize" & firstPrize.velocity.magnitude > 5f && other.transform.GetComponent<FirstPrizeScript>().crazyTime <= 0 && !invisi && !invisichalk)
 		{
 			hugging = true;

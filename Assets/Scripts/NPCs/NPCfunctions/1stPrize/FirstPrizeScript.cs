@@ -9,6 +9,8 @@ public class FirstPrizeScript : NPC
         coolDown = 1f;
         autoBrakeCool = 1f;
         Wander();
+        base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
+        currentSpeed = base.agentSpeed;
     }
     #endregion
 
@@ -20,6 +22,7 @@ public class FirstPrizeScript : NPC
         StunModel.SetActive(base.stun);
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         runSpeed = DefaultRunspeed * base.agentSpeedScale;
+        
         if (base.stun)
         {
             runSpeed = 0f;
@@ -72,7 +75,7 @@ public class FirstPrizeScript : NPC
         TargetPlayer();
         currentSpeed = runSpeed;
         if (base.stun) currentSpeed = 0f;
-        if (base.StunTime < 0f)  currentSpeed = runSpeed;
+        if (base.StunTime < 0f) currentSpeed = runSpeed;
     }
 
     private void HandleLostPlayer()

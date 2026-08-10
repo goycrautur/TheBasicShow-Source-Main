@@ -17,9 +17,9 @@
     </SoundFontInfo>
     <SoundFontInfo>
       <Name>GS Wavetable Synth</Name>
-      <PatchCount>0</PatchCount>
-      <WaveCount>0</WaveCount>
-      <WaveSize>0</WaveSize>
+      <PatchCount>235</PatchCount>
+      <WaveCount>495</WaveCount>
+      <WaveSize>6368594</WaveSize>
       <SF2Path>C:/Users/Admin/AppData/LocalLow/quagteamtrust/The Basics Show\SoundFont\GS Wavetable Synth.sf2</SF2Path>
     </SoundFontInfo>
     <SoundFontInfo>
@@ -44,7 +44,7 @@
       <SF2Path>C:/Users/Admin/AppData/LocalLow/quagteamtrust/The Basics Show\SoundFont\gm.sf2</SF2Path>
     </SoundFontInfo>
   </SoundFonts>
-  <IndexSelectedSF>1</IndexSelectedSF>
+  <IndexSelectedSF>2</IndexSelectedSF>
   <MidiFiles>
     <string>bbcmboss before loop</string>
     <string>bbcmboss End</string>
@@ -63,6 +63,7 @@
     <string>kicking_your_bucket_preboss</string>
     <string>MathCheckThoughTheSkull</string>
     <string>MathCheckThoughTheSkullIntro</string>
+    <string>methhouse trouble loop ayayyay</string>
     <string>mondaytrouble</string>
     <string>MultiplayerBossLoop_V2</string>
     <string>rulasmashintroHit</string>

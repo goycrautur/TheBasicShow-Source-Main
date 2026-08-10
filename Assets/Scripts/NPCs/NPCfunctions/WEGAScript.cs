@@ -12,15 +12,12 @@ public class WEGAScript : NPC
 	{
 		base.SetToXrayLayer();
 		CurWegaSpeed = gc.wegchal.globalWegaSpeed;
-		WegaAudio.SetActive(!base.stun || !base.fuckingdead);
-		if (base.stun || base.fuckingdead)
-        {
-            WegaSpeed = 0f;
-        }
-        if (base.StunTime <= 0f)
+		WegaAudio.SetActive(!base.stun && !base.fuckingdead);
+		if (!base.stun && !base.fuckingdead && base.StunTime >= 0f)
         {
             WegaSpeed = CurWegaSpeed;
         }
+        else WegaSpeed = 0f;
 		transform.position = Vector3.MoveTowards(transform.position, new Vector3(base.player.position.x,base.player.position.y -4,base.player.position.z), WegaSpeed * Time.deltaTime);
 	}
 	private void OnTriggerStay(Collider play)

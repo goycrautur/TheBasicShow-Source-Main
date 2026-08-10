@@ -22,7 +22,6 @@ public class LappingTimScript : NPC
     public override void OnUpdate()
     {
         base.OnUpdate();
-        TimVelocMagnitu = agent.velocity.magnitude;
         if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
         if (AntiHearingDuratio < 0f) antiHearing = false;
         MOOOVEYOUBITCH();
@@ -158,10 +157,10 @@ public class LappingTimScript : NPC
                 break;
             }
         }
-        if (gc.fmc.alwaysKnowIp) return;
         if (canHear)
         {
-            if (agent.isActiveAndEnabled) agent.SetDestination(soundLocation);
+            if (base.navmeshNpcPushing) base.PushedTargetPos = soundLocation;
+            else agent.SetDestination(soundLocation);
             currentPriority = priority;
 
             if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
@@ -172,7 +171,7 @@ public class LappingTimScript : NPC
         }
         else
         {
-            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator)
+            if (!inNoSqueeArea && AdditionalGameCustomizer.Instance.Indicator && indicator && !antiHearing)
             {
                 TimCator.Rebind();
                 TimCator.Play("timcator_Confused", -1, 0f);
@@ -192,7 +191,6 @@ public class LappingTimScript : NPC
     [Header("tim's Stats")]
     public float TimCurSpd;
     public float TimTempSpd;
-    public float TimVelocMagnitu;
 
     [Header("Movement and Behavior")]
     [SerializeField] private float timeToMove;

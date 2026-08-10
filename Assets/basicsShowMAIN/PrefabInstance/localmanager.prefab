@@ -50,7 +50,10 @@ MonoBehaviour:
     - key: warnMenu_Warning
       value: hi hello hawwo hello
     - key: warnMenu_Disclaimer
-      value: Finnally new warning text lol
+      value: 'verry quick note that nearly everything here is NOT FINAL !!!!!!
+
+        not
+        really proud with how the mod current state is augaguaguhhh dies'
     - key: warnMenu_dontleak
       value: 'if you somehow got your hands on this build (for non playtester) this
         mod is in a phase of me wana overhaul shit realrealrealreal
@@ -469,4 +472,4 @@ MonoBehaviour:
     - key: loadaText
       value: Loading
   currentLang: EN
-  currentJsonVersion: 25
+  currentJsonVersion: 28

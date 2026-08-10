@@ -40,7 +40,7 @@ public class birthdayFriesScript : MonoBehaviour
                         yield return null;
                     }
                     stunnedBoss = true;
-                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length,0);
+                    ZerullClassic.Instance.OnHit(ZerullClassic.Instance.zs.hit.audClip.length,0,false);
                     Instantiate(GameControllerScript.Instance.ConfettiEffect, transform.position, transform.rotation);
                     Destroy(base.gameObject);
                 }

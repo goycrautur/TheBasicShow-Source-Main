@@ -353,14 +353,17 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
     }
     public void slot(bool wipe = true)
     {
-        Debug.Log("slotted");
-        if (wipe) for (int i = 0; i < AltInventory.Length; ++i) if (i != ItemManager.Instance.ItemSelection) AltInventory[i].ItemImages.texture = null;
+        if (wipe) for (int i = 0; i < AltInventory.Length; ++i)
+        {
+            if (i != ItemManager.Instance.ItemSelection) AltInventory[i].ItemImages.texture = null;
+        }
         for (int i = 0; i < ItemManager.Instance.Inventory.Length; ++i)
         {
             if (i != ItemManager.Instance.ItemSelection)
             {
                 ItemManager.Instance.Inventory[i].ItemID = 0;
                 ItemManager.Instance.Inventory[i].ItemInstance = null;
+                
             }
         }
         if (ItemManager.Instance.ItemSelection >= SlotsAmmou) ItemManager.Instance.ItemSelection = SlotsAmmou - 1;
@@ -369,7 +372,11 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             AltInventory[0].ItemImages.enabled = false;
             AltInventory[0].ItemImageBGs.enabled = false;
             AltInventory[0].ItemImageSlots.enabled = false;
+            ItemManager.Instance.ItemSelection = 0;
             Debug.Log("mf have 0 slots left holy skull");
+            ItemManager.Instance.UpdateItemUI();
+            for (int i = SlotsAmmou-1; i < MaxSlotsAmmou; ++i) AltInventory[i].ItemStacksText.text = "";
+
             return;
         }
         for (int i = SlotsAmmou-1; i < MaxSlotsAmmou; ++i)
@@ -377,6 +384,7 @@ public class OtherMainStuffManager : Singleton<OtherMainStuffManager>
             AltInventory[i].ItemImages.enabled = false;
             AltInventory[i].ItemImageBGs.enabled = false;
             AltInventory[i].ItemImageSlots.enabled = false;
+            AltInventory[i].ItemStacksText.text = "";
         }
         for (int i = 0; i < SlotsAmmou; ++i)
         {

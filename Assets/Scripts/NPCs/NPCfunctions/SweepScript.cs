@@ -10,6 +10,11 @@ public class SweepScript : NPC
         waitTime = Random.Range(10f, 20f);
     }
     #endregion
+    public void OnEnable()
+    {
+        activeTime = 0f;
+        GoHome();
+    }
 
     #region Activity and Timer Logic
     public override void OnUpdate()
@@ -28,7 +33,7 @@ public class SweepScript : NPC
         if (!active)
         {
             active = true;
-            activeTime = Random.Range(30f, 60f);
+            activeTime = Random.Range(60f, 120f);
             Wander();
             audioDevice.PlaySingleClip(aud_Intro);
             return;
@@ -62,7 +67,7 @@ public class SweepScript : NPC
     {
         active = false;
         agent.SetDestination(homeLocation.position);
-        waitTime = Random.Range(60f, 180f);
+        waitTime = Random.Range(30f, 60f);
     }
     #endregion
 
@@ -73,9 +78,33 @@ public class SweepScript : NPC
         {
             if (base.IsHitboxValid)
             {
-                audioDevice.PlaySingleClip(aud_Sweep);
+                
                 if (other.transform.name == "Its a Bully") base.Wander();
             }
+        }
+        if (other.CompareTag("NPC"))
+        {
+            NPC npeecee = other.transform.GetComponent<NPC>();
+            if (base.IsHitboxValid && !npeecee.fuckingdead)
+            {
+                ChainsawAudio.ClearQueue(true);
+                ChainsawAudio.PlaySingleClip(aud_Attack);
+                audioDevice.PlaySingleClip(aud_Sweep);
+                npeecee.Stun(2f);
+                npeecee.DrainHp(25);
+                npeecee.PushNpc(npeecee.GetNPCPushDirection(-transform.forward),64, 1f);
+            }
+        }
+        if (other.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        {
+            if (base.IsHitboxValid)
+			{
+                ChainsawAudio.ClearQueue(true);
+                ChainsawAudio.PlaySingleClip(aud_Attack);
+                audioDevice.PlaySingleClip(aud_Sweep);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 25f / gc.player.PlayerDmgResistance, 1f, false, true, false);
+                gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 64f, 0.5f);
+			}
         }
     }
     #endregion
@@ -87,7 +116,8 @@ public class SweepScript : NPC
 
     [Header("Audio")]
     [SerializeField] private AudioObjectyeah aud_Sweep;
-    [SerializeField] private AudioObjectyeah aud_Intro;
+    [SerializeField] private AudioObjectyeah aud_Intro,aud_Attack;
+    [SerializeField] private AudioManagerLiveReaction ChainsawAudio;
 
     [Header("State Management")]
     [SerializeField] private bool active;

@@ -12,6 +12,18 @@ public class NeedMoreScript : MonoBehaviour
 				if (baldiDoor !=null) audioDevice.PlaySingleClip(baldiDoor);
 			}
 		}
+		
+	}
+	private void OnTriggerExit(Collider other)
+	{
+		if (gc.StoryPreSpoop & other.CompareTag("Player") & gc.notebooks >= gc.UnlockAmount)
+		{
+			Debug.Log("it have started");
+			if (!LearningGameManager.Instance.Tutor.IsLolbit && gc.failedNotebooks <= 1) LearningGameManager.Instance.Tutor.PlayCountdownheh();
+			else if (gc.failedNotebooks == 2) gc.StorySpoop();
+			gc.StoryPreSpoop = false;
+			return;
+		}
 	}
 
 	[Header("Game Controller")]

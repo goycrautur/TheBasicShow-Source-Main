@@ -102,7 +102,7 @@ public class minusbScript : NPC
     public void OnMoveDone()
     {
         agent.speed = 0;
-        if (agent.remainingDistance <= 0.01f) Wander();
+        if (agent.isActiveAndEnabled && agent.remainingDistance <= 0.01f) Wander();
         if (!stopMoving) Invoke(nameof(Move), Wait);
     }
     #endregion
@@ -161,7 +161,8 @@ public class minusbScript : NPC
 
         if (canHear)
         {
-            agent.SetDestination(soundLocation);
+            if (base.navmeshNpcPushing) base.PushedTargetPos = soundLocation;
+            else agent.SetDestination(soundLocation);
             currentPriority = priority;
         }
         else return;

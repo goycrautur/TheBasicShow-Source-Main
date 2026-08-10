@@ -48,11 +48,13 @@ public class AudioManagerLiveReaction : MonoBehaviour
             else if (AudioManStandalone) audioDevice.outputAudioMixerGroup = MixerOverrides[(int)obje.SoundTypeWahh != 0 ? ((int)obje.SoundTypeWahh)-1 : 0];
             audioDevice.volume = obje.volume;
             audioDevice.PlayOneShot(obje.audClip);
+            AudioClipLength = obje.audClip.length;
             if (obje.subti != null && obje.HasSubtitle && !AudioManStandalone) makesub(obje.subti,ForceSubPos ?SubPosForced : obje.subti.subtitleOption.twoDeePosition);
         }   
     }
     private void Update()
     {
+        AudioSourceCurTime = audioDevice.time;
         if (queuedAudios.Count > 0 && (!AudioListener.pause || audioDevice.ignoreListenerPause) && (!audioDevice.isPlaying && !ForcePauseQueue)) PlayNext();
     }
     public void QueueAudio(AudioObjectyeah obje)
@@ -78,8 +80,10 @@ public class AudioManagerLiveReaction : MonoBehaviour
             audioDevice.loop = false;
             audioDevice.mute = false;
             audioDevice.pitch = 1;
-            if (!AudioManStandalone && TBSSubMan.Instance != null) TBSSubMan.Instance.endSubtitle(sourceId);
             audioDevice.Stop();
+            AudioClipLength = 0;
+            if (!AudioManStandalone && TBSSubMan.Instance != null) TBSSubMan.Instance.endSubtitle(sourceId);
+            
         }
     }
 
@@ -89,6 +93,7 @@ public class AudioManagerLiveReaction : MonoBehaviour
         {
             audioDevice.volume = queuedAudios[0].volume;
             audioDevice.clip = queuedAudios[0].audClip;
+            AudioClipLength = audioDevice.clip.length;
             audioDevice.Play();
             queuedAudios.RemoveAt(0);
             SetLoop(loop);
@@ -116,6 +121,10 @@ public class AudioManagerLiveReaction : MonoBehaviour
     public void SetMute(bool toggle) => audioDevice.mute = toggle;
     public void SetPitch(float pitch) => audioDevice.pitch = pitch;
     public void SetVolume(float vol) => audioDevice.volume = vol;
+    public bool GetAudioIsPlaying()
+    {
+        return audioDevice.isPlaying;
+    }
     public void SetForcePausing(bool wha)
     {
         if (wha) audioDevice.Pause();
@@ -146,5 +155,8 @@ public class AudioManagerLiveReaction : MonoBehaviour
     public bool AudioManStandalone;
     public AudioMixerGroup[] MixerOverrides;
     private bool ForcePauseQueue;
+    [Header("misc stuff")]
+    public float AudioClipLength;
+    public float AudioSourceCurTime;
     #endregion
 }

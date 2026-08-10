@@ -39,7 +39,7 @@ public class zerullscript : NPC
         base.agentSpeed = base.DefaultAgentSpeed * base.agentSpeedScale;
         if (TempAnger > 0f) TempAnger -= 0.02f * Time.deltaTime;
         else TempAnger = 0f;
-        if (chair && agent.remainingDistance <= 0.01f) Wander();
+        //if (chair && agent.isActiveAndEnabled && agent.remainingDistance <= 0.01f) Wander();
         if (chair && !base.stun) agent.speed = (base.agentSpeed/4 * (Wait / 20)) + (Anger * (TempAnger+0.9f)/2);
         if (base.stun)
         {
@@ -122,7 +122,7 @@ public class zerullscript : NPC
     private void OnMoveDone()
     {
         agent.speed = 0;
-        if (agent.remainingDistance <= 0.01f) Wander();
+        //if (agent.isActiveAndEnabled && agent.remainingDistance <= 0.01f) Wander();
         if (!stopMoving) Invoke(nameof(Move), Wait);
     }
     #endregion
@@ -179,7 +179,8 @@ public class zerullscript : NPC
 
         if (canHear)
         {
-            agent.SetDestination(soundLocation);
+            if (base.navmeshNpcPushing) base.PushedTargetPos = soundLocation;
+            else agent.SetDestination(soundLocation);
             currentPriority = priority;
 
             if (AdditionalGameCustomizer.Instance.Indicator && indicator)
@@ -195,7 +196,7 @@ public class zerullscript : NPC
         {
             if (AdditionalGameCustomizer.Instance.Indicator && indicator)
             {
-                if (!inNoSqueeArea)
+                if (!inNoSqueeArea && !antiHearing)
                 {
                     erucato.Rebind();
                     erucato.Play("Indicator_Confused", -1, 0f);

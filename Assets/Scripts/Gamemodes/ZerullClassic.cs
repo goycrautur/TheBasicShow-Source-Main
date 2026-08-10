@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using DG.Tweening;
+using BrunoMikoski.AnimationSequencer;
 using MidiPlayerTK;
 
 public class ZerullClassic : MonoBehaviour
@@ -51,10 +52,11 @@ public class ZerullClassic : MonoBehaviour
     [Tooltip("Boss variant of null"), SerializeField] public ZerullBossScript zs;
     public Slider healthSlider;
     public RectTransform ZerullIcon;
+    public AnimationSequencerController HealthbarAnimAppear,HealthbarAnimDissapear;
     private Vector3 ogZerullIconSize;
     private Vector2 ogZerullIconPivot;
 
-    [Header("Audio"), SerializeField, Tooltip("Boss Music (Boss Clips located at NullScript object)")]
+    [Header("Audio"), SerializeField, Tooltip("Boss Music")]
     private AudioObjectyeah[] Boss_Music;
     [SerializeField, Tooltip("Music")] private AudioManagerLiveReaction musicAudio, musicLoop;
 
@@ -88,11 +90,17 @@ public class ZerullClassic : MonoBehaviour
     [Tooltip("Boss Loop MIDI the bloxyver Name String")] public string bloxyLoop1,bloxyLoop2;
 
     [Tooltip("Length of Start MIDI")] public float midiStartLength = 7f;
-    public GameObject[] tweenOutitems,tweenitemsAlt;
+    public GameObject[] tweenOutitems;
     public Transform[] StartingBossfightProjectileSpawnLocaltion;
     public bool ableToStart,bossStarted, realBossStarted,switchToBloxyb;
     public Animator yourflashbang;
     public bool taggedonetime,oneHPfailsave,ExhaustedJerBoss;
+
+    [Header("Extremely temporarily raaargh")]
+    public bool ForceMethhouseBossOst;
+    public AudioObjectyeah[] MethHouse_BossMusic;
+    public string BossMidiLoopMethhouse;
+    
 
     public bool BossStarted
     {
@@ -121,6 +129,8 @@ public class ZerullClassic : MonoBehaviour
     }
     private void Start()
     {
+        /*Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiStart : midiStart, loop: true);
+        if (StartSongsIsMidi) Singleton<MusicManagerMaes>.Instance.QueueMidi(ExhaustedJerBoss ? exhamidiLoop : (switchToBloxyb ? bloxyLoop1 : midiLoop), true);*/
         ogZerullIconSize = ZerullIcon.localScale;
         ogZerullIconPivot = ZerullIcon.pivot;
         if (ExhaustedJerBoss) maxHealth = ExhaustedJerMaxHp;
@@ -170,9 +180,22 @@ public class ZerullClassic : MonoBehaviour
 	{
 		if (ableToStart && midiEvent.Command == MPTKCommand.MetaEvent && midiEvent.Meta == MPTKMeta.TextEvent)
         {
-            ZerullIcon.localScale = ogZerullIconSize * 1.25f;
-            ZerullIcon.pivot = new Vector2(0.75f,0.25f);
-            Singleton<VertexGlitchManager>.Instance.Glitch();
+            //Debug.Log($"midi event info: {midiEvent.Info}");
+            if (midiEvent.Info == "HeavyShake")
+            {
+                ZerullIcon.localScale = ogZerullIconSize * 1.45f;
+                ZerullIcon.pivot = new Vector2(0.75f,0.25f);
+                AdditionalGameCustomizer.Instance.ExtraFovAmmount = -60f;
+                Singleton<VertexGlitchManager>.Instance.Glitch();
+                CameraScript.Instance.TempShakeAmount = 0.35f;
+            }
+            else
+            {
+                ZerullIcon.localScale = ogZerullIconSize * 1.25f;
+                ZerullIcon.pivot = new Vector2(0.75f,0.25f);
+                AdditionalGameCustomizer.Instance.ExtraFovAmmount = -30f;
+                Singleton<VertexGlitchManager>.Instance.Glitch();
+            }
         }
 	}
 
@@ -182,6 +205,7 @@ public class ZerullClassic : MonoBehaviour
         curHealthValueForLerping = Mathf.Lerp(curHealthValueForLerping,health, 5*Time.deltaTime);
         ZerullIcon.localScale = Vector3.Lerp(ZerullIcon.localScale,ogZerullIconSize, 20*Time.deltaTime);
         ZerullIcon.pivot = Vector2.Lerp(ZerullIcon.pivot,ogZerullIconPivot, 20*Time.deltaTime);
+        AdditionalGameCustomizer.Instance.ExtraFovAmmount = Mathf.Lerp(AdditionalGameCustomizer.Instance.ExtraFovAmmount,0, 25*Time.deltaTime);
         if (thrownDelay > 0f)thrownDelay -= Time.deltaTime;
         if (!taggedonetime) tryTOStartBoss();
         if (replaceALLSAKES)
@@ -211,7 +235,7 @@ public class ZerullClassic : MonoBehaviour
             if (spawnCooldown > 0f) spawnCooldown -= Time.deltaTime;
             if (spawnCooldown <= 0f)
             {
-                if (objects < maxObjects) SpawnProjectile(false, false);
+                //if (objects < maxObjects) SpawnProjectile(false, false);
                 spawnCooldown = 25f;
             }
             if (!projectilesDoNotExist && objects == 0)
@@ -246,33 +270,39 @@ public class ZerullClassic : MonoBehaviour
             meepTimerScript.Instance.AddTime(25f, Color.green);
             meepTimerScript.Instance.canTime = false;
         }
-        if (debugMode)
-        {
-            Debug.Log("Encounter");
-        }
+        if (debugMode) Debug.Log("Encounter");
 
         debug = true; // Makes that null doesn't able to kill player 
 
         bossStarted = true; // Boss Started bool enabled
         for (int i = 0; i < StartingBossfightProjectileSpawnLocaltion.Length; ++i)
         {
-            SpawnProjectile(StartingBossfightProjectileSpawnLocaltion[i], true, Random.Range(2, projectileprefabs.Length));
+            SpawnProjectile(StartingBossfightProjectileSpawnLocaltion[i], true, Random.Range(0, projectileprefabs.Length));
         }
         zs.Agent.speed = 0f; // Set Null speed to 0. (make null doesn't able to move)
         zs.Agent.isStopped = true; // Fully stop Null agent
         zs.sprite.gameObject.SetActive(true); // Enable Null Sprite
         GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
         GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultRunSpeed;
-        if (!StartSongsIsMidi)
+        if (!ForceMethhouseBossOst)
         {
-            musicAudio.ClearQueue(true);
-            musicAudio.SetLoop(true);
-            musicAudio.QueueAudio(Boss_Music[0]);
+            if (!StartSongsIsMidi)
+            {
+                musicAudio.ClearQueue(true);
+                musicAudio.SetLoop(true);
+                musicAudio.QueueAudio(Boss_Music[0]);
+            }
+            else
+            {
+                Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiIntro : midiIntro, loop: true);
+                Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+            }
         }
         else
         {
-            Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiIntro : midiIntro, loop: true);
-            Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+            musicAudio.ClearQueue(true);
+            musicAudio.SetLoop(true);
+            musicAudio.QueueAudio(MethHouse_BossMusic[0]);
         }
         zs.StartBossIntro();
     }
@@ -305,18 +335,25 @@ public class ZerullClassic : MonoBehaviour
         RemoveProjectiles(); // Remove projectiles
 
         Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = musicLoop.audioDevice; // Make vertex shake sync to music
-
-        if (!StartSongsIsMidi)
+        if (!ForceMethhouseBossOst)
         {
-            musicAudio.ClearQueue(true);
-            musicAudio.QueueAudio(Boss_Music[0]);
+            if (!StartSongsIsMidi)
+            {
+                musicAudio.ClearQueue(true);
+                musicAudio.QueueAudio(Boss_Music[0]);
+            }
+            else
+            {
+                Singleton<MusicManagerMaes>.Instance.StopMidi();
+                Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiStart : midiStart, loop: true);
+                if (StartSongsIsMidi) Singleton<MusicManagerMaes>.Instance.QueueMidi(ExhaustedJerBoss ? exhamidiLoop : (switchToBloxyb ? bloxyLoop1 : midiLoop), true);
+                Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+            }
         }
         else
         {
-            Singleton<MusicManagerMaes>.Instance.StopMidi();
-            Singleton<MusicManagerMaes>.Instance.PlayMidi(ExhaustedJerBoss ? exhamidiStart : midiStart, loop: true);
-            if (StartSongsIsMidi) Singleton<MusicManagerMaes>.Instance.QueueMidi(ExhaustedJerBoss ? exhamidiLoop : (switchToBloxyb ? bloxyLoop1 : midiLoop), true);
-            Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+            musicAudio.ClearQueue(true);
+            musicAudio.QueueAudio(MethHouse_BossMusic[1]);
         }
 
         GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
@@ -337,8 +374,9 @@ public class ZerullClassic : MonoBehaviour
     {
         Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb && !ExhaustedJerBoss ? bloxyLoop1 : midiLoop, true);
         yield return new WaitForSeconds(12f); // Wait until the music will end
-        health = 10;
+        health = maxHealth/3;
         Sych.SetGameWindowTitle("The fight Continues. yeah");
+        SpawnProjectile(false, false);
         Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         if (spawnBlockagesDuringTheBossfight) blockages.SetActive(true);
         zs.totemAfterStun();
@@ -348,10 +386,18 @@ public class ZerullClassic : MonoBehaviour
     {
         Sych.SetGameWindowTitle("The Basic Show - isnt it obvious hes charging his ult");
         gc.modeState = "he pissed";
-        if (!StartSongsIsMidi) 
+        if (!ForceMethhouseBossOst)
         {
-            yield return new WaitForSeconds(Boss_Music[1].audClip.length); // Wait until the music will end
-            BossBegin(); // Start boss
+            if (!StartSongsIsMidi) 
+            {
+                yield return new WaitForSeconds(Boss_Music[1].audClip.length); // Wait until the music will end
+                BossBegin(); // Start boss
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(MethHouse_BossMusic[1].audClip.length -0.01f);
+            ableToStart = true;
         }
     }
 
@@ -359,6 +405,7 @@ public class ZerullClassic : MonoBehaviour
     {
         Sych.SetGameWindowTitle("The fight begins. preferably now");
         AllowProjectileSpawn = true;
+        SpawnProjectile(false, false);
         SpawnProjectile(false, false);
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled)
@@ -372,13 +419,26 @@ public class ZerullClassic : MonoBehaviour
         spawnCooldown = 1f; // Set spawn cooldown to 1
         GameControllerScript.Instance.player.walkSpeed = PlayerSpeed;
         GameControllerScript.Instance.player.runSpeed = PlayerSpeed;
-        zs.Agent.speed = BossSpeed; // Set Null speed to BossSpeed (20)
-        zs.Agent.isStopped = false; // Unstop Null agent
-        zs.Target = GameControllerScript.Instance.player.transform; // Set Null target to Player
+        if (zs.isActiveAndEnabled)
+        {
+            zs.Agent.speed = BossSpeed; // Set Null speed to BossSpeed (20)
+            zs.Agent.isStopped = false; // Unstop Null agent
+            zs.Target = GameControllerScript.Instance.player.transform; // Set Null target to Player
+        }
         if (VertexShake) // If VertexShake bool enabled, start Vertex Shaking (wall shake)
         {
             Singleton<VertexGlitchManager>.Instance.BossStartShake(); // Start null angry vertex shake
             Singleton<VertexGlitchManager>.Instance.mustGlitch = true; // Make walls to shake
+        }
+        if (ForceMethhouseBossOst)
+        {
+            midiTempo = 1;
+            Singleton<MusicManagerMaes>.Instance.QueueMidi(BossMidiLoopMethhouse, true,true);
+            Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
+            realBossStarted = true; 
+            musicAudio.ClearQueue(true);
+            ShowCustomThings();
+            return;
         }
         realBossStarted = true; // Real Boss Started
         musicAudio.ClearQueue(true); // Stop Intro/Hit music
@@ -403,14 +463,13 @@ public class ZerullClassic : MonoBehaviour
             if (healthSlider != null)
                 healthSlider.gameObject.SetActive(true);
         }
+        HealthbarAnimAppear.Play();
         if (spawnBlockagesDuringTheBossfight)
             blockages.SetActive(true);
         for (int a = 0; a < tweenOutitems.Length; ++a)
         {
             tweenOutitems[a].transform.DOMoveX(-3600, 5f);
         }
-        float ratioy = (float)Screen.width / 360f;
-        tweenitemsAlt[0].transform.DOMoveY(ratioy*175, 3f);
     }
     public void OnHit(float tiem, float hp = 1f, bool spawnExtraProjectile = true, bool DontClear = false) // When player hit null by a projectile
     {
@@ -434,14 +493,18 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted && Midi) midiTempo += (!switchToBloxyb ? 0.015f : 0.025f) * (zs.totemready && hp != 1 ? 1 : hp);
         if (GameControllerScript.Instance.LapManag.Meeptimar.isActiveAndEnabled) meepTimerScript.Instance.AddTime(zs.totemready ? 5f : 5f * hp,Color.green);
-        if (spawnExtraProjectile) SpawnProjectile(false, false);
         Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);
         scoreSystemManager.Instance.AddScore(zs.totemready && hp != 0 && hp != 1 ? 275 : 275*(int)hp);
         debug = true; // Enable debug bool, to make null not able to kill player
         health -= (zs.totemready || !realBossStarted) && hp != 0 && hp != 1 ? 1 : hp; // Decreases null health
         gc.modeState = "in bossfight - " + health +"/"+ maxHealth+"hp";
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.5f * (zs.totemready && hp != 0 && hp != 1 ? 1 : hp)*LearningGameManager.Instance.angerMult, 0f,false, "mucho");
-        if (realBossStarted && health > 1) zs.ThrowProjectileFromBoss(!zs.totemready ? 3*((int)hp) : 5*(int)hp, !zs.totemready ? 0.5f/hp : 0.25f/hp);
+        Singleton<MusicManagerMaes>.Instance.HangMidi(true,true);
+        if (realBossStarted && health > 1)
+        {
+            zs.ThrowProjectileFromBoss(!zs.totemready ? 3*((int)hp) : 5*(int)hp, !zs.totemready ? 0.5f/hp : 0.25f/hp);
+            if (spawnExtraProjectile) SpawnProjectile(false, false);
+        }
         if (health == 1)
         {
             oneHPfailsave = false;
@@ -456,7 +519,6 @@ public class ZerullClassic : MonoBehaviour
                 SpawnProjectile(false, false);
             }
         }
-        Singleton<MusicManagerMaes>.Instance.HangMidi(true,true);
             
         if (health <= 0) // If health is zero or less, game will load results after zerull/chair used totem
         {
@@ -501,6 +563,7 @@ public class ZerullClassic : MonoBehaviour
     
     private void BossEnd()
     {
+        HealthbarAnimDissapear.Play();
         Sych.SetGameWindowTitle("found dead in 2763 thing");
         gc.modeState = "you did it";
         
@@ -535,9 +598,6 @@ public class ZerullClassic : MonoBehaviour
         RemoveItems();
         GameControllerScript.Instance.player.DefaultWalkSpeed += PlayerSpeed-GameControllerScript.Instance.player.DefaultWalkSpeed;
         GameControllerScript.Instance.player.DefaultRunSpeed += PlayerSpeed - GameControllerScript.Instance.player.DefaultRunSpeed;
-        float ratioy = (float)Screen.width / 360f;
-        tweenitemsAlt[0].transform.DOMoveY(ratioy*425, 3f);
-
     }
     public void ReviveHim()
     {
@@ -546,7 +606,7 @@ public class ZerullClassic : MonoBehaviour
     public void AfterHit()
     {
         debug = false;
-        if (health != 1)Singleton<MusicManagerMaes>.Instance.HangMidi(false);
+        if (health != 1) Singleton<MusicManagerMaes>.Instance.HangMidi(false);
         else 
         {
             //Singleton<MusicManagerMaes>.Instance.StopMidi();
@@ -600,27 +660,34 @@ public class ZerullClassic : MonoBehaviour
     }
     public void jusUpdatebr()
     {
+        Vector3 DropPosition = GameControllerScript.Instance.player.dropItemPos.position;
+        DropPosition.y = 4;
+        Vector3 iguess = new Vector3(DropPosition.x - 1.5f, DropPosition.y, DropPosition.z - 1.5f);
+        Vector3 iguess2 = new Vector3(DropPosition.x - 1.5f, DropPosition.y, DropPosition.z + 1.5f);
         if (gc.notebooks == 1)
         {
             Sych.SetGameWindowTitle("Locked in his zone");
             gc.Gatesrea.ForEach(g => g.Down());
         }
-        if (gc.notebooks == 2)
+        if (gc.notebooks == 2)  Sych.SetGameWindowTitle("Sych.MessageFromHim(true) >= Welcome to your personal hell, i guess");
+        if (gc.exitsReached < 1) 
         {
-            Sych.SetGameWindowTitle("Sych.MessageFromHim(true) >= Welcome to your personal hell, i guess");
+            if (gc.notebooks == 3 || gc.notebooks == 5 || gc.notebooks == 8 || gc.notebooks == 11 || gc.notebooks == 12 || gc.notebooks == 13 || gc.notebooks == 14) ItemManager.Instance.CreateDroppedItem(2,DropPosition,true,true);
+            ItemManager.Instance.CreateDroppedItem(5,DropPosition);
         }
-        if (gc.exitsReached == 3)
+        if (gc.notebooks == gc.maxNotebooks && gc.exitsReached < 6) 
         {
-            replaceALLSAKES = true;
+            ItemManager.Instance.CreateDroppedItem(2,DropPosition,true,true);
+            ItemManager.Instance.CreateDroppedItem(2,DropPosition,true,true);
+            ItemManager.Instance.CreateDroppedItem(5,iguess);
+            ItemManager.Instance.CreateDroppedItem(5,DropPosition);
+            ItemManager.Instance.CreateDroppedItem(5,iguess2);
         }
+        if (gc.exitsReached == 3) replaceALLSAKES = true;
         if (gc.exitsReached == 5)
         {
             Sych.SetGameWindowTitle("You won............................. maybe?");
             replaceALLSAKES = false;
-            for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
-            {
-                
-            }
             zer.SetActive(false);
         }
     }

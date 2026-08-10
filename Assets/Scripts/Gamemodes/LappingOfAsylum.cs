@@ -46,7 +46,12 @@ public class LappingOfAsylumController : MonoBehaviour
         string mode = PlayerPrefs.GetString("CurrentMode");
         if (mode != "LappingOfAsylum") return;
         if (randomPrelapQueue && mode == "LappingOfAsylum") PlayPreLaps();
-        if (vanishScore) scoreDecreaseTimer -= Time.deltaTime;
+        if (vanishScore) 
+        {
+            scoreDecreaseTimer -= Time.deltaTime;
+            if (GoodMode && !LapSound.audioDevice.isPlaying) gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 1f, 0f, true, false);
+        }
+        
         if (scoreDecreaseTimer < 0f)
 		{
             scoreSystemManager.Instance.AddScore(-10*CurrentLap);
@@ -326,13 +331,13 @@ public class LappingOfAsylumController : MonoBehaviour
     {
         zawuardoStartTransistionStuff();
         // some lap 99 stuff dont mind it being there smth
-        if (!NinetyNineToggle)yield return new WaitForSeconds(zawarudo.audClip.length);
+        if (!NinetyNineToggle && !GoodMode)yield return new WaitForSeconds(zawarudo.audClip.length);
         else if (GoodMode) yield return new WaitForSeconds(0.005f);
         //gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
         yield return new WaitForSeconds(0.1f);
         zawuardoMiddleTransistionStuff();
         //well yeah again
-        if (!NinetyNineToggle) yield return new WaitForSeconds(zawarudo.audClip.length / 2);
+        if (!NinetyNineToggle && !GoodMode) yield return new WaitForSeconds(zawarudo.audClip.length / 2);
         else if (GoodMode) yield return new WaitForSeconds(0.005f);
         else yield return new WaitForSeconds(9f);
         zawuardoEndTransistionStuff();
@@ -427,6 +432,8 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             if (GoodMode)
             {
+                LappingObjectsEnabler.Add(gc.fmc.butch);
+                LappingObjectsEnabler.Add(gc.zerull.zer);
                 ZerullClassic.Instance.yourflashbang.Rebind();
                 ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
                 gc.lbams.MainSource2.PlaySingleClip(gc.lbams.TeleporterTp);
@@ -456,7 +463,7 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.player.titlecard = false;
         gc.playerCollider.enabled = true;
         gc.player.DisableCamMove = false;
-        gc.npcCloneList.ForEach(o => o.SetActive(true));
+        LappingObjectsEnabler.ForEach(l => l.SetActive(true));
         AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         
         bool shrinky = PlayerPrefsExtension.GetBool("shrink");

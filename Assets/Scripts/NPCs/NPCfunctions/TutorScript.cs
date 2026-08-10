@@ -35,7 +35,7 @@ public class TutorScript : MonoBehaviour
             tutorSource.QueueAudio(aud_Hi);
         }
 
-        if (Countdown && !triggeredCounting && gottothepositio)
+        /*if (Countdown && !triggeredCounting && gottothepositio)
         {
             float distance = Vector3.Distance(transform.position, playerTransform.position);
             if (distance > spoopDistance)
@@ -43,7 +43,13 @@ public class TutorScript : MonoBehaviour
                 triggeredCounting = true;
                 StartCoroutine(PlayCountdown());
             }
-        }
+        }*/
+    }
+    public void PlayCountdownheh() => StartCoroutine(PlayCountdown());
+    public void byebye() => gameObject.SetActive(false);
+    public Vector3 GetCurPosition()
+    {
+        return transform.position;
     }
     private IEnumerator sillyRiseLols()
     {
@@ -63,32 +69,26 @@ public class TutorScript : MonoBehaviour
 
     private IEnumerator PlayCountdown()
     {
-        while (tutorAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f && !tutorAnimation.IsInTransition(0))
-        {
-            yield return null;
-        }
-        tutorAnimation.enabled = false;
-
         foreach (AudioObjectyeah clip in countdownClips)
         {
-            yield return StartCoroutine(DelayWithSpriteChange());
+            //yield return StartCoroutine(DelayWithSpriteChange());
 
-            spriteRenderer.sprite = talkingSprite;
+            tutorSource.ClearQueue(true);
             tutorSource.QueueAudio(clip);
             yield return new WaitForSeconds(clip.audClip.length);
         }
 
         if (ReadyOrNot != null)
         {
-            yield return StartCoroutine(DelayWithSpriteChange());
+            //yield return StartCoroutine(DelayWithSpriteChange());
 
-            spriteRenderer.sprite = talkingSprite;
+            tutorSource.ClearQueue(true);
             tutorSource.QueueAudio(ReadyOrNot);
             yield return new WaitForSeconds(ReadyOrNot.audClip.length);
         }
 
-        GameControllerScript.Instance.ActivateSpoopMode();
-        gameObject.SetActive(false);
+        GameControllerScript.Instance.StorySpoop();
+        byebye();
     }
 
     private IEnumerator DelayWithSpriteChange()
@@ -99,7 +99,7 @@ public class TutorScript : MonoBehaviour
         yield return new WaitForSeconds(delayClips);
     }
     [Header("Lolbit Settings")]
-    [SerializeField] private bool IsLolbit;
+    public bool IsLolbit;
     [SerializeField] private Animator bitRiseAnim;
     public AudioObjectyeah concret;
     [SerializeField] private float riseIntroDelay = 3f;

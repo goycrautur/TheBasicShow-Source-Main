@@ -158,6 +158,7 @@ public class booksInteract : Interactable
         {
             if (gc.mode == "story") lgm.Tutor.tutorSource.ClearQueue(true);
             gc.ActivateSpoopMode();
+            if (lgm.Tutor.IsLolbit) lgm.Tutor.byebye();
         }
         if (gc.notebooks == gc.maxNotebooks && gc.mode != "endless" && gc.mode != "LappingOfAsylum") TriggerFinalSequence();
         if (gc.spoopMode)

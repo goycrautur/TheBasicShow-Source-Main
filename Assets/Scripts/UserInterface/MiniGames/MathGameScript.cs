@@ -29,7 +29,7 @@ public class MathGameScript : MonoBehaviour
                 (int)UnityEngine.Random.Range(0, 9999f)
 		    };
             string baseQuestion = sign == 0 ? $"{num[0]} + ({num[1]} × {num[2]} = ?" : $"({num[0]} ÷ {num[1]}) + {num[2]} =?";
-            questionText.text = $"Solve Math Q{problem}: \n" + ApplyGlitchEffect(baseQuestion);
+            questionText.text = $"Solve Math Q{problem}: \n" + ApplyGlitchEffect(baseQuestion) +  "\n (its impossibble lmfao)";
             questionText2.text = "\n" + ApplyGlitchEffect(baseQuestion);
             questionText3.text = "\n" + ApplyGlitchEffect(baseQuestion);
         }
@@ -67,11 +67,11 @@ public class MathGameScript : MonoBehaviour
 
         baldiAudio.SetIgnoreListenerPause(true);
         lg.learnMusic.SetIgnoreListenerPause(true);
-        if (!gc.spoopMode && gc.mode != "zerullclassic") lbams.SchoolMusic.SetIgnoreListenerPause(true);
+        if (!gc.spoopMode && !gc.StoryPreSpoop && gc.mode != "zerullclassic") lbams.SchoolMusic.SetIgnoreListenerPause(true);
         for (int i = 0; i < questionBlockerSlots.Length; ++i) questionBlockerSlots[i].SetActive(false);
         for (int i = 0; i < problemCapAlt; ++i) questionBlockerSlots[i].SetActive(true);
 
-        endDelay = gc.spoopMode ? Delay : DelayPreSpoop;
+        endDelay =  (gc.StoryPreSpoop && gc.notebooks == 2) || gc.spoopMode ? Delay : DelayPreSpoop;
         lg.ActivateLearningGame();
         baldiFeed.enabled = false;
         Baldtalk.SetActive(false);
@@ -81,8 +81,8 @@ public class MathGameScript : MonoBehaviour
 
         if (gc.notebooks == 1 && gc.mode != "zerullclassic") baldiAudio.QueueAudio(bal_intro);
         //QueueAudio(bal_howto);
-        if (gc.mode != "zerullclassic" && !gc.spoopMode) baldiAudio.QueueAudio(bal_problems[0]);
-        if (gc.spoopMode && gc.mode != "zerullclassic")
+        if (gc.mode != "zerullclassic" && !gc.spoopMode && !gc.StoryPreSpoop) baldiAudio.QueueAudio(bal_problems[0]);
+        if (!gc.spoopMode && !gc.StoryPreSpoop && gc.mode != "zerullclassic")
         {
             BlackCoverUp.SetActive(true);
             baldiFeedTransform.gameObject.SetActive(false);
@@ -163,7 +163,7 @@ public class MathGameScript : MonoBehaviour
         problem++;
         playerAnswer.ActivateInputField();
         questionInProgress = true;
-        if (gc.spoopMode)
+        if (!gc.spoopMode && !gc.StoryPreSpoop)
         {
             foreach (subtitlesScriptReal Subtit in FindObjectsOfType<subtitlesScriptReal>())
             Subtit.hidesub = true;
@@ -172,8 +172,8 @@ public class MathGameScript : MonoBehaviour
 
     private void GenerateMathProblem()
     {
-        if (!gc.spoopMode || gc.mode != "zerullclassic") StartCoroutine(PlayClassicMusic());
-        if (gc.notebooks == 2 && problem == problemcap && !gc.spoopMode) baldiAudio.QueueAudio(scaryproblem);
+        if ((!gc.spoopMode && !gc.StoryPreSpoop) || gc.mode != "zerullclassic") StartCoroutine(PlayClassicMusic());
+        if (gc.notebooks == 2 && problem == problemcap && !gc.spoopMode && !gc.StoryPreSpoop) baldiAudio.QueueAudio(scaryproblem);
 
         if ((gc.mode == "endless" && gc.notebooks == 2 && problem == problemcap && !impossibleQuestionShown) || (gc.mode == "story" && gc.notebooks > 1 && problem == problemcap))
         {
@@ -505,8 +505,9 @@ public class MathGameScript : MonoBehaviour
         results[problem - 1].sprite = correct;
         baldiAudio.ClearQueue(true);
         int praiseIndex = UnityEngine.Random.Range(0, bal_praises.Length);
-        if (!gc.spoopMode) baldiAudio.QueueAudio(bal_praises[praiseIndex]);
-        if (gc.notebooks <= 2 && !gc.spoopMode && problem != problemcap) baldiAudio.QueueAudio(bal_problems[problem - 1]);
+        if (!gc.spoopMode && !gc.StoryPreSpoop) baldiAudio.QueueAudio(bal_praises[praiseIndex]);
+        if (gc.notebooks == 1 && !gc.spoopMode && !gc.StoryPreSpoop && problem != problemcap) baldiAudio.QueueAudio(bal_problems[problem - 1]);
+        if (gc.notebooks == 2 && !gc.spoopMode && !gc.StoryPreSpoop && problem != problemcap-1) baldiAudio.QueueAudio(bal_problems[problem - 1]);
         NewProblem();
         scoreSystemManager.Instance.AddScore(75);
     }
@@ -517,12 +518,13 @@ public class MathGameScript : MonoBehaviour
         problemsWrong++;
         results[problem - 1].sprite = incorrect;
 
-        if (!gc.spoopMode)
+        if (!gc.spoopMode && !gc.StoryPreSpoop && gc.mode == "story")
         {
             //baldiFeedI.enabled = false;
             //baldiFeed.enabled = true;
             //baldiFeed.SetTrigger("angry");
             gc.ActivateSpoopMode(true);
+            StartCoroutine(gc.FadeAudio(gc.Math.learnMusic,4,true));
         }
         scoreSystemManager.Instance.AddScore(275);
         HandleBaldiAnger();
@@ -548,12 +550,13 @@ public class MathGameScript : MonoBehaviour
     #region Game End Handling
     private void HandleProblemCompletion()
     {
-        if (!gc.spoopMode) questionText.text = "WOW! YOU EXIST!";
+        if (!gc.spoopMode && !gc.StoryPreSpoop && gc.mode == "story") questionText.text = "WOW! YOU EXIST!";
         else  ProvideHintOrFeedback();
     }
     
     private void ProvideHintOrFeedback(int allanswerWrongInt = 0)
     {
+        string CurrentCharName = PlayerPrefs.GetString("CurrentCharacter", "");
         if (gc.mode == "endless" && problemsWrong <= 0) questionText.text = endlessHintText[UnityEngine.Random.Range(0, endlessHintText.Length)];
         if (problemsWrong >= problemcap)
         {
@@ -569,8 +572,24 @@ public class MathGameScript : MonoBehaviour
                 int index = UnityEngine.Random.Range(0, zerullQuotes.Length);
                 if (gc.notebooks > 2 && allanswerWrongInt != 1) questionText.text = zerullQuotes[index];
                 if (gc.notebooks > 2 && allanswerWrongInt == 1) questionText.text = "bro.." + '\n' + "youre so fucking cooked LMFAO";
-                if (gc.notebooks == 2) questionText.text = "Jeezpers, you really want to suffer huh?"+ '\n'+ "fine by me i suppose";
-                if (gc.notebooks == 1) questionText.text = "Huh, why did i got teleported into this dimension?"+ '\n'+ "oh its you again, the fuck do you want";
+                
+                if (gc.notebooks == 1) 
+                {
+                    if (CurrentCharName == "methhouseplayer_Akakurobelovedchildmaybe") questionText.text = "allright,allright who the fuck are you"+ '\n'+ "cuz you sure aint one from this universe wanting to challenge me";
+                    else questionText.text = "Huh, why did i got teleported into this dimension?"+ '\n'+ "oh its you again, the fuck do you want";
+                }
+                if (gc.notebooks == 2) 
+                {
+                    if (CurrentCharName == "methhouseplayer_Akakurobelovedchildmaybe")
+                    {
+                        questionText.text = "yeah felt like im being too unfair soo, heres one extra slot and"+ '\n'+ "have some of your items from your universe or some shit";
+                        Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(GameControllerScript.Instance.SlotsAmmount+1);
+                        ItemManager.Instance.CollectItem(50);
+                        ItemManager.Instance.CollectItem(50);
+                        ItemManager.Instance.CollectItem(50);
+                    }
+                    else questionText.text = "Jeezpers, you really want to suffer huh?"+ '\n'+ "fine by me i suppose";
+                }
             }
             if (chairr) questionText.text = "chair";
             questionText2.text = questionText3.text = string.Empty;
@@ -583,6 +602,7 @@ public class MathGameScript : MonoBehaviour
         if (gc.mode == "story" && problemsWrong >= problemcap)
         {
             gc.failedNotebooks++;
+            if (gc.notebooks == 2 && gc.failedNotebooks == 2) LearningGameManager.Instance.Tutor.byebye();
             if (gc.failedNotebooks < gc.maxNotebooks && gc.PadSEToggle)
             {
                 questionText.text = "Keep Doing TS shit my guy, " + gc.failedNotebooks + "/" + gc.maxNotebooks + " left";
@@ -603,7 +623,6 @@ public class MathGameScript : MonoBehaviour
                 }
                 else if (padChallengeCode)
                 {
-                    string CurrentCharName = PlayerPrefs.GetString("CurrentCharacter", "");
                     if (CurrentCharName == "ClassicPlayer") 
                     {
                         gc.ExclusiveRoute = "ClassicPlayerSecretEndLOE";
@@ -677,7 +696,7 @@ public class MathGameScript : MonoBehaviour
             yield return new WaitWhile(() => lg.learnMusic.audioDevice.isPlaying);
         }
 
-        if (!gc.spoopMode)
+        if (!gc.spoopMode && !gc.StoryPreSpoop)
         {
             lg.learnMusic.ClearQueue(true);
             lg.learnMusic.SetLoop(true);

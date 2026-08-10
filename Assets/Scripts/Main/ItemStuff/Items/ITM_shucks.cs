@@ -4,7 +4,7 @@ using TMPro;
 
 public class ITM_shucks : BaseItem
 {
-    [SerializeField] private float duration = 60f;
+    private float duration = 60f;
     [SerializeField] private AudioObjectyeah shucy;
     [SerializeField] private Sprite iwatchasyoubleed;
     [SerializeField] private AudioManagerLiveReaction[] audioManagersToSDIYBT;

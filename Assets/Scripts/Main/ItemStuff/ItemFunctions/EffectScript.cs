@@ -82,12 +82,12 @@ public class EffectScript : MonoBehaviour
                 Destroy(other.gameObject, 0f);
             }
         }
-        if (other.transform.name == "Gotta Sweep" || other.transform.name == "1945 tom")
+        /*if (other.transform.name == "Gotta Sweep" || other.transform.name == "1945 tom")
         {
             inProjectile = true;
             otherVelocity = 0.1f * (!npcreal.dosentUseNavmesh? agent.speed : 1) * transform.forward + (!npcreal.dosentUseNavmesh ? other.GetComponent<NavMeshAgent>().velocity : other.GetComponent<Rigidbody>().velocity);
             failSave = 1;
-        }
+        }*/
     }
     #endregion
     [SerializeField] private NPC npcreal;

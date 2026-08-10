@@ -47,7 +47,6 @@ public class FamishedScript : NPC
     }
     public override void OnUpdate()
     {
-        if (agent.remainingDistance <= 0.01f) Wander();
         if (antiHearing)AntiHearingDuratio -= Time.deltaTime;
         if (AntiHearingDuratio < 0f) antiHearing = false;
         MOOOVEYOUBITCH();
@@ -101,7 +100,7 @@ public class FamishedScript : NPC
     #endregion
     private float DamageValueStuff(float val)
     {
-        if (val < 25f) return 25f;
+        if (val < 25f) return 25f/ gc.player.PlayerDmgResistance;
         else return val;
     }
     private void OnTriggerStay(Collider play)
@@ -110,7 +109,7 @@ public class FamishedScript : NPC
         {
             if (base.IsHitboxValid && !gc.fmc.dontKillBru)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageValueStuff(5 * agent.speed/20 / gc.player.PlayerDmgResistance), 0.5f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageValueStuff(5 * agent.speed/20), 0.5f, false, true, false);
                 gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 16f * agent.speed/10, 1f);
                 base.Stun(3f);
 				gc.player.killedbyfamished = true;

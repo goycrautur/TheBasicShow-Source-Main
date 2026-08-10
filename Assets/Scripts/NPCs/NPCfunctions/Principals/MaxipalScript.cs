@@ -70,7 +70,7 @@ public class MaxcipalScript : NPC
     {
         timeSeenRuleBreak += Time.deltaTime;
 
-        float ruleBreakThreshold = playerScript.guiltType == "escape" ? 0f : playerScript.guiltType == "faculty" ? 0f : playerScript.guiltType == "running" ? 0.25f : 0.35f;
+        float ruleBreakThreshold = playerScript.guiltType == "escape" ? 0f : playerScript.guiltType == "faculty" ? 0f : playerScript.guiltType == "running" ? 0.5f : 0.35f;
         audioQueue.ClearQueue(true);
         if (timeSeenRuleBreak >= ruleBreakThreshold && !angry)
         {

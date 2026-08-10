@@ -30,7 +30,7 @@ public class LearningGameManager : MonoBehaviour
         KF.UnlockMouse();
         if (Tutor.isActiveAndEnabled)Tutor.tutorSource.ClearQueue(true);
 
-        if (!gc.spoopMode)
+        if (!gc.StoryPreSpoop)
         {
             gc.lbams.SchoolMusic.ClearQueue(true);
             learnMusic.ClearQueue(true);
@@ -61,7 +61,7 @@ public class LearningGameManager : MonoBehaviour
     public void DeactivateLearningGame(GameObject subject,int allAnswerWrong = 0)
     {
         lowBudgetAudioManagementShit lbams = lowBudgetAudioManagementShit.Instance;
-        if (!gc.spoopMode && gc.mode == "story") 
+        if (!gc.spoopMode && !gc.StoryPreSpoop && gc.mode == "story") 
         {
             lbams.SchoolMusic.QueueAudio(lbams.schoolClip);
             
@@ -81,13 +81,18 @@ public class LearningGameManager : MonoBehaviour
 
         if (gc.player.stamina < 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Set, 100f);
         if (gc.player.stamina > 100f) gc.player.SetStamina(PlayerScript.StaminaChangeMode.Add, 50f);
-        if (gc.notebooks == 1 && !gc.spoopMode && gc.mode == "story")
+        if (gc.notebooks == 1 && !gc.spoopMode && !gc.StoryPreSpoop && gc.mode == "story")
         {
             Tutor.tutorSource.ClearQueue(true);
             quarter.SetActive(true);
-            Tutor.tutorSource.PlaySingleClip(Tutor.aud_Prize);
+            Tutor.tutorSource.QueueAudio(Tutor.aud_Prize);
         }
-        if (gc.notebooks == 2) gc.ActivateSpoopMode();
+        if (gc.notebooks == 2) 
+        {
+            if (gc.mode == "story") Tutor.tutorSource.ClearQueue(true);
+            gc.ActivateSpoopMode();
+            if (Tutor.IsLolbit) Tutor.byebye();
+        }
         Singleton<OtherMainStuffManager>.Instance.AngerShit(1.1f*angerMult, 0f,false, "all");
         Singleton<OtherMainStuffManager>.Instance.AngerShit(0.1f*angerMult, 0f,false, "famished");
         if (gc.notebooks > 2 && gc.mode == "zerullclassic") Singleton<OtherMainStuffManager>.Instance.AngerShit(0.9f*angerMult, 0f,false, "zerull");

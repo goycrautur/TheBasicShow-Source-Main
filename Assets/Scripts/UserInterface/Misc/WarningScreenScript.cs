@@ -31,7 +31,8 @@ public class WarningScreenScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.5f);
         Cursor.UnlockCursor();
-        LoadingManagerThing.Instance.LoadSceneAsyncUHHH(BootUp);
+        AudioListener.pause = true;
+        LoadingManagerThing.Instance.LoadSceneAsyncUHHH(BootUp,1f,true,"The Basic Show - le menus",true);
     }
 
     private void Update()
