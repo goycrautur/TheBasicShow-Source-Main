@@ -32,15 +32,15 @@ public class PickupScript : Interactable
     }
     public void ItemRespawning()
     {
-        if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems && ID != 26 && !DroppedItem) 
+        /*if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems && ID != 26 && !DroppedItem) 
         {
             itsPresentTime();
             return;
-        }
-        spritContro.targetRenderer.sprite = OriginalSprite;
+        }*/
         HideShitsLogic(true,true);
-        ID = originalId;
+        spritContro.targetRenderer.sprite = OriginalSprite;
         
+        ID = originalId;
     }
     public void rollItem()
     {

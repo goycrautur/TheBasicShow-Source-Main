@@ -515,7 +515,6 @@ public class ZerullClassic : MonoBehaviour
             if (!DontClear)
             {
                 RemoveProjectiles();
-                RemoveItems();
                 SpawnProjectile(false, false);
             }
         }
@@ -533,7 +532,6 @@ public class ZerullClassic : MonoBehaviour
                 if (!DontClear)
                 {
                     RemoveProjectiles();
-                    RemoveItems();
                     SpawnProjectile(false, false);
                 }
                 return;
@@ -622,7 +620,6 @@ public class ZerullClassic : MonoBehaviour
         if (destroyOthers)
         {
             RemoveProjectiles();
-            RemoveItems();
             if (leftOnlyOne)
             {
                 maxObjects = 1;

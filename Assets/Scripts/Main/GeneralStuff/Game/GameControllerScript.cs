@@ -118,12 +118,8 @@ public class GameControllerScript : MonoBehaviour
         CharacterManagement.Instance.noiseiscallingpickupphone();
         foreach (PickupScript pick in FindObjectsOfType<PickupScript>())
         {
-            ItemsToRespawn.Add(pick.transform.gameObject);
-            if (pick.instahide)
-            {
-                pick.transform.gameObject.SetActive(false);
-                pick.mapIconSprite.enabled = false;
-            }
+            ItemsToRespawn.Add(pick.gameObject);
+            if (pick.instahide) pick.HideShitsLogic(false);
         }
         AdditionalGameCustomizer.Instance.ScrambleItems();
         AdditionalGameCustomizer.Instance.InitializeGameTuff();

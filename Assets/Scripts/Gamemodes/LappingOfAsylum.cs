@@ -403,9 +403,9 @@ public class LappingOfAsylumController : MonoBehaviour
         LapPortals.ForEach(lap => lap.SetActive(false));
         LapSound.ClearQueue(true);
         LapSound.SetLoop(true);
+        AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         if (NinetyNineToggle)
         {
-            gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
             gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
             gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
             if (NinetynineIntro != null) LapSound.QueueAudio(NinetynineIntro);
@@ -419,13 +419,13 @@ public class LappingOfAsylumController : MonoBehaviour
                 noteboos[i].MultiCollectTime = 99;
             }
             if (LapFlaninety != null) StartCoroutine(flagmove(LapFlaninety,5f));
-            gc.fmc.butch.SetActive(true);
-            gc.zerull.zer.SetActive(true);
-            gc.wegchal.WEGA.SetActive(true);
+            LappingObjectsEnabler.Add(gc.fmc.butch);
+            LappingObjectsEnabler.Add(gc.zerull.zer);
+            LappingObjectsEnabler.Add(tim);
             gc.player.walkSpeedMultipler += 3f;
             gc.player.runSpeedMultipler += 3f;
             ItemManager.Instance.ClearAllItems();
-            foreach (PickupScript pickmygames in FindObjectsOfType<PickupScript>()) if (pickmygames.DroppedItem) Destroy(pickmygames.transform.parent.gameObject);
+            foreach (PickupScript pickmygames in FindObjectsOfType<PickupScript>()) if (pickmygames.DroppedItem) Destroy(pickmygames.gameObject);
             foreach (BaseItem itemem in FindObjectsOfType<BaseItem>()) itemem.Uses = itemem.Uses * 5;
         }
         else
@@ -464,7 +464,6 @@ public class LappingOfAsylumController : MonoBehaviour
         gc.playerCollider.enabled = true;
         gc.player.DisableCamMove = false;
         LappingObjectsEnabler.ForEach(l => l.SetActive(true));
-        AdditionalGameCustomizer.Instance.donthaveanamelmfao = AdditionalGameCustomizer.Instance.canvascolormain;
         
         bool shrinky = PlayerPrefsExtension.GetBool("shrink");
         if (shrinky) Singleton<OtherMainStuffManager>.Instance.ChangeItemSlot(Singleton<OtherMainStuffManager>.Instance.realMaxSlotsAmmou);
@@ -560,7 +559,6 @@ public class LappingOfAsylumController : MonoBehaviour
             }
             if (CurrentLap == 3)
             {
-                gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
                 gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
                 gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
                 Singleton<TimeOutManagerFUCKYEA>.Instance.TimeDuratiOk = 0;
@@ -604,7 +602,6 @@ public class LappingOfAsylumController : MonoBehaviour
                 LappingObjectsEnabler.Add(ButchClone);
                 gc.player.walkSpeedMultipler += 0.3f;
                 gc.player.runSpeedMultipler += 0.3f;
-                gc.ItemsToRespawn.ForEach(item => item.SetActive(true));
                 gc.ItemsToRespawn.ForEach(item => item.GetComponent<PickupScript>().ItemRespawning());
                 gc.MachinesToRestock.ForEach(machine => machine?.RestockVendingMachine(true));
                 gc.ObjectsToEnable.ForEach(o => o.SetActive(false));
