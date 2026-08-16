@@ -43,6 +43,42 @@ public class bobmprojScript : MonoBehaviour
             boom(true);
             return;
         }
+        if (cork.CompareTag("DoorTrigger1"))
+        {
+            DoorScript dors = cork.GetComponent<DoorScriptExtender>().DoorScripts;
+            if (dors != null);
+            {
+                if (!dors.destroyed && !dors.DestroyImmunity && dors.MainDoorBarrier.enabled)
+                {
+                    dors.DestroyDoor();
+                    boom(true);
+                    return;
+                }
+            }
+        }
+        if (cork.CompareTag("DoorTrigger2"))
+        {
+            DoorScript dors = cork.GetComponent<DoorScriptExtender>().DoorScripts;
+            if (dors != null);
+            {
+                if (!dors.destroyed && !dors.DestroyImmunity && !dors.MainDoorBarrier.enabled)
+                {
+                    dors.DestroyDoor();
+                    boom(true);
+                    return;
+                }
+            }
+        }
+        if (cork.CompareTag("SwingingDoor"))
+        {
+            SwingingDoorScript swindors = cork.GetComponent<SwingingDoorScript>();
+            if (swindors != null && !swindors.DestroyImmunity && !swindors.destroyed);
+            {
+                swindors.PleaseDie();
+                boom(true);
+                return;
+            }
+        }
         if (cork.CompareTag("Player") & !GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard && IsEnemy)
         {
             GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Remove, DamageToNpc / GameControllerScript.Instance.player.PlayerDmgResistance, 0.75f, false, true, false);

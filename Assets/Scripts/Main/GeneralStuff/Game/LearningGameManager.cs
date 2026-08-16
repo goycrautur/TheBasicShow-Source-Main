@@ -84,7 +84,7 @@ public class LearningGameManager : MonoBehaviour
         if (gc.notebooks == 1 && !gc.spoopMode && !gc.StoryPreSpoop && gc.mode == "story")
         {
             Tutor.tutorSource.ClearQueue(true);
-            quarter.SetActive(true);
+            quarter.HideShitsLogic(true,true);
             Tutor.tutorSource.QueueAudio(Tutor.aud_Prize);
         }
         if (gc.notebooks == 2) 
@@ -206,7 +206,7 @@ public class LearningGameManager : MonoBehaviour
     public float tempAngerMult,ScoreDifMult;
     public AudioManagerLiveReaction learnMusic;
     public AudioObjectyeah LearnAudio,aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout;
-    public GameObject quarter;
+    public PickupScript quarter;
     public UltEvents.UltEvent TbsFinaleEventNormal1,TbsFinaleEventNormal2,TbsSecretFinaleEvent1,TbsSecretFinaleEvent2,ClassicPlayerAAWSecretEvent1,ClassicPlayerAAWSecretEvent2;
 
 

@@ -7,11 +7,11 @@ public class ITM_jukijuice : BaseItem
     {
         base.Awake();
         BaseItem ite = this;
+        ite.BigSprite = JukiJuiceStatsistic[ite.Uses-1].JukiJuiceTexture;
         ite.SmallSprite = JukiJuiceStatsistic[ite.Uses-1].JukiJuiceTexture;
         ite.ItmInfoText = JukiJuiceStatsistic[ite.Uses-1].description;
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, JukiJuiceStatsistic[ite.Uses-1].Stamina);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, JukiJuiceStatsistic[ite.Uses-1].helth, 0f, true,false);
-        Debug.Log($"set to juki juic stats thing num {ite.Uses-1}");
     }
     public override bool OnUse()
     {
@@ -20,7 +20,7 @@ public class ITM_jukijuice : BaseItem
 		{
 			if (GameControllerScript.Instance.player.door.lockTime <= 0f)GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
 		}
-        BaseItem ite = this;
+        BaseItem ite = ItemManager.Instance.GetSelectedItemObject();
         if (ite.Uses == 1)
         {
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, JukiJuiceStatsistic[0].Stamina);
@@ -31,15 +31,17 @@ public class ITM_jukijuice : BaseItem
     public override void AfterUse()
     {
         BaseItem ite = ItemManager.Instance.GetSelectedItemObject();
+        ite.BigSprite = JukiJuiceStatsistic[ite.Uses-1].JukiJuiceTexture;
         ite.SmallSprite = JukiJuiceStatsistic[ite.Uses-1].JukiJuiceTexture;
         ite.ItmInfoText = JukiJuiceStatsistic[ite.Uses-1].description;
         GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, JukiJuiceStatsistic[ite.Uses-1].Stamina);
         GameControllerScript.Instance.player.SetHP(PlayerScript.HealthChangeMode.Add, JukiJuiceStatsistic[ite.Uses-1].helth, 0f, true,false);
+        Debug.Log($"set to juki juic stats thing num {ite.Uses-1}");
         ItemManager.Instance.AnimateSwap(ItemManager.Instance.ItemSelection,ite.SmallSprite);
     }
 
     [Serializable]
-    public struct JukiJuiceThing 
+    private struct JukiJuiceThing 
     {
         public int Stamina;
         public float helth;

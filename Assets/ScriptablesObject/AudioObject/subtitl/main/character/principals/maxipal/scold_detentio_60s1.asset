@@ -182,7 +182,7 @@ MonoBehaviour:
     _GradientMode: 0
     _RainbowMode: 0
   - enabled: 1
-    headText: Maxcipal_scold_detention_tier4_2
+    headText: Maxcipal_scold_detention_tier4_3
     isit3d: 1
     IgnoreTimescale: 0
     twoDeePosition: {x: 0, y: 0, z: 0}

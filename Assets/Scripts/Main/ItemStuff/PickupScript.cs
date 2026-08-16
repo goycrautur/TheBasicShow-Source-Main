@@ -10,6 +10,8 @@ public class PickupScript : Interactable
         if (killafterpickup) DroppedItem = true;
         cachedSprites = new Dictionary<int, Sprite>();
         spritContro = GetComponentInChildren<SpriteController>();
+        OriginalSprite = spritContro.targetRenderer.sprite;
+        originalId = ID;
         if (PresentMode)
         {
             spritContro.targetRenderer.sprite = GameControllerScript.Instance.Present;
@@ -25,9 +27,7 @@ public class PickupScript : Interactable
             location.position = wanderer.SetNewTargetForAgent(null, "present");
             transform.position = location.position + Vector3.up * 4f;
         }
-        
-        OriginalSprite = spritContro.targetRenderer.sprite;
-        originalId = ID;
+        if (instahide) HideShitsLogic(false);
         if (AdditionalGameCustomizer.Instance.ActuallyRandomizeItems && !AdditionalGameCustomizer.Instance.RandomizeItems && ID != 26 && !DroppedItem) itsPresentTime();
     }
     public void ItemRespawning()
@@ -109,6 +109,7 @@ public class PickupScript : Interactable
             else HideShitsLogic(false,false,true);
 
             itmManag.CollectItem(ID, GetHeldInstance());
+            if (PickupCallbackEvent != null) PickupCallbackEvent.Invoke();
             PresentMode = false;
             return;
         }
@@ -161,6 +162,7 @@ public class PickupScript : Interactable
     }
     public void ItemSwapLogic()
     {
+        if (SwapCallbackEvent != null) SwapCallbackEvent.Invoke();
         int orgID = ID;
         BaseItem orgItem = GetHeldInstance();
         PresentMode = false;
@@ -303,6 +305,10 @@ public class PickupScript : Interactable
     }
 
     #region Configuration & State
+
+    [Header("Pickup Callbacks")]
+    public UltEvents.UltEvent PickupCallbackEvent;
+    public UltEvents.UltEvent SwapCallbackEvent;
     [Header("Pickup Settings")]
     public int ID;
     [SerializeField] private bool PresentMode, killafterpickup;

@@ -14,7 +14,7 @@ public class lowBudgetAudioManagementShit : MonoBehaviour
     [Header("Audio clip shit")]
     public AudioObjectyeah drivinginmy;
     public AudioObjectyeah quarterDrop,evilLeafTP,TeleporterTp,totem,deltaruneExplud,punchSound,agonyScream,gasterSfx,deadbel,hangAudio,zerullGameover; //part 1
-    public AudioObjectyeah ItemCollect,MoneyCollect,gambling,loudIncorrectBuzz;
+    public AudioObjectyeah ItemCollect,MoneyCollect,GlobalDoorBreak,gambling,loudIncorrectBuzz;
     public AudioObjectyeah[] HurtSounds,LoseSounds;
     [Header("me when escape music n shit")]
     public AudioObjectyeah SchoolhouseEscape;

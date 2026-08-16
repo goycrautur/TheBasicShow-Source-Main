@@ -25,6 +25,7 @@ public class GameControllerScript : MonoBehaviour
     #region UnityCallbacks
     private void Start()
     {
+        AdditionalGameCustomizer.Instance.InitializeGameTuff();
         lbams = lowBudgetAudioManagementShit.Instance;
         InitializeGameSettings();
         UpdateNotebookCount();
@@ -116,13 +117,8 @@ public class GameControllerScript : MonoBehaviour
         Singleton<OtherMainStuffManager>.Instance.ResizeAltInventory();
         Singleton<OtherMainStuffManager>.Instance.UpdateAltInventory();
         CharacterManagement.Instance.noiseiscallingpickupphone();
-        foreach (PickupScript pick in FindObjectsOfType<PickupScript>())
-        {
-            ItemsToRespawn.Add(pick.gameObject);
-            if (pick.instahide) pick.HideShitsLogic(false);
-        }
+        foreach (PickupScript pick in FindObjectsOfType<PickupScript>()) ItemsToRespawn.Add(pick.gameObject);
         AdditionalGameCustomizer.Instance.ScrambleItems();
-        AdditionalGameCustomizer.Instance.InitializeGameTuff();
         foreach (VendingMachineScript vend in FindObjectsOfType<VendingMachineScript>()) if (vend.isOutOfGoods) MachinesToRestock.Add(vend);
         war = PlayerPrefsExtension.GetBool("warreal");
         warrealest = war;
@@ -163,7 +159,7 @@ public class GameControllerScript : MonoBehaviour
             if (StateUpdateType == "chees") modeState = notebooks + "/" + maxNotebooks + " Cheese Blocks | " + "Playing As: " + CharacterString;
             if (StateUpdateType == "exit")
             {
-                if (mode == "LappingOfAsylum" && LapManag.CurrentLap == 0) modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
+                
                 if (mode == "story") 
                 {
                     if (FinaleSecret && ExclusiveRoute != "")
@@ -173,6 +169,7 @@ public class GameControllerScript : MonoBehaviour
                     }
                     else modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
                 }
+                else if (mode == "LappingOfAsylum" && LapManag.CurrentLap == 0) modeState = exitsReached + "/" + (maxExits-1) + " Exits | " + "Playing As: " + CharacterString;
                 else modeState = exitsReached + "/" + maxExits + " Exits | " + "Playing As: " + CharacterString;
             }
             if (mode == "endless")

@@ -126,9 +126,31 @@ public class zerullscript : NPC
         if (!stopMoving) Invoke(nameof(Move), Wait);
     }
     #endregion
-    private void OnTriggerStay(Collider play)
+    private void OnTriggerStay(Collider colid)
     {
-        if (play.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
+        if (colid.CompareTag("SwingingDoor"))
+		{
+			SwingingDoorScript swindors = colid.GetComponent<SwingingDoorScript>();
+			if (swindors != null && !swindors.destroyed);
+			{
+				swindors.PleaseDie(false);
+				return;
+			}
+		}
+		if (colid.CompareTag("DoorTrigger1"))
+		{
+			DoorScript dors = colid.GetComponent<DoorScriptExtender>().DoorScripts;
+			if (dors != null);
+			{
+				if (!dors.destroyed)
+				{
+					dors.DestroyDoor(false);
+					Debug.Log("destroy dor");
+					return;
+				}
+			}
+		}
+        if (colid.CompareTag("Player") & !gc.debugMode & !gc.player.titlecard)
         {
             if (base.IsHitboxValid)
 			{

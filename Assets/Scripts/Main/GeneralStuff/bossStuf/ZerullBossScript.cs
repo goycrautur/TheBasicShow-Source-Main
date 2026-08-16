@@ -61,6 +61,28 @@ public class ZerullBossScript : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("SwingingDoor"))
+		{
+			SwingingDoorScript swindors = other.GetComponent<SwingingDoorScript>();
+			if (swindors != null && !swindors.destroyed);
+			{
+				swindors.PleaseDie();
+				return;
+			}
+		}
+		if (other.CompareTag("DoorTrigger1"))
+		{
+			DoorScript dors = other.GetComponent<DoorScriptExtender>().DoorScripts;
+			if (dors != null);
+			{
+				if (!dors.destroyed)
+				{
+					dors.DestroyDoor();
+					Debug.Log("destroy dor");
+					return;
+				}
+			}
+		}
         if (!ZerullClassic.Instance.debug && !ZerullClassic.Instance.debugMode && ZerullClassic.Instance.RealBossStarted && other.CompareTag("Player") && !iframedown)
         {
             if (!GameControllerScript.Instance.debugMode & !GameControllerScript.Instance.player.titlecard)

@@ -47,8 +47,8 @@ public class AdditionalGameCustomizer : MonoBehaviour
         if (GameControllerScript.Instance.mode == "zerullclassic")
         {
             NoYCTP = false;
-            modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3 | When are you gonna add *The Pit* for this guy brah - someone, def not me(gray)";
-            Sych.SetGameWindowTitle(chair ? "c  h  a  i  r" : "His domain");
+            modesText.text = chair ? "c  h  a  i  r" : "?eru?? M0D3";
+            Sych.SetGameWindowTitle(chair ? "c  h  a  i  r" : "His domain | When are you gonna add *The Pit* for this guy brah - someone, def not me(gray)");
         }
         if (GameControllerScript.Instance.mode == "LappingOfAsylum") 
         {
@@ -102,7 +102,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     {
         if (StaminaPercentage)
         {
-            what = Mathf.Lerp(what,GameControllerScript.Instance.player.stamina, 5*Time.deltaTime);
+            what = Mathf.Lerp(what,GameControllerScript.Instance.player.stamina, 20*Time.deltaTime);
             percentageText.text = (int)what + "%";
             if (GameControllerScript.Instance.player.stamina <= 15f) percentageText.color = Color.red;
             else percentageText.color = Color.black;

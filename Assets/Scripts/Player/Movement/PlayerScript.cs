@@ -64,6 +64,10 @@ public class PlayerScript : MonoBehaviour
 			if (ItemManager.Instance.Inventory[i].ItemID == 26) AdditionalGameCustomizer.Instance.ReworkedCurrency = true;
 		}
     }
+	private void KarmaStuff()
+	{
+		if (guilt > 0f)guilt -= Time.deltaTime * 2;
+	}
 	private IEnumerator summonGaugTotem(Sprite textur)
 	{
 		float time = 10f;
@@ -489,10 +493,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void GuiltCheck()
 	{
-		if (guilt > 0f)
-		{
-			guilt -= Time.deltaTime * 2;
-		}
+		if (guilt > 0f)guilt -= Time.deltaTime * 2;
 	}
 
 	public void ResetGuilt(string type, float amount)
@@ -563,6 +564,28 @@ public class PlayerScript : MonoBehaviour
 	{
 		if (oncar && isMoving && FowardValue >= 2f)
 		{
+			if (other.CompareTag("SwingingDoor"))
+			{
+				SwingingDoorScript swindors = other.GetComponent<SwingingDoorScript>();
+				if (swindors != null && !swindors.destroyed);
+				{
+					swindors.PleaseDie();
+					return;
+				}
+			}
+			if (other.CompareTag("DoorTrigger1"))
+			{
+				DoorScript dors = other.GetComponent<DoorScriptExtender>().DoorScripts;
+				if (dors != null);
+				{
+					if (!dors.destroyed)
+					{
+						dors.DestroyDoor();
+						Debug.Log("destroy dor");
+						return;
+					}
+				}
+			}
 			if (other.GetComponent<NPC>() != null)
 			{
 				NPC enpe = other.GetComponent<NPC>();
@@ -572,14 +595,17 @@ public class PlayerScript : MonoBehaviour
 				return;
 			}
 		}
-		if (other.GetComponent<basicshowWindowScript>() != null && playerSpeed >= 50f)
+		if (other.GetComponent<basicshowWindowScript>() != null && (playerSpeed >= 50f || IsLunging))
 		{
+			int what = !IsLunging ? (int)(playerSpeed/50) : 2;
 			basicshowWindowScript Wind = other.GetComponent<basicshowWindowScript>();
 			if (Wind.broken) return;
 			else
-			{
-				PushPlayer(GetPlayerPushDirection(transform.position + Wind.transform.position), 24f * (1+(playerSpeed/50)), 0.75f);
-				Wind.SetWindowState(true, 6f, 0f, (int)(playerSpeed/50));
+			{	
+				IsLunging = false;
+				Vector3 pos = !Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? -transform.forward : transform.forward;
+				PushPlayer(pos, 24f * (1+what), 0.75f);
+				Wind.SetWindowState(true, 6f, 0f, what);
 			}
 			return;
 		}
@@ -701,7 +727,7 @@ public class PlayerScript : MonoBehaviour
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f,timerTillDeath;
-	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar;
+	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar,IsLunging;
 	public Vector3 frozenPosition;
 
 	[Header("Private Variables")]

@@ -9,7 +9,7 @@ public class ITM_SwingDoorLock : BaseItem
             if (Ray.collider.CompareTag("SwingingDoor"))
             {
                 SwingingDoorScript swing = Ray.collider.gameObject.GetComponent<SwingingDoorScript>();
-                if (!swing.bDoorLocked)
+                if (!swing.bDoorLocked && !swing.destroyed)
                 {
                     swing.LockDoor(DoorLockTime);
                     GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(aud_Locked);

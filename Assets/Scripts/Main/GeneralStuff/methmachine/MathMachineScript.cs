@@ -9,7 +9,7 @@ public class MathMachineScript : MonoBehaviour
     public AudioManagerLiveReaction audioSource;
     public MeshRenderer meshRenderer;
     public Material right,wrong;
-    public bool won, hasLost;
+    public bool pickup,won, hasLost;
     public Transform player;
     public TextMeshPro text1,textsign,text3,text4;
     public GameObject prize, disabled;
@@ -137,7 +137,7 @@ public class MathMachineScript : MonoBehaviour
                 if (GameControllerScript.Instance.mode == "story")
                 {
                     LearningGameManager.Instance.Tutor.tutorSource.ClearQueue(true);
-                    LearningGameManager.Instance.quarter.SetActive(true);
+                    LearningGameManager.Instance.quarter.HideShitsLogic(true,true);
                     LearningGameManager.Instance.Tutor.tutorSource.PlaySingleClip(LearningGameManager.Instance.Tutor.aud_Prize);
                 }
             }
@@ -146,7 +146,8 @@ public class MathMachineScript : MonoBehaviour
             text4.text = correct.ToString();
             
             yield return new WaitForSeconds(0.1f);
-            prize.SetActive(true);
+            if (!pickup) prize.SetActive(true);
+            else prize.GetComponent<PickupScript>().HideShitsLogic(true,true);
             foreach (GameObject ball in balls)
             {
                 GameControllerScript.Instance.PickBall.SetActive(false);
@@ -191,7 +192,8 @@ public class MathMachineScript : MonoBehaviour
             text4.gameObject.SetActive(true);
             text4.text = correct.ToString();
             yield return new WaitForSeconds(0.1f);
-            prize.SetActive(true);
+            if (!pickup) prize.SetActive(true);
+            else prize.GetComponent<PickupScript>().HideShitsLogic(true,true);
             GameControllerScript.Instance.PickBall.SetActive(false);
             foreach (GameObject ball in balls)
             {

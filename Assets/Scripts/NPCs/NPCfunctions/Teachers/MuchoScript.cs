@@ -98,7 +98,13 @@ public class MuchoScript : NPC
     {
         if (this.isActiveAndEnabled)
         {
-            slams++;
+            if (deafened)
+            {
+                Debug.Log("he fogor");
+                Muchocator.Rebind();
+                Muchocator.Play("BjIndicator_Confused", -1, 0f);
+            }
+            deafened = false;
             ThrowProjectile(Random.Range(0,3));
             if (MuchoAnger < 40f) agent.speed = base.agentSpeed;
             if (MuchoAnger > 40f) agent.speed = base.agentSpeed * (MuchoAnger/40);
@@ -106,12 +112,16 @@ public class MuchoScript : NPC
             MuchoAnimator.SetTrigger("slam");
             if (!stopMoving)
             {
-                if (slams != 20) Invoke(nameof(OnMoveDone), timeToMove);
-                if (slams >= 20)
+                slams++;
+                if (slams < 20) Invoke(nameof(OnMoveDone), timeToMove);
+                else if (slams >= 20)
                 {
-                    Invoke(nameof(Teleport), teleportCD);
+                    Muchocator.Rebind();
+                    Debug.Log("gon telepor");
+                    Invoke(nameof(Teleport), teleportCD*1.5f);
                     slams = 0;
                     agent.speed = 0;
+                    deafened = true;
                 }
             }
             resetWaitTime();
@@ -200,7 +210,7 @@ public class MuchoScript : NPC
     #region Hearing Detection
     public void Hear(Vector3 soundLocation, float priority, bool indicator = true)
     {
-        if (!isActiveAndEnabled) return;
+        if (!isActiveAndEnabled && deafened) return;
 
         bool canHear = !antiHearing && priority >= currentPriority;
         bool inNoSqueeArea = false;
@@ -272,6 +282,7 @@ public class MuchoScript : NPC
     [SerializeField] private Animator Muchocator, MuchoAnimator;
 
     private float currentPriority;
+    private bool deafened;
     [SerializeField] private AudioManagerLiveReaction MuchoAudio;
     #endregion
 }

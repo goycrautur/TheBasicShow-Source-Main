@@ -149,7 +149,7 @@ public class booksInteract : Interactable
         {
             if (gc.mode == "story")
             {
-                lgm.quarter.SetActive(true);
+                lgm.quarter.HideShitsLogic(true,true);
                 lgm.Tutor.tutorSource.ClearQueue(true);
                 lgm.Tutor.tutorSource.QueueAudio(lgm.Tutor.aud_Prize);
             }

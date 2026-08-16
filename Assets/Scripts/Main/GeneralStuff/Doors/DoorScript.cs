@@ -68,12 +68,12 @@ public class DoorScript : MonoBehaviour
 
     private void HandleLockTimer()
     {
-        if (lockTime.CountdownWithDeltaTime(1f) == 0 & bDoorLocked) UnlockDoor();
+        if (lockTime.CountdownWithDeltaTime(1f) == 0 & bDoorLocked & !destroyed) UnlockDoor();
     }
 
     private void HandleOpenTimer()
     {
-        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen) CloseDoor();
+        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen & !destroyed) CloseDoor();
     }
 
     private void HandleDoorInteraction()
@@ -93,14 +93,34 @@ public class DoorScript : MonoBehaviour
     #region DoorStateManagement
     public void OpenDoor(float time)
     {
+        if (destroyed) return;
         if (!bDoorOpen && SoundData != null) myAudio.PlaySingleClip(SoundData.doorOpen);
         SetDoorState(true, time);
     }
 
     private void CloseDoor()
     {
+        if (destroyed) return;
         SetDoorState(false);
         if (SoundData != null) myAudio.PlaySingleClip(SoundData.doorClose);
+    }
+
+    public void DestroyDoor(bool makeNoise = true)
+    {
+        SetDoorState(true, 10);
+        destroyed = true;
+        myAudio.ClearQueue(true);
+        
+        myAudio.PlaySingleClip(GameControllerScript.Instance.lbams.GlobalDoorBreak);
+        CameraScript.Instance.TempShakeAmount = 0.5f;
+        if (makeNoise) 
+        {
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
+            foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
+        }
+        AltTrigger.gameObject.layer = LayerMask.NameToLayer(MainTriggerLayerString);
+        inside.material.SetColor("_Color1", Color.clear);
+        outside.material.SetColor("_Color1", Color.clear);
     }
 
     private void SetDoorState(bool open, float time = 3)
@@ -123,18 +143,18 @@ public class DoorScript : MonoBehaviour
     #region LockingMechanics
     public void LockDoor(float time)
     {
+        if (destroyed) return;
         if (SoundData != null) myAudio.PlaySingleClip(SoundData.Click);
         bDoorLocked = true;
-        DorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
-        DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
+        DorMapSprite1.sprite = DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
         lockTime = time;
     }
 
     public void UnlockDoor()
     {
+        if (destroyed) return;
         bDoorLocked = false;
-        DorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
-        DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
+        DorMapSprite1.sprite = DorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
         if (SoundData != null) myAudio.PlaySingleClip(SoundData.Unlocked);
     }
 
@@ -175,7 +195,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private WallType WalTypSideIn = WallType.Normal,WalTypSideOut = WallType.Normal;
     
     [Header("Barrier Stuff Settings")]
-    [SerializeField] private BoxCollider MainDoorBarrier;
+    public BoxCollider MainDoorBarrier;
     [SerializeField] private MeshCollider CurTrigger,MainTrigger,AltTrigger;
     [SerializeField] private GameObject MainTrigGmbObj;
     [SerializeField] private string DefaultLayerString,MainTriggerLayerString;
@@ -191,12 +211,13 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private SpriteRenderer DorMapSprite1,DorMapSprite2;
    
 
-    [Header("Lock/Unlock Settings")]
+    [Header("sum Settings")]
     public float lockTime;
     public float openTime;
+    public bool DestroyImmunity = false;
     #endregion
 
     #region RuntimeState
-    [HideInInspector] public bool bDoorOpen, bDoorLocked;
+    public bool bDoorOpen, bDoorLocked, destroyed;
     #endregion
 }

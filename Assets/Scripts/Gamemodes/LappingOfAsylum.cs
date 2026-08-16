@@ -146,6 +146,8 @@ public class LappingOfAsylumController : MonoBehaviour
         LapPortals.ForEach(lap => lap.SetActive(false));
         SetCustomLapMusic();
     }
+
+    private void QuarterAppearCallback() => gc.Math.quarter.HideShitsLogic(true,true);
             
     public void doShit(string stuff = "beginning")
     {
@@ -155,7 +157,8 @@ public class LappingOfAsylumController : MonoBehaviour
             gc.UnlockAmount = 0;
             gc.ObjectsToEnable.ForEach(o => LappingObjectsEnabler.Add(o));
             gc.ObjectsToEnable.ForEach(o => o.SetActive(true));
-            gc.Math.quarter.SetActive(true);
+            
+            Invoke(nameof(QuarterAppearCallback), 1);
             string mode = PlayerPrefs.GetString("CurrentMode");
             if (mode != "LappingOfAsylum") LapPortals.ForEach(lap => Destroy(lap));
             if (gc.warrealest) gc.LapManag.MeepTimer.SetActive(true);

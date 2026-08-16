@@ -65,7 +65,7 @@ public class MouseAppearingScript : MonoBehaviour
             if (hitTransform.CompareTag("SwingingDoor"))
             {
                 SwingingDoorScript swing = hitTransform.GetComponent<Collider>().gameObject.GetComponent<SwingingDoorScript>();
-                if (!swing.bDoorLocked)
+                if (!swing.bDoorLocked && !swing.destroyed)
                 {
                     for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
                     {
@@ -91,12 +91,12 @@ public class MouseAppearingScript : MonoBehaviour
                 }
             }
             
-            if (hitTransform.CompareTag("DoorTrigger1") && !dor.DoorScripts.bDoorOpen)
+            if (hitTransform.CompareTag("DoorTrigger1") && !dor.DoorScripts.bDoorOpen && !dor.DoorScripts.destroyed)
             {
                 maxDistance = gc.player.LocalRange;
                 MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
             }
-            if (hitTransform.CompareTag("DoorTrigger2") && dor.DoorScripts.bDoorOpen)
+            if (hitTransform.CompareTag("DoorTrigger2") && dor.DoorScripts.bDoorOpen && !dor.DoorScripts.destroyed)
             {
                 maxDistance = gc.player.LocalRange;
                 MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));

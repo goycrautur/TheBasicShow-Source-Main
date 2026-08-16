@@ -45,6 +45,7 @@ public class NPC : MonoBehaviour
             IsHitboxValid = true;
             StunTime = 1f;
 		}
+        if (iFrames > 0f) iFrames -= Time.deltaTime; 
         if (stun)
 		{
 			StunTime -= Time.deltaTime; 
@@ -124,6 +125,12 @@ public class NPC : MonoBehaviour
     public virtual void DrainHp(int Value)
     {
         hp -= Value;
+    }
+    public virtual void DealsDamageIFramesStuff(int Value,int iframesValue)
+    {
+        if (iFrames > 0f) return;
+        hp -= Value;
+        iFrames = iframesValue;
     }
     public virtual void Stun(float Duration)
     {
@@ -262,7 +269,7 @@ public class NPC : MonoBehaviour
     [Header("Misc Stuffs")]
     #region Internal State
     public float coolDown;
-    public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime,DeathRespawnTime,DeathRespawnTimeSet;
+    public float agentSpeedScale = 1f, agentSpeed,DefaultAgentSpeed,StunTime,iFrames,DeathRespawnTime,DeathRespawnTimeSet;
     public bool squished,stun,stopOverridingStun;
     public NavMeshAgent agent;
     public CharacterController cecil;

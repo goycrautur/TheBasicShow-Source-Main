@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4065861123621725688}
   - component: {fileID: 4065861123621736265}
   - component: {fileID: 4065861123621735524}
-  - component: {fileID: 628915688759870803}
+  - component: {fileID: 1415930788271813199}
   m_Layer: 0
   m_Name: Pickup_HotJerrys
   m_TagString: Item
@@ -178,6 +178,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32412ad967028d3458a2f665da9c59d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PickupCallbackEvent:
+    _PersistentCalls: []
+  SwapCallbackEvent:
+    _PersistentCalls:
+    - _Target: {fileID: 1415930788271813199}
+      _MemberName: set_Stopped
+      _PersistentArguments:
+      - _Type: 1
+        _Int: 1
+        _String: 
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
   ID: 24
   PresentMode: 0
   killafterpickup: 1
@@ -185,7 +200,8 @@ MonoBehaviour:
   instahide: 0
   mapIconSprite: {fileID: 5051587764740504221}
   DroppedItem: 0
---- !u!114 &628915688759870803
+  InRange: 0
+--- !u!114 &1415930788271813199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,10 +210,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4065861123621722581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 907c185bc0dfc5c43b04f1693457f544, type: 3}
+  m_Script: {fileID: 11500000, guid: 40758b447fb7af44d95094ee810920ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 50
+  lifetime: 60
+  stopped: 0
 --- !u!1 &4065861123621722769
 GameObject:
   m_ObjectHideFlags: 0

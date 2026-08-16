@@ -2,11 +2,13 @@
 
 public class RuleFreeZone : MonoBehaviour
 {
+    public void Start() => defaultStamDrainMult = player.staminaDropMultiple;
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && Time.timeScale != 0f)
         {
             player.outdoorsfr = true;
+            player.staminaDropMultiple = 0;
             if (player.stamina <= (player.maxStamina * 1.75f))
 			{
 				player.stamina += player.staminaRise*1.25f * Time.deltaTime;
@@ -18,6 +20,7 @@ public class RuleFreeZone : MonoBehaviour
         if (other.CompareTag("Player") && Time.timeScale != 0f)
         {
             player.outdoorsfr = true;
+            player.staminaDropMultiple = 0;
             if (player.stamina <= (player.maxStamina * 1.75f))
 			{
 				player.stamina += player.staminaRise*1.25f * Time.deltaTime;
@@ -29,9 +32,9 @@ public class RuleFreeZone : MonoBehaviour
         if (other.CompareTag("Player") && Time.timeScale != 0f)
         {
             player.outdoorsfr = false;
+            player.staminaDropMultiple = defaultStamDrainMult;
         }
     }
-
-    [Header("References")]
-    [SerializeField] private PlayerScript player;
+    private PlayerScript player => GameControllerScript.Instance.player;
+    private float defaultStamDrainMult;
 }

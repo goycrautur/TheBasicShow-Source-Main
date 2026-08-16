@@ -70,7 +70,7 @@ public class ItemManager : MonoBehaviour
         }
         bool hisquidward = false;
         if (GameControllerScript.Instance.SlotsAmmount == 0) hisquidward = true;
-        CanInteractWithSmth = !hisquidward || GameControllerScript.Instance.player.DeathCountdown;
+        CanInteractWithSmth = !hisquidward && !GameControllerScript.Instance.player.DeathCountdown;
         ItemNameText.enabled = CanInteractWithSmth;
         ItemInfoText.enabled = CanInteractWithSmth;
         theRestOfTheItemInfo.SetActive(CanInteractWithSmth);
@@ -275,6 +275,7 @@ public class ItemManager : MonoBehaviour
         {
             if (Inventory != null)
             {
+                ExecuteItem(Inventory[index].ItemID, ExecutionType.Deselect);
                 Inventory[index].ItemID = 0;
                 Inventory[index].ItemInstance = null;
                 AnimateSlotIfChanged(index);
@@ -289,7 +290,7 @@ public class ItemManager : MonoBehaviour
         bool wasFull = Inventory[index].ItemID != 0;
         item?.transform.SetParent(GetItem(itemID).transform);
 
-        ExecuteItem(Inventory[ItemSelection].ItemID, ExecutionType.Deselect);
+        //ExecuteItem(Inventory[ItemSelection].ItemID, ExecutionType.Deselect);
 
         Inventory[index].ItemID = itemID;
         Inventory[index].ItemInstance = item;

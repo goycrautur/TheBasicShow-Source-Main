@@ -66,7 +66,7 @@ public class GameOverScript : MonoBehaviour
 			delay -= 1f * Time.deltaTime;
 			if (delay <= 0f)
 			{
-				if (chance < 98f) LoadingManagerThing.Instance.LoadSceneAsyncUHHH(OverScene,0,true,"The Basic Show");
+				if (chance < 98f) LoadingManagerThing.Instance.LoadSceneAsyncUHHH(OverScene,0,true);
 				else
 				{
 					image.transform.localScale = new Vector3(5f, 5f, 1f);

@@ -10,8 +10,7 @@ public class SwingingDoorScript : MonoBehaviour
         myAudio = GetComponent<AudioManagerLiveReaction>();
         SetLock(true);
         InitializeShaderVariableStuff();
-        SwinDorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
-        SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
+        SwinDorMapSprite1.sprite = SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapLockedSprite;
     }
     #endregion
 
@@ -51,20 +50,19 @@ public class SwingingDoorScript : MonoBehaviour
         if (!requirementMet && gc.notebooks >= gc.UnlockAmount)
         {
             requirementMet = true;
-            SwinDorMapSprite1.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
-            SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
+            SwinDorMapSprite1.sprite = SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
             SetLock(false);
         }
     }
 
     private void HandleTimers()
     {
-        if (lockTime.CountdownWithDeltaTime() == 0 & bDoorLocked & requirementMet) SetLock(false);
+        if (lockTime.CountdownWithDeltaTime() == 0 & bDoorLocked & requirementMet & !destroyed) SetLock(false);
     }
 
     private void HandleDoorClosing()
     {
-        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen & !bDoorLocked) SetDoorState(false);
+        if (openTime.CountdownWithDeltaTime() == 0 & bDoorOpen & !bDoorLocked & !destroyed) SetDoorState(false);
     }
     #endregion
 
@@ -110,11 +108,34 @@ public class SwingingDoorScript : MonoBehaviour
     {
         myAudio.PlaySingleClip(doorOpen);
     }
+    public void PleaseDie(bool makeNoise = true)
+    {
+        SetDoorState(true);
+        lockTime = 10;
+        destroyed = true;
+        obstacle.SetActive(false);
+        insidecol.enabled = false;
+        outsidecol.enabled = false;
+        if (makeNoise) 
+        {
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
+            foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
+        }
+        CameraScript.Instance.TempShakeAmount = 0.5f;
+        myAudio.ClearQueue(true);
+        myAudio.PlaySingleClip(GameControllerScript.Instance.lbams.GlobalDoorBreak);
+        gameObject.layer = LayerMask.NameToLayer("npcInteractionLayer");
+        SwinDorMapSprite1.sprite = SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
+        inside.material.SetColor("_Color1", Color.clear);
+        outside.material.SetColor("_Color1", Color.clear);
+    }
     #endregion
 
     #region DoorState
     private void SetDoorState(bool set)
     {
+        if (destroyed) return;
+        gameObject.layer = set ? LayerMask.NameToLayer("npcInteractionLayer") : LayerMask.NameToLayer("Default");
         heardDoor = set;
         bDoorOpen = set;
         int shift = set ? 1 : 0;
@@ -124,12 +145,12 @@ public class SwingingDoorScript : MonoBehaviour
 
     private void SetLock(bool lockState)
     {
+        if (destroyed) return;
+        gameObject.layer = LayerMask.NameToLayer("Default");
         obstacle.SetActive(lockState);
         insidecol.enabled = lockState;
-        outsidecol.enabled = !lockState;
         bDoorLocked = lockState;
-        SwinDorMapSprite1.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
-        SwinDorMapSprite2.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
+        SwinDorMapSprite1.sprite = SwinDorMapSprite2.sprite = lockState ? AdditionalGameCustomizer.Instance.dorMapLockedSprite : AdditionalGameCustomizer.Instance.dorMapSprite;
 
         inside.material = lockState ? locked : normal;
         outside.material = lockState ? locked : normal;
@@ -150,7 +171,7 @@ public class SwingingDoorScript : MonoBehaviour
 
     [Header("Door state and timing")]
     [SerializeField] private bool bDoorOpen;
-    public bool bDoorLocked;
+    public bool bDoorLocked,destroyed,DestroyImmunity;
     [SerializeField] private float openTime;
 
     [Header("Audio-related variables")]
