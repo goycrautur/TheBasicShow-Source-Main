@@ -165,7 +165,20 @@ public class LearningGameManager : MonoBehaviour
                                     gc.finaleMode = true;
                                     break;
                                 case AdditionalGameCustomizer.EscapeFunsies.Daldi:
-                                    StartCoroutine(gc.ambatudaldi());
+                                    lbams.EscapeMusic.ClearQueue(true);
+                                    lbams.EscapeMusic.SetLoop(true);
+                                    lbams.EscapeMusic.QueueAudio(lbams.shithourIntro);
+                                    lbams.EscapeMusic.QueueAudio(lbams.shithourLoop);
+                                    gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                    gc.Gatesrea.ForEach(g => g.Down(false));
+                                    gc.finaleMode = true;
+                                    break;
+                                case AdditionalGameCustomizer.EscapeFunsies.Teldi:
+                                    lbams.EscapeMusic.ClearQueue(true);
+                                    lbams.EscapeMusic.SetLoop(true);
+                                    lbams.EscapeMusic.QueueAudio(lbams.fuckminuteIntro);
+                                    lbams.EscapeMusic.QueueAudio(lbams.fuckminuteLoop);
+                                    TeldiThingyEvent.Invoke();
                                     gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                     gc.Gatesrea.ForEach(g => g.Down(false));
                                     gc.finaleMode = true;
@@ -207,7 +220,7 @@ public class LearningGameManager : MonoBehaviour
     public AudioManagerLiveReaction learnMusic;
     public AudioObjectyeah LearnAudio,aud_AllNotebooks,aud_TeacherJerryAllCheese,aud_Timeout;
     public PickupScript quarter;
-    public UltEvents.UltEvent TbsFinaleEventNormal1,TbsFinaleEventNormal2,TbsSecretFinaleEvent1,TbsSecretFinaleEvent2,ClassicPlayerAAWSecretEvent1,ClassicPlayerAAWSecretEvent2;
+    public UltEvents.UltEvent TbsFinaleEventNormal1,TbsFinaleEventNormal2,TbsSecretFinaleEvent1,TbsSecretFinaleEvent2,ClassicPlayerAAWSecretEvent1,ClassicPlayerAAWSecretEvent2,TeldiThingyEvent;
 
 
     [Header("Scripts")]

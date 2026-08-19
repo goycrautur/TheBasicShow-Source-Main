@@ -259,8 +259,21 @@ public class booksInteract : Interactable
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 gc.finaleMode = true;
                                 break;
-                            case AdditionalGameCustomizer.EscapeFunsies.Daldi:
-                                StartCoroutine(gc.ambatudaldi());
+                             case AdditionalGameCustomizer.EscapeFunsies.Daldi:
+                                lbams.EscapeMusic.ClearQueue(true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.shithourIntro);
+                                lbams.EscapeMusic.QueueAudio(lbams.shithourLoop);
+                                gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
+                                gc.Gatesrea.ForEach(g => g.Down(false));
+                                gc.finaleMode = true;
+                                break;
+                            case AdditionalGameCustomizer.EscapeFunsies.Teldi:
+                                lbams.EscapeMusic.ClearQueue(true);
+                                lbams.EscapeMusic.SetLoop(true);
+                                lbams.EscapeMusic.QueueAudio(lbams.fuckminuteIntro);
+                                lbams.EscapeMusic.QueueAudio(lbams.fuckminuteLoop);
+                                lgm.TeldiThingyEvent.Invoke();
                                 gc.ElevdorRea.ForEach(ed => ed.Opendor = true);
                                 gc.Gatesrea.ForEach(g => g.Down(false));
                                 gc.finaleMode = true;

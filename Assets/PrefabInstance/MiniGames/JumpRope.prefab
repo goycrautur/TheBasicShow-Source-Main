@@ -264,7 +264,7 @@ MonoBehaviour:
   jumpDelay: 0
   jumpHeight: 0
   velocity: 0
-  jumpBuffer: 0.05
+  jumpBuffer: 1
   ropeHit: 0
   initialized: 0
   startPos: {x: 0, y: 0, z: 0}

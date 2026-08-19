@@ -170,7 +170,7 @@ public class PlayerScript : MonoBehaviour
 		if (!isForcedToLook) MouseMove();
 		else HandleForcedLook();
 	}
-	public void PushPlayer(Vector3 pushDirection, float pushForce, float duration)
+	public void PushPlayer(Vector3 pushDirection, float pushForce, float duration,bool MovementLock = true)
 	{
 		if (pushCoroutine != null)
         {
@@ -178,14 +178,14 @@ public class PlayerScript : MonoBehaviour
 			pModManag.movementModifiers.Remove(PushSpeedMod);
             pushCoroutine = null;
         }
-		pushCoroutine = StartCoroutine(PlayerPushSmooth(pushDirection, pushForce, duration));
+		pushCoroutine = StartCoroutine(PlayerPushSmooth(pushDirection, pushForce, duration,MovementLock));
 	}
 	public Vector3 GetPlayerPushDirection(Vector3 OtherPosition)
 	{
 		Vector3 pushDirection = (transform.position - OtherPosition).normalized;
 		return pushDirection;
 	}
-	private IEnumerator PlayerPushSmooth(Vector3 pushDirection, float pushForce, float duration)
+	private IEnumerator PlayerPushSmooth(Vector3 pushDirection, float pushForce, float duration,bool MovementLock)
     {
         pushDirection.y = 0f;
         pushDirection.Normalize();
@@ -195,7 +195,7 @@ public class PlayerScript : MonoBehaviour
 		//Debug.Log($"Push Position: {pushDirection}");
 		//Debug.Log($"Push Force: {pushForce}");
 		
-		pModManag.movementModifiers.Add(PushSpeedMod);
+		//pModManag.movementModifiers.Add(PushSpeedMod);
         while (elapsed < duration)
         {
 			
@@ -203,12 +203,12 @@ public class PlayerScript : MonoBehaviour
             float t = elapsed / duration;
             float speed = Mathf.Lerp(currentSpeed, 0f, t);
             Vector3 move = pushDirection * speed * Time.deltaTime;
-			PushSpeedMod.movementAddend = move;
+			//PushSpeedMod.movementAddend = move;
 			RunningSpeedMult = 1f;
 			cc.Move(move);
             yield return null;
         }
-		pModManag.movementModifiers.Remove(PushSpeedMod);
+		//pModManag.movementModifiers.Remove(PushSpeedMod);
     }
 
 	private void MouseMove()
@@ -562,6 +562,7 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
+
 		if (oncar && isMoving && FowardValue >= 2f)
 		{
 			if (other.CompareTag("SwingingDoor"))
@@ -727,7 +728,7 @@ public class PlayerScript : MonoBehaviour
 	public int principalBugFixer;
 	public string guiltType;
 	public float stamina, height, sweepingFailsave, staminaPending, healthPending, slideSpeed, healthslideSpeed, staminaDrop, DefaultstaminaDrop, staminaRise, DefaultstaminaRise, LocalRange, defaultlocalRange, Iframes, PlayerDmgResistance, windowbreakDistance = 20f,timerTillDeath;
-	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar,IsLunging;
+	public bool gameOver, hugging, isSliding, hpisSliding, bootsActive, alsoInOffice, movementLocked, killedbybaldi, killedbyfamished, killedbyhim, outdoorsfr, IgnoreHpLimit, titlecard, isMoving,DisableCamMove,oncar,IsLunging,IsSpecialLunging;
 	public Vector3 frozenPosition;
 
 	[Header("Private Variables")]

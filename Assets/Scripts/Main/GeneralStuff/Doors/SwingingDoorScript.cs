@@ -125,7 +125,7 @@ public class SwingingDoorScript : MonoBehaviour
         myAudio.ClearQueue(true);
         myAudio.PlaySingleClip(GameControllerScript.Instance.lbams.GlobalDoorBreak);
         gameObject.layer = LayerMask.NameToLayer("npcInteractionLayer");
-        SwinDorMapSprite1.sprite = SwinDorMapSprite2.sprite = AdditionalGameCustomizer.Instance.dorMapSprite;
+        SwinDorMapSprite1.enabled = SwinDorMapSprite2.enabled = false;
         inside.material.SetColor("_Color1", Color.clear);
         outside.material.SetColor("_Color1", Color.clear);
     }

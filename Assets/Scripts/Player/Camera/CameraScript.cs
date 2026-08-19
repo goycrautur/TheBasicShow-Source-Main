@@ -17,7 +17,8 @@ public class CameraScript : MonoBehaviour
     private void Update()
     {
         if (!ps.gc.KF.gamePaused) lookBehind = Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? 180 : 0;
-        jumpfloatThing = player.transform.position.y;
+        iguessbro = Mathf.Lerp(iguessbro,TempJumpNum, 6.5f*Time.deltaTime);
+        jumpfloatThing = player.transform.position.y + iguessbro;
         if(TempShakeAmount > 0f) TempShakeAmount -= Time.deltaTime;
 		else TempShakeAmount = 0f;
         CamYVal = Mathf.Lerp(CamYVal, CamRotatYVal, camRotatYSpeed * Time.deltaTime);
@@ -78,7 +79,7 @@ public class CameraScript : MonoBehaviour
 
     [Header("Jump Rope Physics")]
     [SerializeField] private float initVelocity, velocity, gravity;
-    public float jumpfloatThing = 4.88f,TempShakeAmount,ShakeAmount,CamYVal,CamRotatYVal,camRotatYSpeed;
+    public float jumpfloatThing = 4.88f,TempShakeAmount,ShakeAmount,CamYVal,CamRotatYVal,camRotatYSpeed,TempJumpNum;
 
     [Header("Baldi References")]
     [SerializeField] private Transform baldi;
@@ -86,4 +87,5 @@ public class CameraScript : MonoBehaviour
     
     private int lookBehind;
     private Vector3 jumpHeightV3;
+    private float iguessbro;
 }

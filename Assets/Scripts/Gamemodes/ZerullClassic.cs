@@ -374,7 +374,8 @@ public class ZerullClassic : MonoBehaviour
     {
         Singleton<MusicManagerMaes>.Instance.QueueMidi(switchToBloxyb && !ExhaustedJerBoss ? bloxyLoop1 : midiLoop, true);
         yield return new WaitForSeconds(12f); // Wait until the music will end
-        health = maxHealth/3;
+        //health = maxHealth/3;
+        health = 15;
         Sych.SetGameWindowTitle("The fight Continues. yeah");
         SpawnProjectile(false, false);
         Singleton<MusicManagerMaes>.Instance.SetSpeed(midiTempo);

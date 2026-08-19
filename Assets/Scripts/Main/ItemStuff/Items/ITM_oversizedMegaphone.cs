@@ -7,7 +7,7 @@ public class ITM_oversizedMegaphone : BaseItem
     public override bool OnUse()
     {
         if (used) return false;
-        AdditionalGameCustomizer.Instance.FovAmmount -= FovMinus;
+        AdditionalGameCustomizer.Instance.FovAmmount = AdditionalGameCustomizer.Instance.DefaultFovAmmount - FovMinus;
         itemSoundSource.PlaySingleClip(inhal);
         used = true;
         StartCoroutine(amwaitin(inhal.audClip.length+InhaleDelay));

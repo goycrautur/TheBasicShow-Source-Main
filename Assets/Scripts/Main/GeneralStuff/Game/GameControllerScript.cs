@@ -483,23 +483,6 @@ public class GameControllerScript : MonoBehaviour
         }
         FinaleObjectToDisable.ForEach(o => o.SetActive(false));
     }
-
-    public IEnumerator ambatudaldi()
-    {
-        if (mode == "story")
-        {
-            //Singleton<VertexGlitchManager>.Instance.mustGlitch = true;
-            lbams.EscapeMusic.ClearQueue(true);
-            lbams.EscapeMusic.QueueAudio(lbams.shithourIntro);
-            //MusicGO = true;
-            yield return new WaitForSeconds(lbams.shithourIntro.audClip.length);
-            lbams.EscapeMusic.ClearQueue(true);
-            lbams.EscapeMusic.SetLoop(true);
-            lbams.EscapeMusic.QueueAudio(lbams.shithourLoop);
-            
-            //Singleton<VertexGlitchManager>.Instance.sourceToSyncIn = lbams.EscapeMusic.audioDevice;
-        }
-    }
     public IEnumerator FinaleDelayer(float waitSecs)
     {
         yield return new WaitForSeconds(waitSecs);

@@ -40,7 +40,7 @@ public class JumpRopeScript : MonoBehaviour
 			}
             rope.SetTrigger("ActivateJumpRope");
             ropeHit = false;
-            float moveTime = 0.6f;
+            float moveTime = 0.8f;
             while (moveTime > 0f)
             {
                 moveTime -= Time.deltaTime * speedModifier;
@@ -117,7 +117,8 @@ public class JumpRopeScript : MonoBehaviour
 			playtime.canTargetPlayer = true;
             playtime.jumpRopeStarted = false;
             playtime.PlayCool = 15f;
-			playtime.audioDevice.ClearQueue(true);
+			StartCoroutine(playtime.PlayCoolFunctionality());
+			//playtime.audioDevice.ClearQueue(true);
         	playtime.audioDevice.QueueAudio(playtime.aud_Congrats);
 		}
 		else

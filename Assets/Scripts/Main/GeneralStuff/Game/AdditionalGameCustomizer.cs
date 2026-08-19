@@ -341,7 +341,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
 
     #region Enums
     public enum SkyboxStyle { Default, Day, Sunset, Night }
-    public enum EscapeFunsies { BBCR, Daldi, TBS,Taldi}
+    public enum EscapeFunsies { BBCR, Daldi,Teldi, TBS,Taldi}
     public enum StaminaDisplay { Old, PreOld, Normal, Vertical, Circle }
     #endregion
 

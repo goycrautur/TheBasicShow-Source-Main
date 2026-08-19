@@ -14,7 +14,7 @@ public class PlaytimeScript : NPC
         audioDevice = GetComponent<AudioManagerLiveReaction>();
         Wander();
     }
-    private IEnumerator PlayCoolFunctionality()
+    public IEnumerator PlayCoolFunctionality()
     {
         while (playCool >= 0f)
         {

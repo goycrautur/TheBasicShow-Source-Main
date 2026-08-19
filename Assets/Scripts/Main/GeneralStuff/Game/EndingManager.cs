@@ -57,6 +57,9 @@ public class EndingManager : MonoBehaviour
                 case AdditionalGameCustomizer.EscapeFunsies.Taldi:
                     LoadNormalResults(secret);
                     return;
+                case AdditionalGameCustomizer.EscapeFunsies.Teldi:
+                    LoadNormalResults(secret);
+                    return;
             }
         }
         if (Game.mode != "story")
