@@ -113,19 +113,25 @@ public class ITM_lungespearIGuess : BaseItem
                 {
                     if (Vector3.Distance(player.transform.position, ennPeeCee.transform.position) <= 7.5f)
                     {
-                        if (ennPeeCee.iFrames > 0f || ennPeeCee.fuckingdead) yield break;
-                        GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(NpcStab);
-                        ennPeeCee.DealsDamageIFramesStuff(damageToNpc,1);
-                        player.IsLunging = false;
-                        if (IsJarona) 
+                        if (ennPeeCee.iFrames < 0f || !ennPeeCee.fuckingdead)
                         {
-                            player.PushPlayer(pos2, 96 * (1+(player.playerSpeed/100)), 0.5f);
-                            ennPeeCee.PushNpc(ennPeeCee.GetNPCPushDirection(pos),128, 2f);
-                        }
-                        else
-                        {
-                            ennPeeCee.Stun(3f);
-                            ennPeeCee.PushNpc(ennPeeCee.GetNPCPushDirection(pos),64, 0.75f);
+                            GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(NpcStab);
+                            ennPeeCee.DealsDamageIFramesStuff(damageToNpc,1);
+                            if (IsJarona) 
+                            {
+                                
+                                ennPeeCee.Stun(1.75f);
+                                player.PushPlayer(pos2, 96 * (1+(player.playerSpeed/100)), 0.5f);
+                                ennPeeCee.PushNpc(ennPeeCee.GetNPCPushDirection(pos),128, 0.75f);
+                                yield break;
+                            }
+                            else
+                            {
+                                ennPeeCee.Stun(3f);
+                                ennPeeCee.PushNpc(ennPeeCee.GetNPCPushDirection(pos),64, 0.75f);
+                            }
+                            
+                            
                         }
                     }
                 }
@@ -165,7 +171,6 @@ public class ITM_lungespearIGuess : BaseItem
             time -= Time.deltaTime;
             yield return null;
         }
-        CameraScript.Instance.TempJumpNum = 0;
         player.IsLunging = false;
         yield break;
     }
