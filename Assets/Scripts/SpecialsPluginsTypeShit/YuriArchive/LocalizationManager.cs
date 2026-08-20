@@ -159,6 +159,29 @@ namespace YuriArchive.GlobalLocalization
             File.WriteAllText(filePath, sb.ToString());
         }
 
+        private void SaveFilesPathOpenIGuess()
+        {
+            
+            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+            if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                folderPath = folderPath.Replace("/", "\\");
+                Debug.Log($"folder path: {folderPath}");
+                System.Diagnostics.Process.Start("explorer.exe", folderPath);
+                return;
+            }
+            else if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
+            {
+                Debug.Log($"folder path: {folderPath}");
+                System.Diagnostics.Process.Start("open", folderPath);
+            }
+            else if (Application.platform == RuntimePlatform.LinuxPlayer || Application.platform == RuntimePlatform.LinuxEditor)
+            {
+                Debug.Log($"folder path: {folderPath}");
+                System.Diagnostics.Process.Start("xdg-open", folderPath);
+            }
+        }
+
 #if UNITY_EDITOR
         [CustomEditor(typeof(LocalizationManager))]
         public class LocalizationManagerEditor : Editor
@@ -175,6 +198,11 @@ namespace YuriArchive.GlobalLocalization
                 {
                     var mgr = (LocalizationManager)target;
                     mgr.RebuildAllJsonsFromDefaults();
+                }
+                if (GUILayout.Button("Open where the localization files reside you bum"))
+                {
+                    string folderPath = Path.Combine(Application.persistentDataPath, "Yuri Localization Stuff");
+                    Sych.OpenFolderShenanigans(folderPath);
                 }
             }
         }

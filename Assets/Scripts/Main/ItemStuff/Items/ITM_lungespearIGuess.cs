@@ -113,7 +113,7 @@ public class ITM_lungespearIGuess : BaseItem
                 {
                     if (Vector3.Distance(player.transform.position, ennPeeCee.transform.position) <= 7.5f)
                     {
-                        if (ennPeeCee.iFrames < 0f && !ennPeeCee.fuckingdead)
+                        if (ennPeeCee.iFrames <= 0f && !ennPeeCee.fuckingdead)
                         {
                             GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(NpcStab);
                             ennPeeCee.DealsDamageIFramesStuff(damageToNpc,1);

@@ -90,6 +90,29 @@ public static class Sych
         return clip;
     }
 
+    public static void OpenFolderShenanigans(string path)
+    {
+        string folderPath = path;
+        if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            folderPath = folderPath.Replace("/", "\\");
+            Debug.Log($"folder path: {folderPath}");
+            System.Diagnostics.Process.Start("explorer.exe", folderPath);
+            return;
+        }
+        else if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
+        {
+            Debug.Log($"folder path: {folderPath}");
+            System.Diagnostics.Process.Start("open", folderPath);
+        }
+        else if (Application.platform == RuntimePlatform.LinuxPlayer || Application.platform == RuntimePlatform.LinuxEditor)
+        {
+            Debug.Log($"folder path: {folderPath}");
+            System.Diagnostics.Process.Start("xdg-open", folderPath);
+        }
+    }
+
     public static AudioClip[] LoadSounds(string folder)
     {
         List<AudioClip> loadedSounds = new List<AudioClip>();
