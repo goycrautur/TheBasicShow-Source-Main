@@ -292,9 +292,9 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 
 	public void PauseMidi(bool pause)
 	{
-		if (midiPlayer == null)
+		if (midiPlayer == null || reservedPlayer == null)
 		{
-			Debug.LogError("MusicManager: midiPlayer is null. Cannot pause/unpause MIDI.");
+			Debug.LogError("MusicManager: midiPlayer or reservedPlayer is null. Cannot pause/unpause MIDI.");
 			return;
 		}
 
@@ -303,11 +303,13 @@ public class MusicManagerMaes : Singleton<MusicManagerMaes>
 			if (pause && !midiPaused)
 			{
 				midiPlayer.MPTK_Pause();
+				reservedPlayer.MPTK_Pause();
 				midiPaused = true;
 			}
 			else if (!pause && midiPaused)
 			{
 				midiPlayer.MPTK_UnPause();
+				reservedPlayer.MPTK_UnPause();
 				midiPaused = false;
 			}
 		}

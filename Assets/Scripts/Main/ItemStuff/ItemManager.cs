@@ -18,13 +18,7 @@ public class ItemManager : MonoBehaviour
     #endregion
     public IEnumerator ButterfingersEffect(float duration)
 	{
-        for (int i = 0; i < ItemCanvasGroup.Length; i++)
-        {
-            while (ItemCanvasGroup[i].alpha > 0.5f)
-            {
-                ItemCanvasGroup[i].alpha -= Time.deltaTime;
-            }
-        }
+        for (int i = 0; i < ItemCanvasGroup.Length; i++) while (ItemCanvasGroup[i].alpha > 0.5f) ItemCanvasGroup[i].alpha -= Time.deltaTime;
 		float time = duration;
 		Gauge newGauge = GaugeManager.Instance.CreateGaugeInstance(buttfingStatus, duration);
 		while (time > 0f)
@@ -62,7 +56,7 @@ public class ItemManager : MonoBehaviour
         if (Time.timeScale == 0) return;
         for (int i = 0; i < Inventory.Length; i++) 
         {
-            if (Inventory[i].ItemInstance != null && Inventory[i].ItemInstance.MultiUseMaxUsesCap > 1) 
+            if (Inventory[i].ItemInstance != null && Inventory[i].ItemInstance.MultiUseMaxUsesCap > 1 && !Inventory[i].ItemInstance.InfiniteUses) 
             {
                 Inventory[i].ItemStacksText.text = $"{Inventory[i].ItemInstance.Uses}/{Inventory[i].ItemInstance.MultiUseMaxUsesCap}";
             }
@@ -575,8 +569,9 @@ public class ItemManager : MonoBehaviour
         
 
         Vector3 spawnPosition = position;
+        string ItemName = RandomizedItem ? "RandomGiftbox" : item.Name;
 
-        GameObject droppedItem = new GameObject($"Pickup_{item.Name}")
+        GameObject droppedItem = new GameObject($"Pickup_{ItemName}")
         {
             transform = { position = spawnPosition },
             tag = "Item"

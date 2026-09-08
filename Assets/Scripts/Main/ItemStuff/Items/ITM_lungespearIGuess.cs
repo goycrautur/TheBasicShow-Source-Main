@@ -189,8 +189,9 @@ public class ITM_lungespearIGuess : BaseItem
     [SerializeField] private float StaminaDrainValue,StaminaNeededValue,coohdown,LungeDistance;
     [SerializeField] private AudioObjectyeah Used,NpcStab;
     [SerializeField] private bool used;
-    [Header("flowuh man")]
+    
     [HideInInspector] public Coroutine JaronaCoroutine;
+    [Header("flowuh man")]
     [SerializeField] private bool IsJarona;
     [SerializeField] private AudioObjectyeah flowerMan;
     [SerializeField] private AudioManagerLiveReaction JaronaAudio;

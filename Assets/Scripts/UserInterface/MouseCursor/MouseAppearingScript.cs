@@ -62,27 +62,11 @@ public class MouseAppearingScript : MonoBehaviour
                         }
                     }
             }
-            if (hitTransform.CompareTag("SwingingDoor"))
-            {
-                SwingingDoorScript swing = hitTransform.GetComponent<Collider>().gameObject.GetComponent<SwingingDoorScript>();
-                if (!swing.bDoorLocked && !swing.destroyed)
-                {
-                    for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
-                    {
-                        if (ItemManager.Instance.Inventory[i].ItemID == 2)
-                        {
-                            maxDistance = gc.player.LocalRange;
-                            lockin.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
-                            MouseCursor.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
-                        }
-                    }
-                }
-            }
             if (hitTransform.CompareTag("HarderDifficulityFaceLock"))
             {
                 for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
                 {
-                    if (ItemManager.Instance.Inventory[i].ItemID == 35)
+                    if (ItemManager.Instance.Inventory[i].ItemID == 27)
                     {
                         maxDistance = gc.player.LocalRange;
                         firInThe.SetActive(maxDistance > 0 && hitTransform.IsWithinDistanceFrom(playerTransform, maxDistance));
@@ -106,6 +90,22 @@ public class MouseAppearingScript : MonoBehaviour
         {
             Transform mischitTransform = miscRay.transform;
             float maxDist = 0f;
+            if (mischitTransform.CompareTag("SwingingDoor"))
+            {
+                SwingingDoorScript swing = mischitTransform.GetComponent<Collider>().gameObject.GetComponent<SwingingDoorScript>();
+                if (!swing.bDoorLocked && !swing.destroyed)
+                {
+                    for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+                    {
+                        if (ItemManager.Instance.Inventory[i].ItemID == 2)
+                        {
+                            maxDist = gc.player.LocalRange;
+                            lockin.SetActive(maxDist > 0 && mischitTransform.IsWithinDistanceFrom(playerTransform, maxDist));
+                            MouseCursor.SetActive(maxDist > 0 && mischitTransform.IsWithinDistanceFrom(playerTransform, maxDist));
+                        }
+                    }
+                }
+            }
             if (mischitTransform.GetComponent<ZerullBossScript>() != null || mischitTransform.GetComponent<NPC>() != null)
             {
                 

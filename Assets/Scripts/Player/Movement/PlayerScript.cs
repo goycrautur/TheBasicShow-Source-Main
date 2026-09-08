@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
 		if (Iframes > 0)Iframes -= Time.deltaTime;
         runSpeed = DefaultRunSpeed * runSpeedMultipler;
 		walkSpeed = DefaultWalkSpeed * walkSpeedMultipler;
-		staminaDrop = DefaultstaminaDrop * staminaDropMultiple;
+		staminaDrop = DefaultstaminaDrop * (staminaDropMultiple * (outdoorsfr ? 0 : 1));
 		staminaRise = DefaultstaminaRise * staminaRiseMultiple;
 		if (!IgnoreHpLimit)if (health > maxHealth)health = maxHealth;
 		if (health < 0)health = 0;
@@ -58,6 +58,7 @@ public class PlayerScript : MonoBehaviour
 		else HudManager.Instance.colorVarSetter(true);
 		if (breakwindow) breakwind();
 		if (door.lockTime > 0f) ResetGuilt("escape", 1f);
+		if (outdoorsfr && Time.timeScale != 0f && stamina <= (maxStamina * 1.75f)) stamina += staminaRise*1.25f * Time.deltaTime;
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
 			//if (ItemManager.Instance.Inventory[i].ItemID == 34 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "wallet_item") 
@@ -195,7 +196,7 @@ public class PlayerScript : MonoBehaviour
 		//Debug.Log($"Push Position: {pushDirection}");
 		//Debug.Log($"Push Force: {pushForce}");
 		
-		//pModManag.movementModifiers.Add(PushSpeedMod);
+		if (MovementLock) pModManag.movementModifiers.Add(PushSpeedMod);
         while (elapsed < duration)
         {
 			
@@ -203,12 +204,12 @@ public class PlayerScript : MonoBehaviour
             float t = elapsed / duration;
             float speed = Mathf.Lerp(currentSpeed, 0f, t);
             Vector3 move = pushDirection * speed * Time.deltaTime;
-			//PushSpeedMod.movementAddend = move;
+			if (MovementLock) PushSpeedMod.movementAddend = move;
 			RunningSpeedMult = 1f;
 			cc.Move(move);
             yield return null;
         }
-		//pModManag.movementModifiers.Remove(PushSpeedMod);
+		if (MovementLock) pModManag.movementModifiers.Remove(PushSpeedMod);
     }
 
 	private void MouseMove()

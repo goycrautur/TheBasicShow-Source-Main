@@ -36,7 +36,7 @@ public class LappingOfAsylumController : MonoBehaviour
 			yield return null;
 		}
         fromSource.ClearQueue(true);
-		fromSource.SetVolume(toClip.volume);  //volumen
+		fromSource.SetVolume(toClip.volume);
         isCrossfading = false;
         yield break;
 

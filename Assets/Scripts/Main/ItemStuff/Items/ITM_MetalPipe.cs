@@ -16,7 +16,7 @@ public class ITM_MetalPipe : BaseItem
             lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(fail);
             return false;
         }
-        if (!CantUse)
+        else
         {
             PipeDevice.PlaySingleClip(audiopip);
             GameControllerScript.Instance.player.SetStamina(PlayerScript.StaminaChangeMode.Add, energy);
@@ -24,7 +24,6 @@ public class ITM_MetalPipe : BaseItem
             StartCoroutine(Waitin());
             return true;
         }
-        return false;
     }
     public IEnumerator cantuse(float duration)
     {
