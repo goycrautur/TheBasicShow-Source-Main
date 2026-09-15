@@ -202,7 +202,8 @@ public class ZerullClassic : MonoBehaviour
 
     private void Update()
     {
-        DistancVal = Mathf.Clamp(1f - (Vector3.Distance(zs.transform.position, GameControllerScript.Instance.player.transform.position) - 75f) / 150f, 0f, 1f);
+        if (zs.isActiveAndEnabled) DistancVal = Mathf.Clamp(1f - (Vector3.Distance(zs.transform.position, GameControllerScript.Instance.player.transform.position) - 75f) / 150f, 0f, 1f);
+        else DistancVal = 1;
         curHealthValueForLerping = Mathf.Lerp(curHealthValueForLerping,health, 5*Time.deltaTime);
         ZerullIcon.localScale = Vector3.Lerp(ZerullIcon.localScale,ogZerullIconSize, 20*Time.deltaTime);
         ZerullIcon.pivot = Vector2.Lerp(ZerullIcon.pivot,ogZerullIconPivot, 20*Time.deltaTime);
@@ -228,8 +229,8 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted)
         {
-            Singleton<MusicManagerMaes>.Instance.MidiPlayer.MPTK_Channels[9].Volume = DistancVal;
-            Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_Channels[9].Volume = DistancVal;
+            //Singleton<MusicManagerMaes>.Instance.MidiPlayer.MPTK_Channels[9].Volume = DistancVal;
+            //Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_Channels[9].Volume = DistancVal;
         }
         if (AllowProjectileSpawn)
         {

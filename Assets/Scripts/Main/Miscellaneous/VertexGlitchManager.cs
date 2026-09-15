@@ -78,7 +78,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
         }
         else randomSeedVal = RandomCurId;
     }
-	public void Glitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1f,float desiredval = 1f,int randomGlitchVal = 1)
+	public void Glitch(float vertexseedRandomRangeMin = 1f,float vertexseedRandomRangeMax = 1f,float desiredval = 8f,int randomGlitchVal = 1)
 	{
 		if (isShakeGlitchUpdating)
 		{
@@ -93,7 +93,7 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
 		Shader.SetGlobalFloat("_VertexGlitchSeed", UnityEngine.Random.Range(vertexseedRandomRangeMin, vertexseedRandomRangeMax));
 		Shader.SetGlobalFloat("_VertexGlitchIntensity", glitchVal);
         global_VertexGlitchIntensity = glitchVal/4;
-        global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
+        global_VertexGlitchIntensitySpecialCare = glitchVal/4;
         global_VertexGlitchSeed = randomSeedVal;
         global_glitchColorRvalue = UnityEngine.Random.Range(0, randomGlitchVal);
         global_glitchColorGvalue = UnityEngine.Random.Range(0, randomGlitchVal);
@@ -105,12 +105,12 @@ public class VertexGlitchManager : Singleton<VertexGlitchManager>
 		yield return null;
 		while (glitchVal > 0f)
 		{
-            float multnumb = ZerullClassic.Instance.realBossStarted ? ZerullClassic.Instance.midiTempo*1.5f : 1.55f;
+            float multnumb = ZerullClassic.Instance.realBossStarted ? ZerullClassic.Instance.midiTempo*8f : 1.55f;
 			glitchVal -= Time.deltaTime * 2f*multnumb;
             
 			Shader.SetGlobalFloat("_VertexGlitchIntensity", glitchVal/2);
             global_VertexGlitchIntensity = glitchVal/4;
-            global_VertexGlitchIntensitySpecialCare = glitchVal*2.5f;
+            global_VertexGlitchIntensitySpecialCare = glitchVal/4;
             global_VertexGlitchSeed = randomSeedVal;
             global_glitchColorRvalue = UnityEngine.Random.Range(0, randomGlitchVal);
             global_glitchColorGvalue = UnityEngine.Random.Range(0, randomGlitchVal);

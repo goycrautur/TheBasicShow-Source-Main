@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Security.Principal;
 
 public class LifetimeScript : MonoBehaviour
 {
@@ -7,50 +8,50 @@ public class LifetimeScript : MonoBehaviour
     private void Start()
     {
         Physics.IgnoreCollision(GetComponent<BoxCollider>(), GameControllerScript.Instance.player.cc, true);
-        ToggleAudioSourcesInRange(true);
+        ToggleShitsInRange(true);
     }
     private void OnDestroy()
     {
-        ToggleAudioSourcesInRange(false);
-        disabledAudioSources.Clear();
+        ToggleShitsInRange(false);
+        disabledAudioManagers.Clear();
+        OkayDude.Clear();
     }
     #endregion
 
     #region Per-Frame Logic
     private void Update()
     {
-        if (lifetime != 0); ToggleAudioSourcesInRange(true);
+        if (lifetime != 0); ToggleShitsInRange(true);
         if (lifetime.CountdownWithDeltaTime() == 0) Destroy(gameObject);
     }
     #endregion
 
     #region Trigger Handlers
     private void OnTriggerStay(Collider other)
-    {
-        if (other.GetComponent<AudioManagerLiveReaction>() != null) 
-        {
-            ToggleAudioSourceManager(other.GetComponent<AudioManagerLiveReaction>(), true);
-            //ToggleAudioSourceManager(other.GetComponentInChildren<AudioManagerLiveReaction>(), true);
-        }
+    {//Fuck you sadcolored
+        AudioManagerLiveReaction AudioToAdd = other.GetComponentInChildren<AudioManagerLiveReaction>();
+        if (AudioToAdd != null) ToggleAudioSourceManager(AudioToAdd, true);
+        NPC dude = other.GetComponentInChildren<NPC>();
+        if (dude != null) ToggleNpcAudioMute(dude, true);
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<AudioManagerLiveReaction>() != null)
-        {
-            ToggleAudioSourceManager(other.GetComponent<AudioManagerLiveReaction>(), false);
-            //ToggleAudioSourceManager(other.GetComponentInChildren<AudioManagerLiveReaction>(), false);
-        }
+        AudioManagerLiveReaction AudioToAdd = other.GetComponentInChildren<AudioManagerLiveReaction>();
+        if (AudioToAdd != null) ToggleAudioSourceManager(AudioToAdd, false);
+        NPC dude = other.GetComponentInChildren<NPC>();
+        if (dude != null) ToggleNpcAudioMute(dude, false);
     }
     #endregion
 
     #region Audio Management
-    private void ToggleAudioSourcesInRange(bool mute)
+    private void ToggleShitsInRange(bool mute)
     {
         Vector3 range = new Vector3(10*transform.localScale.x, 1, 10*transform.localScale.z);
         var colliders = Physics.OverlapBox(transform.position, range, Quaternion.identity);
         foreach (var collider in colliders) 
         {
-            ToggleAudioSourceManager(collider.GetComponent<AudioManagerLiveReaction>(), mute);
+            ToggleAudioSourceManager(collider.GetComponentInChildren<AudioManagerLiveReaction>(), mute);
+            ToggleNpcAudioMute(collider.GetComponentInChildren<NPC>(), mute);
             //ToggleAudioSourceManager(collider.GetComponentInChildren<AudioManagerLiveReaction>(), mute);
         }
     }
@@ -61,9 +62,20 @@ public class LifetimeScript : MonoBehaviour
         bool isCurrentlyMuted = disabledAudioManagers.Contains(source);
         if (isCurrentlyMuted != mute)
         {
-            source.SetMute(mute);
+            source.ForcedMute = mute;
             if (mute) disabledAudioManagers.Add(source);
             else disabledAudioManagers.Remove(source);
+        }
+    }
+    private void ToggleNpcAudioMute(NPC source, bool mute)
+    {
+        if (source == null) return;
+        bool isCurrentlyMuted = OkayDude.Contains(source);
+        if (isCurrentlyMuted != mute)
+        {
+            source.MuteAllAudioMan = mute;
+            if (mute) OkayDude.Add(source);
+            else OkayDude.Remove(source);
         }
     }
     #endregion
@@ -73,7 +85,7 @@ public class LifetimeScript : MonoBehaviour
     [SerializeField] private float lifetime = 300f;
 
     [Header("Audio Management")]
-    [SerializeField] private List<AudioSource> disabledAudioSources = new List<AudioSource>();
     [SerializeField] private List<AudioManagerLiveReaction> disabledAudioManagers = new List<AudioManagerLiveReaction>();
+    [SerializeField] private List<NPC> OkayDude = new List<NPC>();
     #endregion
 }

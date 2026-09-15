@@ -156,8 +156,9 @@ public class MathMachineScript : MonoBehaviour
                 ball.GetComponent<CapsuleCollider>().enabled = false;
                 ball.GetComponent<SpriteRenderer>().enabled = false;
                 ball.GetComponent<NumBallScript>().die();
+                GameControllerScript.Instance.isHoldingBall = false;
                 ball.SetActive(false);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.25f));
             }
         }
 
@@ -197,14 +198,14 @@ public class MathMachineScript : MonoBehaviour
             GameControllerScript.Instance.PickBall.SetActive(false);
             foreach (GameObject ball in balls)
             {
-                GameControllerScript.Instance.isHoldingBall = false;
                 ball.GetComponent<balloonFloatScript>().minDirectionTime = 0;
                 ball.GetComponent<balloonFloatScript>().maxDirectionTime = 0;
                 ball.GetComponent<SpriteRenderer>().enabled = false;
                 ball.GetComponent<CapsuleCollider>().enabled = false;
                 ball.GetComponent<NumBallScript>().die();
+                GameControllerScript.Instance.isHoldingBall = false;
                 ball.SetActive(false);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.25f));
             }
         }
     }

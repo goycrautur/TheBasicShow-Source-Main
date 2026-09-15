@@ -8,31 +8,27 @@ public class playerPrefsLockBehind : MonoBehaviour
     private bool unloc;
     public bool dotheOpposite;
     public string playerprefsname;
+    [Header("String stuff")]
+    public bool StringPlayerprefs;
+    public string StringValue;
 
     public void Start()
     {
+        thingtodisable.SetActive(false);
+        if (!StringPlayerprefs)
+        {
         unloc = PlayerPrefsExtension.GetBool(playerprefsname);
-        if (!dotheOpposite)
+        thingtodisable.SetActive(!dotheOpposite? unloc : !unloc);
+        }
+        else 
         {
-            if (unloc)
+            string TempStringStfu = PlayerPrefs.GetString(playerprefsname);
+            
+            if (TempStringStfu == StringValue) 
             {
-                thingtodisable.SetActive(true);
-            }
-            else
-            {
-                thingtodisable.SetActive(false);
+                thingtodisable.SetActive(!dotheOpposite? true : false);
             }
         }
-        if (dotheOpposite)
-        {
-            if (!unloc)
-            {
-                thingtodisable.SetActive(true);
-            }
-            else
-            {
-                thingtodisable.SetActive(false);
-            }
-        }
+        
     }
 }

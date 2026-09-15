@@ -15,6 +15,7 @@ public class NPC : MonoBehaviour
     #region Unity Lifecycle
     protected virtual void Start()
     {
+        audiosSourc = GetComponentsInChildren<AudioManagerLiveReaction>(true);
         mainAgentSpeedScale = agentSpeedScale;
         if (!dosentUseNavmesh) agent = GetComponent<NavMeshAgent>();
         if (!dosentUseNavmesh) gc.GlobalNpcList.Add(this);
@@ -279,8 +280,16 @@ public class NPC : MonoBehaviour
     public GameObject NpcGameObj;
     public int hp, maxhp = 100;
     public bool fuckingdead,RespawnAfterDeath,UsesStunSprite,dosentUseNavmesh,navmeshNpcPushing;
+    public AudioManagerLiveReaction[] audiosSourc;
     
     public Coroutine NpcPushCorou;
+    public bool MuteAllAudioMan
+    {
+        set
+		{
+			for (int i = 0; i < audiosSourc.Length; ++i) audiosSourc[i].ForcedMute = value;
+		}
+    }
     [HideInInspector] public float mainAgentSpeedScale;
     #endregion
     

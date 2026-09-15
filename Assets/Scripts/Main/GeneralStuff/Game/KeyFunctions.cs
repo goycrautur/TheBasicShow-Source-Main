@@ -62,6 +62,7 @@ public class KeyFunctions : MonoBehaviour
         Time.timeScale = isPaused ? 0f : 1f;
         Singleton<MusicManagerMaes>.Instance.PauseMidi(isPaused);
         audballs.SetIgnoreListenerPause(isPaused);
+        audballs2.SetIgnoreListenerPause(isPaused);
         AudioListener.pause = isPaused;
         gamePaused = isPaused;
         pauseMenu.SetActive(isPaused);
@@ -178,7 +179,7 @@ public class KeyFunctions : MonoBehaviour
     [SerializeField] private GameObject pauseMenu, reticle,Minimap;
     [SerializeField] private GameControllerScript gc;
     [SerializeField] private CursorControllerScript cursorController;
-    [SerializeField] private AudioManagerLiveReaction audballs;
+    [SerializeField] private AudioManagerLiveReaction audballs,audballs2;
     [SerializeField] private AnimationSequencerController optioAnim;
     public LayerMask PlayerClickablesLayer;
     #endregion

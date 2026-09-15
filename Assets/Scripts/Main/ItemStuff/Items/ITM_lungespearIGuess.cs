@@ -146,6 +146,8 @@ public class ITM_lungespearIGuess : BaseItem
                         {
                             if (swindor.destroyed) yield break;
                             GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(NpcStab);
+                            GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 4f);
+                            swindor.CreateFakeSwingDoorPrefab(player.transform.position);
                             swindor.PleaseDie();
                             player.IsLunging = false;
                             player.PushPlayer(pos2, 64 * (1+(player.playerSpeed/100)), 0.5f);
@@ -161,6 +163,8 @@ public class ITM_lungespearIGuess : BaseItem
                         {
                             if (dordor.destroyed) yield break;
                             GameControllerScript.Instance.lbams.MainSource3.PlaySingleClip(NpcStab);
+                            GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 4f);
+                            dordor.CreateFakeDoorPrefab(player.transform.position);
                             dordor.DestroyDoor();
                             player.IsLunging = false;
                             player.PushPlayer(pos2, 64 * (1+(player.playerSpeed/100)), 0.5f);

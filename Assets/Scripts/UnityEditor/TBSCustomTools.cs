@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 public class TBSCustomTools : MonoBehaviour
 {
+    #if UNITY_EDITOR
     //bleh
     [MenuItem("Basic show utilities/File path shits/Open savefile path")]
     static void saveopenHah()
@@ -67,4 +68,12 @@ public class TBSCustomTools : MonoBehaviour
         Debug.Log($"updated the gamemode to: {PlayerPrefs.GetString("CurrentMode", "null")}");
         PlayerPrefs.Save();
     }
+    [MenuItem("Basic show utilities/Set Gamemodes (do this before you play in the editor you bum,will probally be removed when savefiles are properly coded)/Explorer",false, 6)]
+    static void setModeFree()
+    {
+        PlayerPrefs.SetString("CurrentMode", "Explorer");
+        Debug.Log($"updated the gamemode to: {PlayerPrefs.GetString("CurrentMode", "null")}");
+        PlayerPrefs.Save();
+    }
+    #endif
 }

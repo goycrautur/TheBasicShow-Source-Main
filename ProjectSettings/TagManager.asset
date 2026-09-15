@@ -39,6 +39,8 @@ TagManager:
   - DoorTrigger1
   - DoorTrigger2
   - LOEportal
+  - Ceiling
+  - wall
   layers:
   - Default
   - TransparentFX

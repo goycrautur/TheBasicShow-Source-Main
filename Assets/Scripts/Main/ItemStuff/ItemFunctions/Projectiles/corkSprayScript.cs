@@ -30,6 +30,7 @@ public class corkSparyScript : MonoBehaviour
         }
         if (cork.CompareTag("Window") && cork.GetComponent<basicshowWindowScript>() != null && !cork.GetComponent<basicshowWindowScript>().broken)
         {
+            GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
             cork.GetComponent<basicshowWindowScript>().SetWindowState(true, 6f, 0f, 1);
             lowBudgetAudioManagementShit.Instance.MainSource1.PlaySingleClip(lowBudgetAudioManagementShit.Instance.punchSound);
             Destroy(gameObject, 0f);

@@ -66,6 +66,7 @@ public class ZerullBossScript : MonoBehaviour
 			SwingingDoorScript swindors = other.GetComponent<SwingingDoorScript>();
 			if (swindors != null && !swindors.destroyed);
 			{
+                swindors.CreateFakeSwingDoorPrefab(transform.position);
 				swindors.PleaseDie();
 				return;
 			}
@@ -77,6 +78,7 @@ public class ZerullBossScript : MonoBehaviour
 			{
 				if (!dors.destroyed)
 				{
+                    dors.CreateFakeDoorPrefab(transform.position);
 					dors.DestroyDoor();
 					Debug.Log("destroy dor");
 					return;
@@ -138,7 +140,7 @@ public class ZerullBossScript : MonoBehaviour
         audioDevice.ClearQueue(true);
         
         bool chairh = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        if (!chairh) audioDevice.QueueAudio(hit);
+        if (!chairh) audioDevice.QueueAudio(!firstHit ? hit : ChairHit);
         else audioDevice.QueueAudio(ChairHit);
         if (!ZerullClassic.Instance.RealBossStarted)audioDevice.QueueAudio(bossStart);
         agent.speed += 0.75f * hp;

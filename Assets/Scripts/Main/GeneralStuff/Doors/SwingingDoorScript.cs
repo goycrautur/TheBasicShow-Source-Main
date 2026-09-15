@@ -28,12 +28,12 @@ public class SwingingDoorScript : MonoBehaviour
         HandleDoorClosing();
         //end myself
         inside.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
-        inside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        inside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensitySpecialCare/8);
         inside.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
         inside.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
         inside.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
         outside.material.SetFloat("_VertexGlitchSeed", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchSeed);
-        outside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensity);
+        outside.material.SetFloat("_VertexGlitchIntensity", Singleton<VertexGlitchManager>.Instance.global_VertexGlitchIntensitySpecialCare/8);
         outside.material.SetInt("_ValueX", Singleton<VertexGlitchManager>.Instance.global_glitchColorRvalue);
         outside.material.SetInt("_ValueY", Singleton<VertexGlitchManager>.Instance.global_glitchColorGvalue);
         outside.material.SetInt("_ValueZ", Singleton<VertexGlitchManager>.Instance.global_glitchColorBvalue);
@@ -119,7 +119,7 @@ public class SwingingDoorScript : MonoBehaviour
         if (makeNoise) 
         {
             Singleton<OtherMainStuffManager>.Instance.HearingShit(8f, this.transform, new Vector3(0f,0f,0f), "all",false);
-            foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
+            if (!myAudio.GetForcedMute) foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
         }
         CameraScript.Instance.TempShakeAmount = 0.5f;
         myAudio.ClearQueue(true);
@@ -128,6 +128,43 @@ public class SwingingDoorScript : MonoBehaviour
         SwinDorMapSprite1.enabled = SwinDorMapSprite2.enabled = false;
         inside.material.SetColor("_Color1", Color.clear);
         outside.material.SetColor("_Color1", Color.clear);
+    }
+    public void CreateFakeSwingDoorPrefab(Vector3 force)
+    {
+        obstacle.SetActive(false);
+        insidecol.enabled = false;
+        outsidecol.enabled = false;
+        GameObject gameObject = Object.Instantiate<GameObject>(inside.GetComponentInChildren<Renderer>().gameObject);
+        gameObject.name = "Broken Swinging Door(Clone)";
+		BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+		Bounds bounds = gameObject.GetComponent<MeshFilter>().sharedMesh.bounds;
+		boxCollider.center = bounds.center;
+		boxCollider.size = bounds.size + new Vector3(0f, 0f, 0.06f);
+        boxCollider.center = new Vector3(0f, -0.075f, 0f);
+        boxCollider.size = new Vector3(0.745f, 0.8f, 0.06f);
+		Destroy(gameObject.GetComponent<MeshCollider>());
+		Material material = Object.Instantiate<Material>(inside.material);
+		Renderer component = gameObject.GetComponent<Renderer>();
+		component.sharedMaterial = material;
+        material.SetInt("_Swap", 0);
+		component.sharedMaterial.mainTexture = inside.material.GetTexture("_SecondTex");
+		gameObject.transform.SetPositionAndRotation(inside.GetComponentInChildren<Renderer>().transform.position, inside.transform.rotation);
+		gameObject.transform.localScale = Vector3.Scale(inside.GetComponentInChildren<Renderer>().transform.lossyScale, new Vector3(1f, 1f, 1f));
+		GameObject gameObject2 = Object.Instantiate<GameObject>(inside.GetComponentInChildren<Renderer>().gameObject, gameObject.transform);
+		Destroy(gameObject2.GetComponent<MeshCollider>());
+		gameObject2.transform.localPosition = Vector3.zero;
+		gameObject2.transform.localEulerAngles = Vector3.zero;
+		gameObject2.transform.localScale = Vector3.one;
+		Renderer component2 = gameObject2.GetComponent<Renderer>();
+		component2.sharedMaterial = material;
+		gameObject2.transform.localEulerAngles += new Vector3(0f, 180f, 0f);
+		Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+		rigidbody.mass = 9f;
+        rigidbody.AddExplosionForce(35000f, force, 4f, 1f, 0);
+		rigidbody.angularVelocity += Random.insideUnitSphere / 24f;
+		rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+		rigidbody.detectCollisions = true;
+		Physics.IgnoreCollision(GameControllerScript.Instance.player.cc, boxCollider, true);
     }
     #endregion
 

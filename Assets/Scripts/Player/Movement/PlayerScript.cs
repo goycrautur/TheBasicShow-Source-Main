@@ -269,16 +269,9 @@ public class PlayerScript : MonoBehaviour
 		{
 			if (isMoving && !DeathCountdown) 
 			{
-				if (FowardValue >= FowardMinValue)FowardValue += (fowardVeloAccelerate + fowardVeloAccelerate/5) * Time.deltaTime;
+				if (FowardValue >= FowardMinValue && FowardValue <= FowardMaxValue)FowardValue += (fowardVeloAccelerate + fowardVeloAccelerate/5) * Time.deltaTime;
 				carfuel -= Time.deltaTime;
 				if (CargaugeReal != null && (AdditionalGameCustomizer.Instance != null && AdditionalGameCustomizer.Instance.Gauges || AdditionalGameCustomizer.Instance == null))CargaugeReal.Set(maxcarfuel, carfuel);
-			}
-			if (FowardValue >= FowardMaxValue) 
-			{
-				FowardValue = 0.5f;
-				GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.agonyScream);
-				GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.punchSound);
-				CameraScript.Instance.TempShakeAmount += 0.5f;
 			}
 			if (!isMoving && !DeathCountdown) FowardValue -= fowardVeloDowning * Time.deltaTime;
 			if (FowardValue <= FowardMinValue) FowardValue = 0;
@@ -394,6 +387,15 @@ public class PlayerScript : MonoBehaviour
 		healthbar.value = Mathf.MoveTowards(healthbar.value, health / maxHealth * 100f, 50f * Time.deltaTime * 6f);
 		if (health <= 0f && !DeathCountdown) 
 		{
+			for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
+			{
+				if (ItemManager.Instance.Inventory[i].ItemID == 53)
+				{
+					ItemManager.Instance.Inventory[i].ItemInstance.CustomSpecialFunction();
+					ItemManager.Instance.RemoveItemUses(i,1);
+					return;
+				}
+			}
 			DeathCountdown = true;
 			timerTillDeath = 5f;
 			CameraScript.Instance.MoveCamRotationY(435f,2f);
@@ -416,7 +418,7 @@ public class PlayerScript : MonoBehaviour
 		for (int i = 0; i < ItemManager.Instance.Inventory.Length; i++)
 		{
 			//if (ItemManager.Instance.Inventory[i].ItemID == 31 || ItemManager.Instance.Inventory[i].ItemInstance.NameID == "totemOfUndying") TotemCheck = true;
-			if (ItemManager.Instance.Inventory[i].ItemID == 23) TotemCheck = true;
+			if (ItemManager.Instance.Inventory[i].ItemID == 23 && ActuallyHoldingTotem) TotemCheck = true;
 			if (ItemManager.Instance.Inventory[i].ItemID == 48) AidsKitCheck = true;
 		}
 		if (!TotemCheck && !AidsKitCheck)GameoverStuff();
@@ -563,14 +565,17 @@ public class PlayerScript : MonoBehaviour
 	#region Triggers & Game Events
 	private void OnTriggerEnter(Collider other)
 	{
-
+		Vector3 pos = !Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? -transform.forward : transform.forward;
 		if (oncar && isMoving && FowardValue >= 2f)
 		{
 			if (other.CompareTag("SwingingDoor"))
 			{
 				SwingingDoorScript swindors = other.GetComponent<SwingingDoorScript>();
+				Debug.Log("touched le swin dor");
 				if (swindors != null && !swindors.destroyed);
 				{
+					ResetGuilt("destroyingproperty", 4f);
+					swindors.CreateFakeSwingDoorPrefab(transform.position);
 					swindors.PleaseDie();
 					return;
 				}
@@ -582,8 +587,9 @@ public class PlayerScript : MonoBehaviour
 				{
 					if (!dors.destroyed)
 					{
+						ResetGuilt("destroyingproperty", 4f);
+						dors.CreateFakeDoorPrefab(transform.position);
 						dors.DestroyDoor();
-						Debug.Log("destroy dor");
 						return;
 					}
 				}
@@ -605,9 +611,10 @@ public class PlayerScript : MonoBehaviour
 			else
 			{	
 				IsLunging = false;
-				Vector3 pos = !Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? -transform.forward : transform.forward;
+				
 				PushPlayer(pos, 24f * (1+what), 0.75f);
 				Wind.SetWindowState(true, 6f, 0f, what);
+				ResetGuilt("destroyingproperty", 3f);
 			}
 			return;
 		}
@@ -653,6 +660,27 @@ public class PlayerScript : MonoBehaviour
 		if (other.transform.name == "1945 tom")sweeping = false;
 		if (other.transform.name == "1st Prize")hugging = false;
 		if (other.transform.name == "washingmachine")hugging = false;
+	}
+
+	void OnControllerColliderHit(ControllerColliderHit other)
+	{
+		Vector3 pos = !Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? -transform.forward : transform.forward;
+		if (other.gameObject.tag == "Ceiling")Physics.IgnoreCollision(cc, other.collider, true);
+		if (oncar && isMoving)
+		{
+			if (FowardValue >= FowardMaxValue-0.1f && !Singleton<InputManager>.Instance.GetActionKey(InputAction.MoveBackward))
+			{
+				if (other.gameObject.tag == "wall")
+				{
+					FowardValue = 0.5f;
+					GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.agonyScream);
+					GameControllerScript.Instance.lbams.MainSource2.PlaySingleClip(GameControllerScript.Instance.lbams.punchSound);
+					CameraScript.Instance.TempShakeAmount += 0.5f;
+					PushPlayer(pos, 64f, 0.75f);
+					return;
+				}
+			}
+		}
 	}
 
 	public IEnumerator KeepTheHudOff()
@@ -750,6 +778,14 @@ public class PlayerScript : MonoBehaviour
 	private Gauge CargaugeReal;
 	private MovementModifier thosewhoSpeed;
 	public float FowardValue,FowardMinValue=0,FowardMaxValue=10,fowardVeloAccelerate=1f,fowardVeloDowning=1.5f;
+	private bool ActuallyHoldingTotem;
+	public bool SetRealHoldTotem
+	{
+		set
+		{
+			ActuallyHoldingTotem = value;
+		}
+	}
 
 	public enum StaminaChangeMode { Add, Remove, Multiply, Divide, Set }
 	public enum HealthChangeMode { Add, Remove, Multiply, Divide, Set }

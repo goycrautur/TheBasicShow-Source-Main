@@ -78,7 +78,7 @@ public class AudioManagerLiveReaction : MonoBehaviour
             audioDevice.volume = 1;
             loop = false;
             audioDevice.loop = false;
-            audioDevice.mute = false;
+            audioDevice.mute = ForceMute;
             audioDevice.pitch = 1;
             audioDevice.Stop();
             AudioClipLength = 0;
@@ -158,5 +158,21 @@ public class AudioManagerLiveReaction : MonoBehaviour
     [Header("misc stuff")]
     public float AudioClipLength;
     public float AudioSourceCurTime;
+    private bool ForceMute;
+    public bool GetForcedMute
+    {
+        get
+        {
+            return ForceMute;
+        }
+    }
+    public bool ForcedMute
+    {
+        set
+        {
+            ForceMute = value;
+            audioDevice.mute = ForceMute;
+        }
+    }
     #endregion
 }

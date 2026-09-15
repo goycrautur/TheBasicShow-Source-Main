@@ -3,10 +3,8 @@ using UnityEngine;
 using System;
 public class basicshowWindowScript : MonoBehaviour // when am i going to put this to use
 {
-    [Header("PLEASE IGNORE, this is just for other script to access these variables\n")]
-    public bool enableOffMeshScript;
-    public bool broken;
-    public int durability,ogDurability;
+    [HideInInspector] public bool enableOffMeshScript,broken;
+    [HideInInspector] public int durability,ogDurability;
     [Header("\nwindow side stuff\n")]
     public MeshRenderer window_In;
     public MeshRenderer window_Out;
@@ -47,7 +45,7 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             broken = true;
             if (sound)
             {
-                foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
+                if (!audioDevice.GetForcedMute) foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
             if (WinData.sounds[0] != null) audioDevice.PlaySingleClip(WinData.sounds[0]);
@@ -75,7 +73,7 @@ public class basicshowWindowScript : MonoBehaviour // when am i going to put thi
             broken = false;
             if (sound)
             {
-                foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
+                if (!audioDevice.GetForcedMute) foreach (MaxcipalScript maxi in GameControllerScript.Instance.maxiScr) if (maxi.isActiveAndEnabled) maxi.callToSMTH(this.transform.position);
                 Singleton<OtherMainStuffManager>.Instance.HearingShit(soundval, this.transform, new Vector3(0f,0f,0f), "all",false);
             }
             if (durability == ogDurability)

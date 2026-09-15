@@ -118,7 +118,7 @@ public class MuchoScript : NPC
                 {
                     Muchocator.Rebind();
                     Debug.Log("gon telepor");
-                    Invoke(nameof(Teleport), teleportCD*1.5f);
+                    Invoke(nameof(Teleport), teleportCD*1.25f);
                     slams = 0;
                     agent.speed = 0;
                     deafened = true;
@@ -181,7 +181,7 @@ public class MuchoScript : NPC
         {
             if (base.IsHitboxValid)
 			{
-				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 25f / gc.player.PlayerDmgResistance, 0.05f, false, true, false);
+				gc.player.SetHP(PlayerScript.HealthChangeMode.Remove, 35f / gc.player.PlayerDmgResistance, 0.05f, false, true, false);
 				gc.player.killedbybaldi = true;
                 gc.player.PushPlayer(gc.player.GetPlayerPushDirection(transform.position), 64f, 0.5f);
                 PushNpc(GetNPCPushDirection(-transform.position),32f, 1f);

@@ -38,7 +38,7 @@ public class bobmprojScript : MonoBehaviour
     {
         if (cork.CompareTag("Window") && cork.GetComponent<basicshowWindowScript>() != null && !cork.GetComponent<basicshowWindowScript>().broken)
         {
-            
+            if (!IsEnemy) GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 3f);
             cork.GetComponent<basicshowWindowScript>().SetWindowState(true, 6f, 0f, bouncetime+2);
             boom(true);
             return;
@@ -50,6 +50,8 @@ public class bobmprojScript : MonoBehaviour
             {
                 if (!dors.destroyed && !dors.DestroyImmunity && dors.MainDoorBarrier.enabled)
                 {
+                    if (!IsEnemy) GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 4f);
+                    dors.CreateFakeDoorPrefab(transform.position);
                     dors.DestroyDoor();
                     boom(true);
                     return;
@@ -63,6 +65,8 @@ public class bobmprojScript : MonoBehaviour
             {
                 if (!dors.destroyed && !dors.DestroyImmunity && !dors.MainDoorBarrier.enabled)
                 {
+                    if (!IsEnemy) GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 4f);
+                    dors.CreateFakeDoorPrefab(transform.position);
                     dors.DestroyDoor();
                     boom(true);
                     return;
@@ -74,6 +78,8 @@ public class bobmprojScript : MonoBehaviour
             SwingingDoorScript swindors = cork.GetComponent<SwingingDoorScript>();
             if (swindors != null && !swindors.DestroyImmunity && !swindors.destroyed);
             {
+                if (!IsEnemy) GameControllerScript.Instance.player.ResetGuilt("destroyingproperty", 4f);
+                swindors.CreateFakeSwingDoorPrefab(transform.position);
                 swindors.PleaseDie();
                 boom(true);
                 return;

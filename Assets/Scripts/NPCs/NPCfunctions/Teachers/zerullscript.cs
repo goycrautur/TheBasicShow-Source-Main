@@ -8,7 +8,10 @@ public class zerullscript : NPC
     public override void OnStart()
     {
         bool chairr = PlayerPrefsExtension.GetBool("BeatedUpZerull");
-        chair = chairr;
+        string mode = PlayerPrefs.GetString("CurrentMode");
+        bool tempbool = false;
+        if (mode != "LappingOfAsylum") tempbool = true;
+        chair = !tempbool? chairr : false;
         MainSprite.SetActive(!chair);
         Chairs.SetActive(chair);
         base.OnStart();
@@ -133,6 +136,7 @@ public class zerullscript : NPC
 			SwingingDoorScript swindors = colid.GetComponent<SwingingDoorScript>();
 			if (swindors != null && !swindors.destroyed);
 			{
+                swindors.CreateFakeSwingDoorPrefab(transform.position);
 				swindors.PleaseDie(false);
 				return;
 			}
@@ -144,6 +148,7 @@ public class zerullscript : NPC
 			{
 				if (!dors.destroyed)
 				{
+                    dors.CreateFakeDoorPrefab(transform.position);
 					dors.DestroyDoor(false);
 					Debug.Log("destroy dor");
 					return;

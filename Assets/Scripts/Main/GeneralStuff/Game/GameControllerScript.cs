@@ -197,6 +197,12 @@ public class GameControllerScript : MonoBehaviour
                 largeImagething = "van";
                 largeImageText = "WEGA CHALLENGEEE";
             }
+            if (mode == "Explorer")
+            {
+                modeDetails = "litearlly freerun-ing basic show i guess" + " | " + DifficulityString + " Difficulity";
+                largeImagething = "van";
+                largeImageText = "freee";
+            }
             if (mode == "minusb")
             {
                 modeDetails = "who is this" + " | " + DifficulityString + " Difficulity";
@@ -342,7 +348,7 @@ public class GameControllerScript : MonoBehaviour
         else 
         {
             spoopMode = true;
-            if (mode != "zerullclassic" && mode != "LappingOfAsylum" || mode != "LappingOfAsylum" && mode != "zerullclassic") Gatesrea.ForEach(g => g.Down());
+            if (mode != "zerullclassic" || mode != "LappingOfAsylum" || mode != "Explorer") Gatesrea.ForEach(g => g.Down());
 
             //midishit1.Stop();
             
@@ -726,21 +732,25 @@ public class GameControllerScript : MonoBehaviour
                                 easingExit(new Color(1f / (exitsReached / 1.75f), 0.7f / exitsReached, 0.7f / exitsReached, 1f), 0, 2, 5);
                                 break;
                             case AdditionalGameCustomizer.EscapeFunsies.TBS:
-                                VideoFade.Rebind();
-                                VideoFade.Play("VidFadein", -1, 0f);
-                                MainHudFade.Rebind();
-                                MainHudFade.Play("hudFadeOutNearly", -1, 0f);
-                                RainbowHudFade.Rebind();
-                                RainbowHudFade.Play("hudFadeOutRainb", -1, 0f);
-                                SubtitlesHudFade.Rebind();
-                                SubtitlesHudFade.Play("hudFadeOutsubs", -1, 0f);
-                                youCantPause = true;
-                                vidplay.enabled = true;
-                                AudioListener.pause = true;
-                                thatRawImageThatIHate.enabled = true;
-                                vidplay.Play();
-                                vidplay.loopPointReached += isvidfinished;
-                                Time.timeScale = 0;
+                                if (!UnplayableVideoPlayerFix)
+                                {
+                                    VideoFade.Rebind();
+                                    VideoFade.Play("VidFadein", -1, 0f);
+                                    MainHudFade.Rebind();
+                                    MainHudFade.Play("hudFadeOutNearly", -1, 0f);
+                                    RainbowHudFade.Rebind();
+                                    RainbowHudFade.Play("hudFadeOutRainb", -1, 0f);
+                                    SubtitlesHudFade.Rebind();
+                                    SubtitlesHudFade.Play("hudFadeOutsubs", -1, 0f);
+                                    youCantPause = true;
+                                    vidplay.enabled = true;
+                                    AudioListener.pause = true;
+                                    thatRawImageThatIHate.enabled = true;
+                                    vidplay.Play();
+                                    vidplay.loopPointReached += isvidfinished;
+                                    Time.timeScale = 0;
+                                }
+                                else vidFinishEvent();
                                 lbams.ChaosAudioSource.ClearQueue(true);
                                 lbams.ChaosAudioSource.SetLoop(true);
                                 lbams.ChaosAudioSource.QueueAudio(lbams.ChaosStartLoop);
@@ -990,6 +1000,7 @@ public class GameControllerScript : MonoBehaviour
     public RawImage thatRawImageThatIHate;
     public AudioMixerGroup[] MixerOverrideGlobalson;
     public string[] MixerOverrideGlobalVaribName;
+    public bool UnplayableVideoPlayerFix;
     [Header("Target Materials")]
     public List<Material> targetMaterials = new List<Material>();
     public List<Material> MaterialsThatNeedSpecialCare = new List<Material>();

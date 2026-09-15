@@ -24,7 +24,7 @@ public class balloonFloatScript : MonoBehaviour
         direction = Vector3.Reflect(direction, collision.contacts[0].normal);
     }
 
-    private void ChangeBallonDirection()
+    public void ChangeBallonDirection()
     {
         direction.x = UnityEngine.Random.Range(-1f, 1f);
         direction.z = UnityEngine.Random.Range(-1f, 1f);

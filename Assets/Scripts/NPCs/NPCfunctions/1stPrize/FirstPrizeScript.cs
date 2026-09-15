@@ -270,7 +270,7 @@ public class FirstPrizeScript : NPC
 
     [Header("Player Interaction")]
     [SerializeField] private bool playerSeen;
-    [SerializeField] private bool hugAnnounced;
+    [SerializeField] private bool hugAnnounced,huggingPlayer;
 
     [Header("Audio Settings")]
     [SerializeField] private AudioObjectyeah audBang;

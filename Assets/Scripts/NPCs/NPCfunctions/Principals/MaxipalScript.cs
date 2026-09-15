@@ -28,7 +28,6 @@ public class MaxcipalScript : NPC
         if (base.StunTime < 0f)  PrinSpeedMult = OGPrinSpeedMult;
         base.OnUpdate();
         if (seesRuleBreak) HandleRuleBreaking();
-        else if (timeSeenRuleBreak > 0f) timeSeenRuleBreak -= 0.5f * Time.deltaTime;
         if (gauge != null)
         {
             if (officeDoor.lockTime > 0f)  gauge.Set(maxGaugeLockTime, officeDoor.lockTime);
@@ -68,15 +67,11 @@ public class MaxcipalScript : NPC
     #region Rule and Guilt Handling
     private void HandleRuleBreaking()
     {
-        timeSeenRuleBreak += Time.deltaTime;
-
-        float ruleBreakThreshold = playerScript.guiltType == "escape" ? 0f : playerScript.guiltType == "faculty" ? 0f : playerScript.guiltType == "running" ? 0.5f : 0.35f;
         audioQueue.ClearQueue(true);
-        if (timeSeenRuleBreak >= ruleBreakThreshold && !angry)
+        if (!angry)
         {
             angry = true;
             seesRuleBreak = false;
-            timeSeenRuleBreak = 0f;
             ruleBreakObservationTime = 0f;
             TargetPlayer();
             CorrectPlayer();
@@ -92,11 +87,12 @@ public class MaxcipalScript : NPC
             if (hit.transform.CompareTag("Player") && playerScript.guilt > 0f && !playerScript.alsoInOffice && !gc.player.invisi && !gc.player.invisichalk)
             {
                 ruleBreakObservationTime += Time.deltaTime;
-
-                if (ruleBreakObservationTime >= 0.5f) seesRuleBreak = true;
+                float ruleBreakThreshold = (playerScript.guiltType == "escape" || playerScript.guiltType == "faculty" || playerScript.guiltType == "destroyingproperty") ? 0f  : playerScript.guiltType == "running" ? 1f : 0.35f;
+        
+                if (ruleBreakObservationTime >= ruleBreakThreshold) seesRuleBreak = true;
 
             }
-            else ruleBreakObservationTime = 0f;
+            //else ruleBreakObservationTime = 0f;
         }
         else ruleBreakObservationTime = 0f;
     }
@@ -140,7 +136,7 @@ public class MaxcipalScript : NPC
         base.Wander(locationType);
         if (bullySeen) bullySeen = false;
         ResetCooldown();
-        if (Random.Range(0f, 10f) <= 1f && audioQueue.queuedAudios.Count == 0) audioQueue.PlaySingleClip(aud_Whistle);
+        if (Random.Range(0f, 10f) <= 1f && audioQueue.queuedAudios.Count == 0 && audioQueue.audioDevice.isPlaying) audioQueue.PlaySingleClip(aud_Whistle);
     }
 
     private void WanderWithAnger()
@@ -329,7 +325,7 @@ public class MaxcipalScript : NPC
     [SerializeField] private Sprite gaugeDetentionSprite;
 
     public int detentions;
-    public float maxGaugeLockTime, ruleBreakObservationTime, timeSeenRuleBreak, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
+    public float maxGaugeLockTime, ruleBreakObservationTime, OGPrinSpeedMult = 1f, PrinSpeedMult = 1f;
     [SerializeField] private int[] lockTime = { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 99 };
     public bool summon, seesRuleBreak, bullySeen, inOffice,brogotcalled;
     public RaycastHit hit;

@@ -56,11 +56,11 @@ public class PlaytimeScript : NPC
     #region Player Detection & Targeting
     protected override void CheckForPlayer()
     {
-        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 50f))
+        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 70f))
         {
-            bool playerInRange = (transform.position - player.position).magnitude <= 50f;
+            bool playerInRange = (transform.position - player.position).magnitude <= 70f;
 
-            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 50f, QueryTriggerInteraction.UseGlobal)) if (hitVape.transform.gameObject.layer == 11)  return;
+            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 70f, QueryTriggerInteraction.UseGlobal)) if (hitVape.transform.gameObject.layer == 11)  return;
             if (raycastHit.transform.CompareTag("Player") && playerInRange && playCool <= 0f && !ps.invisi && !ps.invisichalk)
             {
                 playerSeen = true;
@@ -79,10 +79,10 @@ public class PlaytimeScript : NPC
     }
     public void jumpropeRaycastCheck()
     {
-        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 50f))
+        if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit raycastHit, 80f))
         {
-            bool playerInRange = (transform.position - player.position).magnitude <= 50f;
-            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 50f, QueryTriggerInteraction.UseGlobal))
+            bool playerInRange = (transform.position - player.position).magnitude <= 80f;
+            if (transform.position.RaycastFromPositionWithDistance(player.position - transform.position, out RaycastHit hitVape, 80f, QueryTriggerInteraction.UseGlobal))
             {
                 if (hitVape.transform.gameObject.layer == 11) 
                 {

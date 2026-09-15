@@ -200,7 +200,7 @@ public class LappingOfAsylumController : MonoBehaviour
         if (Meeptimar.isActiveAndEnabled && CurrentLap <= 5 && gc.notebooks <= CurrentMaxNotebooks) meepTimerScript.Instance.AddTime(gc.warrealest && CurrentLap < 4 ? 18/(CurrentLap+1) : 10f, Color.green);
         if (LapFamishShit) FamishCheeseCount++;
         if (Lap5TimingStuff) Lap5CheeseCount++;
-        if (Lap5CheeseCount == 14)
+        if (Lap5CheeseCount == CurrentMaxNotebooks)
         {
             gc.maxNotebooks += realCurrentMaxNoteboo;
             CurrentMaxNotebooks += realCurrentMaxNoteboo;
@@ -571,8 +571,6 @@ public class LappingOfAsylumController : MonoBehaviour
             }
             if (CurrentLap == 4)
             {
-                gc.player.walkSpeedMultipler = 1f;
-                gc.player.runSpeedMultipler = 1f;
                 gc.fmc.angerMultipler = 0.45f;
                 MeepTimer.SetActive(true);
             }

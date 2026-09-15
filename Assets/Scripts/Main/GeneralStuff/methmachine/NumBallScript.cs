@@ -62,6 +62,7 @@ public class NumBallScript : MonoBehaviour
         {
             base.GetComponent<balloonFloatScript>().enabled = true;
             base.GetComponent<CapsuleCollider>().enabled = true;
+
         }
         if (!IsPickup)
         {
@@ -107,6 +108,7 @@ public class NumBallScript : MonoBehaviour
         else
         {
             base.transform.position = OldTran;
+            base.GetComponent<balloonFloatScript>().ChangeBallonDirection();
         }
         IsPickup = false;
     }
