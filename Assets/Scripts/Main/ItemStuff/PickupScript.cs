@@ -46,6 +46,7 @@ public class PickupScript : Interactable
     {
         int itemid = Random.Range(1, itmManag.Items.Count);
         BaseItem item = itmManag.GetItem(itemid);
+        ItemSwapBaseitem = null;
         if (item.blacklistFromGamblingVending) 
         {
             rollItem();

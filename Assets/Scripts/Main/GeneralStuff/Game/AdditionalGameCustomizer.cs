@@ -21,6 +21,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     public bool unloc, iteinfo,captio;
     public void InitializeGameTuff()
     {
+        FuckLerp = false;
         GameControllerScript.Instance.mode = PlayerPrefs.GetString("CurrentMode");
         bool chair = PlayerPrefsExtension.GetBool("BeatedUpZerull");
         bool unloc = PlayerPrefsExtension.GetBool("thonkPad");
@@ -131,8 +132,16 @@ public class AdditionalGameCustomizer : MonoBehaviour
     #region VisualEffects
     private void CameraShaking()
     {
-        CameraScript.Instance.MainCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.MainCamera.fieldOfView, FovAmmount + ExtraFovAmmount, 5f * Time.deltaTime);
-        CameraScript.Instance.XrayCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.XrayCamera.fieldOfView, FovAmmount + ExtraFovAmmount, 5f * Time.deltaTime);
+        if (!FuckLerp)
+        {
+            CameraScript.Instance.MainCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.MainCamera.fieldOfView, FovAmmount + ExtraFovAmmount, 5f * Time.deltaTime);
+            CameraScript.Instance.XrayCamera.fieldOfView = CameraShake ? UnityEngine.Random.Range(58, 62) : Mathf.Lerp(CameraScript.Instance.XrayCamera.fieldOfView, FovAmmount + ExtraFovAmmount, 5f * Time.deltaTime);
+        }
+        else
+        {
+            CameraScript.Instance.MainCamera.fieldOfView = FovAmmount + ExtraFovAmmount;
+            CameraScript.Instance.XrayCamera.fieldOfView = FovAmmount + ExtraFovAmmount;
+        }
     }
 
     private void FlashlightCode()
@@ -337,6 +346,7 @@ public class AdditionalGameCustomizer : MonoBehaviour
     [HideInInspector] public SkyboxStyle currentSkybox;
     public List<PickupScript> pickup = new List<PickupScript>();
     public int Cash = 0;
+    public bool FuckLerp;
     #endregion
 
     #region Enums

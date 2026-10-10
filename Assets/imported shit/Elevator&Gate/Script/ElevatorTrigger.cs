@@ -12,19 +12,10 @@ public class ElevatorTrigger : MonoBehaviour
         {
             if (gc.notebooks >= gc.maxNotebooks)
             {
-                for (int i = 0; i < AdditionalGameCustomizer.Instance.ExitImages.Length; ++i)
-                {
-                    gc.ExitReached(i);
-                }
+                for (int i = 0; i < AdditionalGameCustomizer.Instance.ExitImages.Length; ++i) gc.ExitReached(i);
                 eDoor.Close();
-                if (gc.failedNotebooks >= gc.maxNotebooks)
-                {
-                    em.endingShit(WinID,true);
-                }
-                else
-                {
-                    em.endingShit(WinID,false);
-                }
+                if (gc.failedNotebooks >= gc.maxNotebooks) em.endingShit(WinID,true);
+                else em.endingShit(WinID,false);
             }
         }
     }

@@ -229,8 +229,8 @@ public class ZerullClassic : MonoBehaviour
         }
         if (realBossStarted)
         {
-            //Singleton<MusicManagerMaes>.Instance.MidiPlayer.MPTK_Channels[9].Volume = DistancVal;
-            //Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_Channels[9].Volume = DistancVal;
+            Singleton<MusicManagerMaes>.Instance.MidiPlayer.MPTK_Channels[9].Volume = DistancVal;
+            Singleton<MusicManagerMaes>.Instance.ReservedPlayer.MPTK_Channels[9].Volume = DistancVal;
         }
         if (AllowProjectileSpawn)
         {

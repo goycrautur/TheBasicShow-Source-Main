@@ -9,12 +9,13 @@ using GrayCreature.YuriArchive.subtitlesYaoiYuriLiveReaction;
 public class AudioManagerLiveReaction : MonoBehaviour
 {
     private void OnEnable() => InitialiUhh();
-    private void OnDestroy() => disabled();
+    private void OnDestroy() => disabled(true);
     private void OnDisable()=> disabled();
-    private void disabled()
+    private void disabled(bool Die = false)
     {
         if (!AudioManStandalone)
         {
+            if (Die) totalIds--;
             if (totalIds >= TBSSubMan.SubtitleTotalId) Array.Resize(ref TBSSubMan.Instance.subsObjectIdSon, TBSSubMan.SubtitleTotalId + (totalIds - 1));
         }
     }

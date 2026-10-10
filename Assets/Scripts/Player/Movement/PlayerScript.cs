@@ -665,7 +665,7 @@ public class PlayerScript : MonoBehaviour
 	void OnControllerColliderHit(ControllerColliderHit other)
 	{
 		Vector3 pos = !Singleton<InputManager>.Instance.GetActionKey(InputAction.LookBehind) ? -transform.forward : transform.forward;
-		if (other.gameObject.tag == "Ceiling")Physics.IgnoreCollision(cc, other.collider, true);
+		if (other.gameObject.tag == "Ceiling")Physics.IgnoreCollision(other.collider, cc, true);
 		if (oncar && isMoving)
 		{
 			if (FowardValue >= FowardMaxValue-0.1f && !Singleton<InputManager>.Instance.GetActionKey(InputAction.MoveBackward))
