@@ -40,8 +40,6 @@ public class ITM_mainthemepenis : BaseItem
     {
         agc.FuckLerp = true;
         float FuckassDelayIguess = 0;
-        bool DidZoomoutDelay = false;
-        bool DidZoominDelay = false;
         bool DidZoomoutTween = false;
         bool DidZoominTween = false;
         bool Lapper = PlayerPrefs.GetString("CurrentMode") == "LappingOfAsylum";
