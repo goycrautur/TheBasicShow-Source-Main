@@ -245,6 +245,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             gc.PlayerTeleport("evilleaf");
             meepTimerScript.Instance.AddTime(2f, Color.green);
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "all",false);
         }
         if (gc.notebooks == CurrentMaxNotebooks)
         {
@@ -308,27 +309,7 @@ public class LappingOfAsylumController : MonoBehaviour
             if (gc.exitsReached == 6)
             {
                 if (CurrentLap == 0) StartCoroutine(zawadro());
-                if (CurrentLap == 5)
-                {
-                    gc.maxNotebooks += realCurrentMaxNoteboo;
-                    CurrentMaxNotebooks += realCurrentMaxNoteboo;
-                    gc.player.totemshit(false);
-                    for (int i = 0; i < noteboos.Length; ++i) if (noteboos[i].hidden) noteboos[i].Respawn();
-                    gc.UpdateNotebookCount();
-                    Lap5TimingStuff = false;
-                    Lap5CheeseCount = 0;
-                    ZerullClassic.Instance.yourflashbang.Rebind();
-                    ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
-                    gc.lbams.MainSource2.PlaySingleClip(gc.lbams.TeleporterTp);
-                    gc.lbams.MainSource2.PlaySingleClip(gc.lbams.wrongNumb);
-                    gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
-                    allowClosElev = false;
-                    gc.exitsReached = 0;
-                    if (CurrentLap > MaxLap - 1) LapPortals.ForEach(lap => lap.SetActive(false));
-                    gc.ElevdorRea.ForEach(ed => ed.Close());
-                    gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
-                    gc.Gatesrea.ForEach(g => g.Down(false));
-                }
+                if (CurrentLap == 5)  StartCoroutine(FiveZawadros());
                 gc.lbams.ChaosAudioSource.ClearQueue(true);
                 gc.lbams.EscapeMusic.ClearQueue(true);
                 gc.easingExit(new Color(1f, 1, 1, 1f), 0, 2, 0.5f);
@@ -342,6 +323,33 @@ public class LappingOfAsylumController : MonoBehaviour
         clone.name = WhoToClone.name;
         clone.SetActive(true);
         return clone;
+    }
+    public IEnumerator FiveZawadros()
+    {
+        
+        yield return new WaitForSeconds(0.1f);
+        gc.maxNotebooks += realCurrentMaxNoteboo;
+        CurrentMaxNotebooks += realCurrentMaxNoteboo;
+        gc.player.totemshit(false);
+        for (int i = 0; i < noteboos.Length; ++i) if (noteboos[i].hidden) noteboos[i].Respawn();
+        gc.UpdateNotebookCount();
+        Lap5TimingStuff = false;
+        Lap5CheeseCount = 0;
+        ZerullClassic.Instance.yourflashbang.Rebind();
+        ZerullClassic.Instance.yourflashbang.Play("flashAnim", -1, 0f);
+        gc.lbams.MainSource2.PlaySingleClip(gc.lbams.TeleporterTp);
+        gc.lbams.MainSource2.PlaySingleClip(gc.lbams.wrongNumb);
+        gc.player.transform.position = EndingManager.Instance.SecretWarpPoint.transform.position + Vector3.up * gc.player.height;
+        allowClosElev = false;
+        gc.exitsReached = 0;
+        gc.ElevdorRea.ForEach(ed => ed.Close());
+        gc.ElevdorRea.ForEach(ed => ed.finaleActivated = false);
+        gc.Gatesrea.ForEach(g => g.Down(false));
+        LapPortals.ForEach(lap => lap.SetActive(false));
+        gc.maxExits -= 1;
+        for (int e = 0; e < AdditionalGameCustomizer.Instance.ExitImages.Length; ++e) StartCoroutine(gc.tweeniconSolo(new Color(0, 0, 0, 0), 0, 1, 1f, e));
+        yield return null;
+        yield break;
     }
     public IEnumerator zawadro()
     {
