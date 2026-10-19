@@ -245,7 +245,7 @@ public class LappingOfAsylumController : MonoBehaviour
         {
             gc.PlayerTeleport("evilleaf");
             meepTimerScript.Instance.AddTime(2f, Color.green);
-            Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, player, new Vector3(0f,0f,0f), "all",false);
+            Singleton<OtherMainStuffManager>.Instance.HearingShit(7f, gc.player.transform, new Vector3(0f,0f,0f), "all",false);
         }
         if (gc.notebooks == CurrentMaxNotebooks)
         {
